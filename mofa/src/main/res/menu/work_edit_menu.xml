@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+   <item android:id="@+id/work_gps_auto"
+          android:icon="@drawable/ic_action_ic_gps_autodetect"
+          android:title="@string/workedit_menu_gpsauto"
+          android:showAsAction="ifRoom|withText"
+       tools:ignore="UnusedAttribute" />
+    
+</menu>

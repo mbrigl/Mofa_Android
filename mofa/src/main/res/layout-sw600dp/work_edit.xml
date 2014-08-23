@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+     android:id="@+id/fragment_work" >
+
+	
+    <LinearLayout
+        android:id="@+id/LinearLayout01"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:focusable="true" 
+        android:focusableInTouchMode="true">
+		
+        <EditText
+            android:id="@+id/work_edit_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/hint_date"
+            android:imeOptions="actionNext"
+            android:focusable="true" 
+        	android:focusableInTouchMode="true"
+        	android:textSize="@dimen/text_size_large" >
+        </EditText>
+        <Button
+	    android:id="@+id/work_change_date"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="..."
+	    android:textSize="@dimen/text_size_large"
+            tools:ignore="HardcodedText" />
+        
+    </LinearLayout>
+	<Spinner
+        android:id="@+id/tasklist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_large"
+       
+        >
+    </Spinner>
+    <LinearLayout 
+        android:layout_weight="0.1"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        >
+
+        <ImageButton
+        android:id="@+id/work_change_land"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_anlagen" 
+        />
+        <ListView
+        android:id="@+id/currlandlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:textSize="@dimen/text_size_large">
+    </ListView>
+    </LinearLayout>
+	 <TextView android:id="@+id/notelabel"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/note_label"
+              android:textSize="@dimen/text_size_large">
+	     
+	 </TextView>
+    
+    <EditText
+        android:id="@+id/noteeditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:background="@color/lightgreen"
+        android:inputType="textMultiLine"
+        android:focusable="true" 
+        android:focusableInTouchMode="true"
+        android:textSize="@dimen/text_size_large" >
+		
+        
+    </EditText>
+
+   <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    
+    </LinearLayout>
+    <View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:background="@android:color/darker_gray"/>
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/work_save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/work_save_button" >
+    </Button>
+    </LinearLayout>
+</LinearLayout>

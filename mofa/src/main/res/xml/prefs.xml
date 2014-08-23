@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory
+    android:title="Internet - Services" >
+       
+    <EditTextPreference
+        android:key="url"
+        android:summary="Please enter REST path"
+        android:title="REST path" />
+         />
+    <CheckBoxPreference
+		android:key="updateOffline"
+		android:title="@string/updateoffline"/>
+    <CheckBoxPreference
+		android:key="dropbox"
+		android:title="@string/dropbox"/>
+    <CheckBoxPreference
+		android:key="dropboxreset"
+		android:title="@string/dropboxreset"/>   
+    <ListPreference
+       android:title="Format"
+       android:summary="File format"
+       android:key="listFormat"
+       android:defaultValue="2"
+       android:entries="@array/listWebFormat"
+       android:entryValues="@array/listWebFormatValues"
+       />
+    <ListPreference
+       android:title="Backend Software"
+       android:summary="BackendSoftware"
+       android:key="listBackendFormat"
+       android:defaultValue="2"
+       android:entries="@array/listBackend"
+       android:entryValues="@array/listBackendValues"
+    />
+    </PreferenceCategory>
+    <PreferenceScreen android:key="ImportSettings"
+                          android:title="@string/synchronisationsettings"
+                          android:summary="">
+            <intent android:action="android.intent.action.VIEW"
+                	android:targetPackage="it.schmid.android.mofa"
+                    android:targetClass="it.schmid.android.mofa.EditPreferencesImport"
+                    />
+    </PreferenceScreen>
+	
+	
+</PreferenceScreen>

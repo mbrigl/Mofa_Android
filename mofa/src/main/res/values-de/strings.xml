@@ -1,0 +1,177 @@
+<resources>
+
+    <string name="app_name">MoFa</string>
+    <string name="hello_world">Hallo Welt</string>
+    <string name="settings">Einstellungen</string>
+    <string name="title_activity_work">Arbeitsjournal</string>
+    <string name="header_title">Einstellungen Allgemein</string>
+    <string name="header_summary">Technische Einstellungen Datenaustausch </string>    
+    <string name="text">URL:</string>
+	<string name="list">DateiFormat:</string>
+	<string name="listbackend">Software:</string>
+	<string name="header_title_asa">Einstellungen ASA AGRAR</string>
+	<string name="header_summary_asa">Einstellungen für den Datenaustausch mit ASA AGRAR</string> 
+	
+	<!-- Names of the Dashboard items	-->
+	<string name="title_feature1">Arbeitsjournal</string>
+    <string name="title_feature2">Einstellungen</string>
+    <string name="title_feature3">Update</string>
+    <string name="title_feature4">Einkauf</string>
+    <string name="title_feature5">GPS Zuordnung</string>
+    <string name="title_feature6">News - Webseite</string>
+	
+	<!-- Preference setting for import data	-->
+	<string name="updateland">Update Grundstück</string>
+	<string name="landtitle">Update Grundstück</string>
+	<string name="updatevquarter">Update Sortenquartier</string>
+	<string name="vquartertitle">Update Sortenquartier</string>
+	<string name="updatemachine">Update Maschinen</string>
+	<string name="machinetitle">Update Maschinen</string>
+	<string name="updateworker">Update Arbeiter</string>
+	<string name="workertitle">Update Arbeiter</string>
+	<string name="updatetask">Update Arbeiten</string>
+	<string name="updateoffline">Offline update</string>
+	<string name="tasktitle">Update Arbeiten</string>
+	<string name="updatepesticide">Update Pflanzenschutzmittel</string>
+	<string name="pesticidetitle">Update Pflanzenschutzmittel</string>
+	<string name="fertilizertitle">Update Blattdünger</string>
+	<string name="soilfertilizertitle">Updating Bodendünger</string>
+	<string name="dropbox">Dropbox verwenden</string>
+	<string name="dropboxmsg">Offline Update deaktivieren um Dropbox zu verwenden</string>
+	<string name="dropboxact">Klicken Sie auf Update um Dropbox einzurichten</string>
+	<string name="dropboxreset">Dropboxbindung zurücksetzen</string>
+	<string name="dropboxresetmessage">Achtung: Beim nächsten Update müssen Sie sich erneut mit Ihrer Dropbox verbinden</string>
+	<!-- Preference setting 	-->
+	<string name="synchronisationsettings">Datenimport…</string>
+	<!-- Preferences ASA	-->
+	<string name = "asa_pref_title">ASA AGRAR Einstellungen</string>
+	<string name = "asa_tax_setting">Bruttobeträge für Einkäufe</string>
+	<string name = "asa_harvest_codes">Codes für Ernteeinträge</string>
+	<string name = "asa_spray_code">Codes für Spritzung</string>
+	<string name = "asa_herbicide_code">Codes für Herbizidbehandlung</string>
+	<string name = "asa_soilfertilizer_codes">Codes für Bodendüngung</string>
+	<string name = "asa_fertilizer_code">Code für Blattdünger</string>
+	<string name = "asa_fertilizer_soil_code">Code für Bodendünger</string>
+	<!-- Table names	-->
+	<string name="landtable">Grundstücke</string>
+	<string name="vquartertable">Sortenquartiere</string>
+	<string name="machinetable">Maschinen</string>
+	<string name="workertable">Arbeiter</string>
+	<string name="tasktable">Arbeiten</string>
+	<string name="pesticidetable">Pflanzenschutzmittel</string>
+	<string name="fertilizertable">Blattdünger</string>
+	<string name="soilfertilizertable">Bodendünger</string>
+	<string name="categorytable">Erntekategorien</string>
+	<!-- Notification messages	-->
+	<string name="download_mess">MoFa - Downloading</string>
+	<string name="download_title">MoFa - Starte download</string>
+	<string name="download_finished">MoFa - Download fertig</string>
+	<string name="download_finished_ok">Import erfolgreich erledigt</string>
+	<string name="download_finished_error">Fehler beim Import</string>
+	<string name="upload_mess">MoFa - Uploading</string>
+	<string name="upload_title">MoFa - Starte upload</string>
+	<string name="upload_finished">MoFa - Upload fertig</string>
+	<string name="upload_finished_ok">Daten erfolgreich gesendet</string>
+	<string name="upload_finished_error">Fehler beim Upload</string>
+	
+	<!-- Listview Work Strings -->
+	<string name="no_works">Kein Arbeiten</string>
+	
+	<!--  WorkEditActivity -->
+	<string name="work_save_button">Speichern</string>
+	<string name="hint_date">Datum</string>
+	<string name="note_label">Bemerkung</string>
+	
+	<!-- MenuEntries Work -->
+	<string name="work_menu_add">Neue Arbeit</string>
+	<string name="work_menu_upload"> Upload</string>
+	<string name="menu_about"> Info</string>
+	<string name="no_connection"> Keine Datenverbindung - Bitte überprüfen Sie Ihre Netzwerkeinstellungen</string>
+	<!-- MenuEntries Work Contextmenu Filter-->
+	<string name="work_menu_nofilter"> ALLE</string>
+	<string name="work_menu_sprayfilter"> Spritzungen</string>
+	<string name="work_menu_herbicidefilter"> Herbizid</string>
+	<string name="work_menu_fertfilter"> Düngung</string>
+	<string name="work_menu_otherfilter"> Son. Arbeiten</string>
+	<!-- MenuEntries WorkEdit -->
+	<string name="workedit_menu_gpsauto"> GPS Sortenq.</string>
+	<!-- MenuEntries Purchase -->
+	<string name="purchase_menu_add"> Neuer Einkauf</string>
+	<string name="purchase_menu_upload"> Upload Einkäufe</string>
+	<!-- MenuEntries Harvest-->
+	<string name="harvest_menu_add">Neuer Liefersch.</string>
+	<!--  PromptDialog --> 
+	<string name="ok">OK</string>
+	<string name="cancel">Abbrechen</string>
+	<string name="title">MoFa - Eingabe</string>
+	<string name="enter_hours">Bitte Arbeitsstunden eingeben</string>
+	<string name="enter_amount">Bitte Menge eingeben</string>
+	<!-- Strings for export data	-->
+	<string name="export_title">Export aller Arbeiten</string>
+	<string name="export_message">Alle Arbeiten werden exportiert. Die lokalen Daten werden gelöscht</string>
+	<string name="export_status_message">Export gestartet. Bitte führen Sie am Ende das Update nochmals aus</string>
+	<string name="export_purchase_title">Export aller Einkäufe</string>
+	<string name="export_purchase_message">Sind Sie sicher, dass Sie alle Einkäufe exportieren möchten. Die lokalen Einträge werden gelöscht</string>
+	
+	<!--  Strings for gps location  -->
+	<string name="gps_text">GPS Daten des gewählten Sortenquartiers</string>
+	<string name="gps_point1">Längen und Breitengrade von Punkt 1</string>
+	<string name="gps_point2">Längen und Breitengrade von Punkt 2</string>
+	<string name="gps_empty">Keine Daten</string>
+	
+	<!-- Strings for TabCaption -->
+	<string name="worktab">Arbeit</string>
+	<string name="workrestab">Pers/Masch</string>
+	<string name="spraytab">Spritzung</string>
+	<string name="showspraytab">Spritzung</string>
+	<string name="soilferttab">Düngung</string>
+	<string name="harvesttab">Ernte</string>
+	
+	<!-- Strings in SprayTab -->
+	<string name="sprayvqlist">Sortenquartier</string>
+	<string name="sumwatercaption">hl</string>
+	<string name="concentrationcaption">Kon.</string>
+	<string name="openpesticidebutton">Mittel</string>
+	<string name="waterdialogmsg">Wassermenge aktualisieren?</string>
+	<!-- String image description -->
+	<string name="imagepesticide">Mittelliste</string>
+	<!-- Strings in Pesticide List -->
+	<string name="search_str_pesticide">Suchtext eingeben</string>
+	<!-- Strings in workresources -->
+	<string name="toast_msg_start">Bitte zuerst Sortenquartier auswählen</string>
+	<!--  Strings in Fragment Input Dose -->
+	<string name="input_dose_hl">Dosierung pro hl</string>
+	<string name="input_amount_total">Totale Mittelmenge</string>
+	<!-- Strings for TabCaption for Product List -->
+	<string name="pesticidetab">Pflanzenschutzm</string>
+	<string name="fertilizertab">Blattdünger</string>
+	<!-- Strings for Dialogs -->
+	<string name="okbutton">OK</string>
+	<string name="cancelbutton">Abbrechen</string>
+	<string name="closebutton">Schließen</string>
+	<string name="dialogdeletetitel">Löschen</string>
+	<string name="dialogdeletemsg">Wollen Sie den Eintrag löschen?</string>
+	<string name="dialogdeletemsgwithchilds">Wollen Sie den Eintrag und alle dazugehörigen Elemente löschen?</string>
+	<string name="importTitle">Importieren Stammdaten…</string>
+	<string name="noUpdatesInfo">Hinweis</string>
+	<string name="noUpdatesText">Keine Updates vorhanden</string>
+	<!-- Strings for Harvest Fragment Dialog -->
+	<string name="har_title">Lieferschein</string>
+	<string name="har_number">Liefernr</string>
+	<string name="har_amount">Menge</string>
+	<string name="har_category">Kategorie</string>
+	<string name="har_boxes">Kisten</string>
+	<string name="har_note">Bemerk</string>
+	<string name="har_sugar">Z</string>
+	<string name="har_ph">pH</string>
+	<string name="har_phen">Phe</string>
+	<string name="har_acid">S</string>
+	<string name="har_stage">Pflückgang</string>
+	<string name="har_warning_id">Liefernr muss eingegeben werden</string>
+	<!-- Strings for Error/Warnings -->
+	<string name="restpathemptystring">Pfad unter Einstellungen RestPath eintragen</string>
+	<string name="xmlparseerror">Fehler beim Lesen der XML Datei</string>
+	<string name="dropboxconnerror">Verbindung zu DropBox fehlgeschlagen oder abgebrochen</string>
+	<string name="reimportmessage">ACHTUNG - ES MÜSSEN ZUERST ALLE ARBEITEN/EINKÄUFE EXPORTIERT WERDEN</string>
+	<string name="nodata">Keine Stammdaten vorhanden - Bitte auf Update klicken um Daten zu importieren</string>
+</resources>

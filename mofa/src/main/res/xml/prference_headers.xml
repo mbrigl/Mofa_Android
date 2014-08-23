@@ -1,0 +1,22 @@
+<preference-headers xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<header
+		android:fragment="it.schmid.android.mofa.WorkingJournalPreferenceFragment"
+		android:summary="@string/header_summary"
+		android:title="@string/header_title"
+        tools:ignore="UnusedAttribute">
+		<extra
+			android:name="resource"
+			android:value="prefs"/>
+	</header>
+	<header
+		android:fragment="it.schmid.android.mofa.PreferenceFragmentASA"
+		android:summary="@string/header_summary_asa"
+		android:title="@string/header_title_asa"
+        tools:ignore="UnusedAttribute">
+		<extra
+			android:name="resource"
+			android:value="prefs_asa"/>
+	</header>
+</preference-headers>

@@ -1,0 +1,11 @@
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_about"
+          android:icon="@drawable/ic_action_about"
+          android:title="@string/menu_about"
+          android:showAsAction="ifRoom|withText"
+        tools:ignore="UnusedAttribute" />
+    <!--   <item android:id="@+id/menu_test"
+          android:title="Test"
+           /> -->
+</menu>

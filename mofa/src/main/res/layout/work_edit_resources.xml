@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+     android:id="@+id/fragment_work_resources" >
+       
+    <LinearLayout 
+        android:layout_weight="0.5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        >
+        <ImageButton
+        android:id="@+id/work_change_worker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_social_add_person" />
+        <ListView
+        android:id="@+id/currworkerlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </ListView>
+    </LinearLayout>
+     <View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:background="@android:color/darker_gray"/>
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        >
+        <ImageButton
+        android:id="@+id/work_change_machine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_tractor" />
+        <ListView
+        android:id="@+id/currmachinelist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </ListView>
+    </LinearLayout>
+    <View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:background="@android:color/darker_gray"/>
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/work_save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/work_save_button" >
+    </Button>
+    </LinearLayout>
+</LinearLayout>

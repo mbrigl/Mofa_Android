@@ -1,0 +1,72 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<TableRow>
+		<TextView
+			style="@style/label"
+			android:text="@string/asa_tax_setting"/>
+		<TextView
+			android:id="@+id/asa_tax_setting"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/asa_harvest_codes"/>
+
+		<TextView
+			android:id="@+id/asa_harvest_codes"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/asa_spray_code"/>
+
+		<TextView
+			android:id="@+id/asa_spray_code"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/asa_herbicide_code"/>
+
+		<TextView
+			android:id="@+id/asa_herbicide_code"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/asa_soilfertilizer_codes"/>
+
+		<TextView
+			android:id="@+id/asa_soilfertilizer_codes"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/asa_fertilizer_code"/>
+
+		<TextView
+			android:id="@+id/asa_fertilizer_code"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/asa_fertilizer_soil_code"/>
+
+		<TextView
+			android:id="@+id/asa_fertilizer_soil_code"
+			style="@style/value"/>
+	</TableRow>
+</TableLayout>

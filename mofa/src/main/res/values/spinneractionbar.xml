@@ -1,0 +1,9 @@
+<resources>
+    <string-array name="nav_list">
+        <item>@string/work_menu_nofilter</item>
+        <item>@string/work_menu_sprayfilter</item>
+        <item>@string/work_menu_herbicidefilter</item>
+        <item>@string/work_menu_fertfilter</item>
+        <item>@string/work_menu_otherfilter</item>
+    </string-array>
+</resources>

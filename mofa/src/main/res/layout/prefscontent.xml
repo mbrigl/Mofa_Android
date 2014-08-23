@@ -1,0 +1,142 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<TableRow>
+		<TextView
+			style="@style/label"
+			android:text="@string/text"/>
+		<TextView
+			android:id="@+id/text"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/updateoffline"/>
+
+		<TextView
+			android:id="@+id/updateofflinebox"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/dropbox"/>
+
+		<TextView
+			android:id="@+id/dropbox"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/dropboxreset"/>
+
+		<TextView
+			android:id="@+id/dropboxreset"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/list"/>
+
+		<TextView
+			android:id="@+id/list"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/listbackend"/>
+
+		<TextView
+			android:id="@+id/listbackend"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/updateland"/>
+
+		<TextView
+			android:id="@+id/landbox"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/updatevquarter"/>
+
+		<TextView
+			android:id="@+id/vquarterbox"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/updatemachine"/>
+
+		<TextView
+			android:id="@+id/machinebox"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/updateworker"/>
+
+		<TextView
+			android:id="@+id/workerbox"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/updatetask"/>
+
+		<TextView
+			android:id="@+id/taskbox"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/updatepesticide"/>
+
+		<TextView
+			android:id="@+id/pesticidebox"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/fertilizertitle"/>
+
+		<TextView
+			android:id="@+id/fertilizerbox"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/soilfertilizertitle"/>
+
+		<TextView
+			android:id="@+id/soilfertilizerbox"
+			style="@style/value"/>
+	</TableRow>
+</TableLayout>
