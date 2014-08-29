@@ -455,7 +455,7 @@ public void run(){
 		            serializer.endTag("", "Datum");
 		            serializer.startTag("", "Arbeit");
 		            	serializer.startTag("","Code");
-		            		serializer.text(wk.getTask().getCode().toString());
+		            		serializer.text(wk.getTask().getCode());
 		            	serializer.endTag("","Code");
 		            serializer.endTag("", "Arbeit");
 		            
@@ -618,7 +618,7 @@ public void run(){
 		            		serializer.endTag("","Durchgang");
 			            	serializer.startTag("","Kategorie");
 		            			serializer.startTag("" , "Code");
-		            				serializer.text(h.getFruitQuality().getCode().toString());
+		            				serializer.text(h.getFruitQuality().getCode());
 		            			serializer.endTag("" , "Code");
 		            		serializer.endTag("","Kategorie");
 		            		serializer.startTag("","Kisten");

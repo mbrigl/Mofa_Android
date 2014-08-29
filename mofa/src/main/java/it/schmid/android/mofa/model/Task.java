@@ -106,7 +106,7 @@ public boolean equals(Object obj) {
       return false;
     if (obj == this)
       return true;
-    return  this.task.toString().equalsIgnoreCase(((Task) obj).task.toString());
+    return this.task.equalsIgnoreCase(((Task) obj).task);
   }
 @Override
   public int hashCode() {

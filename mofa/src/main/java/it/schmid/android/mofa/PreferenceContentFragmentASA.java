@@ -38,7 +38,7 @@ public class PreferenceContentFragmentASA extends SherlockFragment{
 		// TODO Auto-generated method stub
 		super.onResume();
 		SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
-		asaTaxSettings.setText(new Boolean(prefs.getBoolean("asa_tax_setting", false)).toString());
+		asaTaxSettings.setText(Boolean.valueOf(prefs.getBoolean("asa_tax_setting", false)).toString());
 		harvestWorkCode.setText(prefs.getString("asa_harvest_codes","510;515;520;530"));
 		sprayWorkCode.setText(prefs.getString("asa_spray_code","310"));
 		herbicideWorkCode.setText(prefs.getString("asa_herbicide_code","425"));

@@ -112,13 +112,13 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
             		NumberFormat nf = NumberFormat.getInstance(Locale.US);
 
             		//DecimalFormat nf = new DecimalFormat("#.##");
-            		mDoseHlText.setText (nf.format(mPesticide.getDefaultDose()).toString());
+            		mDoseHlText.setText (nf.format(mPesticide.getDefaultDose()));
             		mAmountText.setText((calcAmount(mWaterAmount,mConc)));
             	}
         	}else{ //editing the selected product
         		NumberFormat nf = NumberFormat.getInstance(Locale.US);
-        		mDoseHlText.setText (nf.format(mDose).toString());
-        		mAmountText.setText(nf.format(mAmount).toString());
+        		mDoseHlText.setText (nf.format(mDose));
+        		mAmountText.setText(nf.format(mAmount));
         	}
         	
         	// Show soft keyboard automatically
@@ -182,7 +182,7 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 			e.printStackTrace();
 		}
 		
-		return nf.format(mAmount).toString();
+		return nf.format(mAmount);
 	}	
 	private String calcDose(Double wateramount,Integer conc){
 		mAmount=0.00;
@@ -194,7 +194,7 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 			e.printStackTrace();
 		}
 		mDose = mAmount/(wateramount*conc);
-		return nf.format(mDose).toString();
+		return nf.format(mDose);
 	}
 	
 	

@@ -103,8 +103,10 @@
 ##---------------Begin: proguard configuration for ActionBarSherlock  ----------
 -keep class android.support.v4.app.** { *; }
 -keep class com.dropbox.sync.android.** { *; }
+-dontwarn com.dropbox.sync.android.**
 -keep interface android.support.v4.app.** { *; }
 -keep class com.actionbarsherlock.** { *; }
+-dontwarn com.actionbarsherlock.internal.**
 -keep interface com.actionbarsherlock.** { *; }
 -keep class it.schmid.android.mofa.db.** { *; }
 -keep class it.schmid.android.mofa.model.** { *; }

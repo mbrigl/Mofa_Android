@@ -79,7 +79,7 @@ public class SoilFertilizer extends ImportBehavior{
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return productName.toString();
+		return productName;
 	}
 	@Override
 	public Boolean importMasterData(String xmlString, NotificationService notification) {

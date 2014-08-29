@@ -3,9 +3,9 @@ package it.schmid.android.mofa;
 public class PropertySuggest {
 	private static PropertySuggest mInstance= null;
 
-	static Double defaultHour=null;
+	public static Double defaultHour=8.00;
 
-	protected PropertySuggest(){}
+	public PropertySuggest(){}
 
 	public static synchronized PropertySuggest getInstance(){
 	    if(null == mInstance){

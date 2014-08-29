@@ -744,7 +744,7 @@ public class DatabaseManager {
     }
    /**
     *  WorkVQuarter-Query and Operations
-    * @param work
+    *
     * @return gives us the VQuarters of a work
     * @throws SQLException
     */
@@ -982,7 +982,7 @@ public class DatabaseManager {
     }
     /**
      *  WorkWorker-Query and Operations
-     * @param work
+     *
      * @return gives us the Worker of a work
      * @throws SQLException
      */
@@ -1060,7 +1060,7 @@ public class DatabaseManager {
     }
     /**
      *  WorkMachine-Query and Operations
-     * @param work
+     *
      * @return gives us the Machine of a work
      * @throws SQLException
      */
@@ -1192,7 +1192,7 @@ public class DatabaseManager {
     }
     /**
      *  WorkSoilFertilizer-Query and Operations
-     * @param work
+     *
      * @return gives us theFertilizer of a work
      * @throws SQLException
      */

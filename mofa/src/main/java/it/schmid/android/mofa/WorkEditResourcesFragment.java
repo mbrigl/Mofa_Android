@@ -6,12 +6,14 @@ import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.model.Work;
 import it.schmid.android.mofa.model.WorkMachine;
 import it.schmid.android.mofa.model.WorkWorker;
+import it.schmid.android.mofa.model.Worker;
 
 import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +35,7 @@ public class WorkEditResourcesFragment extends SherlockFragment  {
 	private ListView mWorkWorkerList;
 	private ListView mWorkMachineList;
 	private Boolean firstLoad=true;
+
 	WorkEditTabActivity parentActivity;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -76,7 +79,7 @@ public class WorkEditResourcesFragment extends SherlockFragment  {
 		
 		private void fillWorkerList(){
 			List<WorkWorker> selectedWorkers = DatabaseManager.getInstance().getWorkWorkerByWorkId(work.getId());
-			
+
 			//Log.d(TAG, "Number WorkWorker of current work" + selectedWorkers.size());
 			WorkWorkerAdapter adapter = new WorkWorkerAdapter(getActivity(), R.layout.work_worker_row, selectedWorkers);
 			mWorkWorkerList.setAdapter(adapter);

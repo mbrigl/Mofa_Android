@@ -75,7 +75,7 @@ public class FruitQuality extends ImportBehavior{
 	      return false;
 	    if (obj == this)
 	      return true;
-	    return  this.quality.toString().equalsIgnoreCase(((FruitQuality) obj).quality.toString());
+	    return this.quality.equalsIgnoreCase(((FruitQuality) obj).quality);
 	  }
 	@Override
 	  public int hashCode() {

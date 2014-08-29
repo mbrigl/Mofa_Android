@@ -30,6 +30,10 @@
 	    android:visibility="gone"
 	    android:focusable="false"
 		android:focusableInTouchMode="false"
+        android:layout_toRightOf="@id/workerlabel"
+        android:layout_toLeftOf="@id/selected"
+        android:gravity="center"
+
 	     >
 
     </TextView>

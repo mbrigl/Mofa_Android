@@ -1,74 +1,82 @@
 package it.schmid.android.mofa;
 
-import it.schmid.android.mofa.db.DatabaseManager;
-import it.schmid.android.mofa.model.Machine;
-import it.schmid.android.mofa.model.Work;
-import it.schmid.android.mofa.model.WorkMachine;
-
-import java.sql.SQLException;
-import java.util.List;
-
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseArray;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.model.Machine;
+import it.schmid.android.mofa.model.Work;
+import it.schmid.android.mofa.model.WorkMachine;
 
 public class WorkSelectMachineActivity extends DashboardActivity{
 	private static final String TAG = "WorkSelectMachineActivity";
-	private ListView listView;
-	private Button closeButton;
-	private int workId;
+    private int workId;
+    SparseArray<Double> selectedMachines = new SparseArray<Double>() ;
 	private Double proposedHour = 0.00;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.machine_list);
-		listView=(ListView)findViewById(R.id.machinelistview);
-		closeButton=(Button)findViewById(R.id.machineclose_btn);
+        ListView listView = (ListView) findViewById(R.id.machinelistview);
+		Button closeButton=(Button)findViewById(R.id.machineclose_btn);
 
 		Bundle bundle = getIntent().getExtras();
 		if (null!=bundle && bundle.containsKey("Work_ID")) {
             workId = bundle.getInt("Work_ID");
-            Log.d(TAG, "Current workid: " + workId); 
+            Log.d(TAG, "Current workid: " + workId);
+            List<WorkMachine> listMachines = DatabaseManager.getInstance().getWorkMachineByWorkId(workId);
+                for (WorkMachine m: listMachines){
+                    selectedMachines.put(m.getMachine().getId(),m.getHours()); //put the current selected machine in a sparseArray
+                }
         	}
 		List<Machine> machineList = DatabaseManager.getInstance().getAllMachines();
-		final ArrayAdapter<Machine> adapter = new ArrayAdapter<Machine>(this, R.layout.machine_row, R.id.machinelabel, machineList);
+		final ArrayAdapter<Machine> adapter = new SelectMachineAdapter(this, R.layout.machine_row, machineList);
 		listView.setAdapter(adapter);
-		listView.setOnItemClickListener(new OnItemClickListener(){
-			 public void onItemClick(AdapterView<?> parent, View view,
-		                int position, long id) {
-				 	final Machine machine = adapter.getItem(position);
-					Log.d(TAG, "Current machine with id: " + machine.getId());
-					if (PropertySuggest.defaultHour!=null){
-						 proposedHour = PropertySuggest.defaultHour;
-					 }
-					PromptDialog dlg = new PromptDialog(WorkSelectMachineActivity.this, R.string.title,
-							R.string.enter_hours, proposedHour) {
-						@Override
-						public boolean onOkClicked(Double input) {
-							// do something
-							Log.d(TAG, "showDialog: " + input);
-							try {
-								saveState(workId, machine.getId(), input);
-								PropertySuggest.defaultHour = input;
-							} catch (SQLException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							return true; // true = close dialog
+		listView.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                final Machine machine = adapter.getItem(position);
+                Log.d(TAG, "Current machine with id: " + machine.getId());
+                if (PropertySuggest.defaultHour != null) {
+                    proposedHour = PropertySuggest.defaultHour;
+                }
+                PromptDialog dlg = new PromptDialog(WorkSelectMachineActivity.this, R.string.title,
+                        R.string.enter_hours, proposedHour) {
+                    @Override
+                    public boolean onOkClicked(Double input) {
+                        // do something
+                        Log.d(TAG, "showDialog: " + input);
 
-						}
-					};
-					dlg.show();
+                        addMachineToArray(machine.getId(), input);
+                        adapter.notifyDataSetChanged();
+                        PropertySuggest.defaultHour = input;
+                        proposedHour = PropertySuggest.defaultHour; //setting the local variable to the new value
 
-					
-			 	}
-		});	
+                        return true; // true = close dialog
+
+                    }
+                };
+                dlg.show();
+
+
+            }
+        });
 		closeButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				finish();
@@ -93,4 +101,109 @@ public class WorkSelectMachineActivity extends DashboardActivity{
 			DatabaseManager.getInstance().updateWorkMachine(w);
 		}
 	}
+    private void saveSparseArray(SparseArray<Double> machineArray){
+        int machineId;
+        for(int i = 0; i < machineArray.size(); i++) {
+            machineId = machineArray.keyAt(i);
+            Double hours = machineArray.get(machineId);
+            try {
+                saveState(workId,machineId,hours);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //writing the values of sparseArray to Database
+        saveSparseArray(selectedMachines);
+    }
+
+    private class SelectMachineAdapter extends ArrayAdapter<Machine> {
+        private static final String TAG = "SelectMachineAdapter";
+        private Context context;
+        private int itemLayout;
+        private List<Machine> machines;
+
+
+
+        public SelectMachineAdapter(Context context, int textViewResourceId, List<Machine> machines) {
+            super(context, textViewResourceId, machines);
+            this.context = context;
+            this.itemLayout= textViewResourceId;
+            this.machines = machines;
+
+
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            final MachineHolder holderItem;
+            if (convertView==null){
+                //inflating the layout
+                LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+                convertView = inflater.inflate(itemLayout,parent, false);
+                //setting up viewholder
+                holderItem = new MachineHolder();
+                holderItem.mName = (TextView) convertView.findViewById(R.id.machinelabel);
+                holderItem.mHours = (TextView)convertView.findViewById(R.id.hourslabel);
+                holderItem.mIsSelected = (CheckBox)convertView.findViewById(R.id.selected);
+
+                convertView.setTag(holderItem);
+            }else{
+                holderItem = (MachineHolder) convertView.getTag();
+            }
+            final Machine machine = machines.get(position);
+            holderItem.mName.setText(machine.getName());
+            Double hours;
+            hours = selectedMachines.get (machine.getId());
+            if (hours!=null){ //existing entries, setting the hours and the checkbox
+//                Log.d(TAG, "worker " + worker.getLastname() + " hours: " + hours);
+                holderItem.mIsSelected.setChecked(true);
+                holderItem.mHours.setVisibility(View.VISIBLE);
+                holderItem.mHours.setText(hours.toString());
+            }
+            holderItem.mIsSelected.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (holderItem.mIsSelected.isChecked()){ //adding item to sparseArray and setting the textview
+                        holderItem.mHours.setVisibility(View.VISIBLE);
+                        holderItem.mHours.setText(proposedHour.toString());
+                        addMachineToArray(machine.getId(), proposedHour);
+
+                    }else{
+                        removeMachineFromArray(machine.getId());
+                        holderItem.mHours.setVisibility(View.GONE);
+                        Log.d (TAG, "Removing");
+                    }
+                }
+            });
+            return convertView;
+        }
+
+        private class MachineHolder{
+            TextView mName;
+            TextView mHours;
+            CheckBox mIsSelected;
+        }
+
+
+
+    }
+
+    private void addMachineToArray(Integer id, Double proposedHour) {
+        selectedMachines.put(id,proposedHour); //adding the selected worker to the SparseArray
+    }
+    private void removeMachineFromArray(Integer id){
+        selectedMachines.delete(id);
+        try {
+            List<WorkMachine> listWorkMachine = DatabaseManager.getInstance().getWorkMachineByWorkIdAndByMachineId(workId, id);
+            if (listWorkMachine.size()>0){
+                DatabaseManager.getInstance().deleteWorkMachine(listWorkMachine.get(0));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

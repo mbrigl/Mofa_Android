@@ -58,16 +58,16 @@ public class PreferenceContentFragment extends SherlockFragment {
 	    text.setText(prefs.getString("text", "<unset>"));
 	    list.setText(prefs.getString("list", "<unset>"));
 	    listbackend.setText(prefs.getString("listbackend", "<unset>"));
-	    checkUpdateLand.setText(new Boolean(prefs.getBoolean("landbox", false)).toString());
-	    checkDropbox.setText(new Boolean(prefs.getBoolean("dropbox", false)).toString());
-	    checkResetDropbox.setText(new Boolean(prefs.getBoolean("dropboxreset", false)).toString());
-	    checkUpdateVquarter.setText(new Boolean(prefs.getBoolean("vquarterbox", false)).toString());
-	    checkUpdateMachine.setText(new Boolean(prefs.getBoolean("machinebox", false)).toString());
-	    checkUpdateWorker.setText(new Boolean(prefs.getBoolean("workerbox", false)).toString());
-	    checkUpdateTask.setText(new Boolean(prefs.getBoolean("taskbox", false)).toString());
-	    checkUpdatePesticide.setText(new Boolean(prefs.getBoolean("pesticidebox", false)).toString());
-	    checkUpdateFertilizer.setText(new Boolean(prefs.getBoolean("fertilizerbox", false)).toString());
-	    checkUpdateSoilFertilizer.setText(new Boolean(prefs.getBoolean("soilfertilizerbox", false)).toString());
-	    checkUpdateOffline.setText(new Boolean(prefs.getBoolean("updateofflinebox",false)).toString());
+	    checkUpdateLand.setText(Boolean.valueOf(prefs.getBoolean("landbox", false)).toString());
+	    checkDropbox.setText(Boolean.valueOf(prefs.getBoolean("dropbox", false)).toString());
+	    checkResetDropbox.setText(Boolean.valueOf(prefs.getBoolean("dropboxreset", false)).toString());
+	    checkUpdateVquarter.setText(Boolean.valueOf(prefs.getBoolean("vquarterbox", false)).toString());
+	    checkUpdateMachine.setText(Boolean.valueOf(prefs.getBoolean("machinebox", false)).toString());
+	    checkUpdateWorker.setText(Boolean.valueOf(prefs.getBoolean("workerbox", false)).toString());
+	    checkUpdateTask.setText(Boolean.valueOf(prefs.getBoolean("taskbox", false)).toString());
+	    checkUpdatePesticide.setText(Boolean.valueOf(prefs.getBoolean("pesticidebox", false)).toString());
+	    checkUpdateFertilizer.setText(Boolean.valueOf(prefs.getBoolean("fertilizerbox", false)).toString());
+	    checkUpdateSoilFertilizer.setText(Boolean.valueOf(prefs.getBoolean("soilfertilizerbox", false)).toString());
+	    checkUpdateOffline.setText(Boolean.valueOf(prefs.getBoolean("updateofflinebox", false)).toString());
 	  }
 }

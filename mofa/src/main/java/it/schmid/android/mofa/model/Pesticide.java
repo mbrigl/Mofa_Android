@@ -151,7 +151,7 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return productName.toString();
+		return productName;
 	}
 
 
