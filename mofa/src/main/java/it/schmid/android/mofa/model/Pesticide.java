@@ -39,7 +39,7 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 	private Double defaultDose;
 	@DatabaseField
 	private String code;
-	@DatabaseField
+    @DatabaseField
 	private String constraints;
 	private Boolean importError=false;
 	
@@ -90,7 +90,15 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 		this.code = code;
 	}
 
-	@Override
+    public String getConstraints() {
+        return constraints;
+    }
+
+    public void setConstraints(String constraints) {
+        this.constraints = constraints;
+    }
+
+    @Override
 	public void importMasterData(JSONArray importData) {
 		Pesticide pesticide;
 		try {
@@ -181,6 +189,7 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 	        	pesticide.setProductName(p.getProductName());
 	        	pesticide.setDefaultDose(p.getDefaultDose());
 	        	pesticide.setRegNumber(p.getRegNumber());
+                pesticide.setConstraints(p.getConstraints());
 	            DatabaseManager.getInstance().updatePesticide(pesticide);
             } else
             {
@@ -188,6 +197,7 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
             	newPesticide.setId(p.getId());
             	newPesticide.setProductName(p.getProductName());
             	newPesticide.setDefaultDose(p.getDefaultDose());
+                newPesticide.setConstraints(p.getConstraints());
             	newPesticide.setRegNumber(p.getRegNumber());
                 DatabaseManager.getInstance().addPesticide(p);
             }
@@ -285,6 +295,8 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 	}
 	private List<Pesticide> pesticideXmlParserASA(String inputData, NotificationService notification)	{
 		List<Pesticide> mPesticideList=null ;
+        JSONObject json;
+        String text="";
 		Integer xId = 1;
 		String xProduct = "";
 		Integer xRegnr = null;
@@ -292,6 +304,12 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 		String xCode="";
 		Boolean firstCode = true;
 		Boolean firstName = true;
+        Boolean isAgrios=false;
+        Boolean isApple=false;
+        Double maxAmount=null;
+        Integer maxUsage=null;
+        String restrictionText=null;
+        Integer waitPeriod=null;
 		try {
 	        //For String source
 	        XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -303,74 +321,117 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 	    
 	        while (eventType != XmlPullParser.END_DOCUMENT ){
 	            String name = null;
-	            switch (eventType){
-	                case XmlPullParser.START_DOCUMENT:
-	                	mPesticideList = new ArrayList<Pesticide>();
-	                    break;
-	                case XmlPullParser.START_TAG:
-	                    name = xpp.getName();
-	                    if (name.equalsIgnoreCase("Spritzmittel")){
-	                    	currentPesticide = new Pesticide();
-	                       // currentPesticide.setId(Integer.parseInt(xpp.getAttributeValue(0))); 
-	                    } else if (currentPesticide!= null){
-	                    	if (name.equalsIgnoreCase("ID")){
-	                    		xId=Integer.parseInt(xpp.nextText());
-	                    		currentPesticide.setId(xId);
-	                    	}
-	                    	if (name.equalsIgnoreCase("Code")&&(firstCode)){
-	                    		xCode = xpp.nextText();
-	                        	currentPesticide.setCode(xCode);
-	                        	//currentPesticide.setId(xId);
-	                        	//xId++;
-	                            firstCode=false;           	                        	
-	                        }
-	                    	//for the moment (2014) not activated, due the fact that in ASA some regnr are alphanumeric
+	            switch (eventType) {
+                    case XmlPullParser.START_DOCUMENT:
+                        mPesticideList = new ArrayList<Pesticide>();
+                        break;
+                    case XmlPullParser.START_TAG:
+                        name = xpp.getName();
+                        if (name.equalsIgnoreCase("Spritzmittel")) {
+                            currentPesticide = new Pesticide();
+                            isAgrios=false;
+                            isApple=false;
+                            // currentPesticide.setId(Integer.parseInt(xpp.getAttributeValue(0)));
+                        } else if (currentPesticide != null) {
+                            if (name.equalsIgnoreCase("ID")) {
+                                xId = Integer.parseInt(xpp.nextText());
+                                currentPesticide.setId(xId);
+                            }
+                            if (name.equalsIgnoreCase("Code") && (firstCode)) {
+                                xCode = xpp.nextText();
+                                currentPesticide.setCode(xCode);
+                                //currentPesticide.setId(xId);
+                                //xId++;
+                                firstCode = false;
+                            }
+                            //for the moment (2014) not activated, due the fact that in ASA some regnr are alphanumeric
 //	                        if (name.equalsIgnoreCase("Zulassungsnummer")&& !(xpp.isEmptyElementTag())){
 //	                        	xRegnr = Integer.parseInt(xpp.nextText());
 //	                        	currentPesticide.setRegNumber(xRegnr);
 //	                        }
-	                        if (name.equalsIgnoreCase("Name")&& firstName){
-	                        	xProduct = xpp.nextText(); //in ASA the machine name is stored as attribute
-	                           	currentPesticide.setProductName(xProduct);
-	                           	firstName=false;
-	                        	
-	                        		                        	
-	                        }
-	                        if (name.equalsIgnoreCase("DosierungProHl")&& !(xpp.isEmptyElementTag())){
-	                        	String value = xpp.nextText();
-	                        	java.text.NumberFormat nf = NumberFormat.getInstance(Locale.ENGLISH); //English number settings
-	                        	try{
-	                        		if (!(value.equalsIgnoreCase(""))){
-	                        			xDose = nf.parse(value).doubleValue();
-	                        			currentPesticide.setDefaultDose(xDose);
-	                        		}
-	                        	//	Log.d(TAG, "[pesticideXMLParser] Reading dose before convertation: "  + xDose);
-	                        		
-	                        	//	Log.d(TAG, "[pesticideXMLParser] Reading dose: "  + xDose);
-	                        		
-	        	        		}catch (Exception ex){
-	        	        			importError = true;
-	        	        			//ex.printStackTrace();
-	        	        		}  
-	                        	
-	                           	
-	                        		                        	
-	                        }
-//	                        if (name.equalsIgnoreCase("Einschraenkung")){
-//	                        	readSubNode(xpp);
-//	                        }
-	                    }
-	                    
-	                case XmlPullParser.END_TAG:
-	                	name = xpp.getName();
-	                    if (name.equalsIgnoreCase("Spritzmittel") && currentPesticide != null){
-	                    	mPesticideList.add(currentPesticide);
-	                    	Log.d(TAG,"[XMLParserPesticide] adding pesticide: " + currentPesticide.getId() + " " + currentPesticide.getProductName());
-	                    	firstCode=true;
-	                    	firstName=true;
-	                    } 
-	                   break;
-	                }
+                            if (name.equalsIgnoreCase("Name") && firstName) {
+                                xProduct = xpp.nextText(); //in ASA the machine name is stored as attribute
+                                currentPesticide.setProductName(xProduct);
+                                firstName = false;
+
+
+                            }
+                            if (name.equalsIgnoreCase("DosierungProHl") && !(xpp.isEmptyElementTag())) {
+                                String value = xpp.nextText();
+                                java.text.NumberFormat nf = NumberFormat.getInstance(Locale.ENGLISH); //English number settings
+                                try {
+                                    if (!(value.equalsIgnoreCase(""))) {
+                                        xDose = nf.parse(value).doubleValue();
+                                        currentPesticide.setDefaultDose(xDose);
+                                    }
+                                    //	Log.d(TAG, "[pesticideXMLParser] Reading dose before convertation: "  + xDose);
+
+                                    //	Log.d(TAG, "[pesticideXMLParser] Reading dose: "  + xDose);
+
+                                } catch (Exception ex) {
+                                    importError = true;
+                                    //ex.printStackTrace();
+                                }
+
+
+                            }
+
+                        }
+                        break;
+                    case XmlPullParser.TEXT:
+                        text = xpp.getText();
+                        break;
+                    case XmlPullParser.END_TAG:
+                        name = xpp.getName();
+                        if (name.equalsIgnoreCase("Spritzmittel") && currentPesticide != null) {
+                            json = new JSONObject();
+                            if (maxAmount != null) {
+                                json.put("maxAmount", maxAmount);
+                            }
+                            if (maxUsage != null) {
+                                json.put("maxUsage", maxUsage);
+                            }
+                            if (restrictionText != null){
+                                json.put("restriction", restrictionText);
+                            }
+                            if (waitPeriod!=null){
+                                json.put("waitingPeriod",waitPeriod);
+                            }
+                            currentPesticide.setConstraints(json.toString());
+                            Log.d(TAG, "Creating JSON for pesticide " + currentPesticide.getProductName() +": " + json.toString());
+                            mPesticideList.add(currentPesticide);
+
+                            //resetting the variables
+                            firstCode = true;
+                            firstName = true;
+                            isAgrios = false;
+                            isApple = false;
+                            maxAmount=null;
+                            maxUsage=null;
+                            restrictionText=null;
+                            waitPeriod=null;
+                        } else if (name.equalsIgnoreCase("Einschraenkung") ) {
+                            isAgrios = false; //resetting the variable, because there is also the wait time to check
+                            isApple = false;
+                        } else if (name.equalsIgnoreCase("Karenzzeit") ){
+                            isAgrios = false; //resetting the variable, because there are also other waiting periods like bio..
+                            isApple = false;
+                        } else if (name.equalsIgnoreCase("Name") && text.equalsIgnoreCase("Agrios")) {
+                            isAgrios = true;
+                        } else if (name.equalsIgnoreCase("Kultur") && text.equalsIgnoreCase("Apfel")) {
+                            isApple = true;
+                        } else if (name.equalsIgnoreCase("MaximaleDosierungProAnwendung") && isAgrios && isApple) {
+                            maxAmount = Double.parseDouble(text);
+                        } else if (name.equalsIgnoreCase("MaximaleAnzahlAnwendungen") && isAgrios && isApple) {
+                            maxUsage = Integer.parseInt(text);
+                        } else if (name.equalsIgnoreCase("Notiz") && isAgrios && isApple){
+                            restrictionText = text;
+                        } else if (name.equalsIgnoreCase("Tage")&&isAgrios && isApple){
+                            waitPeriod = Integer.parseInt(text);
+
+                        }
+                        break;
+                }
 	             eventType = xpp.next();
 	             //Log.d(TAG, "[XMLParserPesticide] eventtype: " + eventType);
 	            }
@@ -384,57 +445,10 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 	    } catch (IOException e) {
 	    	  importError = true;
 	         // e.printStackTrace();
-	    }
-		return (mPesticideList);
+	    } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return (mPesticideList);
 	}
-	private void readSubNode (XmlPullParser xp){
-		JSONObject json = new JSONObject();
-		String name=null;
-		Boolean isAgrios=false;
-		Boolean isApple=false;
-		try {
-			int eventType = xp.getEventType();
-			while (true){
-				name = xp.getName();
-				 switch (eventType){
-				 case XmlPullParser.START_TAG:
-					 if (name.equalsIgnoreCase("Name")){
-							if (xp.getText().equalsIgnoreCase("Agrios")){
-								isAgrios=true;
-							}
-							
-						 }
-					 if (name.equalsIgnoreCase("Kultur")){
-						 if (xp.getText().equalsIgnoreCase("Apfel")){
-								isApple=true;
-							}
-						 }
-				 	if (name.equalsIgnoreCase("MaximaleDosierungProAnwendung")&& isAgrios && isApple){
-						Log.d(TAG,"Max Dosis pro ha: " + xp.getText());
-						json.put("maxAmount", xp.getText());
-					 }
-					 if (name.equalsIgnoreCase("MaximaleAnzahlAnwendungen")&& isAgrios && isApple){
-						 Log.d(TAG,"Maximale Anzahl Anwendungen: " + xp.getText());
-						 json.put("maxUsage", xp.getText());
-					 }
-				 
-				 
-				 
-				case XmlPullParser.END_TAG:
-					if (name.equalsIgnoreCase("Einschraenkung")){
-						Log.d (TAG, "JSON:" + json.toString());
-						break;
-				 	}
-					
-				 }
-				 
-			}
-		} catch (XmlPullParserException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+
 }

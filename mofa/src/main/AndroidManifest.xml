@@ -70,7 +70,7 @@
 			android:label="@string/app_name"
 			android:excludeFromRecents="true" >
 		</activity>
-- See more at: http://www.javabeat.net/2013/05/dialog-activity-android/#sthash.0oPrmg1U.dpuf
+-
 		<activity android:name="com.dropbox.sync.android.DbxAuthActivity" />
 		<activity
   		android:name="com.dropbox.client2.android.AuthActivity"

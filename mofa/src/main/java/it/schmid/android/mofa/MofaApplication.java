@@ -35,6 +35,7 @@ public class MofaApplication extends Application{
 	//Dropbox Credentials
 	public static final String appKey = "zgo2dupm3ung3u6";
     public static final String appSecret = "22u6lbkswjitll9";
+    private static double defaultHour=8.00;
 	private HttpClient httpClient;
 	private Boolean license=false;
 	private static MofaApplication instance;
@@ -174,6 +175,11 @@ public class MofaApplication extends Application{
 	        return false;
 	}
 
+    public static double getDefaultHour() {
+        return defaultHour;
+    }
 
-	
+    public static void setDefaultHour(double defaultHour) {
+        MofaApplication.defaultHour = defaultHour;
+    }
 }

@@ -28,7 +28,7 @@ public class WorkSelectMachineActivity extends DashboardActivity{
 	private static final String TAG = "WorkSelectMachineActivity";
     private int workId;
     SparseArray<Double> selectedMachines = new SparseArray<Double>() ;
-	private Double proposedHour = 0.00;
+	private Double proposedHour = 8.00;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,8 +53,11 @@ public class WorkSelectMachineActivity extends DashboardActivity{
                                     int position, long id) {
                 final Machine machine = adapter.getItem(position);
                 Log.d(TAG, "Current machine with id: " + machine.getId());
-                if (PropertySuggest.defaultHour != null) {
-                    proposedHour = PropertySuggest.defaultHour;
+                Double hours = selectedMachines.get(machine.getId());
+                if (hours!=null){ //existing entry
+                    proposedHour = hours;
+                } else {
+                    proposedHour = MofaApplication.getDefaultHour();
                 }
                 PromptDialog dlg = new PromptDialog(WorkSelectMachineActivity.this, R.string.title,
                         R.string.enter_hours, proposedHour) {
@@ -65,8 +68,8 @@ public class WorkSelectMachineActivity extends DashboardActivity{
 
                         addMachineToArray(machine.getId(), input);
                         adapter.notifyDataSetChanged();
-                        PropertySuggest.defaultHour = input;
-                        proposedHour = PropertySuggest.defaultHour; //setting the local variable to the new value
+                        MofaApplication.setDefaultHour(input);
+                        proposedHour= MofaApplication.getDefaultHour(); //setting the local variable to the new value
 
                         return true; // true = close dialog
 
@@ -156,6 +159,9 @@ public class WorkSelectMachineActivity extends DashboardActivity{
             }
             final Machine machine = machines.get(position);
             holderItem.mName.setText(machine.getName());
+            //default case
+            holderItem.mIsSelected.setChecked(false);
+            holderItem.mHours.setVisibility(View.GONE);
             Double hours;
             hours = selectedMachines.get (machine.getId());
             if (hours!=null){ //existing entries, setting the hours and the checkbox
@@ -169,6 +175,7 @@ public class WorkSelectMachineActivity extends DashboardActivity{
                 public void onClick(View view) {
                     if (holderItem.mIsSelected.isChecked()){ //adding item to sparseArray and setting the textview
                         holderItem.mHours.setVisibility(View.VISIBLE);
+                        proposedHour= MofaApplication.getDefaultHour();
                         holderItem.mHours.setText(proposedHour.toString());
                         addMachineToArray(machine.getId(), proposedHour);
 

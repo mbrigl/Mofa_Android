@@ -32,7 +32,7 @@ public class WorkSelectWorkerActivity extends DashboardActivity{
 	private static final String TAG = "WorkSelectWorkerActivity";
 	private int workId;
 	SparseArray<Double> selectedWorkers = new SparseArray<Double>() ;
-	private Double proposedHour = 0.00;
+	private Double proposedHour=8.00;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,8 +63,8 @@ public class WorkSelectWorkerActivity extends DashboardActivity{
                     Double hours = selectedWorkers.get(worker.getId());
                     if (hours!=null){ //existing entry
                         proposedHour = hours;
-                    } else if (PropertySuggest.defaultHour!=null){
-                        proposedHour = PropertySuggest.defaultHour;
+                    } else {
+                        proposedHour = MofaApplication.getDefaultHour();
                     }
 
 					PromptDialog dlg = new PromptDialog(WorkSelectWorkerActivity.this, R.string.title,
@@ -77,8 +77,8 @@ public class WorkSelectWorkerActivity extends DashboardActivity{
 								//saveState(workId, worker.getId(), input);
                                 addWorkerToArray(worker.getId(),input);
                                 adapter.notifyDataSetChanged();
-								PropertySuggest.defaultHour = input;
-                                proposedHour= PropertySuggest.defaultHour; //setting the local variable to the new value
+								MofaApplication.setDefaultHour(input);
+                                proposedHour= MofaApplication.getDefaultHour(); //setting the local variable to the new value
 							return true; // true = close dialog
 
 						}
@@ -172,10 +172,14 @@ public class WorkSelectWorkerActivity extends DashboardActivity{
             }else{
                 holderItem = (WorkerHolder) convertView.getTag();
             }
+            //default case, needed due the fact that we are working with viewholders
+            holderItem.wIsSelected.setChecked(false);
+            holderItem.wHours.setVisibility(View.GONE);
             final Worker worker = workers.get(position);
             holderItem.wName.setText(worker.getFirstName() + " " + worker.getLastname());
             Double hours;
             hours = selectedWorkers.get (worker.getId());
+
             if (hours!=null){ //existing entries, setting the hours and the checkbox
 //                Log.d(TAG, "worker " + worker.getLastname() + " hours: " + hours);
                 holderItem.wIsSelected.setChecked(true);

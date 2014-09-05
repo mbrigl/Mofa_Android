@@ -19,9 +19,11 @@ android {
     buildTypes {
         release {
             runProguard true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            proguardFile 'proguard-android.txt'
         }
     }
+
 }
 
 dependencies {
@@ -32,4 +34,6 @@ dependencies {
     compile files('libs/ormlite-core-4.42.jar')
     compile files('libs/ormlite-android-4.42.jar')
     compile files('libs/dropbox-sync-sdk-android.jar')
+
+
 }

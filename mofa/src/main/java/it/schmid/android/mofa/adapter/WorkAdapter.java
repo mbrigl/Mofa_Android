@@ -200,7 +200,7 @@ public class WorkAdapter extends ArrayAdapter<Work> {
 			List<Worker> selectedWorkers = DatabaseManager.getInstance().lookupWorkerForWork(work);
 			for (Worker w: selectedWorkers){
 				if (first){
-					txtWorkers = w.getFirstName() + " " + w.getLastname() ;
+					txtWorkers = w.getFirstName() + " " + w.getLastname();
 					first = false;
 				}else{
 					txtWorkers += ", " + w.getFirstName() + " " + w.getLastname() ;
