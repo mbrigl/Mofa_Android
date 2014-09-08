@@ -1,22 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:descendantFocusability="blocksDescendants">
     <ImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-         
+
         android:src="@drawable/ic_social_person" >
-    </ImageView> 
+    </ImageView>
     <TextView
-	    android:id="@+id/workerlabel"
-	    android:layout_width="wrap_content"
-	    android:layout_height="fill_parent"
-	    android:textSize="@dimen/text_size_large"
-	     >
+        android:id="@+id/workerlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_toRightOf="@id/icon"
+        android:textSize="@dimen/text_size_large"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        >
+    </TextView>
+    <TextView
+        android:id="@+id/hourslabel"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:textSize="@dimen/text_size_large"
+        android:visibility="gone"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_toRightOf="@id/workerlabel"
+        android:layout_toLeftOf="@id/selected"
+        android:gravity="center"
+
+        >
 
     </TextView>
+    <CheckBox
+        android:id="@+id/selected"
+        android:textSize="@dimen/text_size_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true" />
 
-</LinearLayout>
+</RelativeLayout>

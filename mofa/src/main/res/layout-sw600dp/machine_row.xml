@@ -1,19 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:weightSum="1">
+    android:descendantFocusability="blocksDescendants">
 
     <TextView
-	    android:id="@+id/machinelabel"
-	    android:layout_width="wrap_content"
-	    android:layout_height="fill_parent"
-	    android:textSize="@dimen/text_size_large"
+        android:id="@+id/machinelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:textSize="@dimen/text_size_large"
         android:drawableLeft="@drawable/ic_tractor_big"
 
-        android:layout_weight="0.05">
+        android:layout_weight="0.04">
+
+    </TextView>
+    <TextView
+        android:id="@+id/hourslabel"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:textSize="@dimen/text_size_large"
+        android:visibility="gone"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_toRightOf="@id/machinelabel"
+        android:layout_toLeftOf="@id/selected"
+        android:gravity="center"
+
+        >
 
     </TextView>
 
-</LinearLayout>
+    <CheckBox
+        android:id="@+id/selected"
+        android:textSize="@dimen/text_size_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true" />
+</RelativeLayout>
