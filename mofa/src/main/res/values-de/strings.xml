@@ -149,6 +149,8 @@
 	<string name="okbutton">OK</string>
 	<string name="cancelbutton">Abbrechen</string>
 	<string name="closebutton">Schließen</string>
+    <string name="yesbutton">JA</string>
+    <string name="nobutton">NEIN</string>
 	<string name="dialogdeletetitel">Löschen</string>
 	<string name="dialogdeletemsg">Wollen Sie den Eintrag löschen?</string>
 	<string name="dialogdeletemsgwithchilds">Wollen Sie den Eintrag und alle dazugehörigen Elemente löschen?</string>
@@ -174,4 +176,15 @@
 	<string name="dropboxconnerror">Verbindung zu DropBox fehlgeschlagen oder abgebrochen</string>
 	<string name="reimportmessage">ACHTUNG - ES MÜSSEN ZUERST ALLE ARBEITEN/EINKÄUFE EXPORTIERT WERDEN</string>
 	<string name="nodata">Keine Stammdaten vorhanden - Bitte auf Update klicken um Daten zu importieren</string>
+    <string name="noupdate">Kein Update vorhanden</string>
+    <!--Strings for Pesticide Info Dialog -->
+    <string name="beeDanger">BG</string>
+    <string name="waitingtime">Karenzzeit</string>
+    <string name="reentertime">WEZ</string>
+    <string name="maxamountha">max Menge pro ha</string>
+    <string name="maxtime">max Anwendungen/Jahr</string>
+    <string name="otherconstraints">weitere Einschr.</string>
+    <string name="waitingtimeUnit">Tage</string>
+    <string name="reentertimeUnit">h</string>
+    <string name="maxamounthaUnit">kg/lt</string>
 </resources>

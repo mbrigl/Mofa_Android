@@ -5,12 +5,17 @@ import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.db.WorkLoader;
 import it.schmid.android.mofa.model.Fertilizer;
+import it.schmid.android.mofa.model.Harvest;
 import it.schmid.android.mofa.model.Pesticide;
+import it.schmid.android.mofa.model.SoilFertilizer;
 import it.schmid.android.mofa.model.SprayFertilizer;
 import it.schmid.android.mofa.model.SprayPesticide;
+import it.schmid.android.mofa.model.Spraying;
 import it.schmid.android.mofa.model.Task;
 import it.schmid.android.mofa.model.VQuarter;
 import it.schmid.android.mofa.model.Work;
+import it.schmid.android.mofa.model.WorkFertilizer;
+import it.schmid.android.mofa.model.WorkWorker;
 import it.schmid.android.mofa.model.Worker;
 
 import java.sql.SQLException;
@@ -22,6 +27,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.SpannableStringBuilder;
+import android.text.style.BulletSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -100,27 +108,41 @@ public class WorkAdapter extends ArrayAdapter<Work> {
 			
 			public void onClick(View v) {
 				String txtVquarters = "";
-				String txtWorkers = "";
-				String txtSpray="";
+                SpannableStringBuilder txtHarvest = new SpannableStringBuilder();
+				SpannableStringBuilder txtWorkers = new SpannableStringBuilder();
+				SpannableStringBuilder txtSpray= new SpannableStringBuilder();
+                SpannableStringBuilder txtFert = new SpannableStringBuilder();
 			//	Work work = data.get(position);
 				View toolbar =row.findViewById(R.id.toolbar);
 				txtVquarters = getVquarters(work);
 				txtWorkers = getWorkers(work);
 				txtSpray = getSprayInfos(work);
+                txtHarvest = getHarvestEntry(work);
+                txtFert = getFertInfos(work);
 				if (txtVquarters != ""){
 					TextView txt = (TextView) row.findViewById(R.id.txtprevvquarters);
 					txt.setText(txtVquarters);
 				}
-				if (txtWorkers != ""){
+				if (txtWorkers.length() != 0){
 					TextView txtworker = (TextView) row.findViewById(R.id.txtprevworkers);
 					txtworker.setVisibility(View.VISIBLE);
 					txtworker.setText(txtWorkers);
 				}
-				if (txtSpray !=""){
+				if (txtSpray.length()!=0){
 					TextView txtSprayPrev = (TextView) row.findViewById(R.id.txtprevspray);
 					txtSprayPrev.setVisibility(View.VISIBLE);
 					txtSprayPrev.setText(txtSpray);
 				}
+                if (txtHarvest.length()!=0){
+                    TextView txtSprayPrev = (TextView) row.findViewById(R.id.txtprevspray);
+                    txtSprayPrev.setVisibility(View.VISIBLE);
+                    txtSprayPrev.setText(txtHarvest);
+                }
+                if (txtFert.length()!=0){
+                    TextView txtSprayPrev = (TextView) row.findViewById(R.id.txtprevspray);
+                    txtSprayPrev.setVisibility(View.VISIBLE);
+                    txtSprayPrev.setText(txtFert);
+                }
 				PreviewAnimation expandAni = new PreviewAnimation(toolbar, 500);
 				toolbar.startAnimation(expandAni);
 				
@@ -193,56 +215,128 @@ public class WorkAdapter extends ArrayAdapter<Work> {
 		}
 		return txtVquarters;
 	}
-	private String getWorkers(Work work){
-		String txtWorkers = "";
-		Boolean first = true;
-		try { // get workers for current work
-			List<Worker> selectedWorkers = DatabaseManager.getInstance().lookupWorkerForWork(work);
-			for (Worker w: selectedWorkers){
-				if (first){
-					txtWorkers = w.getFirstName() + " " + w.getLastname();
-					first = false;
-				}else{
-					txtWorkers += ", " + w.getFirstName() + " " + w.getLastname() ;
-				}
+	private SpannableStringBuilder getWorkers(Work work){
+		SpannableStringBuilder workerBuilder = new SpannableStringBuilder();
+        boolean first = true;
+            List<WorkWorker> selectedWorkers = DatabaseManager.getInstance().getWorkWorkerByWorkId(work.getId());
+			for (WorkWorker w: selectedWorkers){
+                String txtWorkers;
+                if (first){
+                    first = false;
+                } else{
+                    workerBuilder.append("\n");
+                }
+
+                Worker worker = DatabaseManager.getInstance().getWorkerWithId(w.getWorker().getId());
+                txtWorkers = worker.getFirstName() + " " +worker.getLastname() + ": " + w.getHours() + " h";
+				workerBuilder.append(txtWorkers);
+                workerBuilder.setSpan(new BulletSpan(10), workerBuilder.length() - txtWorkers.length(), workerBuilder.length(),17 );
+
+
 				
 				}
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		return txtWorkers;
+
+		return workerBuilder;
 	}
-	private String getSprayInfos(Work work){
-		String txtSpray = "";
-		Boolean first = true;
+    private SpannableStringBuilder getHarvestEntry(Work work){
+       SpannableStringBuilder harvestBuilder = new SpannableStringBuilder();
+       SpannableStringBuilder harvestBuilder1 = new SpannableStringBuilder();
+       if (DatabaseManager.getInstance().getHarvestListbyWorkId(work.getId()).size()!=0){
+           boolean first = true;
+           List<Harvest> harvestList = DatabaseManager.getInstance().getHarvestListbyWorkId(work.getId());
+           for (Harvest h : harvestList){
+              if (first){
+                  first = false;
+              }else{
+                  harvestBuilder.append("\n");
+              }
+              String str1 = context.getResources().getString(R.string.har_number) + ": ";
+              harvestBuilder.append(str1);
+              String str2 = h.getId().toString() + " ";
+              harvestBuilder.append(str2);
+              harvestBuilder.setSpan(new StyleSpan(1), harvestBuilder.length() - str2.length(), harvestBuilder.length(), 17);
+              str1 = context.getResources().getString(R.string.har_amount) + ": ";
+              harvestBuilder.append(str1);
+              str2 = h.getAmount().toString() + " kg ";
+              harvestBuilder.append(str2);
+              harvestBuilder.setSpan(new StyleSpan(1), harvestBuilder.length() - str2.length(), harvestBuilder.length(), 17);
+              str1 = context.getResources().getString(R.string.har_category) + ": ";
+              harvestBuilder.append("\n");
+              harvestBuilder.append(str1);
+              str2 = h.getFruitQuality().getQuality().toString();
+              harvestBuilder.append(str2);
+              harvestBuilder.setSpan(new StyleSpan(1), harvestBuilder.length() - str2.length(), harvestBuilder.length(), 17);
+
+           }
+       }
+       return harvestBuilder;
+    }
+    private SpannableStringBuilder getFertInfos(Work work){
+        SpannableStringBuilder fertBuilder = new SpannableStringBuilder();
+        if (DatabaseManager.getInstance().getWorkFertilizerByWorkId(work.getId()).size()!=0){
+            boolean first=true;
+            List<WorkFertilizer> wF = DatabaseManager.getInstance().getWorkFertilizerByWorkId(work.getId());
+            for (WorkFertilizer f: wF){
+                if (first){
+                    first=false;
+                }else{
+                    fertBuilder.append("\n");
+                }
+                SoilFertilizer soilFertilizer = DatabaseManager.getInstance().getSoilFertilizerWithId(f.getSoilFertilizer().getId());
+                String fertStr = soilFertilizer.getProductName();
+                fertStr+= " (" + f.getAmount() + " kg)";
+                fertBuilder.append(fertStr);
+                fertBuilder.setSpan(new BulletSpan(10), fertBuilder.length() - fertStr.length(), fertBuilder.length(), 17);
+
+            }
+        }
+        return fertBuilder;
+    }
+	private SpannableStringBuilder getSprayInfos(Work work){
+
+        SpannableStringBuilder sprayBuilder = new SpannableStringBuilder();
+
+
 		//getting the spray pesticides, if a spray work
     	if(DatabaseManager.getInstance().getSprayingByWorkId(work.getId()).size()!=0){ //its a spraying work
-    		int msprayId;
+    		Spraying sprayInfo = DatabaseManager.getInstance().getSprayingByWorkId(work.getId()).get(0);
+            //start formatting output using SpannableStringBuilder
+            String str1 = context.getResources().getString(R.string.concentrationcaption) + ": ";
+            sprayBuilder.append(str1);
+            String str2 = sprayInfo.getConcentration() + " x ";
+            sprayBuilder.append(str2);
+            sprayBuilder.setSpan(new StyleSpan(1),sprayBuilder.length() - str2.length(), sprayBuilder.length(), 17);
+            str1 = context.getResources().getString(R.string.sumwatercaption) + ": ";
+            sprayBuilder.append(str1);
+            str2 = sprayInfo.getWateramount().toString() ;
+            sprayBuilder.append(str2);
+            sprayBuilder.setSpan(new StyleSpan(1),sprayBuilder.length() - str2.length(), sprayBuilder.length(), 17);
+            int msprayId;
+
 			msprayId = DatabaseManager.getInstance().getSprayingByWorkId(work.getId()).get(0).getId();
 			List<SprayPesticide> selectedPesticides = DatabaseManager.getInstance().getSprayPesticideBySprayId(msprayId);
 			for (SprayPesticide sp : selectedPesticides){
 				 Pesticide pesticide = DatabaseManager.getInstance().getPesticideWithId(sp.getPesticide().getId());
-				 if (first){
-						txtSpray = pesticide.getProductName() ;
-						first = false;
-					}else{
-						txtSpray += ", " + pesticide.getProductName() ;
-					}
+                 String pestStr = pesticide.getProductName();
+                 pestStr +=  "(" + sp.getDose() + " )";
+                 sprayBuilder.append("\n");
+                 sprayBuilder.append(pestStr);
+                 sprayBuilder.setSpan(new BulletSpan(10), sprayBuilder.length() - pestStr.length(), sprayBuilder.length(), 17);
+
+
 				 
 			}
 			List<SprayFertilizer> selectedFertilizers = DatabaseManager.getInstance().getSprayFertilizerBySprayId(msprayId);
 			for (SprayFertilizer sf : selectedFertilizers){
 				Fertilizer fertilizer = DatabaseManager.getInstance().getFertilizerWithId(sf.getFertilizer().getId());
-				if (first){
-					txtSpray = fertilizer.getProductName() ;
-					first = false;
-				}else{
-					txtSpray += ", " + fertilizer.getProductName() ;
-				}
+                String fertStr = fertilizer.getProductName();
+                fertStr += " (" + sf.getDose() + " )";
+                sprayBuilder.append("\n");
+                sprayBuilder.append(fertStr);
+                sprayBuilder.setSpan(new BulletSpan(10), sprayBuilder.length() - fertStr.length(), sprayBuilder.length(),17 );
 				
 			}
     	}
-    	return txtSpray;
+    	return sprayBuilder;
 	}	
 }

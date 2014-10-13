@@ -9,8 +9,7 @@ import java.util.Locale;
 
 import it.schmid.android.mofa.MofaApplication;
 import it.schmid.android.mofa.NotificationService;
-import it.schmid.android.mofa.R;
-import it.schmid.android.mofa.adapter.ProductInterface;
+import it.schmid.android.mofa.interfaces.ProductInterface;
 import it.schmid.android.mofa.db.DatabaseManager;
 
 import org.json.JSONArray;
@@ -26,6 +25,7 @@ import com.j256.ormlite.field.DatabaseField;
 
 public class Fertilizer extends ImportBehavior implements ProductInterface{
 	private static final String TAG = "FertilizerClass";
+    private static final int SHOWINFO=0;
 	@DatabaseField(id=true)
 	@Expose
 	private Integer id;
@@ -53,7 +53,10 @@ public class Fertilizer extends ImportBehavior implements ProductInterface{
 	public Double getDefaultDose() {
 		return defaultDose;
 	}
-	public void setDefaultDose(Double defaultDose) {
+
+
+
+    public void setDefaultDose(Double defaultDose) {
 		this.defaultDose = defaultDose;
 	}
 	
@@ -351,4 +354,8 @@ public class Fertilizer extends ImportBehavior implements ProductInterface{
 
 	    return false;
 	}
+    @Override
+    public int showInfo() {
+        return SHOWINFO;
+    }
 }

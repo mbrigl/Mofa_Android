@@ -145,9 +145,7 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 			         	case 1:
 			         		try {
 			         			if (Integer.parseInt(backEndSoftware)==1){//ASA Case
-			         				String asaWorkSprayCodes=app.getSprayCodeASA();
-			         				String[] asaCodes =asaWorkSprayCodes.split(";");
-			         				workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASA(asaCodes);
+			         				workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASA("S");
 			         			}else{
 			         				workList = DatabaseManager.getInstance().getWorksForTaskIdOrdered(1);
 			         			}
@@ -162,9 +160,7 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 			            case 2:
 			            	try {
 			            		if (Integer.parseInt(backEndSoftware)==1){//ASA Case
-			            			String asaWorkHerbCodes=app.getHerbicideCodeASA();
-			            			String[] asaCodes =asaWorkHerbCodes.split(";");
-			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASA(asaCodes);
+			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASA("H");
 			            		}else{
 			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrdered(2);
 			            		}
@@ -178,9 +174,7 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 			            case 3:
 			            	try {
 			            		if (Integer.parseInt(backEndSoftware)==1){//ASA Case
-			            			String asaWorkFertCodes=app.getFertilizerCodeASA();
-			            			String[] asaCodes =asaWorkFertCodes.split(";");
-			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASA(asaCodes);
+			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASA("D");
 			            		}else{
 			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrdered(3);
 			            		}
@@ -194,11 +188,7 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 			            default:
 			            	try { 
 			            		if (Integer.parseInt(backEndSoftware)==1){//ASA Case, we get all codes and then we search for all others
-			            			String asaCodesN=app.getSprayCodeASA();
-			            			asaCodesN += ";" + app.getFertilizerCodeASA();
-			            			asaCodesN += ";" + app.getHerbicideCodeASA();
-			            			String[] asaCodes =asaCodesN.split(";");
-			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASARest(asaCodes);
+			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASARest();
 			            		}else{
 			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrdered(4);
 			            		}

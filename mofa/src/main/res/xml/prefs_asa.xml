@@ -6,32 +6,12 @@
 		android:key="grossprice"
 		android:title="@string/asa_tax_setting"
 		android:defaultValue="false"/>
-     <EditTextPreference
-        android:key="harvestworkcodes"
-        android:title="@string/asa_harvest_codes"
-        android:defaultValue="510;515;520;530" />
-         />	
-      <EditTextPreference
-        android:key="sprayworkcode"
-        android:title="@string/asa_spray_code"
-        android:defaultValue="310" />
-         />
-      <EditTextPreference
-        android:key="herbicideworkcode"
-        android:title="@string/asa_herbicide_code"
-        android:defaultValue="425" />
-         />
-      <EditTextPreference
-        android:key="fertilizercode"
-        android:title="@string/asa_soilfertilizer_codes"
-        android:defaultValue="235" />
-         />
-         <EditTextPreference
+    <EditTextPreference
         android:key="fertilizerleafcode"
         android:title="@string/asa_fertilizer_code"
         android:defaultValue="BLATT" />
          />
-         <EditTextPreference
+    <EditTextPreference
         android:key="fertilizersoilcode"
         android:title="@string/asa_fertilizer_soil_code"
         android:defaultValue="MD" />

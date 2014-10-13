@@ -3,12 +3,13 @@ package it.schmid.android.mofa.model;
 
 import it.schmid.android.mofa.MofaApplication;
 import it.schmid.android.mofa.NotificationService;
-import it.schmid.android.mofa.adapter.ProductInterface;
+import it.schmid.android.mofa.interfaces.ProductInterface;
 import it.schmid.android.mofa.db.DatabaseManager;
 
 import java.io.IOException;
 import java.io.StringReader;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -21,13 +22,13 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.annotations.Expose;
 import com.j256.ormlite.field.DatabaseField;
 
 public class Pesticide extends ImportBehavior implements ProductInterface{
 	private static final String TAG = "PesticideClass";
+    private static final int SHOWINFO = 1;
 	@DatabaseField(id=true)
 	@Expose
 	private Integer id;
@@ -77,8 +78,13 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 		return defaultDose;
 	}
 
+    @Override
+    public int showInfo() {
+        return SHOWINFO;
+    }
 
-	public void setDefaultDose(Double defaultDose) {
+
+    public void setDefaultDose(Double defaultDose) {
 		this.defaultDose = defaultDose;
 	}
 	public String getCode() {
@@ -185,7 +191,7 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 	    for(Pesticide p:importData){
 	    	Pesticide pesticide = DatabaseManager.getInstance().getPesticideWithId(p.getId());
 	    	if (pesticide!=null) {
-	        	
+                Log.d(TAG, "[importMasterData] updating " + p.getProductName());
 	        	pesticide.setProductName(p.getProductName());
 	        	pesticide.setDefaultDose(p.getDefaultDose());
 	        	pesticide.setRegNumber(p.getRegNumber());
@@ -193,6 +199,7 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 	            DatabaseManager.getInstance().updatePesticide(pesticide);
             } else
             {
+                Log.d(TAG, "[importMasterData] Adding " + p.getProductName());
             	Pesticide newPesticide = new Pesticide();
             	newPesticide.setId(p.getId());
             	newPesticide.setProductName(p.getProductName());
@@ -208,10 +215,17 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 	}
 	private List<Pesticide> pesticideXmlParser(String inputData, NotificationService notification)	{
 		List<Pesticide> mPesticideList=null ;
+        JSONObject json=null;
 		Integer xId = null;
 		String xProduct = "";
 		Integer xRegnr = null;
 		Double xDose = null;
+        Double maxAmount=null;
+        Integer maxUsage=null;
+        int wez=24;
+        String restrictionText=null;
+        Integer waitPeriod=null;
+        int beeRestriction=0;
 		try {
 	        //For String source
 	        XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -231,9 +245,10 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 	                    name = xpp.getName();
 	                    if (name.equalsIgnoreCase("pesticide")){
 	                    	currentPesticide = new Pesticide();
+                            json = new JSONObject();
 	                       // currentPesticide.setId(Integer.parseInt(xpp.getAttributeValue(0))); 
 	                    } else if (currentPesticide!= null){
-	                    	if (name.equalsIgnoreCase("id")&& !(xpp.isEmptyElementTag())){
+	                    	if (name.equalsIgnoreCase("ID")&& !(xpp.isEmptyElementTag())){
 	                        	xId = Integer.parseInt(xpp.nextText());
 	                        	currentPesticide.setId(xId);
 	                                       	                        	
@@ -247,6 +262,56 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 	                           	currentPesticide.setProductName(xProduct);
 	                        		                        	
 	                        }
+                            if (name.equalsIgnoreCase("waitPeriod")){
+                                waitPeriod = Integer.parseInt(xpp.nextText());
+                                try {
+                                    json.put("waitingPeriod",waitPeriod);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            if (name.equalsIgnoreCase("wez")){
+                                wez = Integer.parseInt(xpp.nextText());
+                                try {
+                                    json.put("wez",wez);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            if (name.equalsIgnoreCase("maxUsage")){
+                               maxUsage = Integer.parseInt(xpp.nextText());
+                                try {
+                                    json.put("maxUsage",maxUsage);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            if (name.equalsIgnoreCase("maxAmount")){
+                                NumberFormat format = NumberFormat.getInstance(Locale.GERMAN);
+                                Number number = format.parse(xpp.nextText());
+                                maxAmount = number.doubleValue();
+                                try {
+                                    json.put("maxAmount",maxAmount);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            if (name.equalsIgnoreCase("beeDanger")){
+                                beeRestriction= Integer.parseInt(xpp.nextText());
+                                try {
+                                    json.put("beeRestriction",beeRestriction);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            if (name.equalsIgnoreCase("restriction")){
+                                restrictionText= xpp.nextText();
+                                try {
+                                    json.put("restriction", restrictionText);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
 	                        if (name.equalsIgnoreCase("dose")&& !(xpp.isEmptyElementTag())){
 	                        	String value = xpp.nextText();
 	                        	java.text.NumberFormat nf = NumberFormat.getInstance(Locale.getDefault());
@@ -272,8 +337,9 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 	                case XmlPullParser.END_TAG:
 	                	name = xpp.getName();
 	                    if (name.equalsIgnoreCase("pesticide") && currentPesticide != null){
+                            currentPesticide.setConstraints(json.toString());
 	                    	mPesticideList.add(currentPesticide);
-	                    	Log.d(TAG,"[XMLParserPesticide] adding pesticide: " + currentPesticide.getId() + " " + currentPesticide.getProductName());
+	                    	//Log.d(TAG,"[XMLParserPesticide] adding pesticide: " + currentPesticide.getId() + " " + currentPesticide.getProductName());
 	                    } 
 	                   break;
 	                }
@@ -290,8 +356,10 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 	    } catch (IOException e) {
 	    	  importError = true;
 	         // e.printStackTrace();
-	    }
-		return (mPesticideList);
+	    } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return (mPesticideList);
 	}
 	private List<Pesticide> pesticideXmlParserASA(String inputData, NotificationService notification)	{
 		List<Pesticide> mPesticideList=null ;
@@ -310,6 +378,7 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
         Integer maxUsage=null;
         String restrictionText=null;
         Integer waitPeriod=null;
+        int beeRestriction=0;
 		try {
 	        //For String source
 	        XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -397,6 +466,7 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
                             if (waitPeriod!=null){
                                 json.put("waitingPeriod",waitPeriod);
                             }
+                            json.put("beeRestriction", beeRestriction);
                             currentPesticide.setConstraints(json.toString());
                             Log.d(TAG, "Creating JSON for pesticide " + currentPesticide.getProductName() +": " + json.toString());
                             mPesticideList.add(currentPesticide);
@@ -428,7 +498,8 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
                             restrictionText = text;
                         } else if (name.equalsIgnoreCase("Tage")&&isAgrios && isApple){
                             waitPeriod = Integer.parseInt(text);
-
+                        } else if (name.equalsIgnoreCase("Bienenschutz")){
+                            beeRestriction = Integer.parseInt(text);
                         }
                         break;
                 }

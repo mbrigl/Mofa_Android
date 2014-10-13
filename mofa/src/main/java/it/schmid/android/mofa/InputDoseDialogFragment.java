@@ -1,6 +1,6 @@
 package it.schmid.android.mofa;
 
-import it.schmid.android.mofa.adapter.ProductInterface;
+import it.schmid.android.mofa.interfaces.ProductInterface;
 
 import java.text.NumberFormat;
 import java.text.ParseException;

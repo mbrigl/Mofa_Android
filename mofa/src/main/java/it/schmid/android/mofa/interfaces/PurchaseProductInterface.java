@@ -1,5 +1,6 @@
-package it.schmid.android.mofa.adapter;
+package it.schmid.android.mofa.interfaces;
 
+import it.schmid.android.mofa.interfaces.ProductInterface;
 import it.schmid.android.mofa.model.Purchase;
 
 public interface PurchaseProductInterface {

@@ -41,10 +41,12 @@ public class MofaApplication extends Application{
 	private static MofaApplication instance;
 	private ConcurrentHashMap<String, String> mGlobalVariables;
 	private Set<AppStateListener> mAppStateListeners;
+
 	private static Integer workType=WORK_NORMAL;
 	public interface AppStateListener{
 		void onStateChanged(String key, String value);
 	}
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -123,26 +125,10 @@ public class MofaApplication extends Application{
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		return preferences.getString("listBackendFormat", "2");
 	}
-	public String getSprayCodeASA(){
-		SharedPreferences preferences;
-		preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		return preferences.getString("sprayworkcode", "310");
-	}
-	public String getHerbicideCodeASA(){
-		SharedPreferences preferences;
-		preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		return preferences.getString("herbicideworkcode", "425");
-	}
-	public String getFertilizerCodeASA(){
-		SharedPreferences preferences;
-		preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		return preferences.getString("fertilizercode", "235");
-	}
-	public String getHarvestCodeASA(){
-		SharedPreferences preferences;
-		preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		return preferences.getString("harvestworkcodes", "510;515;520;530");
-	}
+    public void setBackendSoftware(String backEnd){
+
+    }
+
 	public String getLeafFertilizerCodeASA(){
 		SharedPreferences preferences;
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);

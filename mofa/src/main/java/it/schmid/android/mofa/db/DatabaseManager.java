@@ -231,6 +231,15 @@ public class DatabaseManager {
         }
         return taskList;
     }
+    public List<Task> getAllTasksOrdered() {
+        List<Task> taskList = null;
+        try {
+            taskList = getHelper().getTaskDao().queryBuilder().orderByRaw("task").query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return taskList;
+    }
     // adding,updating Land class
     public void addTask(Task t) {
         try {
@@ -613,10 +622,10 @@ public class DatabaseManager {
         
         
     }
-    public List<Work> getWorksForTaskIdOrderedASA(String[] codes)throws SQLException{ //filtering of asa codes
+    public List<Work> getWorksForTaskIdOrderedASA(String type)throws SQLException{ //filtering of asa codes
     	QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
     	final Where<Work, Integer> w = qb.where();
-    	List<Task> asaTasks = getTaskForASAFiltering(codes);
+    	List<Task> asaTasks = getTaskForASAFiltering(type);
     	int clauseC = 0;
     	for (Task t:asaTasks){ //generating a dynamic or
     		w.eq("task_id", t.getId());
@@ -629,36 +638,39 @@ public class DatabaseManager {
         PreparedQuery<Work> preparedQuery = qb.prepare();
 		return getHelper().getWorkDao().query(preparedQuery);	
     }
-    public List<Work> getWorksForTaskIdOrderedASARest(String[] codes)throws SQLException{ //all others from the code not equal
+
+    public List<Work> getWorksForTaskIdOrderedASARest()throws SQLException{ //all others from the code not equal
     	QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
     	final Where<Work, Integer> w = qb.where();
-    	List<Task> asaTasks = getTaskForASAFiltering(codes);
+    	List<Task> asaTasks = getTaskForASAFilteringRest();
     	int clauseC = 0;
     	for (Task t:asaTasks){ //generating a dynamic or not equal
-    		w.ne("task_id", t.getId());
-    		clauseC++;
-    	}
-    	if (clauseC > 1) {
-    	    w.and(clauseC);
-    	}
-    	qb.orderBy("date", false);
-        PreparedQuery<Work> preparedQuery = qb.prepare();
-		return getHelper().getWorkDao().query(preparedQuery);	
-    }
-    public List<Task>getTaskForASAFiltering(String[]codes)throws SQLException{
-    	QueryBuilder<Task, Integer> qb = getHelper().getTaskDao().queryBuilder();
-    	final Where<Task, Integer> w = qb.where();
-    	int clauseC = 0;
-    	for (String code:codes){
-    		w.eq("code", code);
+    		w.eq("task_id", t.getId());
     		clauseC++;
     	}
     	if (clauseC > 1) {
     	    w.or(clauseC);
     	}
-    	
-        PreparedQuery<Task> preparedQuery = qb.prepare();
+    	qb.orderBy("date", false);
+        PreparedQuery<Work> preparedQuery = qb.prepare();
+		return getHelper().getWorkDao().query(preparedQuery);	
+    }
+    public List<Task>getTaskForASAFiltering(String type)throws SQLException{
+    	QueryBuilder<Task, Integer> qb = getHelper().getTaskDao().queryBuilder();
+    	final Where<Task, Integer> w = qb.where();
+    	w.eq("type", type);
+    	PreparedQuery<Task> preparedQuery = qb.prepare();
 		return getHelper().getTaskDao().query(preparedQuery);	
+    }
+    public List<Task>getTaskForASAFilteringRest()throws SQLException{
+        QueryBuilder<Task, Integer> qb = getHelper().getTaskDao().queryBuilder();
+        final Where<Task, Integer> w = qb.where();
+        w.or(
+            w.isNull("type"),
+            w.eq("type","E")
+        );
+        PreparedQuery<Task> preparedQuery = qb.prepare();
+        return getHelper().getTaskDao().query(preparedQuery);
     }
     public Work getWorkWithId(int workId) {
         Work work= null;

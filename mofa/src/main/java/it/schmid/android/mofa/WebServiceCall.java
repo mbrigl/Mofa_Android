@@ -327,6 +327,7 @@ private String getDropboxData(String filePath){
      // Create DbxFileSystem for synchronized file access.
      try {
 		DbxFileSystem dbxFs = DbxFileSystem.forAccount(mDbxAcctMgr.getLinkedAccount());
+        dbxFs.setMaxFileCacheSize(0);
 		dbxFs.syncNowAndWait();
 		DbxFile testFile = dbxFs.open(dropboxPath);
 		DbxFileStatus status = testFile.getSyncStatus();

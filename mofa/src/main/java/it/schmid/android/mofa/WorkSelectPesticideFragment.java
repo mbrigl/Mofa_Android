@@ -3,6 +3,7 @@ package it.schmid.android.mofa;
 import it.schmid.android.mofa.InputDoseDialogFragment.InputDoseDialogFragmentListener;
 import it.schmid.android.mofa.adapter.WorkProductAdapter;
 import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.interfaces.ShowInfoInterface;
 import it.schmid.android.mofa.model.Pesticide;
 import it.schmid.android.mofa.model.Purchase;
 import it.schmid.android.mofa.model.PurchasePesticide;
@@ -24,10 +25,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-public class WorkSelectPesticideFragment extends SherlockFragment implements InputDoseDialogFragmentListener{
+public class WorkSelectPesticideFragment extends SherlockFragment implements InputDoseDialogFragmentListener,ShowInfoInterface{
 	private static final String TAG = "WorkSelectPesticideActivity";
 	private ListView mPesticideLvWithFilter;
     private EditText mSearchEdt;
@@ -94,7 +96,7 @@ public class WorkSelectPesticideFragment extends SherlockFragment implements Inp
 
 	private void prepAdapter() {
 		List<Pesticide> pesticideList = DatabaseManager.getInstance().getAllPesticidesOrderByName();
-		mPesticideAdapter = new WorkProductAdapter<Pesticide>(getActivity(),R.layout.pesticide_row,pesticideList);
+		mPesticideAdapter = new WorkProductAdapter<Pesticide>(getActivity(),R.layout.pesticide_row,pesticideList,this);
 		mPesticideLvWithFilter.setAdapter(mPesticideAdapter);
 		mPesticideLvWithFilter.setOnItemClickListener(new OnItemClickListener() {
 
@@ -146,7 +148,9 @@ public class WorkSelectPesticideFragment extends SherlockFragment implements Inp
 		};
 		dlg.show();
 	}
+    public void showInfoDialog(){
 
+    }
 	private void setTextWatcher(){
 		 mSearchTw=new TextWatcher() {
 
@@ -215,4 +219,10 @@ public class WorkSelectPesticideFragment extends SherlockFragment implements Inp
 			DatabaseManager.getInstance().updatePurchasePesticide(updatePurPest);
 		}
 	}
+
+    @Override
+    public void showInfos(Integer pestId) {
+        PestInfoDialog infoDialog = PestInfoDialog.newInstance(pestId);
+        infoDialog.show(getFragmentManager(),"DialogFragment");
+    }
 }

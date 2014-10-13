@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.47">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TextView
+                android:id="@+id/beeDanger"
+                android:visibility="gone"
+                android:text="@string/beeDanger"/>
+
+
+
+            <ImageView
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageBee"
+                android:contentDescription="image bee"
+                android:src="@drawable/ic_bee"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TextView
+                android:text="@string/waitingtime"
+                />
+            <TextView
+                android:id="@+id/waitingTime"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:layout_gravity="center"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TextView
+                android:text="@string/reentertime"
+                />
+            <TextView
+                android:id="@+id/reenterTime"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:layout_gravity="center"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TextView
+                android:text="@string/maxtime"
+                />
+            <TextView
+                android:id="@+id/maxTime"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:layout_gravity="center"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TextView
+                android:text="@string/maxamountha"
+                />
+            <TextView
+                android:id="@+id/maxAmount"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:layout_gravity="center"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TextView
+                android:text="@string/otherconstraints"
+                />
+            <TextView
+                android:id="@+id/otherconstraints"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:layout_gravity="center"/>
+        </TableRow>
+
+    </TableLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/closebutton"
+        android:id="@+id/closebutton"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>

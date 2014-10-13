@@ -101,7 +101,7 @@ public void run(){
 		}
 	}else{ //XML
 		if (Integer.parseInt(backEndSoftware)==1){ //special case ASA 
-			asaWorkHerbicideCode = app.getHerbicideCodeASA();
+
 			if (callingActivity==ActivityConstants.WORK_OVERVIEW){ //calling this asynch method from workoverview
 				sendingData = createXMLASA();
 			}
@@ -344,6 +344,14 @@ public void run(){
 			            serializer.startTag("", "task");
 			            serializer.text(wk.getTask().getId().toString());
 			            serializer.endTag("", "task");
+                        serializer.startTag("", "type");
+                        if (wk.getTask().getType()==null){
+                            serializer.text("O");
+                        }else{
+                            serializer.text(wk.getTask().getType().toString());
+                        }
+                        ;
+                        serializer.endTag("", "type");
 			            serializer.startTag("", "note");
 			            serializer.text(wk.getNote());
 			            serializer.endTag("", "note");
@@ -540,9 +548,9 @@ public void run(){
 					}
 					List<Spraying> spraying = DatabaseManager.getInstance().getSprayingByWorkId(wk.getId());
 					for (Spraying s : spraying){
-						String test = wk.getTask().getCode();
+						String test = wk.getTask().getType();
 						
-						if (contains(asaWorkHerbicideCode.split(";"),wk.getTask().getCode())){ //425 special case herbicide work
+						if (wk.getTask().getType().equalsIgnoreCase("H")){ //herbicide
 							serializer.startTag("", "Herbizideinsatz");
 						}else{
 							serializer.startTag("", "Spritzung");
@@ -595,7 +603,7 @@ public void run(){
 				            serializer.endTag("","Menge");
 							serializer.endTag("", "Blattduenger");
 						}
-						if (contains(asaWorkHerbicideCode.split(";"),wk.getTask().getCode())){
+						if (wk.getTask().getType().equalsIgnoreCase("H")){
 							serializer.endTag("", "Herbizideinsatz");
 						}else{
 							serializer.endTag("", "Spritzung");
@@ -823,11 +831,5 @@ public void run(){
 			error=true;
 		}
 	}
-	private static <T> boolean contains( final T[] array, final T v ) {
-	    for ( final T e : array )
-	        if ( e == v || v != null && v.equals( e ) )
-	            return true;
 
-	    return false;
-	}
 }

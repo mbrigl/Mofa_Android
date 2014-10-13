@@ -14,7 +14,7 @@
 	    android:id="@+id/soilfertilizerlabel"
 	    android:layout_width="wrap_content"
 	    android:layout_height="fill_parent"
-	    android:textSize="16sp"
+	    android:textSize="@dimen/text_size_medium"
 	     >
 
     </TextView>

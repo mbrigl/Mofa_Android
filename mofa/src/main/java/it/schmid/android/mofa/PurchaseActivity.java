@@ -1,7 +1,7 @@
 package it.schmid.android.mofa;
 
 import it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter;
-import it.schmid.android.mofa.adapter.PurchaseProductInterface;
+import it.schmid.android.mofa.interfaces.PurchaseProductInterface;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.model.Purchase;
 import it.schmid.android.mofa.model.PurchaseFertilizer;
@@ -9,7 +9,6 @@ import it.schmid.android.mofa.model.PurchasePesticide;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import android.app.AlertDialog;

@@ -106,6 +106,8 @@
 	<!--  PromptDialog --> 
 	<string name="ok">OK</string>
 	<string name="cancel">Annulla</string>
+    <string name="yesbutton">Sì</string>
+    <string name="nobutton">No</string>
 	<string name="title">MoFa - Input</string>
 	<string name="enter_hours">ore di lavoro</string>
 	<string name="enter_amount">immettere quantità</string>
@@ -175,4 +177,15 @@
 	<string name="dropboxconnerror">Errore nella connessione con dropbox</string>
 	<string name="reimportmessage">ATTENZIONE - Prima i dati essistenti e gli aquisti devono essere esportati!</string>
 	<string name="nodata">Fare un update per importare i dati</string>
+    <string name="noupdate">Nessun update a disposizione</string>
+    <!--Strings for Pesticide Info Dialog -->
+    <string name="beeDanger">PerApi</string>
+    <string name="waitingtime">tempo di carenza</string>
+    <string name="reentertime">TDR</string>
+    <string name="maxamountha">max quantità per ha</string>
+    <string name="maxtime">max impiego/anno</string>
+    <string name="otherconstraints">altri limitazioni</string>
+    <string name="waitingtimeUnit">giorni</string>
+    <string name="reentertimeUnit">h</string>
+    <string name="maxamounthaUnit">kg/lt</string>
 </resources>

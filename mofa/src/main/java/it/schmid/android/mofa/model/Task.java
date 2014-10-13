@@ -39,6 +39,8 @@ public class Task extends ImportBehavior {
 	
 	@DatabaseField
 	private String code;
+    @DatabaseField
+    private String type;
 	@ForeignCollectionField
 	private ForeignCollection<Work> works;
 	private Boolean importError=false;
@@ -65,7 +67,14 @@ public String getCode() {
 public void setCode(String code) {
 	this.code = code;
 }
-public void importMasterData(JSONArray importData){
+public String getType() {
+        return type;
+    }
+public void setType(String type) {
+        this.type = type;
+    }
+
+    public void importMasterData(JSONArray importData){
 	Task task;
 	try {
 		Log.i(TAG,
@@ -136,8 +145,8 @@ public Boolean importMasterData(String xmlString, NotificationService notificati
     for(Task t:importData){
     	Task task= DatabaseManager.getInstance().getTaskWithId(t.getId());
     	if (task!=null) {
-        	
         	task.setTask(t.getTask());
+            task.setType(t.getType());
             DatabaseManager.getInstance().updateTask(task);
         } else
         {
@@ -145,6 +154,7 @@ public Boolean importMasterData(String xmlString, NotificationService notificati
         	Task newTask = new Task();
             newTask.setId(t.getId());
         	newTask.setTask(t.getTask());
+            newTask.setType(t.getType());
             DatabaseManager.getInstance().addTask(t);
         }
     }
@@ -153,6 +163,7 @@ public Boolean importMasterData(String xmlString, NotificationService notificati
 private List<Task> taskXmlParser(String inputData, NotificationService notification)	{
 	List<Task> mTaskList=null ;
 	String xTaskName = null;
+    String xType=null;
 	Integer xId = null;
 	try {
         //For String source
@@ -184,8 +195,10 @@ private List<Task> taskXmlParser(String inputData, NotificationService notificat
                         if (name.equalsIgnoreCase("desc")){
                         	xTaskName = xpp.nextText();
                         	currentTask.setTask(xTaskName);
-                        	
-                        	
+                        }
+                        if (name.equalsIgnoreCase("type")){
+                            xType = xpp.nextText();
+                            currentTask.setType(xType);
                         }
                     }
                     break;
@@ -214,7 +227,8 @@ private List<Task> taskXmlParser(String inputData, NotificationService notificat
 }
 private List<Task> taskXmlParserASA(String inputData, NotificationService notification)	{
 	List<Task> mTaskList=null ;
-	Integer xId = 4;
+	Integer xId;
+    String xArt = null;
 	String xCode="";
 	String xTaskName = null;
 	Boolean firstCode = false; //due the fact that ASA uses the Code Tag in different nodes
@@ -246,6 +260,10 @@ private List<Task> taskXmlParserASA(String inputData, NotificationService notifi
                     		xId=Integer.parseInt(xpp.nextText());
                     		currentTask.setId(xId);
                     	}
+                        if (name.equalsIgnoreCase("Art")){
+                            xArt = xpp.nextText();
+                            currentTask.setType(xArt);
+                        }
                     	if ((name.equalsIgnoreCase("Code"))&&(firstCode==false)){
                     		xCode = xpp.nextText();
                     		currentTask.setCode(xCode); //in ASA Code is the primary key

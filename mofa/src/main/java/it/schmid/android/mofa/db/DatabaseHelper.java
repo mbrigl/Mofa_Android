@@ -42,7 +42,7 @@ import com.j256.ormlite.table.TableUtils;
 
 public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
 	private static final String DATABASE_NAME = "MofaDB.sqlite";
-	private static final int DATABASE_VERSION =10;
+	private static final int DATABASE_VERSION =11;
 	
 	// the DAO object we use to access the SimpleData table
     private Dao<Land, Integer> landDao = null;
@@ -139,8 +139,11 @@ public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
 	            	  break; 
 	              case 10:
 	            	  updateFromVersion10(db,connectionSource,oldVersion,newVersion);
-	            	  break; 
-	            }
+	            	  break;
+                  case 11:
+                      updateFromVersion11(db,connectionSource,oldVersion,newVersion);
+                      break;
+                }
 	            for (String sql : allSql) {
 	                db.execSQL(sql);
 	            }
@@ -276,6 +279,15 @@ public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
 		}
 		onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
 	}
+    private void updateFromVersion11(SQLiteDatabase db,
+                                     ConnectionSource connectionSource, int oldVersion, int newVersion) {
+        try {
+            getTaskDao().executeRaw("ALTER TABLE `task` ADD COLUMN type VARCHAR(1);");
+            } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+        }
+        onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
+    }
 	//Dao's for every table, returns the data
 	public Dao<Land, Integer> getLandDao() {
         if (null == landDao) {

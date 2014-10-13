@@ -147,6 +147,8 @@
 	<!-- Strings for DialogBoxes -->
 	<string name="okbutton">OK</string>
 	<string name="cancelbutton">Cancel</string>
+    <string name="yesbutton">YES</string>
+    <string name="nobutton">NO</string>
 	<string name="closebutton"> Close</string>
 	<string name="dialogdeletetitel">Remove</string>
 	<string name="dialogdeletemsg">You want to delete the item?</string>
@@ -175,4 +177,16 @@
 	<string name="dropboxconnerror">Link to Dropbox failed or was cancelled</string>
 	<string name="reimportmessage">ATTENTION-ALL WORKING ENTRIES AND PURCHASES HAVE TO BE EXPORTED FIRST</string>
 	<string name="nodata">No Data - Please import data through update</string>
+    <string name="noupdate">No updates available</string>
+    <!--Strings for Pesticide Info Dialog -->
+    <string name="beeDanger">BD</string>
+    <string name="waitingtime">waitingtime</string>
+    <string name="reentertime">RET</string>
+    <string name="maxamountha">max amount pro ha</string>
+    <string name="maxtime">max usage</string>
+    <string name="otherconstraints">other constraints</string>
+    <string name="waitingtimeUnit">days</string>
+    <string name="reentertimeUnit">h</string>
+    <string name="maxamounthaUnit">kg/lt</string>
+
 </resources>

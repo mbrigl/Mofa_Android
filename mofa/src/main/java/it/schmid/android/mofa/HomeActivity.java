@@ -75,6 +75,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	private String urlPath;
 	private String format;
 	private String backEndSoftware;
+    private MofaApplication app;
 	//**licensing variables
 	private Handler mHandler;
 	private LicenseChecker mChecker;
@@ -122,8 +123,8 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	       // R.id.frame5,
 	       // R.id.frame6
 	        } ;
-	protected void onCreate(Bundle savedInstanceState) 
-	{
+	protected void onCreate(Bundle savedInstanceState) {
+
 	    super.onCreate(savedInstanceState);
 	    DatabaseManager.init(this);
 	    setContentView(R.layout.activity_home);
@@ -168,8 +169,25 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	        }
 	        
 	    }
+        app = MofaApplication.getInstance();
+
 	}
-	public void onClickFeature (View v)
+
+    @Override
+    protected void onResume() {
+        String sBackEnd;
+        super.onResume();
+        //setting title with additional info
+        backEndSoftware = app.getBackendSoftware();
+        if (Integer.parseInt(backEndSoftware)==1) {//ASA case
+            sBackEnd="ASA";
+        }else{
+            sBackEnd="Excel";
+        }
+        getSupportActionBar().setTitle("MoFa - "  + sBackEnd );
+    }
+
+    public void onClickFeature (View v)
 	{
 	   Integer featureNum = (Integer) v.getTag ();
 	   if (featureNum == null) return;
@@ -200,8 +218,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 		       dropBox = preferences.getBoolean("dropbox", false);
 		       format = preferences.getString("listFormat","-1");
 		       
-		       MofaApplication app = MofaApplication.getInstance();
-		       backEndSoftware = app.getBackendSoftware();
+
 		      // Log.d(TAG, "Backendsoftware set to " + backEndSoftware);
 		       //removeLicenseFlag(); //only for testing
 		       //** checking if product is licensed !!!!
@@ -396,6 +413,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 				DatabaseManager.getInstance().flushTask();
 				break;
 			case 6:
+                Log.d(TAG, "Deleting existing entries");
 				DatabaseManager.getInstance().flushPesticideNew();
 				break;
 			case 7:
@@ -465,7 +483,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	        linearLayout.addView(checkBox);
 	        alertDialog.setView(linearLayout);
 	        alertDialog.setMessage(sb);
-	        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+	        alertDialog.setPositiveButton(R.string.yesbutton, new DialogInterface.OnClickListener() {
 	            public void onClick(DialogInterface dialog,int which) {
 	            if (checkBox.isChecked()==true) {
 	            	if ((DatabaseManager.getInstance().getAllWorks().size()==0)&&(DatabaseManager.getInstance().getAllPurchases().size()==0) ) { // works table is empty
@@ -509,7 +527,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	        });
 	 
 	        // Setting Negative "NO" Button
-	        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+	        alertDialog.setNegativeButton(R.string.nobutton, new DialogInterface.OnClickListener() {
 	            public void onClick(DialogInterface dialog, int which) {
 	            
 	            dialog.cancel();
@@ -520,7 +538,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	private void showNoUpdateDialog(){
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(HomeActivity.this);
 		alertDialog.setTitle(R.string.noUpdatesInfo);
-		alertDialog.setMessage(R.string.noUpdatesText)
+		alertDialog.setMessage(R.string.noupdate)
 		 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
              public void onClick(DialogInterface dialog, int id) {
                  dialog.cancel();
@@ -545,7 +563,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 			extension =".xml";
 		}
 		filename = filename + extension;
-		
+
 		DbxPath importPathWorker = new DbxPath(DbxPath.ROOT , DROPBOX_IMPORT_PATH + "/worker" + filename);
 		DbxPath importPathMachine = new DbxPath(DbxPath.ROOT , DROPBOX_IMPORT_PATH + "/machine" + filename);
 		DbxPath importPathTasks = new DbxPath(DbxPath.ROOT , DROPBOX_IMPORT_PATH+ "/task"+ filename);
@@ -555,9 +573,10 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 		DbxPath importPathSoilFertilizer = new DbxPath(DbxPath.ROOT , DROPBOX_IMPORT_PATH + "/soilfertilizer"+ filename);
 		DbxPath importPathPesticide = new DbxPath(DbxPath.ROOT , DROPBOX_IMPORT_PATH + "/pesticide"+ filename);	
 		DbxPath importPathCategory = new DbxPath(DbxPath.ROOT , DROPBOX_IMPORT_PATH + "/category"+ filename);	
-		try{
+
+        try{
 			DbxFileSystem dbxFs = DbxFileSystem.forAccount(mDbxAcctMgr.getLinkedAccount());
-			
+            dbxFs.setMaxFileCacheSize(0); //setting the cache to 0 MB
 			if (dbxFs.exists(importPathLands)) {
 				refreshFile(importPathLands, dbxFs);
 				Log.d(TAG,"[importFromDropbox] Import file of land exists");
@@ -750,6 +769,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	        	Log.d(TAG, "[onActivityResult] OK - Callback OK from Dropbox");
 	        	try {
 					DbxFileSystem dbxFs = DbxFileSystem.forAccount(mDbxAcctMgr.getLinkedAccount());
+                    dbxFs.setMaxFileCacheSize(0);
 					DbxPath importPath = new DbxPath(DbxPath.ROOT , ROOT_IMPORT_PATH);
 					if (!dbxFs.exists(importPath)){
 						 createDropBoxFolders(); // we have to create the folder structure

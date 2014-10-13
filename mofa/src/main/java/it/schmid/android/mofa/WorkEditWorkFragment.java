@@ -148,7 +148,7 @@ public class WorkEditWorkFragment extends SherlockFragment implements OnDateSetL
 	}
 	private void populateFields(int id){
 		String myDate;
-		List<Task> taskList = DatabaseManager.getInstance().getAllTasks();
+		List<Task> taskList = DatabaseManager.getInstance().getAllTasksOrdered();
 		final TaskSpinnerAdapter adapter = new TaskSpinnerAdapter(taskList,getActivity());
 		mWork.setAdapter(adapter);
 		
@@ -235,40 +235,27 @@ public class WorkEditWorkFragment extends SherlockFragment implements OnDateSetL
 				public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
 						int pos, long id) {
 					 	Task item = (Task) parentView.getItemAtPosition(pos);
-					 	MofaApplication app = MofaApplication.getInstance();
-					 	
-						String backEndSoftware = app.getBackendSoftware();
-						if (Integer.parseInt(backEndSoftware)==1){ //ASA case
-							String asaWorkSprayCodes=app.getSprayCodeASA();
-							String asaWorkHerbicideCodes=app.getHerbicideCodeASA();
-							String asaWorkFertilizerCodes=app.getFertilizerCodeASA();
-							String asaWorkHarvestCodes=app.getHarvestCodeASA();
-							Log.d(TAG, "ASA code = " + item.getCode());
-							if (work!=null && contains(asaWorkSprayCodes.split(";"),item.getCode())){
-								mCallback.showSprayTabListener(mworkId,true);
-							}
-							if (work!=null && contains(asaWorkHerbicideCodes.split(";"),item.getCode())){
-								mCallback.showSprayTabListener(mworkId,true);
-							}
-							if (work!=null && contains(asaWorkFertilizerCodes.split(";"),item.getCode())){
-								mShowSFertilizerTab.showSoilFertilizerTab(mworkId, true);
-							}
-							if (work!=null && contains(asaWorkHarvestCodes.split(";"),item.getCode())){
-								Log.d(TAG, "New Harvest entry - Showing Tab");
-								mShowHarvestTab.showHarvestTabListener(mworkId, true);
-							}
-						}else{ //libreoffice case
-							//item.getTask().equalsIgnoreCase("Spraying")
-						 	//showing spraytab only if
-						 	// a) work in the list of defined tasks
-						 	// b) id of work = 1 --> means if work has id of 1!!
-						 	if (work!=null && sprayList.contains(item.getTask())|| (work!=null && item.getId()==1) || (work!=null && item.getId()==2)){
-						 		mCallback.showSprayTabListener(mworkId,true);
-						 	}
-						 	if ((work!=null && item.getId()==3) ){ //showing Soilfertilizer Tab if work id ==3
-						 		mShowSFertilizerTab.showSoilFertilizerTab(mworkId, true);
-						 	}
-						}
+
+
+
+							//Log.d(TAG, "ASA type = " + item.getType());
+                            if (item.getType()!=null){
+                                if (work!=null && item.getType().equalsIgnoreCase("S")){
+                                    mCallback.showSprayTabListener(mworkId,true);
+                                }
+                                if (work!=null && item.getType().equalsIgnoreCase("H")){
+                                    mCallback.showSprayTabListener(mworkId,true);
+                                }
+                                if (work!=null && item.getType().equalsIgnoreCase("D")){
+                                    mShowSFertilizerTab.showSoilFertilizerTab(mworkId, true);
+                                }
+                                if (work!=null && item.getType().equalsIgnoreCase("E")){
+                                    Log.d(TAG, "New Harvest entry - Showing Tab");
+                                    mShowHarvestTab.showHarvestTabListener(mworkId, true);
+                                }
+                            }
+
+
 						
 					 		
 				}
@@ -354,13 +341,7 @@ public class WorkEditWorkFragment extends SherlockFragment implements OnDateSetL
 			parentSetWorkId.setWorkIdListener(mworkId); //setting the workid on the parent Activity
 			
 		}
-		private static <T> boolean contains( final T[] array, final T v ) {
-		    for ( final T e : array )
-		        if ( e == v || v != null && v.equals( e ) )
-		            return true;
 
-		    return false;
-		}
 	
 		 public void onCreateOptionsMenu (com.actionbarsherlock.view.Menu menu, com.actionbarsherlock.view.MenuInflater inflater) {
 			// inflater.inflate(R.menu.work_edit_menu, menu);
@@ -477,8 +458,8 @@ public class WorkEditWorkFragment extends SherlockFragment implements OnDateSetL
 //		}
 		/**
 		 * helper function for the bigger and smaller value
-		 * @param value1 one of two double values
-		 * @param value2
+		// * @param value1 one of two double values
+		// * @param value2
 		 * @return
 		 */
 //		private Double smallerValue(Double value1, Double value2){ 

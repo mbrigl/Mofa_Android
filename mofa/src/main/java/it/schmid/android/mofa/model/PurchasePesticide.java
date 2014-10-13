@@ -1,6 +1,6 @@
 package it.schmid.android.mofa.model;
 
-import it.schmid.android.mofa.adapter.PurchaseProductInterface;
+import it.schmid.android.mofa.interfaces.PurchaseProductInterface;
 
 import com.google.gson.annotations.Expose;
 import com.j256.ormlite.field.DatabaseField;

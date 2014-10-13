@@ -2,6 +2,8 @@ package it.schmid.android.mofa.adapter;
 
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.interfaces.ProductInterface;
+import it.schmid.android.mofa.interfaces.ShowInfoInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,16 +16,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class WorkProductAdapter<T extends ProductInterface> extends ArrayAdapter<T>  implements Filterable{
 	private static final String TAG = "WorkProductAdapter";
 	Context context;
+    private ShowInfoInterface listener;
 	int layoutResourceId;
 	List<T> allPesticideData=null;
 	List<T> filterPesticideData=null;
 	private ModelFilter filter;
-	
+	//standard constructor
 	public WorkProductAdapter(Context context, int layoutResourceId, List<T> data) {
 		super(context, layoutResourceId, data);
 		this.context = context;
@@ -32,15 +36,27 @@ public class WorkProductAdapter<T extends ProductInterface> extends ArrayAdapter
 		allPesticideData.addAll(data);
 		this.filterPesticideData = new ArrayList<T>();
 		filterPesticideData.addAll(allPesticideData);
-		
+
 	    getFilter();
 		DatabaseManager.init(context);
 	}
-	
+    //additional constructor for showing infos implementing the corresponding interface
+    public WorkProductAdapter(Context context, int layoutResourceId, List<T> data,ShowInfoInterface showInfoListener) {
+        super(context, layoutResourceId, data);
+        this.context = context;
+        this.layoutResourceId = layoutResourceId;
+        this.allPesticideData = new ArrayList<T>();
+        allPesticideData.addAll(data);
+        this.filterPesticideData = new ArrayList<T>();
+        filterPesticideData.addAll(allPesticideData);
+        this.listener=showInfoListener;
+        getFilter();
+        DatabaseManager.init(context);
+    }
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		View row = convertView;
-		T p = filterPesticideData.get(position);
+		final T p = filterPesticideData.get(position);
         PesticideHolder holder = null;
         if(row == null)
         {
@@ -48,18 +64,29 @@ public class WorkProductAdapter<T extends ProductInterface> extends ArrayAdapter
             row = inflater.inflate(layoutResourceId, parent, false);
         	holder = new PesticideHolder();
         	holder.txtPesticide = (TextView) row.findViewById(R.id.txt_pesticide_item);
+            holder.imgInfo = (ImageView) row.findViewById(R.id.pesticide_info);
             row.setTag(holder);
             
         }else{
         	 holder = (PesticideHolder)row.getTag();
         }
         
-        
+        if (p.showInfo()==1){
+            holder.imgInfo.setVisibility(View.VISIBLE);
+            holder.imgInfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.showInfos(p.getId());
+
+                }
+            });
+        }
         holder.txtPesticide.setText(p.getProductName());
         return row;
 	}
 	private static class PesticideHolder{
 		TextView txtPesticide;
+        ImageView imgInfo;
     }
 	 @Override
 	    public Filter getFilter() {
