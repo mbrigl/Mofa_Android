@@ -124,14 +124,14 @@ public class WorkEditHarvestFragment extends SherlockFragment implements Harvest
 				newHar.setPhValue(phValue);
 			}
 			if (!isNull(phenValue)){
-				newHar.setPhValue(phenValue);
+				newHar.setPhenol(phenValue);
 			}
 			if (!isNull(acid)){
 				newHar.setAcid(acid);
 			}
 			DatabaseManager.getInstance().addHarvest(newHar);
 		}else{//existing one, update the record
-			
+
 			
 		}
 		fillHarvestList();

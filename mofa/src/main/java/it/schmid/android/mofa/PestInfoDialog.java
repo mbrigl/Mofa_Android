@@ -45,35 +45,37 @@ public class PestInfoDialog extends SherlockDialogFragment{
                 false);
         Pesticide p = DatabaseManager.getInstance().getPesticideWithId(pestNr);
         try {
-            JSONObject jsonString = new JSONObject(p.getConstraints());
-            if (jsonString.has("waitingPeriod")){
-                TextView waitTimeText = (TextView) rootView.findViewById(R.id.waitingTime);
-                waitTimeText.setText(Util.getJSONString(jsonString,"waitingPeriod") + " " + getText(R.string.waitingtimeUnit));
-            }
-            if (jsonString.has("wez")){
-                TextView wezTimeText = (TextView) rootView.findViewById(R.id.reenterTime);
-                wezTimeText.setText(Util.getJSONInt(jsonString,"wez") + " " + getText(R.string.reentertimeUnit));
-            }
-            if (jsonString.has("maxUsage")){
-                TextView maxUsageText = (TextView) rootView.findViewById(R.id.maxTime);
-                maxUsageText.setText(Integer.toString(Util.getJSONInt(jsonString,"maxUsage")));
-            }
-            if (jsonString.has("maxAmount")){
-                TextView maxAmountText = (TextView) rootView.findViewById(R.id.maxAmount);
-                maxAmountText.setText(Util.getJSONDouble(jsonString,"maxAmount")+ " " + getText(R.string.maxamounthaUnit));
-            }
-            if (jsonString.has("restriction")){
-                TextView restrictionText = (TextView) rootView.findViewById(R.id.otherconstraints);
-                restrictionText.setText(Util.getJSONString(jsonString,"restriction"));
-            }
-            if (jsonString.has("beeRestriction")){
-                int beeDange = Util.getJSONInt(jsonString,"beeRestriction");
-                if (beeDange==1){
-                    TextView beeDangerText = (TextView) rootView.findViewById(R.id.beeDanger);
-                    ImageView beeIcon = (ImageView) rootView.findViewById(R.id.imageBee);
-                    beeDangerText.setVisibility(View.VISIBLE);
-                    beeIcon.setVisibility(View.VISIBLE);
+            if (p.getConstraints()!=null) {
+                JSONObject jsonString = new JSONObject(p.getConstraints());
+                if (jsonString.has("waitingPeriod")) {
+                    TextView waitTimeText = (TextView) rootView.findViewById(R.id.waitingTime);
+                    waitTimeText.setText(Util.getJSONString(jsonString, "waitingPeriod") + " " + getText(R.string.waitingtimeUnit));
+                }
+                if (jsonString.has("wez")) {
+                    TextView wezTimeText = (TextView) rootView.findViewById(R.id.reenterTime);
+                    wezTimeText.setText(Util.getJSONInt(jsonString, "wez") + " " + getText(R.string.reentertimeUnit));
+                }
+                if (jsonString.has("maxUsage")) {
+                    TextView maxUsageText = (TextView) rootView.findViewById(R.id.maxTime);
+                    maxUsageText.setText(Integer.toString(Util.getJSONInt(jsonString, "maxUsage")));
+                }
+                if (jsonString.has("maxAmount")) {
+                    TextView maxAmountText = (TextView) rootView.findViewById(R.id.maxAmount);
+                    maxAmountText.setText(Util.getJSONDouble(jsonString, "maxAmount") + " " + getText(R.string.maxamounthaUnit));
+                }
+                if (jsonString.has("restriction")) {
+                    TextView restrictionText = (TextView) rootView.findViewById(R.id.otherconstraints);
+                    restrictionText.setText(Util.getJSONString(jsonString, "restriction"));
+                }
+                if (jsonString.has("beeRestriction")) {
+                    int beeDange = Util.getJSONInt(jsonString, "beeRestriction");
+                    if (beeDange == 1) {
+                        TextView beeDangerText = (TextView) rootView.findViewById(R.id.beeDanger);
+                        ImageView beeIcon = (ImageView) rootView.findViewById(R.id.imageBee);
+                        beeDangerText.setVisibility(View.VISIBLE);
+                        beeIcon.setVisibility(View.VISIBLE);
 
+                    }
                 }
             }
             Button closeButton = (Button) rootView.findViewById(R.id.closebutton);

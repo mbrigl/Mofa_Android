@@ -121,11 +121,68 @@ public class FruitQuality extends ImportBehavior{
 	    return importError;
 		
 	}
-	private List<FruitQuality> qualityXmlParser(String xmlString,
-			NotificationService notification) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+    private List<FruitQuality> qualityXmlParser(String inputData, NotificationService notification)	{
+        List<FruitQuality> mQualityList=null ;
+        String xQualityName = null;
+        Integer xId = null;
+        try {
+            //For String source
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            factory.setNamespaceAware(true);
+            XmlPullParser xpp = factory.newPullParser();
+            xpp.setInput(new StringReader(inputData));
+
+            int eventType = xpp.getEventType();
+            FruitQuality currentQuality = null;
+
+            while (eventType != XmlPullParser.END_DOCUMENT ){
+                String name = null;
+                switch (eventType){
+                    case XmlPullParser.START_DOCUMENT:
+                        mQualityList = new ArrayList<FruitQuality>();
+                        break;
+                    case XmlPullParser.START_TAG:
+                        name = xpp.getName();
+                        if (name.equalsIgnoreCase("quality")){
+                            currentQuality = new FruitQuality();
+
+                        } else if (currentQuality != null){
+                            if (name.equalsIgnoreCase("id")&& !(xpp.isEmptyElementTag())){
+                                xId = Integer.parseInt(xpp.nextText());
+                                currentQuality.setId(xId);
+
+                            }
+                            if (name.equalsIgnoreCase("desc")){
+                                xQualityName = xpp.nextText();
+                                currentQuality.setQuality(xQualityName);
+                            }
+
+                        }
+                        break;
+                    case XmlPullParser.END_TAG:
+                        name = xpp.getName();
+                        if (name.equalsIgnoreCase("quality") && currentQuality!= null){
+                            Log.d(TAG,"[XMLQuality] adding quality: " + currentQuality.getId() + " " + currentQuality.getQuality());
+                            mQualityList.add(currentQuality);
+                        }
+
+                }
+                eventType = xpp.next();
+            }
+
+
+        } catch (XmlPullParserException e) {
+            importError = true;
+            CharSequence tickerText = "Quality";
+            notification.completed(android.R.drawable.stat_sys_download_done, tickerText,"Parser Error");
+            //   e.printStackTrace();
+        } catch (IOException e) {
+            importError = true;
+            //  e.printStackTrace();
+        }
+        return (mQualityList);
+    }
 	private List<FruitQuality> qualityXmlParserASA(String inputData,
 			NotificationService notification) {
 		List<FruitQuality> mQualityList=null ;

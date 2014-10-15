@@ -7,5 +7,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/txt_pesticide_item"
         android:textSize="@dimen/text_size_large"/>
-
+    <ImageView
+        android:id="@+id/pesticide_info"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_action_about"
+        android:visibility="gone"/>
 </RelativeLayout>

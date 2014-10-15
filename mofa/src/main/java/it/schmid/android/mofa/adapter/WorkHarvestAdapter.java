@@ -135,7 +135,7 @@ public class WorkHarvestAdapter extends ArrayAdapter<Harvest>implements HarvestD
 			har.setPhValue(phValue);
 		}
 		if (!isNull(phenValue)){
-			har.setPhValue(phenValue);
+			har.setPhenol(phenValue);
 		}
 		if (!isNull(acid)){
 			har.setAcid(acid);
