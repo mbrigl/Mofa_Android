@@ -155,7 +155,8 @@ public class WorkEditTabActivity extends DashboardActivity implements WorkEditWo
 		
 		//setting the validity of an entry
 		Boolean valid=false;
-			
+        	Log.d(TAG, "[onPause] land is " + mofaApplication.getGlobalVariable("land").toString() );
+            Log.d(TAG, "[onPause] worker is " + mofaApplication.getGlobalVariable("worker").toString() );
 		if (mofaApplication.getGlobalVariable("land").equalsIgnoreCase("valid") && mofaApplication.getGlobalVariable("worker").equalsIgnoreCase("valid")){
 		//	Log.d(TAG, "[onPause] land and worker are valid" );	
 			valid=true;

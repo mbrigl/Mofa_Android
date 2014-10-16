@@ -74,6 +74,7 @@ public class WorkEditWorkFragment extends SherlockFragment implements OnDateSetL
 	private LocationManager mgr; // variable for Location Manager
 	private String best;		//variable for best provider for Location Manager
 	private Boolean firstLoad=true;
+    MofaApplication mofaApplication;
 	WorkEditTabActivity workEditActivity;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -81,7 +82,9 @@ public class WorkEditWorkFragment extends SherlockFragment implements OnDateSetL
 		
 		DatabaseManager.init(getActivity());
 		setHasOptionsMenu(true);
-		
+        mofaApplication = MofaApplication.getInstance();
+        mofaApplication.putGlobalVariable("land", "null"); //setting the global variable for checking validity to null
+        mofaApplication.putGlobalVariable("worker", "null");//setting the global variable for checking validity to null
 	
 	}
 	// interface to pass the workid to the spraying fragment
@@ -129,9 +132,7 @@ public class WorkEditWorkFragment extends SherlockFragment implements OnDateSetL
 		mLand = (ImageButton) view.findViewById(R.id.work_change_land);
 		mWorkVquarterList = (ListView)view.findViewById(R.id.currlandlist);
 		mNoteText = (EditText) view.findViewById(R.id.noteeditText);
-		MofaApplication mofaApplication = MofaApplication.getInstance();
-		mofaApplication.putGlobalVariable("land", "null"); //setting the global variable for checking validity to null
-		mofaApplication.putGlobalVariable("worker", "null");//setting the global variable for checking validity to null
+
 		
 		populateFields(mworkId);
 		setListener();
