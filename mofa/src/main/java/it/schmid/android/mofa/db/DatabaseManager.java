@@ -731,7 +731,8 @@ public class DatabaseManager {
             dbp.where().eq("work_id", work.getId());
             getHelper().getSprayingDao().delete(dbp.prepare());
             DeleteBuilder dbh = getHelper().getHarvestDao().deleteBuilder();
-            dbp.where().eq("work_id",work.getId());
+            dbh.where().eq("work_id",work.getId());
+            getHelper().getHarvestDao().delete(dbh.prepare());
     		//delete the work
             getHelper().getWorkDao().delete(work);
         } catch (SQLException e) {
