@@ -188,5 +188,6 @@
     <string name="waitingtimeUnit">days</string>
     <string name="reentertimeUnit">h</string>
     <string name="maxamounthaUnit">kg/lt</string>
-
+    <!--Strings for History -->
+    <string name="SearchPest">Search for Pesticide</string>
 </resources>
