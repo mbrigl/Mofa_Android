@@ -35,10 +35,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5efaaaa-201a-4a7e-85ce-5935eb23740c" name="Default" comment="fixing error with tablets in layout file">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/build/intermediates/exploded-aar/Mofa/library/unspecified/classes.jar" afterPath="$PROJECT_DIR$/mofa/build/intermediates/exploded-aar/Mofa/library/unspecified/classes.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/res/layout/activity_home_button.xml" afterPath="$PROJECT_DIR$/mofa/src/main/res/layout/activity_home_button.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/res/layout-sw600dp/activity_home_button.xml" afterPath="$PROJECT_DIR$/mofa/src/main/res/layout-sw600dp/activity_home_button.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradlew.bat" afterPath="$PROJECT_DIR$/gradlew.bat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Mofa.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1848,6 +1849,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mofa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mofa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mofa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="AndroidView" />
@@ -1875,6 +1890,7 @@
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="android.project.structure.last.selected" value="mofa" />
     <property name="android.project.structure.proportion" value="0.15" />
+    <property name="restartRequiresConfirmation" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -2077,7 +2093,9 @@
       <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
       <RunnerSettings RunnerId="AndroidDebugRunner" />
       <ConfigurationWrapper RunnerId="AndroidDebugRunner" />
-      <method />
+      <method>
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
     </configuration>
     <list size="1">
       <item index="0" class="java.lang.String" itemvalue="Android Application.mofa" />
@@ -2137,7 +2155,11 @@
       <created>1414045982751</created>
       <updated>1414045982751</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fixing error with tablets in layout file">
+      <created>1414828472692</created>
+      <updated>1414828472692</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2215,10 +2237,10 @@
     <MESSAGE value="new Selecting method for machines/workers&#10;optimizing inflates and others&#10;29 august 2014" />
     <MESSAGE value="fixing bug for multiselecting worker/machines&#10;new class for reading json&#10;deleting propertysuggest class - using the Application class for&#10;the global variable" />
     <MESSAGE value="Pesticide Infos&#10;removing asa codes for work&#10;ordering tasks&#10;backend infos on main view" />
-    <MESSAGE value="fixing error with tablets in layout file" />
     <MESSAGE value="fixing error for check validity" />
     <MESSAGE value="fixing bug deleting harvest entries&#10;changing image for purchase" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing bug deleting harvest entries&#10;changing image for purchase" />
+    <MESSAGE value="fixing error with tablets in layout file" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing error with tablets in layout file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2625,7 +2647,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.77242523" vertical-offset="0" max-vertical-offset="615">
+        <state vertical-scroll-proportion="0.7508306" vertical-offset="13" max-vertical-offset="615">
           <caret line="31" column="6" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="6" />
           <folding />
         </state>
