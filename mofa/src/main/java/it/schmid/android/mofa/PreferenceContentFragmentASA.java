@@ -12,16 +12,16 @@ import com.actionbarsherlock.app.SherlockFragment;
 
 public class PreferenceContentFragmentASA extends SherlockFragment{
 	private TextView asaTaxSettings=null;
-	private TextView fertilizerCode=null;
-	private TextView fertilizerSoilCode=null;
+//	private TextView fertilizerCode=null;
+//	private TextView fertilizerSoilCode=null;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle savedInstanceState) {
 		View result=inflater.inflate(R.layout.prefscontentasa, parent, false);
 		 asaTaxSettings=(TextView)result.findViewById(R.id.asa_tax_setting);
-		 fertilizerCode=(TextView)result.findViewById(R.id.asa_fertilizer_code);
-		 fertilizerSoilCode=(TextView)result.findViewById(R.id.asa_fertilizer_soil_code);
+//		 fertilizerCode=(TextView)result.findViewById(R.id.asa_fertilizer_code);
+//		 fertilizerSoilCode=(TextView)result.findViewById(R.id.asa_fertilizer_soil_code);
  	    return(result);
 	}
 
@@ -31,8 +31,8 @@ public class PreferenceContentFragmentASA extends SherlockFragment{
 		super.onResume();
 		SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
 		asaTaxSettings.setText(Boolean.valueOf(prefs.getBoolean("asa_tax_setting", false)).toString());
-		fertilizerCode.setText(prefs.getString("asa_fertilizer_code", "BLATT"));
-		fertilizerSoilCode.setText(prefs.getString("asa_fertilizer_soil_code", "MD"));
+//		fertilizerCode.setText(prefs.getString("asa_fertilizer_code", "BLATT"));
+//		fertilizerSoilCode.setText(prefs.getString("asa_fertilizer_soil_code", "MD"));
 		
 	}
 	

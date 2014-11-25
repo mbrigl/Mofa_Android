@@ -245,9 +245,7 @@ public class Fertilizer extends ImportBehavior implements ProductInterface{
 		Double xDose = null;
 		String xCode = "";
 		Boolean firstCode = true;//due the fact that ASA uses the Code Tag in different nodes
-		Boolean checkFertType = false;
-		Boolean leafFert = false;
-		asaFertType= app.getLeafFertilizerCodeASA();
+
 		try {
 	        //For String source
 	        XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -287,18 +285,7 @@ public class Fertilizer extends ImportBehavior implements ProductInterface{
 	                           	currentFertilizer.setProductName(xProduct);
 	                           		                        		                        	
 	                        }
-	                        if (name.equalsIgnoreCase("Duengemitteltyp")){
-	                        	checkFertType=true; //checking the Code of Duengemitteltyp
-	                        	
-	                        }
-	                        if (name.equalsIgnoreCase("Code")&&(checkFertType)){
-	                        	xFertType= xpp.nextText();
-	                        	if (contains(asaFertType.split(";"), xFertType)){ //we are adding only fertilizer of type BLATT
-	                        		leafFert=true; //setting the control variable for leaf fertilizer to true
-	                        		
-	                        	}
-	                        	checkFertType=false; //resetting it to false
-	                        }
+
 	                        if (name.equalsIgnoreCase("DosierungProHl")&& !(xpp.isEmptyElementTag()) ){
 	                        	String value = xpp.nextText();
 	                           	java.text.NumberFormat nf = NumberFormat.getInstance(Locale.ENGLISH); //number settings in English
@@ -320,10 +307,10 @@ public class Fertilizer extends ImportBehavior implements ProductInterface{
 	                    break;
 	                case XmlPullParser.END_TAG:
 	                	name = xpp.getName();
-	                    if (name.equalsIgnoreCase("Duengemittel") && currentFertilizer != null && leafFert==true){
+	                    if (name.equalsIgnoreCase("Duengemittel") && currentFertilizer != null ){
 	                    	Log.d(TAG,"[XMLParserFertilizer] adding fertilizer: " + currentFertilizer.getId() + " " + currentFertilizer.getProductName());
 	                        mFertilizerList.add(currentFertilizer);
-	                        leafFert=false;
+	                        //leafFert=false;
 	                       // firstCode=true;
 	                    } 
 	                    if (name.equalsIgnoreCase("Duengemittel")){ //new Duengemittel

@@ -181,9 +181,7 @@ public class SoilFertilizer extends ImportBehavior{
 		String xProduct = "";
 		String xCode = "";
 		Boolean firstCode = true;//due the fact that ASA uses the Code Tag in different nodes
-		Boolean checkFertType = false;
-		Boolean soilFert = false;
-		asaSoilFertType = app.getSoilFertilizerCodeASA();
+
 		try {
 	        //For String source
 	        XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -203,7 +201,7 @@ public class SoilFertilizer extends ImportBehavior{
 	                    name = xpp.getName();
 	                    if (name.equalsIgnoreCase("Duengemittel")){
 	                    	currentFertilizer = new SoilFertilizer();
-	                      //  currentFertilizer.setId(Integer.parseInt(xpp.getAttributeValue(0))); 
+
 	                    } else if (currentFertilizer!= null){
 	                    	if (name.equalsIgnoreCase("ID")){
 	                    		xId=Integer.parseInt(xpp.nextText());
@@ -223,27 +221,16 @@ public class SoilFertilizer extends ImportBehavior{
 	                           	currentFertilizer.setProductName(xProduct);
 	                           		                        		                        	
 	                        }
-	                        if (name.equalsIgnoreCase("Duengemitteltyp")){
-	                        	checkFertType=true; //checking the Code of Duengemitteltyp
-	                        	
-	                        }
-	                        if (name.equalsIgnoreCase("Code")&&(checkFertType)){
-	                        	xFertType= xpp.nextText();
-	                        	if (contains(asaSoilFertType.split(";"), xFertType)){ //we are adding only soilfertilizer of type MD
-	                        		soilFert=true; //setting the control variable for leaf fertilizer to true
-	                        		
-	                        	}
-	                        	checkFertType=false; //resetting it to false
-	                        }
+
 	                        
 	                    }
 	                    break;
 	                case XmlPullParser.END_TAG:
 	                	name = xpp.getName();
-	                    if (name.equalsIgnoreCase("Duengemittel") && currentFertilizer != null && soilFert==true){
+	                    if (name.equalsIgnoreCase("Duengemittel") && currentFertilizer != null ){
 	                    	Log.d(TAG,"[XMLParserFertilizer] adding  soil fertilizer: " + currentFertilizer.getId() + " " + currentFertilizer.getProductName());
 	                        mFertilizerList.add(currentFertilizer);
-	                       soilFert=false;
+	                  //     soilFert=false;
 	                       // firstCode=true;
 	                    } 
 	                    if (name.equalsIgnoreCase("Duengemittel")){ //new Duengemittel

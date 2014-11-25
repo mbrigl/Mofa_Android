@@ -2,58 +2,58 @@
 <pre-dex-items>
 
     <item
-        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/release/internal_impl-20.0.0-1fb93d3274cdd0e48f1c50d915e13c45d5e27790.jar"
-        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/libs/internal_impl-20.0.0.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
-    <item
-        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/release/ormlite-core-4.42-c3d925cf61a0d919603acab266b13a954c215709.jar"
-        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/libs/ormlite-core-4.42.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="9c345683bceda8106373a485be9c6ecdfa5aa2b3"/>
-    <item
-        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/release/support-annotations-20.0.0-820090ec777e85e5f91abc11b0ce2cdd64f29191.jar"
-        jar="/usr/share/android-studio/data/sdk/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
-    <item
-        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/release/classes-d90954ef6f38012770fca2168080f908025d5ae1.jar"
-        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/Mofa/library/unspecified/classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="ae39a9ef777125c06136ddbe57d0276733514a09"/>
-    <item
-        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/release/dropbox-sync-sdk-android-a6da611ca652f6e8040a3fb0c74205effb17626d.jar"
+        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/dropbox-sync-sdk-android-a6da611ca652f6e8040a3fb0c74205effb17626d.jar"
         jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/libs/dropbox-sync-sdk-android.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="e6b999ef53dcaed544889fc3d8022e56bccba723"/>
     <item
-        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/release/classes-b80d0440f3d4242ec738bb9a10e757aef6d456d3.jar"
+        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/classes-b80d0440f3d4242ec738bb9a10e757aef6d456d3.jar"
         jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
     <item
-        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/release/gson-2.2.2-7214090055982b545f46b458742cb4e4d422eeec.jar"
+        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/gson-2.2.2-7214090055982b545f46b458742cb4e4d422eeec.jar"
         jar="/home/schmida/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.2/1f96456ca233dec780aa224bff076d8e8bca3908/gson-2.2.2.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="1f96456ca233dec780aa224bff076d8e8bca3908"/>
     <item
-        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/release/ormlite-android-4.42-c55402d1e7cc9dc1fef3af1999aa78194894a708.jar"
+        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-3a1ff5d7559b86dae54dbd4d686ec4a2adfedd94.jar"
+        jar="/home/schmida/android-sdks/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
+    <item
+        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/ormlite-android-4.42-c55402d1e7cc9dc1fef3af1999aa78194894a708.jar"
         jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/libs/ormlite-android-4.42.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="e100b4fe8706da96352504146c2877b68e0d7231"/>
     <item
-        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/release/classes-525d285d514e386eb838ecbfe4d813166b55e170.jar"
+        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-1fb93d3274cdd0e48f1c50d915e13c45d5e27790.jar"
+        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/libs/internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
+    <item
+        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/classes-525d285d514e386eb838ecbfe4d813166b55e170.jar"
         jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/classes.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="af64527b748983a75de9c0756e9768b56b240a49"/>
+    <item
+        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/ormlite-core-4.42-c3d925cf61a0d919603acab266b13a954c215709.jar"
+        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/libs/ormlite-core-4.42.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="9c345683bceda8106373a485be9c6ecdfa5aa2b3"/>
+    <item
+        dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/classes-d90954ef6f38012770fca2168080f908025d5ae1.jar"
+        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/Mofa/library/unspecified/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="2331134b4c2bd439a1b5d0324bb7110c7a698ffb"/>
 
 </pre-dex-items>
