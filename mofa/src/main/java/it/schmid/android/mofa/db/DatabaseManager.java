@@ -32,6 +32,7 @@ import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.stmt.Where;
+import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 public class DatabaseManager {
@@ -68,6 +69,9 @@ public class DatabaseManager {
      */
     public Integer getDbVersion(){
     	return getHelper().getReadableDatabase().getVersion();
+    }
+    public ConnectionSource getConnection(){
+        return getHelper().getConnectionSource();
     }
     public Boolean checkIfEmpty(){
     	Boolean isEmpty = false;
@@ -575,6 +579,17 @@ public class DatabaseManager {
     	}
     	return workList;
     }
+    public List<Work> getAllValidNotSprayWorks(){
+        List<Work> workList=null;
+
+        try {
+            workList=getWorksNotSpraying();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return workList;
+    }
     public List<Work> getAllNotSendedWorks(){
     	List<Work> workList=null;
     	try{
@@ -589,6 +604,7 @@ public class DatabaseManager {
     	}
     	return workList;
     }
+
     public List<Work> getAllWorksOrderByDate(){
     	List<Work> workList=null;
     	try{
@@ -621,6 +637,22 @@ public class DatabaseManager {
 		return getHelper().getWorkDao().query(preparedQuery);
         
         
+    }
+    public List<Work> getWorksNotSpraying()throws SQLException{ //filtering of asa codes
+        QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
+        final Where<Work, Integer> w = qb.where();
+        List<Task> asaTasks = getTaskNotSpraying();
+        int clauseC = 0;
+        for (Task t:asaTasks){ //generating a dynamic or
+            w.eq("task_id", t.getId()).and() .eq("valid", true);
+            clauseC++;
+        }
+        if (clauseC > 1) {
+            w.or(clauseC);
+        }
+        qb.orderBy("date", false);
+        PreparedQuery<Work> preparedQuery = qb.prepare();
+        return getHelper().getWorkDao().query(preparedQuery);
     }
     public List<Work> getWorksForTaskIdOrderedASA(String type)throws SQLException{ //filtering of asa codes
     	QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
@@ -668,6 +700,19 @@ public class DatabaseManager {
         w.or(
             w.isNull("type"),
             w.eq("type","E")
+        );
+        PreparedQuery<Task> preparedQuery = qb.prepare();
+        return getHelper().getTaskDao().query(preparedQuery);
+    }
+    public List<Task>getTaskNotSpraying()throws SQLException{
+        QueryBuilder<Task, Integer> qb = getHelper().getTaskDao().queryBuilder();
+        final Where<Task, Integer> w = qb.where();
+        w.or(
+                w.isNull("type"),
+                w.eq("type","E"),
+                w.eq("type","D"),
+                w.eq("type","H"),
+                w.eq("type","O")
         );
         PreparedQuery<Task> preparedQuery = qb.prepare();
         return getHelper().getTaskDao().query(preparedQuery);

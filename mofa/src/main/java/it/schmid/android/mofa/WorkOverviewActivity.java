@@ -12,6 +12,7 @@ import it.schmid.android.mofa.model.Work;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -39,6 +40,7 @@ import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.j256.ormlite.misc.TransactionManager;
 
 
 public class WorkOverviewActivity extends DashboardActivity implements SendingProcess.RemoveEntries{
@@ -273,7 +275,7 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 		 */
 	
 
-	public void deleteAllEntries(){
+	public void deleteAllEntriesOrg(){
 		List<Work> removeWorkList=DatabaseManager.getInstance().getAllValidWorks();
 		for (Work w : removeWorkList){
 			DatabaseManager.getInstance().deleteCascWork(w);
@@ -281,6 +283,26 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 		//adapter.notifyDataSetChanged();
 		fillData(listViewWork);
 	}
+    public void deleteAllEntries(){
+        try {
+            TransactionManager.callInTransaction(DatabaseManager.getInstance().getConnection(),
+                    new Callable<Void>() {
+                        public Void call() throws Exception {
+                            List<Work> removeWorkList=DatabaseManager.getInstance().getAllValidNotSprayWorks();
+                            for (Work w : removeWorkList){
+                                DatabaseManager.getInstance().deleteCascWork(w);
+                            }
+                            return null;
+                        }
+                    });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        //adapter.notifyDataSetChanged();
+        fillData(listViewWork);
+    }
 		
 	
 }
