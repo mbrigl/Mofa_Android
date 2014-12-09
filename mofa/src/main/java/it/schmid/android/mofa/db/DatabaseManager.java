@@ -31,6 +31,7 @@ import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
+import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
@@ -590,6 +591,18 @@ public class DatabaseManager {
 
         return workList;
     }
+    //after sending the data, set the remaining ones (= spray works) to sended true
+    public void setWorksSendedToTrue() {
+        UpdateBuilder<Work, Integer> updateBuilder =getHelper().getWorkDao().updateBuilder();
+        try{
+        updateBuilder.updateColumnValue("sended", true);
+        updateBuilder.where().eq("valid", true);
+        updateBuilder.update();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
     public List<Work> getAllNotSendedWorks(){
     	List<Work> workList=null;
     	try{
@@ -660,7 +673,7 @@ public class DatabaseManager {
     	List<Task> asaTasks = getTaskForASAFiltering(type);
     	int clauseC = 0;
     	for (Task t:asaTasks){ //generating a dynamic or
-    		w.eq("task_id", t.getId());
+    		w.eq("task_id", t.getId()).and() .eq("sended", false);
     		clauseC++;
     	}
     	if (clauseC > 1) {
@@ -677,7 +690,7 @@ public class DatabaseManager {
     	List<Task> asaTasks = getTaskForASAFilteringRest();
     	int clauseC = 0;
     	for (Task t:asaTasks){ //generating a dynamic or not equal
-    		w.eq("task_id", t.getId());
+    		w.eq("task_id", t.getId()).and() .eq("sended", false);
     		clauseC++;
     	}
     	if (clauseC > 1) {

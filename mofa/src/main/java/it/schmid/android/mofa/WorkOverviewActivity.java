@@ -139,18 +139,16 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 			         switch (position)
 			         {
 			         	case 0:
-			         		 workList = DatabaseManager.getInstance().getAllWorksOrderByDate();
+			         		 workList = DatabaseManager.getInstance().getAllNotSendedWorks();
 			                 adapter = new WorkAdapter(WorkOverviewActivity.this, R.layout.work_row, workList);
 			                 listViewWork.setAdapter(adapter);
 			                 
 			                 break;
 			         	case 1:
 			         		try {
-			         			if (Integer.parseInt(backEndSoftware)==1){//ASA Case
+
 			         				workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASA("S");
-			         			}else{
-			         				workList = DatabaseManager.getInstance().getWorksForTaskIdOrdered(1);
-			         			}
+
 			         			
 			         		} catch (SQLException e) {
 							// TODO Auto-generated catch block
@@ -161,11 +159,9 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 			                 break;
 			            case 2:
 			            	try {
-			            		if (Integer.parseInt(backEndSoftware)==1){//ASA Case
+
 			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASA("H");
-			            		}else{
-			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrdered(2);
-			            		}
+
 			            	} catch (SQLException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -175,11 +171,9 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 			                 break;
 			            case 3:
 			            	try {
-			            		if (Integer.parseInt(backEndSoftware)==1){//ASA Case
+
 			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASA("D");
-			            		}else{
-			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrdered(3);
-			            		}
+
 			            	} catch (SQLException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -189,11 +183,9 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 			                 break;
 			            default:
 			            	try { 
-			            		if (Integer.parseInt(backEndSoftware)==1){//ASA Case, we get all codes and then we search for all others
+
 			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASARest();
-			            		}else{
-			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrdered(4);
-			            		}
+
 				            } catch (SQLException e) {
 								// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -291,7 +283,9 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
                             List<Work> removeWorkList=DatabaseManager.getInstance().getAllValidNotSprayWorks();
                             for (Work w : removeWorkList){
                                 DatabaseManager.getInstance().deleteCascWork(w);
+
                             }
+                            DatabaseManager.getInstance().setWorksSendedToTrue();
                             return null;
                         }
                     });
