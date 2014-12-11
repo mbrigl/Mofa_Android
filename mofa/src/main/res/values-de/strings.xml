@@ -188,4 +188,7 @@
     <string name="reentertimeUnit">h</string>
     <string name="maxamounthaUnit">kg/lt</string>
     <!--Strings for Archive and history -->
+    <!--Strings for SearchPesticide -->
+    <string name="searchLastPest">Letzte Spritzung</string>
+    <string name="searchInfo">Diese Suche beinhaltet nur Spritzungen, welche von diesem Gerät gesendet wurden. Bitte achten Sie darauf, dass Sie das Spritzarchiv nicht während des Jahres leeren.</string>
 </resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:text="@string/searchLastPest"
+        android:id="@+id/button" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="167dp"
+        android:text="@string/searchInfo"
+        android:id="@+id/textView"
+        android:layout_gravity="bottom"
+        android:background="@color/lightred"/>
+</LinearLayout>
+

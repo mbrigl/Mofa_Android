@@ -188,5 +188,7 @@
     <string name="waitingtimeUnit">days</string>
     <string name="reentertimeUnit">h</string>
     <string name="maxamounthaUnit">kg/lt</string>
-
+    <!--Strings for SearchPesticide -->
+    <string name="searchLastPest">Last Spraying work</string>
+    <string name="searchInfo">This search includes only spraying entries sended from this device. Be sure that you don't clear the archive during the year!</string>
 </resources>
