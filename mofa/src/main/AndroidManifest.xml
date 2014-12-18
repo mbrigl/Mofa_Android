@@ -64,6 +64,9 @@
          <activity
 			android:name="it.schmid.android.mofa.PurchaseActivity"
 			android:label="@string/app_name"/>
+        <activity
+            android:name="it.schmid.android.mofa.search.SearchActivity"
+            android:label="@string/app_name"/>
          <activity
 			android:name="it.schmid.android.mofa.DetailsDialog"
 			android:theme="@android:style/Theme.Dialog"

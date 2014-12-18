@@ -8,6 +8,7 @@ import it.schmid.android.mofa.db.DatabaseHelper;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.db.DatabaseTestDB;
 import it.schmid.android.mofa.model.Work;
+import it.schmid.android.mofa.search.SearchActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	private static final String BASE64_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxxdQkUSBx7ZmOM4AFBBvgNTSN3GWdsfM7uE0ygmvLdXC7V0/tX2byfLMvvkUtfdVD/c986SQdDrB2Un4Hr9nCcAFlWW1DFQgZrHZaWbe/gmk1rcxqbjKTON2CnWyfWU0iLu2ZCSRcYquajpKasJdVlvkTR+mlhOahSB06GmDcZDr/Uzr5psepYpex97Tqny0N+LWwnNFZ4QUPn8YJ/l/BVc3oc+UpshY1h8ieIn7BVEO0Xyk0gGs08BCyvHjNWBYTQadMQRhnXBdLraKwX7v6ojBMWk6RsSjXv94fqyrtPywNYW0IlXwthp4L3xm8EXhiMGdiZ6XbCovHGh9ud7tUQIDAQAB";
 	private static final byte[] SALT = new byte[] {88,77,37,44,48,10,59,27,03,63,60,02,59,50,50,53,58,69,13,95};
 	private static final String TAG = "HomeActivity";
-	public static final int NUM_HOME_BUTTONS = 4;
+	public static final int NUM_HOME_BUTTONS = 5;
 	/**
 	 * // setting from preferences
 	 */
@@ -100,7 +101,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	        R.drawable.home_button2,
 	        R.drawable.home_button3,
 	        R.drawable.home_button4,
-	       // R.drawable.home_button5,
+	        R.drawable.home_button5,
 	       // R.drawable.home_button6 
 	        } ;
 
@@ -110,6 +111,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	        R.string.title_feature2,
 	        R.string.title_feature3,
 	        R.string.title_feature4,
+            R.string.title_feature5,
 	      //  R.string.title_feature5,
 	      //  R.string.title_feature6,
 	        } ;
@@ -120,7 +122,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	        R.id.frame2,
 	        R.id.frame3,
 	        R.id.frame4,
-	       // R.id.frame5,
+	        R.id.frame5,
 	       // R.id.frame6
 	        } ;
 	protected void onCreate(Bundle savedInstanceState) {
@@ -226,7 +228,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 		       //licensed = sharedPref.getBoolean("LICENSED", false);
 		       //** The following lines are to disable for productive use
 		       licensed=app.getLicense(); 
-		      // licensed=true; //only for TESTING, disabling this line for productive use !!!
+		       licensed=true; //only for TESTING, disabling this line for productive use !!!
 		       
 		      if (licensed==false){ //not licensed or still to check
 		    	   String deviceId = Secure.getString(getContentResolver(), Secure.ANDROID_ID);
@@ -277,9 +279,8 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	      case 4: 
 	    	  startActivity(new Intent (this, PurchaseActivity.class));
 	    	  break;
-	 //     case 6:
-	 //   	  Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.mofaapp.it/nfeed/news.html"));
-	 //   	  startActivity(browserIntent);
+	      case 5:
+	    	  startActivity(new Intent (this, SearchActivity.class));
 	      default: 
 	    	   break;
 	   }
