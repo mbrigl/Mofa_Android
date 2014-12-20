@@ -157,6 +157,7 @@
 	<string name="importTitle">Importieren Stammdaten…</string>
 	<string name="noUpdatesInfo">Hinweis</string>
 	<string name="noUpdatesText">Keine Updates vorhanden</string>
+    <string name="startsearchbutton">Suche starten</string>
 	<!-- Strings for Harvest Fragment Dialog -->
 	<string name="har_title">Lieferschein</string>
 	<string name="har_number">Liefernr</string>

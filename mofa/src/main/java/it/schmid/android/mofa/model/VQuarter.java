@@ -51,6 +51,7 @@ public class VQuarter extends ImportBehavior{
 	@DatabaseField
 	private Double gps_y2;
 	private Boolean importError=false;
+    private Boolean isSelected;
 	public VQuarter(){
 		
 	}
@@ -121,7 +122,16 @@ public class VQuarter extends ImportBehavior{
 	public void setCode(String code) {
 		this.code = code;
 	}
-	@Override
+
+    public Boolean getIsSelected() {
+        return isSelected;
+    }
+
+    public void setIsSelected(Boolean isSelected) {
+        this.isSelected = isSelected;
+    }
+
+    @Override
 	public void importMasterData(JSONArray importData) {
 		VQuarter vquarter;
 		Land land;

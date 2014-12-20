@@ -158,6 +158,7 @@
 	<string name="importTitle">Importazione preimpostazioni…</string>
 	<string name="noUpdatesInfo">riferimento</string>
 	<string name="noUpdatesText">no updates</string>
+    <string name="startsearchbutton">Inizia ricerca</string>
 	<!-- Strings for Harvest Fragment Dialog -->
 	<string name="har_title">bolla</string>
 	<string name="har_number">traspnr</string>

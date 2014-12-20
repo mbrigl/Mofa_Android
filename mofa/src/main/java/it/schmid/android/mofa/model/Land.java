@@ -35,6 +35,10 @@ public class Land extends ImportBehavior{
 	@ForeignCollectionField
 	private ForeignCollection<VQuarter> vquarters;
 	private Boolean importError=false;
+
+
+
+    private Boolean isSelected; //needed for temporary selected flag for checkbox in searching activity
 	 public Land(){
 		
 	}
@@ -56,6 +60,12 @@ public class Land extends ImportBehavior{
 		public void setCode(String code) {
 			this.code = code;
 		}
+    public Boolean getIsSelected() {
+        return isSelected;
+    }
+    public void setIsSelected(Boolean isSelected) {
+        this.isSelected = isSelected;
+    }
 	public void importMasterData(JSONArray importData){
 		Land land;
 		try {

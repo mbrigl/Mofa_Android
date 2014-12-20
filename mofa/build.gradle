@@ -28,12 +28,12 @@ android {
 
 dependencies {
     compile project(':library')
-    compile 'com.google.code.gson:gson:2.2.2'
-    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
-    compile 'com.android.support:support-v4:20.0.0'
     compile files('libs/ormlite-core-4.42.jar')
     compile files('libs/ormlite-android-4.42.jar')
     compile files('libs/dropbox-sync-sdk-android.jar')
 
 
+    compile 'com.google.code.gson:gson:2.2.2'
+    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+    compile 'com.android.support:support-v4:20.0.0'
 }
