@@ -178,8 +178,8 @@ public class DatabaseManager {
     public List<Machine> getAllMachines() {
         List<Machine> machineList = null;
         try {
-            machineList = getHelper().getMachineDao().queryForAll();
-        } catch (SQLException e) {
+            machineList = getHelper().getMachineDao().queryBuilder().orderByRaw("code").query();
+            } catch (SQLException e) {
             e.printStackTrace();
         }
         return machineList;
@@ -329,7 +329,8 @@ public class DatabaseManager {
     public List<Worker> getAllWorkers() {
         List<Worker> workerList = null;
         try {
-            workerList = getHelper().getWorkerDao().queryForAll();
+            workerList = getHelper().getWorkerDao().queryBuilder().orderByRaw("code").query();
+           // workerList = getHelper().getWorkerDao().queryForAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }
