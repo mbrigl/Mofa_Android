@@ -9,6 +9,7 @@ import it.schmid.android.mofa.model.WorkWorker;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 import android.content.Context;
 import android.util.Log;
@@ -41,7 +42,7 @@ public class DatabaseTestDB {
     			Work w;
     			int task;
     			String note = "test";
-    			lDate = addDays(lDate, -1);    			
+    			lDate = addDays(lDate,1);
     			if (i%2==0){
     				task = 5;
     				w = createWork(lDate,task,"test2");
@@ -64,7 +65,7 @@ public class DatabaseTestDB {
 		w.setDate(lDate);
 		w.setTask(DatabaseManager.getInstance().getTaskWithId(task));
 		w.setNote(note);
-		w.setValid(false);
+		w.setValid(true);
 		
 		DatabaseManager.getInstance().addWork(w);
 		return w;
@@ -80,42 +81,65 @@ public class DatabaseTestDB {
     	
     }
     private void createWorkVQuarter(Work w){
-    	int vQuarterId=6;
+    	int[] vquarters = {1,2,6,7,8,9,10,11,13,14,15,16,18,20,22,23,24,31};
+        int elPos = new Random().nextInt(vquarters.length-2);
+        Log.d(TAG, "vquarterpos = " + elPos);
+        int vQuarterId=6;
     	for (int i=1; i<=4; i++){
-    		
+    		int vqId = vquarters[elPos];
     		WorkVQuarter wv= new WorkVQuarter();
     		wv.setWork(w);	
-    		wv.setVquarter(DatabaseManager.getInstance().getVQuarterWithId(vQuarterId));
+    		wv.setVquarter(DatabaseManager.getInstance().getVQuarterWithId(vqId));
     		DatabaseManager.getInstance().addWorkVQuarter(wv);
-    		vQuarterId++;
+    		if (elPos >= vquarters.length-1){
+                elPos = 0;
+            }else{
+                elPos++;
+            }
     	}
     	
     }
     private void createSprayEntry(Work w){
-    	int pestId = 301;
-    	int fertId=510;
+    	int[] pestIds= {289,301,302,325,345,347,351,356,1179,895,974,977};
+        int[] fertIds={106,109,258,282,380,383,726,728,730,755,790};
+        int pestId;
+    	int fertId;
     	Spraying sp = new Spraying();
     	sp.setWork(w);
     	sp.setConcentration(1);
     	sp.setWateramount(10.00);
     	DatabaseManager.getInstance().addSpray(sp);
+        int elPestPos = new Random().nextInt(pestIds.length-2);
+        Log.d(TAG, "pestpos = " + elPestPos);
     		for (int i=1; i<=2;i++){
+                pestId = pestIds[elPestPos];
     			SprayPesticide sprayP = new SprayPesticide();
     			sprayP.setSpraying(sp);
     			sprayP.setPesticide(DatabaseManager.getInstance().getPesticideWithId(pestId));
     			sprayP.setDose(0.03);
     			sprayP.setDose_amount(20.00);
     			DatabaseManager.getInstance().addSprayPesticide(sprayP);
-    			pestId++;
+                if (elPestPos >= pestIds.length-1){
+                    elPestPos = 0;
+                }else{
+                    elPestPos++;
+                }
     		}
+        int elFertPos = new Random().nextInt(fertIds.length-2);
+        Log.d(TAG, "fertpos = " + elFertPos);
     		for (int i=1; i<=2;i++){
+                fertId = fertIds[elFertPos];
     			SprayFertilizer sprayF = new SprayFertilizer();
     			sprayF.setSpraying(sp);
     			sprayF.setFertilizer(DatabaseManager.getInstance().getFertilizerWithId(fertId));
     			sprayF.setDose(0.03);
     			sprayF.setDose_amount(20.00);
     			DatabaseManager.getInstance().addSprayFertilizer(sprayF);
-    			fertId++;
+                if (elFertPos >= fertIds.length-1){
+                    elFertPos = 0;
+                }else{
+                    elFertPos++;
+                }
     		}
     }
    

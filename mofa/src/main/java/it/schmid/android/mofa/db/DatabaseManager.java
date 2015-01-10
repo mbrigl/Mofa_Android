@@ -23,6 +23,7 @@ import it.schmid.android.mofa.model.WorkWorker;
 import it.schmid.android.mofa.model.Worker;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -183,7 +184,7 @@ public class DatabaseManager {
     public List<Machine> getAllMachines() {
         List<Machine> machineList = null;
         try {
-            machineList = getHelper().getMachineDao().queryForAll();
+            machineList=getHelper().getMachineDao().queryBuilder().orderByRaw("code").query();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -1675,5 +1676,50 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return harvestList;
+    }
+    /*** Search Queries
+     *
+     */
+    public List<Work> getSprayWorksForVQ(Integer vqs)  {
+        try{
+            QueryBuilder<WorkVQuarter,Integer> qbVquarter = getHelper().getWorkVQuarterDao().queryBuilder();
+            final Where<WorkVQuarter, Integer> w = qbVquarter.where();
+            w.eq("vquarter_id", vqs);
+            QueryBuilder<Work,Integer> work = getSprayWorks();
+            work.join(qbVquarter);
+            work.limit(2);
+            PreparedQuery<Work> prepWork= work.prepare();
+            return getHelper().getWorkDao().query(prepWork);
+        }catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+
+
+    }
+    private QueryBuilder <Work,Integer> getSprayWorks()throws SQLException{ //filtering of asa codes
+        QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
+        final Where<Work, Integer> w = qb.where();
+        List<Task> asaTasks = getTaskForASAFiltering("S");
+        int clauseC = 0;
+        for (Task t:asaTasks){ //generating a dynamic or
+            w.eq("task_id", t.getId()).and() .eq("valid", true) ;
+            clauseC++;
+        }
+        if (clauseC > 1) {
+            w.or(clauseC);
+        }
+        qb.orderBy("date",false);
+        return qb;
+    }
+    private List<SprayPesticide> getUsedPesticideList(){
+        try {
+            List<SprayPesticide> results = getHelper().getSprayPesticideDao().queryBuilder().distinct().selectColumns(SprayPesticide.PESTICIDE_ID_FIELD_NAME).query();
+            return results;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+
     }
 }

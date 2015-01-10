@@ -191,5 +191,7 @@
     <string name="maxamounthaUnit">kg/lt</string>
     <!--Strings for SearchPesticide -->
     <string name="searchLastPest">Cerca ultimo trattamento</string>
+    <string name="searchPest">Cerca antiparassitari</string>
     <string name="searchInfo">Questa ricerca include solo i trattamenti mandati da questo apparecchio. È importante che durante l\'anno non viene svuotato l\'archivio.</string>
+    <string name="search_no_result">Nessun risultato per questa ricerca</string>
 </resources>

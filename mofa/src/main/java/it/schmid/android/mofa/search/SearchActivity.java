@@ -2,6 +2,14 @@ package it.schmid.android.mofa.search;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
+
+import com.actionbarsherlock.app.SherlockFragment;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import it.schmid.android.mofa.DashboardActivity;
 import it.schmid.android.mofa.R;
@@ -9,8 +17,9 @@ import it.schmid.android.mofa.R;
 /**
  * Created by schmida on 08.12.14.
  */
-public class SearchActivity extends DashboardActivity implements SearchLandFragment.OnLandFragmentListener {
-
+public class SearchActivity extends DashboardActivity implements SearchLandFragment.OnLandFragmentListener,SearchResult.GetVQListener {
+    private static final String TAG ="SearchActivity";
+    private ArrayList<Integer> selVQList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +51,29 @@ public class SearchActivity extends DashboardActivity implements SearchLandFragm
     }
 
     @Override
-    public void onLandFragmentInteraction(Uri uri) {
+    public void onLandFragmentInteraction(HashMap<Integer, ArrayList<Integer>> selElements) {
 
+        selVQList = new ArrayList<Integer>();
+        for (HashMap.Entry<Integer, ArrayList<Integer>> e : selElements.entrySet()){
+            ArrayList<Integer> entries = e.getValue();
+            selVQList.addAll(entries);
+        }
+        Log.d(TAG, "Callback from fragment with following entries: " + selVQList.toString());
+        SherlockFragment searchResult = SearchResult.newInstance(R.string.searchLastPest);
+        FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.search_fragment_container, searchResult);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
+
+    public ArrayList<Integer> getVQList() {
+        return selVQList;
+    }
+
+    @Override
+    public void closeActivity() {
+
+        this.finish();
+    }
+
 }

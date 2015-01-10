@@ -9,7 +9,11 @@
         android:layout_height="65dp"
         android:text="@string/searchLastPest"
         android:id="@+id/btn_search_last_sprayop" />
-
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:text="@string/searchPest"
+        android:id="@+id/btn_search_pest" />
 
     <TextView
         android:layout_width="match_parent"

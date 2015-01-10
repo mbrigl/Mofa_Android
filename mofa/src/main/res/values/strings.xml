@@ -192,7 +192,10 @@
     <string name="maxamounthaUnit">kg/lt</string>
     <!-- Strings for SearchPesticide -->
     <string name="searchLastPest">Last Spraying work</string>
+    <string name="searchPest">Search Pesticide</string>
     <string name="searchInfo">This search includes only spraying entries sended from this device. Be sure that you don\'t clear the archive during the year!</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_no_result">No entry found for this query</string>
+
 
 </resources>

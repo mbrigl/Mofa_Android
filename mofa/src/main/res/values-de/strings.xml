@@ -191,5 +191,7 @@
     <!--Strings for Archive and history -->
     <!--Strings for SearchPesticide -->
     <string name="searchLastPest">Letzte Spritzung</string>
+    <string name="searchPest">Suche Pflanzenschutzmittel</string>
     <string name="searchInfo">Diese Suche beinhaltet nur Spritzungen, welche von diesem Gerät gesendet wurden. Bitte achten Sie darauf, dass Sie das Spritzarchiv nicht während des Jahres leeren.</string>
+    <string name="search_no_result">Kein Eintrag für diese Suche</string>
 </resources>

@@ -16,7 +16,7 @@
         android:listSelector="@drawable/list_selector" 
         >
     </ExpandableListView>
-	<Button android:id="@+id/landclose_btn" 
+	<Button android:id="@+id/landsearch_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/startsearchbutton"/>

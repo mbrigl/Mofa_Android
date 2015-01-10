@@ -101,8 +101,8 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	        R.drawable.home_button2,
 	        R.drawable.home_button3,
 	        R.drawable.home_button4,
-	        R.drawable.home_button5,
-	       // R.drawable.home_button6 
+	        R.drawable.home_button5
+
 	        } ;
 
 	// Labels for the buttons
@@ -111,7 +111,8 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	        R.string.title_feature2,
 	        R.string.title_feature3,
 	        R.string.title_feature4,
-            R.string.title_feature5,
+            R.string.title_feature5
+
 	      //  R.string.title_feature5,
 	      //  R.string.title_feature6,
 	        } ;
@@ -122,8 +123,8 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	        R.id.frame2,
 	        R.id.frame3,
 	        R.id.frame4,
-	        R.id.frame5,
-	       // R.id.frame6
+	        R.id.frame5
+
 	        } ;
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -448,11 +449,11 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 			about.setTitle("about MoFa");
 			about.show();
 			return true;
-//		case R.id.menu_test:
+		case R.id.menu_test:
 //			Log.d(TAG, "automatically filling DB");
-//			DatabaseTestDB.init(this);
-//			DatabaseTestDB.getInstance().createTestRecords();
-//			return true;
+			DatabaseTestDB.init(this);
+			DatabaseTestDB.getInstance().createTestRecords();
+			return true;
 		
 		}
 		return super.onMenuItemSelected(featureId, item);
