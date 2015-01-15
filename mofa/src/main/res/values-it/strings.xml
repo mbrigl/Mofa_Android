@@ -18,7 +18,7 @@
     <string name="title_feature3">Update</string>
     <string name="title_feature4">Aquisti</string>
     <string name="title_feature5">Cerca</string>
-    <string name="title_feature6">News - Web</string>
+    <string name="title_feature6">Ore di lavoro</string>
 	
 	<!-- Preference setting for import data	-->
 	<string name="updateland">Update Impianti</string>
@@ -191,7 +191,11 @@
     <string name="maxamounthaUnit">kg/lt</string>
     <!--Strings for SearchPesticide -->
     <string name="searchLastPest">Cerca ultimo trattamento</string>
+    <string name="searchVQuarter">Scegliere il campo da cercare</string>
     <string name="searchPest">Cerca antiparassitari</string>
+    <string name="searchPestSel">Selezionare prodotto per la ricerca</string>
     <string name="searchInfo">Questa ricerca include solo i trattamenti mandati da questo apparecchio. È importante che durante l\'anno non viene svuotato l\'archivio.</string>
     <string name="search_no_result">Nessun risultato per questa ricerca</string>
+    <string name="fromDate">von Datum</string>
+    <string name="toDate">bis Datum</string>
 </resources>

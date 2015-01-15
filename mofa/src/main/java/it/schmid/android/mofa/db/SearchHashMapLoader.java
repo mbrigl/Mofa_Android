@@ -7,11 +7,14 @@ import android.content.IntentFilter;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
+import com.j256.ormlite.stmt.QueryBuilder;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.model.Fertilizer;
 import it.schmid.android.mofa.model.Pesticide;
@@ -28,20 +31,42 @@ public class SearchHashMapLoader extends AsyncTaskLoader<HashMap<Integer,List<St
 	private HashMap<Integer,List<String>> mData = new HashMap<Integer, List<String>>();
     private ArrayList<Integer> vquarters;
     private Context context;
-	public SearchHashMapLoader(Context context, ArrayList<Integer> vquarters) {
+    private int prodId=0;
+    private int queryType;
+	public SearchHashMapLoader(Context context, ArrayList<Integer> vquarters,int queryType) {
 		super(context);
 		this.vquarters=vquarters;
         this.context= context;
+        this.queryType=queryType;
 	}
-
+    //constructor for searching a pesticide
+    public SearchHashMapLoader(Context context, ArrayList<Integer> vquarters,int queryType,int prodId) {
+        super(context);
+        this.vquarters=vquarters;
+        this.context= context;
+        this.queryType=queryType;
+        this.prodId=prodId;
+    }
 	@Override
 	public HashMap<Integer,List<String>> loadInBackground() {
+        switch(queryType){
+            case (ActivityConstants.SEARCH_LAST_PEST):
+                return searchLastPest();
+            case (ActivityConstants.SEARCH_PEST):
+                return searchPest(prodId);
+            default:
+                return searchLastPest();
+
+        }
+		
+	}
+    private HashMap<Integer,List<String>> searchLastPest(){
         final String DATE_FORMAT = "dd.MM.yyyy";
         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 
-        String sprayDate;
+
         Integer sprayId;
-		Log.d(TAG,"Loading Data in a Background Process");
+        Log.d(TAG,"Loading Data in a Background Process");
         for (Integer vqId : vquarters){
             List<String> sprayString = new ArrayList<String>();
             List<Work> sprayWorks = DatabaseManager.getInstance().getSprayWorksForVQ(vqId);
@@ -54,21 +79,59 @@ public class SearchHashMapLoader extends AsyncTaskLoader<HashMap<Integer,List<St
                     List<SprayPesticide> selectedPesticides = DatabaseManager.getInstance().getSprayPesticideBySprayId(sprayId);
                     for(SprayPesticide sP: selectedPesticides){
                         Pesticide pest = DatabaseManager.getInstance().getPesticideWithId(sP.getPesticide().getId());
-                        sprayString.add(dateFormat.format(w.getDate()) + " " + pest.getProductName() + " " + sP.getDose());
+                        if (pest!=null){
+                            sprayString.add(dateFormat.format(w.getDate()) + " " + pest.getProductName() + " " + sP.getDose());
+                        }else{
+                            sprayString.add ("Pesticide deleted!!!");
+                        }
+
                     }
                     List<SprayFertilizer> selectedFertilizers = DatabaseManager.getInstance().getSprayFertilizerBySprayId(sprayId);
                     for(SprayFertilizer sF: selectedFertilizers){
                         Fertilizer fert = DatabaseManager.getInstance().getFertilizerWithId(sF.getFertilizer().getId());
-                        sprayString.add(dateFormat.format(w.getDate()) + " " + fert.getProductName() + " " + sF.getDose());
+                        if (fert!=null){
+                            sprayString.add(dateFormat.format(w.getDate()) + " " + fert.getProductName() + " " + sF.getDose());
+                        }else{
+                            sprayString.add ("Fertilizer deleted!!!");
+                        }
+
                     }
                 }
             }
             mData.put(vqId,sprayString);
         }
-		return mData;
-		
-	}
+        return mData;
+    }
+    private HashMap<Integer,List<String>> searchPest(int prodId){
+        final String DATE_FORMAT = "dd.MM.yyyy";
+        final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+        Integer sprayId;
+        List<Integer> workIdsForPestId = DatabaseManager.getInstance().getIdsForSelectedPest(prodId);
+        Log.d(TAG,"Loading Data in a Background Process");
+        for (Integer vqId : vquarters){
+            List<String> sprayString = new ArrayList<String>();
+            List<Work> sprayWorks = DatabaseManager.getInstance().getSprayWorksForVQAndProd(vqId,workIdsForPestId);
+            if (sprayWorks.size()==0){
+                sprayString.add (context.getString(R.string.search_no_result));
+            }
+            for (Work w : sprayWorks){
+                if (DatabaseManager.getInstance().getSprayingByWorkId(w.getId()).size()!=0){
+                    sprayId = DatabaseManager.getInstance().getSprayingByWorkId(w.getId()).get(0).getId();
+                    List<SprayPesticide> selectedPesticides = DatabaseManager.getInstance().getSprayPesticideBySprayId(sprayId);
+                    for(SprayPesticide sP: selectedPesticides){
+                        Pesticide pest = DatabaseManager.getInstance().getPesticideWithId(sP.getPesticide().getId());
+                        if (pest.getId()==prodId){
+                            sprayString.add(dateFormat.format(w.getDate()) + " " + pest.getProductName() + " " + sP.getDose());
+                        }
 
+                    }
+
+                }
+            }
+            mData.put(vqId,sprayString);
+        }
+        return mData;
+    }
 	@Override
 	public void deliverResult(HashMap<Integer,List<String>> data) {
 		 if (isReset()){

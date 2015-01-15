@@ -40,12 +40,13 @@ public class SearchLandFragment  extends SherlockFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
     ExpandableListView landListView;
 
     private ExpandableSearchLandAdapter adapter;
     // TODO: Rename and change types of parameters
     private String mTitle;
-
+    private int searchType;
 
     private OnLandFragmentListener mListener;
 
@@ -57,10 +58,11 @@ public class SearchLandFragment  extends SherlockFragment {
      * @return A new instance of fragment SearchLandFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SearchLandFragment newInstance(int param1) {
+    public static SearchLandFragment newInstance(int param1,int param2) {
         SearchLandFragment fragment = new SearchLandFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, param1);
+        args.putInt(ARG_PARAM2,param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -74,7 +76,7 @@ public class SearchLandFragment  extends SherlockFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mTitle = getResources().getString(getArguments().getInt(ARG_PARAM1));
-
+            searchType = getArguments().getInt(ARG_PARAM2);
         }
     }
 
@@ -93,7 +95,7 @@ public class SearchLandFragment  extends SherlockFragment {
             @Override
             public void onClick(View view) {
                 if (mListener !=null){
-                    mListener.onLandFragmentInteraction(adapter.getChildCheckState());
+                    mListener.onLandFragmentInteraction(adapter.getChildCheckState(),searchType);
                 }
             }
         });
@@ -131,7 +133,7 @@ public class SearchLandFragment  extends SherlockFragment {
      */
     public interface OnLandFragmentListener {
         // TODO: Update argument type and name
-        public void onLandFragmentInteraction(HashMap<Integer,ArrayList<Integer>> selElements);
+        public void onLandFragmentInteraction(HashMap<Integer,ArrayList<Integer>> selElements, int searchType);
     }
 
     public static class ExpandableSearchLandAdapter extends BaseExpandableListAdapter{

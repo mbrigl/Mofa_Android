@@ -38,7 +38,7 @@ public class DatabaseTestDB {
     public void createTestRecords(){
     	
     		Date lDate = (new Date());
-    		for (int i=1;i<400;i++){
+    		for (int i=1;i<350;i++){
     			Work w;
     			int task;
     			String note = "test";
@@ -65,6 +65,7 @@ public class DatabaseTestDB {
 		w.setDate(lDate);
 		w.setTask(DatabaseManager.getInstance().getTaskWithId(task));
 		w.setNote(note);
+        w.setSended(true);
 		w.setValid(true);
 		
 		DatabaseManager.getInstance().addWork(w);

@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.db.DatabaseHelper;
 
@@ -40,11 +41,13 @@ public class SearchResult extends SherlockFragment implements LoaderManager.Load
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-
+    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
     private int mParam1;
     private String mTitle;
+    private int queryType;
+    private int prodId=0;
     private Integer[] vquartersId;
     // The Loader's id (this id is specific to the ListFragment's LoaderManager)
     private static final int LOADER_ID = 1;
@@ -61,11 +64,11 @@ public class SearchResult extends SherlockFragment implements LoaderManager.Load
      * @return A new instance of fragment SearchResult.
      */
     // TODO: Rename and change types and number of parameters
-    public static SearchResult newInstance(int param1) {
+    public static SearchResult newInstance(int param1,int param2) {
         SearchResult fragment = new SearchResult();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, param1);
-
+        args.putInt(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -79,7 +82,7 @@ public class SearchResult extends SherlockFragment implements LoaderManager.Load
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mTitle = getResources().getString(getArguments().getInt(ARG_PARAM1));
-
+            queryType = getArguments().getInt(ARG_PARAM2);
         }
 
     }
@@ -90,6 +93,9 @@ public class SearchResult extends SherlockFragment implements LoaderManager.Load
 
         if (mListener !=null){
             vqIds=mListener.getVQList();
+            if (queryType== ActivityConstants.SEARCH_PEST){
+                prodId=mListener.getProdId();
+            }
         }
         View v = inflater.inflate(R.layout.fragment_search_result,container,false);
         resultListView =(ExpandableListView) v.findViewById(R.id.resultlistview);
@@ -114,7 +120,11 @@ public class SearchResult extends SherlockFragment implements LoaderManager.Load
 
     @Override
     public Loader<HashMap<Integer,List<String>>> onCreateLoader(int id, Bundle args) {
-       return new SearchHashMapLoader(getActivity(),vqIds);
+       if (queryType==ActivityConstants.SEARCH_PEST) {
+           return new SearchHashMapLoader(getActivity(),vqIds,queryType,prodId);
+       }else{
+           return new SearchHashMapLoader(getActivity(),vqIds,queryType);
+       }
     }
 
     @Override
@@ -147,6 +157,7 @@ public class SearchResult extends SherlockFragment implements LoaderManager.Load
     public interface GetVQListener {
         // TODO: Update argument type and name
         public ArrayList<Integer> getVQList();
+        public int getProdId();
         public void closeActivity();
     }
 
@@ -213,6 +224,7 @@ public class SearchResult extends SherlockFragment implements LoaderManager.Load
         public View getGroupView(int groupPosition, boolean isExpanded,
                                  View convertView, ViewGroup parent) {
             int varId = (Integer) getGroup(groupPosition);
+          //  int sizechild = getChildrenCount(groupPosition);
             VQuarter vQ = DatabaseManager.getInstance().getVQuarterWithId(varId);
             String headerTitle = vQ.getLand().getName() + ", " + vQ.getVariety() + ", " + vQ.getPlantYear();
             if (convertView == null) {
@@ -231,6 +243,7 @@ public class SearchResult extends SherlockFragment implements LoaderManager.Load
         public View getChildView(int groupPosition, final int childPosition,
                                  boolean isLastChild, View convertView, ViewGroup parent) {
             final String childText = (String) getChild(groupPosition, childPosition);
+
             if (convertView == null) {
                 LayoutInflater infalInflater = (LayoutInflater) this.context
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);

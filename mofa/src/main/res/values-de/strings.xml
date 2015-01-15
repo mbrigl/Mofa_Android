@@ -18,7 +18,7 @@
     <string name="title_feature3">Update</string>
     <string name="title_feature4">Einkauf</string>
     <string name="title_feature5">Suche</string>
-    <string name="title_feature6">News - Webseite</string>
+    <string name="title_feature6">Arbeitsstunden</string>
 	
 	<!-- Preference setting for import data	-->
 	<string name="updateland">Update Grundstück</string>
@@ -191,7 +191,11 @@
     <!--Strings for Archive and history -->
     <!--Strings for SearchPesticide -->
     <string name="searchLastPest">Letzte Spritzung</string>
+    <string name="searchVQuarter">Bitte Sortenquartier zur Suche auswählen</string>
     <string name="searchPest">Suche Pflanzenschutzmittel</string>
+    <string name="searchPestSel">Bitte Produkt für die Suche auswählen</string>
     <string name="searchInfo">Diese Suche beinhaltet nur Spritzungen, welche von diesem Gerät gesendet wurden. Bitte achten Sie darauf, dass Sie das Spritzarchiv nicht während des Jahres leeren.</string>
     <string name="search_no_result">Kein Eintrag für diese Suche</string>
+    <string name="fromDate">von Datum</string>
+    <string name="toDate">bis Datum</string>
 </resources>

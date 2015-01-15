@@ -1694,8 +1694,51 @@ public class DatabaseManager {
             e.printStackTrace();
             return null;
         }
+    }
+    public List<Work> getSprayWorksForVQAndProd(Integer vqs,List<Integer> workIdsForPestId)  {
+        try{
+            QueryBuilder<WorkVQuarter,Integer> qbVquarter = getHelper().getWorkVQuarterDao().queryBuilder();
+            final Where<WorkVQuarter, Integer> w = qbVquarter.where();
+            w.eq("vquarter_id", vqs).and() .in("work_id",workIdsForPestId);
+          //  PreparedQuery<WorkVQuarter> test=qbVquarter.prepare();
+         //   List<WorkVQuarter> testList= getHelper().getWorkVQuarterDao().query(test);
+            QueryBuilder<Work,Integer> worksForPest = getSprayWorks();
+            worksForPest.join(qbVquarter);
+            PreparedQuery<Work> prepWork=worksForPest.prepare();
 
-
+            return getHelper().getWorkDao().query(prepWork);
+        }catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public List<Integer> getIdsForSelectedPest(Integer pestId)  {
+        try{
+            List<Integer> idList = new ArrayList<Integer>();
+            QueryBuilder<Spraying,Integer>sprayingWithId = getSprayingWithPestId(pestId);
+            QueryBuilder<Work,Integer> work = getSprayWorks();
+            work.join(sprayingWithId);
+            PreparedQuery<Work> prepWork= work.prepare();
+            List<Work> list = getHelper().getWorkDao().query(prepWork);
+            for (Work w:list){
+                idList.add(w.getId());
+            }
+            return idList;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+   public QueryBuilder<Work,Integer> getWorksForPestId(Integer pestId)  {
+        try{
+            QueryBuilder<Spraying,Integer>sprayingWithId = getSprayingWithPestId(pestId);
+            QueryBuilder<Work,Integer> work = getSprayWorks();
+            work.join(sprayingWithId);
+            return work;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
     }
     private QueryBuilder <Work,Integer> getSprayWorks()throws SQLException{ //filtering of asa codes
         QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
@@ -1712,11 +1755,67 @@ public class DatabaseManager {
         qb.orderBy("date",false);
         return qb;
     }
-    private List<SprayPesticide> getUsedPesticideList(){
+    private QueryBuilder<Spraying,Integer>getSprayingWithPestId(int pestId){
+        try{
+            QueryBuilder<SprayPesticide, Integer> qb = getHelper().getSprayPesticideDao().queryBuilder();
+            final Where<SprayPesticide, Integer> w = qb.where();
+            w.eq("pest_id",pestId);
+            QueryBuilder<Spraying,Integer>sprayingQb = getHelper().getSprayingDao().queryBuilder();
+            sprayingQb.join(qb);
+
+
+            return sprayingQb;
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public List<Pesticide> getUsedPesticideList() {
         try {
             List<SprayPesticide> results = getHelper().getSprayPesticideDao().queryBuilder().distinct().selectColumns(SprayPesticide.PESTICIDE_ID_FIELD_NAME).query();
-            return results;
-        }catch (SQLException e){
+            List<Integer> idList = new ArrayList<Integer>();
+            for (SprayPesticide sp: results){
+                idList.add(sp.getPesticide().getId());
+            }
+            QueryBuilder<Pesticide,Integer>qb = getHelper().getPesticideDao().queryBuilder();
+            // get the WHERE object to build our query
+            Where<Pesticide, Integer> where = qb.where();
+            where.in("id",idList);
+            qb.orderBy("productName",true);
+            PreparedQuery<Pesticide> preparedQuery = qb.prepare();
+            return getHelper().getPesticideDao().query(preparedQuery);
+
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+    public List<Fertilizer> getUsedFertilizerList() {
+        try {
+            List<SprayFertilizer> results = getHelper().getSprayFertilizerDao().queryBuilder().distinct().selectColumns(SprayFertilizer.FERTILIZER_ID_FIELD_NAME).query();
+            List<Integer> idList = new ArrayList<Integer>();
+            for (SprayFertilizer sf: results){
+                idList.add(sf.getFertilizer().getId());
+            }
+            QueryBuilder<Fertilizer,Integer>qb = getHelper().getFertilizerDao().queryBuilder();
+            // get the WHERE object to build our query
+            Where<Fertilizer, Integer> where = qb.where();
+            where.in("id",idList);
+            qb.orderBy("productName",true);
+            PreparedQuery<Fertilizer> preparedQuery = qb.prepare();
+            return getHelper().getFertilizerDao().query(preparedQuery);
+
+
+
+
+        } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
