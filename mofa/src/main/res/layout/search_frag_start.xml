@@ -18,9 +18,21 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="167dp"
-        android:text="@string/searchInfo"
         android:id="@+id/textView"
         android:layout_gravity="bottom"
-        android:background="@color/lightred"/>
+        android:background="@color/lightgreen"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:text="@string/delete_archive"
+        android:id="@+id/btn_del_arch" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="167dp"
+        android:id="@+id/textViewClearArchive"
+        android:layout_gravity="bottom"
+        android:background="@color/lightred"
+        android:text="@string/delete_archive_mes"/>
+
 </LinearLayout>
 

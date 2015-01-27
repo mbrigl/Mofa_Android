@@ -35,28 +35,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5efaaaa-201a-4a7e-85ce-5935eb23740c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/WorkerOverviewActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mofa/src/main/res/layout/activity_worker_overview.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mofa/src/main/res/values-w820dp/dimens.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/dummy/DummyContent.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mofa/src/main/res/layout/worker_row_hours.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/model_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/model_data.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/ActivityConstants.java" afterPath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/ActivityConstants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/mofa/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/db/DatabaseManager.java" afterPath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/db/DatabaseManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/db/DatabaseTestDB.java" afterPath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/db/DatabaseTestDB.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/HomeActivity.java" afterPath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/HomeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/MofaApplication.java" afterPath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/MofaApplication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchActivity.java" afterPath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/db/SearchHashMapLoader.java" afterPath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/db/SearchHashMapLoader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchLandFragment.java" afterPath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchLandFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchPestFragment.java" afterPath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchPestFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchResult.java" afterPath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchResult.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchStartFragment.java" afterPath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchStartFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/mofa/src/main/res/values/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/res/layout/fragment_searchpest_grid.xml" afterPath="$PROJECT_DIR$/mofa/src/main/res/layout/fragment_searchpest_grid.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/res/layout/fragment_searchpest_list.xml" afterPath="$PROJECT_DIR$/mofa/src/main/res/layout/fragment_searchpest_list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/res/drawable/home_button6.xml" afterPath="$PROJECT_DIR$/mofa/src/main/res/drawable/home_button6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/res/layout/land_list_search.xml" afterPath="$PROJECT_DIR$/mofa/src/main/res/layout/land_list_search.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/SendingProcess.java" afterPath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/SendingProcess.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkOverviewActivity.java" afterPath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkOverviewActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/WorkerOverviewActivity.java" afterPath="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/WorkerOverviewActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/res/layout/activity_worker_overview.xml" afterPath="$PROJECT_DIR$/mofa/src/main/res/layout/activity_worker_overview.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/res/xml/prference_headers.xml" afterPath="$PROJECT_DIR$/mofa/src/main/res/xml/prference_headers.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/res/layout/search_frag_start.xml" afterPath="$PROJECT_DIR$/mofa/src/main/res/layout/search_frag_start.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/mofa/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/res/values-de/strings.xml" afterPath="$PROJECT_DIR$/mofa/src/main/res/values-de/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mofa/src/main/res/values-it/strings.xml" afterPath="$PROJECT_DIR$/mofa/src/main/res/values-it/strings.xml" />
@@ -88,69 +77,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HomeActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/HomeActivity.java">
+      <file leaf-file-name="search_frag_start.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/search_frag_start.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="12750">
-              <caret line="70" column="7" selection-start-line="70" selection-start-column="7" selection-end-line="70" selection-end-column="7" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="660">
+              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WorkerOverviewActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/WorkerOverviewActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
-              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mofa/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37437603" vertical-offset="0" max-vertical-offset="1665">
-              <caret line="15" column="78" selection-start-line="15" selection-start-column="78" selection-end-line="15" selection-end-column="78" />
-              <folding>
-                <element signature="e#3959#3977#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_worker_overview.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/activity_worker_overview.xml">
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
-              <caret line="26" column="4" selection-start-line="26" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding>
-                <element signature="e#637#655#0" expanded="true" />
-                <element signature="e#911#927#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
+          <provider editor-type-id="android-designer">
             <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mofa/src/main/res/values/strings.xml">
+      <file leaf-file-name="SearchStartFragment.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchStartFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.32" vertical-offset="2587" max-vertical-offset="3165">
-              <caret line="183" column="40" selection-start-line="183" selection-start-column="40" selection-end-line="183" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1170" max-vertical-offset="1440">
+              <caret line="78" column="106" selection-start-line="78" selection-start-column="106" selection-end-line="78" selection-end-column="106" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PurchaseActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/PurchaseActivity.java">
+      <file leaf-file-name="DatabaseManager.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/db/DatabaseManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1530" max-vertical-offset="2190">
-              <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+            <state vertical-scroll-proportion="-15.767055" vertical-offset="10616" max-vertical-offset="28635">
+              <caret line="126" column="31" selection-start-line="126" selection-start-column="31" selection-end-line="126" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WorkOverviewActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkOverviewActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4335" max-vertical-offset="4635">
+              <caret line="289" column="34" selection-start-line="289" selection-start-column="34" selection-end-line="289" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -1506,7 +1470,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="5665307663678" />
+        <entry key="$PROJECT_DIR$" value="5665745696526" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1687,13 +1651,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkSelectPesticideFragment.java" />
-        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/model/Pesticide.java" />
-        <option value="$PROJECT_DIR$/mofa/src/main/res/layout/pestinfodialog.xml" />
-        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/model/FruitQuality.java" />
-        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkEditHarvestFragment.java" />
-        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/adapter/WorkHarvestAdapter.java" />
-        <option value="$PROJECT_DIR$/mofa/src/main/res/layout-sw600dp/pesticide_row.xml" />
         <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/PestInfoDialog.java" />
         <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkEditTabActivity.java" />
         <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkEditWorkFragment.java" />
@@ -1701,11 +1658,9 @@
         <option value="$PROJECT_DIR$/mofa/src/main/res/layout/purchase_group_row.xml" />
         <option value="$PROJECT_DIR$/mofa/build.gradle" />
         <option value="$PROJECT_DIR$/library/build.gradle" />
-        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkOverviewActivity.java" />
         <option value="$PROJECT_DIR$/mofa/src/main/res/layout/search_activity.xml" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/mofa/src/main/res/drawable/home_button5.xml" />
-        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/SendingProcess.java" />
         <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/model/VQuarter.java" />
         <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/model/Land.java" />
         <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/db/BaseOrmLiteLoader.java" />
@@ -1715,7 +1670,6 @@
         <option value="$PROJECT_DIR$/mofa/src/main/res/layout/search_group_row.xml" />
         <option value="$PROJECT_DIR$/mofa/src/main/res/layout/fragment_search_result.xml" />
         <option value="$PROJECT_DIR$/mofa/src/main/res/menu/activity_main.xml" />
-        <option value="$PROJECT_DIR$/mofa/src/main/res/layout/search_frag_start.xml" />
         <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/model/SprayPesticide.java" />
         <option value="$PROJECT_DIR$/mofa/src/main/res/layout/land_list_search.xml" />
         <option value="$PROJECT_DIR$/mofa/src/main/res/layout/fragment_searchpest_list.xml" />
@@ -1723,21 +1677,31 @@
         <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/MofaApplication.java" />
         <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/ActivityConstants.java" />
         <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchPestFragment.java" />
-        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchStartFragment.java" />
         <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchLandFragment.java" />
         <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchActivity.java" />
-        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/db/DatabaseManager.java" />
         <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchResult.java" />
         <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/db/DatabaseTestDB.java" />
         <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/db/SearchHashMapLoader.java" />
         <option value="$PROJECT_DIR$/mofa/src/main/res/drawable/home_button6.xml" />
+        <option value="$PROJECT_DIR$/mofa/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/mofa/src/main/res/layout/worker_row_hours.xml" />
+        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/SendingProcess.java" />
+        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkOverviewActivity.java" />
+        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/PreferenceFragmentArchiv.java" />
+        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/PreferenceFragmentArchiv.java" />
+        <option value="$PROJECT_DIR$/mofa/src/main/res/xml/prefs_archiv.xml" />
+        <option value="$PROJECT_DIR$/mofa/src/main/res/layout/prefscontentarchive.xml" />
+        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/PreferenceContentFragmentArchive.java" />
+        <option value="$PROJECT_DIR$/mofa/src/main/res/xml/prference_headers.xml" />
         <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/HomeActivity.java" />
-        <option value="$PROJECT_DIR$/mofa/src/main/res/values-de/strings.xml" />
-        <option value="$PROJECT_DIR$/mofa/src/main/res/values-it/strings.xml" />
+        <option value="$PROJECT_DIR$/mofa/src/main/res/layout/search_frag_start.xml" />
+        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/WorkerOverviewActivity.java" />
         <option value="$PROJECT_DIR$/mofa/src/main/res/layout/activity_worker_overview.xml" />
         <option value="$PROJECT_DIR$/mofa/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/WorkerOverviewActivity.java" />
-        <option value="$PROJECT_DIR$/mofa/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/mofa/src/main/res/values-de/strings.xml" />
+        <option value="$PROJECT_DIR$/mofa/src/main/res/values-it/strings.xml" />
+        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/db/DatabaseManager.java" />
+        <option value="$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchStartFragment.java" />
       </list>
     </option>
   </component>
@@ -1798,8 +1762,9 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1996,37 +1961,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="menu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Mofa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Mofa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mofa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable" />
+              <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2060,9 +1995,76 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mofa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mofa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mofa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mofa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="search" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mofa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mofa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mofa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mofa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2073,8 +2075,8 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Test_Device_Costumer" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="AVD_for_Nexus_4_ASA2" />
     <property name="FullScreen" value="false" />
     <property name="options.lastSelected" value="preferences.keymap" />
     <property name="options.splitter.main.proportions" value="0.3" />
@@ -2104,14 +2106,16 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="it.schmid.android.mofa" />
+      <recent name="it.schmid.android.mofa.search" />
       <recent name="it.schmid.android.mofa.db" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/mofa/src/main/res/layout" />
+      <recent name="$PROJECT_DIR$/mofa/src/main/res/xml" />
       <recent name="$PROJECT_DIR$/mofa/src/main/res/drawable-xxhdpi" />
       <recent name="$PROJECT_DIR$/mofa/src/main/res/drawable-xhdpi" />
       <recent name="$PROJECT_DIR$/mofa/src/main/res/drawable-mdpi" />
-      <recent name="$PROJECT_DIR$/mofa/src/main/res/drawable-hdpi" />
     </key>
     <key name="android.template.packageName">
       <recent name="it.schmid.android.mofa.search" />
@@ -2121,6 +2125,7 @@
       <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="it.schmid.android.mofa" />
       <recent name="it.schmid.android.mofa.interfaces" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -2389,12 +2394,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943678" sideWeight="0.4997242" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16050744" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943678" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3995749" sideWeight="0.4997242" order="3" side_tool="false" content_ui="tabs" />
@@ -2402,20 +2406,21 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25537783" sideWeight="0.5007924" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943678" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943678" sideWeight="0.5002758" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33535576" sideWeight="0.3312102" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24324325" sideWeight="0.33598727" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33262485" sideWeight="0.91671264" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32984003" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943678" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2498621" sideWeight="0.49044585" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2498621" sideWeight="0.4888535" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32984003" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33535576" sideWeight="0.6687898" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24324325" sideWeight="0.66401273" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943678" sideWeight="0.85714287" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16050744" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32943678" sideWeight="0.4997242" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943678" sideWeight="0.4997242" order="7" side_tool="false" content_ui="tabs" />
@@ -2463,252 +2468,14 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="69" />
+      <option name="time" value="83" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/android-sdks/platforms/android-15/android.jar!/android/os/Looper.class">
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/HomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.72864324" vertical-offset="0" max-vertical-offset="597">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21015762" vertical-offset="0" max-vertical-offset="571">
-          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/activity_home.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.60595447" vertical-offset="944" max-vertical-offset="1515">
-          <caret line="86" column="18" selection-start-line="86" selection-start-column="18" selection-end-line="86" selection-end-column="18" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/activity_home_button.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.2084063" vertical-offset="119" max-vertical-offset="690">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/interfaces/PurchaseProductInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10050251" vertical-offset="0" max-vertical-offset="597">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/menu/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2763819" vertical-offset="0" max-vertical-offset="597">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/search_frag_start.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28896672" vertical-offset="0" max-vertical-offset="571">
-          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/pesticide_row.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18388791" vertical-offset="0" max-vertical-offset="571">
-          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/pesticide_list.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="615">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/adapter/WorkWorkerAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12562814" vertical-offset="0" max-vertical-offset="1635">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkSelectMachineActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2850">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/model/Machine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3450">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/interfaces/ProductInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.050251257" vertical-offset="0" max-vertical-offset="597">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/interfaces/ShowInfoInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12562814" vertical-offset="0" max-vertical-offset="597">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkEditSprayFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10273973" vertical-offset="1530" max-vertical-offset="3090">
-          <caret line="138" column="12" selection-start-line="138" selection-start-column="12" selection-end-line="138" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkSelectPesticideFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="543" max-vertical-offset="2910">
-          <caret line="98" column="93" selection-start-line="98" selection-start-column="76" selection-end-line="98" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/adapter/WorkProductAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="1920">
-          <caret line="25" column="16" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/land_list_search.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
-          <caret line="7" column="44" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/fragment_searchpest_list.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="375">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/fragment_searchpest_grid.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="375">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/model/Pesticide.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.407654" vertical-offset="6330" max-vertical-offset="7230">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkProductTabActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="228" max-vertical-offset="1905">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkSelectFertilizerFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="2760">
-          <caret line="98" column="64" selection-start-line="98" selection-start-column="64" selection-end-line="98" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/MofaApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19966722" vertical-offset="0" max-vertical-offset="2085">
-          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/ActivityConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchStartFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.84858567" vertical-offset="0" max-vertical-offset="630">
-          <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchPestFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1649" max-vertical-offset="2835">
-          <caret line="57" column="64" selection-start-line="57" selection-start-column="64" selection-end-line="57" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchLandFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="4470">
-          <caret line="100" column="11" selection-start-line="100" selection-start-column="11" selection-end-line="100" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/mofa/libs/ormlite-core-4.42.jar!/com/j256/ormlite/stmt/QueryBuilder.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.348135" vertical-offset="884" max-vertical-offset="2175">
-          <caret line="73" column="52" selection-start-line="73" selection-start-column="52" selection-end-line="73" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/android-sdks/platforms/android-15/android.jar!/android/os/Handler.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8502496" vertical-offset="644" max-vertical-offset="1245">
-          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/db/DatabaseManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2159864" vertical-offset="24215" max-vertical-offset="26775">
-          <caret line="1707" column="0" selection-start-line="1707" selection-start-column="0" selection-end-line="1707" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="4320" max-vertical-offset="13860">
+          <caret line="288" column="8" selection-start-line="288" selection-start-column="8" selection-end-line="288" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -2747,13 +2514,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkOverviewActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44925123" vertical-offset="360" max-vertical-offset="3795">
-          <caret line="81" column="8" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkEditTabActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.6734693" vertical-offset="2310" max-vertical-offset="4800">
@@ -2768,23 +2528,86 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/drawable/home_button5.xml">
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
-          <caret line="19" column="12" selection-start-line="16" selection-start-column="0" selection-end-line="21" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="1665">
+          <caret line="20" column="45" selection-start-line="20" selection-start-column="45" selection-end-line="20" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/drawable/home_button6.xml">
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkEditWorkFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state vertical-scroll-proportion="-5.765306" vertical-offset="3465" max-vertical-offset="7335">
+          <caret line="48" column="13" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/PurchaseActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.5459185" vertical-offset="1557" max-vertical-offset="2190">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkEditHarvestFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.34941763" vertical-offset="270" max-vertical-offset="1875">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/HarvestDialogFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1575" max-vertical-offset="3945">
+          <caret line="177" column="37" selection-start-line="177" selection-start-column="37" selection-end-line="177" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchPestFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35108152" vertical-offset="1949" max-vertical-offset="2835">
+          <caret line="168" column="50" selection-start-line="168" selection-start-column="50" selection-end-line="168" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/adapter/WorkWorkerAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.47420964" vertical-offset="360" max-vertical-offset="1635">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/search_activity.xml">
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/model/Work.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09983361" vertical-offset="0" max-vertical-offset="720">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkSelectWorkerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.22462562" vertical-offset="585" max-vertical-offset="3060">
+          <caret line="53" column="29" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/model/Worker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="121" max-vertical-offset="3825">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/model/WorkWorker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6" max-vertical-offset="600">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/work_list.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="575">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -2795,83 +2618,254 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchActivity.java">
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/PreviewAnimation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.7857143" vertical-offset="0" max-vertical-offset="1410">
-          <caret line="88" column="13" selection-start-line="88" selection-start-column="13" selection-end-line="88" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="975">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/worker_row.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3478261" vertical-offset="205" max-vertical-offset="780">
+          <caret line="27" column="21" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
           <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/work_row.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-34.03846" vertical-offset="0" max-vertical-offset="1545">
+          <caret line="59" column="34" selection-start-line="53" selection-start-column="8" selection-end-line="59" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/adapter/WorkAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1035" max-vertical-offset="4470">
+          <caret line="148" column="16" selection-start-line="148" selection-start-column="16" selection-end-line="148" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/SendingProcess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="8755" max-vertical-offset="12450">
+          <caret line="487" column="21" selection-start-line="487" selection-start-column="21" selection-end-line="487" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/mofa/libs/ormlite-core-4.42.jar!/com/j256/ormlite/misc/TransactionManager.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6127886" vertical-offset="0" max-vertical-offset="563">
+          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/worker_row_hours.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45217392" vertical-offset="370" max-vertical-offset="945">
+          <caret line="42" column="35" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/EditPreferences.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.1464226" vertical-offset="749" max-vertical-offset="1350">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/EditPreferences_Honey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09983361" vertical-offset="0" max-vertical-offset="601">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/EditPreferencesImport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09983361" vertical-offset="0" max-vertical-offset="601">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/PreferenceFragmentASA.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09983361" vertical-offset="0" max-vertical-offset="601">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/xml/prefs_asa.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/PreferenceContentFragmentASA.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42429283" vertical-offset="0" max-vertical-offset="601">
+          <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/prefscontentasa.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1155">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/PreferenceContentFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.36589405" vertical-offset="281" max-vertical-offset="1065">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/xml/prference_headers.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5215232" vertical-offset="0" max-vertical-offset="604">
+          <caret line="21" column="3" selection-start-line="21" selection-start-column="3" selection-end-line="21" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/search_activity.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/drawable/home_button6.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54908484" vertical-offset="0" max-vertical-offset="601">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/drawable/home_button5.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.52412647" vertical-offset="0" max-vertical-offset="601">
+          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/HomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="12750">
-          <caret line="70" column="7" selection-start-line="70" selection-start-column="7" selection-end-line="70" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3030" max-vertical-offset="12795">
+          <caret line="288" column="8" selection-start-line="288" selection-start-column="8" selection-end-line="288" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/xml/prefs.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17470881" vertical-offset="0" max-vertical-offset="780">
+          <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.547421" vertical-offset="539" max-vertical-offset="1410">
+          <caret line="28" column="45" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/activity_worker_overview.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="855">
+          <caret line="24" column="59" selection-start-line="24" selection-start-column="59" selection-end-line="24" selection-end-column="59" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/WorkerOverviewActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="2355">
+          <caret line="145" column="9" selection-start-line="145" selection-start-column="9" selection-end-line="145" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/search_frag_start.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="660">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mofa/src/main/res/values-it/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8934281" vertical-offset="2497" max-vertical-offset="3090">
-          <caret line="200" column="12" selection-start-line="200" selection-start-column="12" selection-end-line="200" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.7868561" vertical-offset="2557" max-vertical-offset="3180">
+          <caret line="200" column="80" selection-start-line="200" selection-start-column="80" selection-end-line="200" selection-end-column="80" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mofa/src/main/res/values-de/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8401421" vertical-offset="2512" max-vertical-offset="3105">
-          <caret line="199" column="44" selection-start-line="198" selection-start-column="4" selection-end-line="199" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/res/layout/activity_worker_overview.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="600">
-          <caret line="26" column="4" selection-start-line="26" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding>
-            <element signature="e#637#655#0" expanded="true" />
-            <element signature="e#911#927#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/PurchaseActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1530" max-vertical-offset="2190">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.937833" vertical-offset="2562" max-vertical-offset="3210">
+          <caret line="206" column="127" selection-start-line="206" selection-start-column="127" selection-end-line="206" selection-end-column="127" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mofa/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.32" vertical-offset="2587" max-vertical-offset="3165">
-          <caret line="183" column="40" selection-start-line="183" selection-start-column="40" selection-end-line="183" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3135" max-vertical-offset="3270">
+          <caret line="209" column="4" selection-start-line="209" selection-start-column="4" selection-end-line="209" selection-end-column="121" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/WorkerOverviewActivity.java">
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/WorkOverviewActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3209" max-vertical-offset="3810">
+          <caret line="289" column="34" selection-start-line="289" selection-start-column="34" selection-end-line="289" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mofa/src/main/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/search/SearchStartFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37437603" vertical-offset="0" max-vertical-offset="1665">
-          <caret line="15" column="78" selection-start-line="15" selection-start-column="78" selection-end-line="15" selection-end-column="78" />
-          <folding>
-            <element signature="e#3959#3977#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="1020">
+          <caret line="78" column="106" selection-start-line="78" selection-start-column="106" selection-end-line="78" selection-end-column="106" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mofa/src/main/java/it/schmid/android/mofa/db/DatabaseManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.767055" vertical-offset="10616" max-vertical-offset="28635">
+          <caret line="126" column="31" selection-start-line="126" selection-start-column="31" selection-end-line="126" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>

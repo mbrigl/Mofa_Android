@@ -10,7 +10,8 @@
 	<string name="list">DateiFormat:</string>
 	<string name="listbackend">Software:</string>
 	<string name="header_title_asa">Einstellungen ASA AGRAR</string>
-	<string name="header_summary_asa">Einstellungen für den Datenaustausch mit ASA AGRAR</string> 
+	<string name="header_summary_asa">Einstellungen für den Datenaustausch mit ASA AGRAR</string>
+
 	
 	<!-- Names of the Dashboard items	-->
 	<string name="title_feature1">Arbeitsjournal</string>
@@ -52,6 +53,7 @@
 	<string name = "asa_soilfertilizer_codes">Codes für Bodendüngung</string>
 	<string name = "asa_fertilizer_code">Code für Blattdünger</string>
 	<string name = "asa_fertilizer_soil_code">Code für Bodendünger</string>
+
 	<!-- Table names	-->
 	<string name="landtable">Grundstücke</string>
 	<string name="vquartertable">Sortenquartiere</string>
@@ -194,8 +196,13 @@
     <string name="searchVQuarter">Bitte Sortenquartier zur Suche auswählen</string>
     <string name="searchPest">Suche Pflanzenschutzmittel</string>
     <string name="searchPestSel">Bitte Produkt für die Suche auswählen</string>
-    <string name="searchInfo">Diese Suche beinhaltet nur Spritzungen, welche von diesem Gerät gesendet wurden. Bitte achten Sie darauf, dass Sie das Spritzarchiv nicht während des Jahres leeren.</string>
+    <string name="searchInfo">Das Archiv beinhaltet %1$d Einträge. \n Diese Suche beinhaltet nur Spritzungen, welche von diesem Gerät gesendet wurden. Bitte achten Sie darauf, dass Sie das Spritzarchiv nicht während des Jahres leeren.</string>
     <string name="search_no_result">Kein Eintrag für diese Suche</string>
+    <string name="delete_archive">Spritzarchiv leeren</string>
+    <string name="delete_archive_mes">ACHTUNG!! ALLE SPRITZEINTRÄGE DIE ÄLTER ALS 50 TAGE SIND WERDEN GELÖSCHT!</string>
     <string name="fromDate">von Datum</string>
     <string name="toDate">bis Datum</string>
+    <string name="noHoursMsg">Keine Stunden in diesem Zeitraum</string>
+    <string name="datemsgtomuch">Das Datum darf nicht mehr als 50 Tage vor dem heutigen liegen</string>
+    <string name="deletearchivemsg">Sind Sie sicher, dass Sie alle Spritzeinträge löschen wollen, welche älter als 50 Tage sind?</string>
 </resources>

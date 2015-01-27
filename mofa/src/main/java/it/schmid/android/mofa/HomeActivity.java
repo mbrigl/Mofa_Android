@@ -9,6 +9,7 @@ import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.db.DatabaseTestDB;
 import it.schmid.android.mofa.model.Work;
 import it.schmid.android.mofa.search.SearchActivity;
+import it.schmid.android.mofa.search.WorkerOverviewActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -280,6 +281,9 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	    	  break;
 	      case 5:
 	    	  startActivity(new Intent (this, SearchActivity.class));
+              break;
+           case 6:
+               startActivity(new Intent (this, WorkerOverviewActivity.class));
 	      default: 
 	    	   break;
 	   }

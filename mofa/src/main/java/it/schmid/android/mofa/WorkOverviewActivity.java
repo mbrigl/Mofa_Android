@@ -280,7 +280,8 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
             TransactionManager.callInTransaction(DatabaseManager.getInstance().getConnection(),
                     new Callable<Void>() {
                         public Void call() throws Exception {
-                            List<Work> removeWorkList=DatabaseManager.getInstance().getAllValidNotSprayWorks();
+                           //List<Work> removeWorkList=DatabaseManager.getInstance().getAllValidNotSprayWorks();
+                            List<Work> removeWorkList=DatabaseManager.getInstance().getAllOldValidNotSprayWorks();
                             for (Work w : removeWorkList){
                                 DatabaseManager.getInstance().deleteCascWork(w);
 

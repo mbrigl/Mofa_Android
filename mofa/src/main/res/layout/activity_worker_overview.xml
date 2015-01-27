@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:text="@string/fromDate"
         android:id="@+id/textView4"
-        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/editTextFromDate"
+        android:layout_alignBottom="@+id/editTextFromDate"
         android:layout_alignParentLeft="true" />
 
     <TextView
@@ -20,9 +21,8 @@
         android:layout_height="wrap_content"
         android:text="@string/toDate"
         android:id="@+id/textView5"
-        android:layout_below="@+id/textView4"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="42dp" />
+        android:layout_alignBottom="@+id/editTextToDate" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -30,13 +30,22 @@
         android:ems="10"
         android:id="@+id/editTextFromDate"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:inputType="date"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/editTextToDate"
         android:layout_below="@+id/editTextFromDate"
-        android:layout_alignLeft="@+id/editTextFromDate" />
+        android:layout_alignLeft="@+id/editTextFromDate"
+        android:inputType="date"/>
+    <ListView
+        android:id="@+id/workerhourslist"
+        android:layout_marginTop="24dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/editTextToDate"
+        android:drawSelectorOnTop="false"/>
 </RelativeLayout>

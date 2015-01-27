@@ -24,10 +24,14 @@ import it.schmid.android.mofa.model.Worker;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import android.content.Context;
 
+import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -63,7 +67,7 @@ public class DatabaseManager {
         helper = new DatabaseHelper(ctx);
     }
 
-    private DatabaseHelper getHelper() {
+   private DatabaseHelper getHelper() {
         return helper;
     }
     /*
@@ -116,7 +120,24 @@ public class DatabaseManager {
 			
     	return isEmpty;
     }
-   /***************************************************
+    public void batchDeleteAllOldSprayEntries(final List<Work> workList){
+        try {
+            getHelper().getWorkDao().callBatchTasks(new Callable<Void>() {
+                public Void call() throws Exception {
+                    for (Work w: workList) {
+                        deleteCascWork(w);
+                    }
+                    return null;
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+   /***************************************************{
+    *
+    }
     * 
     * LAND - DB Operations
     */
@@ -374,6 +395,31 @@ public class DatabaseManager {
             e.printStackTrace();
         }
     }
+    public String getWorkerHours(Date fromDate, Date toDate, int workerid){
+        String sumHours = "0.00";
+        QueryBuilder<Work,Integer>workqb = getHelper().getWorkDao().queryBuilder();
+        try {
+            workqb.where().between("date", fromDate, toDate);
+          //  PreparedQuery<Work> prepWork = workqb.prepare();
+          //  List<Work> test = getHelper().getWorkDao().query(prepWork);
+            QueryBuilder<WorkWorker, Integer> qb = getHelper().getWorkWorkerDao().queryBuilder();
+            qb.join(workqb);
+            qb.selectRaw("SUM(hours) AS total");
+            qb.where().eq("worker_id", workerid);
+            GenericRawResults<String[]> sum = getHelper().getWorkWorkerDao().queryRaw(qb.prepareStatementString());
+            String[] x = sum.getFirstResult();
+            sumHours = x[0];
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sumHours;
+
+//
+//
+//
+
+    }
     /*************************************
      * 
      * Pesticide - DB Operations
@@ -586,6 +632,19 @@ public class DatabaseManager {
 
         try {
             workList=getWorksNotSpraying();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return workList;
+    }
+    public List<Work> getAllOldValidNotSprayWorks(){
+        List<Work> workList=null;
+
+        try {
+            workList=getOldWorksNotSpraying();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -681,6 +740,56 @@ public class DatabaseManager {
         PreparedQuery<Work> preparedQuery = qb.prepare();
         return getHelper().getWorkDao().query(preparedQuery);
     }
+    //query for deleting the old works, not spraying
+    public List<Work> getOldWorksNotSpraying()throws SQLException{ //filtering of asa codes
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date()); // Now use today date.
+        c.add(Calendar.DATE, -50);
+        Date currDateMinusFifty = c.getTime();
+        QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
+        final Where<Work, Integer> w = qb.where();
+        List<Task> asaTasks = getTaskNotSpraying();
+        int clauseC = 0;
+        for (Task t:asaTasks){ //generating a dynamic or
+            w.eq("task_id", t.getId()).and() .eq("valid", true).and() .le("date",currDateMinusFifty);
+            clauseC++;
+        }
+        if (clauseC > 1) {
+            w.or(clauseC);
+        }
+        qb.orderBy("date", false);
+        PreparedQuery<Work> preparedQuery = qb.prepare();
+        return getHelper().getWorkDao().query(preparedQuery);
+    }
+    // all old spraying works that can be deleted using delete archive
+    public List<Work> getOldSprayingWorks(){ //filtering of asa codes
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date()); // Now use today date.
+        c.add(Calendar.DATE, -50);
+        Date currDateMinusFifty = c.getTime();
+        QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
+        final Where<Work, Integer> w = qb.where();
+        try {
+            List<Task> asaTasks = getTaskSpraying();
+            int clauseC = 0;
+            for (Task t : asaTasks) { //generating a dynamic or
+                w.eq("task_id", t.getId()).and().eq("valid", true).and().eq("sended", true).and().le("date", currDateMinusFifty);
+                clauseC++;
+            }
+            if (clauseC > 1) {
+                w.or(clauseC);
+            }
+            qb.orderBy("date", false);
+            PreparedQuery<Work> preparedQuery = qb.prepare();
+            return getHelper().getWorkDao().query(preparedQuery);
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null; //only if error
+
+    }
+
+    //query for filtering data for S,D,H Spritzung, Düngung und Herbizid
     public List<Work> getWorksForTaskIdOrderedASA(String type)throws SQLException{ //filtering of asa codes
     	QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
     	final Where<Work, Integer> w = qb.where();
@@ -698,6 +807,7 @@ public class DatabaseManager {
 		return getHelper().getWorkDao().query(preparedQuery);	
     }
 
+    // query for filtering all other works
     public List<Work> getWorksForTaskIdOrderedASARest()throws SQLException{ //all others from the code not equal
     	QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
     	final Where<Work, Integer> w = qb.where();
@@ -714,6 +824,7 @@ public class DatabaseManager {
         PreparedQuery<Work> preparedQuery = qb.prepare();
 		return getHelper().getWorkDao().query(preparedQuery);	
     }
+    //subquery for task for Spritzung, Dpngung und Herbizid
     public List<Task>getTaskForASAFiltering(String type)throws SQLException{
     	QueryBuilder<Task, Integer> qb = getHelper().getTaskDao().queryBuilder();
     	final Where<Task, Integer> w = qb.where();
@@ -721,6 +832,7 @@ public class DatabaseManager {
     	PreparedQuery<Task> preparedQuery = qb.prepare();
 		return getHelper().getTaskDao().query(preparedQuery);	
     }
+    //subquery fo task for all other
     public List<Task>getTaskForASAFilteringRest()throws SQLException{
         QueryBuilder<Task, Integer> qb = getHelper().getTaskDao().queryBuilder();
         final Where<Task, Integer> w = qb.where();
@@ -731,6 +843,7 @@ public class DatabaseManager {
         PreparedQuery<Task> preparedQuery = qb.prepare();
         return getHelper().getTaskDao().query(preparedQuery);
     }
+
     public List<Task>getTaskNotSpraying()throws SQLException{
         QueryBuilder<Task, Integer> qb = getHelper().getTaskDao().queryBuilder();
         final Where<Task, Integer> w = qb.where();
@@ -741,6 +854,13 @@ public class DatabaseManager {
                 w.eq("type","H"),
                 w.eq("type","O")
         );
+        PreparedQuery<Task> preparedQuery = qb.prepare();
+        return getHelper().getTaskDao().query(preparedQuery);
+    }
+    public List<Task>getTaskSpraying()throws SQLException{
+        QueryBuilder<Task, Integer> qb = getHelper().getTaskDao().queryBuilder();
+        final Where<Task, Integer> w = qb.where();
+        w.eq("type","S");
         PreparedQuery<Task> preparedQuery = qb.prepare();
         return getHelper().getTaskDao().query(preparedQuery);
     }
@@ -1241,6 +1361,16 @@ public class DatabaseManager {
     	}else{
     		return false;
     	}
+    }
+    public long getNumSprayingEntries(){
+        long numRows=0;
+        try {
+            numRows = getHelper().getSprayingDao().countOf();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return numRows;
     }
  // adding,updating spraying class
     public void addSpray(Spraying s) {

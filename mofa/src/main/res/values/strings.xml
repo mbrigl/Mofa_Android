@@ -12,6 +12,7 @@
     <string name="listbackend">Backend:</string>
     <string name="header_title_asa">Configuring ASA Settings</string>
     <string name="header_summary_asa">Settings for ASA Import/Export</string>
+
     <!-- Names of the Dashboard items -->
     <string name="title_feature1">WorkingJournal</string>
     <string name="title_feature2">Settings</string>
@@ -52,6 +53,8 @@
     <string name="asa_soilfertilizer_codes">Codes soil fertilizing</string>
     <string name="asa_fertilizer_code">Code fertilizer</string>
     <string name="asa_fertilizer_soil_code">Code soil fertilizer</string>
+    >
+
     <!-- Table names -->
     <string name="landtable">land</string>
     <string name="vquartertable">Variety Quarter</string>
@@ -195,11 +198,15 @@
     <string name="searchVQuarter">Please select vquarter for search</string>
     <string name="searchPest">Search Pesticide</string>
     <string name="searchPestSel">Please select a product to search</string>
-    <string name="searchInfo">This search includes only spraying entries sended from this device. Be sure that you don\'t clear the archive during the year!</string>
+    <string name="searchInfo">The archive contains %1$d entries. \n This search includes only spraying entries sended from this device. Be sure that you don\'t clear the archive during the year!</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="delete_archive">Clear spray archive</string>
+    <string name="delete_archive_mes">ATTENTION: ALL SPRAYING ENTRIES WERE DELETED, WHICH ARE OLDER THAN 50 DAYS</string>
     <string name="search_no_result">No entry found for this query</string>
     <string name="fromDate">from Date</string>
     <string name="toDate">to Date</string>
-    <string name="action_settings">Settings</string>
+    <string name="noHoursMsg">No hours in this period</string>
+    <string name="datemsgtomuch">The date can not exceed 50 days from today</string>
+    <string name="deletearchivemsg">Are your sure, that you want delete all spraying entries older than 50 days?</string>
 
 </resources>

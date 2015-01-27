@@ -10,8 +10,8 @@
 	<string name="list">Fileformat:</string>
 	<string name="listbackend">Software:</string>
 	<string name="header_title_asa">Configurazione ASAAgrar</string>
-	<string name="header_summary_asa">Impostazioni import/export ASAAgrar</string> 
-	
+	<string name="header_summary_asa">Impostazioni import/export ASAAgrar</string>
+
 	<!-- Names of the Dashboard items	-->
 	<string name="title_feature1">Registro lavoro</string>
     <string name="title_feature2">Impostazioni</string>
@@ -52,6 +52,7 @@
 	<string name = "asa_soilfertilizer_codes">codice lavoro per fertilizzazione</string>
 	<string name = "asa_fertilizer_code">codice per fertilizzatori</string>
 	<string name = "asa_fertilizer_soil_code">codice per fertilizzatori mineralici</string>
+
 	<!-- Table names	-->
 	<!-- Table names	-->
 	<string name="landtable">impianti</string>
@@ -194,8 +195,13 @@
     <string name="searchVQuarter">Scegliere il campo da cercare</string>
     <string name="searchPest">Cerca antiparassitari</string>
     <string name="searchPestSel">Selezionare prodotto per la ricerca</string>
-    <string name="searchInfo">Questa ricerca include solo i trattamenti mandati da questo apparecchio. È importante che durante l\'anno non viene svuotato l\'archivio.</string>
+    <string name="searchInfo">L\'archivo contiene %1$d trattamenti. \n Questa ricerca include solo i trattamenti mandati da questo apparecchio. È importante che durante l\'anno non viene svuotato l\'archivio.</string>
+    <string name="delete_archive">Svuotare l\'archivio</string>
+    <string name="delete_archive_mes">ATTENZIONE!! TUTTI I TRATTAMENTI VECCHI (PIÙ DI 50 GIORNI) VENGONO CANCELLATI</string>
     <string name="search_no_result">Nessun risultato per questa ricerca</string>
     <string name="fromDate">von Datum</string>
     <string name="toDate">bis Datum</string>
+    <string name="noHoursMsg">Nessun ora in questo periodo</string>
+    <string name="datemsgtomuch">Il massimo di cinquanta giorni non può esser supperato</string>
+    <string name="deletearchivemsg">È sicuro che vuole cancellare tutti i trattamenti più vecchi di 50 giorni?</string>
 </resources>
