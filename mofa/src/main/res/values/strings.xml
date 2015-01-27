@@ -193,9 +193,7 @@
     <string name="waitingtimeUnit">days</string>
     <string name="reentertimeUnit">h</string>
     <string name="maxamounthaUnit">kg/lt</string>
-<<<<<<< HEAD
-    <!--Strings for History -->
-=======
+
     <!-- Strings for SearchPesticide -->
     <string name="searchLastPest">Last Spraying work</string>
     <string name="searchVQuarter">Please select vquarter for search</string>
@@ -211,6 +209,5 @@
     <string name="noHoursMsg">No hours in this period</string>
     <string name="datemsgtomuch">The date can not exceed 50 days from today</string>
     <string name="deletearchivemsg">Are your sure, that you want delete all spraying entries older than 50 days?</string>
->>>>>>> history
 
 </resources>
