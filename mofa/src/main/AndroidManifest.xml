@@ -1,24 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="it.schmid.android.mofa"
     android:versionCode="8"
     android:versionName="2.1" >
-	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="com.android.vending.CHECK_LICENSE"/> 
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-		
-    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="16"/>
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="16" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".MofaApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_mofa_main"
         android:label="@string/app_name"
-        android:theme="@style/Theme.Sherlock.Light"
-        android:name="it.schmid.android.mofa.MofaApplication" >
+        android:theme="@style/Theme.Sherlock.Light" >
         <activity
-            android:name="it.schmid.android.mofa.HomeActivity"
+            android:name=".HomeActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,66 +31,76 @@
             </intent-filter>
         </activity>
         <activity
-			android:name="it.schmid.android.mofa.EditPreferences"
-			android:label="@string/app_name"/>
-         <activity 
-             android:name="it.schmid.android.mofa.EditPreferencesImport"
-             android:label= "@string/app_name" />                 />
-            
-         <activity
-			android:name="it.schmid.android.mofa.EditPreferences_Honey"
-			android:label="@string/app_name"/>
-         <activity
-			android:name="it.schmid.android.mofa.WorkOverviewActivity"
-			android:label="@string/app_name"/>
-         
-         <activity
-			android:name="it.schmid.android.mofa.WorkEditTabActivity"
-			android:label="@string/app_name"/>
-         <activity
-			android:name="it.schmid.android.mofa.WorkSelectLandActivity"
-			android:label="@string/app_name"/>
-         <activity
-			android:name="it.schmid.android.mofa.WorkSelectWorkerActivity"
-			android:label="@string/app_name"/>
-          <activity
-			android:name="it.schmid.android.mofa.WorkSelectMachineActivity"
-			android:label="@string/app_name"/>
-          <activity
-			android:name="it.schmid.android.mofa.WorkSelectSoilFertilizerActivity"
-			android:label="@string/app_name"/>
-          <activity
-			android:name="it.schmid.android.mofa.WorkProductTabActivity"
-			android:label="@string/app_name"/>
-         <activity
-			android:name="it.schmid.android.mofa.GPSLocationActivity"
-			android:label="@string/app_name"/>
-         <activity
-			android:name="it.schmid.android.mofa.PurchaseActivity"
-			android:label="@string/app_name"/>
-         <activity
-			android:name="it.schmid.android.mofa.DetailsDialog"
-			android:theme="@android:style/Theme.Dialog"
-			android:label="@string/app_name"
-			android:excludeFromRecents="true" >
-		</activity>
+            android:name=".EditPreferences"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".EditPreferencesImport"
+            android:label="@string/app_name" />
+                 />
+        <activity
+            android:name=".EditPreferences_Honey"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".WorkOverviewActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".WorkEditTabActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".WorkSelectLandActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".WorkSelectWorkerActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".WorkSelectMachineActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".WorkSelectSoilFertilizerActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".WorkProductTabActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".GPSLocationActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".PurchaseActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".search.SearchActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".DetailsDialog"
+            android:excludeFromRecents="true"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
 -
-		<activity android:name="com.dropbox.sync.android.DbxAuthActivity" />
-		<activity
-  		android:name="com.dropbox.client2.android.AuthActivity"
-  		android:launchMode="singleTask" >
-  		<intent-filter>
-    		<data android:scheme="db-zgo2dupm3ung3u6" />
-    		<action android:name="android.intent.action.VIEW" />
-    		<category android:name="android.intent.category.BROWSABLE" />
-    		<category android:name="android.intent.category.DEFAULT" />
-  		</intent-filter>
-		</activity>
-		<service
-  			android:name="com.dropbox.sync.android.DbxSyncService"
-  			android:enabled="true"
-  			android:exported="false"
-  			android:label="Dropbox Sync" />
+        <activity android:name="com.dropbox.sync.android.DbxAuthActivity" />
+        <activity
+            android:name="com.dropbox.client2.android.AuthActivity"
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <data android:scheme="db-zgo2dupm3ung3u6" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.dropbox.sync.android.DbxSyncService"
+            android:enabled="true"
+            android:exported="false"
+            android:label="Dropbox Sync" />
+
+        <activity
+            android:name=".search.WorkerOverviewActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

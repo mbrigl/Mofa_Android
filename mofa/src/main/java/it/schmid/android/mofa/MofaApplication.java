@@ -31,6 +31,7 @@ public class MofaApplication extends Application{
 	public static final Integer WORK_NORMAL=1;
 	public static final Integer WORK_SPRAY=2;
 	public static final Integer WORK_FERT=3;
+
 	static final String TAG ="MofaApplication";
 	//Dropbox Credentials
 	public static final String appKey = "zgo2dupm3ung3u6";

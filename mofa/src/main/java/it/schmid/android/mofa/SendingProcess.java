@@ -326,7 +326,7 @@ public void run(){
 		}
 		private String createXML(){
 			//List<Work> workUploadList = DatabaseManager.getInstance().getAllWorks();
-			List<Work> workUploadList = DatabaseManager.getInstance().getAllValidWorks();
+			List<Work> workUploadList = DatabaseManager.getInstance().getAllValidNotSendedWorks();
 			 XmlSerializer serializer = Xml.newSerializer();
 			 StringWriter writer = new StringWriter();
 			 try {
@@ -495,7 +495,7 @@ public void run(){
 		}
 	private String createXMLASA(){
 		//List<Work> workUploadList = DatabaseManager.getInstance().getAllWorks();
-		List<Work> workUploadList = DatabaseManager.getInstance().getAllValidWorks();
+		List<Work> workUploadList = DatabaseManager.getInstance().getAllValidNotSendedWorks();
 		 XmlSerializer serializer = Xml.newSerializer();
 		 StringWriter writer = new StringWriter();
 		 try {

@@ -12,6 +12,7 @@ import it.schmid.android.mofa.model.Work;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -39,6 +40,7 @@ import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.j256.ormlite.misc.TransactionManager;
 
 
 public class WorkOverviewActivity extends DashboardActivity implements SendingProcess.RemoveEntries{
@@ -137,18 +139,16 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 			         switch (position)
 			         {
 			         	case 0:
-			         		 workList = DatabaseManager.getInstance().getAllWorksOrderByDate();
+			         		 workList = DatabaseManager.getInstance().getAllNotSendedWorks();
 			                 adapter = new WorkAdapter(WorkOverviewActivity.this, R.layout.work_row, workList);
 			                 listViewWork.setAdapter(adapter);
 			                 
 			                 break;
 			         	case 1:
 			         		try {
-			         			if (Integer.parseInt(backEndSoftware)==1){//ASA Case
+
 			         				workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASA("S");
-			         			}else{
-			         				workList = DatabaseManager.getInstance().getWorksForTaskIdOrdered(1);
-			         			}
+
 			         			
 			         		} catch (SQLException e) {
 							// TODO Auto-generated catch block
@@ -159,11 +159,9 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 			                 break;
 			            case 2:
 			            	try {
-			            		if (Integer.parseInt(backEndSoftware)==1){//ASA Case
+
 			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASA("H");
-			            		}else{
-			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrdered(2);
-			            		}
+
 			            	} catch (SQLException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -173,11 +171,9 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 			                 break;
 			            case 3:
 			            	try {
-			            		if (Integer.parseInt(backEndSoftware)==1){//ASA Case
+
 			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASA("D");
-			            		}else{
-			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrdered(3);
-			            		}
+
 			            	} catch (SQLException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -187,11 +183,9 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 			                 break;
 			            default:
 			            	try { 
-			            		if (Integer.parseInt(backEndSoftware)==1){//ASA Case, we get all codes and then we search for all others
+
 			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASARest();
-			            		}else{
-			            			workList = DatabaseManager.getInstance().getWorksForTaskIdOrdered(4);
-			            		}
+
 				            } catch (SQLException e) {
 								// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -273,7 +267,7 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 		 */
 	
 
-	public void deleteAllEntries(){
+	public void deleteAllEntriesOrg(){
 		List<Work> removeWorkList=DatabaseManager.getInstance().getAllValidWorks();
 		for (Work w : removeWorkList){
 			DatabaseManager.getInstance().deleteCascWork(w);
@@ -281,6 +275,29 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 		//adapter.notifyDataSetChanged();
 		fillData(listViewWork);
 	}
+    public void deleteAllEntries(){
+        try {
+            TransactionManager.callInTransaction(DatabaseManager.getInstance().getConnection(),
+                    new Callable<Void>() {
+                        public Void call() throws Exception {
+                           //List<Work> removeWorkList=DatabaseManager.getInstance().getAllValidNotSprayWorks();
+                            List<Work> removeWorkList=DatabaseManager.getInstance().getAllOldValidNotSprayWorks();
+                            for (Work w : removeWorkList){
+                                DatabaseManager.getInstance().deleteCascWork(w);
+
+                            }
+                            DatabaseManager.getInstance().setWorksSendedToTrue();
+                            return null;
+                        }
+                    });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        //adapter.notifyDataSetChanged();
+        fillData(listViewWork);
+    }
 		
 	
 }

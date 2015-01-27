@@ -35,7 +35,9 @@ public class Land extends ImportBehavior{
 	@ForeignCollectionField
 	private ForeignCollection<VQuarter> vquarters;
 	private Boolean importError=false;
-	 public Land(){
+
+
+    public Land(){
 		
 	}
 	public Integer getId() {
@@ -56,7 +58,8 @@ public class Land extends ImportBehavior{
 		public void setCode(String code) {
 			this.code = code;
 		}
-	public void importMasterData(JSONArray importData){
+
+    public void importMasterData(JSONArray importData){
 		Land land;
 		try {
     		Log.i(TAG,
