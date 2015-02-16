@@ -136,9 +136,9 @@ int callSource = 1;
     };
     private void updateLabel1(){
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, -50);
-        Date dateBefore50Days = cal.getTime();
-        if (myCalendar1.getTime().before(dateBefore50Days)){
+        cal.add(Calendar.DATE, -60);
+        Date dateBefore60Days = cal.getTime();
+        if (myCalendar1.getTime().before(dateBefore60Days)){
             Toast.makeText(this,R.string.datemsgtomuch,Toast.LENGTH_LONG).show();
             fromDate.setText(sdf.format(cal.getTime()));
         }else{

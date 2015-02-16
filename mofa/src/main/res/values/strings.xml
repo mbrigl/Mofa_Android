@@ -200,14 +200,18 @@
     <string name="searchPest">Search Pesticide</string>
     <string name="searchPestSel">Please select a product to search</string>
     <string name="searchInfo">The archive contains %1$d entries. \n This search includes only spraying entries sended from this device. Be sure that you don\'t clear the archive during the year!</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="delete_archive">Clear spray archive</string>
-    <string name="delete_archive_mes">ATTENTION: ALL SPRAYING ENTRIES WERE DELETED, WHICH ARE OLDER THAN 50 DAYS</string>
+
+    <string name="delete_archive">Clear archive</string>
+    <string name="delete_archive_mes">ATTENTION: ALL SPRAYING ENTRIES WERE DELETED, WHICH ARE OLDER THAN 60 DAYS\n IF YOU WANT TO DELETE ALL SENDED WORKS, CHECK THE CHECKBOX BELOW</string>
     <string name="search_no_result">No entry found for this query</string>
     <string name="fromDate">from Date</string>
     <string name="toDate">to Date</string>
     <string name="noHoursMsg">No hours in this period</string>
-    <string name="datemsgtomuch">The date can not exceed 50 days from today</string>
-    <string name="deletearchivemsg">Are your sure, that you want delete all spraying entries older than 50 days?</string>
+    <string name="datemsgtomuch">The date can not exceed 60 days from today</string>
+    <string name="deletearchivemsg">Are your sure, that you want delete all spraying entries older than 60 days?</string>
+    <string name="deleteallsended">Deleting all sended works</string>
+    <string name="deleteallsendedmsg">Are you sure, that you want delete all sended works</string>
+    <string name="deletetoastmsg">Data deleted!!</string>
+
 
 </resources>

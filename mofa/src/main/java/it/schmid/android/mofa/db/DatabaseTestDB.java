@@ -9,6 +9,7 @@ import it.schmid.android.mofa.model.WorkWorker;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import android.content.Context;
@@ -36,28 +37,33 @@ public class DatabaseTestDB {
         return helper;
     }
     public void createTestRecords(){
-    	
-    		Date lDate = (new Date());
-    		for (int i=1;i<350;i++){
-    			Work w;
-    			int task;
-    			String note = "test";
-    			lDate = addDays(lDate,1);
-    			if (i%2==0){
-    				task = 5;
-    				w = createWork(lDate,task,"test2");
-    				
-    					
-    			}else{
-    				task = 21;
-    				w = createWork(lDate,task,"test2");
-    				createSprayEntry(w);
-    				
-    			}
-    			createWorkVQuarter(w);
-    			createWorkWorker(w);
-    			Log.d(TAG, "Created record nr: " + i);
-    		}
+        new Thread(new Runnable() {
+            public void run() {
+                Date lDate = (new Date());
+                for (int i=1;i<700;i++){
+                    Work w;
+                    int task;
+                    String note = "test";
+                    lDate = addDays(lDate,-i);
+                    if (i%2==0){
+                        task = 5;
+                        w = createWork(lDate,task,"test2");
+
+
+                    }else{
+                        task = 21;
+                        w = createWork(lDate,task,"test2");
+                        createSprayEntry(w);
+
+                    }
+                    createWorkVQuarter(w);
+                    createWorkWorker(w);
+
+                }
+
+            }
+        }).start();
+
 		
     }
     private Work createWork(Date lDate, Integer task, String note){

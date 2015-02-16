@@ -451,7 +451,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 			about.show();
 			return true;
 		case R.id.menu_test:
-//			Log.d(TAG, "automatically filling DB");
+			Log.d(TAG, "automatically filling DB");
 			DatabaseTestDB.init(this);
 			DatabaseTestDB.getInstance().createTestRecords();
 			return true;
@@ -474,7 +474,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	        // Adding a listener for the checkbox with a
 	        checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 	        	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
-	        		if ((isChecked==true)&&((DatabaseManager.getInstance().getAllWorks().size()>0)||(DatabaseManager.getInstance().getAllPurchases().size()>0))){
+	        		if ((isChecked==true)&&((DatabaseManager.getInstance().getAllNotSendedWorks().size()>0)||(DatabaseManager.getInstance().getAllPurchases().size()>0))){
 	        			Toast.makeText(getApplicationContext(), R.string.reimportmessage,Toast.LENGTH_LONG).show();
 	        		}
 	        	}
@@ -489,7 +489,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	        alertDialog.setPositiveButton(R.string.yesbutton, new DialogInterface.OnClickListener() {
 	            public void onClick(DialogInterface dialog,int which) {
 	            if (checkBox.isChecked()==true) {
-	            	if ((DatabaseManager.getInstance().getAllWorks().size()==0)&&(DatabaseManager.getInstance().getAllPurchases().size()==0) ) { // works table is empty
+	            	if ((DatabaseManager.getInstance().getAllNotSendedWorks().size()==0)&&(DatabaseManager.getInstance().getAllPurchases().size()==0) ) { // works table is empty
 	            		flushData(selElements);
 		            	if (dropBox==false){
 		            		updateData(selElements,urlPath,offline,format); //starting the import of data

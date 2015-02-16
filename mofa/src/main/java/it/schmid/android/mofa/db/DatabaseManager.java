@@ -680,6 +680,19 @@ public class DatabaseManager {
     	}
     	return workList;
     }
+    public List<Work> getAllSendedWorks(){
+        List<Work> workList=null;
+        try{
+            QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
+            qb.where().eq("sended", true);
+            PreparedQuery<Work> preparedQuery = qb.prepare();
+            workList = getHelper().getWorkDao().query(preparedQuery);
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return workList;
+    }
     public List<Work> getAllValidNotSendedWorks(){
         List<Work> workList=null;
         try{
@@ -747,7 +760,7 @@ public class DatabaseManager {
     public List<Work> getOldWorksNotSpraying()throws SQLException{ //filtering of asa codes
         Calendar c = Calendar.getInstance();
         c.setTime(new Date()); // Now use today date.
-        c.add(Calendar.DATE, -50);
+        c.add(Calendar.DATE, -60);
         Date currDateMinusFifty = c.getTime();
         QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
         final Where<Work, Integer> w = qb.where();
@@ -1701,7 +1714,7 @@ public class DatabaseManager {
     }
     /*************************************
      * 
-     * FrutiQuality - DB Operations
+     * FruitQuality - DB Operations
      */
   //Stored - Queries
     public List<FruitQuality> getAllQualities() {
@@ -1740,11 +1753,20 @@ public class DatabaseManager {
         return quality;
     }
     public void flushQuality(){
-    	try {
-            getHelper().getFruitQualityDao().delete(getAllQualities());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+            try {
+                getHelper().getFruitQualityDao().callBatchTasks(new Callable<Void>() {
+                    @Override
+                    public Void call() throws Exception {
+                        getHelper().getFruitQualityDao().delete(getAllQualities());
+                        return null;
+                    }
+                }) ;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            //getHelper().getFruitQualityDao().delete(getAllQualities());
+
     }
     /*************************************
      * 

@@ -81,14 +81,14 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 		
 		//workList = DatabaseManager.getInstance().getAllWorksOrderByDate();
 		workList = DatabaseManager.getInstance().getAllNotSendedWorks();
-		Log.d(TAG,"Number of works:" + workList.size());
+		Log.d(TAG,"Number of total works:" + DatabaseManager.getInstance().getAllWorks().size());
 		adapter = new WorkAdapter(this, R.layout.work_row, workList);
 		lv.setAdapter(adapter);
 		lv.setOnItemClickListener(new OnItemClickListener(){ // listener for click event
 		 public void onItemClick(AdapterView<?> parent, View view,
 	                int position, long id) {
 			Work work = adapter.getItem(position); //current work
-			Log.d(TAG, "Current work with id: " + work.getId());
+
 			Intent i = new Intent(WorkOverviewActivity.this, WorkEditTabActivity.class); // opening the corresponding activity
 			i.putExtra("Work_ID", work.getId());
 			

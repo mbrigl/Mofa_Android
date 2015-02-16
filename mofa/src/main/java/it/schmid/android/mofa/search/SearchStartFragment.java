@@ -11,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -36,6 +38,7 @@ public class SearchStartFragment extends SherlockFragment {
         Button btnLastSprayOp = (Button) v.findViewById(R.id.btn_search_last_sprayop);
         Button btnSearchPest = (Button) v.findViewById(R.id.btn_search_pest);
         Button btnDelArchive = (Button) v.findViewById(R.id.btn_del_arch);
+        final CheckBox chkDelAllSended = (CheckBox) v.findViewById(R.id.check_del_all_sended);
         TextView txtInfo = (TextView) v.findViewById(R.id.textView);
         long numSprayEntries = DatabaseManager.getInstance().getNumSprayingEntries();
         Resources res = getResources();
@@ -56,7 +59,7 @@ public class SearchStartFragment extends SherlockFragment {
         btnSearchPest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "btnSearchPest clicked, loading new fragment");
+               // Log.d(TAG, "btnSearchPest clicked, loading new fragment");
                 SherlockFragment pestFragment = SearchPestFragment.newInstance(R.string.searchPestSel,ActivityConstants.SEARCH_PEST);
                 FragmentTransaction transaction = getSherlockActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.search_fragment_container, pestFragment);
@@ -67,16 +70,41 @@ public class SearchStartFragment extends SherlockFragment {
         btnDelArchive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String msgText;
+                if (chkDelAllSended.isChecked()){
+                    msgText = getString(R.string.deleteallsendedmsg);
+                }else{
+                    msgText = getString(R.string.deletearchivemsg);
+                }
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder
                         .setTitle(R.string.delete_archive)
-                        .setMessage(R.string.deletearchivemsg)
+                        .setMessage(msgText)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setPositiveButton(R.string.yesbutton, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
+                                if (chkDelAllSended.isChecked()){
+                                    new Thread(new Runnable() {
+                                        public void run() {
+                                            final List<Work> workToDelete = DatabaseManager.getInstance().getAllSendedWorks();
+                                              DatabaseManager.getInstance().batchDeleteAllOldSprayEntries(workToDelete);
 
-                                final List<Work> workToDelete = DatabaseManager.getInstance().getOldSprayingWorks();
-                                DatabaseManager.getInstance().batchDeleteAllOldSprayEntries(workToDelete);
+                                        }
+                                    }).start();
+                                    Toast.makeText(getActivity(),R.string.deletetoastmsg,Toast.LENGTH_SHORT).show();
+                                }else{
+                                    new Thread(new Runnable() {
+                                        public void run() {
+                                            final List<Work> workToDelete = DatabaseManager.getInstance().getOldSprayingWorks();
+                                            DatabaseManager.getInstance().batchDeleteAllOldSprayEntries(workToDelete);
+
+                                        }
+                                    }).start();
+                                    Toast.makeText(getActivity(),R.string.deletetoastmsg,Toast.LENGTH_SHORT).show();
+                                }
+
+
 
                             }
                         })

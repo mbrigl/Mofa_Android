@@ -198,11 +198,14 @@
     <string name="searchPestSel">Bitte Produkt für die Suche auswählen</string>
     <string name="searchInfo">Das Archiv beinhaltet %1$d Einträge. \n Diese Suche beinhaltet nur Spritzungen, welche von diesem Gerät gesendet wurden. Bitte achten Sie darauf, dass Sie das Spritzarchiv nicht während des Jahres leeren.</string>
     <string name="search_no_result">Kein Eintrag für diese Suche</string>
-    <string name="delete_archive">Spritzarchiv leeren</string>
-    <string name="delete_archive_mes">ACHTUNG!! ALLE SPRITZEINTRÄGE DIE ÄLTER ALS 50 TAGE SIND WERDEN GELÖSCHT!</string>
+    <string name="delete_archive">Archiv leeren</string>
+    <string name="delete_archive_mes">ACHTUNG!! ALLE SPRITZEINTRÄGE DIE ÄLTER ALS 60 TAGE SIND WERDEN GELÖSCHT!\n DURCH DAS AKTIVIEREN DES KONTROLLKÄSTCHENS WERDEN ALLE GESENDETEN ARBEITEN GELÖSCHT</string>
     <string name="fromDate">von Datum</string>
     <string name="toDate">bis Datum</string>
     <string name="noHoursMsg">Keine Stunden in diesem Zeitraum</string>
-    <string name="datemsgtomuch">Das Datum darf nicht mehr als 50 Tage vor dem heutigen liegen</string>
-    <string name="deletearchivemsg">Sind Sie sicher, dass Sie alle Spritzeinträge löschen wollen, welche älter als 50 Tage sind?</string>
+    <string name="datemsgtomuch">Das Datum darf nicht mehr als 60 Tage vor dem heutigen liegen</string>
+    <string name="deletearchivemsg">Sind Sie sicher, dass Sie alle Spritzeinträge löschen wollen, welche älter als 60 Tage sind?</string>
+    <string name="deleteallsended">Löschen aller gesendeten Arbeiten</string>
+    <string name="deleteallsendedmsg">Sind Sie sicher, dass Sie alle gesendeten Einträge löschen möchten</string>
+    <string name="deletetoastmsg">Daten wurden gelöscht !!</string>
 </resources>

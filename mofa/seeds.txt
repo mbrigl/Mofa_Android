@@ -12321,6 +12321,8 @@ it.schmid.android.mofa.R$dimen: int abs__dropdownitem_text_padding_left
 it.schmid.android.mofa.R$dimen: int abs__dropdownitem_text_padding_right
 it.schmid.android.mofa.R$dimen: int abs__search_view_preferred_width
 it.schmid.android.mofa.R$dimen: int abs__search_view_text_min_width
+it.schmid.android.mofa.R$dimen: int activity_horizontal_margin
+it.schmid.android.mofa.R$dimen: int activity_vertical_margin
 it.schmid.android.mofa.R$dimen: int caption_size_small
 it.schmid.android.mofa.R$dimen: int home_button_size
 it.schmid.android.mofa.R$dimen: int home_button_size_x
@@ -12445,6 +12447,7 @@ it.schmid.android.mofa.R$drawable: int abs__textfield_searchview_holo_light
 it.schmid.android.mofa.R$drawable: int abs__textfield_searchview_right_holo_dark
 it.schmid.android.mofa.R$drawable: int abs__textfield_searchview_right_holo_light
 it.schmid.android.mofa.R$drawable: int abs__toast_frame
+it.schmid.android.mofa.R$drawable: int clock_mofa
 it.schmid.android.mofa.R$drawable: int gps_default
 it.schmid.android.mofa.R$drawable: int gradient_bg
 it.schmid.android.mofa.R$drawable: int gradient_bg_hover
@@ -12488,6 +12491,7 @@ it.schmid.android.mofa.R$drawable: int list_selector
 it.schmid.android.mofa.R$drawable: int ok
 it.schmid.android.mofa.R$drawable: int pesticide_bottle
 it.schmid.android.mofa.R$drawable: int purchase_mofa
+it.schmid.android.mofa.R$drawable: int search_mofa
 it.schmid.android.mofa.R$drawable: int settings_mofa
 it.schmid.android.mofa.R$drawable: int stack_default
 it.schmid.android.mofa.R$drawable: int stack_pressed
@@ -12555,6 +12559,9 @@ it.schmid.android.mofa.R$id: int asa_spray_code
 it.schmid.android.mofa.R$id: int asa_tax_setting
 it.schmid.android.mofa.R$id: int beeDanger
 it.schmid.android.mofa.R$id: int btn_closedialog
+it.schmid.android.mofa.R$id: int btn_del_arch
+it.schmid.android.mofa.R$id: int btn_search_last_sprayop
+it.schmid.android.mofa.R$id: int btn_search_pest
 it.schmid.android.mofa.R$id: int btnclose
 it.schmid.android.mofa.R$id: int button_layout
 it.schmid.android.mofa.R$id: int cancel_confirm_button
@@ -12563,6 +12570,8 @@ it.schmid.android.mofa.R$id: int cap_category
 it.schmid.android.mofa.R$id: int cap_date
 it.schmid.android.mofa.R$id: int cap_docnr
 it.schmid.android.mofa.R$id: int cap_weight
+it.schmid.android.mofa.R$id: int check_del_all_sended
+it.schmid.android.mofa.R$id: int childtext
 it.schmid.android.mofa.R$id: int clear_search
 it.schmid.android.mofa.R$id: int clone
 it.schmid.android.mofa.R$id: int closebutton
@@ -12585,6 +12594,8 @@ it.schmid.android.mofa.R$id: int delete_worker_icon
 it.schmid.android.mofa.R$id: int disableHome
 it.schmid.android.mofa.R$id: int dropbox
 it.schmid.android.mofa.R$id: int dropboxreset
+it.schmid.android.mofa.R$id: int editTextFromDate
+it.schmid.android.mofa.R$id: int editTextToDate
 it.schmid.android.mofa.R$id: int edit_name
 it.schmid.android.mofa.R$id: int edit_query
 it.schmid.android.mofa.R$id: int edtxt_acid
@@ -12608,6 +12619,7 @@ it.schmid.android.mofa.R$id: int frame3
 it.schmid.android.mofa.R$id: int frame4
 it.schmid.android.mofa.R$id: int frame5
 it.schmid.android.mofa.R$id: int frame6
+it.schmid.android.mofa.R$id: int grouptext
 it.schmid.android.mofa.R$id: int harvest_list_doc
 it.schmid.android.mofa.R$id: int harvest_menu_add
 it.schmid.android.mofa.R$id: int harvestlistrowlayout
@@ -12622,6 +12634,7 @@ it.schmid.android.mofa.R$id: int landbox
 it.schmid.android.mofa.R$id: int landclose_btn
 it.schmid.android.mofa.R$id: int landlistview
 it.schmid.android.mofa.R$id: int landname
+it.schmid.android.mofa.R$id: int landsearch_btn
 it.schmid.android.mofa.R$id: int lbl_dose_hl
 it.schmid.android.mofa.R$id: int lbl_dose_total
 it.schmid.android.mofa.R$id: int legal_text
@@ -12637,6 +12650,7 @@ it.schmid.android.mofa.R$id: int machinelistview
 it.schmid.android.mofa.R$id: int maxAmount
 it.schmid.android.mofa.R$id: int maxTime
 it.schmid.android.mofa.R$id: int menu_about
+it.schmid.android.mofa.R$id: int menu_test
 it.schmid.android.mofa.R$id: int normal
 it.schmid.android.mofa.R$id: int noteeditText
 it.schmid.android.mofa.R$id: int notelabel
@@ -12658,8 +12672,12 @@ it.schmid.android.mofa.R$id: int purchase_menu_upload
 it.schmid.android.mofa.R$id: int purchasinglistview
 it.schmid.android.mofa.R$id: int reenterTime
 it.schmid.android.mofa.R$id: int refresh_sumwater_icon
+it.schmid.android.mofa.R$id: int resultlistview
 it.schmid.android.mofa.R$id: int save_gps1
 it.schmid.android.mofa.R$id: int save_gps2
+it.schmid.android.mofa.R$id: int search_fragment_container
+it.schmid.android.mofa.R$id: int searchclose_btn
+it.schmid.android.mofa.R$id: int searchtitle
 it.schmid.android.mofa.R$id: int selected
 it.schmid.android.mofa.R$id: int selected_land
 it.schmid.android.mofa.R$id: int showCustom
@@ -12693,9 +12711,13 @@ it.schmid.android.mofa.R$id: int tableRow9
 it.schmid.android.mofa.R$id: int taskbox
 it.schmid.android.mofa.R$id: int tasklist
 it.schmid.android.mofa.R$id: int text
+it.schmid.android.mofa.R$id: int textView
 it.schmid.android.mofa.R$id: int textView1
 it.schmid.android.mofa.R$id: int textView2
 it.schmid.android.mofa.R$id: int textView3
+it.schmid.android.mofa.R$id: int textView4
+it.schmid.android.mofa.R$id: int textView5
+it.schmid.android.mofa.R$id: int textViewClearArchive
 it.schmid.android.mofa.R$id: int textgpslat1
 it.schmid.android.mofa.R$id: int textgpslat2
 it.schmid.android.mofa.R$id: int textgpslong1
@@ -12745,6 +12767,7 @@ it.schmid.android.mofa.R$id: int work_select_pest
 it.schmid.android.mofa.R$id: int work_spraytab
 it.schmid.android.mofa.R$id: int workerbox
 it.schmid.android.mofa.R$id: int workerclose_btn
+it.schmid.android.mofa.R$id: int workerhourslist
 it.schmid.android.mofa.R$id: int workerlabel
 it.schmid.android.mofa.R$id: int workerlistview
 it.schmid.android.mofa.R$id: int workmachineLabel
@@ -12780,14 +12803,20 @@ it.schmid.android.mofa.R$layout: int abs__simple_dropdown_hint
 it.schmid.android.mofa.R$layout: int activity_home
 it.schmid.android.mofa.R$layout: int activity_home_button
 it.schmid.android.mofa.R$layout: int activity_main
+it.schmid.android.mofa.R$layout: int activity_worker_overview
 it.schmid.android.mofa.R$layout: int dialog_details
 it.schmid.android.mofa.R$layout: int dialog_harvest_frag
 it.schmid.android.mofa.R$layout: int fragment_input_dose
+it.schmid.android.mofa.R$layout: int fragment_search_result
+it.schmid.android.mofa.R$layout: int fragment_searchpest
+it.schmid.android.mofa.R$layout: int fragment_searchpest_grid
+it.schmid.android.mofa.R$layout: int fragment_searchpest_list
 it.schmid.android.mofa.R$layout: int gps_location
 it.schmid.android.mofa.R$layout: int harvest_row
 it.schmid.android.mofa.R$layout: int land_child_row
 it.schmid.android.mofa.R$layout: int land_group_row
 it.schmid.android.mofa.R$layout: int land_list
+it.schmid.android.mofa.R$layout: int land_list_search
 it.schmid.android.mofa.R$layout: int large
 it.schmid.android.mofa.R$layout: int machine_list
 it.schmid.android.mofa.R$layout: int machine_row
@@ -12799,6 +12828,10 @@ it.schmid.android.mofa.R$layout: int prefscontentasa
 it.schmid.android.mofa.R$layout: int purchase_child_row
 it.schmid.android.mofa.R$layout: int purchase_group_row
 it.schmid.android.mofa.R$layout: int purchasing_list
+it.schmid.android.mofa.R$layout: int search_activity
+it.schmid.android.mofa.R$layout: int search_child_row
+it.schmid.android.mofa.R$layout: int search_frag_start
+it.schmid.android.mofa.R$layout: int search_group_row
 it.schmid.android.mofa.R$layout: int sherlock_spinner_dropdown_item
 it.schmid.android.mofa.R$layout: int sherlock_spinner_item
 it.schmid.android.mofa.R$layout: int soilfertilizer_list
@@ -12820,6 +12853,7 @@ it.schmid.android.mofa.R$layout: int work_vquarter_row
 it.schmid.android.mofa.R$layout: int work_worker_row
 it.schmid.android.mofa.R$layout: int worker_list
 it.schmid.android.mofa.R$layout: int worker_row
+it.schmid.android.mofa.R$layout: int worker_row_hours
 it.schmid.android.mofa.R$menu: int activity_main
 it.schmid.android.mofa.R$menu: int harvest_menu
 it.schmid.android.mofa.R$menu: int purchase_menu
@@ -12855,6 +12889,13 @@ it.schmid.android.mofa.R$string: int cancelbutton
 it.schmid.android.mofa.R$string: int categorytable
 it.schmid.android.mofa.R$string: int closebutton
 it.schmid.android.mofa.R$string: int concentrationcaption
+it.schmid.android.mofa.R$string: int datemsgtomuch
+it.schmid.android.mofa.R$string: int delete_archive
+it.schmid.android.mofa.R$string: int delete_archive_mes
+it.schmid.android.mofa.R$string: int deleteallsended
+it.schmid.android.mofa.R$string: int deleteallsendedmsg
+it.schmid.android.mofa.R$string: int deletearchivemsg
+it.schmid.android.mofa.R$string: int deletetoastmsg
 it.schmid.android.mofa.R$string: int dialogdeletemsg
 it.schmid.android.mofa.R$string: int dialogdeletemsgwithchilds
 it.schmid.android.mofa.R$string: int dialogdeletetitel
@@ -12879,6 +12920,7 @@ it.schmid.android.mofa.R$string: int export_title
 it.schmid.android.mofa.R$string: int fertilizertab
 it.schmid.android.mofa.R$string: int fertilizertable
 it.schmid.android.mofa.R$string: int fertilizertitle
+it.schmid.android.mofa.R$string: int fromDate
 it.schmid.android.mofa.R$string: int gps_empty
 it.schmid.android.mofa.R$string: int gps_point1
 it.schmid.android.mofa.R$string: int gps_point2
@@ -12917,6 +12959,7 @@ it.schmid.android.mofa.R$string: int maxamountha
 it.schmid.android.mofa.R$string: int maxamounthaUnit
 it.schmid.android.mofa.R$string: int maxtime
 it.schmid.android.mofa.R$string: int menu_about
+it.schmid.android.mofa.R$string: int noHoursMsg
 it.schmid.android.mofa.R$string: int noUpdatesInfo
 it.schmid.android.mofa.R$string: int noUpdatesText
 it.schmid.android.mofa.R$string: int no_connection
@@ -12938,6 +12981,12 @@ it.schmid.android.mofa.R$string: int reentertime
 it.schmid.android.mofa.R$string: int reentertimeUnit
 it.schmid.android.mofa.R$string: int reimportmessage
 it.schmid.android.mofa.R$string: int restpathemptystring
+it.schmid.android.mofa.R$string: int searchInfo
+it.schmid.android.mofa.R$string: int searchLastPest
+it.schmid.android.mofa.R$string: int searchPest
+it.schmid.android.mofa.R$string: int searchPestSel
+it.schmid.android.mofa.R$string: int searchVQuarter
+it.schmid.android.mofa.R$string: int search_no_result
 it.schmid.android.mofa.R$string: int search_str_pesticide
 it.schmid.android.mofa.R$string: int settings
 it.schmid.android.mofa.R$string: int showspraytab
@@ -12946,6 +12995,7 @@ it.schmid.android.mofa.R$string: int soilfertilizertitle
 it.schmid.android.mofa.R$string: int soilferttab
 it.schmid.android.mofa.R$string: int spraytab
 it.schmid.android.mofa.R$string: int sprayvqlist
+it.schmid.android.mofa.R$string: int startsearchbutton
 it.schmid.android.mofa.R$string: int sumwatercaption
 it.schmid.android.mofa.R$string: int synchronisationsettings
 it.schmid.android.mofa.R$string: int tasktable
@@ -12959,6 +13009,7 @@ it.schmid.android.mofa.R$string: int title_feature3
 it.schmid.android.mofa.R$string: int title_feature4
 it.schmid.android.mofa.R$string: int title_feature5
 it.schmid.android.mofa.R$string: int title_feature6
+it.schmid.android.mofa.R$string: int toDate
 it.schmid.android.mofa.R$string: int toast_msg_start
 it.schmid.android.mofa.R$string: int updateland
 it.schmid.android.mofa.R$string: int updatemachine
@@ -13337,9 +13388,11 @@ it.schmid.android.mofa.db.DatabaseManager: it.schmid.android.mofa.db.DatabaseMan
 it.schmid.android.mofa.db.DatabaseManager: DatabaseManager(android.content.Context)
 it.schmid.android.mofa.db.DatabaseManager: it.schmid.android.mofa.db.DatabaseHelper getHelper()
 it.schmid.android.mofa.db.DatabaseManager: java.lang.Integer getDbVersion()
+it.schmid.android.mofa.db.DatabaseManager: com.j256.ormlite.support.ConnectionSource getConnection()
 it.schmid.android.mofa.db.DatabaseManager: java.lang.Boolean checkIfEmpty()
 it.schmid.android.mofa.db.DatabaseManager: java.lang.Boolean sprayIsEmpty(java.lang.Integer)
 it.schmid.android.mofa.db.DatabaseManager: java.lang.Boolean soilFertIsEmpty(java.lang.Integer)
+it.schmid.android.mofa.db.DatabaseManager: void batchDeleteAllOldSprayEntries(java.util.List)
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getAllLands()
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getAllLandsOrdered()
 it.schmid.android.mofa.db.DatabaseManager: void addLand(it.schmid.android.mofa.model.Land)
@@ -13368,6 +13421,7 @@ it.schmid.android.mofa.db.DatabaseManager: void addWorker(it.schmid.android.mofa
 it.schmid.android.mofa.db.DatabaseManager: void updateWorker(it.schmid.android.mofa.model.Worker)
 it.schmid.android.mofa.db.DatabaseManager: it.schmid.android.mofa.model.Worker getWorkerWithId(int)
 it.schmid.android.mofa.db.DatabaseManager: void flushWorker()
+it.schmid.android.mofa.db.DatabaseManager: java.lang.String getWorkerHours(java.util.Date,java.util.Date,int)
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getAllPesticides()
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getAllPesticidesOrderByName()
 it.schmid.android.mofa.db.DatabaseManager: void addPesticide(it.schmid.android.mofa.model.Pesticide)
@@ -13390,14 +13444,24 @@ it.schmid.android.mofa.db.DatabaseManager: void flushFertilizer()
 it.schmid.android.mofa.db.DatabaseManager: void flushFertilizerNew()
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getAllWorks()
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getAllValidWorks()
+it.schmid.android.mofa.db.DatabaseManager: java.util.List getAllValidNotSprayWorks()
+it.schmid.android.mofa.db.DatabaseManager: java.util.List getAllOldValidNotSprayWorks()
+it.schmid.android.mofa.db.DatabaseManager: void setWorksSendedToTrue()
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getAllNotSendedWorks()
+it.schmid.android.mofa.db.DatabaseManager: java.util.List getAllSendedWorks()
+it.schmid.android.mofa.db.DatabaseManager: java.util.List getAllValidNotSendedWorks()
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getAllWorksOrderByDate()
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getWorksForTaskId(int)
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getWorksForTaskIdOrdered(int)
+it.schmid.android.mofa.db.DatabaseManager: java.util.List getWorksNotSpraying()
+it.schmid.android.mofa.db.DatabaseManager: java.util.List getOldWorksNotSpraying()
+it.schmid.android.mofa.db.DatabaseManager: java.util.List getOldSprayingWorks()
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getWorksForTaskIdOrderedASA(java.lang.String)
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getWorksForTaskIdOrderedASARest()
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getTaskForASAFiltering(java.lang.String)
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getTaskForASAFilteringRest()
+it.schmid.android.mofa.db.DatabaseManager: java.util.List getTaskNotSpraying()
+it.schmid.android.mofa.db.DatabaseManager: java.util.List getTaskSpraying()
 it.schmid.android.mofa.db.DatabaseManager: it.schmid.android.mofa.model.Work getWorkWithId(int)
 it.schmid.android.mofa.db.DatabaseManager: void addWork(it.schmid.android.mofa.model.Work)
 it.schmid.android.mofa.db.DatabaseManager: void updateWork(it.schmid.android.mofa.model.Work)
@@ -13447,6 +13511,7 @@ it.schmid.android.mofa.db.DatabaseManager: void updateWorkMachine(it.schmid.andr
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getWorkMachineByWorkIdAndByMachineId(int,int)
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getSprayingByWorkId(int)
 it.schmid.android.mofa.db.DatabaseManager: boolean isNewSpraying(int)
+it.schmid.android.mofa.db.DatabaseManager: long getNumSprayingEntries()
 it.schmid.android.mofa.db.DatabaseManager: void addSpray(it.schmid.android.mofa.model.Spraying)
 it.schmid.android.mofa.db.DatabaseManager: void updateSpray(it.schmid.android.mofa.model.Spraying)
 it.schmid.android.mofa.db.DatabaseManager: void deleteSpray(it.schmid.android.mofa.model.Spraying)
@@ -13493,6 +13558,26 @@ it.schmid.android.mofa.db.DatabaseManager: it.schmid.android.mofa.model.Harvest 
 it.schmid.android.mofa.db.DatabaseManager: void flushHarvest()
 it.schmid.android.mofa.db.DatabaseManager: void deleteHarvest(it.schmid.android.mofa.model.Harvest)
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getHarvestListbyWorkId(int)
+it.schmid.android.mofa.db.DatabaseManager: java.util.List getSprayWorksForVQ(java.lang.Integer)
+it.schmid.android.mofa.db.DatabaseManager: java.util.List getSprayWorksForVQAndProd(java.lang.Integer,java.util.List)
+it.schmid.android.mofa.db.DatabaseManager: java.util.List getIdsForSelectedPest(java.lang.Integer)
+it.schmid.android.mofa.db.DatabaseManager: com.j256.ormlite.stmt.QueryBuilder getWorksForPestId(java.lang.Integer)
+it.schmid.android.mofa.db.DatabaseManager: com.j256.ormlite.stmt.QueryBuilder getSprayWorks()
+it.schmid.android.mofa.db.DatabaseManager: com.j256.ormlite.stmt.QueryBuilder getSprayingWithPestId(int)
+it.schmid.android.mofa.db.DatabaseManager: java.util.List getUsedPesticideList()
+it.schmid.android.mofa.db.DatabaseManager: java.util.List getUsedFertilizerList()
+it.schmid.android.mofa.db.DatabaseManager: it.schmid.android.mofa.db.DatabaseHelper access$000(it.schmid.android.mofa.db.DatabaseManager)
+it.schmid.android.mofa.db.DatabaseManager$1
+it.schmid.android.mofa.db.DatabaseManager$1: java.util.List val$workList
+it.schmid.android.mofa.db.DatabaseManager$1: it.schmid.android.mofa.db.DatabaseManager this$0
+it.schmid.android.mofa.db.DatabaseManager$1: DatabaseManager$1(it.schmid.android.mofa.db.DatabaseManager,java.util.List)
+it.schmid.android.mofa.db.DatabaseManager$1: java.lang.Void call()
+it.schmid.android.mofa.db.DatabaseManager$1: java.lang.Object call()
+it.schmid.android.mofa.db.DatabaseManager$2
+it.schmid.android.mofa.db.DatabaseManager$2: it.schmid.android.mofa.db.DatabaseManager this$0
+it.schmid.android.mofa.db.DatabaseManager$2: DatabaseManager$2(it.schmid.android.mofa.db.DatabaseManager)
+it.schmid.android.mofa.db.DatabaseManager$2: java.lang.Void call()
+it.schmid.android.mofa.db.DatabaseManager$2: java.lang.Object call()
 it.schmid.android.mofa.db.DatabaseTestDB
 it.schmid.android.mofa.db.DatabaseTestDB: java.lang.String TAG
 it.schmid.android.mofa.db.DatabaseTestDB: it.schmid.android.mofa.db.DatabaseTestDB instance
@@ -13507,6 +13592,40 @@ it.schmid.android.mofa.db.DatabaseTestDB: void createWorkWorker(it.schmid.androi
 it.schmid.android.mofa.db.DatabaseTestDB: void createWorkVQuarter(it.schmid.android.mofa.model.Work)
 it.schmid.android.mofa.db.DatabaseTestDB: void createSprayEntry(it.schmid.android.mofa.model.Work)
 it.schmid.android.mofa.db.DatabaseTestDB: java.util.Date addDays(java.util.Date,int)
+it.schmid.android.mofa.db.DatabaseTestDB: java.util.Date access$000(java.util.Date,int)
+it.schmid.android.mofa.db.DatabaseTestDB: it.schmid.android.mofa.model.Work access$100(it.schmid.android.mofa.db.DatabaseTestDB,java.util.Date,java.lang.Integer,java.lang.String)
+it.schmid.android.mofa.db.DatabaseTestDB: void access$200(it.schmid.android.mofa.db.DatabaseTestDB,it.schmid.android.mofa.model.Work)
+it.schmid.android.mofa.db.DatabaseTestDB: void access$300(it.schmid.android.mofa.db.DatabaseTestDB,it.schmid.android.mofa.model.Work)
+it.schmid.android.mofa.db.DatabaseTestDB: void access$400(it.schmid.android.mofa.db.DatabaseTestDB,it.schmid.android.mofa.model.Work)
+it.schmid.android.mofa.db.DatabaseTestDB$1
+it.schmid.android.mofa.db.DatabaseTestDB$1: it.schmid.android.mofa.db.DatabaseTestDB this$0
+it.schmid.android.mofa.db.DatabaseTestDB$1: DatabaseTestDB$1(it.schmid.android.mofa.db.DatabaseTestDB)
+it.schmid.android.mofa.db.DatabaseTestDB$1: void run()
+it.schmid.android.mofa.db.SearchHashMapLoader
+it.schmid.android.mofa.db.SearchHashMapLoader: java.lang.String TAG
+it.schmid.android.mofa.db.SearchHashMapLoader: it.schmid.android.mofa.db.SearchHashMapLoader$Receiver receiver
+it.schmid.android.mofa.db.SearchHashMapLoader: java.lang.String RELOAD
+it.schmid.android.mofa.db.SearchHashMapLoader: java.util.HashMap mData
+it.schmid.android.mofa.db.SearchHashMapLoader: java.util.ArrayList vquarters
+it.schmid.android.mofa.db.SearchHashMapLoader: android.content.Context context
+it.schmid.android.mofa.db.SearchHashMapLoader: int prodId
+it.schmid.android.mofa.db.SearchHashMapLoader: int queryType
+it.schmid.android.mofa.db.SearchHashMapLoader: SearchHashMapLoader(android.content.Context,java.util.ArrayList,int)
+it.schmid.android.mofa.db.SearchHashMapLoader: SearchHashMapLoader(android.content.Context,java.util.ArrayList,int,int)
+it.schmid.android.mofa.db.SearchHashMapLoader: java.util.HashMap loadInBackground()
+it.schmid.android.mofa.db.SearchHashMapLoader: java.util.HashMap searchLastPest()
+it.schmid.android.mofa.db.SearchHashMapLoader: java.util.HashMap searchPest(int)
+it.schmid.android.mofa.db.SearchHashMapLoader: void deliverResult(java.util.HashMap)
+it.schmid.android.mofa.db.SearchHashMapLoader: void onReset()
+it.schmid.android.mofa.db.SearchHashMapLoader: void onStartLoading()
+it.schmid.android.mofa.db.SearchHashMapLoader: void onStopLoading()
+it.schmid.android.mofa.db.SearchHashMapLoader: java.lang.Object loadInBackground()
+it.schmid.android.mofa.db.SearchHashMapLoader: void deliverResult(java.lang.Object)
+it.schmid.android.mofa.db.SearchHashMapLoader$Receiver
+it.schmid.android.mofa.db.SearchHashMapLoader$Receiver: it.schmid.android.mofa.db.SearchHashMapLoader loader
+it.schmid.android.mofa.db.SearchHashMapLoader$Receiver: it.schmid.android.mofa.db.SearchHashMapLoader this$0
+it.schmid.android.mofa.db.SearchHashMapLoader$Receiver: SearchHashMapLoader$Receiver(it.schmid.android.mofa.db.SearchHashMapLoader,it.schmid.android.mofa.db.SearchHashMapLoader)
+it.schmid.android.mofa.db.SearchHashMapLoader$Receiver: void onReceive(android.content.Context,android.content.Intent)
 it.schmid.android.mofa.db.WorkLoader
 it.schmid.android.mofa.db.WorkLoader: java.lang.String TAG
 it.schmid.android.mofa.db.WorkLoader: it.schmid.android.mofa.db.WorkLoader$Receiver receiver
@@ -13982,3 +14101,11 @@ it.schmid.android.mofa.model.Worker: java.lang.String toString()
 it.schmid.android.mofa.model.Worker: java.lang.Boolean importMasterData(java.lang.String,it.schmid.android.mofa.NotificationService)
 it.schmid.android.mofa.model.Worker: java.util.List workerXmlParser(java.lang.String,it.schmid.android.mofa.NotificationService)
 it.schmid.android.mofa.model.Worker: java.util.List workerXmlParserASA(java.lang.String,it.schmid.android.mofa.NotificationService)
+it.schmid.android.mofa.search.SearchActivity
+it.schmid.android.mofa.search.SearchActivity: SearchActivity()
+it.schmid.android.mofa.search.SearchLandFragment
+it.schmid.android.mofa.search.SearchPestFragment
+it.schmid.android.mofa.search.SearchResult
+it.schmid.android.mofa.search.SearchStartFragment
+it.schmid.android.mofa.search.WorkerOverviewActivity
+it.schmid.android.mofa.search.WorkerOverviewActivity: WorkerOverviewActivity()

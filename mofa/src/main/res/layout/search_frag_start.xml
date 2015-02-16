@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -13,26 +13,36 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:text="@string/searchPest"
-        android:id="@+id/btn_search_pest" />
+        android:id="@+id/btn_search_pest"
+        android:layout_below="@id/btn_search_last_sprayop"/>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="167dp"
+        android:layout_height="100dp"
         android:id="@+id/textView"
-        android:layout_gravity="bottom"
-        android:background="@color/lightgreen"/>
+
+        android:background="@color/lightgreen"
+        android:layout_below="@id/btn_search_pest"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:text="@string/delete_archive"
-        android:id="@+id/btn_del_arch" />
+        android:id="@+id/btn_del_arch"
+        android:layout_below="@id/textView"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="167dp"
+        android:layout_height="130dp"
         android:id="@+id/textViewClearArchive"
-        android:layout_gravity="bottom"
         android:background="@color/lightred"
-        android:text="@string/delete_archive_mes"/>
+        android:text="@string/delete_archive_mes"
+        android:layout_below="@id/btn_del_arch"/>
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/deleteallsended"
+        android:id="@+id/check_del_all_sended"
+        android:layout_below="@id/textViewClearArchive"
+        />
 
-</LinearLayout>
+</RelativeLayout>
 

@@ -1432,32 +1432,90 @@ com.dropbox.client2.android.AuthActivity:
 com.dropbox.client2.android.DropboxAPI
 com.dropbox.client2.android.RESTUtility:
     13:13:RESTUtility()
-com.google.android.vending.licensing.AESObfuscator
+com.google.android.vending.licensing.AESObfuscator:
+    private static final java.lang.String UTF8
+    private static final java.lang.String KEYGEN_ALGORITHM
+    private static final java.lang.String CIPHER_ALGORITHM
+    private static final java.lang.String header
 com.google.android.vending.licensing.APKExpansionPolicy
 com.google.android.vending.licensing.BuildConfig
-com.google.android.vending.licensing.DeviceLimiter
-com.google.android.vending.licensing.ILicenseResultListener
-com.google.android.vending.licensing.ILicenseResultListener$Stub
-com.google.android.vending.licensing.ILicenseResultListener$Stub$Proxy
-com.google.android.vending.licensing.ILicensingService
-com.google.android.vending.licensing.ILicensingService$Stub
-com.google.android.vending.licensing.ILicensingService$Stub$Proxy
-com.google.android.vending.licensing.LicenseChecker
-com.google.android.vending.licensing.LicenseChecker$ResultListener
-com.google.android.vending.licensing.LicenseChecker$ResultListener$1
-com.google.android.vending.licensing.LicenseChecker$ResultListener$2
-com.google.android.vending.licensing.LicenseCheckerCallback
-com.google.android.vending.licensing.LicenseValidator
-com.google.android.vending.licensing.NullDeviceLimiter
-com.google.android.vending.licensing.Obfuscator
-com.google.android.vending.licensing.Policy
-com.google.android.vending.licensing.PreferenceObfuscator
-com.google.android.vending.licensing.ResponseData
-com.google.android.vending.licensing.ServerManagedPolicy
+com.google.android.vending.licensing.ILicenseResultListener$Stub:
+    private static final java.lang.String DESCRIPTOR
+    static final int TRANSACTION_verifyLicense
+com.google.android.vending.licensing.ILicenseResultListener$Stub$Proxy:
+    79:79:public java.lang.String getInterfaceDescriptor()
+com.google.android.vending.licensing.ILicensingService$Stub:
+    private static final java.lang.String DESCRIPTOR
+    static final int TRANSACTION_checkLicense
+    20:22:public ILicensingService$Stub()
+    40:40:public android.os.IBinder asBinder()
+com.google.android.vending.licensing.ILicensingService$Stub$Proxy:
+    79:79:public java.lang.String getInterfaceDescriptor()
+com.google.android.vending.licensing.LicenseChecker:
+    private static final java.lang.String TAG
+    private static final java.lang.String KEY_FACTORY_ALGORITHM
+    private static final int TIMEOUT_MS
+    private static final boolean DEBUG_LICENSE_ERROR
+    326:328:public synchronized void onDestroy()
+com.google.android.vending.licensing.LicenseChecker$ResultListener:
+    private static final int ERROR_CONTACTING_SERVER
+    private static final int ERROR_INVALID_PACKAGE_NAME
+    private static final int ERROR_NON_MATCHING_UID
+com.google.android.vending.licensing.LicenseCheckerCallback:
+    public static final int ERROR_INVALID_PACKAGE_NAME
+    public static final int ERROR_NON_MATCHING_UID
+    public static final int ERROR_NOT_MARKET_MANAGED
+    public static final int ERROR_CHECK_IN_PROGRESS
+    public static final int ERROR_INVALID_PUBLIC_KEY
+    public static final int ERROR_MISSING_PERMISSION
+com.google.android.vending.licensing.LicenseValidator:
+    private static final java.lang.String TAG
+    private static final int LICENSED
+    private static final int NOT_LICENSED
+    private static final int LICENSED_OLD_KEY
+    private static final int ERROR_NOT_MARKET_MANAGED
+    private static final int ERROR_SERVER_FAILURE
+    private static final int ERROR_OVER_QUOTA
+    private static final int ERROR_CONTACTING_SERVER
+    private static final int ERROR_INVALID_PACKAGE_NAME
+    private static final int ERROR_NON_MATCHING_UID
+    private static final java.lang.String SIGNATURE_ALGORITHM
+com.google.android.vending.licensing.Policy:
+    public static final int LICENSED
+    public static final int NOT_LICENSED
+    public static final int RETRY
+com.google.android.vending.licensing.PreferenceObfuscator:
+    private static final java.lang.String TAG
+com.google.android.vending.licensing.ServerManagedPolicy:
+    private static final java.lang.String TAG
+    private static final java.lang.String PREFS_FILE
+    private static final java.lang.String PREF_LAST_RESPONSE
+    private static final java.lang.String PREF_VALIDITY_TIMESTAMP
+    private static final java.lang.String PREF_RETRY_UNTIL
+    private static final java.lang.String PREF_MAX_RETRIES
+    private static final java.lang.String PREF_RETRY_COUNT
+    private static final java.lang.String DEFAULT_VALIDITY_TIMESTAMP
+    private static final java.lang.String DEFAULT_RETRY_UNTIL
+    private static final java.lang.String DEFAULT_MAX_RETRIES
+    private static final java.lang.String DEFAULT_RETRY_COUNT
+    private static final long MILLIS_PER_MINUTE
+    154:154:public long getRetryCount()
+    180:180:public long getValidityTimestamp()
+    206:206:public long getRetryUntil()
+    232:232:public long getMaxRetries()
 com.google.android.vending.licensing.StrictPolicy
-com.google.android.vending.licensing.ValidationException
-com.google.android.vending.licensing.util.Base64
-com.google.android.vending.licensing.util.Base64DecoderException
+com.google.android.vending.licensing.util.Base64:
+    public static final boolean ENCODE
+    public static final boolean DECODE
+    private static final byte EQUALS_SIGN
+    private static final byte NEW_LINE
+    private static final byte WHITE_SPACE_ENC
+    private static final byte EQUALS_SIGN_ENC
+    260:260:public static java.lang.String encodeWebSafe(byte[],boolean)
+    434:435:public static byte[] decodeWebSafe(java.lang.String)
+    448:448:public static byte[] decode(byte[])
+    461:461:public static byte[] decodeWebSafe(byte[])
+    492:492:public static byte[] decodeWebSafe(byte[],int,int)
 com.google.gson.DefaultDateTypeAdapter
 com.google.gson.ExclusionStrategy
 com.google.gson.FieldAttributes
@@ -1630,23 +1688,22 @@ it.schmid.android.mofa.HomeActivity:
     public static final int NUM_HOME_BUTTONS
     static final java.lang.String DROPBOX_IMPORT_PATH
     private static final int REQUEST_LINK_TO_DBX
-    807:809:private void removeLicenseFlag()
-it.schmid.android.mofa.HomeActivity$MyLicenseCheckerCallback
+    811:813:private void removeLicenseFlag()
 it.schmid.android.mofa.InputDoseDialogFragment:
     private static final java.lang.String TAG
 it.schmid.android.mofa.MofaApplication:
     static final java.lang.String TAG
     public static final java.lang.String appKey
     public static final java.lang.String appSecret
-    65:67:public java.lang.String removeGlobalVariable(java.lang.String)
-    74:74:public java.lang.Integer getWorkType()
-    77:79:public static void setWorkType(java.lang.Integer)
-    82:83:public void addAppStateListener(it.schmid.android.mofa.MofaApplication$AppStateListener)
-    85:86:public void removeAppStateListener(it.schmid.android.mofa.MofaApplication$AppStateListener)
-    89:93:private void notifyListeners(java.lang.String,java.lang.String)
-    130:130:public void setBackendSoftware(java.lang.String)
-    134:135:public java.lang.String getLeafFertilizerCodeASA()
-    139:140:public java.lang.String getSoilFertilizerCodeASA()
+    66:68:public java.lang.String removeGlobalVariable(java.lang.String)
+    75:75:public java.lang.Integer getWorkType()
+    78:80:public static void setWorkType(java.lang.Integer)
+    83:84:public void addAppStateListener(it.schmid.android.mofa.MofaApplication$AppStateListener)
+    86:87:public void removeAppStateListener(it.schmid.android.mofa.MofaApplication$AppStateListener)
+    90:94:private void notifyListeners(java.lang.String,java.lang.String)
+    131:131:public void setBackendSoftware(java.lang.String)
+    135:136:public java.lang.String getLeafFertilizerCodeASA()
+    140:141:public java.lang.String getSoilFertilizerCodeASA()
 it.schmid.android.mofa.MofaApplication$AppStateListener
 it.schmid.android.mofa.NotificationService:
     63:67:public void progressUpdate(int)
@@ -1703,6 +1760,7 @@ it.schmid.android.mofa.WorkOverviewActivity:
     private static final java.lang.String TAG
     private static final int ACTIVITY_CREATE
     private static final int ACTIVITY_EDIT
+    271:277:public void deleteAllEntriesOrg()
 it.schmid.android.mofa.WorkProductTabActivity:
     private static final java.lang.String TAG
     android.widget.TextView tabCenter
@@ -1755,3 +1813,22 @@ it.schmid.android.mofa.interfaces.PurchaseProductInterface:
     public abstract java.lang.Integer getId()
     public abstract it.schmid.android.mofa.model.Purchase getPurchase()
     public abstract it.schmid.android.mofa.interfaces.ProductInterface getProduct()
+it.schmid.android.mofa.search.SearchActivity:
+    private static final java.lang.String TAG
+it.schmid.android.mofa.search.SearchLandFragment:
+    private static final java.lang.String ARG_PARAM1
+    private static final java.lang.String ARG_PARAM2
+it.schmid.android.mofa.search.SearchPestFragment:
+    private static final java.lang.String ARG_PARAM1
+    private static final java.lang.String ARG_PARAM2
+    143:148:public void setEmptyText(java.lang.CharSequence)
+it.schmid.android.mofa.search.SearchResult:
+    private static final java.lang.String ARG_PARAM1
+    private static final java.lang.String ARG_PARAM2
+    private int mParam1
+    private java.lang.Integer[] vquartersId
+    private static final int LOADER_ID
+it.schmid.android.mofa.search.SearchResult$ExpandableSearchResultAdapter:
+    private static final java.lang.String TAG
+it.schmid.android.mofa.search.SearchStartFragment:
+    private static final java.lang.String TAG
