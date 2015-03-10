@@ -5,7 +5,7 @@
           android:title="@string/menu_about"
           android:showAsAction="ifRoom|withText"
         tools:ignore="UnusedAttribute" />
-      <item android:id="@+id/menu_test"
+      <!--<item android:id="@+id/menu_test"
           android:title="Test"
-           />
+           /> -->
 </menu>

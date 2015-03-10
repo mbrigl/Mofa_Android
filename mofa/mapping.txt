@@ -12610,6 +12610,7 @@ it.schmid.android.mofa.HarvestDialogFragment -> gq:
     221:225:void updateDateLabel() -> a
     230:291:void readValues() -> b
     294:303:void updatePassView(int) -> a
+    308:314:boolean isNumeric(java.lang.String) -> a
     34:34:void access$000(it.schmid.android.mofa.HarvestDialogFragment,int) -> a
     34:34:void access$100(it.schmid.android.mofa.HarvestDialogFragment) -> a
     34:34:java.lang.Integer access$200(it.schmid.android.mofa.HarvestDialogFragment) -> b

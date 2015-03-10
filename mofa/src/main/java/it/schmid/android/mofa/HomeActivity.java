@@ -450,11 +450,11 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 			about.setTitle("about MoFa");
 			about.show();
 			return true;
-		case R.id.menu_test:
+		/*case R.id.menu_test:
 			Log.d(TAG, "automatically filling DB");
 			DatabaseTestDB.init(this);
 			DatabaseTestDB.getInstance().createTestRecords();
-			return true;
+			return true;*/
 		
 		}
 		return super.onMenuItemSelected(featureId, item);

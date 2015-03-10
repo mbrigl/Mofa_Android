@@ -249,7 +249,7 @@ public class HarvestDialogFragment extends DialogFragment{
 				Toast.makeText(getActivity(),"Check Input", Toast.LENGTH_LONG).show();
 			}
 		}
-		if (TextUtils.isDigitsOnly(mBoxesText.getText()) && (mBoxesText.getText().toString().trim().length()!=0)){
+		if (isNumeric(mBoxesText.getText().toString()) && (mBoxesText.getText().toString().trim().length()!=0)){
 			try{
 				mBoxes = Integer.parseInt(mBoxesText.getText().toString());
 			}catch (NumberFormatException e){
@@ -301,4 +301,16 @@ public class HarvestDialogFragment extends DialogFragment{
 		}
 		mPass=iChecked;
 	}
+    private static boolean isNumeric(String str)
+    {
+        try
+        {
+           Integer i = Integer.parseInt(str);
+        }
+        catch(NumberFormatException nfe)
+        {
+            return false;
+        }
+        return true;
+    }
 }

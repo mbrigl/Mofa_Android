@@ -12650,7 +12650,6 @@ it.schmid.android.mofa.R$id: int machinelistview
 it.schmid.android.mofa.R$id: int maxAmount
 it.schmid.android.mofa.R$id: int maxTime
 it.schmid.android.mofa.R$id: int menu_about
-it.schmid.android.mofa.R$id: int menu_test
 it.schmid.android.mofa.R$id: int normal
 it.schmid.android.mofa.R$id: int noteeditText
 it.schmid.android.mofa.R$id: int notelabel
@@ -12675,6 +12674,7 @@ it.schmid.android.mofa.R$id: int refresh_sumwater_icon
 it.schmid.android.mofa.R$id: int resultlistview
 it.schmid.android.mofa.R$id: int save_gps1
 it.schmid.android.mofa.R$id: int save_gps2
+it.schmid.android.mofa.R$id: int scrollView1
 it.schmid.android.mofa.R$id: int search_fragment_container
 it.schmid.android.mofa.R$id: int searchclose_btn
 it.schmid.android.mofa.R$id: int searchtitle
