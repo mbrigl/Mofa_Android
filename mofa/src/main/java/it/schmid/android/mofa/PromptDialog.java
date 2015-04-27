@@ -43,8 +43,9 @@ public abstract class PromptDialog extends AlertDialog.Builder implements OnClic
 		 input.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 		 seek=new SeekBar(context);
 		 seek.setMax(56);
-		 linear.addView(seek);
 		 linear.addView(input);
+		 linear.addView(seek);
+
 
 		 setView(linear);
 		 seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

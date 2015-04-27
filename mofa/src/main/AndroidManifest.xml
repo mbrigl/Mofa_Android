@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="it.schmid.android.mofa"
     android:versionCode="10"
-    android:versionName="3.3 U" >
+    android:versionName="3.3" >
 
     <uses-sdk
         android:minSdkVersion="7"
