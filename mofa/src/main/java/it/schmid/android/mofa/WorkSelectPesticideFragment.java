@@ -172,11 +172,11 @@ public class WorkSelectPesticideFragment extends SherlockFragment implements Inp
 	        };
 	}
 	public void onFinishEditDialog(Double doseHl, Double amount) {
-		Log.d(TAG,"[onFinishEditDialog] Current doseHl =" + (Math.round(doseHl*100.0)/100.0) + "Amount = " + (Math.round(amount*100.0)/100.0));
+		Log.d(TAG,"[onFinishEditDialog] Current doseHl =" + (Math.round(doseHl*1000.0)/1000.0) + "Amount = " + (Math.round(amount*1000.0)/1000.0));
 		try {
 			//DecimalFormat twoDForm = new DecimalFormat("#.##");
 		    //return Double.valueOf(twoDForm.format(d));
-			saveState((Math.round(doseHl*100.0)/100.0),(Math.round(amount*100.0)/100.0));
+			saveState((Math.round(doseHl*1000.0)/1000.0),(Math.round(amount*1000.0)/1000.0));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

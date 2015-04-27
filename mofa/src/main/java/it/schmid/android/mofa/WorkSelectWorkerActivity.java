@@ -83,7 +83,9 @@ public class WorkSelectWorkerActivity extends DashboardActivity{
 
 						}
 					};
+
 					dlg.show();
+
 
 					
 			 	}

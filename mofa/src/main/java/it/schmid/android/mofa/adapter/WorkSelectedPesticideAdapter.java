@@ -135,8 +135,8 @@ public class WorkSelectedPesticideAdapter extends ArrayAdapter<SprayPesticide>im
 	}
 	public void onFinishEditDialog(Double doseInput, Double amountInput) {
 		SprayPesticide pest = getCurrPesticide();
-		pest.setDose(Math.round(doseInput*100.0)/100.0);
-		pest.setDose_amount(Math.round(amountInput*100.0)/100.0);
+		pest.setDose(Math.round(doseInput*1000.0)/1000.0);
+		pest.setDose_amount(Math.round(amountInput*1000.0)/1000.0);
 		DatabaseManager.getInstance().updateSprayPesticide(pest);
 		notifyDataSetChanged(); 
 		

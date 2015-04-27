@@ -672,6 +672,7 @@ public class DatabaseManager {
     		QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
     		qb.where().eq("sended", false);
     		qb.orderBy("date", false);
+            qb.orderBy("id",false);
     		PreparedQuery<Work> preparedQuery = qb.prepare();
     		workList = getHelper().getWorkDao().query(preparedQuery);
     		
@@ -699,6 +700,20 @@ public class DatabaseManager {
             QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
             qb.where().eq("sended", false).and() .eq("valid", true);
             qb.orderBy("date", false);
+            PreparedQuery<Work> preparedQuery = qb.prepare();
+            workList = getHelper().getWorkDao().query(preparedQuery);
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return workList;
+    }
+    public List<Work> getAllValidNotSendedWorksExcel(){
+        List<Work> workList=null;
+        try{
+            QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
+            qb.where().eq("sended", false).and() .eq("valid", true);
+            qb.orderBy("date",true);
             PreparedQuery<Work> preparedQuery = qb.prepare();
             workList = getHelper().getWorkDao().query(preparedQuery);
 

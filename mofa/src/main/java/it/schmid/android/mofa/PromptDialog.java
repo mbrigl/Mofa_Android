@@ -6,31 +6,76 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.text.InputType;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 public abstract class PromptDialog extends AlertDialog.Builder implements OnClickListener {
-	 private final EditText input;  
-	 private Double defaultValue; 
+	 private final TextView input;
+	 private final SeekBar seek;
+	 private Double defaultValue;
+	 private int currPos;
 	 /** 
 	  * @param context 
 	  * @param title resource id 
 	  * @param message resource id 
 	  */  
 	 public PromptDialog(Context context, int title, int message, Double proposedValue) {  
-	  super(context);  
+	  super(context);
 	  setTitle(title);  
-	  setMessage(message);  
-	 
-	  input = new EditText(context);  
-	  input.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
+	  setMessage(message);
+		 input = new TextView(context);
+	 // SeekBar seekbar = new SeekBar(context);
+	//  input = new EditText(context);
+		 LinearLayout linear=new LinearLayout(context);
+
+		 linear.setOrientation(LinearLayout.VERTICAL);
+		// TextView input=new TextView(context);
+		 //input.setText("Hello Android");
+		 input.setPadding(10, 10, 10, 10);
+		 input.setGravity(Gravity.CENTER);
+		 input.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+		 seek=new SeekBar(context);
+		 seek.setMax(56);
+		 linear.addView(seek);
+		 linear.addView(input);
+
+		 setView(linear);
+		 seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			 @Override
+			 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+				 Double value = ((double) progress / 4);
+				 input.setText(value.toString());
+			 }
+
+			 @Override
+			 public void onStartTrackingTouch(SeekBar seekBar) {
+			 }
+
+			 @Override
+			 public void onStopTrackingTouch(SeekBar seekBar) {
+			 }
+		 });
+		 //input.setSelectAllOnFocus(true);
+	 // input.requestFocus();
+	 // input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 	  if (proposedValue != 0.00){
 			 input.setText(proposedValue.toString());
 		 }
-	  setView(input);  
-	  
-	  setPositiveButton(R.string.ok, this);  
+		 proposedValue*=4;
+		 currPos = proposedValue.intValue();
+		 seek.setProgress(currPos);
+		 //setView(input);
+		 setPositiveButton(R.string.ok, this);
 	  setNegativeButton(R.string.cancel, this);  
-	 }  
+	 }
+
 	  
 	 /** 
 	  * will be called when "cancel" pressed. 

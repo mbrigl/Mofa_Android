@@ -2,6 +2,8 @@ package it.schmid.android.mofa;
 
 import it.schmid.android.mofa.interfaces.ProductInterface;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
@@ -110,9 +112,10 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
         		if (mPesticide.getDefaultDose()!=null){
             		//java.text.NumberFormat nf = java.text.NumberFormat.getNumberInstance();
             		NumberFormat nf = NumberFormat.getInstance(Locale.US);
-
-            		//DecimalFormat nf = new DecimalFormat("#.##");
-            		mDoseHlText.setText (nf.format(mPesticide.getDefaultDose()));
+					//new DecimalFormat("####.000", DecimalFormatSymbols.getInstance(Locale.US));
+            		//DecimalFormat nf = new DecimalFormat("#.###");
+					((DecimalFormat) nf).applyPattern("###.###");
+					mDoseHlText.setText (nf.format(mPesticide.getDefaultDose()));
             		mAmountText.setText((calcAmount(mWaterAmount,mConc)));
             	}
         	}else{ //editing the selected product
@@ -175,6 +178,7 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 		mAmount=0.00;
 		mDose=0.00;
 		NumberFormat nf = NumberFormat.getInstance(Locale.US);
+		((DecimalFormat) nf).applyPattern("###.###");
 		try {
 			mDose = nf.parse(mDoseHlText.getText().toString()).doubleValue();
 			mAmount = (mDose*wateramount*conc);
@@ -185,9 +189,10 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 		return nf.format(mAmount);
 	}	
 	private String calcDose(Double wateramount,Integer conc){
-		mAmount=0.00;
-		mDose=0.00;
+		mAmount=0.000;
+		mDose=0.000;
 		NumberFormat nf = NumberFormat.getInstance(Locale.US);
+		((DecimalFormat) nf).applyPattern("###.###");
 		try {
 			mAmount = nf.parse(mAmountText.getText().toString()).doubleValue();
 		} catch (ParseException e) {
