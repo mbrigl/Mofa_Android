@@ -51,7 +51,7 @@ public class WorkSelectSoilFertilizerActivity extends DashboardActivity{
 				 	final SoilFertilizer soilFertilizer = adapter.getItem(position);
 					Log.d(TAG, "Current soilfertilizer with id: " + soilFertilizer.getId());
 					
-					PromptDialog dlg = new PromptDialog(WorkSelectSoilFertilizerActivity.this, R.string.title,
+					PromptDialogKeyboard dlg = new PromptDialogKeyboard(WorkSelectSoilFertilizerActivity.this, R.string.title,
 							R.string.enter_amount, 0.00) {
 						@Override
 						public boolean onOkClicked(Double input) {

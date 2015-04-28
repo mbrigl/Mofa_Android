@@ -2,7 +2,8 @@ package it.schmid.android.mofa.adapter;
 
 
 
-import it.schmid.android.mofa.PromptDialog;
+
+import it.schmid.android.mofa.PromptDialogKeyboard;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.model.SoilFertilizer;
@@ -60,7 +61,7 @@ public class WorkSoilFertilizerAdapter extends ArrayAdapter<WorkFertilizer> {
             
             public void onClick(View v) {
             	
-            	PromptDialog dlg = new PromptDialog(context, R.string.title,
+            	PromptDialogKeyboard dlg = new PromptDialogKeyboard(context, R.string.title,
 						R.string.enter_amount, workFertilizer.getAmount()) {
 					@Override
 					public boolean onOkClicked(Double input) {

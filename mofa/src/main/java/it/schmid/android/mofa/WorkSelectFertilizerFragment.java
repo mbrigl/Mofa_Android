@@ -128,7 +128,7 @@ public class WorkSelectFertilizerFragment extends SherlockFragment implements In
     }
 	private void showPurchaseDialog(final Fertilizer fertilizer ){
 		currProd = fertilizer;
-		PromptDialog dlg = new PromptDialog(getActivity(), R.string.title,
+		PromptDialogKeyboard dlg = new PromptDialogKeyboard(getActivity(), R.string.title,
 				R.string.enter_amount, 1.0) {
 			@Override
 			public boolean onOkClicked(Double input) {

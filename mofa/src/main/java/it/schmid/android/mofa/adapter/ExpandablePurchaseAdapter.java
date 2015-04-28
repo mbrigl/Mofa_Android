@@ -2,6 +2,7 @@ package it.schmid.android.mofa.adapter;
 
 import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.PromptDialog;
+import it.schmid.android.mofa.PromptDialogKeyboard;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.WorkProductTabActivity;
 import it.schmid.android.mofa.db.DatabaseManager;
@@ -238,7 +239,7 @@ public class ExpandablePurchaseAdapter extends BaseExpandableListAdapter{
 	}
 	private void showPurchaseDialog(final PurchaseProductInterface curProd){
 		
-		PromptDialog dlg = new PromptDialog(context, R.string.title,
+		PromptDialogKeyboard dlg = new PromptDialogKeyboard(context, R.string.title,
 				R.string.enter_amount, curProd.getAmount()) {
 			@Override
 			public boolean onOkClicked(Double input) {

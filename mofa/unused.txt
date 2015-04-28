@@ -1710,6 +1710,9 @@ it.schmid.android.mofa.NotificationService:
     94:109:public void completedWithDetails(int,java.lang.CharSequence,java.lang.String,java.lang.String)
 it.schmid.android.mofa.PromptDialog:
     private java.lang.Double defaultValue
+it.schmid.android.mofa.PromptDialogKeyboard:
+    private java.lang.Double defaultValue
+    private int currPos
 it.schmid.android.mofa.PurchaseActivity:
     private static final java.lang.String TAG
 it.schmid.android.mofa.R

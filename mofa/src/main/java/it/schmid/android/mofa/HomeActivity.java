@@ -227,7 +227,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 		       //licensed = sharedPref.getBoolean("LICENSED", false);
 		       //** The following lines are to disable for productive use
 		       licensed=app.getLicense(); 
-		       //licensed=true; //only for TESTING, disabling this line for productive use !!!
+		       licensed=true; //only for TESTING, disabling this line for productive use !!!
 		       
 		      if (licensed==false){ //not licensed or still to check
 		    	   String deviceId = Secure.getString(getContentResolver(), Secure.ANDROID_ID);

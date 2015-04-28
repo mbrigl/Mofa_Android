@@ -127,7 +127,7 @@ public class WorkSelectPesticideFragment extends SherlockFragment implements Inp
     }
 	private void showPurchaseDialog(final Pesticide pesticide){
 		currProd = pesticide;
-		PromptDialog dlg = new PromptDialog(getActivity(), R.string.title,
+		PromptDialogKeyboard dlg = new PromptDialogKeyboard(getActivity(), R.string.title,
 				R.string.enter_amount, 1.0) {
 			@Override
 			public boolean onOkClicked(Double input) {
