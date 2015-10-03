@@ -96,6 +96,9 @@ public class SearchResult extends SherlockFragment implements LoaderManager.Load
             if (queryType== ActivityConstants.SEARCH_PEST){
                 prodId=mListener.getProdId();
             }
+            if (queryType== ActivityConstants.SEARCH_FERT){
+                prodId=mListener.getProdId();
+            }
         }
         View v = inflater.inflate(R.layout.fragment_search_result,container,false);
         resultListView =(ExpandableListView) v.findViewById(R.id.resultlistview);
@@ -103,7 +106,7 @@ public class SearchResult extends SherlockFragment implements LoaderManager.Load
         resultListView.setAdapter(adapter);
         Button btnClose = (Button)v.findViewById(R.id.searchclose_btn);
         btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
+
             public void onClick(View view) {
                 if (mListener !=null){
 
@@ -118,21 +121,21 @@ public class SearchResult extends SherlockFragment implements LoaderManager.Load
 
     }
 
-    @Override
+
     public Loader<HashMap<Integer,List<String>>> onCreateLoader(int id, Bundle args) {
-       if (queryType==ActivityConstants.SEARCH_PEST) {
+       if (queryType==ActivityConstants.SEARCH_PEST || queryType==ActivityConstants.SEARCH_FERT) {
            return new SearchHashMapLoader(getActivity(),vqIds,queryType,prodId);
        }else{
            return new SearchHashMapLoader(getActivity(),vqIds,queryType);
        }
     }
 
-    @Override
+
     public void onLoadFinished(Loader<HashMap<Integer, List<String>>> loader, HashMap<Integer, List<String>> data) {
         adapter.setData(data);
     }
 
-    @Override
+
     public void onLoaderReset(Loader<HashMap<Integer, List<String>>> loader) {
         adapter.setData(null);
     }
@@ -184,43 +187,43 @@ public class SearchResult extends SherlockFragment implements LoaderManager.Load
             }
 
         }
-        @Override
+
         public int getGroupCount() {
             return this.headerList.size();
         }
 
-        @Override
+
        public int getChildrenCount(int groupPosition) {
             return this.resultMap.get(this.headerList.get(groupPosition)).size();
             }
 
-        @Override
+
         public Object getGroup(int groupPosition) {
             return this.headerList.get(groupPosition);
         }
 
-        @Override
+
         public Object getChild(int groupPosition, int childPosition) {
             return this.resultMap.get(this.headerList.get(groupPosition))
                     .get(childPosition);
         }
 
-        @Override
+
         public long getGroupId(int groupPosition){
             return groupPosition;
         }
 
-        @Override
+
         public long getChildId(int groupPosition, int childPosition) {
             return childPosition;
         }
 
-        @Override
+
         public boolean hasStableIds() {
             return false;
         }
 
-        @Override
+
         public View getGroupView(int groupPosition, boolean isExpanded,
                                  View convertView, ViewGroup parent) {
             int varId = (Integer) getGroup(groupPosition);
@@ -239,7 +242,7 @@ public class SearchResult extends SherlockFragment implements LoaderManager.Load
             return convertView;
         }
 
-        @Override
+
         public View getChildView(int groupPosition, final int childPosition,
                                  boolean isLastChild, View convertView, ViewGroup parent) {
             final String childText = (String) getChild(groupPosition, childPosition);
@@ -255,7 +258,7 @@ public class SearchResult extends SherlockFragment implements LoaderManager.Load
             return convertView;
         }
 
-        @Override
+
         public boolean isChildSelectable(int i, int i2) {
             return false;
         }

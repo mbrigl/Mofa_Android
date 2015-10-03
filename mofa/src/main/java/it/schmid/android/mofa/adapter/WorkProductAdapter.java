@@ -53,7 +53,7 @@ public class WorkProductAdapter<T extends ProductInterface> extends ArrayAdapter
         getFilter();
         DatabaseManager.init(context);
     }
-	@Override
+
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		View row = convertView;
 		final T p = filterPesticideData.get(position);
@@ -74,7 +74,7 @@ public class WorkProductAdapter<T extends ProductInterface> extends ArrayAdapter
         if (p.showInfo()==1){
             holder.imgInfo.setVisibility(View.VISIBLE);
             holder.imgInfo.setOnClickListener(new View.OnClickListener() {
-                @Override
+
                 public void onClick(View view) {
                     listener.showInfos(p.getId());
 

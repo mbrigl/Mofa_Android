@@ -220,9 +220,11 @@ public class WorkSelectPesticideFragment extends SherlockFragment implements Inp
 		}
 	}
 
-    @Override
+
     public void showInfos(Integer pestId) {
         PestInfoDialog infoDialog = PestInfoDialog.newInstance(pestId);
         infoDialog.show(getFragmentManager(),"DialogFragment");
     }
+
+
 }

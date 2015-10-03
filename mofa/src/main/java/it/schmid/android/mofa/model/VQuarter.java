@@ -41,6 +41,8 @@ public class VQuarter extends ImportBehavior{
 	@DatabaseField
 	private Double wateramount;
 	@DatabaseField
+	private Double size;
+	@DatabaseField
 	private String code;
 	@DatabaseField
 	private Double gps_x1;
@@ -91,6 +93,13 @@ public class VQuarter extends ImportBehavior{
 	public void setWateramount(Double wateramount) {
 		this.wateramount = wateramount;
 	}
+	public Double getSize() {
+		return size;
+	}
+	public void setSize(Double size) {
+		this.size = size;
+	}
+
 	public Double getGps_x1() {
 		return gps_x1;
 	}
@@ -192,6 +201,7 @@ public class VQuarter extends ImportBehavior{
 	        	vquarter.setWateramount(vq.getWateramount());
 	        	vquarter.setLand(vq.getLand());
 	        	vquarter.setCode(vq.getCode());
+				vquarter.setSize(vq.getSize());
 	            DatabaseManager.getInstance().updateVQuarter(vquarter);
             } else
             {
@@ -203,6 +213,7 @@ public class VQuarter extends ImportBehavior{
 	        	v.setWateramount(vq.getWateramount());
 	        	v.setLand(vq.getLand());
 	        	v.setCode(vq.getCode());
+				v.setSize(vq.getSize());
                 DatabaseManager.getInstance().addVquarter(v);
             }
 	    }
@@ -216,6 +227,7 @@ public class VQuarter extends ImportBehavior{
 		Integer xLandId = null;
 		String xVariety = null;
 		String xClone = null;
+        Double xSize = null;
 		Integer xYear = null;
 		Double xWater = null;
 		try {
@@ -276,6 +288,12 @@ public class VQuarter extends ImportBehavior{
 	                        	currentVquarter.setPlantYear(xYear);
 	                        	
 	                        }
+                            if (name.equalsIgnoreCase("size")){
+                                xSize = Double.parseDouble(xpp.nextText());
+                                Log.d(TAG,"[XMLParserVQuarter] size: " + xSize);
+                                currentVquarter.setSize(xSize);
+
+                            }
 	                        if (name.equalsIgnoreCase("wateramount")){
 	                        	java.text.NumberFormat nf = NumberFormat.getInstance(Locale.getDefault());
 	                        	String value = xpp.nextText();
@@ -429,6 +447,7 @@ public class VQuarter extends ImportBehavior{
 			String xVariety = null;
 			String xClone = null;
 			Integer xYear = null;
+            Double xSize = null;
 			Double xWater = null;
 			String xCode="";
 			Boolean firstCode= true;
@@ -514,6 +533,12 @@ public class VQuarter extends ImportBehavior{
 		                        	
 		                        	
 		                        }
+								if (name.equalsIgnoreCase("Nettoflaeche")){
+									xSize = Double.parseDouble(xpp.nextText());
+									Log.d(TAG,"[XMLParserVQuarter] size: " + xSize);
+									currentVquarter.setSize(xSize);
+
+								}
 		                    }
 		                    break;
 		                case XmlPullParser.END_TAG:

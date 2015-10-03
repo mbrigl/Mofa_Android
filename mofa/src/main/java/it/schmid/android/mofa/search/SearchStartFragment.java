@@ -37,6 +37,7 @@ public class SearchStartFragment extends SherlockFragment {
         View v = inflater.inflate(R.layout.search_frag_start, container, false);
         Button btnLastSprayOp = (Button) v.findViewById(R.id.btn_search_last_sprayop);
         Button btnSearchPest = (Button) v.findViewById(R.id.btn_search_pest);
+        Button btnSearchFert = (Button) v.findViewById(R.id.btn_search_fert);
         Button btnDelArchive = (Button) v.findViewById(R.id.btn_del_arch);
         final CheckBox chkDelAllSended = (CheckBox) v.findViewById(R.id.check_del_all_sended);
         TextView txtInfo = (TextView) v.findViewById(R.id.textView);
@@ -45,7 +46,7 @@ public class SearchStartFragment extends SherlockFragment {
         String infoText = String.format(res.getString(R.string.searchInfo),numSprayEntries);
         txtInfo.setText(infoText);
         btnLastSprayOp.setOnClickListener(new View.OnClickListener() {
-            @Override
+
             public void onClick(View view) {
                 Log.d(TAG, "btnLastSprayOP clicked, loading new fragment");
                 SherlockFragment landFragment = SearchLandFragment.newInstance(R.string.searchVQuarter,ActivityConstants.SEARCH_LAST_PEST);
@@ -57,10 +58,19 @@ public class SearchStartFragment extends SherlockFragment {
             }
         });
         btnSearchPest.setOnClickListener(new View.OnClickListener() {
-            @Override
+
             public void onClick(View view) {
-               // Log.d(TAG, "btnSearchPest clicked, loading new fragment");
-                SherlockFragment pestFragment = SearchPestFragment.newInstance(R.string.searchPestSel,ActivityConstants.SEARCH_PEST);
+                // Log.d(TAG, "btnSearchPest clicked, loading new fragment");
+                SherlockFragment pestFragment = SearchPestFragment.newInstance(R.string.searchPestSel, ActivityConstants.SEARCH_PEST);
+                FragmentTransaction transaction = getSherlockActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.search_fragment_container, pestFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+        btnSearchFert.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                SherlockFragment pestFragment = SearchPestFragment.newInstance(R.string.searchPestSel,ActivityConstants.SEARCH_FERT);
                 FragmentTransaction transaction = getSherlockActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.search_fragment_container, pestFragment);
                 transaction.addToBackStack(null);
@@ -68,7 +78,7 @@ public class SearchStartFragment extends SherlockFragment {
             }
         });
         btnDelArchive.setOnClickListener(new View.OnClickListener() {
-            @Override
+
             public void onClick(View view) {
                 String msgText;
                 if (chkDelAllSended.isChecked()){

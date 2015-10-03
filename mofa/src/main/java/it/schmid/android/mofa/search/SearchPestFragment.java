@@ -18,6 +18,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 
 import java.util.List;
 
+import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.PromptDialog;
 import it.schmid.android.mofa.R;
 
@@ -46,7 +47,7 @@ public class SearchPestFragment extends SherlockFragment implements AbsListView.
     // TODO: Rename and change types of parameters
     private String mTitle;
     private int searchType;
-
+    private List<? extends ProductInterface> prodList;
     private OnFragmentPesticideListener mListener;
 
     /**
@@ -86,8 +87,13 @@ public class SearchPestFragment extends SherlockFragment implements AbsListView.
             searchType = getArguments().getInt(ARG_PARAM2);
 
         }
-        List<? extends ProductInterface> pestList = DatabaseManager.getInstance().getUsedPesticideList();
-        mAdapter = new PesticideAdapter<ProductInterface>(getActivity(),R.layout.pesticide_row,pestList);
+        if (searchType == ActivityConstants.SEARCH_FERT){
+            prodList = DatabaseManager.getInstance().getUsedFertilizerList();
+        }else {
+           prodList = DatabaseManager.getInstance().getUsedPesticideList();
+        }
+
+        mAdapter = new PesticideAdapter<ProductInterface>(getActivity(),R.layout.pesticide_row,prodList);
 
     }
 
@@ -125,12 +131,11 @@ public class SearchPestFragment extends SherlockFragment implements AbsListView.
     }
 
 
-    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragPestInteraction((ProductInterface)mAdapter.getItem(position));
+            mListener.onFragPestInteraction((ProductInterface)mAdapter.getItem(position),searchType);
         }
     }
 
@@ -159,7 +164,7 @@ public class SearchPestFragment extends SherlockFragment implements AbsListView.
      */
     public interface OnFragmentPesticideListener {
         // TODO: Update argument type and name
-        public void onFragPestInteraction(ProductInterface product);
+        public void onFragPestInteraction(ProductInterface product, int searchType);
     }
     public static class PesticideAdapter<T extends ProductInterface> extends ArrayAdapter<T>{
        List<? extends ProductInterface>data;

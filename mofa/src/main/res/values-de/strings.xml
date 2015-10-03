@@ -135,6 +135,10 @@
 	<string name="concentrationcaption">Kon.</string>
 	<string name="openpesticidebutton">Mittel</string>
 	<string name="waterdialogmsg">Wassermenge aktualisieren?</string>
+	<string name="constraintDefault">Keine Warnungen</string>
+	<string name="constraintWarningAmountPerHa">Max Menge pro ha überschritten:</string>
+	<string name="constraintWarningDose">Max Dosis überschritten:</string>
+	<string name="constraintError">Überprüfung nicht möglich, da Daten (zb: Fläche) fehlt</string>
 	<!-- String image description -->
 	<string name="imagepesticide">Mittelliste</string>
 	<!-- Strings in Pesticide List -->
@@ -195,6 +199,7 @@
     <string name="searchLastPest">Letzte Spritzung</string>
     <string name="searchVQuarter">Bitte Sortenquartier zur Suche auswählen</string>
     <string name="searchPest">Suche Pflanzenschutzmittel</string>
+	<string name="searchFert">Suche Blattdünger</string>
     <string name="searchPestSel">Bitte Produkt für die Suche auswählen</string>
     <string name="searchInfo">Das Archiv beinhaltet %1$d Einträge. \n Diese Suche beinhaltet nur Spritzungen, welche von diesem Gerät gesendet wurden. Bitte achten Sie darauf, dass Sie das Spritzarchiv nicht während des Jahres leeren.</string>
     <string name="search_no_result">Kein Eintrag für diese Suche</string>

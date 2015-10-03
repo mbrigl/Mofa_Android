@@ -53,7 +53,7 @@ public class SearchActivity extends DashboardActivity implements SearchLandFragm
 
     }
 
-    @Override
+    //callback, when selected the vquarters
     public void onLandFragmentInteraction(HashMap<Integer, ArrayList<Integer>> selElements, int searchType) {
 
         selVQList = new ArrayList<Integer>();
@@ -76,6 +76,13 @@ public class SearchActivity extends DashboardActivity implements SearchLandFragm
             transaction.addToBackStack(null);
             transaction.commit();
         }
+        if(searchType==ActivityConstants.SEARCH_FERT){
+            SherlockFragment searchResult = SearchResult.newInstance(R.string.searchFert,searchType);
+            FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.search_fragment_container, searchResult);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
 
 
     }
@@ -86,21 +93,21 @@ public class SearchActivity extends DashboardActivity implements SearchLandFragm
     public int getProdId(){
         return prodId;
     }
-    @Override
+
     public void closeActivity() {
 
         this.finish();
     }
     //callback, when selecting a product(pesticide) item in the list,
     //we get the id and then we create the searchlandfragment.
-    @Override
-    public void onFragPestInteraction(ProductInterface p) {
+
+    public void onFragPestInteraction(ProductInterface p, int searchType) {
         prodId = p.getId();
-        SherlockFragment landFragment = SearchLandFragment.newInstance(R.string.searchVQuarter, ActivityConstants.SEARCH_PEST);
+        SherlockFragment landFragment = SearchLandFragment.newInstance(R.string.searchVQuarter, searchType);
         FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.search_fragment_container, landFragment);
         transaction.addToBackStack(null);
         transaction.commit();
-        Log.d(TAG, "Selected pesticide: " + p.getProductName());
+        Log.d(TAG, "[onFragPestInteraction] Selected product: " + p.getProductName());
     }
 }

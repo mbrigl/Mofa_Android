@@ -80,7 +80,7 @@ public class PestInfoDialog extends SherlockDialogFragment{
             }
             Button closeButton = (Button) rootView.findViewById(R.id.closebutton);
             closeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
+
                 public void onClick(View view) {
                     dismiss();
                 }

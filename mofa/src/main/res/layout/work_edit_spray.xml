@@ -109,8 +109,30 @@
         		    android:layout_weight="80" >
 
     			</ListView>
-			</TableRow>	
-			
+			</TableRow>
+			<TableRow
+				android:id="@+id/tableRow8"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" >
+
+				<TextView
+                    android:id="@+id/constraintstxtbox"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="80"
+					android:background="@color/lightgreen"
+					android:text = "Keine Warnungen"
+					android:lines="3"
+					android:maxLines="3"
+                    />
+				<ImageView
+					android:id="@+id/refresh_constraint_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="fill_parent"
+					android:layout_alignParentRight="true"
+					android:src="@drawable/ic_action_refresh" />
+
+			</TableRow>
 		</TableLayout>
 
 	

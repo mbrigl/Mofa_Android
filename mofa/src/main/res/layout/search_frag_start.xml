@@ -12,32 +12,37 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:text="@string/searchLastPest"
         android:id="@+id/btn_search_last_sprayop" />
     <Button
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:text="@string/searchPest"
         android:id="@+id/btn_search_pest"
         android:layout_below="@id/btn_search_last_sprayop"/>
-
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/searchFert"
+        android:id="@+id/btn_search_fert"
+        android:layout_below="@id/btn_search_pest"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="95dp"
+        android:layout_height="90dp"
         android:id="@+id/textView"
 
         android:background="@color/lightgreen"
-        android:layout_below="@id/btn_search_pest"/>
+        android:layout_below="@id/btn_search_fert"/>
     <Button
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:text="@string/delete_archive"
         android:id="@+id/btn_del_arch"
         android:layout_below="@id/textView"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="95dp"
+        android:layout_height="90dp"
         android:id="@+id/textViewClearArchive"
         android:background="@color/lightred"
         android:text="@string/delete_archive_mes"

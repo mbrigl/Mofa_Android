@@ -92,7 +92,7 @@ public class SearchLandFragment  extends SherlockFragment {
         txtTitle.setText(mTitle);
         Button btnSearch = (Button)v.findViewById(R.id.landsearch_btn);
         btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
+
             public void onClick(View view) {
                 if (mListener !=null){
                     mListener.onLandFragmentInteraction(adapter.getChildCheckState(),searchType);
@@ -207,7 +207,7 @@ public class SearchLandFragment  extends SherlockFragment {
             }
 
             mholder.selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
+
                 public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                     ArrayList<Integer> hashEntries = new ArrayList<Integer>();
                     if (isChecked){
@@ -292,7 +292,7 @@ public class SearchLandFragment  extends SherlockFragment {
             }
             holder.selectedLand.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 ArrayList<Integer> hashEntries = new ArrayList<Integer>();
-                    @Override
+
                     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                         if (isChecked){
                         for (VQuarter vq: getChild(group)){

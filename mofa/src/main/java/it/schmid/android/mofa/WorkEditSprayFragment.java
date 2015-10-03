@@ -3,6 +3,7 @@ package it.schmid.android.mofa;
 import it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter;
 import it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter;
 import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.model.Pesticide;
 import it.schmid.android.mofa.model.SprayFertilizer;
 import it.schmid.android.mofa.model.SprayPesticide;
 import it.schmid.android.mofa.model.Spraying;
@@ -30,9 +31,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class WorkEditSprayFragment extends SherlockFragment{
 	private static final String TAG = "WorkEditSprayActivity";
@@ -43,6 +48,8 @@ public class WorkEditSprayFragment extends SherlockFragment{
 	private Button confirmButton;
 	private ImageButton pesticideButton;
 	private ImageView refreshIcon;
+	private ImageView refreshConstraintIcon;
+	private TextView constraintTextView;
 	private Work work = null;
 	private Spraying spray = null;
 	private int mworkId = 0;
@@ -50,6 +57,12 @@ public class WorkEditSprayFragment extends SherlockFragment{
 	private int spinnerPosition=0;
 	private List<VQuarter> selectedQuarters;
 	private WorkEditTabActivity parentActivity;
+    private Boolean firstCall = true;
+    private Boolean constraintWarning = false;
+    private String constraintMsg = "";
+	private boolean firstconstraintha = true;
+	private boolean firstconstraintDose = true;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,6 +90,8 @@ public class WorkEditSprayFragment extends SherlockFragment{
 		 confirmButton=(Button)view.findViewById(R.id.spray_save_button);
 		 pesticideButton=(ImageButton)view.findViewById(R.id.work_select_pest);
 		 refreshIcon=(ImageView)view.findViewById(R.id.refresh_sumwater_icon);
+		 refreshConstraintIcon=(ImageView)view.findViewById(R.id.refresh_constraint_icon);
+		 constraintTextView = (TextView)view.findViewById(R.id.constraintstxtbox);
 		 concent = (Spinner)view.findViewById(R.id.concent_spinner);
 		 concent.setOnItemSelectedListener(new OnItemSelectedListenerWrapper
 				 (spinnerPosition,new OnItemSelectedListener(){
@@ -134,7 +149,12 @@ public class WorkEditSprayFragment extends SherlockFragment{
 			Log.d(TAG, "Number Pesticides of current work" + selectedPesticides.size());
 			WorkSelectedPesticideAdapter adapter = new WorkSelectedPesticideAdapter(getActivity(),WorkEditSprayFragment.this, R.layout.work_pesticide_row, selectedPesticides);
 			mWorkPesticideList.setAdapter(adapter);
-			
+            if (firstCall) {
+                checkConstraints(selectedPesticides);
+                firstCall = false;
+            }
+
+
 			
 			
 		
@@ -154,38 +174,44 @@ public class WorkEditSprayFragment extends SherlockFragment{
 			}
 		});
 		pesticideButton.setOnClickListener(new View.OnClickListener() {
-			
+
 			public void onClick(View v) {
-				if (parentActivity.getContinueEnabled()==true){
-					Log.d(TAG,"Showing pesticide list");
+				if (parentActivity.getContinueEnabled() == true) {
+					Log.d(TAG, "Showing pesticide list");
 					saveState();
-					Intent i = new Intent(getActivity(),WorkProductTabActivity.class);
-					i.putExtra("Spray_ID",msprayId );
+					Intent i = new Intent(getActivity(), WorkProductTabActivity.class);
+					i.putExtra("Spray_ID", msprayId);
 					i.putExtra("Calling_Activity", ActivityConstants.WORK_SPRAYING_ACTIVITY);
 					startActivity(i);
-				}else{
+				} else {
 					Toast.makeText(getActivity(), R.string.toast_msg_start, Toast.LENGTH_LONG).show();
 				}
-				
+
 			}
 		});
 		refreshIcon.setOnClickListener(new View.OnClickListener() {
-			
+
 			public void onClick(View v) {
 				Double water;
 				//Toast.makeText(getActivity(), sumOfWater().toString(),Toast.LENGTH_LONG).show();
-				Integer concentration = Integer.parseInt (concent.getSelectedItem().toString());
-				water = sumOfWater()/concentration;
+				Integer concentration = Integer.parseInt(concent.getSelectedItem().toString());
+				water = sumOfWater() / concentration;
 				sumWater.setText(format(water));
-				
+
 			}
 		});
+        refreshConstraintIcon.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                List<SprayPesticide> selectedPesticides = DatabaseManager.getInstance().getSprayPesticideBySprayId(msprayId);
+                checkConstraints(selectedPesticides);
+            }
+        });
 	}
 	public Double getCurrentWaterAmount(){
 		return Double.parseDouble (sumWater.getText().toString());
 	}
 	public Integer getCurrentConc(){
-		return Integer.parseInt (concent.getSelectedItem().toString());
+		return Integer.parseInt(concent.getSelectedItem().toString());
 	}
 	private void saveState(){
 		Log.d(TAG,"Saving Spraying Data");
@@ -239,4 +265,88 @@ public class WorkEditSprayFragment extends SherlockFragment{
 		double toFormat = ((double)Math.round(i*100))/100;
 		return nf.format(toFormat);
 	}
+	public void checkConstraints (List<SprayPesticide> currentPesticides){
+        constraintWarning = false;
+        constraintMsg = "";
+        firstconstraintDose = true;
+        firstconstraintha = true;
+		for (SprayPesticide p: currentPesticides){
+            Pesticide pesticide = DatabaseManager.getInstance().getPesticideWithId(p.getPesticide().getId());
+           // Log.d (TAG, "[checkConstraints] product: " + pesticide.getProductName() );
+            try {
+                if (pesticide.getConstraints() != null) {
+                    JSONObject jsonString = new JSONObject(pesticide.getConstraints());
+                    if (jsonString.has("maxAmount")) {
+                       Double maxAmountProHa =  (Util.getJSONDouble(jsonString, "maxAmount"));
+                       Double currentAmount = p.getDose_amount();
+                       boolean warning = checkAmountForVQuarters(maxAmountProHa, currentAmount, pesticide);
+                       if (warning) {
+                           constraintWarning = true;
+                       }
+                    }
+                }
+            } catch(JSONException e){
+                    e.printStackTrace();
+            }
+			if (pesticide.getDefaultDose()!= null) {
+				if (p.getDose() > pesticide.getDefaultDose()){
+                    constraintWarning = true;
+					if (firstconstraintDose){
+						if (firstconstraintha){
+                            constraintMsg = getResources().getString(R.string.constraintWarningDose);
+						}else {
+							constraintMsg += " - " + getResources().getString(R.string.constraintWarningDose);
+						}
+						firstconstraintDose = false;
+					}
+					constraintMsg += " "  + pesticide.getProductName();
+				}
+			}
+
+		}
+        if (constraintWarning == false) {
+            constraintTextView.setBackgroundColor(getResources().getColor(R.color.lightgreen));
+            constraintMsg = getResources().getString(R.string.constraintDefault);
+        } else {
+            constraintTextView.setBackgroundColor(getResources().getColor(R.color.lightred));
+
+        }
+        constraintTextView.setText(constraintMsg);
+
+	}
+
+    public boolean checkAmountForVQuarters(Double maxAmountProHa, Double currentAmount, Pesticide pesticide){
+		MofaApplication app = MofaApplication.getInstance();
+		int backEndSoftware = Integer.parseInt(app.getBackendSoftware());
+		double sumWater = sumOfWater();
+        try {
+			for (VQuarter v:selectedQuarters){
+				double factor = v.getWateramount()/sumWater;
+				if (backEndSoftware == 2) { //LibreOffice
+					currentAmount = currentAmount/1000; //we convert it to kg/lt to have a single procedure to check the amount, because max amount is in kg/lt
+				}
+				double amountProHa = ((currentAmount * factor) / v.getSize() * 10000);
+				amountProHa = (double)Math.round(amountProHa * 100) / 100;
+				if (amountProHa > maxAmountProHa) {
+
+
+					if (firstconstraintha) {
+
+						constraintMsg = getResources().getString(R.string.constraintWarningAmountPerHa);
+						firstconstraintha = false; //helper variable to construct the string output
+					}
+					constraintMsg += " " + pesticide.getProductName() + " -> " + v.getVariety() + ", " + v.getPlantYear();
+					return true; // only if we exceed the amount
+				}
+
+			}
+		}catch (NullPointerException e) {
+			constraintMsg = getResources().getString(R.string.constraintError);
+			return true;
+		}
+
+	    return false;
+    }
+
+
 }

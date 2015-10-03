@@ -78,7 +78,7 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 		return defaultDose;
 	}
 
-    @Override
+
     public int showInfo() {
         return SHOWINFO;
     }
@@ -195,7 +195,7 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 	        	pesticide.setProductName(p.getProductName());
 	        	pesticide.setDefaultDose(p.getDefaultDose());
 	        	pesticide.setRegNumber(p.getRegNumber());
-                pesticide.setConstraints(p.getConstraints());
+				pesticide.setConstraints(p.getConstraints());
 	            DatabaseManager.getInstance().updatePesticide(pesticide);
             } else
             {

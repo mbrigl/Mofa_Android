@@ -54,6 +54,8 @@ public class SearchHashMapLoader extends AsyncTaskLoader<HashMap<Integer,List<St
                 return searchLastPest();
             case (ActivityConstants.SEARCH_PEST):
                 return searchPest(prodId);
+            case (ActivityConstants.SEARCH_FERT):
+                return searchFert(prodId);
             default:
                 return searchLastPest();
 
@@ -110,7 +112,7 @@ public class SearchHashMapLoader extends AsyncTaskLoader<HashMap<Integer,List<St
         Log.d(TAG,"Loading Data in a Background Process");
         for (Integer vqId : vquarters){
             List<String> sprayString = new ArrayList<String>();
-            List<Work> sprayWorks = DatabaseManager.getInstance().getSprayWorksForVQAndProd(vqId,workIdsForPestId);
+            List<Work> sprayWorks = DatabaseManager.getInstance().getSprayWorksForVQAndProd(vqId, workIdsForPestId);
             if (sprayWorks.size()==0){
                 sprayString.add (context.getString(R.string.search_no_result));
             }
@@ -122,6 +124,36 @@ public class SearchHashMapLoader extends AsyncTaskLoader<HashMap<Integer,List<St
                         Pesticide pest = DatabaseManager.getInstance().getPesticideWithId(sP.getPesticide().getId());
                         if (pest.getId()==prodId){
                             sprayString.add(dateFormat.format(w.getDate()) + " " + pest.getProductName() + " " + sP.getDose());
+                        }
+
+                    }
+
+                }
+            }
+            mData.put(vqId,sprayString);
+        }
+        return mData;
+    }
+    private HashMap<Integer,List<String>> searchFert(int prodId){
+        final String DATE_FORMAT = "dd.MM.yyyy";
+        final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+        Integer sprayId;
+        List<Integer> workIdsForFertId = DatabaseManager.getInstance().getIdsForSelectedFert(prodId);
+        Log.d(TAG,"Loading Data in a Background Process");
+        for (Integer vqId : vquarters){
+            List<String> sprayString = new ArrayList<String>();
+            List<Work> sprayWorks = DatabaseManager.getInstance().getSprayWorksForVQAndProd(vqId,workIdsForFertId);
+            if (sprayWorks.size()==0){
+                sprayString.add (context.getString(R.string.search_no_result));
+            }
+            for (Work w : sprayWorks){
+                if (DatabaseManager.getInstance().getSprayingByWorkId(w.getId()).size()!=0){
+                    sprayId = DatabaseManager.getInstance().getSprayingByWorkId(w.getId()).get(0).getId();
+                    List<SprayFertilizer> selectedFertilizers = DatabaseManager.getInstance().getSprayFertilizerBySprayId(sprayId);
+                    for(SprayFertilizer sF: selectedFertilizers){
+                        Fertilizer fert = DatabaseManager.getInstance().getFertilizerWithId(sF.getFertilizer().getId());
+                        if (fert.getId()==prodId){
+                            sprayString.add(dateFormat.format(w.getDate()) + " " + fert.getProductName() + " " + sF.getDose());
                         }
 
                     }

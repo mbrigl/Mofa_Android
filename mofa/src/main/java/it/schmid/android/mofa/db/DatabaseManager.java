@@ -672,7 +672,7 @@ public class DatabaseManager {
     		QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
     		qb.where().eq("sended", false);
     		qb.orderBy("date", false);
-            qb.orderBy("id",false);
+            qb.orderBy("id", false);
     		PreparedQuery<Work> preparedQuery = qb.prepare();
     		workList = getHelper().getWorkDao().query(preparedQuery);
     		
@@ -782,7 +782,7 @@ public class DatabaseManager {
         List<Task> asaTasks = getTaskNotSpraying();
         int clauseC = 0;
         for (Task t:asaTasks){ //generating a dynamic or
-            w.eq("task_id", t.getId()).and() .eq("valid", true).and() .le("date",currDateMinusFifty);
+            w.eq("task_id", t.getId()).and() .eq("valid", true).and() .le("date", currDateMinusFifty);
             clauseC++;
         }
         if (clauseC > 1) {
@@ -868,8 +868,8 @@ public class DatabaseManager {
         QueryBuilder<Task, Integer> qb = getHelper().getTaskDao().queryBuilder();
         final Where<Task, Integer> w = qb.where();
         w.or(
-            w.isNull("type"),
-            w.eq("type","E")
+                w.isNull("type"),
+                w.eq("type", "E")
         );
         PreparedQuery<Task> preparedQuery = qb.prepare();
         return getHelper().getTaskDao().query(preparedQuery);
@@ -882,7 +882,7 @@ public class DatabaseManager {
                 w.isNull("type"),
                 w.eq("type","E"),
                 w.eq("type","D"),
-                w.eq("type","H"),
+                w.eq("type", "H"),
                 w.eq("type","O")
         );
         PreparedQuery<Task> preparedQuery = qb.prepare();
@@ -891,7 +891,7 @@ public class DatabaseManager {
     public List<Task>getTaskSpraying()throws SQLException{
         QueryBuilder<Task, Integer> qb = getHelper().getTaskDao().queryBuilder();
         final Where<Task, Integer> w = qb.where();
-        w.eq("type","S");
+        w.eq("type", "S");
         PreparedQuery<Task> preparedQuery = qb.prepare();
         return getHelper().getTaskDao().query(preparedQuery);
     }
@@ -1771,7 +1771,7 @@ public class DatabaseManager {
 
             try {
                 getHelper().getFruitQualityDao().callBatchTasks(new Callable<Void>() {
-                    @Override
+
                     public Void call() throws Exception {
                         getHelper().getFruitQualityDao().delete(getAllQualities());
                         return null;
@@ -1869,7 +1869,7 @@ public class DatabaseManager {
         try{
             QueryBuilder<WorkVQuarter,Integer> qbVquarter = getHelper().getWorkVQuarterDao().queryBuilder();
             final Where<WorkVQuarter, Integer> w = qbVquarter.where();
-            w.eq("vquarter_id", vqs).and() .in("work_id",workIdsForPestId);
+            w.eq("vquarter_id", vqs).and() .in("work_id", workIdsForPestId);
           //  PreparedQuery<WorkVQuarter> test=qbVquarter.prepare();
          //   List<WorkVQuarter> testList= getHelper().getWorkVQuarterDao().query(test);
             QueryBuilder<Work,Integer> worksForPest = getSprayWorks();
@@ -1886,6 +1886,23 @@ public class DatabaseManager {
         try{
             List<Integer> idList = new ArrayList<Integer>();
             QueryBuilder<Spraying,Integer>sprayingWithId = getSprayingWithPestId(pestId);
+            QueryBuilder<Work,Integer> work = getSprayWorks();
+            work.join(sprayingWithId);
+            PreparedQuery<Work> prepWork= work.prepare();
+            List<Work> list = getHelper().getWorkDao().query(prepWork);
+            for (Work w:list){
+                idList.add(w.getId());
+            }
+            return idList;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public List<Integer> getIdsForSelectedFert(Integer fertId)  {
+        try{
+            List<Integer> idList = new ArrayList<Integer>();
+            QueryBuilder<Spraying,Integer>sprayingWithId = getSprayingWithFertId(fertId);
             QueryBuilder<Work,Integer> work = getSprayWorks();
             work.join(sprayingWithId);
             PreparedQuery<Work> prepWork= work.prepare();
@@ -1942,7 +1959,23 @@ public class DatabaseManager {
         }
 
     }
+    private QueryBuilder<Spraying,Integer>getSprayingWithFertId(int fertId){
+        try{
+            QueryBuilder<SprayFertilizer, Integer> qb = getHelper().getSprayFertilizerDao().queryBuilder();
+            final Where<SprayFertilizer, Integer> w = qb.where();
+            w.eq("fert_id",fertId);
+            QueryBuilder<Spraying,Integer>sprayingQb = getHelper().getSprayingDao().queryBuilder();
+            sprayingQb.join(qb);
 
+
+            return sprayingQb;
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+
+    }
     public List<Pesticide> getUsedPesticideList() {
         try {
             List<SprayPesticide> results = getHelper().getSprayPesticideDao().queryBuilder().distinct().selectColumns(SprayPesticide.PESTICIDE_ID_FIELD_NAME).query();

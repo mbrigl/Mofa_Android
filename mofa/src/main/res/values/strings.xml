@@ -136,6 +136,11 @@
     <string name="concentrationcaption">Con.</string>
     <string name="openpesticidebutton">Pesticides</string>
     <string name="waterdialogmsg">Refreshing water amount?</string>
+    <string name="constraintDefault">No warning</string>
+    <string name="constraintWarningAmountPerHa">Max Amount per ha exceeded:</string>
+    <string name="constraintError">Check not possible, because some data are missing</string>
+
+
 
     <!-- Strings in Pesticide List -->
     <string name="search_str_pesticide">Enter text to search</string>
@@ -198,6 +203,7 @@
     <string name="searchLastPest">Last Spraying work</string>
     <string name="searchVQuarter">Please select vquarter for search</string>
     <string name="searchPest">Search Pesticide</string>
+    <string name="searchFert">Search Fertilizer</string>
     <string name="searchPestSel">Please select a product to search</string>
     <string name="searchInfo">The archive contains %1$d entries. \n This search includes only spraying entries sended from this device. Be sure that you don\'t clear the archive during the year!</string>
 
