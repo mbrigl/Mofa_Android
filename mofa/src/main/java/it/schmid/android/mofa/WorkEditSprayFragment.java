@@ -284,24 +284,27 @@ public class WorkEditSprayFragment extends SherlockFragment{
                            constraintWarning = true;
                        }
                     }
-                }
+					if (jsonString.has("maxDose")) {
+						Double maxDose = (Util.getJSONDouble(jsonString,"maxDose"));
+						if (p.getDose() > maxDose){
+							constraintWarning = true;
+							if (firstconstraintDose){
+								if (firstconstraintha){
+									constraintMsg = getResources().getString(R.string.constraintWarningDose);
+								}else {
+									constraintMsg += " - " + getResources().getString(R.string.constraintWarningDose);
+								}
+								firstconstraintDose = false;
+							}
+							constraintMsg += " "  + pesticide.getProductName();
+						}
+					}
+				}
+
             } catch(JSONException e){
                     e.printStackTrace();
             }
-			if (pesticide.getDefaultDose()!= null) {
-				if (p.getDose() > pesticide.getDefaultDose()){
-                    constraintWarning = true;
-					if (firstconstraintDose){
-						if (firstconstraintha){
-                            constraintMsg = getResources().getString(R.string.constraintWarningDose);
-						}else {
-							constraintMsg += " - " + getResources().getString(R.string.constraintWarningDose);
-						}
-						firstconstraintDose = false;
-					}
-					constraintMsg += " "  + pesticide.getProductName();
-				}
-			}
+
 
 		}
         if (constraintWarning == false) {

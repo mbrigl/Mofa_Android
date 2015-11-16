@@ -12179,6 +12179,7 @@ it.schmid.android.mofa.MofaApplication: MofaApplication()
 it.schmid.android.mofa.PreferenceContentFragment
 it.schmid.android.mofa.PreferenceContentFragmentASA
 it.schmid.android.mofa.PreferenceFragmentASA
+it.schmid.android.mofa.PreferenceFragmentASA: PreferenceFragmentASA()
 it.schmid.android.mofa.PurchaseActivity
 it.schmid.android.mofa.PurchaseActivity: PurchaseActivity()
 it.schmid.android.mofa.R$array: int listBackend
@@ -12560,6 +12561,7 @@ it.schmid.android.mofa.R$id: int asa_tax_setting
 it.schmid.android.mofa.R$id: int beeDanger
 it.schmid.android.mofa.R$id: int btn_closedialog
 it.schmid.android.mofa.R$id: int btn_del_arch
+it.schmid.android.mofa.R$id: int btn_search_fert
 it.schmid.android.mofa.R$id: int btn_search_last_sprayop
 it.schmid.android.mofa.R$id: int btn_search_pest
 it.schmid.android.mofa.R$id: int btnclose
@@ -12577,6 +12579,7 @@ it.schmid.android.mofa.R$id: int clone
 it.schmid.android.mofa.R$id: int closebutton
 it.schmid.android.mofa.R$id: int concent_spinner
 it.schmid.android.mofa.R$id: int concentration
+it.schmid.android.mofa.R$id: int constraintstxtbox
 it.schmid.android.mofa.R$id: int currfertilizerlist
 it.schmid.android.mofa.R$id: int currlandlist
 it.schmid.android.mofa.R$id: int currmachinelist
@@ -12670,6 +12673,7 @@ it.schmid.android.mofa.R$id: int purchase_menu_add
 it.schmid.android.mofa.R$id: int purchase_menu_upload
 it.schmid.android.mofa.R$id: int purchasinglistview
 it.schmid.android.mofa.R$id: int reenterTime
+it.schmid.android.mofa.R$id: int refresh_constraint_icon
 it.schmid.android.mofa.R$id: int refresh_sumwater_icon
 it.schmid.android.mofa.R$id: int resultlistview
 it.schmid.android.mofa.R$id: int save_gps1
@@ -12889,6 +12893,10 @@ it.schmid.android.mofa.R$string: int cancelbutton
 it.schmid.android.mofa.R$string: int categorytable
 it.schmid.android.mofa.R$string: int closebutton
 it.schmid.android.mofa.R$string: int concentrationcaption
+it.schmid.android.mofa.R$string: int constraintDefault
+it.schmid.android.mofa.R$string: int constraintError
+it.schmid.android.mofa.R$string: int constraintWarningAmountPerHa
+it.schmid.android.mofa.R$string: int constraintWarningDose
 it.schmid.android.mofa.R$string: int datemsgtomuch
 it.schmid.android.mofa.R$string: int delete_archive
 it.schmid.android.mofa.R$string: int delete_archive_mes
@@ -12981,6 +12989,7 @@ it.schmid.android.mofa.R$string: int reentertime
 it.schmid.android.mofa.R$string: int reentertimeUnit
 it.schmid.android.mofa.R$string: int reimportmessage
 it.schmid.android.mofa.R$string: int restpathemptystring
+it.schmid.android.mofa.R$string: int searchFert
 it.schmid.android.mofa.R$string: int searchInfo
 it.schmid.android.mofa.R$string: int searchLastPest
 it.schmid.android.mofa.R$string: int searchPest
@@ -13313,6 +13322,7 @@ it.schmid.android.mofa.WorkSelectSoilFertilizerActivity: WorkSelectSoilFertilize
 it.schmid.android.mofa.WorkSelectWorkerActivity
 it.schmid.android.mofa.WorkSelectWorkerActivity: WorkSelectWorkerActivity()
 it.schmid.android.mofa.WorkingJournalPreferenceFragment
+it.schmid.android.mofa.WorkingJournalPreferenceFragment: WorkingJournalPreferenceFragment()
 it.schmid.android.mofa.db.DatabaseHelper
 it.schmid.android.mofa.db.DatabaseHelper: java.lang.String DATABASE_NAME
 it.schmid.android.mofa.db.DatabaseHelper: int DATABASE_VERSION
@@ -13351,6 +13361,7 @@ it.schmid.android.mofa.db.DatabaseHelper: void updateFromVersion8(android.databa
 it.schmid.android.mofa.db.DatabaseHelper: void updateFromVersion9(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int)
 it.schmid.android.mofa.db.DatabaseHelper: void updateFromVersion10(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int)
 it.schmid.android.mofa.db.DatabaseHelper: void updateFromVersion11(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int)
+it.schmid.android.mofa.db.DatabaseHelper: void updateFromVersion12(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int)
 it.schmid.android.mofa.db.DatabaseHelper: com.j256.ormlite.dao.Dao getLandDao()
 it.schmid.android.mofa.db.DatabaseHelper: com.j256.ormlite.dao.Dao getMachineDao()
 it.schmid.android.mofa.db.DatabaseHelper: com.j256.ormlite.dao.Dao getWorkerDao()
@@ -13562,9 +13573,11 @@ it.schmid.android.mofa.db.DatabaseManager: java.util.List getHarvestListbyWorkId
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getSprayWorksForVQ(java.lang.Integer)
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getSprayWorksForVQAndProd(java.lang.Integer,java.util.List)
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getIdsForSelectedPest(java.lang.Integer)
+it.schmid.android.mofa.db.DatabaseManager: java.util.List getIdsForSelectedFert(java.lang.Integer)
 it.schmid.android.mofa.db.DatabaseManager: com.j256.ormlite.stmt.QueryBuilder getWorksForPestId(java.lang.Integer)
 it.schmid.android.mofa.db.DatabaseManager: com.j256.ormlite.stmt.QueryBuilder getSprayWorks()
 it.schmid.android.mofa.db.DatabaseManager: com.j256.ormlite.stmt.QueryBuilder getSprayingWithPestId(int)
+it.schmid.android.mofa.db.DatabaseManager: com.j256.ormlite.stmt.QueryBuilder getSprayingWithFertId(int)
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getUsedPesticideList()
 it.schmid.android.mofa.db.DatabaseManager: java.util.List getUsedFertilizerList()
 it.schmid.android.mofa.db.DatabaseManager: it.schmid.android.mofa.db.DatabaseHelper access$000(it.schmid.android.mofa.db.DatabaseManager)
@@ -13616,6 +13629,7 @@ it.schmid.android.mofa.db.SearchHashMapLoader: SearchHashMapLoader(android.conte
 it.schmid.android.mofa.db.SearchHashMapLoader: java.util.HashMap loadInBackground()
 it.schmid.android.mofa.db.SearchHashMapLoader: java.util.HashMap searchLastPest()
 it.schmid.android.mofa.db.SearchHashMapLoader: java.util.HashMap searchPest(int)
+it.schmid.android.mofa.db.SearchHashMapLoader: java.util.HashMap searchFert(int)
 it.schmid.android.mofa.db.SearchHashMapLoader: void deliverResult(java.util.HashMap)
 it.schmid.android.mofa.db.SearchHashMapLoader: void onReset()
 it.schmid.android.mofa.db.SearchHashMapLoader: void onStartLoading()
@@ -13954,6 +13968,7 @@ it.schmid.android.mofa.model.VQuarter: java.lang.String variety
 it.schmid.android.mofa.model.VQuarter: java.lang.String clone
 it.schmid.android.mofa.model.VQuarter: java.lang.Integer plantYear
 it.schmid.android.mofa.model.VQuarter: java.lang.Double wateramount
+it.schmid.android.mofa.model.VQuarter: java.lang.Double size
 it.schmid.android.mofa.model.VQuarter: java.lang.String code
 it.schmid.android.mofa.model.VQuarter: java.lang.Double gps_x1
 it.schmid.android.mofa.model.VQuarter: java.lang.Double gps_x2
@@ -13973,6 +13988,8 @@ it.schmid.android.mofa.model.VQuarter: java.lang.Integer getPlantYear()
 it.schmid.android.mofa.model.VQuarter: void setPlantYear(java.lang.Integer)
 it.schmid.android.mofa.model.VQuarter: java.lang.Double getWateramount()
 it.schmid.android.mofa.model.VQuarter: void setWateramount(java.lang.Double)
+it.schmid.android.mofa.model.VQuarter: java.lang.Double getSize()
+it.schmid.android.mofa.model.VQuarter: void setSize(java.lang.Double)
 it.schmid.android.mofa.model.VQuarter: java.lang.Double getGps_x1()
 it.schmid.android.mofa.model.VQuarter: void setGps_x1(java.lang.Double)
 it.schmid.android.mofa.model.VQuarter: java.lang.Double getGps_x2()

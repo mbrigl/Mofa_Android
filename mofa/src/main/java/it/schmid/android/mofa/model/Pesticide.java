@@ -226,6 +226,7 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
         String restrictionText=null;
         Integer waitPeriod=null;
         int beeRestriction=0;
+		Double maxDose = null;
 		try {
 	        //For String source
 	        XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -312,6 +313,16 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
                                     e.printStackTrace();
                                 }
                             }
+							if (name.equalsIgnoreCase("maxDose")){
+								NumberFormat format = NumberFormat.getInstance(Locale.GERMAN);
+								Number number = format.parse(xpp.nextText());
+								maxDose = number.doubleValue();
+								try {
+									json.put("maxDose",maxDose);
+								} catch (JSONException e) {
+									e.printStackTrace();
+								}
+							}
 	                        if (name.equalsIgnoreCase("dose")&& !(xpp.isEmptyElementTag())){
 	                        	String value = xpp.nextText();
 	                        	java.text.NumberFormat nf = NumberFormat.getInstance(Locale.getDefault());

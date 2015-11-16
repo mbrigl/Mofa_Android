@@ -1824,7 +1824,7 @@ it.schmid.android.mofa.search.SearchLandFragment:
 it.schmid.android.mofa.search.SearchPestFragment:
     private static final java.lang.String ARG_PARAM1
     private static final java.lang.String ARG_PARAM2
-    143:148:public void setEmptyText(java.lang.CharSequence)
+    148:153:public void setEmptyText(java.lang.CharSequence)
 it.schmid.android.mofa.search.SearchResult:
     private static final java.lang.String ARG_PARAM1
     private static final java.lang.String ARG_PARAM2
