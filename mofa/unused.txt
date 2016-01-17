@@ -1778,7 +1778,7 @@ it.schmid.android.mofa.WorkSelectMachineActivity$SelectMachineAdapter:
     private static final java.lang.String TAG
 it.schmid.android.mofa.WorkSelectPesticideFragment:
     private static final java.lang.String TAG
-    153:153:public void showInfoDialog()
+    157:157:public void showInfoDialog()
 it.schmid.android.mofa.WorkSelectSoilFertilizerActivity:
     private static final java.lang.String TAG
 it.schmid.android.mofa.WorkSelectWorkerActivity:

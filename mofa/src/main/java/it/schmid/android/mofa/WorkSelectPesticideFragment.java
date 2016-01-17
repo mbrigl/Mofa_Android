@@ -42,6 +42,7 @@ public class WorkSelectPesticideFragment extends SherlockFragment implements Inp
     private Pesticide currProd;
     private int concentration;
     private Double wateramount;
+	private Double size;
     private int callingActivity;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -54,11 +55,14 @@ public class WorkSelectPesticideFragment extends SherlockFragment implements Inp
         	if (null!=bundle && bundle.containsKey("Spray_ID")) {
                 sprayId = bundle.getInt("Spray_ID");
                 }
+			if (null!=bundle && bundle.containsKey("Size")) {
+				size = bundle.getDouble("Size");
+			}
             break;
         case ActivityConstants.PURCHASING_ACTIVITY:
         	if (null!=bundle && bundle.containsKey("Purchase_ID")) {
                 purchaseId = bundle.getInt("Purchase_ID");
-                Log.d(TAG, "PurchaseId = " + purchaseId);
+
                 }
             break;
         }
@@ -121,7 +125,7 @@ public class WorkSelectPesticideFragment extends SherlockFragment implements Inp
 	private void showDoseDialog(Pesticide pesticide) {
         currProd = pesticide;
 		//FragmentManager fm = getActivity().getSupportFragmentManager();
-        InputDoseDialogFragment inputDoseDialog = new InputDoseDialogFragment(pesticide,concentration,wateramount);
+        InputDoseDialogFragment inputDoseDialog = new InputDoseDialogFragment(pesticide,concentration,wateramount,size);
         inputDoseDialog.setTargetFragment(this, 0);
         inputDoseDialog.show(getFragmentManager(), "fragment_input_dose");
     }
@@ -132,7 +136,7 @@ public class WorkSelectPesticideFragment extends SherlockFragment implements Inp
 			@Override
 			public boolean onOkClicked(Double input) {
 				// do something
-				Log.d(TAG, "showDialog: " + input);
+
 				try {
 					savePurchaseProduct(purchaseId, pesticide.getId(), input);
 					
@@ -172,7 +176,7 @@ public class WorkSelectPesticideFragment extends SherlockFragment implements Inp
 	        };
 	}
 	public void onFinishEditDialog(Double doseHl, Double amount) {
-		Log.d(TAG,"[onFinishEditDialog] Current doseHl =" + (Math.round(doseHl*1000.0)/1000.0) + "Amount = " + (Math.round(amount*1000.0)/1000.0));
+		//Log.d(TAG,"[onFinishEditDialog] Current doseHl =" + (Math.round(doseHl*1000.0)/1000.0) + "Amount = " + (Math.round(amount*1000.0)/1000.0));
 		try {
 			//DecimalFormat twoDForm = new DecimalFormat("#.##");
 		    //return Double.valueOf(twoDForm.format(d));
@@ -182,10 +186,10 @@ public class WorkSelectPesticideFragment extends SherlockFragment implements Inp
 		}
 	}
 	private void saveState(Double doseHl, Double amount)throws SQLException{
-		Log.d(TAG,"[saveState] Saving pesticide treatment");
+		//Log.d(TAG,"[saveState] Saving pesticide treatment");
 		List<SprayPesticide> currSprayPesticide = DatabaseManager.getInstance().getSprayPesticideBySprayIdAndByPesticideId(sprayId, currProd.getId());
 		if (currSprayPesticide.size() == 0) {
-			Log.d(TAG,"[saveState] New Entry");
+			//Log.d(TAG,"[saveState] New Entry");
 			SprayPesticide sprayProduct = new SprayPesticide();
 			Spraying curSpray = DatabaseManager.getInstance().getSprayingWithId(sprayId);
 			sprayProduct.setSpraying(curSpray);
@@ -194,7 +198,7 @@ public class WorkSelectPesticideFragment extends SherlockFragment implements Inp
 			sprayProduct.setDose_amount(amount);
 			DatabaseManager.getInstance().addSprayPesticide(sprayProduct);
 		}else{
-			Log.d(TAG,"[saveState] Updating Entry");
+			//Log.d(TAG,"[saveState] Updating Entry");
 			SprayPesticide currSprayPest = currSprayPesticide.get(0);
 			currSprayPest.setDose(doseHl);
 			currSprayPest.setDose_amount(amount);
@@ -206,14 +210,14 @@ public class WorkSelectPesticideFragment extends SherlockFragment implements Inp
 		List<PurchasePesticide> currPurPest = DatabaseManager.getInstance().getPurchasePesticideByPurchaseIdAndByPesticideId(purchaseId, pestId);
 		Purchase p= DatabaseManager.getInstance().getPurchaseWithId(purchaseId);
 		if (currPurPest.size()==0){
-			Log.d(TAG,"[savePurchaseProduct] New Entry");
+			//Log.d(TAG,"[savePurchaseProduct] New Entry");
 			PurchasePesticide newPurPest = new PurchasePesticide();
 			newPurPest.setProduct(currProd);
 			newPurPest.setPurchase(p);
 			newPurPest.setAmount(input);
 			DatabaseManager.getInstance().addPurchasePesticide(newPurPest);
 		}else{
-			Log.d(TAG,"[savePurchaseProduct] Updating Entry" );
+			//Log.d(TAG,"[savePurchaseProduct] Updating Entry" );
 			PurchasePesticide updatePurPest = currPurPest.get(0);
 			updatePurPest.setAmount(input);
 			DatabaseManager.getInstance().updatePurchasePesticide(updatePurPest);

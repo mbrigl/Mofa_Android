@@ -49,17 +49,17 @@ public abstract class PromptDialog extends AlertDialog.Builder implements OnClic
 
 		 setView(linear);
 		 seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-			 @Override
+
 			 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 				 Double value = ((double) progress / 4);
 				 input.setText(value.toString());
 			 }
 
-			 @Override
+
 			 public void onStartTrackingTouch(SeekBar seekBar) {
 			 }
 
-			 @Override
+
 			 public void onStopTrackingTouch(SeekBar seekBar) {
 			 }
 		 });

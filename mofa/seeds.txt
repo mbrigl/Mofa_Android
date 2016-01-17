@@ -12638,8 +12638,11 @@ it.schmid.android.mofa.R$id: int landclose_btn
 it.schmid.android.mofa.R$id: int landlistview
 it.schmid.android.mofa.R$id: int landname
 it.schmid.android.mofa.R$id: int landsearch_btn
+it.schmid.android.mofa.R$id: int lbl_amount_ha_desc
+it.schmid.android.mofa.R$id: int lbl_amount_ha_value
 it.schmid.android.mofa.R$id: int lbl_dose_hl
 it.schmid.android.mofa.R$id: int lbl_dose_total
+it.schmid.android.mofa.R$id: int lbl_size
 it.schmid.android.mofa.R$id: int legal_text
 it.schmid.android.mofa.R$id: int list
 it.schmid.android.mofa.R$id: int listMode
@@ -12878,6 +12881,7 @@ it.schmid.android.mofa.R$string: int abs__searchview_description_submit
 it.schmid.android.mofa.R$string: int abs__searchview_description_voice
 it.schmid.android.mofa.R$string: int abs__shareactionprovider_share_with
 it.schmid.android.mofa.R$string: int abs__shareactionprovider_share_with_application
+it.schmid.android.mofa.R$string: int amountha
 it.schmid.android.mofa.R$string: int app_name
 it.schmid.android.mofa.R$string: int asa_fertilizer_code
 it.schmid.android.mofa.R$string: int asa_fertilizer_soil_code
@@ -12999,6 +13003,7 @@ it.schmid.android.mofa.R$string: int search_no_result
 it.schmid.android.mofa.R$string: int search_str_pesticide
 it.schmid.android.mofa.R$string: int settings
 it.schmid.android.mofa.R$string: int showspraytab
+it.schmid.android.mofa.R$string: int sizeInfo
 it.schmid.android.mofa.R$string: int soilfertilizertable
 it.schmid.android.mofa.R$string: int soilfertilizertitle
 it.schmid.android.mofa.R$string: int soilferttab

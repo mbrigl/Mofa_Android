@@ -81,7 +81,7 @@ public class WorkSelectedFertilizerAdapter extends ArrayAdapter<SprayFertilizer>
         holder.txtFertilizer.setOnClickListener(new OnClickListener(){
         	public void onClick(View v){
         		InputDoseDialogFragment inputDoseDialog = new InputDoseDialogFragment(fertilizer,workFertilizer.getDose(),
-						workFertilizer.getDose_amount(),fragment.getCurrentConc(),fragment.getCurrentWaterAmount());
+						workFertilizer.getDose_amount(),fragment.getCurrentConc(),fragment.getCurrentWaterAmount(),fragment.getSumOfSize());
 				android.support.v4.app.FragmentManager fm = ((FragmentActivity)context).getSupportFragmentManager();
 				inputDoseDialog.setCallback(WorkSelectedFertilizerAdapter.this);
 				//inputDoseDialog.setTargetFragment( fm.,0);

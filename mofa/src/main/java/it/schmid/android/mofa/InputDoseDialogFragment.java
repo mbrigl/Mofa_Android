@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.util.Locale;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
@@ -27,6 +28,8 @@ import android.widget.TextView.OnEditorActionListener;
 @SuppressLint("ValidFragment")
 public class InputDoseDialogFragment  extends DialogFragment implements OnEditorActionListener{
 	private static final String TAG = "InputDoseDialogFragment";
+	private TextView mSizeText;
+	private TextView mAmountProHa;
 	private EditText mDoseHlText;
 	private EditText mAmountText;
 	private Button mOkButton;
@@ -34,6 +37,7 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 	private ProductInterface mPesticide;
 	private Integer mConc;
 	private Double mWaterAmount;
+	private Double mSize;
 	private InputDoseDialogFragmentListener callback;
 	private Integer focus = 0; //checking which field is active to calculate the right amount on closing the dialog
 	private Double mAmount;
@@ -46,18 +50,20 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 	public InputDoseDialogFragment() {
 		
 	}
-	public InputDoseDialogFragment(ProductInterface pesticide,Integer conc, Double water) {
+	public InputDoseDialogFragment(ProductInterface pesticide,Integer conc, Double water,Double size) {
 		this.mPesticide=pesticide;
 		this.mConc=conc;
 		this.mWaterAmount=water;
+		this.mSize=size;
 	}
 //	constructor for existing entries, to modify the dose or amount
-	public InputDoseDialogFragment(ProductInterface pesticide,Double dose, Double doseAmount, Integer conc, Double water){ 
+	public InputDoseDialogFragment(ProductInterface pesticide,Double dose, Double doseAmount, Integer conc, Double water,Double size){
 		this.mPesticide=pesticide;
 		this.mConc=conc;
 		this.mWaterAmount=water;
 		this.mDose=dose;
 		this.mAmount=doseAmount;
+		this.mSize=size;
 		this.edit=true;
 	}
 	public void setCallback(InputDoseDialogFragmentListener mCallback){
@@ -82,6 +88,11 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_input_dose, container);
+		mSizeText=(TextView) view.findViewById(R.id.lbl_size);
+		Resources res = getResources();
+		String sizeText = String.format(res.getString(R.string.sizeInfo), mSize.toString());
+		mSizeText.setText(sizeText);
+		mAmountProHa =(TextView) view.findViewById(R.id.lbl_amount_ha_value);
         mDoseHlText = (EditText) view.findViewById(R.id.txt_dose_hl);
         mAmountText = (EditText) view.findViewById(R.id.txt_dose_total);
         mOkButton = (Button) view.findViewById(R.id.ok_confirm_button);
@@ -122,9 +133,10 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
         		NumberFormat nf = NumberFormat.getInstance(Locale.US);
         		mDoseHlText.setText (nf.format(mDose));
         		mAmountText.setText(nf.format(mAmount));
+				calcAmountProHa(mAmount);
         	}
         	
-        	// Show soft keyboard automatically
+        	// Show soft keyboard automaticallybi
             mDoseHlText.requestFocus();
             mDoseHlText.setOnEditorActionListener(this);
             mAmountText.setOnEditorActionListener(this);
@@ -177,11 +189,13 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 	private String calcAmount(Double wateramount, Integer conc){
 		mAmount=0.00;
 		mDose=0.00;
+
 		NumberFormat nf = NumberFormat.getInstance(Locale.US);
 		((DecimalFormat) nf).applyPattern("###.###");
 		try {
 			mDose = nf.parse(mDoseHlText.getText().toString()).doubleValue();
 			mAmount = (mDose*wateramount*conc);
+			calcAmountProHa(mAmount);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -201,7 +215,15 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 		mDose = mAmount/(wateramount*conc);
 		return nf.format(mDose);
 	}
-	
+	private void calcAmountProHa(Double amount){
+		Double amountProHa=0.00;
+		if(mSize!= 0){
+			amountProHa =amount/mSize*10000 ;
+			amountProHa = (double)Math.round(amountProHa * 100) / 100;
+			mAmountProHa.setText(amountProHa.toString());
+		}
+
+	}
 	
 	
 	

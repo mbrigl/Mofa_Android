@@ -12720,47 +12720,51 @@ it.schmid.android.mofa.HomeActivity$MyLicenseCheckerCallback -> hf:
     843:859:void dontAllow(int) -> b
     865:875:void applicationError(int) -> c
 it.schmid.android.mofa.InputDoseDialogFragment -> hg:
-    android.widget.EditText mDoseHlText -> a
-    android.widget.EditText mAmountText -> b
-    android.widget.Button mOkButton -> c
-    android.widget.Button mCancelButton -> d
-    it.schmid.android.mofa.interfaces.ProductInterface mPesticide -> e
-    java.lang.Integer mConc -> f
-    java.lang.Double mWaterAmount -> g
-    it.schmid.android.mofa.InputDoseDialogFragment$InputDoseDialogFragmentListener callback -> h
-    java.lang.Integer focus -> i
-    java.lang.Double mAmount -> j
-    java.lang.Double mDose -> k
-    java.lang.Boolean edit -> l
-    64:65:void setCallback(it.schmid.android.mofa.InputDoseDialogFragment$InputDoseDialogFragmentListener) -> a
-    68:80:void onCreate(android.os.Bundle) -> onCreate
-    84:156:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    161:174:boolean onEditorAction(android.widget.TextView,int,android.view.KeyEvent) -> onEditorAction
-    178:189:java.lang.String calcAmount(java.lang.Double,java.lang.Integer) -> a
-    192:202:java.lang.String calcDose(java.lang.Double,java.lang.Integer) -> b
-    28:28:java.lang.Integer access$000(it.schmid.android.mofa.InputDoseDialogFragment) -> a
-    28:28:java.lang.Double access$100(it.schmid.android.mofa.InputDoseDialogFragment) -> b
-    28:28:java.lang.Integer access$200(it.schmid.android.mofa.InputDoseDialogFragment) -> c
-    28:28:java.lang.String access$300(it.schmid.android.mofa.InputDoseDialogFragment,java.lang.Double,java.lang.Integer) -> a
-    28:28:android.widget.EditText access$400(it.schmid.android.mofa.InputDoseDialogFragment) -> d
-    28:28:java.lang.String access$500(it.schmid.android.mofa.InputDoseDialogFragment,java.lang.Double,java.lang.Integer) -> b
-    28:28:android.widget.EditText access$600(it.schmid.android.mofa.InputDoseDialogFragment) -> e
-    28:28:java.lang.Double access$700(it.schmid.android.mofa.InputDoseDialogFragment) -> f
-    28:28:java.lang.Double access$800(it.schmid.android.mofa.InputDoseDialogFragment) -> g
-    28:28:it.schmid.android.mofa.InputDoseDialogFragment$InputDoseDialogFragmentListener access$900(it.schmid.android.mofa.InputDoseDialogFragment) -> h
-    28:28:java.lang.Integer access$002(it.schmid.android.mofa.InputDoseDialogFragment,java.lang.Integer) -> a
+    android.widget.TextView mSizeText -> a
+    android.widget.TextView mAmountProHa -> b
+    android.widget.EditText mDoseHlText -> c
+    android.widget.EditText mAmountText -> d
+    android.widget.Button mOkButton -> e
+    android.widget.Button mCancelButton -> f
+    it.schmid.android.mofa.interfaces.ProductInterface mPesticide -> g
+    java.lang.Integer mConc -> h
+    java.lang.Double mWaterAmount -> i
+    java.lang.Double mSize -> j
+    it.schmid.android.mofa.InputDoseDialogFragment$InputDoseDialogFragmentListener callback -> k
+    java.lang.Integer focus -> l
+    java.lang.Double mAmount -> m
+    java.lang.Double mDose -> n
+    java.lang.Boolean edit -> o
+    70:71:void setCallback(it.schmid.android.mofa.InputDoseDialogFragment$InputDoseDialogFragmentListener) -> a
+    74:86:void onCreate(android.os.Bundle) -> onCreate
+    90:168:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    173:186:boolean onEditorAction(android.widget.TextView,int,android.view.KeyEvent) -> onEditorAction
+    190:203:java.lang.String calcAmount(java.lang.Double,java.lang.Integer) -> a
+    206:216:java.lang.String calcDose(java.lang.Double,java.lang.Integer) -> b
+    219:226:void calcAmountProHa(java.lang.Double) -> a
+    29:29:java.lang.Integer access$000(it.schmid.android.mofa.InputDoseDialogFragment) -> a
+    29:29:java.lang.Double access$100(it.schmid.android.mofa.InputDoseDialogFragment) -> b
+    29:29:java.lang.Integer access$200(it.schmid.android.mofa.InputDoseDialogFragment) -> c
+    29:29:java.lang.String access$300(it.schmid.android.mofa.InputDoseDialogFragment,java.lang.Double,java.lang.Integer) -> a
+    29:29:android.widget.EditText access$400(it.schmid.android.mofa.InputDoseDialogFragment) -> d
+    29:29:java.lang.String access$500(it.schmid.android.mofa.InputDoseDialogFragment,java.lang.Double,java.lang.Integer) -> b
+    29:29:android.widget.EditText access$600(it.schmid.android.mofa.InputDoseDialogFragment) -> e
+    29:29:java.lang.Double access$700(it.schmid.android.mofa.InputDoseDialogFragment) -> f
+    29:29:java.lang.Double access$800(it.schmid.android.mofa.InputDoseDialogFragment) -> g
+    29:29:it.schmid.android.mofa.InputDoseDialogFragment$InputDoseDialogFragmentListener access$900(it.schmid.android.mofa.InputDoseDialogFragment) -> h
+    29:29:java.lang.Integer access$002(it.schmid.android.mofa.InputDoseDialogFragment,java.lang.Integer) -> a
 it.schmid.android.mofa.InputDoseDialogFragment$1 -> hh:
     it.schmid.android.mofa.InputDoseDialogFragment this$0 -> a
-    91:92:void onClick(android.view.View) -> onClick
+    102:103:void onClick(android.view.View) -> onClick
 it.schmid.android.mofa.InputDoseDialogFragment$2 -> hi:
     it.schmid.android.mofa.InputDoseDialogFragment this$0 -> a
-    97:108:void onClick(android.view.View) -> onClick
+    108:119:void onClick(android.view.View) -> onClick
 it.schmid.android.mofa.InputDoseDialogFragment$3 -> hj:
     it.schmid.android.mofa.InputDoseDialogFragment this$0 -> a
-    133:142:void onFocusChange(android.view.View,boolean) -> onFocusChange
+    145:154:void onFocusChange(android.view.View,boolean) -> onFocusChange
 it.schmid.android.mofa.InputDoseDialogFragment$4 -> hk:
     it.schmid.android.mofa.InputDoseDialogFragment this$0 -> a
-    147:154:void onFocusChange(android.view.View,boolean) -> onFocusChange
+    159:166:void onFocusChange(android.view.View,boolean) -> onFocusChange
 it.schmid.android.mofa.InputDoseDialogFragment$InputDoseDialogFragmentListener -> hl:
     void onFinishEditDialog(java.lang.Double,java.lang.Double) -> a
 it.schmid.android.mofa.MofaApplication -> it.schmid.android.mofa.MofaApplication:
@@ -13057,27 +13061,30 @@ it.schmid.android.mofa.WorkEditSprayFragment -> it.schmid.android.mofa.WorkEditS
     boolean firstconstraintDose -> u
     68:73:void onCreate(android.os.Bundle) -> onCreate
     77:109:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    112:118:void fillSpinner() -> c
+    112:118:void fillSpinner() -> d
     120:143:void populateFields(int) -> a
-    148:161:void fillPesticideList() -> d
-    163:168:void fillFertilizerList() -> e
-    170:209:void setListener() -> f
-    211:211:java.lang.Double getCurrentWaterAmount() -> a
-    214:214:java.lang.Integer getCurrentConc() -> b
-    217:227:void saveState() -> g
-    229:236:void createNewSpraying(java.lang.Integer,java.lang.Double) -> a
-    238:243:void updateSpraying(it.schmid.android.mofa.model.Spraying,java.lang.Integer,java.lang.Double) -> a
-    245:252:java.lang.Double sumOfWater() -> h
-    256:260:void onResume() -> onResume
-    263:266:java.lang.String format(double) -> a
-    269:316:void checkConstraints(java.util.List) -> a
-    319:348:boolean checkAmountForVQuarters(java.lang.Double,java.lang.Double,it.schmid.android.mofa.model.Pesticide) -> a
+    148:161:void fillPesticideList() -> e
+    163:168:void fillFertilizerList() -> f
+    170:210:void setListener() -> g
+    212:212:java.lang.Double getCurrentWaterAmount() -> a
+    215:215:java.lang.Integer getCurrentConc() -> b
+    218:218:java.lang.Double getSumOfSize() -> c
+    221:231:void saveState() -> h
+    233:240:void createNewSpraying(java.lang.Integer,java.lang.Double) -> a
+    242:247:void updateSpraying(it.schmid.android.mofa.model.Spraying,java.lang.Integer,java.lang.Double) -> a
+    249:256:java.lang.Double sumOfWater() -> i
+    259:266:java.lang.Double sumOfSize() -> j
+    270:274:void onResume() -> onResume
+    277:280:java.lang.String format(double) -> a
+    283:333:void checkConstraints(java.util.List) -> a
+    336:366:boolean checkAmountForVQuarters(java.lang.Double,java.lang.Double,it.schmid.android.mofa.model.Pesticide) -> a
     42:42:void access$000(it.schmid.android.mofa.WorkEditSprayFragment) -> a
     42:42:it.schmid.android.mofa.WorkEditTabActivity access$100(it.schmid.android.mofa.WorkEditSprayFragment) -> b
     42:42:int access$200(it.schmid.android.mofa.WorkEditSprayFragment) -> c
-    42:42:android.widget.Spinner access$300(it.schmid.android.mofa.WorkEditSprayFragment) -> d
-    42:42:java.lang.Double access$400(it.schmid.android.mofa.WorkEditSprayFragment) -> e
-    42:42:android.widget.EditText access$500(it.schmid.android.mofa.WorkEditSprayFragment) -> f
+    42:42:java.lang.Double access$300(it.schmid.android.mofa.WorkEditSprayFragment) -> d
+    42:42:android.widget.Spinner access$400(it.schmid.android.mofa.WorkEditSprayFragment) -> e
+    42:42:java.lang.Double access$500(it.schmid.android.mofa.WorkEditSprayFragment) -> f
+    42:42:android.widget.EditText access$600(it.schmid.android.mofa.WorkEditSprayFragment) -> g
 it.schmid.android.mofa.WorkEditSprayFragment$1 -> ij:
     it.schmid.android.mofa.WorkEditSprayFragment this$0 -> a
     101:101:void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
@@ -13087,13 +13094,13 @@ it.schmid.android.mofa.WorkEditSprayFragment$2 -> ik:
     172:174:void onClick(android.view.View) -> onClick
 it.schmid.android.mofa.WorkEditSprayFragment$3 -> il:
     it.schmid.android.mofa.WorkEditSprayFragment this$0 -> a
-    179:190:void onClick(android.view.View) -> onClick
+    179:191:void onClick(android.view.View) -> onClick
 it.schmid.android.mofa.WorkEditSprayFragment$4 -> im:
     it.schmid.android.mofa.WorkEditSprayFragment this$0 -> a
-    197:201:void onClick(android.view.View) -> onClick
+    198:202:void onClick(android.view.View) -> onClick
 it.schmid.android.mofa.WorkEditSprayFragment$5 -> in:
     it.schmid.android.mofa.WorkEditSprayFragment this$0 -> a
-    205:207:void onClick(android.view.View) -> onClick
+    206:208:void onClick(android.view.View) -> onClick
 it.schmid.android.mofa.WorkEditTabActivity -> it.schmid.android.mofa.WorkEditTabActivity:
     android.support.v4.view.ViewPager mViewPager -> a
     it.schmid.android.mofa.WorkEditTabActivity$TabsAdapter mTabsAdapter -> b
@@ -13274,17 +13281,18 @@ it.schmid.android.mofa.WorkSelectFertilizerFragment -> it.schmid.android.mofa.Wo
     it.schmid.android.mofa.model.Fertilizer currProd -> i
     int concentration -> j
     java.lang.Double wateramount -> k
-    int callingActivity -> l
-    47:65:void onCreate(android.os.Bundle) -> onCreate
-    70:94:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    98:116:void prepAdapter() -> a
-    118:121:void getSprayInfos() -> b
-    123:128:void showDoseDialog(it.schmid.android.mofa.model.Fertilizer) -> a
-    130:151:void showPurchaseDialog(it.schmid.android.mofa.model.Fertilizer) -> b
-    153:171:void setTextWatcher() -> c
-    173:179:void onFinishEditDialog(java.lang.Double,java.lang.Double) -> a
-    181:199:void saveState(java.lang.Double,java.lang.Double) -> b
-    202:217:void savePurchaseProduct(int,java.lang.Integer,java.lang.Double) -> a
+    java.lang.Double size -> l
+    int callingActivity -> m
+    48:69:void onCreate(android.os.Bundle) -> onCreate
+    74:98:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    102:120:void prepAdapter() -> a
+    122:125:void getSprayInfos() -> b
+    127:132:void showDoseDialog(it.schmid.android.mofa.model.Fertilizer) -> a
+    134:155:void showPurchaseDialog(it.schmid.android.mofa.model.Fertilizer) -> b
+    157:175:void setTextWatcher() -> c
+    179:183:void onFinishEditDialog(java.lang.Double,java.lang.Double) -> a
+    186:203:void saveState(java.lang.Double,java.lang.Double) -> b
+    206:221:void savePurchaseProduct(int,java.lang.Integer,java.lang.Double) -> a
     31:31:android.widget.EditText access$000(it.schmid.android.mofa.WorkSelectFertilizerFragment) -> a
     31:31:it.schmid.android.mofa.adapter.WorkProductAdapter access$100(it.schmid.android.mofa.WorkSelectFertilizerFragment) -> b
     31:31:int access$200(it.schmid.android.mofa.WorkSelectFertilizerFragment) -> c
@@ -13294,22 +13302,22 @@ it.schmid.android.mofa.WorkSelectFertilizerFragment -> it.schmid.android.mofa.Wo
     31:31:void access$600(it.schmid.android.mofa.WorkSelectFertilizerFragment,int,java.lang.Integer,java.lang.Double) -> a
 it.schmid.android.mofa.WorkSelectFertilizerFragment$1 -> jh:
     it.schmid.android.mofa.WorkSelectFertilizerFragment this$0 -> a
-    77:78:void onClick(android.view.View) -> onClick
+    81:82:void onClick(android.view.View) -> onClick
 it.schmid.android.mofa.WorkSelectFertilizerFragment$2 -> ji:
     it.schmid.android.mofa.WorkSelectFertilizerFragment this$0 -> a
-    83:84:void onClick(android.view.View) -> onClick
+    87:88:void onClick(android.view.View) -> onClick
 it.schmid.android.mofa.WorkSelectFertilizerFragment$3 -> jj:
     it.schmid.android.mofa.WorkSelectFertilizerFragment this$0 -> a
-    105:113:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+    109:117:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 it.schmid.android.mofa.WorkSelectFertilizerFragment$4 -> jk:
     it.schmid.android.mofa.model.Fertilizer val$fertilizer -> a
     it.schmid.android.mofa.WorkSelectFertilizerFragment this$0 -> b
-    136:144:boolean onOkClicked(java.lang.Double) -> a
+    142:148:boolean onOkClicked(java.lang.Double) -> a
 it.schmid.android.mofa.WorkSelectFertilizerFragment$5 -> jl:
     it.schmid.android.mofa.WorkSelectFertilizerFragment this$0 -> a
-    156:158:void afterTextChanged(android.text.Editable) -> afterTextChanged
-    163:163:void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
-    168:168:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
+    160:162:void afterTextChanged(android.text.Editable) -> afterTextChanged
+    167:167:void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
+    172:172:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
 it.schmid.android.mofa.WorkSelectLandActivity -> it.schmid.android.mofa.WorkSelectLandActivity:
     it.schmid.android.mofa.model.Work work -> a
     it.schmid.android.mofa.adapter.ExpandableLandAdapter adapter -> b
@@ -13373,18 +13381,19 @@ it.schmid.android.mofa.WorkSelectPesticideFragment -> it.schmid.android.mofa.Wor
     it.schmid.android.mofa.model.Pesticide currProd -> i
     int concentration -> j
     java.lang.Double wateramount -> k
-    int callingActivity -> l
-    48:67:void onCreate(android.os.Bundle) -> onCreate
-    72:94:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    98:115:void prepAdapter() -> a
-    117:120:void getSprayInfos() -> b
-    122:127:void showDoseDialog(it.schmid.android.mofa.model.Pesticide) -> a
-    129:150:void showPurchaseDialog(it.schmid.android.mofa.model.Pesticide) -> b
-    155:173:void setTextWatcher() -> c
-    175:183:void onFinishEditDialog(java.lang.Double,java.lang.Double) -> a
-    185:203:void saveState(java.lang.Double,java.lang.Double) -> b
-    206:221:void savePurchaseProduct(int,java.lang.Integer,java.lang.Double) -> a
-    225:227:void showInfos(java.lang.Integer) -> a
+    java.lang.Double size -> l
+    int callingActivity -> m
+    49:71:void onCreate(android.os.Bundle) -> onCreate
+    76:98:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    102:119:void prepAdapter() -> a
+    121:124:void getSprayInfos() -> b
+    126:131:void showDoseDialog(it.schmid.android.mofa.model.Pesticide) -> a
+    133:154:void showPurchaseDialog(it.schmid.android.mofa.model.Pesticide) -> b
+    159:177:void setTextWatcher() -> c
+    183:187:void onFinishEditDialog(java.lang.Double,java.lang.Double) -> a
+    190:207:void saveState(java.lang.Double,java.lang.Double) -> b
+    210:225:void savePurchaseProduct(int,java.lang.Integer,java.lang.Double) -> a
+    229:231:void showInfos(java.lang.Integer) -> a
     32:32:android.widget.EditText access$000(it.schmid.android.mofa.WorkSelectPesticideFragment) -> a
     32:32:it.schmid.android.mofa.adapter.WorkProductAdapter access$100(it.schmid.android.mofa.WorkSelectPesticideFragment) -> b
     32:32:int access$200(it.schmid.android.mofa.WorkSelectPesticideFragment) -> c
@@ -13394,22 +13403,22 @@ it.schmid.android.mofa.WorkSelectPesticideFragment -> it.schmid.android.mofa.Wor
     32:32:void access$600(it.schmid.android.mofa.WorkSelectPesticideFragment,int,java.lang.Integer,java.lang.Double) -> a
 it.schmid.android.mofa.WorkSelectPesticideFragment$1 -> jt:
     it.schmid.android.mofa.WorkSelectPesticideFragment this$0 -> a
-    79:80:void onClick(android.view.View) -> onClick
+    83:84:void onClick(android.view.View) -> onClick
 it.schmid.android.mofa.WorkSelectPesticideFragment$2 -> ju:
     it.schmid.android.mofa.WorkSelectPesticideFragment this$0 -> a
-    84:85:void onClick(android.view.View) -> onClick
+    88:89:void onClick(android.view.View) -> onClick
 it.schmid.android.mofa.WorkSelectPesticideFragment$3 -> jv:
     it.schmid.android.mofa.WorkSelectPesticideFragment this$0 -> a
-    105:112:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+    109:116:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 it.schmid.android.mofa.WorkSelectPesticideFragment$4 -> jw:
     it.schmid.android.mofa.model.Pesticide val$pesticide -> a
     it.schmid.android.mofa.WorkSelectPesticideFragment this$0 -> b
-    135:143:boolean onOkClicked(java.lang.Double) -> a
+    141:147:boolean onOkClicked(java.lang.Double) -> a
 it.schmid.android.mofa.WorkSelectPesticideFragment$5 -> jx:
     it.schmid.android.mofa.WorkSelectPesticideFragment this$0 -> a
-    158:160:void afterTextChanged(android.text.Editable) -> afterTextChanged
-    165:165:void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
-    170:170:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
+    162:164:void afterTextChanged(android.text.Editable) -> afterTextChanged
+    169:169:void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
+    174:174:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
 it.schmid.android.mofa.WorkSelectSoilFertilizerActivity -> it.schmid.android.mofa.WorkSelectSoilFertilizerActivity:
     android.widget.ListView listView -> a
     int workId -> b
@@ -14366,8 +14375,8 @@ it.schmid.android.mofa.model.Pesticide -> it.schmid.android.mofa.model.Pesticide
     111:162:void importMasterData(org.json.JSONArray) -> importMasterData
     168:168:java.lang.String toString() -> toString
     176:213:java.lang.Boolean importMasterData(java.lang.String,it.schmid.android.mofa.NotificationService) -> importMasterData
-    217:362:java.util.List pesticideXmlParser(java.lang.String,it.schmid.android.mofa.NotificationService) -> pesticideXmlParser
-    365:522:java.util.List pesticideXmlParserASA(java.lang.String,it.schmid.android.mofa.NotificationService) -> pesticideXmlParserASA
+    217:373:java.util.List pesticideXmlParser(java.lang.String,it.schmid.android.mofa.NotificationService) -> pesticideXmlParser
+    376:533:java.util.List pesticideXmlParserASA(java.lang.String,it.schmid.android.mofa.NotificationService) -> pesticideXmlParserASA
 it.schmid.android.mofa.model.Purchase -> it.schmid.android.mofa.model.Purchase:
     java.lang.Integer id -> id
     java.util.Date date -> date

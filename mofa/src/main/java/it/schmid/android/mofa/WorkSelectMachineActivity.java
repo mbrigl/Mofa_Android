@@ -171,7 +171,7 @@ public class WorkSelectMachineActivity extends DashboardActivity{
                 holderItem.mHours.setText(hours.toString());
             }
             holderItem.mIsSelected.setOnClickListener(new View.OnClickListener() {
-                @Override
+
                 public void onClick(View view) {
                     if (holderItem.mIsSelected.isChecked()){ //adding item to sparseArray and setting the textview
                         holderItem.mHours.setVisibility(View.VISIBLE);

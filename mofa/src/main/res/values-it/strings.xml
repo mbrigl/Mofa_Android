@@ -141,6 +141,8 @@
 	<string name="constraintWarningAmountPerHa">quantità per ha superato:</string>
 	<string name="constraintWarningDose">quantità dosaggio superato:</string>
 	<string name="constraintError">Controllo non possibile, perchè mancano dati (grandezza campo)</string>
+	<string name="sizeInfo">superficie:  %1$s m²</string>
+	<string name="amountha">quantita ettaro:</string>
 	<!-- String image description -->
 	<string name="imagepesticide">lista antipar.</string>
 	<!-- Strings in Pesticide List -->

@@ -182,6 +182,7 @@ public class WorkEditSprayFragment extends SherlockFragment{
 					Intent i = new Intent(getActivity(), WorkProductTabActivity.class);
 					i.putExtra("Spray_ID", msprayId);
 					i.putExtra("Calling_Activity", ActivityConstants.WORK_SPRAYING_ACTIVITY);
+					i.putExtra("Size", sumOfSize());
 					startActivity(i);
 				} else {
 					Toast.makeText(getActivity(), R.string.toast_msg_start, Toast.LENGTH_LONG).show();
@@ -201,17 +202,20 @@ public class WorkEditSprayFragment extends SherlockFragment{
 			}
 		});
         refreshConstraintIcon.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                List<SprayPesticide> selectedPesticides = DatabaseManager.getInstance().getSprayPesticideBySprayId(msprayId);
-                checkConstraints(selectedPesticides);
-            }
-        });
+			public void onClick(View view) {
+				List<SprayPesticide> selectedPesticides = DatabaseManager.getInstance().getSprayPesticideBySprayId(msprayId);
+				checkConstraints(selectedPesticides);
+			}
+		});
 	}
 	public Double getCurrentWaterAmount(){
 		return Double.parseDouble (sumWater.getText().toString());
 	}
 	public Integer getCurrentConc(){
 		return Integer.parseInt(concent.getSelectedItem().toString());
+	}
+	public Double getSumOfSize(){
+		return sumOfSize();
 	}
 	private void saveState(){
 		Log.d(TAG,"Saving Spraying Data");
@@ -248,6 +252,16 @@ public class WorkEditSprayFragment extends SherlockFragment{
 				sum= sum + v.getWateramount();
 			}
 			
+		}
+		return sum;
+	}
+	private Double sumOfSize(){
+		Double sum=0.00;
+		for (VQuarter v:selectedQuarters){
+			if (v.getSize()!=null){
+				sum= sum + v.getSize();
+			}
+
 		}
 		return sum;
 	}
@@ -323,11 +337,12 @@ public class WorkEditSprayFragment extends SherlockFragment{
 		int backEndSoftware = Integer.parseInt(app.getBackendSoftware());
 		double sumWater = sumOfWater();
         try {
+			if (backEndSoftware == 2) { //LibreOffice
+				currentAmount = currentAmount/1000; //we convert it to kg/lt to have a single procedure to check the amount, because max amount is in kg/lt
+			}
 			for (VQuarter v:selectedQuarters){
 				double factor = v.getWateramount()/sumWater;
-				if (backEndSoftware == 2) { //LibreOffice
-					currentAmount = currentAmount/1000; //we convert it to kg/lt to have a single procedure to check the amount, because max amount is in kg/lt
-				}
+
 				double amountProHa = ((currentAmount * factor) / v.getSize() * 10000);
 				amountProHa = (double)Math.round(amountProHa * 100) / 100;
 				if (amountProHa > maxAmountProHa) {

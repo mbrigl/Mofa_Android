@@ -41,6 +41,7 @@ public class WorkSelectFertilizerFragment extends SherlockFragment implements In
     private Fertilizer currProd;
     private int concentration;
     private Double wateramount;
+	private Double size;
     private int callingActivity;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,9 @@ public class WorkSelectFertilizerFragment extends SherlockFragment implements In
         	if (null!=bundle && bundle.containsKey("Spray_ID")) {
                 sprayId = bundle.getInt("Spray_ID");
                 }
+			if (null!=bundle && bundle.containsKey("Size")) {
+				size = bundle.getDouble("Size");
+			}
             break;
         case ActivityConstants.PURCHASING_ACTIVITY:
         	if (null!=bundle && bundle.containsKey("Purchase_ID")) {
@@ -122,7 +126,7 @@ public class WorkSelectFertilizerFragment extends SherlockFragment implements In
 	private void showDoseDialog(Fertilizer fertilizer) {
         currProd = fertilizer;
 		//FragmentManager fm = getActivity().getSupportFragmentManager();
-        InputDoseDialogFragment inputDoseDialog = new InputDoseDialogFragment(fertilizer,concentration,wateramount);
+        InputDoseDialogFragment inputDoseDialog = new InputDoseDialogFragment(fertilizer,concentration,wateramount,size);
         inputDoseDialog.setTargetFragment(this, 0);
         inputDoseDialog.show(getFragmentManager(), "fragment_input_dose");
     }
@@ -133,7 +137,7 @@ public class WorkSelectFertilizerFragment extends SherlockFragment implements In
 			@Override
 			public boolean onOkClicked(Double input) {
 				// do something
-				Log.d(TAG, "showDialog: " + input);
+				//Log.d(TAG, "showDialog: " + input);
 				try {
 					savePurchaseProduct(purchaseId, fertilizer.getId(), input);
 					
@@ -170,7 +174,7 @@ public class WorkSelectFertilizerFragment extends SherlockFragment implements In
 	        };
 	}
 	public void onFinishEditDialog(Double doseHl, Double amount) {
-		Log.d(TAG,"[onFinishEditDialog] Current doseHl =" + doseHl);
+	//	Log.d(TAG,"[onFinishEditDialog] Current doseHl =" + doseHl);
 		try {
 			saveState((Math.round(doseHl*100.0)/100.0),(Math.round(amount*100.0)/100.0));
 		} catch (SQLException e) {
@@ -178,10 +182,10 @@ public class WorkSelectFertilizerFragment extends SherlockFragment implements In
 		}
 	}
 	private void saveState(Double doseHl, Double amount)throws SQLException{
-		Log.d(TAG,"[saveState] Saving fertilizer treatment");
+		//Log.d(TAG,"[saveState] Saving fertilizer treatment");
 		List<SprayFertilizer> currSprayFertilizer = DatabaseManager.getInstance().getSprayFertilizerBySprayIdAndByFertilizerId(sprayId, currProd.getId());
 		if (currSprayFertilizer.size() == 0) {
-			Log.d(TAG,"[saveState] New Entry");
+			//Log.d(TAG,"[saveState] New Entry");
 			SprayFertilizer sprayProduct = new SprayFertilizer();
 			Spraying curSpray = DatabaseManager.getInstance().getSprayingWithId(sprayId);
 			sprayProduct.setSpraying(curSpray);
@@ -190,7 +194,7 @@ public class WorkSelectFertilizerFragment extends SherlockFragment implements In
 			sprayProduct.setDose_amount(amount);
 			DatabaseManager.getInstance().addSprayFertilizer(sprayProduct);
 		}else{
-			Log.d(TAG,"[saveState] Updating Entry");
+			//Log.d(TAG,"[saveState] Updating Entry");
 			SprayFertilizer currSprayFert = currSprayFertilizer.get(0);
 			currSprayFert.setDose(doseHl);
 			currSprayFert.setDose_amount(amount);
@@ -202,14 +206,14 @@ public class WorkSelectFertilizerFragment extends SherlockFragment implements In
 		List<PurchaseFertilizer> currPurFert = DatabaseManager.getInstance().getPurchaseFertilizerByPurchaseIdAndByFertilizerId(purchaseId, fertId);
 		Purchase p= DatabaseManager.getInstance().getPurchaseWithId(purchaseId);
 		if (currPurFert.size()==0){
-			Log.d(TAG,"[savePurchaseProduct] New Entry");
+			//Log.d(TAG,"[savePurchaseProduct] New Entry");
 			PurchaseFertilizer newPurFert = new PurchaseFertilizer();
 			newPurFert.setProduct(currProd);
 			newPurFert.setPurchase(p);
 			newPurFert.setAmount(input);
 			DatabaseManager.getInstance().addPurchaseFertilizer(newPurFert);
 		}else{
-			Log.d(TAG,"[savePurchaseProduct] Updating Entry" );
+			//Log.d(TAG,"[savePurchaseProduct] Updating Entry" );
 			PurchaseFertilizer updatePurFert = currPurFert.get(0);
 			updatePurFert.setAmount(input);
 			DatabaseManager.getInstance().updatePurchaseFertilizer(updatePurFert);

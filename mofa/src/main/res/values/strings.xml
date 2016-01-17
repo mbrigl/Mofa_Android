@@ -139,6 +139,7 @@
     <string name="constraintDefault">No warning</string>
     <string name="constraintWarningAmountPerHa">Max Amount per ha exceeded:</string>
     <string name="constraintError">Check not possible, because some data are missing</string>
+    <string name="sizeInfo">Size:  %1$s m²</string>
 
 
 
@@ -198,6 +199,7 @@
     <string name="waitingtimeUnit">days</string>
     <string name="reentertimeUnit">h</string>
     <string name="maxamounthaUnit">kg/lt</string>
+    <string name="amountha">amount ha:</string>
 
     <!-- Strings for SearchPesticide -->
     <string name="searchLastPest">Last Spraying work</string>

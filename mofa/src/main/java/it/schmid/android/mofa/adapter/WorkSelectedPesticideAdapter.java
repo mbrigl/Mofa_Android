@@ -87,7 +87,7 @@ public class WorkSelectedPesticideAdapter extends ArrayAdapter<SprayPesticide>im
 			
 			public void onClick(View v) {
 				InputDoseDialogFragment inputDoseDialog = new InputDoseDialogFragment(pesticide,workPesticide.getDose(),
-						workPesticide.getDose_amount(),fragment.getCurrentConc(),fragment.getCurrentWaterAmount());
+						workPesticide.getDose_amount(),fragment.getCurrentConc(),fragment.getCurrentWaterAmount(),fragment.getSumOfSize());
 				android.support.v4.app.FragmentManager fm = ((FragmentActivity)context).getSupportFragmentManager();
 				inputDoseDialog.setCallback(WorkSelectedPesticideAdapter.this);
 				//inputDoseDialog.setTargetFragment( fm.,0);

@@ -139,6 +139,8 @@
 	<string name="constraintWarningAmountPerHa">Max Menge pro ha überschritten:</string>
 	<string name="constraintWarningDose">Max Dosis überschritten:</string>
 	<string name="constraintError">Überprüfung nicht möglich, da Daten (zb: Fläche) fehlt</string>
+	<string name="sizeInfo">Fläche:  %1$s m²</string>
+	<string name="amountha">Menge ha:</string>
 	<!-- String image description -->
 	<string name="imagepesticide">Mittelliste</string>
 	<!-- Strings in Pesticide List -->
