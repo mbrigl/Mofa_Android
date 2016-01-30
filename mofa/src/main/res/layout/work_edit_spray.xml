@@ -133,6 +133,48 @@
 					android:src="@drawable/ic_action_refresh" />
 
 			</TableRow>
+			<TableRow
+				android:id="@+id/tableRow9"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:stretchColumns="1">
+				<ImageButton
+					android:id="@+id/imageButton1"
+					android:layout_width="0dip"
+					android:layout_weight="1"
+					android:gravity="center"
+					android:src="@drawable/ic_sun" />
+				<ImageButton
+					android:id="@+id/imageButton2"
+					android:layout_width="0dip"
+					android:layout_weight="1"
+					android:gravity="center"
+					android:src="@drawable/ic_part_cloud" />
+				<ImageButton
+					android:id="@+id/imageButton3"
+					android:layout_width="0dip"
+					android:layout_weight="1"
+					android:gravity="center"
+					android:src="@drawable/ic_clouds" />
+				<ImageButton
+					android:id="@+id/imageButton4"
+					android:layout_width="0dip"
+					android:layout_weight="1"
+					android:gravity="center"
+					android:src="@drawable/ic_lightrain" />
+				<ImageButton
+					android:id="@+id/imageButton5"
+					android:layout_width="0dip"
+					android:layout_weight="1"
+					android:gravity="center"
+					android:src="@drawable/ic_rain" />
+				<ImageButton
+					android:id="@+id/imageButton6"
+					android:layout_width="0dip"
+					android:layout_weight="1"
+					android:gravity="center"
+					android:src="@drawable/ic_moon" />
+			</TableRow>
 		</TableLayout>
 
 	

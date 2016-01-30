@@ -215,4 +215,11 @@
     <string name="deleteallsended">Löschen aller gesendeten Arbeiten</string>
     <string name="deleteallsendedmsg">Sind Sie sicher, dass Sie alle gesendeten Einträge löschen möchten</string>
     <string name="deletetoastmsg">Daten wurden gelöscht !!</string>
+	<!-- Strings for Weather -->
+	<string name="weathersunny">Wetter: sonnig</string>
+	<string name="weatherpartlycloudy">Wetter: teilw. bewölkt</string>
+	<string name="weathercloudy">Wetter: bewölkt</string>
+	<string name="weatherlightrain">Wetter: leichter Regen</string>
+	<string name="weatherrain">Wetter: Regen</string>
+	<string name="weathernight">Nacht</string>
 </resources>

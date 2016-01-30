@@ -3,6 +3,7 @@ package it.schmid.android.mofa.db;
 import it.schmid.android.mofa.MofaApplication;
 import it.schmid.android.mofa.model.Fertilizer;
 import it.schmid.android.mofa.model.FruitQuality;
+import it.schmid.android.mofa.model.Global;
 import it.schmid.android.mofa.model.Harvest;
 import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.Machine;
@@ -42,7 +43,7 @@ import com.j256.ormlite.table.TableUtils;
 
 public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
 	private static final String DATABASE_NAME = "MofaDB.sqlite";
-	private static final int DATABASE_VERSION =12;
+	private static final int DATABASE_VERSION =13;
 	
 	// the DAO object we use to access the SimpleData table
     private Dao<Land, Integer> landDao = null;
@@ -66,6 +67,7 @@ public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
     private Dao<PurchaseFertilizer,Integer>purchaseFertilizerDao=null;
     private Dao<FruitQuality,Integer>fruitQualityDao=null;
     private Dao<Harvest,Integer>harvestDao=null;
+	private Dao<Global,Integer>globalDao=null;
 	 public DatabaseHelper(Context context) {
 	        super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	    }
@@ -93,6 +95,7 @@ public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
             TableUtils.createTable(connectionSource, PurchaseFertilizer.class);
             TableUtils.createTable(connectionSource, FruitQuality.class);
             TableUtils.createTable(connectionSource, Harvest.class);
+			TableUtils.createTable(connectionSource, Global.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
             throw new RuntimeException(e);
@@ -145,6 +148,9 @@ public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
                       break;
 					case 12:
 						updateFromVersion12(db,connectionSource,oldVersion,newVersion);
+						break;
+					case 13:
+						updateFromVersion13(db,connectionSource,oldVersion,newVersion);
 						break;
                 }
 	            for (String sql : allSql) {
@@ -296,6 +302,16 @@ public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
 		try {
 			getVquarterDao().executeRaw("ALTER TABLE `vquarter` ADD COLUMN size REAL;");
 
+		} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+		}
+		onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
+	}
+	private void updateFromVersion13(SQLiteDatabase db,
+									 ConnectionSource connectionSource, int oldVersion, int newVersion) {
+		try {
+			getWorkDao().executeRaw("ALTER TABLE `Spraying` ADD COLUMN weather Integer;");
+			TableUtils.createTableIfNotExists(connectionSource, Global.class);
 		} catch (java.sql.SQLException e) {
 			e.printStackTrace();
 		}
@@ -513,4 +529,14 @@ public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
         }
         return harvestDao;
     }
+	public Dao<Global, Integer> getGlobalDao() {
+		if (null == globalDao) {
+			try {
+				globalDao = getDao(Global.class);
+			}catch (java.sql.SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return globalDao;
+	}
 }

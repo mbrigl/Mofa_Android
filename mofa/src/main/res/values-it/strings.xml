@@ -214,4 +214,12 @@
     <string name="deleteallsended">Canellare tutti i lavori mandati</string>
     <string name="deleteallsendedmsg">È sicuro, che voule canellare tutti i lavori già mandati</string>
     <string name="deletetoastmsg">Dati cancellati !!</string>
+
+	<!-- Strings for Weather -->
+	<string name="weathersunny">tempo: soleggiato</string>
+	<string name="weatherpartlycloudy">tempo: poco nuvoloso</string>
+	<string name="weathercloudy">tempo: nuvoloso</string>
+	<string name="weatherlightrain">tempo: pioggia debole</string>
+	<string name="weatherrain">tempo: pioggia</string>
+	<string name="weathernight">notte</string>
 </resources>

@@ -12302,11 +12302,13 @@ it.schmid.android.mofa.R$color: int abs__primary_text_disable_only_holo_dark
 it.schmid.android.mofa.R$color: int abs__primary_text_disable_only_holo_light
 it.schmid.android.mofa.R$color: int abs__primary_text_holo_dark
 it.schmid.android.mofa.R$color: int abs__primary_text_holo_light
+it.schmid.android.mofa.R$color: int deepskyblue
 it.schmid.android.mofa.R$color: int green
 it.schmid.android.mofa.R$color: int lgray
 it.schmid.android.mofa.R$color: int lightgreen
 it.schmid.android.mofa.R$color: int lightred
 it.schmid.android.mofa.R$color: int red
+it.schmid.android.mofa.R$color: int skyblue
 it.schmid.android.mofa.R$dimen: int abs__action_bar_default_height
 it.schmid.android.mofa.R$dimen: int abs__action_bar_icon_vertical_padding
 it.schmid.android.mofa.R$dimen: int abs__action_bar_subtitle_bottom_margin
@@ -12471,19 +12473,24 @@ it.schmid.android.mofa.R$drawable: int ic_action_upload
 it.schmid.android.mofa.R$drawable: int ic_alerts_and_states_warning
 it.schmid.android.mofa.R$drawable: int ic_anlagen
 it.schmid.android.mofa.R$drawable: int ic_bee
+it.schmid.android.mofa.R$drawable: int ic_clouds
 it.schmid.android.mofa.R$drawable: int ic_content_remove
 it.schmid.android.mofa.R$drawable: int ic_gps
 it.schmid.android.mofa.R$drawable: int ic_icon_fertilizer
 it.schmid.android.mofa.R$drawable: int ic_launcher
+it.schmid.android.mofa.R$drawable: int ic_lightrain
 it.schmid.android.mofa.R$drawable: int ic_menu_add
 it.schmid.android.mofa.R$drawable: int ic_mofa
 it.schmid.android.mofa.R$drawable: int ic_mofa_main
 it.schmid.android.mofa.R$drawable: int ic_ok_icon
+it.schmid.android.mofa.R$drawable: int ic_part_cloud
+it.schmid.android.mofa.R$drawable: int ic_rain
 it.schmid.android.mofa.R$drawable: int ic_save
 it.schmid.android.mofa.R$drawable: int ic_social_add_person
 it.schmid.android.mofa.R$drawable: int ic_social_person
 it.schmid.android.mofa.R$drawable: int ic_sprueh
 it.schmid.android.mofa.R$drawable: int ic_sprueh_small
+it.schmid.android.mofa.R$drawable: int ic_sun
 it.schmid.android.mofa.R$drawable: int ic_tractor
 it.schmid.android.mofa.R$drawable: int ic_tractor_big
 it.schmid.android.mofa.R$drawable: int ic_trash_empty
@@ -12492,6 +12499,7 @@ it.schmid.android.mofa.R$drawable: int list_selector
 it.schmid.android.mofa.R$drawable: int ok
 it.schmid.android.mofa.R$drawable: int pesticide_bottle
 it.schmid.android.mofa.R$drawable: int purchase_mofa
+it.schmid.android.mofa.R$drawable: int red_border
 it.schmid.android.mofa.R$drawable: int search_mofa
 it.schmid.android.mofa.R$drawable: int settings_mofa
 it.schmid.android.mofa.R$drawable: int stack_default
@@ -12632,6 +12640,11 @@ it.schmid.android.mofa.R$id: int home_btn_label
 it.schmid.android.mofa.R$id: int hourslabel
 it.schmid.android.mofa.R$id: int icon
 it.schmid.android.mofa.R$id: int imageBee
+it.schmid.android.mofa.R$id: int imageButton1
+it.schmid.android.mofa.R$id: int imageButton2
+it.schmid.android.mofa.R$id: int imageButton3
+it.schmid.android.mofa.R$id: int imageButton4
+it.schmid.android.mofa.R$id: int imageButton5
 it.schmid.android.mofa.R$id: int info_text
 it.schmid.android.mofa.R$id: int landbox
 it.schmid.android.mofa.R$id: int landclose_btn
@@ -13042,6 +13055,11 @@ it.schmid.android.mofa.R$string: int vquartertitle
 it.schmid.android.mofa.R$string: int waitingtime
 it.schmid.android.mofa.R$string: int waitingtimeUnit
 it.schmid.android.mofa.R$string: int waterdialogmsg
+it.schmid.android.mofa.R$string: int weathercloudy
+it.schmid.android.mofa.R$string: int weatherlightrain
+it.schmid.android.mofa.R$string: int weatherpartlycloudy
+it.schmid.android.mofa.R$string: int weatherrain
+it.schmid.android.mofa.R$string: int weathersunny
 it.schmid.android.mofa.R$string: int work_menu_add
 it.schmid.android.mofa.R$string: int work_menu_fertfilter
 it.schmid.android.mofa.R$string: int work_menu_herbicidefilter
@@ -13352,6 +13370,7 @@ it.schmid.android.mofa.db.DatabaseHelper: com.j256.ormlite.dao.Dao purchasePesti
 it.schmid.android.mofa.db.DatabaseHelper: com.j256.ormlite.dao.Dao purchaseFertilizerDao
 it.schmid.android.mofa.db.DatabaseHelper: com.j256.ormlite.dao.Dao fruitQualityDao
 it.schmid.android.mofa.db.DatabaseHelper: com.j256.ormlite.dao.Dao harvestDao
+it.schmid.android.mofa.db.DatabaseHelper: com.j256.ormlite.dao.Dao globalDao
 it.schmid.android.mofa.db.DatabaseHelper: DatabaseHelper(android.content.Context)
 it.schmid.android.mofa.db.DatabaseHelper: void onCreate(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource)
 it.schmid.android.mofa.db.DatabaseHelper: void onUpgrade(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int)
@@ -13367,6 +13386,7 @@ it.schmid.android.mofa.db.DatabaseHelper: void updateFromVersion9(android.databa
 it.schmid.android.mofa.db.DatabaseHelper: void updateFromVersion10(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int)
 it.schmid.android.mofa.db.DatabaseHelper: void updateFromVersion11(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int)
 it.schmid.android.mofa.db.DatabaseHelper: void updateFromVersion12(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int)
+it.schmid.android.mofa.db.DatabaseHelper: void updateFromVersion13(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int)
 it.schmid.android.mofa.db.DatabaseHelper: com.j256.ormlite.dao.Dao getLandDao()
 it.schmid.android.mofa.db.DatabaseHelper: com.j256.ormlite.dao.Dao getMachineDao()
 it.schmid.android.mofa.db.DatabaseHelper: com.j256.ormlite.dao.Dao getWorkerDao()
@@ -13388,6 +13408,7 @@ it.schmid.android.mofa.db.DatabaseHelper: com.j256.ormlite.dao.Dao getPurchasePe
 it.schmid.android.mofa.db.DatabaseHelper: com.j256.ormlite.dao.Dao getPurchaseFertilizerDao()
 it.schmid.android.mofa.db.DatabaseHelper: com.j256.ormlite.dao.Dao getFruitQualityDao()
 it.schmid.android.mofa.db.DatabaseHelper: com.j256.ormlite.dao.Dao getHarvestDao()
+it.schmid.android.mofa.db.DatabaseHelper: com.j256.ormlite.dao.Dao getGlobalDao()
 it.schmid.android.mofa.db.DatabaseManager
 it.schmid.android.mofa.db.DatabaseManager: com.j256.ormlite.stmt.PreparedQuery vqForWorkQuery
 it.schmid.android.mofa.db.DatabaseManager: com.j256.ormlite.stmt.PreparedQuery workerForWorkQuery
@@ -13712,6 +13733,13 @@ it.schmid.android.mofa.model.FruitQuality: int hashCode()
 it.schmid.android.mofa.model.FruitQuality: java.lang.Boolean importMasterData(java.lang.String,it.schmid.android.mofa.NotificationService)
 it.schmid.android.mofa.model.FruitQuality: java.util.List qualityXmlParser(java.lang.String,it.schmid.android.mofa.NotificationService)
 it.schmid.android.mofa.model.FruitQuality: java.util.List qualityXmlParserASA(java.lang.String,it.schmid.android.mofa.NotificationService)
+it.schmid.android.mofa.model.Global
+it.schmid.android.mofa.model.Global: java.lang.Integer id
+it.schmid.android.mofa.model.Global: java.lang.String typeInfo
+it.schmid.android.mofa.model.Global: java.lang.String data
+it.schmid.android.mofa.model.Global: Global()
+it.schmid.android.mofa.model.Global: void importMasterData(org.json.JSONArray)
+it.schmid.android.mofa.model.Global: java.lang.Boolean importMasterData(java.lang.String,it.schmid.android.mofa.NotificationService)
 it.schmid.android.mofa.model.Harvest
 it.schmid.android.mofa.model.Harvest: java.lang.String ID_FIELD_NAME
 it.schmid.android.mofa.model.Harvest: java.lang.Integer id
@@ -13931,6 +13959,7 @@ it.schmid.android.mofa.model.Spraying: java.lang.Integer id
 it.schmid.android.mofa.model.Spraying: it.schmid.android.mofa.model.Work work
 it.schmid.android.mofa.model.Spraying: java.lang.Integer concentration
 it.schmid.android.mofa.model.Spraying: java.lang.Double wateramount
+it.schmid.android.mofa.model.Spraying: java.lang.Integer weather
 it.schmid.android.mofa.model.Spraying: Spraying()
 it.schmid.android.mofa.model.Spraying: java.lang.Integer getId()
 it.schmid.android.mofa.model.Spraying: void setId(java.lang.Integer)
@@ -13940,6 +13969,8 @@ it.schmid.android.mofa.model.Spraying: java.lang.Integer getConcentration()
 it.schmid.android.mofa.model.Spraying: void setConcentration(java.lang.Integer)
 it.schmid.android.mofa.model.Spraying: java.lang.Double getWateramount()
 it.schmid.android.mofa.model.Spraying: void setWateramount(java.lang.Double)
+it.schmid.android.mofa.model.Spraying: java.lang.Integer getWeather()
+it.schmid.android.mofa.model.Spraying: void setWeather(java.lang.Integer)
 it.schmid.android.mofa.model.Task
 it.schmid.android.mofa.model.Task: java.lang.String TAG
 it.schmid.android.mofa.model.Task: java.lang.Integer id

@@ -341,7 +341,7 @@ public class Fertilizer extends ImportBehavior implements ProductInterface{
 
 	    return false;
 	}
-    @Override
+
     public int showInfo() {
         return SHOWINFO;
     }

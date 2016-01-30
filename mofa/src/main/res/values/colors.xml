@@ -5,4 +5,6 @@
  <color name="lgray">#ffcccccc </color> 
  <color name="lightred">#ff8080</color>
  <color name="lightgreen">#bcd35f</color>
+    <color name="skyblue">#87CEEB</color>
+    <color name="deepskyblue">#00BFFF</color>
 </resources>

@@ -221,5 +221,11 @@
     <string name="deleteallsendedmsg">Are you sure, that you want delete all sended works</string>
     <string name="deletetoastmsg">Data deleted!!</string>
 
-
+    <!-- Strings for Weather -->
+    <string name="weathersunny">weather: sunny</string>
+    <string name="weatherpartlycloudy">weather: partly cloudy</string>
+    <string name="weathercloudy">weather: cloudy</string>
+    <string name="weatherlightrain">weather: light rain</string>
+    <string name="weatherrain">weather: rain</string>
+    <string name="weathernight">night</string>
 </resources>

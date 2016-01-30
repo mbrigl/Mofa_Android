@@ -12917,11 +12917,12 @@ it.schmid.android.mofa.SendingProcess -> hw:
     204:279:java.lang.String createJSON() -> b
     287:323:void writeFile(java.lang.String,java.lang.String) -> a
     325:325:boolean isSdPresent() -> c
-    329:493:java.lang.String createXML() -> d
-    498:727:java.lang.String createXMLASA() -> e
-    732:776:java.lang.String createPurchaseXML() -> f
-    780:837:java.lang.String createPurchaseXMLASA() -> g
-    847:882:void writeFileToDropBox(java.lang.String,java.lang.String) -> b
+    329:497:java.lang.String createXML() -> d
+    502:735:java.lang.String createXMLASA() -> e
+    740:784:java.lang.String createPurchaseXML() -> f
+    788:845:java.lang.String createPurchaseXMLASA() -> g
+    855:890:void writeFileToDropBox(java.lang.String,java.lang.String) -> b
+    892:909:java.lang.String getWeatherString(int) -> a
 it.schmid.android.mofa.SendingProcess$1 -> hx:
     it.schmid.android.mofa.SendingProcess this$0 -> a
     189:191:void handleMessage(android.os.Message) -> handleMessage
@@ -13047,60 +13048,68 @@ it.schmid.android.mofa.WorkEditSprayFragment -> it.schmid.android.mofa.WorkEditS
     android.widget.ImageView refreshIcon -> g
     android.widget.ImageView refreshConstraintIcon -> h
     android.widget.TextView constraintTextView -> i
-    it.schmid.android.mofa.model.Work work -> j
-    it.schmid.android.mofa.model.Spraying spray -> k
-    int mworkId -> l
-    int msprayId -> m
-    int spinnerPosition -> n
-    java.util.List selectedQuarters -> o
-    it.schmid.android.mofa.WorkEditTabActivity parentActivity -> p
-    java.lang.Boolean firstCall -> q
-    java.lang.Boolean constraintWarning -> r
-    java.lang.String constraintMsg -> s
-    boolean firstconstraintha -> t
-    boolean firstconstraintDose -> u
-    68:73:void onCreate(android.os.Bundle) -> onCreate
-    77:109:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    112:118:void fillSpinner() -> d
-    120:143:void populateFields(int) -> a
-    148:161:void fillPesticideList() -> e
-    163:168:void fillFertilizerList() -> f
-    170:210:void setListener() -> g
-    212:212:java.lang.Double getCurrentWaterAmount() -> a
-    215:215:java.lang.Integer getCurrentConc() -> b
-    218:218:java.lang.Double getSumOfSize() -> c
-    221:231:void saveState() -> h
-    233:240:void createNewSpraying(java.lang.Integer,java.lang.Double) -> a
-    242:247:void updateSpraying(it.schmid.android.mofa.model.Spraying,java.lang.Integer,java.lang.Double) -> a
-    249:256:java.lang.Double sumOfWater() -> i
-    259:266:java.lang.Double sumOfSize() -> j
-    270:274:void onResume() -> onResume
-    277:280:java.lang.String format(double) -> a
-    283:333:void checkConstraints(java.util.List) -> a
-    336:366:boolean checkAmountForVQuarters(java.lang.Double,java.lang.Double,it.schmid.android.mofa.model.Pesticide) -> a
-    42:42:void access$000(it.schmid.android.mofa.WorkEditSprayFragment) -> a
-    42:42:it.schmid.android.mofa.WorkEditTabActivity access$100(it.schmid.android.mofa.WorkEditSprayFragment) -> b
-    42:42:int access$200(it.schmid.android.mofa.WorkEditSprayFragment) -> c
-    42:42:java.lang.Double access$300(it.schmid.android.mofa.WorkEditSprayFragment) -> d
-    42:42:android.widget.Spinner access$400(it.schmid.android.mofa.WorkEditSprayFragment) -> e
-    42:42:java.lang.Double access$500(it.schmid.android.mofa.WorkEditSprayFragment) -> f
-    42:42:android.widget.EditText access$600(it.schmid.android.mofa.WorkEditSprayFragment) -> g
+    android.widget.TableRow mTurnRow -> j
+    it.schmid.android.mofa.model.Work work -> k
+    it.schmid.android.mofa.model.Spraying spray -> l
+    int mworkId -> m
+    int msprayId -> n
+    int weather -> o
+    int spinnerPosition -> p
+    java.util.List selectedQuarters -> q
+    it.schmid.android.mofa.WorkEditTabActivity parentActivity -> r
+    java.lang.Boolean firstCall -> s
+    java.lang.Boolean constraintWarning -> t
+    java.lang.String constraintMsg -> u
+    boolean firstconstraintha -> v
+    boolean firstconstraintDose -> w
+    71:76:void onCreate(android.os.Bundle) -> onCreate
+    80:113:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    116:122:void fillSpinner() -> d
+    124:166:void populateFields(int) -> a
+    171:184:void fillPesticideList() -> e
+    186:191:void fillFertilizerList() -> f
+    193:233:void setListener() -> g
+    235:235:java.lang.Double getCurrentWaterAmount() -> a
+    238:238:java.lang.Integer getCurrentConc() -> b
+    241:241:java.lang.Double getSumOfSize() -> c
+    244:254:void saveState() -> h
+    256:264:void createNewSpraying(java.lang.Integer,java.lang.Double) -> a
+    266:272:void updateSpraying(it.schmid.android.mofa.model.Spraying,java.lang.Integer,java.lang.Double) -> a
+    274:281:java.lang.Double sumOfWater() -> i
+    284:291:java.lang.Double sumOfSize() -> j
+    295:299:void onResume() -> onResume
+    302:305:java.lang.String format(double) -> a
+    308:358:void checkConstraints(java.util.List) -> a
+    361:391:boolean checkAmountForVQuarters(java.lang.Double,java.lang.Double,it.schmid.android.mofa.model.Pesticide) -> a
+    396:406:void updateWeatherView(int) -> b
+    43:43:void access$000(it.schmid.android.mofa.WorkEditSprayFragment,int) -> a
+    43:43:void access$100(it.schmid.android.mofa.WorkEditSprayFragment) -> a
+    43:43:it.schmid.android.mofa.WorkEditTabActivity access$200(it.schmid.android.mofa.WorkEditSprayFragment) -> b
+    43:43:int access$300(it.schmid.android.mofa.WorkEditSprayFragment) -> c
+    43:43:java.lang.Double access$400(it.schmid.android.mofa.WorkEditSprayFragment) -> d
+    43:43:android.widget.Spinner access$500(it.schmid.android.mofa.WorkEditSprayFragment) -> e
+    43:43:java.lang.Double access$600(it.schmid.android.mofa.WorkEditSprayFragment) -> f
+    43:43:android.widget.EditText access$700(it.schmid.android.mofa.WorkEditSprayFragment) -> g
 it.schmid.android.mofa.WorkEditSprayFragment$1 -> ij:
     it.schmid.android.mofa.WorkEditSprayFragment this$0 -> a
-    101:101:void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
-    104:104:void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
+    104:104:void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
+    107:107:void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
 it.schmid.android.mofa.WorkEditSprayFragment$2 -> ik:
-    it.schmid.android.mofa.WorkEditSprayFragment this$0 -> a
-    172:174:void onClick(android.view.View) -> onClick
+    android.widget.ImageButton val$weatherBtn -> a
+    it.schmid.android.mofa.WorkEditSprayFragment this$0 -> b
+    155:159:void onClick(android.view.View) -> onClick
 it.schmid.android.mofa.WorkEditSprayFragment$3 -> il:
     it.schmid.android.mofa.WorkEditSprayFragment this$0 -> a
-    179:191:void onClick(android.view.View) -> onClick
+    195:197:void onClick(android.view.View) -> onClick
 it.schmid.android.mofa.WorkEditSprayFragment$4 -> im:
     it.schmid.android.mofa.WorkEditSprayFragment this$0 -> a
-    198:202:void onClick(android.view.View) -> onClick
+    202:214:void onClick(android.view.View) -> onClick
 it.schmid.android.mofa.WorkEditSprayFragment$5 -> in:
     it.schmid.android.mofa.WorkEditSprayFragment this$0 -> a
-    206:208:void onClick(android.view.View) -> onClick
+    221:225:void onClick(android.view.View) -> onClick
+it.schmid.android.mofa.WorkEditSprayFragment$6 -> io:
+    it.schmid.android.mofa.WorkEditSprayFragment this$0 -> a
+    229:231:void onClick(android.view.View) -> onClick
 it.schmid.android.mofa.WorkEditTabActivity -> it.schmid.android.mofa.WorkEditTabActivity:
     android.support.v4.view.ViewPager mViewPager -> a
     it.schmid.android.mofa.WorkEditTabActivity$TabsAdapter mTabsAdapter -> b
@@ -13124,7 +13133,7 @@ it.schmid.android.mofa.WorkEditTabActivity -> it.schmid.android.mofa.WorkEditTab
     153:193:void onPause() -> onPause
     197:201:void onResume() -> onResume
     206:209:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
-it.schmid.android.mofa.WorkEditTabActivity$TabsAdapter -> io:
+it.schmid.android.mofa.WorkEditTabActivity$TabsAdapter -> ip:
     android.content.Context mContext -> a
     com.actionbarsherlock.app.ActionBar mActionBar -> b
     android.support.v4.view.ViewPager mViewPager -> c
@@ -13138,7 +13147,7 @@ it.schmid.android.mofa.WorkEditTabActivity$TabsAdapter -> io:
     289:297:void onTabSelected(com.actionbarsherlock.app.ActionBar$Tab,android.support.v4.app.FragmentTransaction) -> onTabSelected
     302:304:void onTabUnselected(com.actionbarsherlock.app.ActionBar$Tab,android.support.v4.app.FragmentTransaction) -> onTabUnselected
     308:308:void onTabReselected(com.actionbarsherlock.app.ActionBar$Tab,android.support.v4.app.FragmentTransaction) -> onTabReselected
-it.schmid.android.mofa.WorkEditTabActivity$TabsAdapter$TabInfo -> ip:
+it.schmid.android.mofa.WorkEditTabActivity$TabsAdapter$TabInfo -> iq:
     java.lang.Class clss -> a
     android.os.Bundle args -> b
     227:227:java.lang.Class access$000(it.schmid.android.mofa.WorkEditTabActivity$TabsAdapter$TabInfo) -> a
@@ -13185,31 +13194,31 @@ it.schmid.android.mofa.WorkEditWorkFragment -> it.schmid.android.mofa.WorkEditWo
     49:49:java.lang.Boolean access$102(it.schmid.android.mofa.WorkEditWorkFragment,java.lang.Boolean) -> a
     49:49:int access$200(it.schmid.android.mofa.WorkEditWorkFragment) -> b
     49:49:it.schmid.android.mofa.model.Work access$300(it.schmid.android.mofa.WorkEditWorkFragment) -> c
-it.schmid.android.mofa.WorkEditWorkFragment$1 -> iq:
+it.schmid.android.mofa.WorkEditWorkFragment$1 -> ir:
     it.schmid.android.mofa.WorkEditWorkFragment this$0 -> a
     206:208:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.WorkEditWorkFragment$2 -> ir:
+it.schmid.android.mofa.WorkEditWorkFragment$2 -> is:
     it.schmid.android.mofa.WorkEditWorkFragment this$0 -> a
     212:216:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.WorkEditWorkFragment$3 -> is:
+it.schmid.android.mofa.WorkEditWorkFragment$3 -> it:
     it.schmid.android.mofa.WorkEditWorkFragment this$0 -> a
     222:230:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.WorkEditWorkFragment$4 -> it:
+it.schmid.android.mofa.WorkEditWorkFragment$4 -> iu:
     it.schmid.android.mofa.WorkEditWorkFragment this$0 -> a
     238:262:void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     267:267:void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-it.schmid.android.mofa.WorkEditWorkFragment$5 -> iu:
+it.schmid.android.mofa.WorkEditWorkFragment$5 -> iv:
     it.schmid.android.mofa.WorkEditWorkFragment this$0 -> a
     273:278:void onFocusChange(android.view.View,boolean) -> onFocusChange
-it.schmid.android.mofa.WorkEditWorkFragment$CompleteBehaviour -> iv:
+it.schmid.android.mofa.WorkEditWorkFragment$CompleteBehaviour -> iw:
     void setContinue(boolean) -> a
-it.schmid.android.mofa.WorkEditWorkFragment$SetWorkIdListener -> iw:
+it.schmid.android.mofa.WorkEditWorkFragment$SetWorkIdListener -> ix:
     void setWorkIdListener(int) -> a
-it.schmid.android.mofa.WorkEditWorkFragment$ShowHarvestTabListener -> ix:
+it.schmid.android.mofa.WorkEditWorkFragment$ShowHarvestTabListener -> iy:
     void showHarvestTabListener(int,java.lang.Boolean) -> c
-it.schmid.android.mofa.WorkEditWorkFragment$ShowSoilFertilizerTabListener -> iy:
+it.schmid.android.mofa.WorkEditWorkFragment$ShowSoilFertilizerTabListener -> iz:
     void showSoilFertilizerTab(int,java.lang.Boolean) -> b
-it.schmid.android.mofa.WorkEditWorkFragment$ShowSprayTabListener -> iz:
+it.schmid.android.mofa.WorkEditWorkFragment$ShowSprayTabListener -> ja:
     void showSprayTabListener(int,java.lang.Boolean) -> a
 it.schmid.android.mofa.WorkOverviewActivity -> it.schmid.android.mofa.WorkOverviewActivity:
     java.util.List workList -> c
@@ -13230,19 +13239,19 @@ it.schmid.android.mofa.WorkOverviewActivity -> it.schmid.android.mofa.WorkOvervi
     46:46:java.util.List access$102(it.schmid.android.mofa.WorkOverviewActivity,java.util.List) -> a
     46:46:it.schmid.android.mofa.adapter.WorkAdapter access$002(it.schmid.android.mofa.WorkOverviewActivity,it.schmid.android.mofa.adapter.WorkAdapter) -> a
     46:46:java.util.List access$100(it.schmid.android.mofa.WorkOverviewActivity) -> b
-it.schmid.android.mofa.WorkOverviewActivity$1 -> ja:
+it.schmid.android.mofa.WorkOverviewActivity$1 -> jb:
     it.schmid.android.mofa.WorkOverviewActivity this$0 -> a
     90:97:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-it.schmid.android.mofa.WorkOverviewActivity$2 -> jb:
+it.schmid.android.mofa.WorkOverviewActivity$2 -> jc:
     it.schmid.android.mofa.WorkOverviewActivity this$0 -> a
     137:198:boolean onNavigationItemSelected(int,long) -> onNavigationItemSelected
-it.schmid.android.mofa.WorkOverviewActivity$3 -> jc:
+it.schmid.android.mofa.WorkOverviewActivity$3 -> jd:
     it.schmid.android.mofa.WorkOverviewActivity this$0 -> a
     252:254:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.WorkOverviewActivity$4 -> jd:
+it.schmid.android.mofa.WorkOverviewActivity$4 -> je:
     it.schmid.android.mofa.WorkOverviewActivity this$0 -> a
     260:261:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.WorkOverviewActivity$5 -> je:
+it.schmid.android.mofa.WorkOverviewActivity$5 -> jf:
     it.schmid.android.mofa.WorkOverviewActivity this$0 -> a
     284:290:java.lang.Void call() -> a
     281:281:java.lang.Object call() -> call
@@ -13250,7 +13259,7 @@ it.schmid.android.mofa.WorkProductTabActivity -> it.schmid.android.mofa.WorkProd
     android.support.v4.view.ViewPager mViewPager -> a
     it.schmid.android.mofa.WorkProductTabActivity$TabsAdapter mTabsAdapter -> b
     25:44:void onCreate(android.os.Bundle) -> onCreate
-it.schmid.android.mofa.WorkProductTabActivity$TabsAdapter -> jf:
+it.schmid.android.mofa.WorkProductTabActivity$TabsAdapter -> jg:
     android.content.Context mContext -> a
     com.actionbarsherlock.app.ActionBar mActionBar -> b
     android.support.v4.view.ViewPager mViewPager -> c
@@ -13264,7 +13273,7 @@ it.schmid.android.mofa.WorkProductTabActivity$TabsAdapter -> jf:
     118:126:void onTabSelected(com.actionbarsherlock.app.ActionBar$Tab,android.support.v4.app.FragmentTransaction) -> onTabSelected
     130:130:void onTabUnselected(com.actionbarsherlock.app.ActionBar$Tab,android.support.v4.app.FragmentTransaction) -> onTabUnselected
     134:134:void onTabReselected(com.actionbarsherlock.app.ActionBar$Tab,android.support.v4.app.FragmentTransaction) -> onTabReselected
-it.schmid.android.mofa.WorkProductTabActivity$TabsAdapter$TabInfo -> jg:
+it.schmid.android.mofa.WorkProductTabActivity$TabsAdapter$TabInfo -> jh:
     java.lang.Class clss -> a
     android.os.Bundle args -> b
     56:56:java.lang.Class access$000(it.schmid.android.mofa.WorkProductTabActivity$TabsAdapter$TabInfo) -> a
@@ -13300,20 +13309,20 @@ it.schmid.android.mofa.WorkSelectFertilizerFragment -> it.schmid.android.mofa.Wo
     31:31:void access$400(it.schmid.android.mofa.WorkSelectFertilizerFragment,it.schmid.android.mofa.model.Fertilizer) -> b
     31:31:int access$500(it.schmid.android.mofa.WorkSelectFertilizerFragment) -> d
     31:31:void access$600(it.schmid.android.mofa.WorkSelectFertilizerFragment,int,java.lang.Integer,java.lang.Double) -> a
-it.schmid.android.mofa.WorkSelectFertilizerFragment$1 -> jh:
+it.schmid.android.mofa.WorkSelectFertilizerFragment$1 -> ji:
     it.schmid.android.mofa.WorkSelectFertilizerFragment this$0 -> a
     81:82:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.WorkSelectFertilizerFragment$2 -> ji:
+it.schmid.android.mofa.WorkSelectFertilizerFragment$2 -> jj:
     it.schmid.android.mofa.WorkSelectFertilizerFragment this$0 -> a
     87:88:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.WorkSelectFertilizerFragment$3 -> jj:
+it.schmid.android.mofa.WorkSelectFertilizerFragment$3 -> jk:
     it.schmid.android.mofa.WorkSelectFertilizerFragment this$0 -> a
     109:117:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-it.schmid.android.mofa.WorkSelectFertilizerFragment$4 -> jk:
+it.schmid.android.mofa.WorkSelectFertilizerFragment$4 -> jl:
     it.schmid.android.mofa.model.Fertilizer val$fertilizer -> a
     it.schmid.android.mofa.WorkSelectFertilizerFragment this$0 -> b
     142:148:boolean onOkClicked(java.lang.Double) -> a
-it.schmid.android.mofa.WorkSelectFertilizerFragment$5 -> jl:
+it.schmid.android.mofa.WorkSelectFertilizerFragment$5 -> jm:
     it.schmid.android.mofa.WorkSelectFertilizerFragment this$0 -> a
     160:162:void afterTextChanged(android.text.Editable) -> afterTextChanged
     167:167:void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
@@ -13325,7 +13334,7 @@ it.schmid.android.mofa.WorkSelectLandActivity -> it.schmid.android.mofa.WorkSele
     android.widget.Button closeButton -> d
     29:48:void onCreate(android.os.Bundle) -> onCreate
     52:62:void prepAdapter() -> a
-it.schmid.android.mofa.WorkSelectLandActivity$1 -> jm:
+it.schmid.android.mofa.WorkSelectLandActivity$1 -> jn:
     it.schmid.android.mofa.WorkSelectLandActivity this$0 -> a
     45:46:void onClick(android.view.View) -> onClick
 it.schmid.android.mofa.WorkSelectMachineActivity -> it.schmid.android.mofa.WorkSelectMachineActivity:
@@ -13342,29 +13351,29 @@ it.schmid.android.mofa.WorkSelectMachineActivity -> it.schmid.android.mofa.WorkS
     27:27:java.lang.Double access$000(it.schmid.android.mofa.WorkSelectMachineActivity) -> a
     27:27:void access$100(it.schmid.android.mofa.WorkSelectMachineActivity,java.lang.Integer,java.lang.Double) -> a
     27:27:void access$300(it.schmid.android.mofa.WorkSelectMachineActivity,java.lang.Integer) -> a
-it.schmid.android.mofa.WorkSelectMachineActivity$1 -> jn:
+it.schmid.android.mofa.WorkSelectMachineActivity$1 -> jo:
     android.widget.ArrayAdapter val$adapter -> a
     it.schmid.android.mofa.WorkSelectMachineActivity this$0 -> b
     54:81:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-it.schmid.android.mofa.WorkSelectMachineActivity$1$1 -> jo:
+it.schmid.android.mofa.WorkSelectMachineActivity$1$1 -> jp:
     it.schmid.android.mofa.model.Machine val$machine -> a
     it.schmid.android.mofa.WorkSelectMachineActivity$1 this$1 -> b
     67:74:boolean onOkClicked(java.lang.Double) -> a
-it.schmid.android.mofa.WorkSelectMachineActivity$2 -> jp:
+it.schmid.android.mofa.WorkSelectMachineActivity$2 -> jq:
     it.schmid.android.mofa.WorkSelectMachineActivity this$0 -> a
     85:86:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.WorkSelectMachineActivity$SelectMachineAdapter -> jq:
+it.schmid.android.mofa.WorkSelectMachineActivity$SelectMachineAdapter -> jr:
     android.content.Context context -> b
     int itemLayout -> c
     java.util.List machines -> d
     it.schmid.android.mofa.WorkSelectMachineActivity this$0 -> a
     146:189:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-it.schmid.android.mofa.WorkSelectMachineActivity$SelectMachineAdapter$1 -> jr:
+it.schmid.android.mofa.WorkSelectMachineActivity$SelectMachineAdapter$1 -> js:
     it.schmid.android.mofa.WorkSelectMachineActivity$SelectMachineAdapter$MachineHolder val$holderItem -> a
     it.schmid.android.mofa.model.Machine val$machine -> b
     it.schmid.android.mofa.WorkSelectMachineActivity$SelectMachineAdapter this$1 -> c
     176:187:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.WorkSelectMachineActivity$SelectMachineAdapter$MachineHolder -> js:
+it.schmid.android.mofa.WorkSelectMachineActivity$SelectMachineAdapter$MachineHolder -> jt:
     android.widget.TextView mName -> a
     android.widget.TextView mHours -> b
     android.widget.CheckBox mIsSelected -> c
@@ -13401,20 +13410,20 @@ it.schmid.android.mofa.WorkSelectPesticideFragment -> it.schmid.android.mofa.Wor
     32:32:void access$400(it.schmid.android.mofa.WorkSelectPesticideFragment,it.schmid.android.mofa.model.Pesticide) -> b
     32:32:int access$500(it.schmid.android.mofa.WorkSelectPesticideFragment) -> d
     32:32:void access$600(it.schmid.android.mofa.WorkSelectPesticideFragment,int,java.lang.Integer,java.lang.Double) -> a
-it.schmid.android.mofa.WorkSelectPesticideFragment$1 -> jt:
+it.schmid.android.mofa.WorkSelectPesticideFragment$1 -> ju:
     it.schmid.android.mofa.WorkSelectPesticideFragment this$0 -> a
     83:84:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.WorkSelectPesticideFragment$2 -> ju:
+it.schmid.android.mofa.WorkSelectPesticideFragment$2 -> jv:
     it.schmid.android.mofa.WorkSelectPesticideFragment this$0 -> a
     88:89:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.WorkSelectPesticideFragment$3 -> jv:
+it.schmid.android.mofa.WorkSelectPesticideFragment$3 -> jw:
     it.schmid.android.mofa.WorkSelectPesticideFragment this$0 -> a
     109:116:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-it.schmid.android.mofa.WorkSelectPesticideFragment$4 -> jw:
+it.schmid.android.mofa.WorkSelectPesticideFragment$4 -> jx:
     it.schmid.android.mofa.model.Pesticide val$pesticide -> a
     it.schmid.android.mofa.WorkSelectPesticideFragment this$0 -> b
     141:147:boolean onOkClicked(java.lang.Double) -> a
-it.schmid.android.mofa.WorkSelectPesticideFragment$5 -> jx:
+it.schmid.android.mofa.WorkSelectPesticideFragment$5 -> jy:
     it.schmid.android.mofa.WorkSelectPesticideFragment this$0 -> a
     162:164:void afterTextChanged(android.text.Editable) -> afterTextChanged
     169:169:void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
@@ -13428,15 +13437,15 @@ it.schmid.android.mofa.WorkSelectSoilFertilizerActivity -> it.schmid.android.mof
     102:105:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
     25:25:int access$000(it.schmid.android.mofa.WorkSelectSoilFertilizerActivity) -> a
     25:25:void access$100(it.schmid.android.mofa.WorkSelectSoilFertilizerActivity,int,int,java.lang.Double) -> a
-it.schmid.android.mofa.WorkSelectSoilFertilizerActivity$1 -> jy:
+it.schmid.android.mofa.WorkSelectSoilFertilizerActivity$1 -> jz:
     android.widget.ArrayAdapter val$adapter -> a
     it.schmid.android.mofa.WorkSelectSoilFertilizerActivity this$0 -> b
     51:74:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-it.schmid.android.mofa.WorkSelectSoilFertilizerActivity$1$1 -> jz:
+it.schmid.android.mofa.WorkSelectSoilFertilizerActivity$1$1 -> ka:
     it.schmid.android.mofa.model.SoilFertilizer val$soilFertilizer -> a
     it.schmid.android.mofa.WorkSelectSoilFertilizerActivity$1 this$1 -> b
     59:67:boolean onOkClicked(java.lang.Double) -> a
-it.schmid.android.mofa.WorkSelectSoilFertilizerActivity$2 -> ka:
+it.schmid.android.mofa.WorkSelectSoilFertilizerActivity$2 -> kb:
     it.schmid.android.mofa.WorkSelectSoilFertilizerActivity this$0 -> a
     78:79:void onClick(android.view.View) -> onClick
 it.schmid.android.mofa.WorkSelectWorkerActivity -> it.schmid.android.mofa.WorkSelectWorkerActivity:
@@ -13454,29 +13463,29 @@ it.schmid.android.mofa.WorkSelectWorkerActivity -> it.schmid.android.mofa.WorkSe
     31:31:java.lang.Double access$000(it.schmid.android.mofa.WorkSelectWorkerActivity) -> a
     31:31:void access$100(it.schmid.android.mofa.WorkSelectWorkerActivity,int,java.lang.Double) -> a
     31:31:void access$300(it.schmid.android.mofa.WorkSelectWorkerActivity,int) -> a
-it.schmid.android.mofa.WorkSelectWorkerActivity$1 -> kb:
+it.schmid.android.mofa.WorkSelectWorkerActivity$1 -> kc:
     android.widget.ArrayAdapter val$adapter -> a
     it.schmid.android.mofa.WorkSelectWorkerActivity this$0 -> b
     61:91:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-it.schmid.android.mofa.WorkSelectWorkerActivity$1$1 -> kc:
+it.schmid.android.mofa.WorkSelectWorkerActivity$1$1 -> kd:
     it.schmid.android.mofa.model.Worker val$worker -> a
     it.schmid.android.mofa.WorkSelectWorkerActivity$1 this$1 -> b
     75:82:boolean onOkClicked(java.lang.Double) -> a
-it.schmid.android.mofa.WorkSelectWorkerActivity$2 -> kd:
+it.schmid.android.mofa.WorkSelectWorkerActivity$2 -> ke:
     it.schmid.android.mofa.WorkSelectWorkerActivity this$0 -> a
     95:96:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.WorkSelectWorkerActivity$SelectWorkerAdapter -> ke:
+it.schmid.android.mofa.WorkSelectWorkerActivity$SelectWorkerAdapter -> kf:
     android.content.Context context -> b
     int itemLayout -> c
     java.util.List workers -> d
     it.schmid.android.mofa.WorkSelectWorkerActivity this$0 -> a
     162:206:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-it.schmid.android.mofa.WorkSelectWorkerActivity$SelectWorkerAdapter$1 -> kf:
+it.schmid.android.mofa.WorkSelectWorkerActivity$SelectWorkerAdapter$1 -> kg:
     it.schmid.android.mofa.WorkSelectWorkerActivity$SelectWorkerAdapter$WorkerHolder val$holderItem -> a
     it.schmid.android.mofa.model.Worker val$worker -> b
     it.schmid.android.mofa.WorkSelectWorkerActivity$SelectWorkerAdapter this$1 -> c
     194:204:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.WorkSelectWorkerActivity$SelectWorkerAdapter$WorkerHolder -> kg:
+it.schmid.android.mofa.WorkSelectWorkerActivity$SelectWorkerAdapter$WorkerHolder -> kh:
     android.widget.ImageView wImage -> a
     android.widget.TextView wName -> b
     android.widget.TextView wHours -> c
@@ -13489,7 +13498,7 @@ it.schmid.android.mofa.WorkingJournalPreferenceFragment -> it.schmid.android.mof
     90:90:boolean isSdPresent() -> b
     94:97:void onResume() -> onResume
     101:103:void onPause() -> onPause
-it.schmid.android.mofa.adapter.ExpandableLandAdapter -> kh:
+it.schmid.android.mofa.adapter.ExpandableLandAdapter -> ki:
     java.util.List lands -> a
     android.view.LayoutInflater inflater -> b
     java.util.Map hashSelQuarters -> c
@@ -13515,24 +13524,24 @@ it.schmid.android.mofa.adapter.ExpandableLandAdapter -> kh:
     25:25:it.schmid.android.mofa.model.Work access$200(it.schmid.android.mofa.adapter.ExpandableLandAdapter) -> c
     25:25:java.lang.Boolean[] access$300(it.schmid.android.mofa.adapter.ExpandableLandAdapter) -> d
     25:25:java.lang.Boolean access$402(it.schmid.android.mofa.adapter.ExpandableLandAdapter,java.lang.Boolean) -> a
-it.schmid.android.mofa.adapter.ExpandableLandAdapter$1 -> ki:
+it.schmid.android.mofa.adapter.ExpandableLandAdapter$1 -> kj:
     it.schmid.android.mofa.adapter.ExpandableLandAdapter$ViewHolder val$holder -> a
     it.schmid.android.mofa.adapter.ExpandableLandAdapter this$0 -> b
     90:108:void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-it.schmid.android.mofa.adapter.ExpandableLandAdapter$2 -> kj:
+it.schmid.android.mofa.adapter.ExpandableLandAdapter$2 -> kk:
     it.schmid.android.mofa.model.Land val$group -> a
     int val$groupPosition -> b
     it.schmid.android.mofa.adapter.ExpandableLandAdapter this$0 -> c
     178:214:void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-it.schmid.android.mofa.adapter.ExpandableLandAdapter$ViewHolder -> kk:
+it.schmid.android.mofa.adapter.ExpandableLandAdapter$ViewHolder -> kl:
     android.widget.TextView txtVar -> a
     android.widget.TextView txtClone -> b
     android.widget.TextView txtPlantYear -> c
     android.widget.CheckBox selected -> d
-it.schmid.android.mofa.adapter.ExpandableLandAdapter$ViewHolderParent -> kl:
+it.schmid.android.mofa.adapter.ExpandableLandAdapter$ViewHolderParent -> km:
     android.widget.TextView txtLand -> a
     android.widget.CheckBox selectedLand -> b
-it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter -> km:
+it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter -> kn:
     java.util.List purchases -> a
     android.util.SparseArray products -> b
     android.app.Activity context -> c
@@ -13555,48 +13564,48 @@ it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter -> km:
     35:35:android.app.Activity access$300(it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter) -> a
     35:35:java.util.List access$400(it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter) -> b
     35:35:android.util.SparseArray access$500(it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter) -> c
-it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$1 -> kn:
+it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$1 -> ko:
     it.schmid.android.mofa.interfaces.PurchaseProductInterface val$p -> a
     int val$groupPosition -> b
     it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter this$0 -> c
     91:92:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$2 -> ko:
+it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$2 -> kp:
     it.schmid.android.mofa.interfaces.PurchaseProductInterface val$p -> a
     it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter this$0 -> b
     101:103:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$3 -> kp:
+it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$3 -> kq:
     it.schmid.android.mofa.model.Purchase val$p -> a
     int val$groupPosition -> b
     it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter this$0 -> c
     143:144:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$4 -> kq:
+it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$4 -> kr:
     it.schmid.android.mofa.model.Purchase val$p -> a
     int val$groupPosition -> b
     it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter this$0 -> c
     151:159:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$5 -> kr:
+it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$5 -> ks:
     it.schmid.android.mofa.model.Purchase val$p -> a
     int val$position -> b
     it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter this$0 -> c
     185:189:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$6 -> ks:
+it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$6 -> kt:
     it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter this$0 -> a
     195:196:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$7 -> kt:
+it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$7 -> ku:
     it.schmid.android.mofa.interfaces.PurchaseProductInterface val$p -> a
     int val$position -> b
     it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter this$0 -> c
     214:224:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$8 -> ku:
+it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$8 -> kv:
     it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter this$0 -> a
     230:231:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$9 -> kv:
+it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$9 -> kw:
     it.schmid.android.mofa.interfaces.PurchaseProductInterface val$curProd -> a
     it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter this$0 -> b
     247:260:boolean onOkClicked(java.lang.Double) -> a
-it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$OnExpandableListener -> kw:
+it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter$OnExpandableListener -> kx:
     void onExpanded(int) -> a
-it.schmid.android.mofa.adapter.QualitySpinnerAdapter -> kx:
+it.schmid.android.mofa.adapter.QualitySpinnerAdapter -> ky:
     java.util.List qualities -> a
     android.content.Context context -> b
     25:25:int getCount() -> getCount
@@ -13605,7 +13614,7 @@ it.schmid.android.mofa.adapter.QualitySpinnerAdapter -> kx:
     37:39:int getPosition(it.schmid.android.mofa.model.FruitQuality) -> a
     43:45:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     49:51:android.view.View getDropDownView(int,android.view.View,android.view.ViewGroup) -> getDropDownView
-it.schmid.android.mofa.adapter.TaskSpinnerAdapter -> ky:
+it.schmid.android.mofa.adapter.TaskSpinnerAdapter -> kz:
     java.util.List tasks -> a
     android.content.Context context -> b
     25:25:int getCount() -> getCount
@@ -13614,7 +13623,7 @@ it.schmid.android.mofa.adapter.TaskSpinnerAdapter -> ky:
     39:41:int getPosition(it.schmid.android.mofa.model.Task) -> a
     45:47:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     51:53:android.view.View getDropDownView(int,android.view.View,android.view.ViewGroup) -> getDropDownView
-it.schmid.android.mofa.adapter.VQSpinnerAdapter -> kz:
+it.schmid.android.mofa.adapter.VQSpinnerAdapter -> la:
     java.util.List vquarters -> a
     android.content.Context context -> b
     26:26:int getCount() -> getCount
@@ -13623,7 +13632,7 @@ it.schmid.android.mofa.adapter.VQSpinnerAdapter -> kz:
     44:46:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     52:54:android.view.View getDropDownView(int,android.view.View,android.view.ViewGroup) -> getDropDownView
     58:61:java.lang.String vquarterString(int) -> a
-it.schmid.android.mofa.adapter.WorkAdapter -> la:
+it.schmid.android.mofa.adapter.WorkAdapter -> lb:
     android.content.Context context -> a
     int layoutResourceId -> b
     java.util.List data -> c
@@ -13640,30 +13649,30 @@ it.schmid.android.mofa.adapter.WorkAdapter -> la:
     42:42:android.text.SpannableStringBuilder access$300(it.schmid.android.mofa.adapter.WorkAdapter,it.schmid.android.mofa.model.Work) -> d
     42:42:android.text.SpannableStringBuilder access$400(it.schmid.android.mofa.adapter.WorkAdapter,it.schmid.android.mofa.model.Work) -> e
     42:42:void access$500(it.schmid.android.mofa.adapter.WorkAdapter,it.schmid.android.mofa.model.Work,int) -> a
-it.schmid.android.mofa.adapter.WorkAdapter$1 -> lb:
+it.schmid.android.mofa.adapter.WorkAdapter$1 -> lc:
     android.view.View val$row -> a
     it.schmid.android.mofa.model.Work val$work -> b
     it.schmid.android.mofa.adapter.WorkAdapter this$0 -> c
     110:150:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.WorkAdapter$2 -> lc:
+it.schmid.android.mofa.adapter.WorkAdapter$2 -> ld:
     it.schmid.android.mofa.model.Work val$work -> a
     int val$position -> b
     it.schmid.android.mofa.adapter.WorkAdapter this$0 -> c
     157:158:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.WorkAdapter$3 -> ld:
+it.schmid.android.mofa.adapter.WorkAdapter$3 -> le:
     it.schmid.android.mofa.model.Work val$work -> a
     int val$position -> b
     it.schmid.android.mofa.adapter.WorkAdapter this$0 -> c
     179:183:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.WorkAdapter$4 -> le:
+it.schmid.android.mofa.adapter.WorkAdapter$4 -> lf:
     it.schmid.android.mofa.adapter.WorkAdapter this$0 -> a
     189:190:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.WorkAdapter$WorkHolder -> lf:
+it.schmid.android.mofa.adapter.WorkAdapter$WorkHolder -> lg:
     android.widget.ImageView imgIcon -> a
     android.widget.TextView txtDate -> b
     android.widget.TextView txtWork -> c
     android.widget.ImageView delIcon -> d
-it.schmid.android.mofa.adapter.WorkHarvestAdapter -> lg:
+it.schmid.android.mofa.adapter.WorkHarvestAdapter -> lh:
     android.content.Context context -> a
     int layoutResourceId -> b
     it.schmid.android.mofa.model.Harvest h -> d
@@ -13676,24 +13685,24 @@ it.schmid.android.mofa.adapter.WorkHarvestAdapter -> lg:
     157:183:void showYesNoDeleteDialog(it.schmid.android.mofa.model.Harvest,int) -> a
     31:31:void access$000(it.schmid.android.mofa.adapter.WorkHarvestAdapter,it.schmid.android.mofa.model.Harvest) -> a
     31:31:void access$100(it.schmid.android.mofa.adapter.WorkHarvestAdapter,it.schmid.android.mofa.model.Harvest,int) -> a
-it.schmid.android.mofa.adapter.WorkHarvestAdapter$1 -> lh:
+it.schmid.android.mofa.adapter.WorkHarvestAdapter$1 -> li:
     it.schmid.android.mofa.model.Harvest val$currHarvest -> a
     it.schmid.android.mofa.adapter.WorkHarvestAdapter this$0 -> b
     76:81:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.WorkHarvestAdapter$2 -> li:
+it.schmid.android.mofa.adapter.WorkHarvestAdapter$2 -> lj:
     it.schmid.android.mofa.model.Harvest val$currHarvest -> a
     int val$position -> b
     it.schmid.android.mofa.adapter.WorkHarvestAdapter this$0 -> c
     103:105:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.WorkHarvestAdapter$3 -> lj:
+it.schmid.android.mofa.adapter.WorkHarvestAdapter$3 -> lk:
     it.schmid.android.mofa.model.Harvest val$har -> a
     int val$position -> b
     it.schmid.android.mofa.adapter.WorkHarvestAdapter this$0 -> c
     165:169:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.WorkHarvestAdapter$4 -> lk:
+it.schmid.android.mofa.adapter.WorkHarvestAdapter$4 -> ll:
     it.schmid.android.mofa.adapter.WorkHarvestAdapter this$0 -> a
     175:176:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.WorkHarvestAdapter$HarvestHolder -> ll:
+it.schmid.android.mofa.adapter.WorkHarvestAdapter$HarvestHolder -> lm:
     android.widget.TextView txtHarvestDate -> a
     android.widget.TextView txtHarvestId -> b
     android.widget.TextView txtHarvestAmount -> c
@@ -13701,37 +13710,37 @@ it.schmid.android.mofa.adapter.WorkHarvestAdapter$HarvestHolder -> ll:
     android.widget.TextView txtHarvestBoxes -> e
     android.widget.TextView txtHarvestNotes -> f
     android.widget.ImageView delIcon -> g
-it.schmid.android.mofa.adapter.WorkMachineAdapter -> lm:
+it.schmid.android.mofa.adapter.WorkMachineAdapter -> ln:
     android.content.Context context -> a
     int layoutResourceId -> b
     java.util.List data -> c
     37:88:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     91:117:void showYesNoDeleteDialog(it.schmid.android.mofa.model.WorkMachine,int) -> a
     23:23:void access$000(it.schmid.android.mofa.adapter.WorkMachineAdapter,it.schmid.android.mofa.model.WorkMachine,int) -> a
-it.schmid.android.mofa.adapter.WorkMachineAdapter$1 -> ln:
+it.schmid.android.mofa.adapter.WorkMachineAdapter$1 -> lo:
     it.schmid.android.mofa.model.WorkMachine val$workMachine -> a
     it.schmid.android.mofa.adapter.WorkMachineAdapter this$0 -> b
     60:79:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.WorkMachineAdapter$1$1 -> lo:
+it.schmid.android.mofa.adapter.WorkMachineAdapter$1$1 -> lp:
     it.schmid.android.mofa.adapter.WorkMachineAdapter$1 this$1 -> a
     66:72:boolean onOkClicked(java.lang.Double) -> a
-it.schmid.android.mofa.adapter.WorkMachineAdapter$2 -> lp:
+it.schmid.android.mofa.adapter.WorkMachineAdapter$2 -> lq:
     it.schmid.android.mofa.model.WorkMachine val$workMachine -> a
     int val$position -> b
     it.schmid.android.mofa.adapter.WorkMachineAdapter this$0 -> c
     84:86:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.WorkMachineAdapter$3 -> lq:
+it.schmid.android.mofa.adapter.WorkMachineAdapter$3 -> lr:
     it.schmid.android.mofa.model.WorkMachine val$workMachine -> a
     int val$position -> b
     it.schmid.android.mofa.adapter.WorkMachineAdapter this$0 -> c
     99:103:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.WorkMachineAdapter$4 -> lr:
+it.schmid.android.mofa.adapter.WorkMachineAdapter$4 -> ls:
     it.schmid.android.mofa.adapter.WorkMachineAdapter this$0 -> a
     109:110:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.WorkMachineAdapter$MachineHolder -> ls:
+it.schmid.android.mofa.adapter.WorkMachineAdapter$MachineHolder -> lt:
     android.widget.TextView txtMachine -> a
     android.widget.ImageView delIcon -> b
-it.schmid.android.mofa.adapter.WorkProductAdapter -> lt:
+it.schmid.android.mofa.adapter.WorkProductAdapter -> lu:
     android.content.Context context -> a
     it.schmid.android.mofa.interfaces.ShowInfoInterface listener -> e
     int layoutResourceId -> b
@@ -13741,18 +13750,18 @@ it.schmid.android.mofa.adapter.WorkProductAdapter -> lt:
     58:85:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     93:96:android.widget.Filter getFilter() -> getFilter
     22:22:it.schmid.android.mofa.interfaces.ShowInfoInterface access$100(it.schmid.android.mofa.adapter.WorkProductAdapter) -> a
-it.schmid.android.mofa.adapter.WorkProductAdapter$1 -> lu:
+it.schmid.android.mofa.adapter.WorkProductAdapter$1 -> lv:
     it.schmid.android.mofa.interfaces.ProductInterface val$p -> a
     it.schmid.android.mofa.adapter.WorkProductAdapter this$0 -> b
     79:81:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.WorkProductAdapter$ModelFilter -> lv:
+it.schmid.android.mofa.adapter.WorkProductAdapter$ModelFilter -> lw:
     it.schmid.android.mofa.adapter.WorkProductAdapter this$0 -> a
     104:127:android.widget.Filter$FilterResults performFiltering(java.lang.CharSequence) -> performFiltering
     133:139:void publishResults(java.lang.CharSequence,android.widget.Filter$FilterResults) -> publishResults
-it.schmid.android.mofa.adapter.WorkProductAdapter$PesticideHolder -> lw:
+it.schmid.android.mofa.adapter.WorkProductAdapter$PesticideHolder -> lx:
     android.widget.TextView txtPesticide -> a
     android.widget.ImageView imgInfo -> b
-it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter -> lx:
+it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter -> ly:
     android.content.Context context -> a
     int layoutResourceId -> b
     it.schmid.android.mofa.WorkEditSprayFragment fragment -> c
@@ -13765,30 +13774,30 @@ it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter -> lx:
     138:144:void onFinishEditDialog(java.lang.Double,java.lang.Double) -> a
     29:29:void access$000(it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter,it.schmid.android.mofa.model.SprayFertilizer,int) -> a
     29:29:void access$100(it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter,it.schmid.android.mofa.model.SprayFertilizer) -> a
-it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter$1 -> ly:
+it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter$1 -> lz:
     it.schmid.android.mofa.model.SprayFertilizer val$workFertilizer -> a
     int val$position -> b
     it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter this$0 -> c
     77:79:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter$2 -> lz:
+it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter$2 -> ma:
     it.schmid.android.mofa.model.Fertilizer val$fertilizer -> a
     it.schmid.android.mofa.model.SprayFertilizer val$workFertilizer -> b
     it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter this$0 -> c
     83:90:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter$3 -> ma:
+it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter$3 -> mb:
     it.schmid.android.mofa.model.SprayFertilizer val$workFertilizer -> a
     int val$position -> b
     it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter this$0 -> c
     112:116:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter$4 -> mb:
+it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter$4 -> mc:
     it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter this$0 -> a
     122:123:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter$FertilizerHolder -> mc:
+it.schmid.android.mofa.adapter.WorkSelectedFertilizerAdapter$FertilizerHolder -> md:
     android.widget.TextView txtFertilizer -> a
     android.widget.TextView txtDose -> b
     android.widget.TextView txtAmount -> c
     android.widget.ImageView delIcon -> d
-it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter -> md:
+it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter -> me:
     android.content.Context context -> a
     it.schmid.android.mofa.WorkEditSprayFragment fragment -> b
     int layoutResourceId -> c
@@ -13801,95 +13810,95 @@ it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter -> md:
     148:148:it.schmid.android.mofa.model.SprayPesticide getCurrPesticide() -> a
     30:30:void access$000(it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter,it.schmid.android.mofa.model.SprayPesticide,int) -> a
     30:30:void access$100(it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter,it.schmid.android.mofa.model.SprayPesticide) -> a
-it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter$1 -> me:
+it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter$1 -> mf:
     it.schmid.android.mofa.model.SprayPesticide val$workPesticide -> a
     int val$position -> b
     it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter this$0 -> c
     83:84:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter$2 -> mf:
+it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter$2 -> mg:
     it.schmid.android.mofa.model.Pesticide val$pesticide -> a
     it.schmid.android.mofa.model.SprayPesticide val$workPesticide -> b
     it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter this$0 -> c
     89:97:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter$3 -> mg:
+it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter$3 -> mh:
     it.schmid.android.mofa.model.SprayPesticide val$workPesticide -> a
     int val$position -> b
     it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter this$0 -> c
     117:121:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter$4 -> mh:
+it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter$4 -> mi:
     it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter this$0 -> a
     127:128:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter$PesticideHolder -> mi:
+it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter$PesticideHolder -> mj:
     android.widget.TextView txtPesticide -> a
     android.widget.TextView txtDose -> b
     android.widget.TextView txtAmount -> c
     android.widget.ImageView delIcon -> d
-it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter -> mj:
+it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter -> mk:
     android.content.Context context -> a
     int layoutResourceId -> b
     java.util.List data -> c
     43:94:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     102:129:void showYesNoDeleteDialog(it.schmid.android.mofa.model.WorkFertilizer,int) -> a
     27:27:void access$000(it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter,it.schmid.android.mofa.model.WorkFertilizer,int) -> a
-it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter$1 -> mk:
+it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter$1 -> ml:
     it.schmid.android.mofa.model.WorkFertilizer val$workFertilizer -> a
     it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter this$0 -> b
     64:83:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter$1$1 -> ml:
+it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter$1$1 -> mm:
     it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter$1 this$1 -> a
     70:76:boolean onOkClicked(java.lang.Double) -> a
-it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter$2 -> mm:
+it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter$2 -> mn:
     it.schmid.android.mofa.model.WorkFertilizer val$workFertilizer -> a
     int val$position -> b
     it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter this$0 -> c
     91:92:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter$3 -> mn:
+it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter$3 -> mo:
     it.schmid.android.mofa.model.WorkFertilizer val$workFertilizer -> a
     int val$position -> b
     it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter this$0 -> c
     111:115:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter$4 -> mo:
+it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter$4 -> mp:
     it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter this$0 -> a
     121:122:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter$SoilFertilizerHolder -> mp:
+it.schmid.android.mofa.adapter.WorkSoilFertilizerAdapter$SoilFertilizerHolder -> mq:
     android.widget.TextView txtSoilFertilizer -> a
     android.widget.ImageView delIcon -> b
-it.schmid.android.mofa.adapter.WorkVQuarterAdapter -> mq:
+it.schmid.android.mofa.adapter.WorkVQuarterAdapter -> mr:
     android.content.Context context -> a
     java.lang.String strVquarter -> b
     int layoutResourceId -> c
     java.util.List data -> d
     40:66:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-it.schmid.android.mofa.adapter.WorkVQuarterAdapter$VquarterHolder -> mr:
+it.schmid.android.mofa.adapter.WorkVQuarterAdapter$VquarterHolder -> ms:
     android.widget.TextView txtVquarter -> a
-it.schmid.android.mofa.adapter.WorkWorkerAdapter -> ms:
+it.schmid.android.mofa.adapter.WorkWorkerAdapter -> mt:
     android.content.Context context -> a
     int layoutResourceId -> b
     java.util.List data -> c
     43:94:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     102:132:void showYesNoDeleteDialog(it.schmid.android.mofa.model.WorkWorker,int) -> a
     25:25:void access$000(it.schmid.android.mofa.adapter.WorkWorkerAdapter,it.schmid.android.mofa.model.WorkWorker,int) -> a
-it.schmid.android.mofa.adapter.WorkWorkerAdapter$1 -> mt:
+it.schmid.android.mofa.adapter.WorkWorkerAdapter$1 -> mu:
     it.schmid.android.mofa.model.WorkWorker val$workWorker -> a
     it.schmid.android.mofa.adapter.WorkWorkerAdapter this$0 -> b
     64:83:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.WorkWorkerAdapter$1$1 -> mu:
+it.schmid.android.mofa.adapter.WorkWorkerAdapter$1$1 -> mv:
     it.schmid.android.mofa.adapter.WorkWorkerAdapter$1 this$1 -> a
     70:76:boolean onOkClicked(java.lang.Double) -> a
-it.schmid.android.mofa.adapter.WorkWorkerAdapter$2 -> mv:
+it.schmid.android.mofa.adapter.WorkWorkerAdapter$2 -> mw:
     it.schmid.android.mofa.model.WorkWorker val$workWorker -> a
     int val$position -> b
     it.schmid.android.mofa.adapter.WorkWorkerAdapter this$0 -> c
     91:92:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.adapter.WorkWorkerAdapter$3 -> mw:
+it.schmid.android.mofa.adapter.WorkWorkerAdapter$3 -> mx:
     it.schmid.android.mofa.model.WorkWorker val$workWorker -> a
     int val$position -> b
     it.schmid.android.mofa.adapter.WorkWorkerAdapter this$0 -> c
     110:118:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.WorkWorkerAdapter$4 -> mx:
+it.schmid.android.mofa.adapter.WorkWorkerAdapter$4 -> my:
     it.schmid.android.mofa.adapter.WorkWorkerAdapter this$0 -> a
     124:125:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.adapter.WorkWorkerAdapter$WorkerHolder -> my:
+it.schmid.android.mofa.adapter.WorkWorkerAdapter$WorkerHolder -> mz:
     android.widget.TextView txtWorker -> a
     android.widget.ImageView delIcon -> b
 it.schmid.android.mofa.db.DatabaseHelper -> it.schmid.android.mofa.db.DatabaseHelper:
@@ -13916,41 +13925,44 @@ it.schmid.android.mofa.db.DatabaseHelper -> it.schmid.android.mofa.db.DatabaseHe
     com.j256.ormlite.dao.Dao purchaseFertilizerDao -> purchaseFertilizerDao
     com.j256.ormlite.dao.Dao fruitQualityDao -> fruitQualityDao
     com.j256.ormlite.dao.Dao harvestDao -> harvestDao
-    75:103:void onCreate(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource) -> onCreate
-    108:158:void onUpgrade(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> onUpgrade
-    163:172:void updateFromVersion1(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion1
-    175:177:void updateFromVersion2(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion2
-    181:187:void updateFromVersion3(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion3
-    191:199:void updateFromVersion4(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion4
-    204:209:void updateFromVersion5(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion5
-    214:226:void updateFromVersion6(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion6
-    230:239:void updateFromVersion7(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion7
-    242:263:void updateFromVersion8(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion8
-    267:273:void updateFromVersion9(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion9
-    277:284:void updateFromVersion10(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion10
-    288:293:void updateFromVersion11(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion11
-    297:303:void updateFromVersion12(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion12
-    306:313:com.j256.ormlite.dao.Dao getLandDao() -> getLandDao
-    316:323:com.j256.ormlite.dao.Dao getMachineDao() -> getMachineDao
-    326:333:com.j256.ormlite.dao.Dao getWorkerDao() -> getWorkerDao
-    336:343:com.j256.ormlite.dao.Dao getTaskDao() -> getTaskDao
-    346:353:com.j256.ormlite.dao.Dao getPesticideDao() -> getPesticideDao
-    356:363:com.j256.ormlite.dao.Dao getFertilizerDao() -> getFertilizerDao
-    366:373:com.j256.ormlite.dao.Dao getSoilFertilizerDao() -> getSoilFertilizerDao
-    376:383:com.j256.ormlite.dao.Dao getSprayPesticideDao() -> getSprayPesticideDao
-    386:393:com.j256.ormlite.dao.Dao getSprayFertilizerDao() -> getSprayFertilizerDao
-    397:404:com.j256.ormlite.dao.Dao getSprayingDao() -> getSprayingDao
-    407:414:com.j256.ormlite.dao.Dao getVquarterDao() -> getVquarterDao
-    417:424:com.j256.ormlite.dao.Dao getWorkDao() -> getWorkDao
-    427:434:com.j256.ormlite.dao.Dao getWorkVQuarterDao() -> getWorkVQuarterDao
-    437:444:com.j256.ormlite.dao.Dao getWorkWorkerDao() -> getWorkWorkerDao
-    447:454:com.j256.ormlite.dao.Dao getWorkMachineDao() -> getWorkMachineDao
-    457:464:com.j256.ormlite.dao.Dao getWorkFertilizerDao() -> getWorkFertilizerDao
-    467:474:com.j256.ormlite.dao.Dao getPurchaseDao() -> getPurchaseDao
-    477:484:com.j256.ormlite.dao.Dao getPurchasePesticideDao() -> getPurchasePesticideDao
-    487:494:com.j256.ormlite.dao.Dao getPurchaseFertilizerDao() -> getPurchaseFertilizerDao
-    497:504:com.j256.ormlite.dao.Dao getFruitQualityDao() -> getFruitQualityDao
-    507:514:com.j256.ormlite.dao.Dao getHarvestDao() -> getHarvestDao
+    com.j256.ormlite.dao.Dao globalDao -> globalDao
+    77:106:void onCreate(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource) -> onCreate
+    111:164:void onUpgrade(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> onUpgrade
+    169:178:void updateFromVersion1(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion1
+    181:183:void updateFromVersion2(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion2
+    187:193:void updateFromVersion3(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion3
+    197:205:void updateFromVersion4(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion4
+    210:215:void updateFromVersion5(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion5
+    220:232:void updateFromVersion6(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion6
+    236:245:void updateFromVersion7(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion7
+    248:269:void updateFromVersion8(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion8
+    273:279:void updateFromVersion9(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion9
+    283:290:void updateFromVersion10(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion10
+    294:299:void updateFromVersion11(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion11
+    303:309:void updateFromVersion12(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion12
+    313:319:void updateFromVersion13(android.database.sqlite.SQLiteDatabase,com.j256.ormlite.support.ConnectionSource,int,int) -> updateFromVersion13
+    322:329:com.j256.ormlite.dao.Dao getLandDao() -> getLandDao
+    332:339:com.j256.ormlite.dao.Dao getMachineDao() -> getMachineDao
+    342:349:com.j256.ormlite.dao.Dao getWorkerDao() -> getWorkerDao
+    352:359:com.j256.ormlite.dao.Dao getTaskDao() -> getTaskDao
+    362:369:com.j256.ormlite.dao.Dao getPesticideDao() -> getPesticideDao
+    372:379:com.j256.ormlite.dao.Dao getFertilizerDao() -> getFertilizerDao
+    382:389:com.j256.ormlite.dao.Dao getSoilFertilizerDao() -> getSoilFertilizerDao
+    392:399:com.j256.ormlite.dao.Dao getSprayPesticideDao() -> getSprayPesticideDao
+    402:409:com.j256.ormlite.dao.Dao getSprayFertilizerDao() -> getSprayFertilizerDao
+    413:420:com.j256.ormlite.dao.Dao getSprayingDao() -> getSprayingDao
+    423:430:com.j256.ormlite.dao.Dao getVquarterDao() -> getVquarterDao
+    433:440:com.j256.ormlite.dao.Dao getWorkDao() -> getWorkDao
+    443:450:com.j256.ormlite.dao.Dao getWorkVQuarterDao() -> getWorkVQuarterDao
+    453:460:com.j256.ormlite.dao.Dao getWorkWorkerDao() -> getWorkWorkerDao
+    463:470:com.j256.ormlite.dao.Dao getWorkMachineDao() -> getWorkMachineDao
+    473:480:com.j256.ormlite.dao.Dao getWorkFertilizerDao() -> getWorkFertilizerDao
+    483:490:com.j256.ormlite.dao.Dao getPurchaseDao() -> getPurchaseDao
+    493:500:com.j256.ormlite.dao.Dao getPurchasePesticideDao() -> getPurchasePesticideDao
+    503:510:com.j256.ormlite.dao.Dao getPurchaseFertilizerDao() -> getPurchaseFertilizerDao
+    513:520:com.j256.ormlite.dao.Dao getFruitQualityDao() -> getFruitQualityDao
+    523:530:com.j256.ormlite.dao.Dao getHarvestDao() -> getHarvestDao
+    533:540:com.j256.ormlite.dao.Dao getGlobalDao() -> getGlobalDao
 it.schmid.android.mofa.db.DatabaseManager -> it.schmid.android.mofa.db.DatabaseManager:
     com.j256.ormlite.stmt.PreparedQuery vqForWorkQuery -> vqForWorkQuery
     com.j256.ormlite.stmt.PreparedQuery workerForWorkQuery -> workerForWorkQuery
@@ -14217,14 +14229,14 @@ it.schmid.android.mofa.db.WorkLoader$Receiver -> it.schmid.android.mofa.db.WorkL
     it.schmid.android.mofa.db.WorkLoader loader -> loader
     it.schmid.android.mofa.db.WorkLoader this$0 -> this$0
     85:87:void onReceive(android.content.Context,android.content.Intent) -> onReceive
-it.schmid.android.mofa.interfaces.ProductInterface -> mz:
+it.schmid.android.mofa.interfaces.ProductInterface -> na:
     java.lang.Integer getId() -> getId
     java.lang.String getProductName() -> getProductName
     java.lang.Double getDefaultDose() -> getDefaultDose
     int showInfo() -> showInfo
-it.schmid.android.mofa.interfaces.PurchaseProductInterface -> na:
+it.schmid.android.mofa.interfaces.PurchaseProductInterface -> nb:
     java.lang.Double getAmount() -> getAmount
-it.schmid.android.mofa.interfaces.ShowInfoInterface -> nb:
+it.schmid.android.mofa.interfaces.ShowInfoInterface -> nc:
     void showInfos(java.lang.Integer) -> a
 it.schmid.android.mofa.model.Fertilizer -> it.schmid.android.mofa.model.Fertilizer:
     java.lang.String TAG -> TAG
@@ -14272,6 +14284,12 @@ it.schmid.android.mofa.model.FruitQuality -> it.schmid.android.mofa.model.FruitQ
     91:121:java.lang.Boolean importMasterData(java.lang.String,it.schmid.android.mofa.NotificationService) -> importMasterData
     126:184:java.util.List qualityXmlParser(java.lang.String,it.schmid.android.mofa.NotificationService) -> qualityXmlParser
     188:260:java.util.List qualityXmlParserASA(java.lang.String,it.schmid.android.mofa.NotificationService) -> qualityXmlParserASA
+it.schmid.android.mofa.model.Global -> it.schmid.android.mofa.model.Global:
+    java.lang.Integer id -> id
+    java.lang.String typeInfo -> typeInfo
+    java.lang.String data -> data
+    25:25:void importMasterData(org.json.JSONArray) -> importMasterData
+    29:29:java.lang.Boolean importMasterData(java.lang.String,it.schmid.android.mofa.NotificationService) -> importMasterData
 it.schmid.android.mofa.model.Harvest -> it.schmid.android.mofa.model.Harvest:
     java.lang.String ID_FIELD_NAME -> ID_FIELD_NAME
     java.lang.Integer id -> id
@@ -14478,14 +14496,17 @@ it.schmid.android.mofa.model.Spraying -> it.schmid.android.mofa.model.Spraying:
     it.schmid.android.mofa.model.Work work -> work
     java.lang.Integer concentration -> concentration
     java.lang.Double wateramount -> wateramount
-    22:22:java.lang.Integer getId() -> getId
-    26:27:void setId(java.lang.Integer) -> setId
-    30:30:it.schmid.android.mofa.model.Work getWork() -> getWork
-    34:35:void setWork(it.schmid.android.mofa.model.Work) -> setWork
-    38:38:java.lang.Integer getConcentration() -> getConcentration
-    42:43:void setConcentration(java.lang.Integer) -> setConcentration
-    46:46:java.lang.Double getWateramount() -> getWateramount
-    50:51:void setWateramount(java.lang.Double) -> setWateramount
+    java.lang.Integer weather -> weather
+    23:23:java.lang.Integer getId() -> getId
+    27:28:void setId(java.lang.Integer) -> setId
+    31:31:it.schmid.android.mofa.model.Work getWork() -> getWork
+    35:36:void setWork(it.schmid.android.mofa.model.Work) -> setWork
+    39:39:java.lang.Integer getConcentration() -> getConcentration
+    43:44:void setConcentration(java.lang.Integer) -> setConcentration
+    47:47:java.lang.Double getWateramount() -> getWateramount
+    51:52:void setWateramount(java.lang.Double) -> setWateramount
+    55:55:java.lang.Integer getWeather() -> getWeather
+    59:60:void setWeather(java.lang.Integer) -> setWeather
 it.schmid.android.mofa.model.Task -> it.schmid.android.mofa.model.Task:
     java.lang.String TAG -> TAG
     java.lang.Integer id -> id
@@ -14565,18 +14586,18 @@ it.schmid.android.mofa.model.Work -> it.schmid.android.mofa.model.Work:
     java.lang.String note -> note
     java.lang.Boolean valid -> valid
     java.lang.Boolean sended -> sended
-    35:35:java.lang.Integer getId() -> getId
-    38:39:void setId(java.lang.Integer) -> setId
-    41:41:java.lang.Boolean getValid() -> getValid
-    44:45:void setValid(java.lang.Boolean) -> setValid
-    47:47:java.util.Date getDate() -> getDate
-    50:51:void setDate(java.util.Date) -> setDate
-    53:53:it.schmid.android.mofa.model.Task getTask() -> getTask
-    56:57:void setTask(it.schmid.android.mofa.model.Task) -> setTask
-    59:59:java.lang.String getNote() -> getNote
-    62:63:void setNote(java.lang.String) -> setNote
-    65:65:java.lang.Boolean getSended() -> getSended
-    68:69:void setSended(java.lang.Boolean) -> setSended
+    37:37:java.lang.Integer getId() -> getId
+    41:42:void setId(java.lang.Integer) -> setId
+    45:45:java.lang.Boolean getValid() -> getValid
+    49:50:void setValid(java.lang.Boolean) -> setValid
+    53:53:java.util.Date getDate() -> getDate
+    57:58:void setDate(java.util.Date) -> setDate
+    61:61:it.schmid.android.mofa.model.Task getTask() -> getTask
+    65:66:void setTask(it.schmid.android.mofa.model.Task) -> setTask
+    69:69:java.lang.String getNote() -> getNote
+    73:74:void setNote(java.lang.String) -> setNote
+    77:77:java.lang.Boolean getSended() -> getSended
+    81:82:void setSended(java.lang.Boolean) -> setSended
 it.schmid.android.mofa.model.WorkFertilizer -> it.schmid.android.mofa.model.WorkFertilizer:
     java.lang.String WORK_ID_FIELD_NAME -> WORK_ID_FIELD_NAME
     java.lang.String SOILFERTILIZER_ID_FIELD_NAME -> SOILFERTILIZER_ID_FIELD_NAME
@@ -14681,10 +14702,10 @@ it.schmid.android.mofa.search.SearchLandFragment -> it.schmid.android.mofa.searc
     39:39:it.schmid.android.mofa.search.SearchLandFragment$OnLandFragmentListener access$000(it.schmid.android.mofa.search.SearchLandFragment) -> a
     39:39:it.schmid.android.mofa.search.SearchLandFragment$ExpandableSearchLandAdapter access$100(it.schmid.android.mofa.search.SearchLandFragment) -> b
     39:39:int access$200(it.schmid.android.mofa.search.SearchLandFragment) -> c
-it.schmid.android.mofa.search.SearchLandFragment$1 -> nc:
+it.schmid.android.mofa.search.SearchLandFragment$1 -> nd:
     it.schmid.android.mofa.search.SearchLandFragment this$0 -> a
     97:100:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.search.SearchLandFragment$ExpandableSearchLandAdapter -> nd:
+it.schmid.android.mofa.search.SearchLandFragment$ExpandableSearchLandAdapter -> ne:
     java.lang.String TAG -> a
     java.util.List lands -> b
     java.util.HashMap childCheckState -> c
@@ -14703,26 +14724,26 @@ it.schmid.android.mofa.search.SearchLandFragment$ExpandableSearchLandAdapter -> 
     320:320:boolean hasStableIds() -> hasStableIds
     325:325:boolean isChildSelectable(int,int) -> isChildSelectable
     139:139:java.util.HashMap access$300(it.schmid.android.mofa.search.SearchLandFragment$ExpandableSearchLandAdapter) -> a
-it.schmid.android.mofa.search.SearchLandFragment$ExpandableSearchLandAdapter$1 -> ne:
+it.schmid.android.mofa.search.SearchLandFragment$ExpandableSearchLandAdapter$1 -> nf:
     int val$groupPosition -> a
     it.schmid.android.mofa.model.VQuarter val$element -> b
     it.schmid.android.mofa.search.SearchLandFragment$ExpandableSearchLandAdapter this$0 -> c
     212:241:void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-it.schmid.android.mofa.search.SearchLandFragment$ExpandableSearchLandAdapter$2 -> nf:
+it.schmid.android.mofa.search.SearchLandFragment$ExpandableSearchLandAdapter$2 -> ng:
     java.util.ArrayList hashEntries -> a
     it.schmid.android.mofa.model.Land val$group -> b
     int val$groupPosition -> c
     it.schmid.android.mofa.search.SearchLandFragment$ExpandableSearchLandAdapter this$0 -> d
     297:306:void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-it.schmid.android.mofa.search.SearchLandFragment$ExpandableSearchLandAdapter$ViewHolder -> ng:
+it.schmid.android.mofa.search.SearchLandFragment$ExpandableSearchLandAdapter$ViewHolder -> nh:
     android.widget.TextView txtVar -> a
     android.widget.TextView txtClone -> b
     android.widget.TextView txtPlantYear -> c
     android.widget.CheckBox selected -> d
-it.schmid.android.mofa.search.SearchLandFragment$ExpandableSearchLandAdapter$ViewHolderParent -> nh:
+it.schmid.android.mofa.search.SearchLandFragment$ExpandableSearchLandAdapter$ViewHolderParent -> ni:
     android.widget.TextView txtLand -> a
     android.widget.CheckBox selectedLand -> b
-it.schmid.android.mofa.search.SearchLandFragment$OnLandFragmentListener -> ni:
+it.schmid.android.mofa.search.SearchLandFragment$OnLandFragmentListener -> nj:
     void onLandFragmentInteraction(java.util.HashMap,int) -> a
 it.schmid.android.mofa.search.SearchPestFragment -> it.schmid.android.mofa.search.SearchPestFragment:
     java.lang.String mTitle -> a
@@ -14737,10 +14758,10 @@ it.schmid.android.mofa.search.SearchPestFragment -> it.schmid.android.mofa.searc
     118:125:void onAttach(android.app.Activity) -> onAttach
     129:131:void onDetach() -> onDetach
     135:140:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-it.schmid.android.mofa.search.SearchPestFragment$1 -> nj:
-it.schmid.android.mofa.search.SearchPestFragment$OnFragmentPesticideListener -> nk:
+it.schmid.android.mofa.search.SearchPestFragment$1 -> nk:
+it.schmid.android.mofa.search.SearchPestFragment$OnFragmentPesticideListener -> nl:
     void onFragPestInteraction(it.schmid.android.mofa.interfaces.ProductInterface,int) -> a
-it.schmid.android.mofa.search.SearchPestFragment$PesticideAdapter -> nl:
+it.schmid.android.mofa.search.SearchPestFragment$PesticideAdapter -> nm:
     java.util.List data -> a
     android.content.Context context -> b
     int layoutResourceId -> c
@@ -14748,7 +14769,7 @@ it.schmid.android.mofa.search.SearchPestFragment$PesticideAdapter -> nl:
     204:204:int getCount() -> getCount
     209:209:it.schmid.android.mofa.interfaces.ProductInterface getItem(int) -> a
     169:169:java.lang.Object getItem(int) -> getItem
-it.schmid.android.mofa.search.SearchPestFragment$PesticideAdapter$PesticideHolder -> nm:
+it.schmid.android.mofa.search.SearchPestFragment$PesticideAdapter$PesticideHolder -> nn:
     android.widget.TextView txtPesticide -> a
 it.schmid.android.mofa.search.SearchResult -> it.schmid.android.mofa.search.SearchResult:
     java.lang.String mTitle -> a
@@ -14768,10 +14789,10 @@ it.schmid.android.mofa.search.SearchResult -> it.schmid.android.mofa.search.Sear
     157:159:void onDetach() -> onDetach
     40:40:void onLoadFinished(android.support.v4.content.Loader,java.lang.Object) -> onLoadFinished
     40:40:it.schmid.android.mofa.search.SearchResult$GetVQListener access$000(it.schmid.android.mofa.search.SearchResult) -> a
-it.schmid.android.mofa.search.SearchResult$1 -> nn:
+it.schmid.android.mofa.search.SearchResult$1 -> no:
     it.schmid.android.mofa.search.SearchResult this$0 -> a
     111:115:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.search.SearchResult$ExpandableSearchResultAdapter -> no:
+it.schmid.android.mofa.search.SearchResult$ExpandableSearchResultAdapter -> np:
     android.content.Context context -> a
     java.util.List headerList -> b
     java.util.HashMap resultMap -> c
@@ -14786,32 +14807,32 @@ it.schmid.android.mofa.search.SearchResult$ExpandableSearchResultAdapter -> no:
     229:242:android.view.View getGroupView(int,boolean,android.view.View,android.view.ViewGroup) -> getGroupView
     248:258:android.view.View getChildView(int,int,boolean,android.view.View,android.view.ViewGroup) -> getChildView
     263:263:boolean isChildSelectable(int,int) -> isChildSelectable
-it.schmid.android.mofa.search.SearchResult$GetVQListener -> np:
+it.schmid.android.mofa.search.SearchResult$GetVQListener -> nq:
     java.util.ArrayList getVQList() -> a
     int getProdId() -> b
     void closeActivity() -> c
 it.schmid.android.mofa.search.SearchStartFragment -> it.schmid.android.mofa.search.SearchStartFragment:
     37:125:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-it.schmid.android.mofa.search.SearchStartFragment$1 -> nq:
+it.schmid.android.mofa.search.SearchStartFragment$1 -> nr:
     it.schmid.android.mofa.search.SearchStartFragment this$0 -> a
     51:58:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.search.SearchStartFragment$2 -> nr:
+it.schmid.android.mofa.search.SearchStartFragment$2 -> ns:
     it.schmid.android.mofa.search.SearchStartFragment this$0 -> a
     64:69:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.search.SearchStartFragment$3 -> ns:
+it.schmid.android.mofa.search.SearchStartFragment$3 -> nt:
     it.schmid.android.mofa.search.SearchStartFragment this$0 -> a
     73:78:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.search.SearchStartFragment$4 -> nt:
+it.schmid.android.mofa.search.SearchStartFragment$4 -> nu:
     android.widget.CheckBox val$chkDelAllSended -> a
     it.schmid.android.mofa.search.SearchStartFragment this$0 -> b
     84:123:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.search.SearchStartFragment$4$1 -> nu:
+it.schmid.android.mofa.search.SearchStartFragment$4$1 -> nv:
     it.schmid.android.mofa.search.SearchStartFragment$4 this$1 -> a
     97:119:void onClick(android.content.DialogInterface,int) -> onClick
-it.schmid.android.mofa.search.SearchStartFragment$4$1$1 -> nv:
+it.schmid.android.mofa.search.SearchStartFragment$4$1$1 -> nw:
     it.schmid.android.mofa.search.SearchStartFragment$4$1 this$2 -> a
     100:103:void run() -> run
-it.schmid.android.mofa.search.SearchStartFragment$4$1$2 -> nw:
+it.schmid.android.mofa.search.SearchStartFragment$4$1$2 -> nx:
     it.schmid.android.mofa.search.SearchStartFragment$4$1 this$2 -> a
     109:112:void run() -> run
 it.schmid.android.mofa.search.WorkerOverviewActivity -> it.schmid.android.mofa.search.WorkerOverviewActivity:
@@ -14829,19 +14850,19 @@ it.schmid.android.mofa.search.WorkerOverviewActivity -> it.schmid.android.mofa.s
     150:151:void updateLabel2() -> b
     33:33:void access$000(it.schmid.android.mofa.search.WorkerOverviewActivity) -> a
     33:33:void access$100(it.schmid.android.mofa.search.WorkerOverviewActivity) -> b
-it.schmid.android.mofa.search.WorkerOverviewActivity$1 -> nx:
+it.schmid.android.mofa.search.WorkerOverviewActivity$1 -> ny:
     it.schmid.android.mofa.search.WorkerOverviewActivity this$0 -> a
     64:68:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.search.WorkerOverviewActivity$2 -> ny:
+it.schmid.android.mofa.search.WorkerOverviewActivity$2 -> nz:
     it.schmid.android.mofa.search.WorkerOverviewActivity this$0 -> a
     73:77:void onClick(android.view.View) -> onClick
-it.schmid.android.mofa.search.WorkerOverviewActivity$3 -> nz:
+it.schmid.android.mofa.search.WorkerOverviewActivity$3 -> oa:
     it.schmid.android.mofa.search.WorkerOverviewActivity this$0 -> a
     91:113:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-it.schmid.android.mofa.search.WorkerOverviewActivity$4 -> oa:
+it.schmid.android.mofa.search.WorkerOverviewActivity$4 -> ob:
     it.schmid.android.mofa.search.WorkerOverviewActivity this$0 -> a
     123:134:void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
-it.schmid.android.mofa.search.WorkerOverviewActivity$WorkerAdapter -> ob:
+it.schmid.android.mofa.search.WorkerOverviewActivity$WorkerAdapter -> oc:
     java.util.List workerList -> a
     android.content.Context context -> b
     int layoutResourceId -> c
@@ -14849,5 +14870,5 @@ it.schmid.android.mofa.search.WorkerOverviewActivity$WorkerAdapter -> ob:
     188:188:int getCount() -> getCount
     193:193:it.schmid.android.mofa.model.Worker getItem(int) -> a
     152:152:java.lang.Object getItem(int) -> getItem
-it.schmid.android.mofa.search.WorkerOverviewActivity$WorkerAdapter$WorkerHolder -> oc:
+it.schmid.android.mofa.search.WorkerOverviewActivity$WorkerAdapter$WorkerHolder -> od:
     android.widget.TextView txtWorker -> a

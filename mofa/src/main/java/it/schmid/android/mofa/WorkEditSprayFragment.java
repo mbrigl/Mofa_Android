@@ -31,6 +31,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,10 +51,12 @@ public class WorkEditSprayFragment extends SherlockFragment{
 	private ImageView refreshIcon;
 	private ImageView refreshConstraintIcon;
 	private TextView constraintTextView;
+	private TableRow mTurnRow;
 	private Work work = null;
 	private Spraying spray = null;
 	private int mworkId = 0;
 	private int msprayId = 0;
+	private int weather=1;
 	private int spinnerPosition=0;
 	private List<VQuarter> selectedQuarters;
 	private WorkEditTabActivity parentActivity;
@@ -104,6 +107,7 @@ public class WorkEditSprayFragment extends SherlockFragment{
 					}
 			 
 		 }));
+		mTurnRow = (TableRow) view.findViewById(R.id.tableRow9);
 		 populateFields(msprayId);
          setListener();
          return view;
@@ -130,9 +134,10 @@ public class WorkEditSprayFragment extends SherlockFragment{
 				Log.d(TAG, "[populateFields] SprayId = " + id);
 				spray = DatabaseManager.getInstance().getSprayingWithId(id);
 				sumWater.setText(spray.getWateramount().toString());
+				weather = spray.getWeather();
 				ArrayAdapter myAdap = (ArrayAdapter) concent.getAdapter(); //cast to an ArrayAdapter
 				String strcon= spray.getConcentration().toString();
-				Log.d(TAG, "[populateFields] concentration = " + spray.getConcentration().toString());
+				//Log.d(TAG, "[populateFields] concentration = " + spray.getConcentration().toString());
 				spinnerPosition = myAdap.getPosition(strcon);
 				concent.setSelection(spinnerPosition,true);
 				fillPesticideList();
@@ -140,6 +145,24 @@ public class WorkEditSprayFragment extends SherlockFragment{
 		}else{ //new entry
 			sumWater.setText(sumOfWater().toString());
 		}
+		for (int i = 0; i < mTurnRow.getChildCount(); i++){
+			final ImageButton weatherBtn= (ImageButton) mTurnRow.getChildAt(i);
+			weatherBtn.setTag(Integer.valueOf(i));
+			View.OnClickListener weatherClick = new View.OnClickListener()
+			{
+				public void onClick(View view)
+				{
+					int i = 1 + ((Integer)weatherBtn.getTag()).intValue();
+
+					Log.d(TAG, "[weatherBtnClicked] i  = " + i);
+					updateWeatherView(i);
+				}
+
+
+			};
+			weatherBtn.setOnClickListener(weatherClick);
+		}
+		updateWeatherView(weather);
 	}
 	
 
@@ -233,6 +256,7 @@ public class WorkEditSprayFragment extends SherlockFragment{
 		spray = new Spraying();
 		spray.setConcentration(c);
 		spray.setWateramount(w);
+		spray.setWeather(weather);
 		spray.setWork(work);
 		DatabaseManager.getInstance().addSpray(spray);
 		Log.d(TAG, "New Spray Entry");
@@ -241,6 +265,7 @@ public class WorkEditSprayFragment extends SherlockFragment{
 	private void updateSpraying (Spraying s,Integer c,Double w){
 		s.setConcentration(c);
 		s.setWateramount(w);
+		s.setWeather(weather);
 		s.setWork(work);
 		DatabaseManager.getInstance().updateSpray(s);
 		Log.d(TAG, "Updating Spray Entry");
@@ -366,5 +391,17 @@ public class WorkEditSprayFragment extends SherlockFragment{
 	    return false;
     }
 
+	private void updateWeatherView(int iChecked) {
 
+		for (int x = 0; x < mTurnRow.getChildCount(); x++){
+			ImageButton weatherBtn = (ImageButton) mTurnRow.getChildAt(x);
+			if (iChecked==(x+1)){
+				weatherBtn.setBackgroundColor(getResources().getColor(R.color.deepskyblue));
+			}else{
+				weatherBtn.setBackgroundColor(getResources().getColor(R.color.skyblue));
+			}
+		}
+		weather = iChecked;
+		//mPass=iChecked;
+	}
 }

@@ -160,7 +160,7 @@ public void run(){
 		
 	}
 	
-	mNotificationService.completed(icon, tickerText,notifMess);
+	mNotificationService.completed(icon, tickerText, notifMess);
     Looper.loop(); //Loop in the message queue
 }
 	//preparing to send Data	
@@ -405,6 +405,10 @@ public void run(){
 				            serializer.startTag("", "wateramount");
 				            serializer.text(s.getWateramount().toString());
 				            serializer.endTag("", "wateramount");
+                            serializer.startTag("", "weather");
+                            String weatherStr = getWeatherString(s.getWeather());
+                            serializer.text(weatherStr);
+                            serializer.endTag("", "weather");
 				            List<SprayPesticide> sprayPest = DatabaseManager.getInstance().getSprayPesticideBySprayId(s.getId());
 							for (SprayPesticide sp : sprayPest){
 								serializer.startTag("", "Pesticide");
@@ -511,9 +515,9 @@ public void run(){
 		            serializer.text(sdf.format(wk.getDate()));
 		            serializer.endTag("", "Datum");
 		            serializer.startTag("", "Arbeit");
-		            	serializer.startTag("","Code");
+		            	serializer.startTag("", "Code");
 		            		serializer.text(wk.getTask().getCode());
-		            	serializer.endTag("","Code");
+		            	serializer.endTag("", "Code");
 		            serializer.endTag("", "Arbeit");
 		            
 		            serializer.startTag("", "Notiz");
@@ -586,8 +590,8 @@ public void run(){
 								serializer.startTag("", "Code");
 									SoilFertilizer sf = DatabaseManager.getInstance().getSoilFertilizerWithId(wf.getSoilFertilizer().getId());
 									serializer.text(sf.getCode());
-								serializer.endTag("","Code");
-							serializer.endTag("","Artikel");
+								serializer.endTag("", "Code");
+							serializer.endTag("", "Artikel");
 							serializer.startTag("", "Menge");
 		                		serializer.text(wf.getAmount().toString());
 		                	serializer.endTag("", "Menge");
@@ -611,6 +615,10 @@ public void run(){
 			            serializer.startTag("", "Wassermenge");
 			            serializer.text(s.getWateramount().toString());
 			            serializer.endTag("", "Wassermenge");
+                        serializer.startTag("", "Notiz");
+                        String weatherStr = getWeatherString(s.getWeather());
+                        serializer.text(weatherStr);
+                        serializer.endTag("", "Notiz");
 			            for (WorkVQuarter vq : vquarters){
 							serializer.startTag("", "Sortenquartier");
 								serializer.startTag("", "Sortenquartier");
@@ -667,16 +675,16 @@ public void run(){
 							serializer.startTag("", "LieferscheinNummer");
 								serializer.text(h.getId().toString());
 							serializer.endTag("", "LieferscheinNummer");
-							serializer.startTag("","Menge");
+							serializer.startTag("", "Menge");
 			            		serializer.text(h.getAmount().toString());
-			            	serializer.endTag("","Menge");
-			            	serializer.startTag("","Durchgang");
+			            	serializer.endTag("", "Menge");
+			            	serializer.startTag("", "Durchgang");
 		            			serializer.text(h.getPass().toString());
-		            		serializer.endTag("","Durchgang");
-			            	serializer.startTag("","Kategorie");
-		            			serializer.startTag("" , "Code");
+		            		serializer.endTag("", "Durchgang");
+			            	serializer.startTag("", "Kategorie");
+		            			serializer.startTag("", "Code");
 		            				serializer.text(h.getFruitQuality().getCode());
-		            			serializer.endTag("" , "Code");
+		            			serializer.endTag("", "Code");
 		            		serializer.endTag("","Kategorie");
 		            		serializer.startTag("","Kisten");
 		            			serializer.text(h.getBoxes().toString());
@@ -880,5 +888,29 @@ public void run(){
 			error=true;
 		}
 	}
+	private String getWeatherString(int weatherId){
+		switch(weatherId){
+			case ActivityConstants.SUNNY:
+				return context.getString(R.string.weathersunny);
 
+			case ActivityConstants.PARTLYCLOUDED:
+				return context.getString(R.string.weatherpartlycloudy);
+
+			case ActivityConstants.CLOUDED:
+				return context.getString(R.string.weathercloudy);
+
+			case ActivityConstants.LIGHTRAIN:
+				return context.getString(R.string.weatherlightrain);
+
+			case ActivityConstants.RAIN:
+				return context.getString(R.string.weatherrain);
+			case ActivityConstants.MOON:
+				return context.getString(R.string.weathernight);
+			default:
+				return context.getString(R.string.weathersunny);
+
+
+
+		}
+	}
 }
