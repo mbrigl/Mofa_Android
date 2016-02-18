@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="it.schmid.android.mofa"
     android:versionCode="12"
-    android:versionName="4.15 U" >
+    android:versionName="4.15" >
 
     <uses-sdk
         android:minSdkVersion="7"

@@ -12482,6 +12482,7 @@ it.schmid.android.mofa.R$drawable: int ic_lightrain
 it.schmid.android.mofa.R$drawable: int ic_menu_add
 it.schmid.android.mofa.R$drawable: int ic_mofa
 it.schmid.android.mofa.R$drawable: int ic_mofa_main
+it.schmid.android.mofa.R$drawable: int ic_moon
 it.schmid.android.mofa.R$drawable: int ic_ok_icon
 it.schmid.android.mofa.R$drawable: int ic_part_cloud
 it.schmid.android.mofa.R$drawable: int ic_rain
@@ -12645,6 +12646,7 @@ it.schmid.android.mofa.R$id: int imageButton2
 it.schmid.android.mofa.R$id: int imageButton3
 it.schmid.android.mofa.R$id: int imageButton4
 it.schmid.android.mofa.R$id: int imageButton5
+it.schmid.android.mofa.R$id: int imageButton6
 it.schmid.android.mofa.R$id: int info_text
 it.schmid.android.mofa.R$id: int landbox
 it.schmid.android.mofa.R$id: int landclose_btn
@@ -13057,6 +13059,7 @@ it.schmid.android.mofa.R$string: int waitingtimeUnit
 it.schmid.android.mofa.R$string: int waterdialogmsg
 it.schmid.android.mofa.R$string: int weathercloudy
 it.schmid.android.mofa.R$string: int weatherlightrain
+it.schmid.android.mofa.R$string: int weathernight
 it.schmid.android.mofa.R$string: int weatherpartlycloudy
 it.schmid.android.mofa.R$string: int weatherrain
 it.schmid.android.mofa.R$string: int weathersunny

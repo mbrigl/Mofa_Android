@@ -12922,7 +12922,7 @@ it.schmid.android.mofa.SendingProcess -> hw:
     740:784:java.lang.String createPurchaseXML() -> f
     788:845:java.lang.String createPurchaseXMLASA() -> g
     855:890:void writeFileToDropBox(java.lang.String,java.lang.String) -> b
-    892:909:java.lang.String getWeatherString(int) -> a
+    892:910:java.lang.String getWeatherString(int) -> a
 it.schmid.android.mofa.SendingProcess$1 -> hx:
     it.schmid.android.mofa.SendingProcess this$0 -> a
     189:191:void handleMessage(android.os.Message) -> handleMessage
