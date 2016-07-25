@@ -13,10 +13,10 @@
 
 		<TextView
 			style="@style/label"
-			android:text="@string/asa_harvest_codes"/>
+			android:text="@string/asa_mofa_note"/>
 
 		<TextView
-			android:id="@+id/asa_harvest_codes"
+			android:id="@+id/asa_mofa_note"
 			style="@style/value"/>
 	</TableRow>
 	<TableRow>

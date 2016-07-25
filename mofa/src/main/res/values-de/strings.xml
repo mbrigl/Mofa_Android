@@ -11,6 +11,7 @@
 	<string name="listbackend">Software:</string>
 	<string name="header_title_asa">Einstellungen ASA AGRAR</string>
 	<string name="header_summary_asa">Einstellungen für den Datenaustausch mit ASA AGRAR</string>
+	<string name="APP_KEY">kr7pjmpdjth06g0</string>
 
 	
 	<!-- Names of the Dashboard items	-->
@@ -53,6 +54,7 @@
 	<string name = "asa_soilfertilizer_codes">Codes für Bodendüngung</string>
 	<string name = "asa_fertilizer_code">Code für Blattdünger</string>
 	<string name = "asa_fertilizer_soil_code">Code für Bodendünger</string>
+	<string name="asa_mofa_note">Einträge markieren</string>
 
 	<!-- Table names	-->
 	<string name="landtable">Grundstücke</string>
@@ -64,6 +66,7 @@
 	<string name="fertilizertable">Blattdünger</string>
 	<string name="soilfertilizertable">Bodendünger</string>
 	<string name="categorytable">Erntekategorien</string>
+	<string name="extratable">Extras</string>
 	<!-- Notification messages	-->
 	<string name="download_mess">MoFa - Downloading</string>
 	<string name="download_title">MoFa - Starte download</string>
@@ -128,6 +131,7 @@
 	<string name="showspraytab">Spritzung</string>
 	<string name="soilferttab">Düngung</string>
 	<string name="harvesttab">Ernte</string>
+	<string name="irrigationtab">Bewäss.</string>
 	
 	<!-- Strings in SprayTab -->
 	<string name="sprayvqlist">Sortenquartier</string>
@@ -222,4 +226,14 @@
 	<string name="weatherlightrain">Wetter: leichter Regen</string>
 	<string name="weatherrain">Wetter: Regen</string>
 	<string name="weathernight">Nacht</string>
+	<!-- Strings for Irrigation -->
+	<string name="irrigduration">Dauer in h:</string>
+	<string name="irrigamount">Menge rel/h:</string>
+	<string name="irrDry">Trockenbew.</string>
+	<string name="irrFrost">Frostbew.</string>
+	<string name="irrDrip">Tropfbew.</string>
+	<!-- Strings Login Dropbox Activity-->
+	<string name="titleDropboxLoginActivity">MoFa - Anmelden Dropbox</string>
+	<string name="titleDropboxButton">Anmelden</string>
+	<string name="dropboxInfo">Klicken Sie auf den Anmelden Button um MoFa mit Ihrer Dropbox zu verknüpfen \n Sie benötigen dazu ein gültiges Dropbox Konto</string>
 </resources>

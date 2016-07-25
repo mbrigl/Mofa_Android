@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Mofa</string>
+    <string name="app_name">MoFa</string>
     <string name="hello_world">Ciao Mondo</string>
     <string name="settings">Impostazioni</string>
     <string name="title_activity_work">Registro lavoro</string>
@@ -11,6 +11,7 @@
 	<string name="listbackend">Software:</string>
 	<string name="header_title_asa">Configurazione ASAAgrar</string>
 	<string name="header_summary_asa">Impostazioni import/export ASAAgrar</string>
+	<string name="APP_KEY">kr7pjmpdjth06g0</string>
 
 	<!-- Names of the Dashboard items	-->
 	<string name="title_feature1">Registro lavoro</string>
@@ -52,6 +53,7 @@
 	<string name = "asa_soilfertilizer_codes">codice lavoro per fertilizzazione</string>
 	<string name = "asa_fertilizer_code">codice per fertilizzatori</string>
 	<string name = "asa_fertilizer_soil_code">codice per fertilizzatori mineralici</string>
+	<string name="asa_mofa_note">evidenziare i lavori</string>
 
 	<!-- Table names	-->
 	<!-- Table names	-->
@@ -64,6 +66,7 @@
 	<string name="fertilizertable">fertilizzanti</string>
 	<string name="soilfertilizertable">fertilizzantimin</string>
 	<string name="categorytable">categorie raccolta</string>
+	<string name="extratable">extra</string>
 	
 	<!-- Notification messages	-->
 	<string name="download_mess">MoFa - Downloading</string>
@@ -131,6 +134,7 @@
 	<string name="showspraytab">trattamento</string>
 	<string name="soilferttab">concimazione</string>
 	<string name="harvesttab">raccolta</string>
+	<string name="irrigationtab">irrig.</string>
 	<!-- Strings in SprayTab -->
 	<string name="sprayvqlist">appezzamenti</string>
 	<string name="sumwatercaption">hl</string>
@@ -140,6 +144,7 @@
 	<string name="constraintDefault">Nessun avviso</string>
 	<string name="constraintWarningAmountPerHa">quantità per ha superato:</string>
 	<string name="constraintWarningDose">quantità dosaggio superato:</string>
+
 	<string name="constraintError">Controllo non possibile, perchè mancano dati (grandezza campo)</string>
 	<string name="sizeInfo">superficie:  %1$s m²</string>
 	<string name="amountha">quantita ettaro:</string>
@@ -222,4 +227,14 @@
 	<string name="weatherlightrain">tempo: pioggia debole</string>
 	<string name="weatherrain">tempo: pioggia</string>
 	<string name="weathernight">notte</string>
+	<!-- Strings for Irrigation -->
+	<string name="irrigduration">tempo in h:</string>
+	<string name="irrigamount">quantità rel/h:</string>
+	<string name="irrDry">irrigaz.</string>
+	<string name="irrFrost">irrigaz. gelo</string>
+	<string name="irrDrip">irrigaz. goccia</string>
+	<!-- Strings Login Dropbox Activity-->
+	<string name="titleDropboxLoginActivity">MoFa - Login Dropbox</string>
+	<string name="titleDropboxButton">Login</string>
+	<string name="dropboxInfo">Fare un click sul button Login per connettere MoFa con la sua Dropbox \n Serve un Dropbox account essistente. </string>
 </resources>

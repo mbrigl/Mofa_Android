@@ -2,130 +2,95 @@
 <items version="2" >
 
     <item
-        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/libs/ormlite-android-4.42.jar"
-        jumboMode="false"
+        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
         revision="22.0.1"
-        sha1="e100b4fe8706da96352504146c2877b68e0d7231">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/ormlite-android-4.42-c55402d1e7cc9dc1fef3af1999aa78194894a708.jar" />
+        sha1="644072342e0d044603069a8afd304408d0999a8f">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/instant-run-bootstrap_15d68af1e7b8c0e3085d1f8f8e84fc0dd677f3d9.jar" />
     </item>
     <item
-        jar="/home/schmida/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.2/1f96456ca233dec780aa224bff076d8e8bca3908/gson-2.2.2.jar"
-        jumboMode="false"
-        revision="23.0.0 rc3"
-        sha1="1f96456ca233dec780aa224bff076d8e8bca3908">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/gson-2.2.2-7214090055982b545f46b458742cb4e4d422eeec.jar" />
+        jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.dropbox.core/dropbox-core-sdk/2.0.1/77167a7c620a5c94426c74c13c547cfad310729a/dropbox-core-sdk-2.0.1.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="77167a7c620a5c94426c74c13c547cfad310729a">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/dropbox-core-sdk-2.0.1_1acdbd9997da5602881723f1089fb2d0e717d46c.jar" />
     </item>
     <item
-        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
-        jumboMode="false"
+        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/jars/classes.jar"
+        jumboMode="true"
         revision="22.0.1"
         sha1="8694693636ab36910c8100ce527c258ff3ebece0">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/classes-b80d0440f3d4242ec738bb9a10e757aef6d456d3.jar" />
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/com.android.support-support-v4-20.0.0_499157c13b191602c763ef662aa8bfc77e806939.jar" />
     </item>
     <item
-        jar="/home/schmida/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.2/1f96456ca233dec780aa224bff076d8e8bca3908/gson-2.2.2.jar"
-        jumboMode="false"
+        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="af64527b748983a75de9c0756e9768b56b240a49">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/com.actionbarsherlock-actionbarsherlock-4.4.0_6fd2e7866a1f45b31e2a5989c175333bc494714b.jar" />
+    </item>
+    <item
+        jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.7.1/4127b62db028f981e81caa248953c0899d720f98/jackson-core-2.7.1.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="4127b62db028f981e81caa248953c0899d720f98">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/jackson-core-2.7.1_92ece525870e8220a5f4a801da0fc3043284395b.jar" />
+    </item>
+    <item
+        jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.2/1f96456ca233dec780aa224bff076d8e8bca3908/gson-2.2.2.jar"
+        jumboMode="true"
         revision="22.0.1"
         sha1="1f96456ca233dec780aa224bff076d8e8bca3908">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/gson-2.2.2-7214090055982b545f46b458742cb4e4d422eeec.jar" />
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/gson-2.2.2_ae7e363954198902d67fa6fae42a349bd7febdc2.jar" />
     </item>
     <item
-        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/Mofa/library/unspecified/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="72ce9b51cca4f94b75497c3a80c3a032e6bd15cf">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/classes-d90954ef6f38012770fca2168080f908025d5ae1.jar" />
-    </item>
-    <item
-        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/libs/ormlite-core-4.42.jar"
-        jumboMode="false"
-        revision="23.0.0 rc3"
-        sha1="9c345683bceda8106373a485be9c6ecdfa5aa2b3">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/ormlite-core-4.42-c3d925cf61a0d919603acab266b13a954c215709.jar" />
-    </item>
-    <item
-        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/libs/ormlite-core-4.42.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="9c345683bceda8106373a485be9c6ecdfa5aa2b3">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/ormlite-core-4.42-c3d925cf61a0d919603acab266b13a954c215709.jar" />
-    </item>
-    <item
-        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
-        jumboMode="false"
-        revision="23.0.0 rc3"
-        sha1="8694693636ab36910c8100ce527c258ff3ebece0">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/classes-b80d0440f3d4242ec738bb9a10e757aef6d456d3.jar" />
-    </item>
-    <item
-        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/Mofa/library/unspecified/classes.jar"
-        jumboMode="false"
-        revision="23.0.0 rc3"
-        sha1="72ce9b51cca4f94b75497c3a80c3a032e6bd15cf">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/classes-d90954ef6f38012770fca2168080f908025d5ae1.jar" />
-    </item>
-    <item
-        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="af64527b748983a75de9c0756e9768b56b240a49">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/classes-525d285d514e386eb838ecbfe4d813166b55e170.jar" />
-    </item>
-    <item
-        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/classes.jar"
-        jumboMode="false"
-        revision="23.0.0 rc3"
-        sha1="af64527b748983a75de9c0756e9768b56b240a49">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/classes-525d285d514e386eb838ecbfe4d813166b55e170.jar" />
-    </item>
-    <item
-        jar="/home/schmida/android-sdks/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-3a1ff5d7559b86dae54dbd4d686ec4a2adfedd94.jar" />
-    </item>
-    <item
-        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/libs/dropbox-sync-sdk-android.jar"
-        jumboMode="false"
-        revision="23.0.0 rc3"
-        sha1="e6b999ef53dcaed544889fc3d8022e56bccba723">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/dropbox-sync-sdk-android-a6da611ca652f6e8040a3fb0c74205effb17626d.jar" />
-    </item>
-    <item
-        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/libs/internal_impl-20.0.0.jar"
-        jumboMode="false"
+        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/jars/libs/internal_impl-20.0.0.jar"
+        jumboMode="true"
         revision="22.0.1"
         sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-1fb93d3274cdd0e48f1c50d915e13c45d5e27790.jar" />
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/internal_impl-20.0.0_78d4e397272446b375b929f8e1a79f4ef0788893.jar" />
     </item>
     <item
-        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/libs/ormlite-android-4.42.jar"
-        jumboMode="false"
-        revision="23.0.0 rc3"
+        jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.7.1/8b93f301823b79033fcbe873779b3d84f9730fc1/jackson-annotations-2.7.1.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="8b93f301823b79033fcbe873779b3d84f9730fc1">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/jackson-annotations-2.7.1_dbcfc66a07036c7946bb7d84265c24b02524dc44.jar" />
+    </item>
+    <item
+        jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.7.1-1/381bac8a9251eea3b6a1e12c77d54dd946ad449d/jackson-databind-2.7.1-1.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="381bac8a9251eea3b6a1e12c77d54dd946ad449d">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/jackson-databind-2.7.1-1_03c40242877d13284223f134fb92f868fe5a0b56.jar" />
+    </item>
+    <item
+        jar="/Users/schmida/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/support-annotations-20.0.0_fd579d47100e3dc4d0f64ffd9ebc5fd4bf6d51ba.jar" />
+    </item>
+    <item
+        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/libs/ormlite-core-4.42.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="9c345683bceda8106373a485be9c6ecdfa5aa2b3">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/ormlite-core-4.42_0ceb89f1dd02f3739e628a4bab6d1c9a99253c1b.jar" />
+    </item>
+    <item
+        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/libs/ormlite-android-4.42.jar"
+        jumboMode="true"
+        revision="22.0.1"
         sha1="e100b4fe8706da96352504146c2877b68e0d7231">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/ormlite-android-4.42-c55402d1e7cc9dc1fef3af1999aa78194894a708.jar" />
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/ormlite-android-4.42_4b965e1212cb772ed020d5ca26ee68671b3919f7.jar" />
     </item>
     <item
-        jar="/home/schmida/android-sdks/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0.jar"
-        jumboMode="false"
-        revision="23.0.0 rc3"
-        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-3a1ff5d7559b86dae54dbd4d686ec4a2adfedd94.jar" />
-    </item>
-    <item
-        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/libs/internal_impl-20.0.0.jar"
-        jumboMode="false"
-        revision="23.0.0 rc3"
-        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-1fb93d3274cdd0e48f1c50d915e13c45d5e27790.jar" />
-    </item>
-    <item
-        jar="/home/schmida/AndroidStudioProjects/Mofa/mofa/libs/dropbox-sync-sdk-android.jar"
-        jumboMode="false"
+        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
         revision="22.0.1"
-        sha1="e6b999ef53dcaed544889fc3d8022e56bccba723">
-        <dex dex="/home/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/dropbox-sync-sdk-android-a6da611ca652f6e8040a3fb0c74205effb17626d.jar" />
+        sha1="dfdb03472c4bd78788fa8652d9df29452150b0cd">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/instant-run_efe9399ed2086a50221c62cf6dacaa64d8eb2bb1.jar" />
     </item>
 
 </items>

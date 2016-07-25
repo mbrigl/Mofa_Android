@@ -3,8 +3,11 @@ package it.schmid.android.mofa.adapter;
 
 
 
+import it.schmid.android.mofa.InputAmountSoilFertFragment;
 import it.schmid.android.mofa.PromptDialogKeyboard;
 import it.schmid.android.mofa.R;
+import it.schmid.android.mofa.WorkEditHarvestFragment;
+import it.schmid.android.mofa.WorkEditSoilFertilizerFragment;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.model.SoilFertilizer;
 import it.schmid.android.mofa.model.WorkFertilizer;
@@ -16,6 +19,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,16 +28,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class WorkSoilFertilizerAdapter extends ArrayAdapter<WorkFertilizer> {
+public class WorkSoilFertilizerAdapter extends ArrayAdapter<WorkFertilizer> implements InputAmountSoilFertFragment.InputAmountDialogFragmentListener{
 	private static final String TAG = "WorkWorkerAdapter";
 	Context context;
+	WorkEditSoilFertilizerFragment fragment;
 	int layoutResourceId;
 	List<WorkFertilizer> data=null;
-	public WorkSoilFertilizerAdapter(Context context, int layoutResourceId, List<WorkFertilizer> data) {
+	WorkFertilizer workFertilizer;
+	public WorkSoilFertilizerAdapter(Context context,WorkEditSoilFertilizerFragment fragment, int layoutResourceId, List<WorkFertilizer> data) {
 		super(context, layoutResourceId, data);
 		this.context = context;
 		this.layoutResourceId = layoutResourceId;
 		this.data = data;
+		this.fragment = fragment;
 		DatabaseManager.init(context);
 		
 		
@@ -52,8 +59,8 @@ public class WorkSoilFertilizerAdapter extends ArrayAdapter<WorkFertilizer> {
         }else{
         	holder = (SoilFertilizerHolder)row.getTag();
         }
-        final WorkFertilizer workFertilizer = data.get(position) ;
-        SoilFertilizer soilFertilizer = DatabaseManager.getInstance().getSoilFertilizerWithId(workFertilizer.getSoilFertilizer().getId());
+        workFertilizer = data.get(position) ;
+        final SoilFertilizer soilFertilizer = DatabaseManager.getInstance().getSoilFertilizerWithId(workFertilizer.getSoilFertilizer().getId());
         String strSoilFertilizer = soilFertilizer.getProductName() + " "  + workFertilizer.getAmount();
         holder.txtSoilFertilizer.setText(strSoilFertilizer);
         holder.txtSoilFertilizer.setClickable(true);
@@ -61,24 +68,27 @@ public class WorkSoilFertilizerAdapter extends ArrayAdapter<WorkFertilizer> {
             
             public void onClick(View v) {
             	
-            	PromptDialogKeyboard dlg = new PromptDialogKeyboard(context, R.string.title,
-						R.string.enter_amount, workFertilizer.getAmount()) {
-					@Override
-					public boolean onOkClicked(Double input) {
-						// do something
-						
-							workFertilizer.setAmount(input);
-							DatabaseManager.getInstance().updateWorkFertilizer(workFertilizer);
-							notifyDataSetChanged(); 
-						//	updateState(workId, worker.getId(), input);
-							
-						
-						return true; // true = close dialog
-
-					}
-				};
-				dlg.show();
-
+//            	PromptDialogKeyboard dlg = new PromptDialogKeyboard(context, R.string.title,
+//						R.string.enter_amount, workFertilizer.getAmount()) {
+//					@Override
+//					public boolean onOkClicked(Double input) {
+//						// do something
+//
+//							workFertilizer.setAmount(input);
+//							DatabaseManager.getInstance().updateWorkFertilizer(workFertilizer);
+//							notifyDataSetChanged();
+//						//	updateState(workId, worker.getId(), input);
+//
+//
+//						return true; // true = close dialog
+//
+//					}
+//				};
+//				dlg.show();
+				android.support.v4.app.FragmentManager fm = ((FragmentActivity)context).getSupportFragmentManager();
+				InputAmountSoilFertFragment inputAmountDialog = InputAmountSoilFertFragment.newInstance(workFertilizer.getAmount(), soilFertilizer.getProductName(), fragment.sumOfSize());
+				inputAmountDialog.setCallback(WorkSoilFertilizerAdapter.this);
+				inputAmountDialog.show(fm, "InputAmount");
 				
 		 	}
         });	 
@@ -93,7 +103,13 @@ public class WorkSoilFertilizerAdapter extends ArrayAdapter<WorkFertilizer> {
         });
         return row;
 	}
-	
+
+	public void onFinishEditDialog(Double amountInput) {
+		workFertilizer.setAmount(amountInput);
+		DatabaseManager.getInstance().updateWorkFertilizer(workFertilizer);
+		notifyDataSetChanged();
+	}
+
 	static class SoilFertilizerHolder{
 		TextView txtSoilFertilizer;
         ImageView delIcon;

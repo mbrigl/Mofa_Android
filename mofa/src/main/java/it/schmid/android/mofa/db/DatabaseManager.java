@@ -2,6 +2,7 @@ package it.schmid.android.mofa.db;
 
 import it.schmid.android.mofa.model.Fertilizer;
 import it.schmid.android.mofa.model.FruitQuality;
+import it.schmid.android.mofa.model.Global;
 import it.schmid.android.mofa.model.Harvest;
 import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.Machine;
@@ -956,7 +957,10 @@ public class DatabaseManager {
             DeleteBuilder dbh = getHelper().getHarvestDao().deleteBuilder();
             dbh.where().eq("work_id",work.getId());
             getHelper().getHarvestDao().delete(dbh.prepare());
-    		//delete the work
+    		DeleteBuilder dbi = getHelper().getGlobalDao().deleteBuilder();
+            dbi.where().eq("workId",work.getId());
+            getHelper().getGlobalDao().delete(dbi.prepare());
+            //delete the work
             getHelper().getWorkDao().delete(work);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1787,7 +1791,7 @@ public class DatabaseManager {
      * 
      * Harvest - DB Operations
      */
-  //Stored - Queries
+
     public List<Harvest> getAllHarvestEntries() {
         List<Harvest> harvestList = null;
         try {
@@ -1797,7 +1801,7 @@ public class DatabaseManager {
         }
         return harvestList;
     }
-    // adding,updating Worker class
+
     public void addHarvest(Harvest h) {
         try {
             getHelper().getHarvestDao().create(h);
@@ -1846,6 +1850,77 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return harvestList;
+    }
+    /*************************************
+     *
+     * Global - DB Operations
+     */
+
+    public List<Global> getAllGlobalEntries() {
+        List<Global> globalList = null;
+        try {
+            globalList = getHelper().getGlobalDao().queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return globalList;
+    }
+
+    public void addGlobal(Global g) {
+        try {
+            getHelper().getGlobalDao().create(g);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateGlobal(Global global) {
+        try {
+            getHelper().getGlobalDao().update(global);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    // checking if the global exists by id
+    public Global getGlobalWithId(int id) {
+        Global global= null;
+        try {
+            global = getHelper().getGlobalDao().queryForId(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return global;
+    }
+
+    public void deleteGlobal(Global global){
+        try {
+            getHelper().getGlobalDao().delete(global);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    // getting the list of global objects of a work for irrigation
+    public List<Global> getGlobalbyWorkId(int workId) {
+        List<Global> globalList= null;
+        try {
+            globalList = getHelper().getGlobalDao().queryForEq("workId", workId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return globalList;
+    }
+    public List<Global> getGlobalbyWorkIdAndIrrigation(int workId, String workType) {
+        List<Global> globalList = null;
+        try {
+            QueryBuilder<Global,Integer> qbGlobal = getHelper().getGlobalDao().queryBuilder();
+            qbGlobal.where().eq("workId", workId).and() .eq("typeInfo", workType);
+            PreparedQuery<Global> preparedQuery = qbGlobal.prepare();
+            globalList = getHelper().getGlobalDao().query(preparedQuery);
+            return globalList;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
     /*** Search Queries
      *
@@ -2023,5 +2098,20 @@ public class DatabaseManager {
             return null;
         }
 
+    }
+    public int getFirstLandIdForIrrigation(int workId) {
+        try {
+            QueryBuilder<WorkVQuarter, Integer> qb = getHelper().getWorkVQuarterDao().queryBuilder();
+            final Where<WorkVQuarter, Integer> w = qb.where();
+            w.eq("work_id", workId);
+            QueryBuilder<VQuarter, Integer> vquarterQb = getHelper().getVquarterDao().queryBuilder();
+            vquarterQb.join(qb);
+            VQuarter firstVquarter = vquarterQb.query().get(0);
+            return firstVquarter.getLand().getId();
+        }
+        catch (SQLException e){
+            return 0;
+
+        }
     }
 }

@@ -1,7 +1,9 @@
 package it.schmid.android.mofa;
 
 import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.dropbox.DropboxClient;
 import it.schmid.android.mofa.model.Fertilizer;
+import it.schmid.android.mofa.model.Global;
 import it.schmid.android.mofa.model.Harvest;
 import it.schmid.android.mofa.model.Machine;
 import it.schmid.android.mofa.model.Pesticide;
@@ -20,11 +22,13 @@ import it.schmid.android.mofa.model.WorkVQuarter;
 import it.schmid.android.mofa.model.WorkWorker;
 import it.schmid.android.mofa.model.Worker;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -48,21 +52,24 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.util.Xml;
 
-import com.dropbox.sync.android.DbxAccountManager;
-import com.dropbox.sync.android.DbxFile;
-import com.dropbox.sync.android.DbxFileSystem;
-import com.dropbox.sync.android.DbxPath;
+import com.dropbox.core.DbxException;
+import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.WriteMode;
+
 
 public class SendingProcess implements Runnable{
 	private static final String TAG = "SendingProcess";
+	private static final String ASANOTE = "(MoFa)";
 	Context context;
 	private NotificationService mNotificationService; // notification services
 	private Boolean dropBox;  // checking if dropbox setting is enabled
 	private Boolean offline; // checking if offline or through REST
 	private Boolean grossPrice; // checking if for ASA using gross prices
+	private Boolean mofaNote;
 	private String format; // file format
 	private String sendingData; //
 	private String urlPath;
@@ -72,6 +79,7 @@ public class SendingProcess implements Runnable{
 	private String restResponse=""; // not used yet, but response of json-webservice
 	private int callingActivity;
 	private String asaWorkHerbicideCode;
+	private String ACCESS_TOKEN; //Dropbox
 	RemoveEntries mremoveEntries;
 	//constructor
 	public SendingProcess (Context context, Integer callingActivity){
@@ -168,9 +176,10 @@ public void run(){
 			  SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 			  offline = preferences.getBoolean("updateOffline", false);
 			  dropBox = preferences.getBoolean("dropbox", false);
-			  format = preferences.getString("listFormat","-1");
+			  format = preferences.getString("listFormat", "-1");
 			  urlPath = preferences.getString("url", "");
 			  grossPrice = preferences.getBoolean("grossprice", false);
+			  mofaNote = preferences.getBoolean("asanote", false);
 			  mNotificationService= new NotificationService(context,false);
 				int icon = android.R.drawable.stat_sys_upload;
 			    CharSequence tickerText = context.getString(R.string.upload_title);  
@@ -488,6 +497,47 @@ public void run(){
                             serializer.endTag("", "harvest");
 
                         }
+						List<Global> irrigation = DatabaseManager.getInstance().getGlobalbyWorkId(wk.getId());
+						for (Global irr: irrigation) {
+							serializer.startTag("","irrigation");
+							try {
+								JSONObject jsonObj = new JSONObject(irr.getData());
+								if (jsonObj.has("irrduration")){
+									serializer.startTag("", "irrduration");
+									Double irrDuration = (Util.getJSONDouble(jsonObj,"irrduration"));
+									serializer.text(irrDuration.toString());
+									serializer.endTag("", "irrduration");
+								}
+								if (jsonObj.has("irramount")) {
+									serializer.startTag("", "irramount");
+									Double irrAmount = Util.getJSONDouble(jsonObj,"irramount");
+									serializer.text(irrAmount.toString());
+									serializer.endTag("", "irramount");
+								}
+								if (jsonObj.has("irrtotale")) {
+									serializer.startTag("", "irrtotale");
+									Double irrAmountRelative = Util.getJSONDouble(jsonObj,"irrtotale");
+									serializer.text(irrAmountRelative.toString());
+									serializer.endTag("", "irrtotale");
+
+								}
+
+								if (jsonObj.has("irrtype")){
+									serializer.startTag("", "irrtype");
+									Integer irrigationType = Util.getJSONInt(jsonObj,"irrtype");
+									serializer.text(irrigationType.toString());
+									serializer.endTag("", "irrtype");
+
+								}
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+
+
+
+							serializer.endTag("","irrigation");
+
+						}
 			        serializer.endTag("", "work");
 			        }
 			        serializer.endTag("", "works");
@@ -521,7 +571,13 @@ public void run(){
 		            serializer.endTag("", "Arbeit");
 		            
 		            serializer.startTag("", "Notiz");
-		            serializer.text(wk.getNote());
+						String note;
+						if (mofaNote) {
+							note = ASANOTE + " " + wk.getNote();
+						}else {
+							note = wk.getNote();
+						}
+					serializer.text(note);
 		            serializer.endTag("", "Notiz");
 		            List<WorkWorker> workers = DatabaseManager.getInstance().getWorkWorkerByWorkId(wk.getId());
 		              	
@@ -667,65 +723,115 @@ public void run(){
 						}
 					}
 					List<Harvest> harvest = DatabaseManager.getInstance().getHarvestListbyWorkId(wk.getId());
-					for (Harvest h:harvest){
+					for (Harvest h:harvest) {
 						serializer.startTag("", "Ernteeintrag");
-							serializer.startTag("", "Datum");
-								serializer.text(sdf.format(h.getDate()));
-							serializer.endTag("", "Datum");
-							serializer.startTag("", "LieferscheinNummer");
-								serializer.text(h.getId().toString());
-							serializer.endTag("", "LieferscheinNummer");
-							serializer.startTag("", "Menge");
-			            		serializer.text(h.getAmount().toString());
-			            	serializer.endTag("", "Menge");
-			            	serializer.startTag("", "Durchgang");
-		            			serializer.text(h.getPass().toString());
-		            		serializer.endTag("", "Durchgang");
-			            	serializer.startTag("", "Kategorie");
-		            			serializer.startTag("", "Code");
-		            				serializer.text(h.getFruitQuality().getCode());
-		            			serializer.endTag("", "Code");
-		            		serializer.endTag("","Kategorie");
-		            		serializer.startTag("","Kisten");
-		            			serializer.text(h.getBoxes().toString());
-		            		serializer.endTag("","Kisten");
-		            		if(h.getSugar()!=null){
-		            			serializer.startTag("","Zucker");
-		            				serializer.text(h.getSugar().toString());
-		            			serializer.endTag("","Zucker");
-		            		}
-		            		if(h.getAcid()!=null){
-		            			serializer.startTag("","Saeure");
-	            					serializer.text(h.getAcid().toString());
-	            				serializer.endTag("","Saeure");
-		            		}
-		            		if(h.getPhenol()!=null){
-		            			serializer.startTag("","Phenole");
-            						serializer.text(h.getPhenol().toString());
-            					serializer.endTag("","Phenole");
-		            		}
-		            		if(h.getPhValue()!=null){
-		            			serializer.startTag("","PHWert");
-            						serializer.text(h.getPhValue().toString());
-            					serializer.endTag("","PHWert");
-		            		}
-		            		if(h.getNote()!=null){
-		            			serializer.startTag("","Notiz");
-        							serializer.text(h.getNote());
-        						serializer.endTag("","Notiz");
-		            		}
-		            		for (WorkVQuarter vq : vquarters){
-								serializer.startTag("", "Sortenquartier");
-									serializer.startTag("", "Sortenquartier");
-										serializer.startTag("", "Code");
-											VQuarter vquarter = DatabaseManager.getInstance().getVQuarterWithId(vq.getVquarter().getId());
-											serializer.text(vquarter.getCode());
-										serializer.endTag("", "Code");
-									serializer.endTag("", "Sortenquartier");
-								serializer.endTag("", "Sortenquartier");
-							}
+						serializer.startTag("", "Datum");
+						serializer.text(sdf.format(h.getDate()));
+						serializer.endTag("", "Datum");
+						serializer.startTag("", "LieferscheinNummer");
+						serializer.text(h.getId().toString());
+						serializer.endTag("", "LieferscheinNummer");
+						serializer.startTag("", "Menge");
+						serializer.text(h.getAmount().toString());
+						serializer.endTag("", "Menge");
+						serializer.startTag("", "Durchgang");
+						serializer.text(h.getPass().toString());
+						serializer.endTag("", "Durchgang");
+						serializer.startTag("", "Kategorie");
+						serializer.startTag("", "Code");
+						serializer.text(h.getFruitQuality().getCode());
+						serializer.endTag("", "Code");
+						serializer.endTag("", "Kategorie");
+						serializer.startTag("", "Kisten");
+						serializer.text(h.getBoxes().toString());
+						serializer.endTag("", "Kisten");
+						if (h.getSugar() != null) {
+							serializer.startTag("", "Zucker");
+							serializer.text(h.getSugar().toString());
+							serializer.endTag("", "Zucker");
+						}
+						if (h.getAcid() != null) {
+							serializer.startTag("", "Saeure");
+							serializer.text(h.getAcid().toString());
+							serializer.endTag("", "Saeure");
+						}
+						if (h.getPhenol() != null) {
+							serializer.startTag("", "Phenole");
+							serializer.text(h.getPhenol().toString());
+							serializer.endTag("", "Phenole");
+						}
+						if (h.getPhValue() != null) {
+							serializer.startTag("", "PHWert");
+							serializer.text(h.getPhValue().toString());
+							serializer.endTag("", "PHWert");
+						}
+						if (h.getNote() != null) {
+							serializer.startTag("", "Notiz");
+							serializer.text(h.getNote());
+							serializer.endTag("", "Notiz");
+						}
+						for (WorkVQuarter vq : vquarters) {
+							serializer.startTag("", "Sortenquartier");
+							serializer.startTag("", "Sortenquartier");
+							serializer.startTag("", "Code");
+							VQuarter vquarter = DatabaseManager.getInstance().getVQuarterWithId(vq.getVquarter().getId());
+							serializer.text(vquarter.getCode());
+							serializer.endTag("", "Code");
+							serializer.endTag("", "Sortenquartier");
+							serializer.endTag("", "Sortenquartier");
+						}
 						serializer.endTag("", "Ernteeintrag");
 					}
+						List<Global> irrigation = DatabaseManager.getInstance().getGlobalbyWorkId(wk.getId());
+						for (Global irr: irrigation) {
+							serializer.startTag("","Bewaesserung");
+							try {
+								JSONObject jsonObj = new JSONObject(irr.getData());
+																if (jsonObj.has("irrduration")){
+									serializer.startTag("", "Dauer");
+										Double irrDuration = (Util.getJSONDouble(jsonObj,"irrduration"));
+										serializer.text(irrDuration.toString());
+									serializer.endTag("", "Dauer");
+								}
+								if (jsonObj.has("irramount")) {
+									serializer.startTag("", "MengeProStunde");
+										 Double irrAmount = Util.getJSONDouble(jsonObj,"irramount");
+										serializer.text(irrAmount.toString());
+									serializer.endTag("", "MengeProStunde");
+								}
+								if (jsonObj.has("irrtotale")) {
+									serializer.startTag("", "MengeRelativ");
+									Double irrAmountRelative = Util.getJSONDouble(jsonObj,"irrtotale");
+									serializer.text(irrAmountRelative.toString());
+									serializer.endTag("", "MengeRelativ");
+
+								}
+
+								if (jsonObj.has("irrtype")){
+									serializer.startTag("", "Art");
+										Integer irrigationType = Util.getJSONInt(jsonObj,"irrtype");
+										serializer.text(irrigationType.toString());
+									serializer.endTag("", "Art");
+
+								}
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+							for (WorkVQuarter vq : vquarters){
+								serializer.startTag("", "Sortenquartier");
+								serializer.startTag("", "Sortenquartier");
+								serializer.startTag("", "Code");
+								VQuarter vquarter = DatabaseManager.getInstance().getVQuarterWithId(vq.getVquarter().getId());
+								serializer.text(vquarter.getCode());
+								serializer.endTag("", "Code");
+								serializer.endTag("", "Sortenquartier");
+								serializer.endTag("", "Sortenquartier");
+							}
+
+
+							serializer.endTag("","Bewaesserung");
+
+						}
 		        serializer.endTag("", "Arbeitseintrag");
 		        }
 		        serializer.endTag("", "Arbeitseintraege");
@@ -850,43 +956,44 @@ public void run(){
 	 * 
 	 */
 	private void writeFileToDropBox(String data, String fileType){
-		DbxAccountManager mDbxAcctMgr;
-		DbxPath dropboxPath;
+
 		Date date = new Date() ;
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss") ;
 		String filePath=null;
-		
+		ACCESS_TOKEN = DropboxClient.retrieveAccessToken(context);
 		if (fileType.equalsIgnoreCase("1")){
 			if (callingActivity==ActivityConstants.WORK_OVERVIEW){
-				filePath =  "MoFaBackend/export/worklist" + dateFormat.format(date) + ".json";
+				filePath =  "/MoFaBackend/export/worklist" + dateFormat.format(date) + ".json";
 			}
 			if (callingActivity==ActivityConstants.PURCHASING_ACTIVITY){
-				filePath =  "MoFaBackend/export/purchaselist" + dateFormat.format(date) + ".json";
+				filePath =  "/MoFaBackend/export/purchaselist" + dateFormat.format(date) + ".json";
 			}
 		}else{
 			if (callingActivity==ActivityConstants.WORK_OVERVIEW){
-				filePath =  "MoFaBackend/export/worklist" + dateFormat.format(date) + ".xml";
+				filePath =  "/MoFaBackend/export/worklist" + dateFormat.format(date) + ".xml";
 			}
 			if (callingActivity==ActivityConstants.PURCHASING_ACTIVITY){
-				filePath =  "MoFaBackend/export/purchaselist" + dateFormat.format(date) + ".xml";
+				filePath =  "/MoFaBackend/export/purchaselist" + dateFormat.format(date) + ".xml";
 			}
 		}
-		dropboxPath = new DbxPath(DbxPath.ROOT, filePath);
-		 mDbxAcctMgr = DbxAccountManager.getInstance(MofaApplication.getInstance(), MofaApplication.appKey, MofaApplication.appSecret);
-	    // Create DbxFileSystem for synchronized file access.
+
+
 	    try {
-			DbxFileSystem dbxFs = DbxFileSystem.forAccount(mDbxAcctMgr.getLinkedAccount());
-			DbxFile exportFile = dbxFs.create(dropboxPath);
-	        try {
-	            exportFile.writeString(data);
-	        } finally {
-	            exportFile.close();
-	        }
+			InputStream inputStream = new ByteArrayInputStream(data.getBytes(Charset.forName("UTF-8")));
+			if (ACCESS_TOKEN != null) {
+				DbxClientV2 dbxClient = DropboxClient.getClient(ACCESS_TOKEN);
+				dbxClient.files().uploadBuilder(filePath)
+						.withMode(WriteMode.OVERWRITE)
+						.uploadAndFinish(inputStream);
+			}
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			error=true;
+		} catch (DbxException e){
+			error = true;
 		}
+
 	}
 	private String getWeatherString(int weatherId){
 		switch(weatherId){
@@ -913,4 +1020,5 @@ public void run(){
 
 		}
 	}
+
 }

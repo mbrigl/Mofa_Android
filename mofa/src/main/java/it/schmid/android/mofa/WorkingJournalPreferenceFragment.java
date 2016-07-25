@@ -28,14 +28,14 @@ public class WorkingJournalPreferenceFragment extends PreferenceFragment impleme
 
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			String key) {
-		Log.d("WorkingJournalPreferenceFragment", "calling listener");
+		//Log.d("WorkingJournalPreferenceFragment", "calling listener");
 		CheckBoxPreference offlineUpdate = (CheckBoxPreference)getPreferenceScreen().findPreference("updateOffline");
 		CheckBoxPreference dropbox = (CheckBoxPreference)getPreferenceScreen().findPreference("dropbox");
 		CheckBoxPreference dropboxReset = (CheckBoxPreference)getPreferenceScreen().findPreference("dropboxreset");
 		ListPreference backendSoftware = (ListPreference)getPreferenceScreen().findPreference("listBackendFormat");
 		ListPreference encodePref = (ListPreference)getPreferenceScreen().findPreference("listFormat");
 		if (offlineUpdate.isChecked()){
-			Log.d("WorkingJournalPreferenceFragment", "offlineupdate = true");
+		//	Log.d("WorkingJournalPreferenceFragment", "offlineupdate = true");
 			if (isSdPresent()==true){
 				
 				createSdFolderStruct();
@@ -48,7 +48,7 @@ public class WorkingJournalPreferenceFragment extends PreferenceFragment impleme
 			offlineUpdate.setChecked(false);
 		}
 		if (backendSoftware.getValue().equals("1")){ //ASA settings - we set preferences for ASA on Android 4.x
-			Log.d("WorkingJournalPreferenceFragment", "Pref ASA "); 
+		//	Log.d("WorkingJournalPreferenceFragment", "Pref ASA ");
 			dropbox.setChecked(true);
 			encodePref.setValue("2");
 		}

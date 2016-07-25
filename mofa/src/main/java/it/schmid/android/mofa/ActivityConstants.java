@@ -14,4 +14,8 @@ public interface ActivityConstants {
 	public static final int LIGHTRAIN=4;
 	public static final int RAIN=5;
 	public static final int MOON=6;
+
+	public static final int DRYIRRIGATION=1;
+	public static final int FROSTIRRIGATION=2;
+	public static final int DRIPIRRIGATION=3;
 }

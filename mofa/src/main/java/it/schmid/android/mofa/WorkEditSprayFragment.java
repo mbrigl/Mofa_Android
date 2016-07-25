@@ -297,6 +297,9 @@ public class WorkEditSprayFragment extends SherlockFragment{
 		Log.d(TAG,"[onResume] CurrWorkID= " + mworkId);
 		populateFields(msprayId);
 	}
+
+
+
 	public static String format(double i)
 	{
 		NumberFormat nf = NumberFormat.getInstance(Locale.US);

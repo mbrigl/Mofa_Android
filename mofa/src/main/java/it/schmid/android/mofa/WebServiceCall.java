@@ -36,17 +36,16 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
 
-import com.dropbox.sync.android.DbxAccountManager;
-import com.dropbox.sync.android.DbxException;
-import com.dropbox.sync.android.DbxFile;
-import com.dropbox.sync.android.DbxFileStatus;
-import com.dropbox.sync.android.DbxFileSystem;
-import com.dropbox.sync.android.DbxPath;
+import com.dropbox.core.DbxException;
+import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.FileMetadata;
+
 
 public class WebServiceCall extends AsyncTask<Object, Integer, String > {
 	private static final String TAG = "WebServiceCall";
 	private static final String UTF = "UTF-8";
 	private static final String ISO8859 = "iso-8859-1";
+
 	ProgressDialog dialog;
 	 InputStream is = null;
 	 String data = "";
@@ -60,14 +59,15 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String > {
 	 private ArrayList<Integer> selItems;
 	 private String encoding; //setting the encoding for xml
 	//Dropbox variable
-	 private DbxAccountManager mDbxAcctMgr;
+	private final DbxClientV2 mDbxClient;
 	 //Notification variable
 	 private NotificationService mNotificationService;
-	public WebServiceCall(Context context,Boolean offline,String format,Boolean dropBox, String backEndSoftware){
+	public WebServiceCall(Context context,Boolean offline,String format,Boolean dropBox, String backEndSoftware,DbxClientV2 dbxClient){
 		this.mContext = context;
 		this.mOffline=offline;
 		this.mDropbox=dropBox;
 		this.format = format;
+		this.mDbxClient = dbxClient;
 		//Get the notification manager
 		 mNotificationService= new NotificationService(context,true);
 		 switch (Integer.parseInt(backEndSoftware)) {
@@ -219,6 +219,7 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String > {
 			}
 		}else{
 			data=getDropboxData(filePath);
+			deleteDropboxFile(filePath);
 		}
 		return data;
 	}
@@ -318,69 +319,57 @@ private String offlineImport(String filePath){
 	//TODO
 	return jString;
 }
-private String getDropboxData(String filePath){
-	// DbxFileStatus statusDbx;
-	 DbxPath dropboxPath = new DbxPath(DbxPath.ROOT, filePath);
-	 String resultData="";
-	 mDbxAcctMgr = DbxAccountManager.getInstance(MofaApplication.getInstance(), MofaApplication.appKey, MofaApplication.appSecret);
-	// mDbxAcctMgr = MofaApplication.getDbxAccountManager();
-     // Create DbxFileSystem for synchronized file access.
-     try {
-		DbxFileSystem dbxFs = DbxFileSystem.forAccount(mDbxAcctMgr.getLinkedAccount());
-        dbxFs.setMaxFileCacheSize(0);
-		dbxFs.syncNowAndWait();
-		DbxFile testFile = dbxFs.open(dropboxPath);
-		DbxFileStatus status = testFile.getSyncStatus();
 
-		if (!status.isLatest) {
-			Log.d(TAG, "[getDropBoxData] - Read and download file" + filePath);
-			//String strTemp = testFile.readString(); //force downloading file
-			
-			
-			testFile.addListener(new DbxFile.Listener() {
-		        
-		        public void onFileChange(DbxFile file) {
-		        	DbxFileStatus statusDbx = null;
-		        	try {
-						statusDbx = file.getNewerStatus();
-					    if (statusDbx.isCached){
-		            		file.update();
-					    }
-						} catch (DbxException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-		            
-		        }
-		    });
+private String getDropboxData(String filePath){
+	try {
+		FileMetadata mData = (FileMetadata)mDbxClient.files().getMetadata(filePath);
+		InputStream in  = mDbxClient.files().download(mData.getPathLower()).getInputStream();
+		String data = getStringFromInputStream(in);
+
+		return data;
+
+	} catch ( DbxException e ) {
+		error = true;
+	}
+
+
+
+	return null;
+}
+	private void deleteDropboxFile(String filePath){
+		try{
+			mDbxClient.files().delete(filePath);
+		}catch (DbxException e) {
+			error = true;
+		}
+	}
+	private static String getStringFromInputStream(InputStream is) {
+
+		BufferedReader br = null;
+		StringBuilder sb = new StringBuilder();
+
+		String line;
+		try {
+
+			br = new BufferedReader(new InputStreamReader(is));
+			while ((line = br.readLine()) != null) {
+				sb.append(line);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 
-            
-            try {
-            	FileInputStream in = testFile.getReadStream();
-            	resultData = new Scanner(in,encoding).useDelimiter("\\A").next();
-                
-               //resultData = testFile.readString(); //reading UTF-8
-               
-            } finally {
-                testFile.close();
-                if (status.isLatest){
-                	Log.d(TAG, "[getDropBoxData] - Status is isLatest - Removing it!" + filePath);
-                	dbxFs.delete(dropboxPath); //removing the file
-               }
-                
-            }  
-            
-            
-		
-		
-	} catch (IOException e) {
-		error = true;
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		return sb.toString();
+
 	}
-  //  Log.d(TAG,"[getDropboxData] :" +resultData);
-    return resultData;
-}
 
 }

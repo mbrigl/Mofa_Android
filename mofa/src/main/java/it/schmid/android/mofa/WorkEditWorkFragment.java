@@ -57,6 +57,7 @@ public class WorkEditWorkFragment extends SherlockFragment implements OnDateSetL
 	CompleteBehaviour continueEnabled;
 	ShowSoilFertilizerTabListener mShowSFertilizerTab;
 	ShowHarvestTabListener mShowHarvestTab;
+	ShowWaterTabListener mShowWaterTab;
 	private static final int REQUEST_CODE = 0;
 	private Boolean saveStateOnPause = false;
 	private int mworkId = 0;
@@ -103,6 +104,9 @@ public class WorkEditWorkFragment extends SherlockFragment implements OnDateSetL
 	public interface ShowHarvestTabListener{
 		public void showHarvestTabListener (int workId, Boolean status);
 	}
+	public interface ShowWaterTabListener{
+		public void showWaterTabListener (int workId, Boolean status);
+	}
 	// registering the callback, using onAttach
 	@Override
 	public void onAttach(Activity activity) {
@@ -111,6 +115,7 @@ public class WorkEditWorkFragment extends SherlockFragment implements OnDateSetL
 			mCallback = (ShowSprayTabListener) activity;
 			mShowSFertilizerTab = (ShowSoilFertilizerTabListener) activity;
 			mShowHarvestTab = (ShowHarvestTabListener) activity;
+			mShowWaterTab = (ShowWaterTabListener) activity;
 			parentSetWorkId = (SetWorkIdListener) activity;
 			continueEnabled = (CompleteBehaviour) activity;
 		}catch (ClassCastException e){
@@ -254,6 +259,10 @@ public class WorkEditWorkFragment extends SherlockFragment implements OnDateSetL
                                     Log.d(TAG, "New Harvest entry - Showing Tab");
                                     mShowHarvestTab.showHarvestTabListener(mworkId, true);
                                 }
+								if (work!=null && item.getType().equalsIgnoreCase("B")){
+									Log.d(TAG, "New Irrigation entry - Showing Tab");
+									mShowWaterTab.showWaterTabListener(mworkId, true);
+								}
                             }
 
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Mofa</string>
+    <string name="app_name">MoFa</string>
     <string name="hello_world">Hello world!</string>
     <string name="settings">Settings</string>
     <string name="title_activity_work">Working Journal</string>
@@ -12,6 +12,7 @@
     <string name="listbackend">Backend:</string>
     <string name="header_title_asa">Configuring ASA Settings</string>
     <string name="header_summary_asa">Settings for ASA Import/Export</string>
+    <string name="APP_KEY">kr7pjmpdjth06g0</string>
 
     <!-- Names of the Dashboard items -->
     <string name="title_feature1">WorkingJournal</string>
@@ -53,7 +54,8 @@
     <string name="asa_soilfertilizer_codes">Codes soil fertilizing</string>
     <string name="asa_fertilizer_code">Code fertilizer</string>
     <string name="asa_fertilizer_soil_code">Code soil fertilizer</string>
-    >
+    <string name="asa_mofa_note">Mark entries</string>
+
 
     <!-- Table names -->
     <string name="landtable">land</string>
@@ -65,6 +67,7 @@
     <string name="fertilizertable">fertilizer</string>
     <string name="soilfertilizertable">soilfertilizer</string>
     <string name="categorytable">fruit category</string>
+    <string name="extratable">extras</string>
     <!-- Notification messages -->
     <string name="download_mess">MoFa - Downloading</string>
     <string name="download_title">MoFa - Starting download</string>
@@ -128,6 +131,7 @@
     <string name="showspraytab">spray tab</string>
     <string name="soilferttab">Fertilizing</string>
     <string name="harvesttab">Harvest</string>
+    <string name="irrigationtab">Irrig.</string>
     <!-- String image description -->
     <string name="imagepesticide">Pesticide</string>
     <!-- Strings in SprayTab -->
@@ -137,10 +141,10 @@
     <string name="openpesticidebutton">Pesticides</string>
     <string name="waterdialogmsg">Refreshing water amount?</string>
     <string name="constraintDefault">No warning</string>
+    <string name="constraintWarningDose">max dose exceeded</string>
     <string name="constraintWarningAmountPerHa">Max Amount per ha exceeded:</string>
     <string name="constraintError">Check not possible, because some data are missing</string>
     <string name="sizeInfo">Size:  %1$s m²</string>
-
 
 
     <!-- Strings in Pesticide List -->
@@ -228,4 +232,15 @@
     <string name="weatherlightrain">weather: light rain</string>
     <string name="weatherrain">weather: rain</string>
     <string name="weathernight">night</string>
+    <!-- Strings for Irrigation -->
+    <string name="irrigduration">Duration in h:</string>
+    <string name="irrigamount">Amount rel/h:</string>
+    <string name="irrDry">DryIrrig.</string>
+    <string name="irrFrost">FrostIrrig.</string>
+    <string name="irrDrip">DripIrrig.</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <!-- Strings Login Dropbox Activity-->
+    <string name="titleDropboxLoginActivity">MoFa - Login Dropbox</string>
+    <string name="titleDropboxButton">Login</string>
+    <string name="dropboxInfo">Click on the login Button to connect MoFa with your Dropbox. \n You must have a valid Dropbox Account.</string>
 </resources>

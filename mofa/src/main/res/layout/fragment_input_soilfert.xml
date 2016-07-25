@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/edit_name"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_gravity="center" android:orientation="vertical"  >
+        <TextView
+            android:id="@+id/lbl_size"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_gravity="right"
+            />
+
+
+
+        <TextView
+            android:id="@+id/lbl_amount_total" android:text="@string/enter_amount"
+            android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/txt_amount_total"
+            android:layout_width="match_parent"  android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:digits="0123456789.,$"
+            android:imeOptions="actionDone" />
+        <TextView
+            android:id="@+id/lbl_amount_ha" android:text="@string/amountha"
+            android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/txt_amount_ha"
+            android:layout_width="match_parent"  android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:digits="0123456789.,$"
+            android:imeOptions="actionDone" />
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+
+                <Button
+                    android:id="@+id/cancel_confirm_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cancelbutton" />
+                <Button
+                    android:id="@+id/ok_confirm_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/okbutton" />
+            </TableRow>
+
+
+
+
+        </TableLayout>
+
+</LinearLayout>

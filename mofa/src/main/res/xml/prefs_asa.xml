@@ -6,6 +6,9 @@
 		android:key="grossprice"
 		android:title="@string/asa_tax_setting"
 		android:defaultValue="false"/>
-
+        <CheckBoxPreference
+            android:key="asanote"
+            android:title="@string/asa_mofa_note"
+            android:defaultValue="false"/>
 </PreferenceCategory>
 </PreferenceScreen>

@@ -33,9 +33,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.dropbox.sync.android.DbxAccountManager;
-import com.dropbox.sync.android.DbxFileSystem;
-import com.dropbox.sync.android.DbxPath;
+
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
@@ -43,7 +41,7 @@ import com.j256.ormlite.table.TableUtils;
 
 public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
 	private static final String DATABASE_NAME = "MofaDB.sqlite";
-	private static final int DATABASE_VERSION =13;
+	private static final int DATABASE_VERSION =14;
 	
 	// the DAO object we use to access the SimpleData table
     private Dao<Land, Integer> landDao = null;
@@ -152,6 +150,9 @@ public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
 					case 13:
 						updateFromVersion13(db,connectionSource,oldVersion,newVersion);
 						break;
+					case 14:
+						updateFromVersion14(db,connectionSource,oldVersion,newVersion);
+						break;
                 }
 	            for (String sql : allSql) {
 	                db.execSQL(sql);
@@ -248,23 +249,14 @@ public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
 			final String CAT_IMPORT_PATH = "MoFaBackend/import/category"; //this is the new Dropbox Folder
 		try {
 			//we have to add a new folder for backward compatibility on upgrade
-			DbxAccountManager mDbxAcctMgr=null;
-			mDbxAcctMgr = DbxAccountManager.getInstance(MofaApplication.getInstance(), MofaApplication.appKey, MofaApplication.appSecret);
-			DbxFileSystem dbxFs = DbxFileSystem.forAccount(mDbxAcctMgr.getLinkedAccount());
-			DbxPath categoryPath = new DbxPath(DbxPath.ROOT , CAT_IMPORT_PATH);
-			if (!dbxFs.exists(categoryPath)) {
-				Log.d("DatabaseHelperClass","Upgrade to version 8: Creating the new folder for category");
-				dbxFs.createFolder(categoryPath);
-			}
+
 			TableUtils.createTableIfNotExists(connectionSource, FruitQuality.class);
 			TableUtils.createTableIfNotExists(connectionSource, Harvest.class);
 			
 		} catch (java.sql.SQLException e) {
 			e.printStackTrace();
 		}
-		catch (IOException e){
-			e.printStackTrace();
-		}
+
 		onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
 	}
 	private void updateFromVersion9(SQLiteDatabase db,
@@ -313,6 +305,15 @@ public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
 			getWorkDao().executeRaw("ALTER TABLE `Spraying` ADD COLUMN weather Integer;");
 			TableUtils.createTableIfNotExists(connectionSource, Global.class);
 		} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+		}
+		onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
+	}
+	private void updateFromVersion14(SQLiteDatabase db,
+									 ConnectionSource connectionSource, int oldVersion, int newVersion) {
+		try {
+			getWorkDao().executeRaw("ALTER TABLE `Global` ADD COLUMN workId Integer;");
+			} catch (java.sql.SQLException e) {
 			e.printStackTrace();
 		}
 		onUpgrade(db, connectionSource, oldVersion + 1, newVersion);

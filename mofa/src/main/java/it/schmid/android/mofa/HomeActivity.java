@@ -7,6 +7,9 @@ import it.schmid.android.mofa.SendingProcess.RemoveEntries;
 import it.schmid.android.mofa.db.DatabaseHelper;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.db.DatabaseTestDB;
+import it.schmid.android.mofa.dropbox.CheckFileTask;
+import it.schmid.android.mofa.dropbox.DropboxClient;
+import it.schmid.android.mofa.dropbox.LoginActivity;
 import it.schmid.android.mofa.model.Work;
 import it.schmid.android.mofa.search.SearchActivity;
 import it.schmid.android.mofa.search.WorkerOverviewActivity;
@@ -47,11 +50,8 @@ import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.dropbox.sync.android.DbxAccountManager;
-import com.dropbox.sync.android.DbxFile;
-import com.dropbox.sync.android.DbxFileStatus;
-import com.dropbox.sync.android.DbxFileSystem;
-import com.dropbox.sync.android.DbxPath;
+import com.dropbox.core.android.Auth;
+
 import com.google.android.vending.licensing.AESObfuscator;
 import com.google.android.vending.licensing.LicenseChecker;
 import com.google.android.vending.licensing.LicenseCheckerCallback;
@@ -72,7 +72,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	 */
 	private Boolean resetDropbox;
 	private Boolean dropBox; 
-	static final String DROPBOX_IMPORT_PATH = "MoFaBackend/import";
+	static final String DROPBOX_IMPORT_PATH = "/MoFaBackend/import";
 	private Boolean offline;
 	private String urlPath;
 	private String format;
@@ -94,7 +94,8 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
     private static final int REQUEST_LINK_TO_DBX = 0;
     
     //Dropbox variable
-    private DbxAccountManager mDbxAcctMgr;
+	private String ACCESS_TOKEN;
+
 	
 	// Image resources for the buttons
 	private Integer[] mImageIds = {
@@ -187,6 +188,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
             sBackEnd="Excel";
         }
         getSupportActionBar().setTitle("MoFa - "  + sBackEnd );
+
     }
 
     public void onClickFeature (View v)
@@ -227,7 +229,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 		       //licensed = sharedPref.getBoolean("LICENSED", false);
 		       //** The following lines are to disable for productive use
 		       licensed=app.getLicense(); 
-		       //licensed=true; //only for TESTING, disabling this line for productive use !!!
+		       licensed=true; //only for TESTING, disabling this line for productive use !!!
 		       
 		      if (licensed==false){ //not licensed or still to check
 		    	   String deviceId = Secure.getString(getContentResolver(), Secure.ANDROID_ID);
@@ -239,23 +241,26 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 		     }
 		      if (licensed==true){ //seems to be licensed, go on..
 		    	  app.setLicense(true);
-		    	   
+				  if (resetDropbox == true){ //resetting the link if enabled in preferences
+					  deleteAccessToken();
+					  Editor editor = preferences.edit(); //resetting this preference to false
+					  editor.putBoolean("dropboxreset", false);
+					  editor.commit();
+				  }
 		    	   if (dropBox == true){ //DropBox sync
-			    	   mDbxAcctMgr = DbxAccountManager.getInstance(MofaApplication.getInstance(), MofaApplication.appKey, MofaApplication.appSecret);
-			    	   if (resetDropbox == true){ //resetting the link if enabled in preferences
-			    		   mDbxAcctMgr.unlink();
-			    		   Editor editor = preferences.edit(); //resetting this preference to false
-			    		   editor.putBoolean("dropboxreset", false);
-			    		   editor.commit();
-			    	   }
-			    	 //  mDbxAcctMgr.unlink(); //unlinking, only for testing to recreate folder structure
-			    	   if (mDbxAcctMgr.hasLinkedAccount()==false){  // first call, we have to link
-			    		  // Log.d(TAG, "[DropBox - Starting linking process]");
-			    		   mDbxAcctMgr.startLink((Activity)this, REQUEST_LINK_TO_DBX);
-			    	   }else{
-			    		  // Log.d(TAG, "[DropBox - Already linked]");
-			    		   importFromDropbox(); // checking if there are new import files
-			    	   }
+					   if (!tokenExists()) { //Dropbox API V2 - check if Token exists
+						   //No token
+						   //Back to LoginActivity
+						   Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+						   startActivity(intent);
+
+					   }else {
+						   ACCESS_TOKEN = retrieveAccessToken();
+						   importFromDropbox();
+					   }
+
+
+
 			    /**
 			     * handling cases different from Dropbox	   
 			     */
@@ -302,7 +307,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 		}else{
 			extension =".xml";
 		}
-		WebServiceCall importData = new WebServiceCall(this, offline, format, dropBox, backEndSoftware);
+		WebServiceCall importData = new WebServiceCall(this, offline, format, dropBox, backEndSoftware,DropboxClient.getClient(ACCESS_TOKEN));
 		importData.execute(selItems, url);
 		
 
@@ -558,6 +563,9 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 		String extension;
 		String filename = "/list"; //the filename is always list
 		final ArrayList<Integer> selElements = new ArrayList<Integer>(); //storing the elements to import/update
+		final String[] elementDesc = {getString(R.string.landtable), getString(R.string.vquartertable), getString(R.string.machinetable),
+				getString(R.string.workertable),getString(R.string.tasktable), getString(R.string.pesticidetable), getString(R.string.fertilizertable),
+				getString(R.string.soilfertilizertable), getString(R.string.categorytable), getString(R.string.extratable)};
 		StringBuilder sb = new StringBuilder();
 		boolean first = false; //only for checking if \n
 		if (format.equalsIgnoreCase("1")){ //json
@@ -566,230 +574,29 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 			extension =".xml";
 		}
 		filename = filename + extension;
+		new CheckFileTask(DropboxClient.getClient(ACCESS_TOKEN),elementDesc, new CheckFileTask.Callback(){
 
-		DbxPath importPathWorker = new DbxPath(DbxPath.ROOT , DROPBOX_IMPORT_PATH + "/worker" + filename);
-		DbxPath importPathMachine = new DbxPath(DbxPath.ROOT , DROPBOX_IMPORT_PATH + "/machine" + filename);
-		DbxPath importPathTasks = new DbxPath(DbxPath.ROOT , DROPBOX_IMPORT_PATH+ "/task"+ filename);
-		DbxPath importPathLands = new DbxPath(DbxPath.ROOT , DROPBOX_IMPORT_PATH + "/land"+ filename);
-		DbxPath importPathVquarter = new DbxPath(DbxPath.ROOT , DROPBOX_IMPORT_PATH + "/vquarter"+ filename);
-		DbxPath importPathFertilizer = new DbxPath(DbxPath.ROOT , DROPBOX_IMPORT_PATH + "/fertilizer"+ filename);
-		DbxPath importPathSoilFertilizer = new DbxPath(DbxPath.ROOT , DROPBOX_IMPORT_PATH + "/soilfertilizer"+ filename);
-		DbxPath importPathPesticide = new DbxPath(DbxPath.ROOT , DROPBOX_IMPORT_PATH + "/pesticide"+ filename);	
-		DbxPath importPathCategory = new DbxPath(DbxPath.ROOT , DROPBOX_IMPORT_PATH + "/category"+ filename);	
-
-        try{
-			DbxFileSystem dbxFs = DbxFileSystem.forAccount(mDbxAcctMgr.getLinkedAccount());
-            dbxFs.setMaxFileCacheSize(0); //setting the cache to 0 MB
-			if (dbxFs.exists(importPathLands)) {
-				refreshFile(importPathLands, dbxFs);
-				Log.d(TAG,"[importFromDropbox] Import file of land exists");
-				 sb.append(getString(R.string.landtable));
-				   	 first=true;
-			         selElements.add(1); // 1 means we update land,
-		         };
-			
-			if (dbxFs.exists(importPathVquarter)) {
-				refreshFile(importPathVquarter, dbxFs);
-				Log.d(TAG,"[importFromDropbox] Import file of vquarter exists");
-				 if (first){
-		            	sb.append("\n");
-		          	    }
-		          //  else {
-		            	// Special case, its not possible to update only the variety quarters, we have a relation to the land!!! 
-		            	// Therefore we add the land-element
-		           // 	selElements.add(1);
-		           // }
-		        	sb.append(getString(R.string.vquartertable));
-		               first=true;
-			            selElements.add(2); // 2 means we update the variety quarter
-		           }
-			
-			if (dbxFs.exists(importPathMachine)) {
-				refreshFile(importPathMachine, dbxFs);
-				Log.d(TAG,"[importFromDropbox] Import file of machine exists");
-				if (first){
-	            	sb.append("\n");
-	          	    }
-	        	sb.append(getString(R.string.machinetable));
-	            first=true;
-	            selElements.add(3);
-	            
-			}
-			if (dbxFs.exists(importPathWorker)) {
-				refreshFile(importPathWorker, dbxFs);
-				Log.d(TAG,"[importFromDropbox] Import file of worker exists");
-				 if (first){
-		            	sb.append("\n");
-		          	    }
-		        	sb.append(getString(R.string.workertable));
-		            first=true;
-		            selElements.add(4);
-		            
+			@Override
+			public void onDataLoaded(ArrayList<Integer> result, StringBuilder sb) {
+				if (result.size()>0){
+					showAlertDialog(sb,result);
+				}else{ // no updates
+					showNoUpdateDialog();
 				}
-			if (dbxFs.exists(importPathTasks)) {
-				refreshFile(importPathTasks, dbxFs);
-				Log.d(TAG,"[importFromDropbox] Import file of tasks exists:" + importPathTasks.toString());
-				if (first){
-	            	sb.append("\n");
-	          	    }
-	        	sb.append(getString(R.string.tasktable));
-	            first=true;
-	            selElements.add(5);
-				
 
 			}
-			if (dbxFs.exists(importPathPesticide)) {
-				refreshFile(importPathPesticide, dbxFs);
-				Log.d(TAG,"[importFromDropbox] Import file of pesticide exists");
-				if (first){
-	            	sb.append("\n");
-	          	    }
-	        	sb.append(getString(R.string.pesticidetable));
-	            first=true;
-	            selElements.add(6);
-				
+
+			@Override
+			public void onError(Exception e) {
+
 			}
-			if (dbxFs.exists(importPathFertilizer)) {
-				refreshFile(importPathFertilizer, dbxFs);
-				Log.d(TAG,"[importFromDropbox] Import file of fertilizer exists");
-				if (first){
-	            	sb.append("\n");
-	          	    }
-	        	sb.append(getString(R.string.fertilizertable));
-	            first=true;
-	            selElements.add(7);
-			
-			}
-			if (dbxFs.exists(importPathSoilFertilizer)) {
-				refreshFile(importPathSoilFertilizer, dbxFs);
-				Log.d(TAG,"[importFromDropbox] Import file of soilfertilizer exists");
-				if (first){
-	            	sb.append("\n");
-	          	    }
-	        	sb.append(getString(R.string.soilfertilizertable));
-	            first=true;
-	            selElements.add(8);
-				 
-			}
-			if (dbxFs.exists(importPathCategory)) {
-				refreshFile(importPathCategory, dbxFs);
-				Log.d(TAG,"[importFromDropbox] Import file of category exists");
-				if (first){
-	            	sb.append("\n");
-	          	    }
-	        	sb.append(getString(R.string.categorytable));
-	            first=true;
-	            selElements.add(9);
-				 
-			}
-			
-            
-		}catch (IOException e){
-			Toast.makeText(getApplicationContext(),e.toString(), Toast.LENGTH_LONG).show();
-		}
-		if (selElements.size()>0){
-			showAlertDialog(sb,selElements);
-		}else{ // no updates
-			showNoUpdateDialog();
-		}
-		 
-		
+		}).execute(filename);
+//
 		
 	}
-	private void refreshFile(DbxPath dropboxPath, DbxFileSystem dbxFs){
-		
-		try {
-		if (dbxFs.isFile(dropboxPath)) {
-            DbxFile testFile = dbxFs.open(dropboxPath);
-            DbxFileStatus status = testFile.getSyncStatus(); //get sync status
-            //Log.d (TAG, "[DROPBOX] getting newer file");
-            if (status.isLatest==false){ // not the newest file
-            	Log.d (TAG, "[HomeActivity - DROPBOX] getting newer file " + dropboxPath.toString());
-            	testFile.getNewerStatus(); //getting newer file
-            	
-            }
-            
-             testFile.close();
-                      
-			}
-		
-		}catch (IOException e) {
-			
-			e.printStackTrace();
-		}
-		
-	}
-	private void createDropBoxFolders(){
-		
-		final String ROOT_IMPORT_PATH = "MoFaBackend/import";
-		final String ROOT_EXPORT_PATH = "MoFaBackend/export";
-		try{
-			DbxPath importPath = new DbxPath(DbxPath.ROOT , ROOT_IMPORT_PATH);
-			DbxPath exportPath = new DbxPath(DbxPath.ROOT, ROOT_EXPORT_PATH);
-			DbxPath importPathWorker = new DbxPath(DbxPath.ROOT , ROOT_IMPORT_PATH + "/worker");
-			DbxPath importPathMachine = new DbxPath(DbxPath.ROOT , ROOT_IMPORT_PATH + "/machine");
-			DbxPath importPathTasks = new DbxPath(DbxPath.ROOT , ROOT_IMPORT_PATH + "/task");
-			DbxPath importPathLands = new DbxPath(DbxPath.ROOT , ROOT_IMPORT_PATH + "/land");
-			DbxPath importPathVquarter = new DbxPath(DbxPath.ROOT , ROOT_IMPORT_PATH + "/vquarter");
-			DbxPath importPathFertilizer = new DbxPath(DbxPath.ROOT , ROOT_IMPORT_PATH + "/fertilizer");
-			DbxPath importPathSoilFertilizer = new DbxPath(DbxPath.ROOT , ROOT_IMPORT_PATH + "/soilfertilizer");
-			DbxPath importPathPesticide = new DbxPath(DbxPath.ROOT , ROOT_IMPORT_PATH + "/pesticide");
-			DbxPath importPathCategory = new DbxPath(DbxPath.ROOT , ROOT_IMPORT_PATH + "/category");
-			DbxFileSystem dbxFs = DbxFileSystem.forAccount(mDbxAcctMgr.getLinkedAccount());
-			if (!dbxFs.exists(importPath)) {
-				Log.d(TAG, "[createDropBoxFolders] Creating folder");
-				dbxFs.createFolder(importPath);
-				dbxFs.createFolder(exportPath);
-				dbxFs.createFolder(importPathWorker);
-				dbxFs.createFolder(importPathMachine);
-				dbxFs.createFolder(importPathTasks);
-				dbxFs.createFolder(importPathLands);
-				dbxFs.createFolder(importPathVquarter);
-				dbxFs.createFolder(importPathPesticide);
-				dbxFs.createFolder(importPathFertilizer);
-				dbxFs.createFolder(importPathSoilFertilizer);
-				dbxFs.createFolder(importPathCategory);
-			}
-		}catch (IOException e) {
-       	Toast.makeText(getApplicationContext(),e.toString(), Toast.LENGTH_LONG).show();
-      }
-		
-		
-		
-	}
-	/**
-	 * only for dropbox; checking if ok
-	 */
-	/**
-	 * callback after signing in for the first time
-	 */
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		final String ROOT_IMPORT_PATH = "MoFaBackend/import";
-	//    Log.d(TAG, "[onActivityResult] Callback from Dropbox");
-		if (requestCode == REQUEST_LINK_TO_DBX) {
-	        if (resultCode == Activity.RESULT_OK) {
-	        	Log.d(TAG, "[onActivityResult] OK - Callback OK from Dropbox");
-	        	try {
-					DbxFileSystem dbxFs = DbxFileSystem.forAccount(mDbxAcctMgr.getLinkedAccount());
-                    dbxFs.setMaxFileCacheSize(0);
-					DbxPath importPath = new DbxPath(DbxPath.ROOT , ROOT_IMPORT_PATH);
-					if (!dbxFs.exists(importPath)){
-						 createDropBoxFolders(); // we have to create the folder structure
-					}
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	        	
-	           
-	        } else {
-	        	Toast.makeText(getApplicationContext(), R.string.dropboxconnerror, Toast.LENGTH_LONG).show(); //error
-	        }
-	    } else {
-	        super.onActivityResult(requestCode, resultCode, data);
-	    }
-	}
+
+
+
 	public void deleteAllEntries() {
 		List<Work> workList;
 		workList = DatabaseManager.getInstance().getAllWorksOrderByDate();
@@ -913,5 +720,26 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 
     }
 
-
+	private boolean tokenExists() {
+		SharedPreferences prefs = getSharedPreferences("it.schmid.android.mofa", Context.MODE_PRIVATE);
+		String accessToken = prefs.getString("access-token", null);
+		return accessToken != null;
+	}
+	private String retrieveAccessToken() {
+		//check if ACCESS_TOKEN is previously stored on previous app launches
+		SharedPreferences prefs = getSharedPreferences("it.schmid.android.mofa", Context.MODE_PRIVATE);
+		String accessToken = prefs.getString("access-token", null);
+		if (accessToken == null) {
+			Log.d("AccessToken Status", "No token found");
+			return null;
+		} else {
+			//accessToken already exists
+			Log.d("AccessToken Status", "Token exists");
+			return accessToken;
+		}
+	}
+	private void deleteAccessToken(){
+		SharedPreferences prefs = getSharedPreferences("it.schmid.android.mofa", Context.MODE_PRIVATE);
+		prefs.edit().remove("access-token").commit();
+	}
 }
