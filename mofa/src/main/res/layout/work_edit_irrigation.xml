@@ -13,19 +13,19 @@
                 android:layout_width="0dip"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:src="@drawable/ic_sun" />
+                android:src="@drawable/ic_beregnung" />
             <ImageButton
                 android:id="@+id/imageButton2"
                 android:layout_width="0dip"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:src="@drawable/ic_part_cloud" />
+                android:src="@drawable/ic_frost" />
             <ImageButton
                 android:id="@+id/imageButton3"
                 android:layout_width="0dip"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:src="@drawable/ic_clouds" />
+                android:src="@drawable/ic_tropfen" />
 
         </TableRow>
         <TableRow

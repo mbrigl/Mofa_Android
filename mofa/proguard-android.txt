@@ -17,7 +17,6 @@
 -renamesourcefileattribute SourceFile
 -keepattributes SourceFile,LineNumberTable
 -repackageclasses ''
-
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application
 -keep public class * extends android.app.Service
@@ -28,10 +27,23 @@
 -keep public class * extends android.preference.PreferenceFragment
 -keep public class * extends com.actionbarsherlock.app.SherlockFragment
 -keep public class * extends com.actionbarsherlock.app.SherlockPreferenceActivity
-
 -keep public class com.android.vending.licensing.ILicensingService
+-dontskipnonpubliclibraryclassmembers
 -dontnote com.android.vending.licensing.ILicensingService
-
+-dontnote **ILicensingService
+# OkHttp and Servlet optional dependencies
+-dontwarn com.squareup.okhttp.**
+-dontwarn okio.**
+-dontwarn okhttp3.**
+-dontwarn com.google.appengine.**
+-dontwarn javax.servlet.**
+-dontwarn okhttp.**
+-dontwarn android.support.**
+-dontnote android.support.**
+-dontwarn org.apache.http.**
+-dontwarn android.net.http.AndroidHttpClient
+-dontwarn com.google.android.gms.**
+-dontwarn com.android.volley.toolbox.**
 # Explicitly preserve all serialization members. The Serializable interface
 # is only a marker interface, so it wouldn't save them.
 -keepclassmembers class * implements java.io.Serializable {
@@ -99,17 +111,16 @@
 ##---------------End: proguard configuration for Gson  ----------
 
 
-
 ##---------------Begin: proguard configuration for ActionBarSherlock  ----------
+
 -keep class android.support.v4.app.** { *; }
--keep class com.dropbox.sync.android.** { *; }
--dontwarn com.dropbox.sync.android.**
 -keep interface android.support.v4.app.** { *; }
 -keep class com.actionbarsherlock.** { *; }
 -dontwarn com.actionbarsherlock.internal.**
 -keep interface com.actionbarsherlock.** { *; }
 -keep class it.schmid.android.mofa.db.** { *; }
 -keep class it.schmid.android.mofa.model.** { *; }
+-keep class it.schmid.android.mofa.dropbox.** { *; }
 -keep class com.j256.**
 -keepclassmembers class com.j256.** { *; }
 -keep enum com.j256.**

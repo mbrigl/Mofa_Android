@@ -19,7 +19,9 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -167,8 +169,8 @@ public class WorkEditWorkFragment extends SherlockFragment implements OnDateSetL
 	        mWork.setSelection(adapter.getPosition(selTask));
 	       // selectSpinnerItem(); //preselecting the stored task in the spinner
 	        fillVQuarterList();	//filling list of vquarters of current work
-	        
-	        
+
+
 	       
 	        if (work.getNote()!=null){
 				mNoteText.setText(work.getNote());
@@ -176,6 +178,11 @@ public class WorkEditWorkFragment extends SherlockFragment implements OnDateSetL
 		}else{
 			Date date = new Date();
 	    	myDate = setCalendarDate(date);
+			Task selTask = DatabaseManager.getInstance().getTaskWithId(getPredefWork()); //getting the predefined work from preferences
+			if (selTask != null) {
+				mWork.setSelection(adapter.getPosition(selTask));
+			}
+
 		}
 		
 		mDateText.setText(myDate);
@@ -334,6 +341,7 @@ public class WorkEditWorkFragment extends SherlockFragment implements OnDateSetL
 			{
 				createNewWork(t,newDate);
 			}
+			setPredefWork(t.getId());
 		}
 		private void updateWork(Task t, Date d){
 			work.setDate(d);
@@ -351,7 +359,20 @@ public class WorkEditWorkFragment extends SherlockFragment implements OnDateSetL
 			parentSetWorkId.setWorkIdListener(mworkId); //setting the workid on the parent Activity
 			
 		}
+	private void setPredefWork(int taskId) {
+		String key = "LAST_TASK"; //creating key for last task
+		SharedPreferences prefs = getActivity().getSharedPreferences("it.schmid.android.mofa", Context.MODE_PRIVATE);
+		prefs.edit().putInt(key,taskId).apply();
+		//Toast.makeText(getActivity(),DatabaseManager.getInstance().getFirstLandIdForIrrigation(workId),Toast.LENGTH_LONG).show();
+	}
+	private int getPredefWork (){
+		String key = "LAST_TASK";
+		SharedPreferences prefs = getActivity().getSharedPreferences("it.schmid.android.mofa", Context.MODE_PRIVATE);
+		int taskId = (prefs.getInt(key, 0));
+		return taskId;
 
+
+	}
 	
 		 public void onCreateOptionsMenu (com.actionbarsherlock.view.Menu menu, com.actionbarsherlock.view.MenuInflater inflater) {
 			// inflater.inflate(R.menu.work_edit_menu, menu);

@@ -36,8 +36,10 @@ dependencies {
     compile project(':library')
     compile files('libs/ormlite-core-4.42.jar')
     compile files('libs/ormlite-android-4.42.jar')
-    compile 'com.dropbox.core:dropbox-core-sdk:2.0.1'
+    compile 'com.dropbox.core:dropbox-core-sdk:2.0.6'
     compile 'com.google.code.gson:gson:2.2.2'
     compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     compile 'com.android.support:support-v4:20.0.0'
+    compile 'com.squareup.okhttp:okhttp:2.7.5'
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
 }

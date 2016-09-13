@@ -238,7 +238,7 @@
     <string name="irrDry">DryIrrig.</string>
     <string name="irrFrost">FrostIrrig.</string>
     <string name="irrDrip">DripIrrig.</string>
-    <string name="title_activity_login">LoginActivity</string>
+
     <!-- Strings Login Dropbox Activity-->
     <string name="titleDropboxLoginActivity">MoFa - Login Dropbox</string>
     <string name="titleDropboxButton">Login</string>

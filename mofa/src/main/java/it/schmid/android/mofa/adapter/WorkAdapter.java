@@ -1,10 +1,13 @@
 package it.schmid.android.mofa.adapter;
 
+import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.PreviewAnimation;
 import it.schmid.android.mofa.R;
+import it.schmid.android.mofa.Util;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.db.WorkLoader;
 import it.schmid.android.mofa.model.Fertilizer;
+import it.schmid.android.mofa.model.Global;
 import it.schmid.android.mofa.model.Harvest;
 import it.schmid.android.mofa.model.Pesticide;
 import it.schmid.android.mofa.model.SoilFertilizer;
@@ -38,6 +41,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class WorkAdapter extends ArrayAdapter<Work> {
 	private static final String TAG = "ArrayAdapter";
@@ -112,6 +118,7 @@ public class WorkAdapter extends ArrayAdapter<Work> {
 				SpannableStringBuilder txtWorkers = new SpannableStringBuilder();
 				SpannableStringBuilder txtSpray= new SpannableStringBuilder();
                 SpannableStringBuilder txtFert = new SpannableStringBuilder();
+                SpannableStringBuilder txtWater = new SpannableStringBuilder();
 			//	Work work = data.get(position);
 				View toolbar =row.findViewById(R.id.toolbar);
 				txtVquarters = getVquarters(work);
@@ -119,6 +126,7 @@ public class WorkAdapter extends ArrayAdapter<Work> {
 				txtSpray = getSprayInfos(work);
                 txtHarvest = getHarvestEntry(work);
                 txtFert = getFertInfos(work);
+                txtWater = getWaterInfos(work);
 				if (txtVquarters != ""){
 					TextView txt = (TextView) row.findViewById(R.id.txtprevvquarters);
 					txt.setText(txtVquarters);
@@ -142,6 +150,11 @@ public class WorkAdapter extends ArrayAdapter<Work> {
                     TextView txtSprayPrev = (TextView) row.findViewById(R.id.txtprevspray);
                     txtSprayPrev.setVisibility(View.VISIBLE);
                     txtSprayPrev.setText(txtFert);
+                }
+                if (txtWater.length() != 0){
+                    TextView txtSprayPrev = (TextView) row.findViewById(R.id.txtprevwater);
+                    txtSprayPrev.setVisibility(View.VISIBLE);
+                    txtSprayPrev.setText(txtWater);
                 }
 				PreviewAnimation expandAni = new PreviewAnimation(toolbar, 500);
 				toolbar.startAnimation(expandAni);
@@ -338,5 +351,48 @@ public class WorkAdapter extends ArrayAdapter<Work> {
 			}
     	}
     	return sprayBuilder;
-	}	
+	}
+    private SpannableStringBuilder getWaterInfos(Work work){
+        final String GLOBALTYP = "Irrigation";
+        double irrDuration= 0.00;
+        int irrigationType;
+        String irrDesc="";
+        SpannableStringBuilder waterBuilder = new SpannableStringBuilder();
+        if (DatabaseManager.getInstance().getGlobalbyWorkIdAndIrrigation(work.getId(),GLOBALTYP).size() != 0) {
+            Global irrData = DatabaseManager.getInstance().getGlobalbyWorkId(work.getId()).get(0);
+            if (irrData.getData() != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(irrData.getData());
+
+                    if (jsonObj.has("irrduration")){
+                        irrDuration = Util.getJSONDouble(jsonObj,"irrduration");
+                    }
+                    if (jsonObj.has("irrtype")){
+                        irrigationType = Util.getJSONInt(jsonObj,"irrtype");
+                        switch (irrigationType) {
+                            case ActivityConstants.DRYIRRIGATION:
+                                irrDesc = (context.getResources().getString(R.string.irrDry));
+                                break;
+                            case ActivityConstants.FROSTIRRIGATION:
+                                irrDesc = (context.getResources().getString(R.string.irrFrost));
+                                break;
+                            case ActivityConstants.DRIPIRRIGATION:
+                                irrDesc = (context.getResources().getString(R.string.irrDrip));
+                                break;
+                            default:
+                                irrDesc = "";
+                                break;
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                waterBuilder.append(irrDesc);
+                waterBuilder.append("\n");
+                waterBuilder.append(String.valueOf(irrDuration)+ "h");
+            }
+        }
+
+        return waterBuilder;
+    }
 }

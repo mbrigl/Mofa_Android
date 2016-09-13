@@ -55,6 +55,6 @@ public class CreateFolderTask extends AsyncTask {
     @Override
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
-        Toast.makeText(context, "Folder created successfully", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "Folder created successfully", Toast.LENGTH_SHORT).show();
     }
 }

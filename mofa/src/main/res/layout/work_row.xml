@@ -91,7 +91,17 @@
             
             >
         </TextView>
-        
+       <TextView
+           android:id="@+id/txtprevwater"
+           android:visibility="gone"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:background="@color/skyblue"
+           android:focusable="false"
+           android:focusableInTouchMode="false"
+
+           >
+       </TextView>
     </LinearLayout>
    
 	
