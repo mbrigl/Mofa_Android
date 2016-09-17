@@ -39,10 +39,11 @@ Thumbs.db
 # Android Studio
 build/intermediates/model_data.bin
 .idea/workspace.xml
-.idea
+.idea/
 .idea/workspace.xml - remove # and delete .idea if it better suit your needs.
 .gradle
 build/
+mofa/mofa.iml
 /.idea/workspace.xml
 .idea/tasks.xml
 .idea/datasources.xml
