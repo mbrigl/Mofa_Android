@@ -5,7 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-
+import android.support.v4.app.NotificationCompat;
 /**
  * 
  * @author schmida
@@ -30,21 +30,28 @@ public class NotificationService {
 	@SuppressWarnings("deprecation")
 	public void createNotification(int notIcon, CharSequence aText, String fullText) {
 	   //get the notification manager
-	       mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+		mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
+		Intent notificationIntent = new Intent();
+		mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
+		int icon = notIcon;
+		CharSequence tickerText = aText; //Initial text that appears in the status bar
+		long when = System.currentTimeMillis();
+		mNotification = builder.setContentIntent(mContentIntent)
+				.setSmallIcon(icon).setTicker(tickerText).setWhen(when)
+				.setAutoCancel(true).setContentTitle(fullText)
+				.setContentText(tickerText).build();
 	  //create the notification
-	      int icon = notIcon;
-	      CharSequence tickerText = aText; //Initial text that appears in the status bar
-	      long when = System.currentTimeMillis();
-	      mNotification = new Notification(icon, tickerText, when);
+
+	     // mNotification = new Notification(icon, tickerText, when);
 	      //create the content which is shown in the notification pulldown
-	      mContentTitle = fullText; //Full title of the notification in the pull down
+	    //  mContentTitle = fullText; //Full title of the notification in the pull down
 	     // CharSequence contentText = "0% complete"; //Text of the notification in the pull down
-	      Intent notificationIntent = new Intent();
-	      mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
+
      //add the additional content and intent to the notification
-	      mNotification.setLatestEventInfo(mContext, mContentTitle, "", mContentIntent);
+	     // mNotification.setLatestEventInfo(mContext, mContentTitle, "", mContentIntent);
      //make this notification appear in the 'Ongoing events' section
-	      mNotification.flags = Notification.FLAG_ONGOING_EVENT;
+	    //  mNotification.flags = Notification.FLAG_ONGOING_EVENT;
 	      
 	  //show the notification
 	      mNotificationManager.notify(NOTIFICATION_ID, mNotification);
@@ -60,10 +67,11 @@ public class NotificationService {
 	
 	        //build up the new status message
 	
-	        CharSequence contentText = percentageComplete + "% complete";
+	      //  CharSequence contentText = percentageComplete + "% complete";
 		        //publish it to the status bar
-		        mNotification.setLatestEventInfo(mContext, mContentTitle, contentText, mContentIntent);
-		        mNotificationManager.notify(NOTIFICATION_ID, mNotification);
+		      //  mNotification.setLatestEventInfo(mContext, mContentTitle, contentText, mContentIntent);
+
+		       // mNotificationManager.notify(NOTIFICATION_ID, mNotification);
 		    }
 	  /**
   * called when the background task is complete, this removes the notification from the status bar.
@@ -81,7 +89,12 @@ public class NotificationService {
 			    mContentTitle = fullText;
 			    notificationIntent = new Intent();
 			    mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
-			    mNotification.setLatestEventInfo(mContext, mContentTitle, "", mContentIntent);
+				NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
+				mNotification = builder.setContentIntent(mContentIntent)
+						.setSmallIcon(icon).setTicker(tickerText).setWhen(when)
+						.setAutoCancel(true).setContentTitle(fullText)
+						.setContentText(tickerText).build();
+			    //mNotification.setLatestEventInfo(mContext, mContentTitle, "", mContentIntent);
 			    mNotification.flags = Notification.FLAG_AUTO_CANCEL;
 			    mNotificationManager.notify(NOTIFICATION_ID_F, mNotification);
 			    
@@ -102,7 +115,7 @@ public class NotificationService {
 			    
 			    
 			    mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
-			    mNotification.setLatestEventInfo(mContext, mContentTitle, "", mContentIntent);
+			   // mNotification.setLatestEventInfo(mContext, mContentTitle, "", mContentIntent);
 			    mNotification.flags = Notification.FLAG_AUTO_CANCEL;
 			    mNotificationManager.notify(NOTIFICATION_ID_F, mNotification);
 			    

@@ -18,6 +18,7 @@ import java.util.Locale;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,12 +36,12 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragment;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class WorkEditSprayFragment extends SherlockFragment{
+public class WorkEditSprayFragment extends Fragment {
 	private static final String TAG = "WorkEditSprayActivity";
 	private ListView mWorkPesticideList;
 	private ListView mWorkFertilizerList;

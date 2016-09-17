@@ -15,16 +15,18 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class PurchaseActivity extends DashboardActivity implements OnDateSetListener, ExpandablePurchaseAdapter.OnExpandableListener,SendingProcess.RemoveEntries{
 	private static final String TAG = "PurchaseActivity";
@@ -44,6 +46,12 @@ public class PurchaseActivity extends DashboardActivity implements OnDateSetList
 		setContentView(R.layout.purchasing_list);
 		// getting the Listview
 		purchaseListView = (ExpandableListView) findViewById(R.id.purchasinglistview);
+		FloatingActionButton myFab = (FloatingActionButton)  findViewById(R.id.fab);
+		myFab.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				createPurchase();
+			}
+		});
 		// loading data
 		loadData();
 		
@@ -72,24 +80,24 @@ public class PurchaseActivity extends DashboardActivity implements OnDateSetList
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) { //inflating the menu
-		MenuInflater inflater = getSupportMenuInflater();
+		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.purchase_menu, menu);
 		return true;
 	}
 	// Reaction to the menu selection
 			@Override
-			public boolean onMenuItemSelected(int featureId, MenuItem item) {
+			public boolean onOptionsItemSelected( MenuItem item) {
 				switch (item.getItemId()) {
-				case R.id.purchase_menu_add:
-					Log.d(TAG, "Adding an new purchase");
-					createPurchase();
-					return true;
+//				case R.id.purchase_menu_add:
+//					Log.d(TAG, "Adding an new purchase");
+//					createPurchase();
+//					return true;
 				case R.id.purchase_menu_upload:
 					Log.d(TAG, "Upload purchases");
 					showUploadDialog();
 					return true;
 				}
-				return super.onMenuItemSelected(featureId, item);
+				return super.onOptionsItemSelected(item);
 			}
 	private void createPurchase() {
 		DialogFragment newFragment = new DatePickerDialogFragment(this);

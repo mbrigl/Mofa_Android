@@ -16,6 +16,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
+
 
 public class WorkSelectedPesticideAdapter extends ArrayAdapter<SprayPesticide>implements InputDoseDialogFragment.InputDoseDialogFragmentListener{
 	
@@ -88,6 +89,7 @@ public class WorkSelectedPesticideAdapter extends ArrayAdapter<SprayPesticide>im
 			public void onClick(View v) {
 				InputDoseDialogFragment inputDoseDialog = new InputDoseDialogFragment(pesticide,workPesticide.getDose(),
 						workPesticide.getDose_amount(),fragment.getCurrentConc(),fragment.getCurrentWaterAmount(),fragment.getSumOfSize());
+				inputDoseDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
 				android.support.v4.app.FragmentManager fm = ((FragmentActivity)context).getSupportFragmentManager();
 				inputDoseDialog.setCallback(WorkSelectedPesticideAdapter.this);
 				//inputDoseDialog.setTargetFragment( fm.,0);

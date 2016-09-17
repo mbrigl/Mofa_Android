@@ -10,6 +10,9 @@ import java.util.Date;
 import java.util.List;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +21,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 
-public class WorkEditHarvestFragment extends SherlockFragment implements HarvestDialogListener{
+
+public class WorkEditHarvestFragment extends Fragment implements HarvestDialogListener{
 	private static final String TAG = "WorkEditHarvestFragment";
 	private int mworkId = 0;
 	private Button confirmButton;
@@ -51,14 +54,20 @@ public class WorkEditHarvestFragment extends SherlockFragment implements Harvest
 				}
 
 			});
-			btnAddHarvestDoc = (ImageButton) view.findViewById(R.id.work_add_harvest_doc);
+			//btnAddHarvestDoc = (ImageButton) view.findViewById(R.id.work_add_harvest_doc);
 			lstHarvestDoc = (ListView) view.findViewById(R.id.harvest_list_doc);
-			btnAddHarvestDoc.setOnClickListener(new View.OnClickListener() { //event when user adds a new transport document
-				public void onClick(View v) {
-					Log.d(TAG, "Showing the input dialog of transport document");
-					showHarvestDialog();
-					}
-			});
+//			btnAddHarvestDoc.setOnClickListener(new View.OnClickListener() { //event when user adds a new transport document
+//				public void onClick(View v) {
+//					Log.d(TAG, "Showing the input dialog of transport document");
+//					showHarvestDialog();
+//					}
+//			});
+		FloatingActionButton myFab = (FloatingActionButton)  view.findViewById(R.id.fab);
+		myFab.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				showHarvestDialog();
+			}
+		});
 			fillHarvestList();
 			return view;
 	}
@@ -86,6 +95,7 @@ public class WorkEditHarvestFragment extends SherlockFragment implements Harvest
 	
 	private void showHarvestDialog(){
 		 HarvestDialogFragment harvestDialog = new HarvestDialogFragment();
+		harvestDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
 	        harvestDialog.setTargetFragment(this, 0);
 	        harvestDialog.show(getFragmentManager(), "harvest_dialog");
 	}

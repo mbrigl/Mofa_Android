@@ -46,10 +46,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 import com.dropbox.core.android.Auth;
 
 import com.google.android.vending.licensing.AESObfuscator;
@@ -441,13 +441,13 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) { //inflating the menu
-		MenuInflater inflater = getSupportMenuInflater();
+		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.activity_main, menu);
 		return true;
 	}
 	// Reaction to the menu selection
-	@Override
-	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+
+	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_about:
 			Log.d(TAG, "showing about dialog");
@@ -462,7 +462,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 			return true;*/
 		
 		}
-		return super.onMenuItemSelected(featureId, item);
+		return super.onOptionsItemSelected(item);
 	}
 	@SuppressWarnings("deprecation")
 	private void showAlertDialog(StringBuilder sb,final ArrayList<Integer>selElements ){

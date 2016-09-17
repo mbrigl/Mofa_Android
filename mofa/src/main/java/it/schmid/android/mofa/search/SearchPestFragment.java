@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
+
 
 import java.util.List;
 
@@ -37,7 +37,7 @@ import it.schmid.android.mofa.model.Pesticide;
  * Activities containing this fragment MUST implement the {@link it.schmid.android.mofa.search.SearchPestFragment.OnFragmentPesticideListener}
  * interface.
  */
-public class SearchPestFragment extends SherlockFragment implements AbsListView.OnItemClickListener {
+public class SearchPestFragment extends Fragment implements AbsListView.OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

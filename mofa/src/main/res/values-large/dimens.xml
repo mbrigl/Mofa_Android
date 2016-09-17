@@ -26,4 +26,5 @@
     <dimen name="home_button_size">216dp</dimen>
     <dimen name="home_button_size_x">216dp</dimen>
     <dimen name="home_button_size_y">144dp</dimen>
+    <dimen name="fab_margin">32dp</dimen>
 </resources>

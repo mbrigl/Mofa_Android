@@ -22,21 +22,8 @@
     <string name="title_feature6">Ore di lavoro</string>
 	
 	<!-- Preference setting for import data	-->
-	<string name="updateland">Update Impianti</string>
-	<string name="landtitle">Update Impianti</string>
-	<string name="updatevquarter">Update appezzamenti</string>
-	<string name="vquartertitle">Update appezzamenti</string>
-	<string name="updatemachine">Update macchine</string>
-	<string name="machinetitle">Update macchine</string>
-	<string name="updateworker">Update lavoratori</string>
-	<string name="workertitle">Update lavoratori</string>
-	<string name="updatetask">Update lavori</string>
+	<string name="showPestInfos">attivare sempre finestra info parasit.</string>
 	<string name="updateoffline">Offline update</string>
-	<string name="tasktitle">Update lavori</string>
-	<string name="updatepesticide">Update antiparassitari</string>
-	<string name="pesticidetitle">Update antiparassitari</string>
-	<string name="fertilizertitle">Update fertilizzanti</string>
-	<string name="soilfertilizertitle">Updating fertilizzanti min.</string>
 	<string name="dropbox">Utilizzare Dropbox</string>
 	<string name="dropboxmsg">Deattivare Offline Update per usare dropbox</string>
 	<string name="dropboxact">Clic su update per configurare dropbox</string>
@@ -201,6 +188,7 @@
     <string name="waitingtimeUnit">giorni</string>
     <string name="reentertimeUnit">h</string>
     <string name="maxamounthaUnit">kg/lt</string>
+	<string name="maxDose">max dose/hl:</string>
     <!--Strings for SearchPesticide -->
     <string name="searchLastPest">Cerca ultimo trattamento</string>
     <string name="searchVQuarter">Scegliere il campo da cercare</string>

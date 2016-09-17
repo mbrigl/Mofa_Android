@@ -11,6 +11,7 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +21,10 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragment;
 
 
-public class WorkEditSoilFertilizerFragment extends SherlockFragment  {
+
+public class WorkEditSoilFertilizerFragment extends Fragment {
 	private static final String TAG = "WorkEditSoilFertilizerFragment";
 	private int mworkId = 0;
 	private Work work = null;

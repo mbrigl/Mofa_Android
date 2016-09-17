@@ -5,9 +5,11 @@ import java.util.List;
 
 
 import android.annotation.SuppressLint;
-import com.actionbarsherlock.app.SherlockPreferenceActivity;
+import android.preference.PreferenceActivity;
 
-public class EditPreferences_Honey extends SherlockPreferenceActivity {
+
+
+public class EditPreferences_Honey extends PreferenceActivity {
 
 	@SuppressLint("NewApi")
 	@Override

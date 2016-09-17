@@ -39,7 +39,7 @@ public class WorkSelectMachineActivity extends DashboardActivity{
 		Bundle bundle = getIntent().getExtras();
 		if (null!=bundle && bundle.containsKey("Work_ID")) {
             workId = bundle.getInt("Work_ID");
-            Log.d(TAG, "Current workid: " + workId);
+          //  Log.d(TAG, "Current workid: " + workId);
             List<WorkMachine> listMachines = DatabaseManager.getInstance().getWorkMachineByWorkId(workId);
                 for (WorkMachine m: listMachines){
                     selectedMachines.put(m.getMachine().getId(),m.getHours()); //put the current selected machine in a sparseArray
@@ -52,7 +52,7 @@ public class WorkSelectMachineActivity extends DashboardActivity{
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 final Machine machine = adapter.getItem(position);
-                Log.d(TAG, "Current machine with id: " + machine.getId());
+              //  Log.d(TAG, "Current machine with id: " + machine.getId());
                 Double hours = selectedMachines.get(machine.getId());
                 if (hours!=null){ //existing entry
                     proposedHour = hours;
@@ -64,7 +64,7 @@ public class WorkSelectMachineActivity extends DashboardActivity{
                     @Override
                     public boolean onOkClicked(Double input) {
                         // do something
-                        Log.d(TAG, "showDialog: " + input);
+                     //   Log.d(TAG, "showDialog: " + input);
 
                         addMachineToArray(machine.getId(), input);
                         adapter.notifyDataSetChanged();
@@ -89,7 +89,7 @@ public class WorkSelectMachineActivity extends DashboardActivity{
 	private void saveState (int workid, int machineid, Double hours) throws SQLException{
 		List<WorkMachine> listWorkMachine = DatabaseManager.getInstance().getWorkMachineByWorkIdAndByMachineId(workid, machineid);
 		if (listWorkMachine.size() == 0) {
-			 Log.d (TAG, "New Machine");
+			// Log.d (TAG, "New Machine");
 			 WorkMachine w = new WorkMachine();
 			 Work curWork = DatabaseManager.getInstance().getWorkWithId(workid);
 			 Machine curMachine = DatabaseManager.getInstance().getMachineWithId(machineid);
@@ -98,7 +98,7 @@ public class WorkSelectMachineActivity extends DashboardActivity{
 			 w.setHours(hours);
 			 DatabaseManager.getInstance().addWorkMachine(w);
 		}else{
-			Log.d (TAG, "Updating Machine");
+			// Log.d (TAG, "Updating Machine");
 			WorkMachine w = listWorkMachine.get(0);
 			w.setHours(hours);
 			DatabaseManager.getInstance().updateWorkMachine(w);

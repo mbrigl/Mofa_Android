@@ -9,8 +9,10 @@ import java.text.ParseException;
 import java.util.Locale;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -88,6 +90,7 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_input_dose, container);
+
 		mSizeText=(TextView) view.findViewById(R.id.lbl_size);
 		Resources res = getResources();
 		String sizeText = String.format(res.getString(R.string.sizeInfo), mSize.toString());
@@ -110,7 +113,16 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 	            }else{
 	            	mDoseHlText.setText((calcDose(mWaterAmount,mConc))); //recalculate the dose
 	            }
-	            	
+				SharedPreferences sharedPreferences = PreferenceManager .getDefaultSharedPreferences(getActivity());
+
+				boolean showPestInfos = sharedPreferences.getBoolean("showPestInfos",false);
+				//Log.d("showpestInfo", "value = " + showPestInfos);
+				//TODO showing constraints on pesticide
+				if (mPesticide.showInfo()== 1 && showPestInfos) { //only for pesticides
+					PestInfoDialog infoDialog = PestInfoDialog.newInstance(mPesticide.getId());
+				 	infoDialog.show(getFragmentManager(),"DialogFragment");
+				}
+//
 				callback.onFinishEditDialog(mDose,mAmount);
 				
 				

@@ -17,6 +17,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,6 +83,7 @@ public class WorkSelectedFertilizerAdapter extends ArrayAdapter<SprayFertilizer>
         	public void onClick(View v){
         		InputDoseDialogFragment inputDoseDialog = new InputDoseDialogFragment(fertilizer,workFertilizer.getDose(),
 						workFertilizer.getDose_amount(),fragment.getCurrentConc(),fragment.getCurrentWaterAmount(),fragment.getSumOfSize());
+				inputDoseDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
 				android.support.v4.app.FragmentManager fm = ((FragmentActivity)context).getSupportFragmentManager();
 				inputDoseDialog.setCallback(WorkSelectedFertilizerAdapter.this);
 				//inputDoseDialog.setTargetFragment( fm.,0);

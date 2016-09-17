@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragment;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +30,7 @@ import it.schmid.android.mofa.model.Global;
 /**
  * Created by schmida on 09.04.16.
  */
-public class WorkEditWaterFragment extends SherlockFragment {
+public class WorkEditWaterFragment extends Fragment {
     private static final String TAG = "WorkEditWaterFragment";
     private static final String GLOBALTYP = "Irrigation";
     private int mWorkId = 0;

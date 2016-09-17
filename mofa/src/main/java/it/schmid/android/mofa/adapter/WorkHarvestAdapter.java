@@ -18,6 +18,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,6 +75,7 @@ public class WorkHarvestAdapter extends ArrayAdapter<Harvest>implements HarvestD
         OnClickListener txtClick = new OnClickListener() {
 			public void onClick(View v) {
 				HarvestDialogFragment harvestDialog = new HarvestDialogFragment(currHarvest);
+				harvestDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
 				android.support.v4.app.FragmentManager fm = ((FragmentActivity)context).getSupportFragmentManager();
 				harvestDialog.setHarvestCallback(WorkHarvestAdapter.this);
 				setCurrHarvest(currHarvest);

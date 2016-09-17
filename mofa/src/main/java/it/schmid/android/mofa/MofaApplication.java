@@ -102,6 +102,7 @@ public class MofaApplication extends Application{
 		super.onTerminate();
 		shutdownHttpClient();
 	}
+
 	private HttpClient createHttpClient(){
 		Log.d(TAG,"createHttpClient()...");
 		HttpParams params = new BasicHttpParams();

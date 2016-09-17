@@ -16,7 +16,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-import com.actionbarsherlock.app.SherlockFragment;
+
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +37,7 @@ import it.schmid.android.mofa.model.VQuarter;
  * Use the {@link SearchLandFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchLandFragment  extends SherlockFragment {
+public class SearchLandFragment  extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";

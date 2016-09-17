@@ -7,12 +7,13 @@ import android.os.Environment;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockPreferenceActivity;
 
-public class EditPreferences extends SherlockPreferenceActivity{
+
+public class EditPreferences extends PreferenceActivity {
 	@SuppressWarnings("deprecation")
 	  @Override
 	  public void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class EditPreferences extends SherlockPreferenceActivity{
 	     
 	    final CheckBoxPreference checkboxPref = (CheckBoxPreference) getPreferenceManager().findPreference("updateOffline");
 	    final CheckBoxPreference dropboxPref = (CheckBoxPreference) getPreferenceManager().findPreference("dropbox");
+		final CheckBoxPreference showPestPref = (CheckBoxPreference) getPreferenceManager().findPreference("showPestInfos");
 	    final ListPreference backendSoftware = (ListPreference) getPreferenceManager().findPreference("listBackendFormat");
 	    final ListPreference encodePref = (ListPreference) getPreferenceManager().findPreference("listFormat");
 	    checkboxPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {            

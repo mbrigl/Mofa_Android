@@ -2,10 +2,11 @@ package it.schmid.android.mofa.search;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
-import com.actionbarsherlock.app.SherlockFragment;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,21 +64,21 @@ public class SearchActivity extends DashboardActivity implements SearchLandFragm
         }
         Log.d(TAG, "Callback from fragment with following entries: " + selVQList.toString());
         if (searchType==ActivityConstants.SEARCH_LAST_PEST){
-            SherlockFragment searchResult = SearchResult.newInstance(R.string.searchLastPest,searchType);
+            Fragment searchResult = SearchResult.newInstance(R.string.searchLastPest,searchType);
             FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.search_fragment_container, searchResult);
             transaction.addToBackStack(null);
             transaction.commit();
         }
         if(searchType==ActivityConstants.SEARCH_PEST){
-            SherlockFragment searchResult = SearchResult.newInstance(R.string.searchPest,searchType);
+            Fragment searchResult = SearchResult.newInstance(R.string.searchPest,searchType);
             FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.search_fragment_container, searchResult);
             transaction.addToBackStack(null);
             transaction.commit();
         }
         if(searchType==ActivityConstants.SEARCH_FERT){
-            SherlockFragment searchResult = SearchResult.newInstance(R.string.searchFert,searchType);
+            Fragment searchResult = SearchResult.newInstance(R.string.searchFert,searchType);
             FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.search_fragment_container, searchResult);
             transaction.addToBackStack(null);
@@ -103,7 +104,7 @@ public class SearchActivity extends DashboardActivity implements SearchLandFragm
 
     public void onFragPestInteraction(ProductInterface p, int searchType) {
         prodId = p.getId();
-        SherlockFragment landFragment = SearchLandFragment.newInstance(R.string.searchVQuarter, searchType);
+        Fragment landFragment = SearchLandFragment.newInstance(R.string.searchVQuarter, searchType);
         FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.search_fragment_container, landFragment);
         transaction.addToBackStack(null);

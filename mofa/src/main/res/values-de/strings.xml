@@ -23,21 +23,8 @@
     <string name="title_feature6">Arbeitsstunden</string>
 	
 	<!-- Preference setting for import data	-->
-	<string name="updateland">Update Grundstück</string>
-	<string name="landtitle">Update Grundstück</string>
-	<string name="updatevquarter">Update Sortenquartier</string>
-	<string name="vquartertitle">Update Sortenquartier</string>
-	<string name="updatemachine">Update Maschinen</string>
-	<string name="machinetitle">Update Maschinen</string>
-	<string name="updateworker">Update Arbeiter</string>
-	<string name="workertitle">Update Arbeiter</string>
-	<string name="updatetask">Update Arbeiten</string>
+	<string name="showPestInfos">PSM Infos immer anzeigen</string>
 	<string name="updateoffline">Offline update</string>
-	<string name="tasktitle">Update Arbeiten</string>
-	<string name="updatepesticide">Update Pflanzenschutzmittel</string>
-	<string name="pesticidetitle">Update Pflanzenschutzmittel</string>
-	<string name="fertilizertitle">Update Blattdünger</string>
-	<string name="soilfertilizertitle">Updating Bodendünger</string>
 	<string name="dropbox">Dropbox verwenden</string>
 	<string name="dropboxmsg">Offline Update deaktivieren um Dropbox zu verwenden</string>
 	<string name="dropboxact">Klicken Sie auf Update um Dropbox einzurichten</string>
@@ -145,6 +132,7 @@
 	<string name="constraintError">Überprüfung nicht möglich, da Daten (zb: Fläche) fehlt</string>
 	<string name="sizeInfo">Fläche:  %1$s m²</string>
 	<string name="amountha">Menge ha:</string>
+
 	<!-- String image description -->
 	<string name="imagepesticide">Mittelliste</string>
 	<!-- Strings in Pesticide List -->
@@ -200,6 +188,7 @@
     <string name="waitingtimeUnit">Tage</string>
     <string name="reentertimeUnit">h</string>
     <string name="maxamounthaUnit">kg/lt</string>
+	<string name="maxDose">max Dosis/hl:</string>
     <!--Strings for Archive and history -->
     <!--Strings for SearchPesticide -->
     <string name="searchLastPest">Letzte Spritzung</string>

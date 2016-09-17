@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
-   <item  android:showAsAction="ifRoom|withText"
-       tools:ignore="UnusedAttribute">
-       
-	    <com.actionbarsherlock.internal.widget.IcsSpinner xmlns:android="http://schemas.android.com/apk/res/android"
-	    android:id="@+id/filterSelectSpinner"  
-	    android:layout_height="fill_parent" 
-	    android:layout_width="fill_parent" 
-	    android:title="@string/work_menu_nofilter"
-	     />  
-	</item>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+
 	
-   <item android:id="@+id/work_menu_add"
+  <!-- <item android:id="@+id/work_menu_add"
           android:icon="@drawable/ic_menu_add"
           android:title="@string/work_menu_add"
-          android:showAsAction="always|withText"
-       tools:ignore="UnusedAttribute" />
+          app:showAsAction="always"
+        /> -->
     <item android:id="@+id/work_menu_upload"
           android:icon="@drawable/ic_action_upload"
           android:title="@string/work_menu_upload"
-          android:showAsAction="always|withText"
-        tools:ignore="UnusedAttribute" />
+          app:showAsAction="always"
+        />
 </menu>

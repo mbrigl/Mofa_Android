@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,7 +37,7 @@ import it.schmid.android.mofa.model.VQuarter;
  * Use the {@link SearchResult#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchResult extends SherlockFragment implements LoaderManager.LoaderCallbacks<HashMap<Integer,List<String>>> {
+public class SearchResult extends Fragment implements LoaderManager.LoaderCallbacks<HashMap<Integer,List<String>>> {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";

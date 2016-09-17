@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -27,9 +29,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragment;
 
-public class WorkSelectPesticideFragment extends SherlockFragment implements InputDoseDialogFragmentListener,ShowInfoInterface{
+
+public class WorkSelectPesticideFragment extends Fragment implements InputDoseDialogFragmentListener,ShowInfoInterface{
 	private static final String TAG = "WorkSelectPesticideActivity";
 	private ListView mPesticideLvWithFilter;
     private EditText mSearchEdt;
@@ -126,6 +128,7 @@ public class WorkSelectPesticideFragment extends SherlockFragment implements Inp
         currProd = pesticide;
 		//FragmentManager fm = getActivity().getSupportFragmentManager();
         InputDoseDialogFragment inputDoseDialog = new InputDoseDialogFragment(pesticide,concentration,wateramount,size);
+		inputDoseDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
         inputDoseDialog.setTargetFragment(this, 0);
         inputDoseDialog.show(getFragmentManager(), "fragment_input_dose");
     }

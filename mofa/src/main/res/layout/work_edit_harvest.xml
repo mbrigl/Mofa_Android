@@ -2,23 +2,35 @@
 <LinearLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
     android:layout_weight="0.1"
     android:orientation="vertical" >
- <ImageButton
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <!--<ImageButton
         android:id="@+id/work_add_harvest_doc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_menu_add" />
- <ListView
+        android:src="@drawable/ic_menu_add" /> -->
+
+        <ListView
         android:id="@+id/harvest_list_doc"
         android:layout_width="fill_parent"
-        android:layout_height="0dip"
+        android:layout_height="fill_parent"
         android:layout_weight="1" >
- </ListView>
- <LinearLayout 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        </ListView>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|left"
+            android:layout_margin="@dimen/fab_margin"
+            android:tint="@android:color/white"
+            android:src="@android:drawable/ic_input_add"
+            />
+
     <Button
         android:id="@+id/work_save_button"
         android:layout_width="wrap_content"
@@ -26,6 +38,6 @@
         android:layout_gravity="bottom"
         android:text="@string/work_save_button" >
     </Button>
-    </LinearLayout>
- 
+
+    </FrameLayout>
  </LinearLayout>

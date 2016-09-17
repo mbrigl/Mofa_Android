@@ -8,11 +8,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar.Tab;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 
 public class WorkProductTabActivity extends DashboardActivity{
 	private static final String TAG = "WorkProductTabActivity";
@@ -65,7 +66,7 @@ static final class TabInfo
     }
 }
 
-public TabsAdapter(SherlockFragmentActivity activity, ViewPager pager)
+public TabsAdapter(ActionBarActivity activity, ViewPager pager)
 {
     super(activity.getSupportFragmentManager());
     mContext = activity;

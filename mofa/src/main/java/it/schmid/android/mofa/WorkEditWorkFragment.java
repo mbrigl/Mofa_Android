@@ -28,6 +28,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,12 +44,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.MenuItem;
+
 import com.j256.ormlite.stmt.query.IsNull;
 
 
-public class WorkEditWorkFragment extends SherlockFragment implements OnDateSetListener {
+public class WorkEditWorkFragment extends Fragment implements OnDateSetListener {
 	private static final String TAG = "WorkEditWorkFragment";
 	private List<String> sprayList =  new ArrayList<String>(
 			Arrays.asList("Spraying", "Spritzen", "Behandlung","Trattamento","Spritzung", "Pflanzenschutz", "Herbizidbehandlung",
@@ -374,10 +374,10 @@ public class WorkEditWorkFragment extends SherlockFragment implements OnDateSetL
 
 	}
 	
-		 public void onCreateOptionsMenu (com.actionbarsherlock.view.Menu menu, com.actionbarsherlock.view.MenuInflater inflater) {
+	// public void onCreateOptionsMenu (com.actionbarsherlock.view.Menu menu, com.actionbarsherlock.view.MenuInflater inflater) {
 			// inflater.inflate(R.menu.work_edit_menu, menu);
 			//  super.onCreateOptionsMenu(menu, inflater);
-		    }
+	//	 }
 		
 		
 

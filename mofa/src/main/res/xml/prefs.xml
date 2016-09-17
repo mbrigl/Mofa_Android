@@ -16,7 +16,11 @@
 		android:title="@string/dropbox"/>
     <CheckBoxPreference
 		android:key="dropboxreset"
-		android:title="@string/dropboxreset"/>   
+		android:title="@string/dropboxreset"/>
+    <CheckBoxPreference
+        android:key="showPestInfos"
+        android:title="@string/showPestInfos"/>
+
     <ListPreference
        android:title="Format"
        android:summary="File format"
@@ -34,14 +38,7 @@
        android:entryValues="@array/listBackendValues"
     />
     </PreferenceCategory>
-    <PreferenceScreen android:key="ImportSettings"
-                          android:title="@string/synchronisationsettings"
-                          android:summary="">
-            <intent android:action="android.intent.action.VIEW"
-                	android:targetPackage="it.schmid.android.mofa"
-                    android:targetClass="it.schmid.android.mofa.EditPreferencesImport"
-                    />
-    </PreferenceScreen>
+
 	
 	
 </PreferenceScreen>

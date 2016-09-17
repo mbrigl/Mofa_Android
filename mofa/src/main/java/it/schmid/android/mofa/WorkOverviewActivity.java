@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -34,12 +35,12 @@ import android.widget.ListView;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.OnNavigationListener;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 import com.j256.ormlite.misc.TransactionManager;
 
 
@@ -65,6 +66,12 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 		// ViewGroup contentView = (ViewGroup) getLayoutInflater().inflate(R.layout.work_list,null);
 		 listViewWork = (ListView) findViewById(R.id.listViewWork);
 		 delIcon = (ImageView) findViewById(R.id.delete_icon);
+		FloatingActionButton myFab = (FloatingActionButton)  findViewById(R.id.fab);
+		myFab.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				createWork();
+			}
+		});
 		// setContentView(contentView);
 		
 	}
@@ -113,19 +120,14 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 		@Override
 		public boolean onCreateOptionsMenu(final Menu menu) { //inflating the menu
 			
-			MenuInflater inflater = getSupportMenuInflater();
+			MenuInflater inflater = getMenuInflater();
 			inflater.inflate(R.menu.work_menu, menu);
 			
 			
 			SpinnerAdapter mSpinnerAdapter;
-			   if(Build.VERSION.SDK_INT <= 10)
-			   {
-			      mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.nav_list,android.R.layout.simple_spinner_item);
-			   }
-			   else
-			   {
+
 			      mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.nav_list,android.R.layout.simple_spinner_dropdown_item);
-			   }
+
 			   OnNavigationListener mOnNavigationListener = new OnNavigationListener()
 			   {
 				   
@@ -205,12 +207,12 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 		}
 		// Reaction to the menu selection
 		@Override
-		public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		public boolean onOptionsItemSelected( MenuItem item) {
 			switch (item.getItemId()) {
-			case R.id.work_menu_add:
-				Log.d(TAG, "Adding an work");
-				createWork();
-				return true;
+//			case R.id.work_menu_add:
+//				Log.d(TAG, "Adding an work");
+//				createWork();
+//				return true;
 			case R.id.work_menu_upload:
 				Log.d(TAG, "Upload the work entries");
 				MofaApplication app = MofaApplication.getInstance();
@@ -223,7 +225,7 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 				
 				return true;
 			}
-			return super.onMenuItemSelected(featureId, item);
+			return super.onOptionsItemSelected(item);
 		}
 		/**
 		 * creating a new work

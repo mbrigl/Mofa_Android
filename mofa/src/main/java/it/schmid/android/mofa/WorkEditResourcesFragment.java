@@ -12,6 +12,7 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -22,10 +23,10 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragment;
 
 
-public class WorkEditResourcesFragment extends SherlockFragment  {
+
+public class WorkEditResourcesFragment extends Fragment {
 	private static final String TAG = "WorkEditResourcesFragment";
 	private int mworkId = 0;
 	private Work work = null;
@@ -51,7 +52,7 @@ public class WorkEditResourcesFragment extends SherlockFragment  {
 			Bundle savedInstanceState) {
 		parentActivity = (WorkEditTabActivity) getActivity();
 		mworkId = parentActivity.getWorkId();
-		Log.d(TAG,"[onCreateView] CurrWorkID= " + mworkId);
+		//Log.d(TAG,"[onCreateView] CurrWorkID= " + mworkId);
 		View view = inflater.inflate(R.layout.work_edit_resources, container, false);
 		confirmButton = (Button) view.findViewById(R.id.work_save_button);
 		mWorker = (ImageButton) view.findViewById(R.id.work_change_worker);
@@ -141,7 +142,7 @@ public class WorkEditResourcesFragment extends SherlockFragment  {
 		public void onSaveInstanceState(Bundle savedInstanceState) {
 		  super.onSaveInstanceState(savedInstanceState);
 		  savedInstanceState.putInt("Work_ID", mworkId);
-		  Log.d(TAG,"onSaveInstanceState in WorkEditResourcesActivity");
+		 // Log.d(TAG,"onSaveInstanceState in WorkEditResourcesActivity");
 //		  Toast.makeText(this, "Activity state saved:" + mworkId, Toast.LENGTH_LONG).show();
 		}
 		
@@ -155,7 +156,7 @@ public class WorkEditResourcesFragment extends SherlockFragment  {
 			super.onResume();
 			if (!firstLoad){
 				mworkId = parentActivity.getWorkId();
-				Log.d(TAG,"[onResume] CurrWorkID= " + mworkId);
+				//Log.d(TAG,"[onResume] CurrWorkID= " + mworkId);
 				populateFields(mworkId);
 			}
 			firstLoad=false;

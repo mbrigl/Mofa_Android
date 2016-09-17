@@ -23,21 +23,8 @@
     <string name="title_feature6">Working hours</string>
 
     <!-- Preference setting for import data -->
-    <string name="updateland">Updating land data</string>
-    <string name="landtitle">Updating land data</string>
-    <string name="updatevquarter">Updating varietyquarter data</string>
-    <string name="vquartertitle">Updating varietyquarter data</string>
-    <string name="updatemachine">Updating machine data</string>
-    <string name="machinetitle">Updating machine data</string>
-    <string name="updateworker">Updating worker data</string>
-    <string name="workertitle">Updating worker data</string>
-    <string name="updatetask">Updating tasks data</string>
+    <string name="showPestInfos">Show allways Pest Infos</string>
     <string name="updateoffline">Offline update</string>
-    <string name="tasktitle">Updating tasks data</string>
-    <string name="updatepesticide">Updating pesticide data</string>
-    <string name="pesticidetitle">Updating pesticide data</string>
-    <string name="fertilizertitle">Updating fertilizer data</string>
-    <string name="soilfertilizertitle">Updating soil fertilizer data</string>
     <string name="dropbox">Enabling Dropbox</string>
     <string name="dropboxmsg">Deactivating Offline Update to use dropbox</string>
     <string name="dropboxact">Activating Dropbox through clicking on update</string>
@@ -204,6 +191,7 @@
     <string name="reentertimeUnit">h</string>
     <string name="maxamounthaUnit">kg/lt</string>
     <string name="amountha">amount ha:</string>
+    <string name="maxDose">max dose/hl:</string>
 
     <!-- Strings for SearchPesticide -->
     <string name="searchLastPest">Last Spraying work</string>
