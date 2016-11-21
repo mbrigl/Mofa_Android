@@ -11,7 +11,7 @@ public class Spraying {
 	 @Expose
 	 private Work work;
 	 @DatabaseField
-	 private Integer concentration;
+	 private Double concentration;
 	 @DatabaseField
 	 private Double wateramount;
 	@DatabaseField
@@ -35,11 +35,11 @@ public class Spraying {
 		this.work = work;
 	}
 
-	public Integer getConcentration() {
+	public Double getConcentration() {
 		return concentration;
 	}
 
-	public void setConcentration(Integer concentration) {
+	public void setConcentration(Double concentration) {
 		this.concentration = concentration;
 	}
 

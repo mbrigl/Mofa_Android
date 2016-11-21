@@ -113,7 +113,7 @@ public class DatabaseTestDB {
     	int fertId;
     	Spraying sp = new Spraying();
     	sp.setWork(w);
-    	sp.setConcentration(1);
+    	sp.setConcentration(1.0);
     	sp.setWateramount(10.00);
     	DatabaseManager.getInstance().addSpray(sp);
         int elPestPos = new Random().nextInt(pestIds.length-2);

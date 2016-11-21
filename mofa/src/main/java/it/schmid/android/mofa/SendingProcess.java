@@ -28,9 +28,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -57,8 +60,11 @@ import android.util.Log;
 import android.util.Xml;
 
 import com.dropbox.core.DbxException;
+import com.dropbox.core.DbxWebAuth;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.WriteMode;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 
 public class SendingProcess implements Runnable{
@@ -116,12 +122,18 @@ public void run(){
 			if (callingActivity==ActivityConstants.PURCHASING_ACTIVITY){ //calling this asynch method from purchasing activity
 				sendingData = createPurchaseXMLASA();
 			}
-		}else{
+			if (callingActivity==ActivityConstants.VEGDATA_ACTIVITY){ // calling this asynch from vegdata
+				sendingData = createVegDataXMLASA();
+			}
+		}else{ //default case LibreOffice
 			if (callingActivity==ActivityConstants.WORK_OVERVIEW){ //default case
 				sendingData = createXML(); //default case
 			}
 			if (callingActivity==ActivityConstants.PURCHASING_ACTIVITY){
 				sendingData= createPurchaseXML();
+			}
+			if (callingActivity==ActivityConstants.VEGDATA_ACTIVITY){ // calling this asynch from vegdata
+				sendingData = createVegDataXML();
 			}
 		}
 		
@@ -951,6 +963,118 @@ public void run(){
 		        throw new RuntimeException(e);
 		    } 
 	}
+	private String createVegDataXML(){
+		HashMap<String,String> blossStart = new HashMap<String,String>();
+		HashMap<String,String> blossEnd = new HashMap<String,String>();
+		if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).isEmpty()){
+			String json = "";
+			Global blossomStart = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).get(0);
+			json = blossomStart.getData();
+			blossStart = getMapFromJson(json);
+		};
+		if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMEND).isEmpty()){
+			String json = "";
+			Global blossomEnd = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMEND).get(0);
+			json = blossomEnd.getData();
+			blossEnd = getMapFromJson(json);
+		};
+		List<VQuarter> vquarters = DatabaseManager.getInstance().getAllVQuarters();
+		XmlSerializer serializer = Xml.newSerializer();
+		StringWriter writer = new StringWriter();
+		//Calendar calender = Calendar.getInstance();
+		//int curYear = calender.get(Calendar.YEAR);
+		try {
+			serializer.setOutput(writer);
+			serializer.startDocument("UTF-8", true);
+			serializer.startTag("", "vquarters");
+			for (VQuarter vq : vquarters) {
+				String blossDateStart = blossStart.get(vq.getId().toString());
+				String blossDateEnd = blossEnd.get(vq.getId().toString());
+				if (blossDateStart != null || blossDateEnd != null){
+					serializer.startTag("","vquarter");
+						serializer.startTag("", "vqid");
+							serializer.text(vq.getId().toString());
+						serializer.endTag("", "vqid");
+						if (blossDateStart != null) {
+							serializer.startTag("", "blossomStart");
+							serializer.text(blossDateStart);
+							serializer.endTag("", "blossomStart");
+						}
+						if (blossDateEnd != null) {
+							serializer.startTag("", "blossomEnd");
+							serializer.text(blossDateEnd);
+							serializer.endTag("", "blossomEnd");
+						}
+					serializer.endTag("","vquarter");
+				}
+			}
+			serializer.endTag("","vquarters");
+			serializer.endDocument();
+			return writer.toString();
+		}catch (Exception e){
+			throw new RuntimeException(e);
+		}
+
+	}
+	private String createVegDataXMLASA(){
+		HashMap<String,String> blossStart = new HashMap<String,String>();
+		HashMap<String,String> blossEnd = new HashMap<String,String>();
+		if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).isEmpty()){
+			String json = "";
+			Global blossomStart = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).get(0);
+			json = blossomStart.getData();
+			blossStart = getMapFromJson(json);
+		};
+		if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMEND).isEmpty()){
+			String json = "";
+			Global blossomEnd = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMEND).get(0);
+			json = blossomEnd.getData();
+			blossEnd = getMapFromJson(json);
+		};
+		List<VQuarter> vquarters = DatabaseManager.getInstance().getAllVQuarters();
+		XmlSerializer serializer = Xml.newSerializer();
+		StringWriter writer = new StringWriter();
+		Calendar calender = Calendar.getInstance();
+		int curYear = calender.get(Calendar.YEAR);
+		try {
+			serializer.setOutput(writer);
+			serializer.startDocument("UTF-8", true);
+			serializer.startTag("", "Sortenquartiere");
+			for (VQuarter vq : vquarters) {
+				String blossDateStart = blossStart.get(vq.getId().toString());
+				String blossDateEnd = blossEnd.get(vq.getId().toString());
+				if (blossDateStart != null || blossDateEnd != null){
+					serializer.startTag("","Sortenquartier");
+					serializer.startTag("", "Code");
+						serializer.text(vq.getCode());
+					serializer.endTag("", "Code");
+					serializer.startTag("","Jahresdaten");
+					serializer.startTag("","Erntejahr");
+						serializer.text(Integer.toString(curYear));
+					serializer.endTag("","Erntejahr");
+					if (blossDateStart != null) {
+						serializer.startTag("", "Bluehbeginn");
+						serializer.text(getDateStringForASA(blossDateStart,Integer.toString(curYear)));
+						serializer.endTag("", "Bluehbeginn");
+					}
+					if (blossDateEnd != null) {
+						serializer.startTag("", "Bluehende");
+						serializer.text(getDateStringForASA(blossDateEnd, Integer.toString(curYear)));
+						serializer.endTag("", "Bluehende");
+					}
+					serializer.endTag("","Jahresdaten");
+					serializer.endTag("","Sortenquartier");
+				}
+			}
+			serializer.endTag("","Sortenquartiere");
+			serializer.endDocument();
+			return writer.toString();
+		}catch (Exception e){
+			throw new RuntimeException(e);
+		}
+
+		
+	}
 	/**
 	 * Dropbox sending process
 	 * 
@@ -968,12 +1092,18 @@ public void run(){
 			if (callingActivity==ActivityConstants.PURCHASING_ACTIVITY){
 				filePath =  "/MoFaBackend/export/purchaselist" + dateFormat.format(date) + ".json";
 			}
+			if (callingActivity==ActivityConstants.VEGDATA_ACTIVITY){ // calling this asynch from vegdata
+				filePath = "/MoFaBackend/export/vegdata" + dateFormat.format(date) + ".json";
+			}
 		}else{
 			if (callingActivity==ActivityConstants.WORK_OVERVIEW){
 				filePath =  "/MoFaBackend/export/worklist" + dateFormat.format(date) + ".xml";
 			}
 			if (callingActivity==ActivityConstants.PURCHASING_ACTIVITY){
 				filePath =  "/MoFaBackend/export/purchaselist" + dateFormat.format(date) + ".xml";
+			}
+			if (callingActivity==ActivityConstants.VEGDATA_ACTIVITY){ // calling this asynch from vegdata
+				filePath = "/MoFaBackend/export/vegdata" + dateFormat.format(date) + ".xml";
 			}
 		}
 
@@ -1020,5 +1150,18 @@ public void run(){
 
 		}
 	}
-
+	private HashMap<String,String> getMapFromJson(String json){
+		HashMap<String,String> tmpMap;
+		Type type = new TypeToken<HashMap<String, String>>(){}.getType();
+		Gson gson = new Gson();
+		tmpMap =  gson.fromJson(json, type);
+		if (tmpMap == null) {
+			tmpMap = new HashMap<String,String>();
+		}
+		return tmpMap;
+	}
+	private String getDateStringForASA(String dateOrg, String curYear){
+		String [] splitted = dateOrg.split("\\.");
+		return curYear +"-" + splitted[1] + "-" + splitted[0];
+	}
 }

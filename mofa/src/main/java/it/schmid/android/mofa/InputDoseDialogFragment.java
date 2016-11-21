@@ -37,7 +37,7 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 	private Button mOkButton;
 	private Button mCancelButton;
 	private ProductInterface mPesticide;
-	private Integer mConc;
+	private Double mConc;
 	private Double mWaterAmount;
 	private Double mSize;
 	private InputDoseDialogFragmentListener callback;
@@ -52,14 +52,14 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 	public InputDoseDialogFragment() {
 		
 	}
-	public InputDoseDialogFragment(ProductInterface pesticide,Integer conc, Double water,Double size) {
+	public InputDoseDialogFragment(ProductInterface pesticide,Double conc, Double water,Double size) {
 		this.mPesticide=pesticide;
 		this.mConc=conc;
 		this.mWaterAmount=water;
 		this.mSize=size;
 	}
 //	constructor for existing entries, to modify the dose or amount
-	public InputDoseDialogFragment(ProductInterface pesticide,Double dose, Double doseAmount, Integer conc, Double water,Double size){
+	public InputDoseDialogFragment(ProductInterface pesticide,Double dose, Double doseAmount, Double conc, Double water,Double size){
 		this.mPesticide=pesticide;
 		this.mConc=conc;
 		this.mWaterAmount=water;
@@ -198,7 +198,7 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
         return false;
     }
 
-	private String calcAmount(Double wateramount, Integer conc){
+	private String calcAmount(Double wateramount, Double conc){
 		mAmount=0.00;
 		mDose=0.00;
 
@@ -214,7 +214,7 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 		
 		return nf.format(mAmount);
 	}	
-	private String calcDose(Double wateramount,Integer conc){
+	private String calcDose(Double wateramount,Double conc){
 		mAmount=0.000;
 		mDose=0.000;
 		NumberFormat nf = NumberFormat.getInstance(Locale.US);

@@ -2,6 +2,7 @@ package it.schmid.android.mofa.search;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -40,6 +41,7 @@ public class SearchStartFragment extends Fragment {
         Button btnSearchPest = (Button) v.findViewById(R.id.btn_search_pest);
         Button btnSearchFert = (Button) v.findViewById(R.id.btn_search_fert);
         Button btnDelArchive = (Button) v.findViewById(R.id.btn_del_arch);
+        Button btnWorkHours = (Button) v.findViewById(R.id.btn_hours_overview);
         final CheckBox chkDelAllSended = (CheckBox) v.findViewById(R.id.check_del_all_sended);
         TextView txtInfo = (TextView) v.findViewById(R.id.textView);
         long numSprayEntries = DatabaseManager.getInstance().getNumSprayingEntries();
@@ -76,6 +78,12 @@ public class SearchStartFragment extends Fragment {
                 transaction.replace(R.id.search_fragment_container, pestFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
+            }
+        });
+        btnWorkHours.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), WorkerOverviewActivity.class));
             }
         });
         btnDelArchive.setOnClickListener(new View.OnClickListener() {

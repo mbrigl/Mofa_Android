@@ -4,6 +4,7 @@ public interface ActivityConstants {
 	public static final int WORK_SPRAYING_ACTIVITY= 1;
 	public static final int PURCHASING_ACTIVITY=2;
 	public static final int WORK_OVERVIEW=3;
+	public static final int VEGDATA_ACTIVITY=4;
     public static final int SEARCH_LAST_PEST=1;
     public static final int SEARCH_PEST=2;
 	public static final int SEARCH_FERT=3;
@@ -18,4 +19,8 @@ public interface ActivityConstants {
 	public static final int DRYIRRIGATION=1;
 	public static final int FROSTIRRIGATION=2;
 	public static final int DRIPIRRIGATION=3;
+
+	public static final String BLOSSOMSTART="BLOSSOMSTART";
+	public static final String BLOSSOMEND="BLOSSOMEND";
+
 }

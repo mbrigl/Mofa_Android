@@ -16,15 +16,21 @@
     <item>2</item>
 </string-array>
 <string-array name="sprayconcentration">
-    <item>1</item>
-    <item>2</item>
-    <item>3</item>
-    <item>4</item>
-    <item>5</item>
-    <item>6</item>
-    <item>7</item>
-    <item>8</item>
-    <item>9</item>
+    <item>1.0</item>
+    <item>1.5</item>
+    <item>2.0</item>
+    <item>2.5</item>
+    <item>3.0</item>
+    <item>3.5</item>
+    <item>4.0</item>
+    <item>4.5</item>
+    <item>5.0</item>
+    <item>5.5</item>
+    <item>6.0</item>
+    <item>6.5</item>
+    <item>7.0</item>
+    <item>8.0</item>
+    <item>9.0</item>
     <item>10</item>
 
 </string-array>

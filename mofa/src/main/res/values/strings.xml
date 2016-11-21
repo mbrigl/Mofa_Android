@@ -20,7 +20,7 @@
     <string name="title_feature3">Update</string>
     <string name="title_feature4">Purchasing</string>
     <string name="title_feature5">Searching</string>
-    <string name="title_feature6">Working hours</string>
+    <string name="title_feature6">Blossom</string>
 
     <!-- Preference setting for import data -->
     <string name="showPestInfos">Show allways Pest Infos</string>
@@ -30,6 +30,8 @@
     <string name="dropboxact">Activating Dropbox through clicking on update</string>
     <string name="dropboxreset">Resetting Dropbox binding</string>
     <string name="dropboxresetmessage">Attention: You have to reconnect to your dropbox on the next update</string>
+    <string name="waitingspinnertitle">Loading</string>
+    <string name="waitingspinnertext">Connection to Dropbox...</string>
     <!-- Preference setting -->
     <string name="synchronisationsettings">Synchronization…</string>
     <!-- Preferences ASA -->
@@ -92,6 +94,11 @@
     <string name="purchase_menu_upload"> Upload Purchases</string>
     <!-- MenuEntries Harvest -->
     <string name="harvest_menu_add">Add document</string>
+    <!-- MenuEntries VegData-->
+    <string name="vegdata_menu_upload">Upload veg.data</string>
+    <string name="vegdata_clear_content">Clear data</string>
+    <string name="vegdata_clear_message">Are you sure, that you want delete all vegetation infos</string>
+    <string name="vegdata_clear_message_title">Resetting vegetation data</string>
     <!-- PromptDialog -->
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -105,6 +112,8 @@
     <string name="export_status_message">Starting export, at the end restart the update</string>
     <string name="export_purchase_title">Export all purchase entries</string>
     <string name="export_purchase_message">Are you sure, that you want export all your purchases. The local entries will be deleted</string>
+    <string name="export_vegdata_title">Export data</string>
+    <string name="export_vegdata_message">Are you sure, that you want export all vegetation infos.</string>
     <!-- Strings for gps location -->
     <string name="gps_text">GPS location data of selected variety quarter</string>
     <string name="gps_point1">longitude and latitude of point 1</string>
@@ -200,7 +209,7 @@
     <string name="searchFert">Search Fertilizer</string>
     <string name="searchPestSel">Please select a product to search</string>
     <string name="searchInfo">The archive contains %1$d entries. \n This search includes only spraying entries sended from this device. Be sure that you don\'t clear the archive during the year!</string>
-
+    <string name="hoursOverview">Working hours</string>
     <string name="delete_archive">Clear archive</string>
     <string name="delete_archive_mes">ATTENTION: ALL SPRAYING ENTRIES WERE DELETED, WHICH ARE OLDER THAN 60 DAYS\n IF YOU WANT TO DELETE ALL SENDED WORKS, CHECK THE CHECKBOX BELOW</string>
     <string name="search_no_result">No entry found for this query</string>
@@ -231,4 +240,11 @@
     <string name="titleDropboxLoginActivity">MoFa - Login Dropbox</string>
     <string name="titleDropboxButton">Login</string>
     <string name="dropboxInfo">Click on the login Button to connect MoFa with your Dropbox. \n You must have a valid Dropbox Account.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Strings for VegData -->
+    <string name="blossomStart">BLOSSOMSTART</string>
+    <string name="blossomEnd">BLOSSOMEND</string>
 </resources>

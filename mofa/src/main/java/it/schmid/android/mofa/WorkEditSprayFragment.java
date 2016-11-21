@@ -16,7 +16,9 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -144,7 +146,14 @@ public class WorkEditSprayFragment extends Fragment {
 				fillPesticideList();
 				fillFertilizerList();
 		}else{ //new entry
-			sumWater.setText(sumOfWater().toString());
+			double predefConc = getPredefConc();
+			ArrayAdapter myAdap = (ArrayAdapter) concent.getAdapter(); //cast to an ArrayAdapter
+			String strcon= Double.toString(predefConc);
+			//Log.d(TAG, "[populateFields] concentration = " + spray.getConcentration().toString());
+			spinnerPosition = myAdap.getPosition(strcon);
+			concent.setSelection(spinnerPosition,true);
+			double sumWat = sumOfWater()/predefConc;
+			sumWater.setText(format (sumWat));
 		}
 		for (int i = 0; i < mTurnRow.getChildCount(); i++){
 			final ImageButton weatherBtn= (ImageButton) mTurnRow.getChildAt(i);
@@ -219,7 +228,7 @@ public class WorkEditSprayFragment extends Fragment {
 			public void onClick(View v) {
 				Double water;
 				//Toast.makeText(getActivity(), sumOfWater().toString(),Toast.LENGTH_LONG).show();
-				Integer concentration = Integer.parseInt(concent.getSelectedItem().toString());
+				Double concentration = Double.parseDouble(concent.getSelectedItem().toString());
 				water = sumOfWater() / concentration;
 				sumWater.setText(format(water));
 
@@ -235,15 +244,15 @@ public class WorkEditSprayFragment extends Fragment {
 	public Double getCurrentWaterAmount(){
 		return Double.parseDouble (sumWater.getText().toString());
 	}
-	public Integer getCurrentConc(){
-		return Integer.parseInt(concent.getSelectedItem().toString());
+	public Double getCurrentConc(){
+		return Double.parseDouble(concent.getSelectedItem().toString());
 	}
 	public Double getSumOfSize(){
 		return sumOfSize();
 	}
 	private void saveState(){
 		Log.d(TAG,"Saving Spraying Data");
-		Integer concentration = Integer.parseInt (concent.getSelectedItem().toString());
+		Double concentration = Double.parseDouble (concent.getSelectedItem().toString());
 		Double wateramount = Double.parseDouble (sumWater.getText().toString());
 		if(DatabaseManager.getInstance().getSprayingByWorkId(mworkId).size()==0){
 			createNewSpraying(concentration,wateramount);
@@ -252,8 +261,9 @@ public class WorkEditSprayFragment extends Fragment {
 			msprayId=spray.getId();
 			updateSpraying(spray,concentration,wateramount);
 		}
+		setPredefConc(concentration);
 	}
-	private void createNewSpraying(Integer c, Double w){
+	private void createNewSpraying(Double c, Double w){
 		spray = new Spraying();
 		spray.setConcentration(c);
 		spray.setWateramount(w);
@@ -263,7 +273,7 @@ public class WorkEditSprayFragment extends Fragment {
 		Log.d(TAG, "New Spray Entry");
 		msprayId = spray.getId();
 	}
-	private void updateSpraying (Spraying s,Integer c,Double w){
+	private void updateSpraying (Spraying s,Double c,Double w){
 		s.setConcentration(c);
 		s.setWateramount(w);
 		s.setWeather(weather);
@@ -407,5 +417,19 @@ public class WorkEditSprayFragment extends Fragment {
 		}
 		weather = iChecked;
 		//mPass=iChecked;
+	}
+	private void setPredefConc(double conc) {
+		String key = "LAST_CONC"; //creating key for concentration
+		SharedPreferences prefs = getActivity().getSharedPreferences("it.schmid.android.mofa", Context.MODE_PRIVATE);
+		prefs.edit().putLong(key,Double.doubleToRawLongBits(conc)).apply();
+		//Toast.makeText(getActivity(),DatabaseManager.getInstance().getFirstLandIdForIrrigation(workId),Toast.LENGTH_LONG).show();
+	}
+	private double getPredefConc (){
+		String key = "LAST_CONC";
+		SharedPreferences prefs = getActivity().getSharedPreferences("it.schmid.android.mofa", Context.MODE_PRIVATE);
+		double conc = Double.longBitsToDouble(prefs.getLong(key, Double.doubleToLongBits(1.0)));
+		return conc;
+
+
 	}
 }

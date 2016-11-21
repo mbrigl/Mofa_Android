@@ -1,5 +1,6 @@
 package it.schmid.android.mofa.db;
 
+import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.model.Fertilizer;
 import it.schmid.android.mofa.model.FruitQuality;
 import it.schmid.android.mofa.model.Global;
@@ -1909,11 +1910,49 @@ public class DatabaseManager {
         }
         return globalList;
     }
+    public List<Global> getGlobalbyType(String type){
+        List<Global> globalList = null;
+        try {
+            globalList = getHelper().getGlobalDao().queryForEq("typeInfo", type);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return globalList;
+    }
     public List<Global> getGlobalbyWorkIdAndIrrigation(int workId, String workType) {
         List<Global> globalList = null;
         try {
             QueryBuilder<Global,Integer> qbGlobal = getHelper().getGlobalDao().queryBuilder();
             qbGlobal.where().eq("workId", workId).and() .eq("typeInfo", workType);
+            PreparedQuery<Global> preparedQuery = qbGlobal.prepare();
+            globalList = getHelper().getGlobalDao().query(preparedQuery);
+            return globalList;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public void flushVegData(){
+
+        try {
+            getHelper().getGlobalDao().callBatchTasks(new Callable<Void>() {
+
+                public Void call() throws Exception {
+                    getHelper().getGlobalDao().delete(getAllVegData());
+                    return null;
+                }
+            }) ;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //getHelper().getFruitQualityDao().delete(getAllQualities());
+
+    }
+    private List<Global> getAllVegData(){
+        List<Global> globalList = null;
+        try {
+            QueryBuilder<Global,Integer> qbGlobal = getHelper().getGlobalDao().queryBuilder();
+            qbGlobal.where().eq("typeInfo", ActivityConstants.BLOSSOMSTART).or() .eq("typeInfo", ActivityConstants.BLOSSOMEND);
             PreparedQuery<Global> preparedQuery = qbGlobal.prepare();
             globalList = getHelper().getGlobalDao().query(preparedQuery);
             return globalList;

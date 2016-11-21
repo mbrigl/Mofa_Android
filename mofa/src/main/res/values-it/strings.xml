@@ -19,7 +19,7 @@
     <string name="title_feature3">Update</string>
     <string name="title_feature4">Aquisti</string>
     <string name="title_feature5">Cerca</string>
-    <string name="title_feature6">Ore di lavoro</string>
+    <string name="title_feature6">Fioritura</string>
 	
 	<!-- Preference setting for import data	-->
 	<string name="showPestInfos">attivare sempre finestra info parasit.</string>
@@ -29,6 +29,8 @@
 	<string name="dropboxact">Clic su update per configurare dropbox</string>
 	<string name="dropboxreset">Rimuovere conness. Dropbox</string>
 	<string name="dropboxresetmessage">Attenzione: Con il prossimo update serve una nuova riconnissione con Dropbox</string>
+	<string name="waitingspinnertitle">Loading</string>
+	<string name="waitingspinnertext">Connessione con Dropbox...</string>
 	<!-- Preference setting 	-->
 	<string name="synchronisationsettings">import dati…</string>
 	<!-- Preferences ASA	-->
@@ -94,6 +96,10 @@
 	<string name="purchase_menu_upload"> upload aquisti</string>
 	<!-- MenuEntries Harvest-->
 	<string name="harvest_menu_add">Nuovo documento</string>
+	<!-- MenuEntries VegData-->
+	<string name="vegdata_menu_upload">Upload veg.data</string>
+	<string name="vegdata_clear_content">Clear data</string>
+	<string name="vegdata_clear_message">Vuole cancellare tutti i dati di vegetazione?</string>
 	<!--  PromptDialog --> 
 	<string name="ok">OK</string>
 	<string name="cancel">Annulla</string>
@@ -108,6 +114,9 @@
 	<string name="export_status_message">Esporto eseguito. Per favore alla fine eseguire l\'update un altra volta </string>
 	<string name="export_purchase_title">Esportazione aquisti</string>
 	<string name="export_purchase_message">Tutti gli aquisti vengono esportati. I dati locali vengono cancellati</string>
+	<string name="export_vegdata_title">Esportazione dati</string>
+	<string name="export_vegdata_message">Tutti i dati riguarda la fioritura vengono esportati. I dati locali non vengono cancellati</string>
+	<string name="vegdata_clear_message_title">Resetting vegetation data</string>
 	<!--  Strings for gps location  -->
 	<string name="gps_text">dati gps dell\' appezzamento attivo</string>
 	<string name="gps_point1">meridiano e latitudine del punto 1</string>
@@ -207,7 +216,7 @@
     <string name="deleteallsended">Canellare tutti i lavori mandati</string>
     <string name="deleteallsendedmsg">È sicuro, che voule canellare tutti i lavori già mandati</string>
     <string name="deletetoastmsg">Dati cancellati !!</string>
-
+	<string name="hoursOverview">Ore di lavoro</string>
 	<!-- Strings for Weather -->
 	<string name="weathersunny">tempo: soleggiato</string>
 	<string name="weatherpartlycloudy">tempo: poco nuvoloso</string>
@@ -225,4 +234,7 @@
 	<string name="titleDropboxLoginActivity">MoFa - Login Dropbox</string>
 	<string name="titleDropboxButton">Login</string>
 	<string name="dropboxInfo">Fare un click sul button Login per connettere MoFa con la sua Dropbox \n Serve un Dropbox account essistente. </string>
+	<!-- Strings for VegData -->
+	<string name="blossomStart">INIZIOFIORIT.</string>
+	<string name="blossomEnd">FINEFIORIT.</string>
 </resources>

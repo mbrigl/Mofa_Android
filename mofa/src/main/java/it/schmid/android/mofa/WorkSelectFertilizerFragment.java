@@ -41,7 +41,7 @@ public class WorkSelectFertilizerFragment extends Fragment implements InputDoseD
     private int sprayId;
     private int purchaseId;
     private Fertilizer currProd;
-    private int concentration;
+    private Double concentration;
     private Double wateramount;
 	private Double size;
     private int callingActivity;

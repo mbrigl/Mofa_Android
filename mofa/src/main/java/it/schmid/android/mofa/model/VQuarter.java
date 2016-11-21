@@ -45,6 +45,8 @@ public class VQuarter extends ImportBehavior{
 	@DatabaseField
 	private String code;
 	@DatabaseField
+	private String data;
+	@DatabaseField
 	private Double gps_x1;
 	@DatabaseField
 	private Double gps_x2;
@@ -132,7 +134,15 @@ public class VQuarter extends ImportBehavior{
 		this.code = code;
 	}
 
-    @Override
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
+	@Override
 	public void importMasterData(JSONArray importData) {
 		VQuarter vquarter;
 		Land land;

@@ -13,24 +13,48 @@ import android.support.v4.app.Fragment;
 
 @SuppressLint("ValidFragment")
 public class DatePickerDialogFragment extends DialogFragment {
+    private int year;
+    private int month;
+    private int day;
+    private boolean setArgs = false;
 	private Fragment mFragment = null;
 	private Activity mActivity;
-	
+    private boolean callFromAdapter = false;
+    OnDateSetListener ondateSet;
+	public DatePickerDialogFragment(){}
 	public DatePickerDialogFragment(Activity acallback){
 		mActivity = acallback;
 	}
 	public DatePickerDialogFragment(Fragment callback) {
         mFragment = callback;
     }
-	
+
+    public void setCallBack(OnDateSetListener ondate) {
+        ondateSet = ondate;
+        callFromAdapter = true;
+    }
+    @SuppressLint("NewApi")
+    @Override
+    public void setArguments(Bundle args) {
+        super.setArguments(args);
+        year = args.getInt("year");
+        month = args.getInt("month");
+        day = args.getInt("day");
+        setArgs = true;
+    }
 	@Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 	// Use the current date as the default date in the picker
-    final Calendar c = Calendar.getInstance();
-    int year = c.get(Calendar.YEAR);
-    int month = c.get(Calendar.MONTH);
-    int day = c.get(Calendar.DAY_OF_MONTH);
+    if (setArgs == false) {
+        final Calendar c = Calendar.getInstance();
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        day = c.get(Calendar.DAY_OF_MONTH);
+    }
 
+    if (callFromAdapter) {
+        return new DatePickerDialog(getActivity(), ondateSet, year, month, day);
+        }
     // Create a new instance of DatePickerDialog and return it
     if (mFragment==null){//activity
     	return new DatePickerDialog(getActivity(), (OnDateSetListener) mActivity, year, month, day);

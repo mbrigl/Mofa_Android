@@ -1,0 +1,295 @@
+package it.schmid.android.mofa.vegdata;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.net.Uri;
+import android.provider.ContactsContract;
+import android.provider.SyncStateContract;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.text.style.TtsSpan;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import it.schmid.android.mofa.ActivityConstants;
+import it.schmid.android.mofa.DashboardActivity;
+import it.schmid.android.mofa.MofaApplication;
+import it.schmid.android.mofa.R;
+import it.schmid.android.mofa.SendingProcess;
+import it.schmid.android.mofa.WorkOverviewActivity;
+import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.model.Global;
+import it.schmid.android.mofa.model.Land;
+import it.schmid.android.mofa.model.VQuarter;
+
+public class VegDataActivity extends AppCompatActivity implements BlossomStartFragment.OnBlossomStartInteractionListener, BlossomEndFragment.OnBlossomEndInteractionListener,SendingProcess.RemoveEntries {
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    public HashMap<Land,List<VQuarter>> landMap= new HashMap<Land,List<VQuarter>>();
+    public List<Land> lands;
+    private String jsonStringBlossStart="";
+    private String jsonStringBlossEnd="";
+    private boolean unSavedValues = false;
+    public interface ResetFragmentListener {
+        void clearFragment();
+    }
+    public ResetFragmentListener getFragmentRefreshListener() {
+        return resetFragmentListener;
+    }
+
+    public void setFragmentRefreshListener(ResetFragmentListener resetFragmentListener) {
+        this.resetFragmentListener = resetFragmentListener;
+    }
+
+    private ResetFragmentListener resetFragmentListener;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        DatabaseManager.init(this);
+        lands = DatabaseManager.getInstance().getAllLandsOrdered();
+        for (Land land : lands) {
+            List<VQuarter> vquarters = land.getVQuarters();
+            landMap.put(land,vquarters);
+
+        }
+        setContentView(R.layout.activity_veg_data);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
+
+    }
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        Fragment blossomStartFragment = BlossomStartFragment.newInstance(getBlossomStartJson());
+        Fragment blossomEndFragment = BlossomEndFragment.newInstance(getBlossomEndJson());
+        adapter.addFragment(blossomStartFragment, getString(R.string.blossomStart));
+        adapter.addFragment(blossomEndFragment, getString(R.string.blossomEnd));
+
+        viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.vegdata_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.vegdata_clearContent:
+                resetAllVegData();
+                return true;
+            case R.id.vegdata_menu_upload:
+                MofaApplication app = MofaApplication.getInstance();
+                Boolean haveConnection = app.networkStatus();
+                if (haveConnection){
+                    showUploadDialog();
+                }else{
+                    Toast.makeText(getApplicationContext(), R.string.no_connection,Toast.LENGTH_LONG).show();
+                }
+
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBlossomStartInteraction(String jsonString) {
+        jsonStringBlossStart = jsonString;
+        unSavedValues = true;
+        Log.d("VegDataActivity", "CallBack from BlossomStartFragment");
+    }
+    @Override
+    public void onBlossomEndInteraction(String jsonString) {
+        jsonStringBlossEnd = jsonString;
+        unSavedValues = true;
+        Log.d("VegDataActivity", "CallBack from BlossomEndFragment");
+
+    }
+
+    private void saveBlossomStart() {
+
+        if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).isEmpty()){
+            Global blossomStart = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).get(0);
+            blossomStart.setData(jsonStringBlossStart);
+            DatabaseManager.getInstance().updateGlobal(blossomStart);
+        }else {
+            Global blossomStart = new Global();
+            blossomStart.setTypeInfo(ActivityConstants.BLOSSOMSTART);
+            blossomStart.setData(jsonStringBlossStart);
+            DatabaseManager.getInstance().addGlobal(blossomStart);
+
+        }
+
+    }
+    private void saveBlossomEnd(){
+        if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMEND).isEmpty()){
+            Global blossomEnd = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMEND).get(0);
+            blossomEnd.setData(jsonStringBlossEnd);
+            DatabaseManager.getInstance().updateGlobal(blossomEnd);
+        }else {
+            Global blossomEnd = new Global();
+            blossomEnd.setTypeInfo(ActivityConstants.BLOSSOMEND);
+            blossomEnd.setData(jsonStringBlossEnd);
+            DatabaseManager.getInstance().addGlobal(blossomEnd);
+
+        }
+
+    }
+
+
+    private String getBlossomStartJson(){
+        jsonStringBlossStart="";
+        if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).isEmpty()){
+          Global blossomStart = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).get(0);
+            jsonStringBlossStart = blossomStart.getData();
+        };
+
+        return jsonStringBlossStart;
+    }
+    private String getBlossomEndJson(){
+        jsonStringBlossEnd="";
+        if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMEND).isEmpty()){
+            Global blossomEnd = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMEND).get(0);
+            jsonStringBlossEnd = blossomEnd.getData();
+        };
+        return jsonStringBlossEnd;
+    }
+
+    private void resetAllVegData() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(VegDataActivity.this);
+        alertDialog.setTitle(getString(R.string.vegdata_clear_message_title));
+        StringBuilder sb = new StringBuilder();
+        sb.append(getString(R.string.vegdata_clear_message));
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setLayoutParams( new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
+                LinearLayout.LayoutParams.FILL_PARENT));
+        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        alertDialog.setView(linearLayout);
+        alertDialog.setMessage(sb);
+        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
+                DatabaseManager.getInstance().flushVegData();
+                getFragmentRefreshListener().clearFragment();
+
+
+            }
+        });
+        // Setting Negative "NO" Button
+        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.cancel();
+            }
+        });
+        alertDialog.show();
+
+    }
+    /**
+     * export dialog
+     */
+    private void showUploadDialog(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(VegDataActivity.this);
+        alertDialog.setTitle(getString(R.string.export_vegdata_title));
+        StringBuilder sb = new StringBuilder();
+        sb.append(getString(R.string.export_vegdata_message));
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setLayoutParams( new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
+                LinearLayout.LayoutParams.FILL_PARENT));
+        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        alertDialog.setView(linearLayout);
+        alertDialog.setMessage(sb);
+        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
+                //sendData();
+                if (unSavedValues) {
+                    saveBlossomStart();
+                    saveBlossomEnd();
+                }
+                SendingProcess sending = new SendingProcess(VegDataActivity.this,ActivityConstants.VEGDATA_ACTIVITY);
+                sending.sendData();
+            }
+        });
+        // Setting Negative "NO" Button
+        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.cancel();
+            }
+        });
+        alertDialog.show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveBlossomStart();
+        saveBlossomEnd();
+        unSavedValues = false;
+    }
+
+    @Override
+    public void deleteAllEntries() {
+        //nothing to do for VegData. Not deleting data, later moment perhaps mark data, that where sended
+    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+    }
+    public HashMap<Land, List<VQuarter>> getLandMap() {
+        return landMap;
+    }
+
+    public List<Land> getLands() {
+        return lands;
+    }
+
+
+}

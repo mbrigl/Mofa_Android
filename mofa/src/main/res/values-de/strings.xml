@@ -20,7 +20,7 @@
     <string name="title_feature3">Update</string>
     <string name="title_feature4">Einkauf</string>
     <string name="title_feature5">Suche</string>
-    <string name="title_feature6">Arbeitsstunden</string>
+    <string name="title_feature6">Blüte</string>
 	
 	<!-- Preference setting for import data	-->
 	<string name="showPestInfos">PSM Infos immer anzeigen</string>
@@ -30,6 +30,8 @@
 	<string name="dropboxact">Klicken Sie auf Update um Dropbox einzurichten</string>
 	<string name="dropboxreset">Dropboxbindung zurücksetzen</string>
 	<string name="dropboxresetmessage">Achtung: Beim nächsten Update müssen Sie sich erneut mit Ihrer Dropbox verbinden</string>
+	<string name="waitingspinnertitle">Loading</string>
+	<string name="waitingspinnertext">Verbinden mit Dropbox...</string>
 	<!-- Preference setting 	-->
 	<string name="synchronisationsettings">Datenimport…</string>
 	<!-- Preferences ASA	-->
@@ -92,6 +94,11 @@
 	<string name="purchase_menu_upload"> Upload Einkäufe</string>
 	<!-- MenuEntries Harvest-->
 	<string name="harvest_menu_add">Neuer Liefersch.</string>
+	<!-- MenuEntries VegData-->
+	<string name="vegdata_menu_upload">Upload veg.data</string>
+	<string name="vegdata_clear_content">Daten löschen</string>
+	<string name="vegdata_clear_message">Sind Sie sicher,dass Sie alle Vegedationsdaten löschen möchten?</string>
+	<string name="vegdata_clear_message_title">Vegetationsdaten zurücksetzen</string>
 	<!--  PromptDialog --> 
 	<string name="ok">OK</string>
 	<string name="cancel">Abbrechen</string>
@@ -104,7 +111,8 @@
 	<string name="export_status_message">Export gestartet. Bitte führen Sie am Ende das Update nochmals aus</string>
 	<string name="export_purchase_title">Export aller Einkäufe</string>
 	<string name="export_purchase_message">Sind Sie sicher, dass Sie alle Einkäufe exportieren möchten. Die lokalen Einträge werden gelöscht</string>
-	
+	<string name="export_vegdata_title">Export Daten</string>
+	<string name="export_vegdata_message">Sind Sie sicher, dass Sie die Vegetationsdaten exportieren möchten. Die Daten bleiben lokal gespeichert</string>
 	<!--  Strings for gps location  -->
 	<string name="gps_text">GPS Daten des gewählten Sortenquartiers</string>
 	<string name="gps_point1">Längen und Breitengrade von Punkt 1</string>
@@ -208,6 +216,7 @@
     <string name="deleteallsended">Löschen aller gesendeten Arbeiten</string>
     <string name="deleteallsendedmsg">Sind Sie sicher, dass Sie alle gesendeten Einträge löschen möchten</string>
     <string name="deletetoastmsg">Daten wurden gelöscht !!</string>
+	<string name="hoursOverview">Arbeitsstunden</string>
 	<!-- Strings for Weather -->
 	<string name="weathersunny">Wetter: sonnig</string>
 	<string name="weatherpartlycloudy">Wetter: teilw. bewölkt</string>
@@ -225,4 +234,7 @@
 	<string name="titleDropboxLoginActivity">MoFa - Anmelden Dropbox</string>
 	<string name="titleDropboxButton">Anmelden</string>
 	<string name="dropboxInfo">Klicken Sie auf den Anmelden Button um MoFa mit Ihrer Dropbox zu verknüpfen \n Sie benötigen dazu ein gültiges Dropbox Konto</string>
+	<!-- Strings for VegData -->
+	<string name="blossomStart">BLÜHBEGINN</string>
+	<string name="blossomEnd">BLÜHENDE</string>
 </resources>

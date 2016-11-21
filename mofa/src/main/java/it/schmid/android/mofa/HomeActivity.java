@@ -13,6 +13,7 @@ import it.schmid.android.mofa.dropbox.LoginActivity;
 import it.schmid.android.mofa.model.Work;
 import it.schmid.android.mofa.search.SearchActivity;
 import it.schmid.android.mofa.search.WorkerOverviewActivity;
+import it.schmid.android.mofa.vegdata.VegDataActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -287,7 +289,9 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	    	  startActivity(new Intent (this, SearchActivity.class));
               break;
            case 6:
-               startActivity(new Intent (this, WorkerOverviewActivity.class));
+               //startActivity(new Intent (this, WorkerOverviewActivity.class));
+			   startActivity(new Intent (this, VegDataActivity.class));
+			   break;
 	      default: 
 	    	   break;
 	   }
@@ -560,6 +564,10 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	 * DropBox Operation for import
 	 */
 	private void importFromDropbox(){
+		final ProgressDialog waitingSpinner = new ProgressDialog(this);
+		waitingSpinner.setTitle(getString(R.string.waitingspinnertitle));
+		waitingSpinner.setMessage(getString(R.string.waitingspinnertext));
+		waitingSpinner.show();
 		String extension;
 		String filename = "/list"; //the filename is always list
 		final ArrayList<Integer> selElements = new ArrayList<Integer>(); //storing the elements to import/update
@@ -579,8 +587,11 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 			@Override
 			public void onDataLoaded(ArrayList<Integer> result, StringBuilder sb) {
 				if (result.size()>0){
+					waitingSpinner.dismiss();
 					showAlertDialog(sb,result);
+
 				}else{ // no updates
+					waitingSpinner.dismiss();
 					showNoUpdateDialog();
 				}
 

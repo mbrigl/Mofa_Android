@@ -27,6 +27,7 @@ import it.schmid.android.mofa.model.Worker;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import android.content.Context;
 import android.database.SQLException;
@@ -36,12 +37,13 @@ import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.misc.TransactionManager;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
 	private static final String DATABASE_NAME = "MofaDB.sqlite";
-	private static final int DATABASE_VERSION =14;
+	private static final int DATABASE_VERSION =15;
 	
 	// the DAO object we use to access the SimpleData table
     private Dao<Land, Integer> landDao = null;
@@ -152,6 +154,9 @@ public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
 						break;
 					case 14:
 						updateFromVersion14(db,connectionSource,oldVersion,newVersion);
+						break;
+					case 15:
+						updateFromVersion15(db,connectionSource,oldVersion,newVersion);
 						break;
                 }
 	            for (String sql : allSql) {
@@ -314,6 +319,27 @@ public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
 		try {
 			getWorkDao().executeRaw("ALTER TABLE `Global` ADD COLUMN workId Integer;");
 			} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+		}
+		onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
+	}
+	private void updateFromVersion15(SQLiteDatabase db,
+									 ConnectionSource connectionSource, int oldVersion, int newVersion){
+		try {
+			Log.d("Update Db", "updating to ver 15");
+			TransactionManager.callInTransaction(connectionSource,
+					new Callable<Void>() {
+
+						public Void call() throws Exception {
+							getWorkDao().executeRaw("ALTER TABLE spraying RENAME TO tmp;");
+							getWorkDao().executeRaw("CREATE TABLE spraying (concentration DOUBLE PRECISION , id INTEGER PRIMARY KEY AUTOINCREMENT , wateramount DOUBLE PRECISION , weather INTEGER , work_id INTEGER );");
+							getWorkDao().executeRaw("INSERT INTO spraying(concentration, id, wateramount, weather, work_id) SELECT concentration, id, wateramount, weather, work_id FROM tmp;");
+							getWorkDao().executeRaw("DROP TABLE tmp;");
+							getWorkDao().executeRaw("ALTER TABLE `vquarter` ADD COLUMN data VARCHAR;");
+							return null;
+						}
+					});
+		} catch (java.sql.SQLException e) {
 			e.printStackTrace();
 		}
 		onUpgrade(db, connectionSource, oldVersion + 1, newVersion);

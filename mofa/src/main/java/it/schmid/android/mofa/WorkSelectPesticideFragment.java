@@ -42,7 +42,7 @@ public class WorkSelectPesticideFragment extends Fragment implements InputDoseDi
     private int sprayId;
     private int purchaseId;
     private Pesticide currProd;
-    private int concentration;
+    private Double concentration;
     private Double wateramount;
 	private Double size;
     private int callingActivity;
