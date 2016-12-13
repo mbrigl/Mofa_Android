@@ -27,6 +27,8 @@ public class Work {
 	@DatabaseField(index = true, defaultValue = "0")
 	@Expose
 	private Boolean sended;
+	@DatabaseField
+	private String data;
 
 
 	//constructor
@@ -79,6 +81,14 @@ public class Work {
 
 	public void setSended(Boolean sended) {
 		this.sended = sended;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
 	}
 }
 

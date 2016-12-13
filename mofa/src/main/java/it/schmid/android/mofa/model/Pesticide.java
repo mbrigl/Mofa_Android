@@ -42,6 +42,8 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
 	private String code;
     @DatabaseField
 	private String constraints;
+	@DatabaseField
+	private String data;
 	private Boolean importError=false;
 	
 	public Integer getId() {
@@ -104,7 +106,15 @@ public class Pesticide extends ImportBehavior implements ProductInterface{
         this.constraints = constraints;
     }
 
-    @Override
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
+	@Override
 	public void importMasterData(JSONArray importData) {
 		Pesticide pesticide;
 		try {

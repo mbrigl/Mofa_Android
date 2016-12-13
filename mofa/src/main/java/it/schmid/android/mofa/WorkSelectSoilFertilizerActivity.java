@@ -14,6 +14,7 @@ import java.util.List;
 
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +77,7 @@ public class WorkSelectSoilFertilizerActivity extends DashboardActivity implemen
 				android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
 				InputAmountSoilFertFragment inputAmountDialog = InputAmountSoilFertFragment.newInstance(0.00, soilFertilizer[0].getProductName(), size);
 				inputAmountDialog.setCallback(WorkSelectSoilFertilizerActivity.this);
+				inputAmountDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
 				inputAmountDialog.show(fm, "InputAmount");
 
 			}

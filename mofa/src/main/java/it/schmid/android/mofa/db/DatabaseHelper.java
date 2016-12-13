@@ -336,6 +336,12 @@ public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
 							getWorkDao().executeRaw("INSERT INTO spraying(concentration, id, wateramount, weather, work_id) SELECT concentration, id, wateramount, weather, work_id FROM tmp;");
 							getWorkDao().executeRaw("DROP TABLE tmp;");
 							getWorkDao().executeRaw("ALTER TABLE `vquarter` ADD COLUMN data VARCHAR;");
+							getWorkDao().executeRaw("ALTER TABLE `pesticide` ADD COLUMN data VARCHAR;");
+							getWorkDao().executeRaw("ALTER TABLE `fertilizer` ADD COLUMN data VARCHAR;");
+							getWorkDao().executeRaw("ALTER TABLE `task` ADD COLUMN data VARCHAR;");
+							getWorkDao().executeRaw("ALTER TABLE `work` ADD COLUMN data VARCHAR;");
+							getWorkDao().executeRaw("ALTER TABLE `purchasefertilizer` ADD COLUMN data VARCHAR;");
+							getWorkDao().executeRaw("ALTER TABLE `purchasepesticide` ADD COLUMN data VARCHAR;");
 							return null;
 						}
 					});

@@ -237,4 +237,9 @@
 	<!-- Strings for VegData -->
 	<string name="blossomStart">BLÜHBEGINN</string>
 	<string name="blossomEnd">BLÜHENDE</string>
+	<string name="harvestStart">ERNTE</string>
+	<string name="estimCrop">ERTRAG</string>
+	<string name="estimCropTitleHa">Menge in t/ha</string>
+	<string name="amountCrop">Menge auf Fläche: %1$d t</string>
+
 </resources>

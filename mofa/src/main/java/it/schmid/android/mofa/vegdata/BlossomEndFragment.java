@@ -20,8 +20,10 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 
+import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.adapter.ExpandableVegDataAdapter;
+import it.schmid.android.mofa.interfaces.ClearInterface;
 import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.VQuarter;
 
@@ -33,7 +35,7 @@ import it.schmid.android.mofa.model.VQuarter;
  * Use the {@link BlossomEndFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BlossomEndFragment extends Fragment implements ExpandableVegDataAdapter.VegDataListener {
+public class BlossomEndFragment extends Fragment implements ExpandableVegDataAdapter.VegDataListener,ClearInterface {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -86,16 +88,7 @@ public class BlossomEndFragment extends Fragment implements ExpandableVegDataAda
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ((VegDataActivity)getActivity()).setFragmentRefreshListener(new VegDataActivity.ResetFragmentListener() {
-            @Override
-            public void clearFragment() {
-                Log.d("Test", "calling refresh");
-                setDateMap.clear();
-                refreshJson();
-                ((BaseExpandableListAdapter) expandableListAdapter).notifyDataSetChanged();
 
-            }
-        });
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_blossom_end, container, false);
     }
@@ -104,7 +97,7 @@ public class BlossomEndFragment extends Fragment implements ExpandableVegDataAda
         super.onViewCreated(view, savedInstanceState);
         expandableListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
         expandableListView.setGroupIndicator(null);
-        expandableListAdapter = new ExpandableVegDataAdapter(getActivity(),lands,landMap,setDateMap,this);
+        expandableListAdapter = new ExpandableVegDataAdapter(getActivity(),lands,landMap,setDateMap, ActivityConstants.BLOSSOMEND,this);
         expandableListView.setAdapter(expandableListAdapter);
 
     }
@@ -152,6 +145,16 @@ public class BlossomEndFragment extends Fragment implements ExpandableVegDataAda
             mListener.onBlossomEndInteraction(createJsonFromMap());
         }
         mListener = null;
+    }
+
+    @Override
+    public void clear() {
+        Log.d("BlossomEndFragment", "Calling clear");
+        setDateMap.clear();
+        if (mListener != null) {
+            mListener.onBlossomEndInteraction(createJsonFromMap());
+        }
+        ((BaseExpandableListAdapter) expandableListAdapter).notifyDataSetChanged();
     }
 
     /**

@@ -32,32 +32,30 @@ import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.SendingProcess;
 import it.schmid.android.mofa.WorkOverviewActivity;
 import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.interfaces.ClearInterface;
+import it.schmid.android.mofa.interfaces.ShowInfoInterface;
 import it.schmid.android.mofa.model.Global;
 import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.VQuarter;
 
-public class VegDataActivity extends AppCompatActivity implements BlossomStartFragment.OnBlossomStartInteractionListener, BlossomEndFragment.OnBlossomEndInteractionListener,SendingProcess.RemoveEntries {
+public class VegDataActivity extends AppCompatActivity implements BlossomStartFragment.OnBlossomStartInteractionListener, BlossomEndFragment.OnBlossomEndInteractionListener, EstimCropFragment.OnEstimCropInteractionListener,HarvestStartFragment.OnHarvestStartInteractionListener,SendingProcess.RemoveEntries {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private ViewPagerAdapter adapter;
     public HashMap<Land,List<VQuarter>> landMap= new HashMap<Land,List<VQuarter>>();
     public List<Land> lands;
     private String jsonStringBlossStart="";
     private String jsonStringBlossEnd="";
+    private String jsonStringEstimCrop="";
+    private String jsonStringHarvestStart="";
     private boolean unSavedValues = false;
-    public interface ResetFragmentListener {
-        void clearFragment();
-    }
-    public ResetFragmentListener getFragmentRefreshListener() {
-        return resetFragmentListener;
-    }
-
-    public void setFragmentRefreshListener(ResetFragmentListener resetFragmentListener) {
-        this.resetFragmentListener = resetFragmentListener;
-    }
-
-    private ResetFragmentListener resetFragmentListener;
-
+    private int[] tabIcons = {
+            R.drawable.ic_action_flowerstart,
+            R.drawable.ic_action_flowerend,
+            R.drawable.ic_action_harveststart,
+            R.drawable.ic_action_estimcrop
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,19 +72,29 @@ public class VegDataActivity extends AppCompatActivity implements BlossomStartFr
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
+        setupTabIcons();
 
     }
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
         Fragment blossomStartFragment = BlossomStartFragment.newInstance(getBlossomStartJson());
         Fragment blossomEndFragment = BlossomEndFragment.newInstance(getBlossomEndJson());
+        Fragment harvestStartFragment = HarvestStartFragment.newInstance(getHarvestStartJson());
+        Fragment estimCropFragment = EstimCropFragment.newInstance(getEstimCropJson());
+
         adapter.addFragment(blossomStartFragment, getString(R.string.blossomStart));
         adapter.addFragment(blossomEndFragment, getString(R.string.blossomEnd));
+        adapter.addFragment(harvestStartFragment,getString(R.string.harvestStart));
+        adapter.addFragment(estimCropFragment,getString(R.string.estimCrop));
 
         viewPager.setAdapter(adapter);
     }
-
+    private void setupTabIcons(){
+        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+        tabLayout.getTabAt(2).setIcon(tabIcons[2]);
+        tabLayout.getTabAt(3).setIcon(tabIcons[3]);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -128,6 +136,20 @@ public class VegDataActivity extends AppCompatActivity implements BlossomStartFr
 
     }
 
+    @Override
+    public void onEstimCropInteraction(String jsonString) {
+        jsonStringEstimCrop = jsonString;
+        unSavedValues = true;
+        Log.d("VegDataActivity", "CallBack from EstimCropFragment");
+    }
+
+    @Override
+    public void onHarvestStartInteraction(String jsonString) {
+        jsonStringHarvestStart = jsonString;
+        unSavedValues = true;
+        Log.d("VegDataActivity", "CallBack from HarvestStartFragment");
+    }
+
     private void saveBlossomStart() {
 
         if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).isEmpty()){
@@ -157,8 +179,32 @@ public class VegDataActivity extends AppCompatActivity implements BlossomStartFr
         }
 
     }
+    private void saveHarvestStart(){
+        if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.HARVESTSTART).isEmpty()){
+            Global harvestStart = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.HARVESTSTART).get(0);
+            harvestStart.setData(jsonStringHarvestStart);
+            DatabaseManager.getInstance().updateGlobal(harvestStart);
+        }else {
+            Global harvestStart = new Global();
+            harvestStart.setTypeInfo(ActivityConstants.HARVESTSTART);
+            harvestStart.setData(jsonStringHarvestStart);
+            DatabaseManager.getInstance().addGlobal(harvestStart);
 
+        }
+    }
+    private void saveEstimCrop(){
+        if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.ESTIMCROP).isEmpty()){
+            Global estimCrop = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.ESTIMCROP).get(0);
+            estimCrop.setData(jsonStringEstimCrop);
+            DatabaseManager.getInstance().updateGlobal(estimCrop);
+        }else {
+            Global estimCrop = new Global();
+            estimCrop.setTypeInfo(ActivityConstants.ESTIMCROP);
+            estimCrop.setData(jsonStringEstimCrop);
+            DatabaseManager.getInstance().addGlobal(estimCrop);
 
+        }
+    }
     private String getBlossomStartJson(){
         jsonStringBlossStart="";
         if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).isEmpty()){
@@ -177,6 +223,22 @@ public class VegDataActivity extends AppCompatActivity implements BlossomStartFr
         return jsonStringBlossEnd;
     }
 
+    private String getEstimCropJson(){
+        jsonStringEstimCrop="";
+        if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.ESTIMCROP).isEmpty()){
+            Global estimCrop = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.ESTIMCROP).get(0);
+            jsonStringEstimCrop = estimCrop.getData();
+        };
+        return jsonStringEstimCrop;
+    }
+    private String getHarvestStartJson(){
+        jsonStringHarvestStart="";
+        if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.HARVESTSTART).isEmpty()){
+            Global harvestStart = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.HARVESTSTART).get(0);
+            jsonStringHarvestStart = harvestStart.getData();
+        };
+        return jsonStringHarvestStart;
+    }
     private void resetAllVegData() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(VegDataActivity.this);
         alertDialog.setTitle(getString(R.string.vegdata_clear_message_title));
@@ -190,8 +252,9 @@ public class VegDataActivity extends AppCompatActivity implements BlossomStartFr
         alertDialog.setMessage(sb);
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
+                clearAllFragments();
                 DatabaseManager.getInstance().flushVegData();
-                getFragmentRefreshListener().clearFragment();
+
 
 
             }
@@ -204,6 +267,10 @@ public class VegDataActivity extends AppCompatActivity implements BlossomStartFr
             }
         });
         alertDialog.show();
+
+    }
+    private void clearAllFragments() {
+        adapter.clearAllDataFromFragments();
 
     }
     /**
@@ -226,6 +293,8 @@ public class VegDataActivity extends AppCompatActivity implements BlossomStartFr
                 if (unSavedValues) {
                     saveBlossomStart();
                     saveBlossomEnd();
+                    saveHarvestStart();
+                    saveEstimCrop();
                 }
                 SendingProcess sending = new SendingProcess(VegDataActivity.this,ActivityConstants.VEGDATA_ACTIVITY);
                 sending.sendData();
@@ -246,11 +315,14 @@ public class VegDataActivity extends AppCompatActivity implements BlossomStartFr
         super.onPause();
         saveBlossomStart();
         saveBlossomEnd();
+        saveHarvestStart();
+        saveEstimCrop();
         unSavedValues = false;
     }
 
     @Override
     public void deleteAllEntries() {
+
         //nothing to do for VegData. Not deleting data, later moment perhaps mark data, that where sended
     }
 
@@ -277,7 +349,11 @@ public class VegDataActivity extends AppCompatActivity implements BlossomStartFr
             mFragmentTitleList.add(title);
 
         }
-
+        public void clearAllDataFromFragments(){
+            for (Fragment fm : mFragmentList){
+                ((ClearInterface)fm).clear();
+            }
+        }
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);

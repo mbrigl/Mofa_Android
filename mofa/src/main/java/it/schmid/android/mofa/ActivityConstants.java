@@ -22,5 +22,7 @@ public interface ActivityConstants {
 
 	public static final String BLOSSOMSTART="BLOSSOMSTART";
 	public static final String BLOSSOMEND="BLOSSOMEND";
+	public static final String HARVESTSTART="HARVESTSTART";
+	public static final String ESTIMCROP="ESTIMCROP";
 
 }

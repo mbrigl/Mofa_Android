@@ -4,10 +4,11 @@
     android:layout_height="match_parent"
     tools:context="it.schmid.android.mofa.vegdata.HarvestStartFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
+    <ExpandableListView
+        android:id="@+id/expandableListView"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+        android:layout_width="match_parent"
+        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="0.5dp" />
 </FrameLayout>

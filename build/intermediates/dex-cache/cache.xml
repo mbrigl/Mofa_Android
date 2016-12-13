@@ -16,7 +16,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.1"
-        sha1="2d8a72d9fdd8436479cb4435da68e123f43336f4">
+        sha1="72d2df2b60d3def4f085ccc7fcc2384e60890c36">
         <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/instant-run-bootstrap_15d68af1e7b8c0e3085d1f8f8e84fc0dd677f3d9.jar" />
     </item>
     <item
@@ -52,7 +52,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.1"
-        sha1="48c2c4a938ab4d7c039cdad779840a7ed93836e4">
+        sha1="bf92bcebfc6dc6c80299d4e350292adb5ee08820">
         <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/instant-run_efe9399ed2086a50221c62cf6dacaa64d8eb2bb1.jar" />
     </item>
     <item

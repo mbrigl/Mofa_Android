@@ -9,7 +9,7 @@ android {
     }
     defaultConfig {
         applicationId "it.schmid.android.mofa"
-        minSdkVersion 9
+        minSdkVersion 11
         targetSdkVersion 16
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_7

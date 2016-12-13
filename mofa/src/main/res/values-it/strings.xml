@@ -237,4 +237,9 @@
 	<!-- Strings for VegData -->
 	<string name="blossomStart">INIZIOFIORIT.</string>
 	<string name="blossomEnd">FINEFIORIT.</string>
+	<string name="harvestStart">RACCOLTA</string>
+	<string name="estimCrop">RACCOLTO</string>
+	<string name="estimCropTitleHa">raccolto in t/ha</string>
+	<string name="amountCrop">raccolot su superf.: %1$d t</string>
+
 </resources>

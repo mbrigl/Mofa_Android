@@ -966,6 +966,8 @@ public void run(){
 	private String createVegDataXML(){
 		HashMap<String,String> blossStart = new HashMap<String,String>();
 		HashMap<String,String> blossEnd = new HashMap<String,String>();
+		HashMap<String,String> harvStart = new HashMap<String,String>();
+		HashMap<String,String> estCrop = new HashMap<String,String>();
 		if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).isEmpty()){
 			String json = "";
 			Global blossomStart = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).get(0);
@@ -977,6 +979,18 @@ public void run(){
 			Global blossomEnd = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMEND).get(0);
 			json = blossomEnd.getData();
 			blossEnd = getMapFromJson(json);
+		};
+		if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.HARVESTSTART).isEmpty()){
+			String json = "";
+			Global harvestStart = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.HARVESTSTART).get(0);
+			json = harvestStart.getData();
+			harvStart = getMapFromJson(json);
+		};
+		if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.ESTIMCROP).isEmpty()){
+			String json = "";
+			Global estimCrop = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.ESTIMCROP).get(0);
+			json = estimCrop.getData();
+			estCrop = getMapFromJson(json);
 		};
 		List<VQuarter> vquarters = DatabaseManager.getInstance().getAllVQuarters();
 		XmlSerializer serializer = Xml.newSerializer();
@@ -990,7 +1004,9 @@ public void run(){
 			for (VQuarter vq : vquarters) {
 				String blossDateStart = blossStart.get(vq.getId().toString());
 				String blossDateEnd = blossEnd.get(vq.getId().toString());
-				if (blossDateStart != null || blossDateEnd != null){
+				String harvestDate = harvStart.get(vq.getId().toString());
+				String estimCropAmount = estCrop.get(vq.getId().toString());
+				if (blossDateStart != null || blossDateEnd != null || harvestDate != null || estimCropAmount != null){
 					serializer.startTag("","vquarter");
 						serializer.startTag("", "vqid");
 							serializer.text(vq.getId().toString());
@@ -1004,6 +1020,16 @@ public void run(){
 							serializer.startTag("", "blossomEnd");
 							serializer.text(blossDateEnd);
 							serializer.endTag("", "blossomEnd");
+						}
+						if (blossDateEnd != null) {
+							serializer.startTag("", "harvestStart");
+							serializer.text(harvestDate);
+							serializer.endTag("", "harvestStart");
+						}
+						if (blossDateEnd != null) {
+							serializer.startTag("", "cropAmount");
+							serializer.text(estimCropAmount);
+							serializer.endTag("", "cropAmount");
 						}
 					serializer.endTag("","vquarter");
 				}

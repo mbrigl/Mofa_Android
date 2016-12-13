@@ -241,10 +241,14 @@
     <string name="titleDropboxButton">Login</string>
     <string name="dropboxInfo">Click on the login Button to connect MoFa with your Dropbox. \n You must have a valid Dropbox Account.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Strings for VegData -->
     <string name="blossomStart">BLOSSOMSTART</string>
     <string name="blossomEnd">BLOSSOMEND</string>
+    <string name="harvestStart">HARVEST</string>
+    <string name="estimCrop">YIELD</string>
+    <string name="estimCropTitleHa">amount in t/ha</string>
+    <string name="amountCrop">Amount on size: %1$d t</string>
+
+
 </resources>

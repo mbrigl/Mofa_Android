@@ -19,6 +19,9 @@ public class PurchasePesticide implements PurchaseProductInterface{
 	@DatabaseField
 	@Expose
 	private Double amount;
+	@DatabaseField
+	private String data;
+
 	public Integer getId() {
 		return id;
 	}
@@ -43,5 +46,12 @@ public class PurchasePesticide implements PurchaseProductInterface{
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-	
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
 }

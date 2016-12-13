@@ -35,6 +35,8 @@ public class Fertilizer extends ImportBehavior implements ProductInterface{
 	private Double defaultDose;
 	@DatabaseField
 	private String code;
+	@DatabaseField
+	private String data;
 	private Boolean importError=false;
 	private String asaFertType;
 	private MofaApplication app;
@@ -54,9 +56,15 @@ public class Fertilizer extends ImportBehavior implements ProductInterface{
 		return defaultDose;
 	}
 
+	public String getData() {
+		return data;
+	}
 
+	public void setData(String data) {
+		this.data = data;
+	}
 
-    public void setDefaultDose(Double defaultDose) {
+	public void setDefaultDose(Double defaultDose) {
 		this.defaultDose = defaultDose;
 	}
 	

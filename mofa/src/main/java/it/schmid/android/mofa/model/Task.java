@@ -36,7 +36,8 @@ public class Task extends ImportBehavior {
 	private Integer id;
 	@DatabaseField
 	private String task;
-	
+    @DatabaseField
+    private String data;
 	@DatabaseField
 	private String code;
     @DatabaseField
@@ -72,6 +73,14 @@ public String getType() {
     }
 public void setType(String type) {
         this.type = type;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 
     public void importMasterData(JSONArray importData){
