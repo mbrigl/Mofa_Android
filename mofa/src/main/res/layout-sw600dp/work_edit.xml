@@ -83,7 +83,15 @@
 		
         
     </EditText>
-
+    <ImageButton
+        android:id="@+id/speechButton"
+        android:textSize="18dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:src="@android:drawable/ic_btn_speak_now"
+        >
+    </ImageButton>
    <LinearLayout 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

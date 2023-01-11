@@ -1,14 +1,13 @@
 package it.schmid.android.mofa.adapter;
 
+import androidx.fragment.app.FragmentManager;
 import it.schmid.android.mofa.InputDoseDialogFragment;
-import it.schmid.android.mofa.MofaApplication;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.WorkEditSprayFragment;
-import it.schmid.android.mofa.WorkEditTabActivity;
 import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.interfaces.InputDoseDialogFragmentListener;
 import it.schmid.android.mofa.model.Fertilizer;
 import it.schmid.android.mofa.model.SprayFertilizer;
-import it.schmid.android.mofa.model.SprayPesticide;
 import it.schmid.android.mofa.model.Spraying;
 
 import java.util.List;
@@ -17,8 +16,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,7 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class WorkSelectedFertilizerAdapter extends ArrayAdapter<SprayFertilizer>implements InputDoseDialogFragment.InputDoseDialogFragmentListener{
+public class WorkSelectedFertilizerAdapter extends ArrayAdapter<SprayFertilizer>implements InputDoseDialogFragmentListener {
 	
 	private static final String TAG = "WorkSelectedFertilizerAdapter";
 	Context context;
@@ -84,7 +83,7 @@ public class WorkSelectedFertilizerAdapter extends ArrayAdapter<SprayFertilizer>
         		InputDoseDialogFragment inputDoseDialog = new InputDoseDialogFragment(fertilizer,workFertilizer.getDose(),
 						workFertilizer.getDose_amount(),fragment.getCurrentConc(),fragment.getCurrentWaterAmount(),fragment.getSumOfSize());
 				inputDoseDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
-				android.support.v4.app.FragmentManager fm = ((FragmentActivity)context).getSupportFragmentManager();
+				FragmentManager fm = ((FragmentActivity)context).getSupportFragmentManager();
 				inputDoseDialog.setCallback(WorkSelectedFertilizerAdapter.this);
 				//inputDoseDialog.setTargetFragment( fm.,0);
 				setCurrWorkFertilizer(workFertilizer); //saving the current element to a private variable

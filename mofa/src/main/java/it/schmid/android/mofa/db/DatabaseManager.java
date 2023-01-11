@@ -162,6 +162,15 @@ public class DatabaseManager {
         }
         return landList;
     }
+    public List<Land> getAllLandsOrderedByCode(){
+        List<Land> landList = null;
+        try {
+            landList = getHelper().getLandDao().queryBuilder().orderByRaw("code").query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return landList;
+    }
     // adding,updating Land class
     public void addLand(Land l) {
         try {

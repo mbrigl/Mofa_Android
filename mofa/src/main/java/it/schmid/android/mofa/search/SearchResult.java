@@ -4,9 +4,9 @@ package it.schmid.android.mofa.search;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,13 +19,11 @@ import android.widget.TextView;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.R;
-import it.schmid.android.mofa.db.DatabaseHelper;
 
 
 import it.schmid.android.mofa.db.DatabaseManager;

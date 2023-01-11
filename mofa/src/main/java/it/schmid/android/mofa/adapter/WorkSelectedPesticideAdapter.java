@@ -1,14 +1,17 @@
 package it.schmid.android.mofa.adapter;
 
+import androidx.fragment.app.FragmentManager;
 import it.schmid.android.mofa.InputDoseDialogFragment;
+import it.schmid.android.mofa.InputDoseDialogFragmentNewVer;
 import it.schmid.android.mofa.MofaApplication;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.WorkEditSprayFragment;
-import it.schmid.android.mofa.WorkEditTabActivity;
 import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.interfaces.InputDoseASANewFragmentListener;
+import it.schmid.android.mofa.interfaces.InputDoseDialogFragmentListener;
 import it.schmid.android.mofa.model.Pesticide;
 import it.schmid.android.mofa.model.SprayPesticide;
-import it.schmid.android.mofa.model.Spraying;
+import it.schmid.android.mofa.model.Wirkung;
 
 import java.util.List;
 
@@ -16,8 +19,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,7 +31,7 @@ import android.widget.TextView;
 
 
 
-public class WorkSelectedPesticideAdapter extends ArrayAdapter<SprayPesticide>implements InputDoseDialogFragment.InputDoseDialogFragmentListener{
+public class WorkSelectedPesticideAdapter extends ArrayAdapter<SprayPesticide>implements InputDoseDialogFragmentListener,InputDoseASANewFragmentListener{
 	
 	private static final String TAG = "WorkPesticideAdapter";
 	Context context;
@@ -87,14 +90,29 @@ public class WorkSelectedPesticideAdapter extends ArrayAdapter<SprayPesticide>im
         holder.txtPesticide.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				InputDoseDialogFragment inputDoseDialog = new InputDoseDialogFragment(pesticide,workPesticide.getDose(),
-						workPesticide.getDose_amount(),fragment.getCurrentConc(),fragment.getCurrentWaterAmount(),fragment.getSumOfSize());
-				inputDoseDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
-				android.support.v4.app.FragmentManager fm = ((FragmentActivity)context).getSupportFragmentManager();
-				inputDoseDialog.setCallback(WorkSelectedPesticideAdapter.this);
-				//inputDoseDialog.setTargetFragment( fm.,0);
-				setCurrPesticide(workPesticide); //saving the current element to a private variable
-		        inputDoseDialog.show(fm, "fragment_input_dose");
+				MofaApplication app = MofaApplication.getInstance();
+				//different dose views for asa new version and default
+				if (app.newAsaVersion()){
+					String reason = workPesticide.getReason();
+					InputDoseDialogFragmentNewVer inputDoseDialog = new InputDoseDialogFragmentNewVer(pesticide,workPesticide.getDose(),
+							workPesticide.getDose_amount(),fragment.getCurrentConc(),fragment.getCurrentWaterAmount(),fragment.getSumOfSize(),reason);
+					inputDoseDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
+					FragmentManager fm = ((FragmentActivity)context).getSupportFragmentManager();
+					inputDoseDialog.setCallback(WorkSelectedPesticideAdapter.this);
+					//inputDoseDialog.setTargetFragment( fm.,0);
+					setCurrPesticide(workPesticide); //saving the current element to a private variable
+					inputDoseDialog.show(fm, "fragment_input_dose");
+				}else { //default
+					InputDoseDialogFragment inputDoseDialog = new InputDoseDialogFragment(pesticide,workPesticide.getDose(),
+							workPesticide.getDose_amount(),fragment.getCurrentConc(),fragment.getCurrentWaterAmount(),fragment.getSumOfSize());
+					inputDoseDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
+					FragmentManager fm = ((FragmentActivity)context).getSupportFragmentManager();
+					inputDoseDialog.setCallback(WorkSelectedPesticideAdapter.this);
+					//inputDoseDialog.setTargetFragment( fm.,0);
+					setCurrPesticide(workPesticide); //saving the current element to a private variable
+					inputDoseDialog.show(fm, "fragment_input_dose");
+				}
+
 				
 			}
 		});
@@ -143,6 +161,17 @@ public class WorkSelectedPesticideAdapter extends ArrayAdapter<SprayPesticide>im
 		notifyDataSetChanged(); 
 		
 	}
+
+	@Override
+	public void onFinishEditDialog(Double doseInput, Double amountInput, Wirkung w) {
+		SprayPesticide pest = getCurrPesticide();
+		pest.setDose(Math.round(doseInput*1000.0)/1000.0);
+		pest.setDose_amount(Math.round(amountInput*1000.0)/1000.0);
+		pest.setReason(w.toString());
+		DatabaseManager.getInstance().updateSprayPesticide(pest);
+		notifyDataSetChanged();
+	}
+
 	private void setCurrPesticide(SprayPesticide p){
 		this.p = p;
 	}

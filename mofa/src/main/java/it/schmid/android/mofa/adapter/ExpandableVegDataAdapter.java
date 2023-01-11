@@ -4,10 +4,10 @@ package it.schmid.android.mofa.adapter;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import androidx.fragment.app.DialogFragment;
 
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.fragment.app.FragmentManager;
 import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.DatePickerDialogFragment;
 
@@ -292,7 +293,7 @@ public class ExpandableVegDataAdapter extends BaseExpandableListAdapter implemen
         if (dateMap.containsKey(curId.toString())){
            amount = Integer.parseInt (dateMap.get(curId.toString())) ;
         }
-        android.support.v4.app.FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
+        FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
         InputEstimCropFragment inputAmountDialog = InputEstimCropFragment.newInstance(amount,size,title);
         inputAmountDialog.setCallback(this);
         inputAmountDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
@@ -301,7 +302,7 @@ public class ExpandableVegDataAdapter extends BaseExpandableListAdapter implemen
     }
     private void showEstimDialogFromLand(Double size,String landName){
         int amount = 50; //default value is 50
-        android.support.v4.app.FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
+        FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
         InputEstimCropFragment inputAmountDialog = InputEstimCropFragment.newInstance(amount,size,landName);
         inputAmountDialog.setCallback(this);
         inputAmountDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);

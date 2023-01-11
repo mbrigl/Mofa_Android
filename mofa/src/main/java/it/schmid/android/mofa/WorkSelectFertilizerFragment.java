@@ -1,12 +1,12 @@
 package it.schmid.android.mofa;
 
-import it.schmid.android.mofa.InputDoseDialogFragment.InputDoseDialogFragmentListener;
+
 import it.schmid.android.mofa.adapter.WorkProductAdapter;
 import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.interfaces.InputDoseDialogFragmentListener;
 import it.schmid.android.mofa.model.Fertilizer;
 import it.schmid.android.mofa.model.Purchase;
 import it.schmid.android.mofa.model.PurchaseFertilizer;
-import it.schmid.android.mofa.model.PurchasePesticide;
 import it.schmid.android.mofa.model.SprayFertilizer;
 import it.schmid.android.mofa.model.Spraying;
 
@@ -14,11 +14,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +26,13 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
-
-public class WorkSelectFertilizerFragment extends Fragment implements InputDoseDialogFragmentListener{
+public class WorkSelectFertilizerFragment extends Fragment implements InputDoseDialogFragmentListener,InputPurchaseDialogFragment.OnInputPurchaseDialogListener{
 	private static final String TAG = "WorkSelectFertilizerActivity";
 	private ListView mFertilizerLvWithFilter;
     private EditText mSearchEdt;
@@ -113,7 +115,14 @@ public class WorkSelectFertilizerFragment extends Fragment implements InputDoseD
 					showDoseDialog (fertilizer);
 				}
 				if (callingActivity==ActivityConstants.PURCHASING_ACTIVITY){
-					showPurchaseDialog (fertilizer);
+					MofaApplication app = MofaApplication.getInstance();
+					String backEndSoftware = app.getBackendSoftware();
+					if (Integer.parseInt(backEndSoftware)==1) { //special case ASA
+						showPurchaseDialogASA(fertilizer);
+					}else {
+						showPurchaseDialog (fertilizer);
+					}
+
 				}
 				
 			}
@@ -142,7 +151,7 @@ public class WorkSelectFertilizerFragment extends Fragment implements InputDoseD
 				// do something
 				//Log.d(TAG, "showDialog: " + input);
 				try {
-					savePurchaseProduct(purchaseId, fertilizer.getId(), input);
+					savePurchaseProduct(purchaseId, fertilizer.getId(), input,"");
 					
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -155,6 +164,14 @@ public class WorkSelectFertilizerFragment extends Fragment implements InputDoseD
 			
 		};
 		dlg.show();
+	}
+	private void showPurchaseDialogASA(final Fertilizer fertilizer){
+		currProd = fertilizer;
+		InputPurchaseDialogFragment purchaseDialogFragment = InputPurchaseDialogFragment.newInstance(fertilizer.getProductName(),1.0,0.0);
+		purchaseDialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
+		purchaseDialogFragment.setCallback(this);
+		purchaseDialogFragment.setTargetFragment(this,0);
+		purchaseDialogFragment.show(getFragmentManager(),"fragment_input_purchase");
 	}
 	private void setTextWatcher(){
 		 mSearchTw=new TextWatcher() {
@@ -205,7 +222,7 @@ public class WorkSelectFertilizerFragment extends Fragment implements InputDoseD
 		}
 	}
 	private void savePurchaseProduct(int purchaseId, Integer fertId,
-			Double input) throws SQLException {
+			Double input, String data) throws SQLException {
 		List<PurchaseFertilizer> currPurFert = DatabaseManager.getInstance().getPurchaseFertilizerByPurchaseIdAndByFertilizerId(purchaseId, fertId);
 		Purchase p= DatabaseManager.getInstance().getPurchaseWithId(purchaseId);
 		if (currPurFert.size()==0){
@@ -214,12 +231,30 @@ public class WorkSelectFertilizerFragment extends Fragment implements InputDoseD
 			newPurFert.setProduct(currProd);
 			newPurFert.setPurchase(p);
 			newPurFert.setAmount(input);
+			newPurFert.setData(data);
 			DatabaseManager.getInstance().addPurchaseFertilizer(newPurFert);
 		}else{
 			//Log.d(TAG,"[savePurchaseProduct] Updating Entry" );
 			PurchaseFertilizer updatePurFert = currPurFert.get(0);
 			updatePurFert.setAmount(input);
+			updatePurFert.setData(data);
 			DatabaseManager.getInstance().updatePurchaseFertilizer(updatePurFert);
 		}
+	}
+	@Override
+	public void onInputPurchaseDialogInteraction(Double amount, Double price) {
+		JSONObject object = new JSONObject();
+		try {
+			// Add the id to the json
+			object.put("price", price);
+			// Create a json array
+			savePurchaseProduct(purchaseId, currProd.getId(), amount,object.toString());
+		} catch (JSONException e) {
+			// Handle impossible error
+			e.printStackTrace();
+		} catch (SQLException e) {
+			Toast.makeText(getActivity(),"Error in saving data",Toast.LENGTH_LONG).show();
+		}
+
 	}
 }

@@ -21,8 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-
-import android.support.v7.app.ActionBarActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +29,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v7.app.AppCompatActivity;
 
 
 /**
@@ -42,7 +40,7 @@ import android.support.v7.app.AppCompatActivity;
  *
  */
 
-public abstract class DashboardActivity extends ActionBarActivity
+public abstract class DashboardActivity extends AppCompatActivity
 {
 
 /**

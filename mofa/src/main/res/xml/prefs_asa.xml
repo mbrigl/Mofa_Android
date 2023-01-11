@@ -10,5 +10,21 @@
             android:key="asanote"
             android:title="@string/asa_mofa_note"
             android:defaultValue="false"/>
-</PreferenceCategory>
+        <CheckBoxPreference
+            android:key="asa_landorder_code"
+            android:title="@string/asa_landorder_code"
+            android:defaultValue="false"/>
+        <CheckBoxPreference
+            android:key="asa_new_ver"
+            android:title="@string/asa_new_ver"
+            android:defaultValue="false"/>
+        <ListPreference
+            android:title="@string/cultivation_type"
+            android:summary="@string/cultivation_type_desc"
+            android:key="listCultivationType"
+            android:defaultValue="1"
+            android:entries="@array/listCultivationType"
+            android:entryValues="@array/listCultivationTypeValues"
+            />
+    </PreferenceCategory>
 </PreferenceScreen>

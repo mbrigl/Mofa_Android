@@ -1,5 +1,6 @@
 package it.schmid.android.mofa;
 
+import it.schmid.android.mofa.model.Einsatzgrund;
 import it.schmid.android.mofa.model.Fertilizer;
 import it.schmid.android.mofa.model.FruitQuality;
 import it.schmid.android.mofa.model.ImportBehavior;
@@ -190,6 +191,14 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String > {
 					importData (data, fruitQuality);
 					statusMsg += " fruitquality - error: " + error + "\n";
 					break;
+                case 11:
+                        Einsatzgrund einsatzgrund = new Einsatzgrund();
+                        data = getData(url +"/reason/list" + extension);
+                        publishProgress(progress);
+                        importData(data, einsatzgrund);
+                        statusMsg += " reason - error: " + error + "\n";
+                        break;
+
 				default:
 					break;
 				}

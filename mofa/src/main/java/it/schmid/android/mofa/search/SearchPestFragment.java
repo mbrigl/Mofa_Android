@@ -2,9 +2,8 @@ package it.schmid.android.mofa.search;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.sip.SipAudioCall;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +18,10 @@ import android.widget.TextView;
 import java.util.List;
 
 import it.schmid.android.mofa.ActivityConstants;
-import it.schmid.android.mofa.PromptDialog;
 import it.schmid.android.mofa.R;
 
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.interfaces.ProductInterface;
-import it.schmid.android.mofa.model.Fertilizer;
-import it.schmid.android.mofa.model.Pesticide;
 
 
 /**

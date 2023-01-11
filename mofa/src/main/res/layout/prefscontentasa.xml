@@ -23,6 +23,36 @@
 
 		<TextView
 			style="@style/label"
+			android:text="@string/asa_landorder_code"/>
+
+		<TextView
+			android:id="@+id/asa_landorder_code"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/asa_new_ver"/>
+
+		<TextView
+			android:id="@+id/asa_new_ver"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
+			android:text="@string/cultivation_type"/>
+
+		<TextView
+			android:id="@+id/cultivationType"
+			style="@style/value"/>
+	</TableRow>
+	<TableRow>
+
+		<TextView
+			style="@style/label"
 			android:text="@string/asa_spray_code"/>
 
 		<TextView

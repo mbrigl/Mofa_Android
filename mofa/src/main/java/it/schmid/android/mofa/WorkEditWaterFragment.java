@@ -3,9 +3,9 @@ package it.schmid.android.mofa;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +15,10 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
 
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.model.Global;

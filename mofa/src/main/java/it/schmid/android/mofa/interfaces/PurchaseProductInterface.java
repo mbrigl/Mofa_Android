@@ -9,4 +9,5 @@ public interface PurchaseProductInterface {
 	public Purchase getPurchase();
 	public Double getAmount();
 	public ProductInterface getProduct();
+	public String getData();
 }

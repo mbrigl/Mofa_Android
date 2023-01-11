@@ -3,7 +3,7 @@ package it.schmid.android.mofa;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +19,7 @@ public class PreferenceContentFragment extends Fragment {
 	  private TextView checkDropbox=null;
 	  private TextView checkResetDropbox=null;
 	  private TextView checkShowPestInfos=null;
+
 
 	  @Override
 	  public View onCreateView(LayoutInflater inflater, ViewGroup parent,

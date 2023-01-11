@@ -2,6 +2,7 @@ package it.schmid.android.mofa;
 
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.dropbox.DropboxClient;
+import it.schmid.android.mofa.model.Einsatzgrund;
 import it.schmid.android.mofa.model.Fertilizer;
 import it.schmid.android.mofa.model.Global;
 import it.schmid.android.mofa.model.Harvest;
@@ -76,6 +77,7 @@ public class SendingProcess implements Runnable{
 	private Boolean offline; // checking if offline or through REST
 	private Boolean grossPrice; // checking if for ASA using gross prices
 	private Boolean mofaNote;
+	private Boolean asa_New_Ver;
 	private String format; // file format
 	private String sendingData; //
 	private String urlPath;
@@ -105,7 +107,7 @@ public void run(){
 	Looper.prepare(); //For Preparing Message Pool for the child Thread
 	MofaApplication app = MofaApplication.getInstance();
 	backEndSoftware = app.getBackendSoftware();
-	
+
 	if (format.equalsIgnoreCase("1")){ //JSON
 		try {
 			sendingData = createJSON();
@@ -117,10 +119,21 @@ public void run(){
 		if (Integer.parseInt(backEndSoftware)==1){ //special case ASA 
 
 			if (callingActivity==ActivityConstants.WORK_OVERVIEW){ //calling this asynch method from workoverview
-				sendingData = createXMLASA();
+				if (asa_New_Ver){
+					sendingData = createXMLASAVer16();
+				}else{
+					sendingData = createXMLASA();
+				}
+
 			}
 			if (callingActivity==ActivityConstants.PURCHASING_ACTIVITY){ //calling this asynch method from purchasing activity
-				sendingData = createPurchaseXMLASA();
+				if(asa_New_Ver){
+					Log.d("Sending Data","ASA_New_Purchasexml");
+					sendingData = createPurchaseXMLASAVer16();
+				}else{
+					sendingData = createPurchaseXMLASA();
+				}
+
 			}
 			if (callingActivity==ActivityConstants.VEGDATA_ACTIVITY){ // calling this asynch from vegdata
 				sendingData = createVegDataXMLASA();
@@ -192,6 +205,7 @@ public void run(){
 			  urlPath = preferences.getString("url", "");
 			  grossPrice = preferences.getBoolean("grossprice", false);
 			  mofaNote = preferences.getBoolean("asanote", false);
+			  asa_New_Ver = preferences.getBoolean("asa_new_ver",false);
 			  mNotificationService= new NotificationService(context,false);
 				int icon = android.R.drawable.stat_sys_upload;
 			    CharSequence tickerText = context.getString(R.string.upload_title);  
@@ -853,7 +867,321 @@ public void run(){
 		        throw new RuntimeException(e);
 		    } 
 	}
-	
+	private String createXMLASAVer16(){
+		//List<Work> workUploadList = DatabaseManager.getInstance().getAllWorks();
+		List<Work> workUploadList = DatabaseManager.getInstance().getAllValidNotSendedWorks();
+		HashMap<String,String> reasonMap = Einsatzgrund.getEinsatzGrundHashMap();
+		XmlSerializer serializer = Xml.newSerializer();
+		StringWriter writer = new StringWriter();
+		try {
+			serializer.setOutput(writer);
+			serializer.startDocument("UTF-8", true);
+			serializer.startTag("", "Arbeitseintraege");
+			//serializer.attribute("", "number", String.valueOf(workUploadList.size()));
+			for (Work wk: workUploadList){
+				serializer.startTag("", "Arbeitseintrag");
+				serializer.startTag("", "Datum");
+				SimpleDateFormat sdf = new SimpleDateFormat();
+				sdf.applyPattern("yyyy-MM-dd");
+				serializer.text(sdf.format(wk.getDate()));
+				serializer.endTag("", "Datum");
+				serializer.startTag("", "Arbeit");
+				serializer.startTag("", "Code");
+				serializer.text(wk.getTask().getCode());
+				serializer.endTag("", "Code");
+				serializer.endTag("", "Arbeit");
+
+				serializer.startTag("", "Notiz");
+				String note;
+				if (mofaNote) {
+					note = ASANOTE + " " + wk.getNote();
+				}else {
+					note = wk.getNote();
+				}
+				serializer.text(note);
+				serializer.endTag("", "Notiz");
+				List<WorkWorker> workers = DatabaseManager.getInstance().getWorkWorkerByWorkId(wk.getId());
+
+				for (WorkWorker w : workers){
+					serializer.startTag("", "Arbeitskraft");
+					serializer.startTag("", "Arbeitskraft");
+					serializer.startTag("", "Code");
+					Worker worker = DatabaseManager.getInstance().getWorkerWithId(w.getWorker().getId());
+					serializer.text(worker.getCode());
+					serializer.endTag("", "Code");
+					serializer.endTag("", "Arbeitskraft");
+					serializer.startTag("", "Stunden");
+					serializer.text(w.getHours().toString());
+					serializer.endTag("", "Stunden");
+
+					serializer.endTag("", "Arbeitskraft");
+				}
+
+
+
+				List<WorkMachine> machines = DatabaseManager.getInstance().getWorkMachineByWorkId(wk.getId());
+
+				for (WorkMachine m : machines){
+					serializer.startTag("", "Maschine");
+					serializer.startTag("", "Maschine");
+					serializer.startTag("", "Code");
+					Machine machine = DatabaseManager.getInstance().getMachineWithId(m.getMachine().getId());
+					serializer.text(machine.getCode());
+					serializer.endTag("", "Code");
+					serializer.endTag("", "Maschine");
+					serializer.startTag("", "Stunden");
+					serializer.text(m.getHours().toString());
+					serializer.endTag("", "Stunden");
+					serializer.endTag("", "Maschine");
+				}
+
+				List<WorkVQuarter> vquarters = DatabaseManager.getInstance().getVQuarterByWorkId(wk.getId());
+
+				for (WorkVQuarter vq : vquarters){
+					serializer.startTag("", "Sortenquartier");
+					serializer.startTag("", "Sortenquartier");
+					serializer.startTag("", "Code");
+					VQuarter vquarter = DatabaseManager.getInstance().getVQuarterWithId(vq.getVquarter().getId());
+					serializer.text(vquarter.getCode());
+					serializer.endTag("", "Code");
+					serializer.endTag("", "Sortenquartier");
+					serializer.endTag("", "Sortenquartier");
+				}
+
+
+				List<WorkFertilizer> soilfertilizers = DatabaseManager.getInstance().getWorkFertilizerByWorkId(wk.getId());
+				for (WorkFertilizer wf : soilfertilizers){
+					serializer.startTag("", "Duengung");
+					for (WorkVQuarter vq : vquarters){
+						serializer.startTag("", "Sortenquartier");
+						serializer.startTag("", "Sortenquartier");
+						serializer.startTag("", "Code");
+						VQuarter vquarter = DatabaseManager.getInstance().getVQuarterWithId(vq.getVquarter().getId());
+						serializer.text(vquarter.getCode());
+						serializer.endTag("", "Code");
+						serializer.endTag("", "Sortenquartier");
+						serializer.endTag("", "Sortenquartier");
+					}
+					serializer.startTag("", "Duengemittel");
+					serializer.startTag("", "Artikel");
+					serializer.startTag("", "Code");
+					SoilFertilizer sf = DatabaseManager.getInstance().getSoilFertilizerWithId(wf.getSoilFertilizer().getId());
+					serializer.text(sf.getCode());
+					serializer.endTag("", "Code");
+					serializer.endTag("", "Artikel");
+					serializer.startTag("", "Menge");
+					serializer.text(wf.getAmount().toString());
+					serializer.endTag("", "Menge");
+					serializer.endTag("","Duengemittel");
+
+					serializer.endTag("","Duengung");
+				}
+				List<Spraying> spraying = DatabaseManager.getInstance().getSprayingByWorkId(wk.getId());
+				for (Spraying s : spraying){
+					serializer.startTag("","Witterungsverhaeltnis");
+					serializer.startTag("","Code");
+						String weatherCode = getWeatherCodeForASA(s.getWeather());
+						serializer.text(weatherCode);
+					serializer.endTag("","Code");
+					serializer.endTag("","Witterungsverhaeltnis");
+
+					if (wk.getTask().getType().equalsIgnoreCase("H")){ //herbicide
+						serializer.startTag("", "Herbizideinsatz");
+					}else{
+						serializer.startTag("", "Spritzung");
+					}
+
+					serializer.startTag("", "Konzentration");
+					serializer.text(s.getConcentration().toString());
+					serializer.endTag("", "Konzentration");
+					serializer.startTag("", "Wassermenge");
+					serializer.text(s.getWateramount().toString());
+					serializer.endTag("", "Wassermenge");
+					serializer.startTag("", "Notiz");
+					String weatherStr = getWeatherString(s.getWeather());
+					serializer.text(weatherStr);
+					serializer.endTag("", "Notiz");
+					for (WorkVQuarter vq : vquarters){
+						serializer.startTag("", "Sortenquartier");
+						serializer.startTag("", "Sortenquartier");
+						serializer.startTag("", "Code");
+						VQuarter vquarter = DatabaseManager.getInstance().getVQuarterWithId(vq.getVquarter().getId());
+						serializer.text(vquarter.getCode());
+						serializer.endTag("", "Code");
+						serializer.endTag("", "Sortenquartier");
+						serializer.endTag("", "Sortenquartier");
+					}
+					List<SprayPesticide> sprayPest = DatabaseManager.getInstance().getSprayPesticideBySprayId(s.getId());
+					for (SprayPesticide sp : sprayPest){
+						serializer.startTag("", "Pflanzenschutzmittel");
+						serializer.startTag("", "Artikel");
+						serializer.startTag("", "Code");
+						Pesticide pest = DatabaseManager.getInstance().getPesticideWithId(sp.getPesticide().getId());
+						serializer.text(pest.getCode());
+						serializer.endTag("", "Code");
+						serializer.endTag("", "Artikel");
+						serializer.startTag("", "Menge");
+						serializer.text(sp.getDose_amount().toString());
+						serializer.endTag("", "Menge");
+						serializer.startTag("", "MengeProHl1Mal");
+						serializer.text(sp.getDose().toString());
+						serializer.endTag("", "MengeProHl1Mal");
+						serializer.startTag("","Einsatzperiode");
+							serializer.startTag("","Code");
+								serializer.text(sp.getPeriodCode());
+							serializer.endTag("","Code");
+						serializer.endTag("","Einsatzperiode");
+						serializer.startTag("","EinsatzgruendeAlsString");
+						serializer.text(getEinsatzGrundForASA(sp.getReason()));
+						serializer.endTag("","EinsatzgruendeAlsString");
+						serializer.startTag("","Einsatzgrund");
+							serializer.startTag("","Einsatzgrund");
+								serializer.startTag("","Code");
+									serializer.text(reasonMap.get(getEinsatzGrundForASA(sp.getReason())));
+								serializer.endTag("","Code");
+							serializer.endTag("","Einsatzgrund");
+						serializer.endTag("","Einsatzgrund");
+						serializer.endTag("", "Pflanzenschutzmittel");
+					}
+					List<SprayFertilizer>sprayFert = DatabaseManager.getInstance().getSprayFertilizerBySprayId(s.getId());
+					for (SprayFertilizer sf : sprayFert){
+						serializer.startTag("", "Blattduenger");
+						serializer.startTag("", "Artikel");
+						serializer.startTag("", "Code");
+						Fertilizer fert = DatabaseManager.getInstance().getFertilizerWithId(sf.getFertilizer().getId());
+						serializer.text(fert.getCode());
+						serializer.endTag("", "Code");
+						serializer.endTag("", "Artikel");
+						serializer.startTag("","Menge");
+						serializer.text(sf.getDose_amount().toString());
+						serializer.endTag("","Menge");
+						serializer.endTag("", "Blattduenger");
+					}
+					if (wk.getTask().getType().equalsIgnoreCase("H")){
+						serializer.endTag("", "Herbizideinsatz");
+					}else{
+						serializer.endTag("", "Spritzung");
+					}
+				}
+				List<Harvest> harvest = DatabaseManager.getInstance().getHarvestListbyWorkId(wk.getId());
+				for (Harvest h:harvest) {
+					serializer.startTag("", "Ernteeintrag");
+					serializer.startTag("", "Datum");
+					serializer.text(sdf.format(h.getDate()));
+					serializer.endTag("", "Datum");
+					serializer.startTag("", "LieferscheinNummer");
+					serializer.text(h.getId().toString());
+					serializer.endTag("", "LieferscheinNummer");
+					serializer.startTag("", "Menge");
+					serializer.text(h.getAmount().toString());
+					serializer.endTag("", "Menge");
+					serializer.startTag("", "Durchgang");
+					serializer.text(h.getPass().toString());
+					serializer.endTag("", "Durchgang");
+					serializer.startTag("", "Kategorie");
+					serializer.startTag("", "Code");
+					serializer.text(h.getFruitQuality().getCode());
+					serializer.endTag("", "Code");
+					serializer.endTag("", "Kategorie");
+					serializer.startTag("", "Kisten");
+					serializer.text(h.getBoxes().toString());
+					serializer.endTag("", "Kisten");
+					if (h.getSugar() != null) {
+						serializer.startTag("", "Zucker");
+						serializer.text(h.getSugar().toString());
+						serializer.endTag("", "Zucker");
+					}
+					if (h.getAcid() != null) {
+						serializer.startTag("", "Saeure");
+						serializer.text(h.getAcid().toString());
+						serializer.endTag("", "Saeure");
+					}
+					if (h.getPhenol() != null) {
+						serializer.startTag("", "Phenole");
+						serializer.text(h.getPhenol().toString());
+						serializer.endTag("", "Phenole");
+					}
+					if (h.getPhValue() != null) {
+						serializer.startTag("", "PHWert");
+						serializer.text(h.getPhValue().toString());
+						serializer.endTag("", "PHWert");
+					}
+					if (h.getNote() != null) {
+						serializer.startTag("", "Notiz");
+						serializer.text(h.getNote());
+						serializer.endTag("", "Notiz");
+					}
+					for (WorkVQuarter vq : vquarters) {
+						serializer.startTag("", "Sortenquartier");
+						serializer.startTag("", "Sortenquartier");
+						serializer.startTag("", "Code");
+						VQuarter vquarter = DatabaseManager.getInstance().getVQuarterWithId(vq.getVquarter().getId());
+						serializer.text(vquarter.getCode());
+						serializer.endTag("", "Code");
+						serializer.endTag("", "Sortenquartier");
+						serializer.endTag("", "Sortenquartier");
+					}
+					serializer.endTag("", "Ernteeintrag");
+				}
+				List<Global> irrigation = DatabaseManager.getInstance().getGlobalbyWorkId(wk.getId());
+				for (Global irr: irrigation) {
+					serializer.startTag("","Bewaesserung");
+					try {
+						JSONObject jsonObj = new JSONObject(irr.getData());
+						if (jsonObj.has("irrduration")){
+							serializer.startTag("", "Dauer");
+							Double irrDuration = (Util.getJSONDouble(jsonObj,"irrduration"));
+							serializer.text(irrDuration.toString());
+							serializer.endTag("", "Dauer");
+						}
+						if (jsonObj.has("irramount")) {
+							serializer.startTag("", "MengeProStunde");
+							Double irrAmount = Util.getJSONDouble(jsonObj,"irramount");
+							serializer.text(irrAmount.toString());
+							serializer.endTag("", "MengeProStunde");
+						}
+						if (jsonObj.has("irrtotale")) {
+							serializer.startTag("", "MengeRelativ");
+							Double irrAmountRelative = Util.getJSONDouble(jsonObj,"irrtotale");
+							serializer.text(irrAmountRelative.toString());
+							serializer.endTag("", "MengeRelativ");
+
+						}
+
+						if (jsonObj.has("irrtype")){
+							serializer.startTag("", "Art");
+							Integer irrigationType = Util.getJSONInt(jsonObj,"irrtype");
+							serializer.text(irrigationType.toString());
+							serializer.endTag("", "Art");
+
+						}
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+					for (WorkVQuarter vq : vquarters){
+						serializer.startTag("", "Sortenquartier");
+						serializer.startTag("", "Sortenquartier");
+						serializer.startTag("", "Code");
+						VQuarter vquarter = DatabaseManager.getInstance().getVQuarterWithId(vq.getVquarter().getId());
+						serializer.text(vquarter.getCode());
+						serializer.endTag("", "Code");
+						serializer.endTag("", "Sortenquartier");
+						serializer.endTag("", "Sortenquartier");
+					}
+
+
+					serializer.endTag("","Bewaesserung");
+
+				}
+				serializer.endTag("", "Arbeitseintrag");
+			}
+			serializer.endTag("", "Arbeitseintraege");
+			serializer.endDocument();
+			return writer.toString();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 	private String createPurchaseXML(){
 		List<Purchase> purchaseUploadList = DatabaseManager.getInstance().getAllPurchases();
 		 XmlSerializer serializer = Xml.newSerializer();
@@ -928,6 +1256,7 @@ public void run(){
 		            serializer.endTag("", "Bruttobetraege");
 		            List<PurchasePesticide> purPest = DatabaseManager.getInstance().getPurchasePesticideByPurchaseId(p.getId());
 					for (PurchasePesticide pp : purPest){
+						double price = getPriceFromJson(pp.getData());
 						serializer.startTag("", "Lagereingangsposition");
 							serializer.startTag("", "Spritzmittel");
 								serializer.startTag("", "Code");
@@ -938,10 +1267,16 @@ public void run(){
 							serializer.startTag("", "Menge");
 								serializer.text(pp.getAmount().toString());
 							serializer.endTag("", "Menge");
+							if (price != 0.00){
+								serializer.startTag("", "Preis");
+									serializer.text(Double.toString(price));
+								serializer.endTag("", "Preis");
+							}
 						serializer.endTag("", "Lagereingangsposition");
 					}
 					List<PurchaseFertilizer> purFert = DatabaseManager.getInstance().getPurchaseFertilizerByPurchaseId(p.getId());
 					for (PurchaseFertilizer pf : purFert){
+						double price = getPriceFromJson(pf.getData());
 						serializer.startTag("", "Lagereingangsposition");
 						serializer.startTag("", "Duengemittel");
 							serializer.startTag("", "Code");
@@ -952,6 +1287,11 @@ public void run(){
 						serializer.startTag("", "Menge");
 							serializer.text(pf.getAmount().toString());
 						serializer.endTag("", "Menge");
+						if (price != 0.00){
+							serializer.startTag("", "Preis");
+							serializer.text(Double.toString(price));
+							serializer.endTag("", "Preis");
+						}
 					serializer.endTag("", "Lagereingangsposition");
 					}
 		        serializer.endTag("", "Lagereingang");
@@ -962,6 +1302,80 @@ public void run(){
 		    } catch (Exception e) {
 		        throw new RuntimeException(e);
 		    } 
+	}
+	private String createPurchaseXMLASAVer16(){
+		List<Purchase> purchaseUploadList = DatabaseManager.getInstance().getAllPurchases();
+
+		XmlSerializer serializer = Xml.newSerializer();
+		StringWriter writer = new StringWriter();
+		try {
+			serializer.setOutput(writer);
+			serializer.startDocument("UTF-8", true);
+			serializer.startTag("", "Lagereingaenge");
+			//serializer.attribute("", "number", String.valueOf(workUploadList.size()));
+			for (Purchase p: purchaseUploadList){
+				serializer.startTag("", "Lagereingang");
+				serializer.startTag("", "Datum");
+				SimpleDateFormat sdf = new SimpleDateFormat();
+				sdf.applyPattern("yyyy-MM-dd");
+				serializer.text(sdf.format(p.getDate()));
+				serializer.endTag("", "Datum");
+				serializer.startTag("", "Bruttobetraege");
+				if (grossPrice){
+					serializer.text("1");
+				}else{
+					serializer.text("0");
+				}
+
+				serializer.endTag("", "Bruttobetraege");
+				List<PurchasePesticide> purPest = DatabaseManager.getInstance().getPurchasePesticideByPurchaseId(p.getId());
+				for (PurchasePesticide pp : purPest){
+					double price = getPriceFromJson(pp.getData());
+					serializer.startTag("", "Lagereingangsposition");
+					serializer.startTag("", "Pflanzenschutzmittel");
+					serializer.startTag("", "Code");
+					Pesticide pest = DatabaseManager.getInstance().getPesticideWithId(pp.getProduct().getId());
+					serializer.text(pest.getCode());
+					serializer.endTag("", "Code");
+					serializer.endTag("", "Pflanzenschutzmittel");
+					serializer.startTag("", "Menge");
+					serializer.text(pp.getAmount().toString());
+					serializer.endTag("", "Menge");
+					if (price != 0.00){
+						serializer.startTag("", "Preis");
+						serializer.text(Double.toString(price));
+						serializer.endTag("", "Preis");
+					}
+					serializer.endTag("", "Lagereingangsposition");
+				}
+				List<PurchaseFertilizer> purFert = DatabaseManager.getInstance().getPurchaseFertilizerByPurchaseId(p.getId());
+				for (PurchaseFertilizer pf : purFert){
+					double price = getPriceFromJson(pf.getData());
+					serializer.startTag("", "Lagereingangsposition");
+					serializer.startTag("", "Duengemittel");
+					serializer.startTag("", "Code");
+					Fertilizer fert = DatabaseManager.getInstance().getFertilizerWithId(pf.getProduct().getId());
+					serializer.text(fert.getCode());
+					serializer.endTag("", "Code");
+					serializer.endTag("", "Duengemittel");
+					serializer.startTag("", "Menge");
+					serializer.text(pf.getAmount().toString());
+					serializer.endTag("", "Menge");
+					if (price != 0.00){
+						serializer.startTag("", "Preis");
+						serializer.text(Double.toString(price));
+						serializer.endTag("", "Preis");
+					}
+					serializer.endTag("", "Lagereingangsposition");
+				}
+				serializer.endTag("", "Lagereingang");
+			}
+			serializer.endTag("", "Lagereingaenge");
+			serializer.endDocument();
+			return writer.toString();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 	private String createVegDataXML(){
 		HashMap<String,String> blossStart = new HashMap<String,String>();
@@ -1021,12 +1435,12 @@ public void run(){
 							serializer.text(blossDateEnd);
 							serializer.endTag("", "blossomEnd");
 						}
-						if (blossDateEnd != null) {
+						if (harvestDate != null) {
 							serializer.startTag("", "harvestStart");
 							serializer.text(harvestDate);
 							serializer.endTag("", "harvestStart");
 						}
-						if (blossDateEnd != null) {
+						if (estimCropAmount!= null) {
 							serializer.startTag("", "cropAmount");
 							serializer.text(estimCropAmount);
 							serializer.endTag("", "cropAmount");
@@ -1045,6 +1459,8 @@ public void run(){
 	private String createVegDataXMLASA(){
 		HashMap<String,String> blossStart = new HashMap<String,String>();
 		HashMap<String,String> blossEnd = new HashMap<String,String>();
+		HashMap<String,String> harvStart = new HashMap<String,String>();
+		HashMap<String,String> estCrop = new HashMap<String,String>();
 		if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).isEmpty()){
 			String json = "";
 			Global blossomStart = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).get(0);
@@ -1069,7 +1485,9 @@ public void run(){
 			for (VQuarter vq : vquarters) {
 				String blossDateStart = blossStart.get(vq.getId().toString());
 				String blossDateEnd = blossEnd.get(vq.getId().toString());
-				if (blossDateStart != null || blossDateEnd != null){
+				String harvestDate = harvStart.get(vq.getId().toString());
+				String estimCropAmount = estCrop.get(vq.getId().toString());
+				if (blossDateStart != null || blossDateEnd != null || harvestDate != null || estimCropAmount != null){
 					serializer.startTag("","Sortenquartier");
 					serializer.startTag("", "Code");
 						serializer.text(vq.getCode());
@@ -1087,6 +1505,16 @@ public void run(){
 						serializer.startTag("", "Bluehende");
 						serializer.text(getDateStringForASA(blossDateEnd, Integer.toString(curYear)));
 						serializer.endTag("", "Bluehende");
+					}
+					if (harvestDate != null) {
+						serializer.startTag("", "Erntebeginn");
+						serializer.text(getDateStringForASA(harvestDate, Integer.toString(curYear)));
+						serializer.endTag("", "Erntebeginn");
+					}
+					if (estimCropAmount != null) {
+						serializer.startTag("", "ErnteschaetzungProHa");
+						serializer.text(getCropAmountInKilo(estimCropAmount));
+						serializer.endTag("", "ErnteschaetzungProHa");
 					}
 					serializer.endTag("","Jahresdaten");
 					serializer.endTag("","Sortenquartier");
@@ -1176,6 +1604,31 @@ public void run(){
 
 		}
 	}
+	//this for new ASA - Version, important is that the weathercodes are number 01,02..05
+	private String getWeatherCodeForASA(int weatherId){
+		switch(weatherId){
+			case ActivityConstants.SUNNY:
+				return "01";
+
+			case ActivityConstants.PARTLYCLOUDED:
+				return "02";
+			case ActivityConstants.CLOUDED:
+				return "03";
+
+			case ActivityConstants.LIGHTRAIN:
+				return "04";
+
+			case ActivityConstants.RAIN:
+				return "05";
+			case ActivityConstants.MOON:
+				return "01";
+			default:
+				return "01";
+
+
+
+		}
+	}
 	private HashMap<String,String> getMapFromJson(String json){
 		HashMap<String,String> tmpMap;
 		Type type = new TypeToken<HashMap<String, String>>(){}.getType();
@@ -1189,5 +1642,24 @@ public void run(){
 	private String getDateStringForASA(String dateOrg, String curYear){
 		String [] splitted = dateOrg.split("\\.");
 		return curYear +"-" + splitted[1] + "-" + splitted[0];
+	}
+	private String getEinsatzGrundForASA(String einsatzgrund){
+		String[] splittedText = einsatzgrund.split(",");
+		return splittedText[0];
+	}
+
+	private String getCropAmountInKilo(String amount){
+		Integer amountInT = Integer.parseInt(amount);
+		Integer amountInK = amountInT * 1000;
+		return amountInK.toString();
+	}
+	private double getPriceFromJson(String json){
+		try {
+			JSONObject object = new JSONObject(json);
+			double price = object.getDouble("price");
+			return price;
+		} catch (JSONException e) {
+			return 0.00;
+		}
 	}
 }

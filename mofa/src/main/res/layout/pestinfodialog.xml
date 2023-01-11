@@ -108,7 +108,34 @@
         </TableRow>
 
     </TableLayout>
+    <Button
+        android:id="@+id/btn_etich"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/pestLabel"
+        >
 
+    </Button>
+    <Button
+        android:id="@+id/btn_show_etich"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        >
+
+    </Button>
+    <TextView
+        android:id="@+id/etich_Statustxt"
+
+
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        android:lines="2"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

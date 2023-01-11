@@ -1,9 +1,12 @@
 package it.schmid.android.mofa.dropbox;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.ListFolderResult;
+import com.dropbox.core.v2.files.Metadata;
 
 import java.util.ArrayList;
 
@@ -13,7 +16,7 @@ import java.util.ArrayList;
  * Created by schmida on 22.07.16.
  */
 public class CheckFileTask extends AsyncTask<String, Void, ArrayList<Integer>> {
-    String[] elements = {"/land","/vquarter", "/machine","/worker", "/task","/pesticide", "/fertilizer", "/soilfertilizer", "/category", "/extra"};
+    String[] elements = {"/land","/vquarter", "/machine","/worker", "/task","/pesticide", "/fertilizer", "/soilfertilizer", "/category", "/extra","/reason","/weather"};
 
     private final DbxClientV2 mDbxClient;
     private final Callback mCallback;
@@ -52,20 +55,33 @@ public class CheckFileTask extends AsyncTask<String, Void, ArrayList<Integer>> {
         String fileName = params[0];
         int pos = 1;
         for (String element: elements) {
-            String path = "/MoFaBackend/import"+element+fileName;
+
+
+
             try {
-                mDbxClient.files().getMetadata(path);
-                sb.append(mElementDesc[pos-1]);
-                sb.append("\n");
-                selElements.add(pos);
+                String path = "";
+
+                    path = "/MoFaBackend/import"+element+fileName;
+                    mDbxClient.files().getMetadata(path);
+
+
+                    sb.append(mElementDesc[pos-1]);
+                    sb.append("\n");
+                    selElements.add(pos);
+
+
+
+
 
 
             }catch(DbxException e){
-
+                Log.d("Error Dropbox",e.getLocalizedMessage());
             }
             pos ++;
         }
         return selElements;
     }
+
+
 }
 

@@ -6,7 +6,6 @@ import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.model.Task;
 import it.schmid.android.mofa.model.VQuarter;
 import it.schmid.android.mofa.model.Work;
-import it.schmid.android.mofa.model.WorkVQuarter;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -15,20 +14,20 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
+import android.speech.RecognizerIntent;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,11 +44,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
-import com.j256.ormlite.stmt.query.IsNull;
+import static android.app.Activity.RESULT_OK;
 
 
 public class WorkEditWorkFragment extends Fragment implements OnDateSetListener {
 	private static final String TAG = "WorkEditWorkFragment";
+	private final int REQ_CODE_SPEECH_INPUT = 100;
 	private List<String> sprayList =  new ArrayList<String>(
 			Arrays.asList("Spraying", "Spritzen", "Behandlung","Trattamento","Spritzung", "Pflanzenschutz", "Herbizidbehandlung",
 					"Chemische Unkrautbekämpfung","Chem. Unkrautbekämpfung")
@@ -70,10 +70,12 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
 	private Button confirmButton;
 	private Spinner mWork;
 	private ImageButton mLand;
+	private ImageButton mSpeech;
 	private ListView mWorkVquarterList;
 	private int mYear;
 	private int mMonth;
 	private int mDay;
+	private String speechInput = null;
 	private LocationManager mgr; // variable for Location Manager
 	private String best;		//variable for best provider for Location Manager
 	private Boolean firstLoad=true;
@@ -136,6 +138,7 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
 		mPickDate = (Button) view.findViewById(R.id.work_change_date);
 		mWork = (Spinner) view.findViewById(R.id.tasklist);
 		confirmButton = (Button) view.findViewById(R.id.work_save_button);
+		mSpeech = (ImageButton) view.findViewById(R.id.speechButton);
 		mLand = (ImageButton) view.findViewById(R.id.work_change_land);
 		mWorkVquarterList = (ListView)view.findViewById(R.id.currlandlist);
 		mNoteText = (EditText) view.findViewById(R.id.noteeditText);
@@ -241,6 +244,13 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
 					//startActivityForResult(i, REQUEST_CODE);
 				}
 			});
+			mSpeech.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					promptSpeechInput();
+				}
+			});
+
 
 			mWork.setOnItemSelectedListener(new OnItemSelectedListener() {
 				
@@ -318,6 +328,17 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
 		
 		    }
 		  }
+		  if(requestCode == REQ_CODE_SPEECH_INPUT){
+			  if (resultCode == RESULT_OK && null != data) {
+
+				  ArrayList<String> result = data
+						  .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+				  Log.d("Speechresult", result.get(0));
+				  speechInput=result.get(0);
+				 // mNoteText.setText(result.get(0));
+
+			  }
+		  }
 		} 
 		public String setCalendarDate(Date date){
 			final String DATE_FORMAT = "dd.MM.yyyy";
@@ -373,7 +394,25 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
 
 
 	}
-	
+	/**
+	 * Showing google speech input dialog
+	 * */
+	private void promptSpeechInput() {
+		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+				RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+		intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+				getString(R.string.speech_prompt));
+		try {
+			startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+		} catch (ActivityNotFoundException a) {
+			Toast.makeText(getActivity(),
+					getString(R.string.speech_not_supported),
+					Toast.LENGTH_SHORT).show();
+		}
+	}
+
 	// public void onCreateOptionsMenu (com.actionbarsherlock.view.Menu menu, com.actionbarsherlock.view.MenuInflater inflater) {
 			// inflater.inflate(R.menu.work_edit_menu, menu);
 			//  super.onCreateOptionsMenu(menu, inflater);
@@ -559,6 +598,10 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
 			//Log.d(TAG, "[onResume] populate fields!!");
 			if (!firstLoad){
 				populateFields(mworkId);
+			}
+			if (speechInput!= null){
+				mNoteText.setText(speechInput);
+				speechInput = null;
 			}
 			firstLoad=false;
 		}

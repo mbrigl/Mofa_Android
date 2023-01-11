@@ -1,7 +1,9 @@
 package it.schmid.android.mofa.adapter;
 
+import androidx.fragment.app.FragmentManager;
 import it.schmid.android.mofa.ActivityConstants;
-import it.schmid.android.mofa.PromptDialog;
+import it.schmid.android.mofa.InputPurchaseDialogFragment;
+import it.schmid.android.mofa.MofaApplication;
 import it.schmid.android.mofa.PromptDialogKeyboard;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.WorkProductTabActivity;
@@ -22,7 +24,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.util.Log;
+import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,13 +36,16 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ExpandablePurchaseAdapter extends BaseExpandableListAdapter{
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class ExpandablePurchaseAdapter extends BaseExpandableListAdapter implements InputPurchaseDialogFragment.OnInputPurchaseDialogListener {
 	private static final String TAG = "ExpandablePurchaseAdapter";
 	private List<Purchase> purchases;
 	private SparseArray<List<PurchaseProductInterface>> products;
 	private Activity context;
 	private LayoutInflater inflater;
-	
+	private PurchaseProductInterface curProduct;
 	public interface OnExpandableListener {
 	    public void onExpanded(int groupPos);
 
@@ -98,7 +105,14 @@ public class ExpandablePurchaseAdapter extends BaseExpandableListAdapter{
 		txtListChild.setOnClickListener(new OnClickListener(){
 
 			public void onClick(View v) {
-				showPurchaseDialog(p);
+				MofaApplication app = MofaApplication.getInstance();
+				String backEndSoftware = app.getBackendSoftware();
+				if (Integer.parseInt(backEndSoftware)==1) { //special case ASA
+					showPurchaseDialogASA(p);
+				}else {
+					showPurchaseDialog(p);
+				}
+
 				
 			}
 			
@@ -244,7 +258,7 @@ public class ExpandablePurchaseAdapter extends BaseExpandableListAdapter{
 			@Override
 			public boolean onOkClicked(Double input) {
 				// do something
-				Log.d(TAG, "showDialog: " + input);
+				//Log.d(TAG, "showDialog: " + input);
 				
 				if (curProd instanceof PurchasePesticide){
 					PurchasePesticide pest = (PurchasePesticide) curProd;
@@ -264,6 +278,52 @@ public class ExpandablePurchaseAdapter extends BaseExpandableListAdapter{
 			
 		};
 		dlg.show();
+	}
+	private void showPurchaseDialogASA(final PurchaseProductInterface curProd){
+		curProduct = curProd;
+		double curPrice = getPriceFromData(curProd.getData());
+		InputPurchaseDialogFragment purchaseDialogFragment = InputPurchaseDialogFragment.newInstance(curProd.getProduct().getProductName(),curProd.getAmount(),curPrice);
+		purchaseDialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
+		purchaseDialogFragment.setCallback(this);
+		FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
+		purchaseDialogFragment.show(fm,"fragment_input_purchase");
+	}
+	@Override
+	public void onInputPurchaseDialogInteraction(Double amount, Double price) {
+		JSONObject object = new JSONObject();
+		try {
+			// Add the id to the json
+			object.put("price", price);
+			if (curProduct instanceof PurchasePesticide){
+				PurchasePesticide pest = (PurchasePesticide) curProduct;
+				pest.setAmount(amount);
+				pest.setData(object.toString());
+				DatabaseManager.getInstance().updatePurchasePesticide(pest);
+			}else{
+				PurchaseFertilizer fert = (PurchaseFertilizer) curProduct;
+				fert.setAmount(amount);
+				fert.setData(object.toString());
+				DatabaseManager.getInstance().updatePurchaseFertilizer(fert);
+			}
+
+			notifyDataSetChanged();
+			// Create a json array
+			//savePurchaseProduct(purchaseId, currProd.getId(), amount,object.toString());
+		} catch (JSONException e) {
+			// Handle impossible error
+			e.printStackTrace();
+		}
+
+	}
+	public double getPriceFromData(String data){
+		try {
+			JSONObject object = new JSONObject(data);
+			double price = object.getDouble("price");
+			return price;
+		} catch (JSONException e) {
+			return 0.00;
+		}
+
 	}
 	
 }

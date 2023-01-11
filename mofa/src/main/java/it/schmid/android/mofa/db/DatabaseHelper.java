@@ -43,7 +43,7 @@ import com.j256.ormlite.table.TableUtils;
 
 public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
 	private static final String DATABASE_NAME = "MofaDB.sqlite";
-	private static final int DATABASE_VERSION =15;
+	private static final int DATABASE_VERSION =17;
 	
 	// the DAO object we use to access the SimpleData table
     private Dao<Land, Integer> landDao = null;
@@ -157,6 +157,12 @@ public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
 						break;
 					case 15:
 						updateFromVersion15(db,connectionSource,oldVersion,newVersion);
+						break;
+					case 16:
+						updateFromVersion16(db,connectionSource,oldVersion,newVersion);
+						break;
+					case 17:
+						updateFromVersion17(db,connectionSource,oldVersion,newVersion);
 						break;
                 }
 	            for (String sql : allSql) {
@@ -342,6 +348,44 @@ public class DatabaseHelper extends  OrmLiteSqliteOpenHelper{
 							getWorkDao().executeRaw("ALTER TABLE `work` ADD COLUMN data VARCHAR;");
 							getWorkDao().executeRaw("ALTER TABLE `purchasefertilizer` ADD COLUMN data VARCHAR;");
 							getWorkDao().executeRaw("ALTER TABLE `purchasepesticide` ADD COLUMN data VARCHAR;");
+							return null;
+						}
+					});
+		} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+		}
+		onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
+	}
+	private void updateFromVersion16(SQLiteDatabase db,
+									 ConnectionSource connectionSource, int oldVersion, int newVersion){
+		try {
+			Log.d("Update Db", "updating to ver 16");
+			TransactionManager.callInTransaction(connectionSource,
+					new Callable<Void>() {
+
+						public Void call() throws Exception {
+
+							getWorkDao().executeRaw("ALTER TABLE `pesticide` ADD COLUMN status VARCHAR;");
+							getWorkDao().executeRaw("ALTER TABLE `spraypesticide` ADD COLUMN reason VARCHAR;");
+							return null;
+						}
+					});
+		} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+		}
+		onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
+	}
+	private void updateFromVersion17(SQLiteDatabase db,
+									 ConnectionSource connectionSource, int oldVersion, int newVersion){
+		try {
+			Log.d("Update Db", "updating to ver 16");
+			TransactionManager.callInTransaction(connectionSource,
+					new Callable<Void>() {
+
+						public Void call() throws Exception {
+
+
+							getWorkDao().executeRaw("ALTER TABLE `spraypesticide` ADD COLUMN periodCode VARCHAR;");
 							return null;
 						}
 					});

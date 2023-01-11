@@ -1,9 +1,9 @@
 package it.schmid.android.mofa;
 
+import it.schmid.android.mofa.interfaces.InputDoseDialogFragmentListener;
 import it.schmid.android.mofa.interfaces.ProductInterface;
 
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
@@ -13,7 +13,9 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
+import androidx.fragment.app.DialogFragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -25,15 +27,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
 
 
 @SuppressLint("ValidFragment")
 public class InputDoseDialogFragment  extends DialogFragment implements OnEditorActionListener{
 	private static final String TAG = "InputDoseDialogFragment";
 	private TextView mSizeText;
-	private TextView mAmountProHa;
+	//private TextView mAmountProHa;
 	private EditText mDoseHlText;
 	private EditText mAmountText;
+	private EditText mAmountProHa;
 	private Button mOkButton;
 	private Button mCancelButton;
 	private ProductInterface mPesticide;
@@ -45,10 +49,10 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 	private Double mAmount;
 	private Double mDose;
 	private Boolean edit=false;
-	public interface InputDoseDialogFragmentListener {
-		void onFinishEditDialog(Double doseInput, Double amountInput);
-
-	}
+//	public interface InputDoseDialogFragmentListener {
+//		void onFinishEditDialog(Double doseInput, Double amountInput);
+//
+//	}
 	public InputDoseDialogFragment() {
 		
 	}
@@ -95,7 +99,7 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 		Resources res = getResources();
 		String sizeText = String.format(res.getString(R.string.sizeInfo), mSize.toString());
 		mSizeText.setText(sizeText);
-		mAmountProHa =(TextView) view.findViewById(R.id.lbl_amount_ha_value);
+		mAmountProHa =(EditText) view.findViewById(R.id.txt_amount_ha);
         mDoseHlText = (EditText) view.findViewById(R.id.txt_dose_hl);
         mAmountText = (EditText) view.findViewById(R.id.txt_dose_total);
         mOkButton = (Button) view.findViewById(R.id.ok_confirm_button);
@@ -140,6 +144,7 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 					((DecimalFormat) nf).applyPattern("###.###");
 					mDoseHlText.setText (nf.format(mPesticide.getDefaultDose()));
             		mAmountText.setText((calcAmount(mWaterAmount,mConc)));
+
             	}
         	}else{ //editing the selected product
         		NumberFormat nf = NumberFormat.getInstance(Locale.US);
@@ -177,6 +182,36 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 					
 				}
 			});
+			mAmountProHa.addTextChangedListener(new TextWatcher() {
+				@Override
+				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+				}
+
+				@Override
+				public void onTextChanged(CharSequence s, int start, int before, int count) {
+					if (mAmountProHa.hasFocus()&& mSize != null && s.length()>0){ //only if the current textfield has focus
+						mAmount=0.00;
+						mDose=0.00;
+						Double amountHa=0.00;
+						NumberFormat nf = NumberFormat.getInstance(Locale.US);
+						((DecimalFormat) nf).applyPattern("###.###");
+						try {
+							amountHa = nf.parse(s.toString()).doubleValue();
+							mAmount = amountHa/10000 * mSize;
+							mAmountText.setText(nf.format(mAmount));
+							mDoseHlText.setText(calcDose(mWaterAmount,mConc));
+						} catch (ParseException e) {
+							Toast.makeText(getActivity(),"Please enter a number, not a text",Toast.LENGTH_LONG).show();
+						}
+					}
+				}
+
+				@Override
+				public void afterTextChanged(Editable s) {
+
+				}
+			});
         return view;
 
 	}
@@ -207,7 +242,10 @@ public class InputDoseDialogFragment  extends DialogFragment implements OnEditor
 		try {
 			mDose = nf.parse(mDoseHlText.getText().toString()).doubleValue();
 			mAmount = (mDose*wateramount*conc);
-			calcAmountProHa(mAmount);
+			if (mAmountProHa.hasFocus()==false){
+				calcAmountProHa(mAmount);
+			}
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

@@ -6,6 +6,7 @@ import it.schmid.android.mofa.model.Task;
 import java.util.List;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,10 +16,12 @@ import android.widget.TextView;
 public class TaskSpinnerAdapter extends BaseAdapter implements SpinnerAdapter {
 	private  List<Task> tasks;
 	private  Context context;
+
 	public TaskSpinnerAdapter(List<Task> tasks,Context context) {
 			super();
 			this.context = context;
 			this.tasks = tasks;
+
 			}
 
 	public int getCount() {

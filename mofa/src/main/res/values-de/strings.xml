@@ -44,7 +44,10 @@
 	<string name = "asa_fertilizer_code">Code für Blattdünger</string>
 	<string name = "asa_fertilizer_soil_code">Code für Bodendünger</string>
 	<string name="asa_mofa_note">Einträge markieren</string>
-
+	<string name="asa_new_ver">ASA Version 16</string>
+	<string name="cultivation_type">Anbauart</string>
+	<string name="cultivation_type_desc">nur für ASAAGRAR Ver. > 16</string>
+	<string name="asa_landorder_code">Sort. Anlagen nach Code</string>
 	<!-- Table names	-->
 	<string name="landtable">Grundstücke</string>
 	<string name="vquartertable">Sortenquartiere</string>
@@ -56,6 +59,8 @@
 	<string name="soilfertilizertable">Bodendünger</string>
 	<string name="categorytable">Erntekategorien</string>
 	<string name="extratable">Extras</string>
+	<string name="reasonstable">Einsatzgründe</string>
+	<string name="weathertable">Wetter</string>
 	<!-- Notification messages	-->
 	<string name="download_mess">MoFa - Downloading</string>
 	<string name="download_title">MoFa - Starte download</string>
@@ -148,8 +153,22 @@
 	<!-- Strings in workresources -->
 	<string name="toast_msg_start">Bitte zuerst Sortenquartier auswählen</string>
 	<!--  Strings in Fragment Input Dose -->
-	<string name="input_dose_hl">Dosierung pro hl</string>
+	<string name="input_dose_hl">Dosierung pro hl(1x)</string>
 	<string name="input_amount_total">Totale Mittelmenge</string>
+	<string name="reason">Einsatzgrund</string>
+	<string name="status">Status:</string>
+	<string name="beeWarning">*** ACHTUNG BIENENGEFÄHRLICH ***</string>
+	<string name="beeNoWarning">*** NICHT BIENENGEFÄHRLICH ***</string>
+	<string name="warteFristen">Karenzzeiten:</string>
+	<string name="reason_prompt">Einsatzgrund</string>
+	<string name="min_dose">Minimum Dosis:</string>
+	<string name="max_dose">Maximum Dosis:</string>
+	<string name="max_use_pro_year">Anzahl Anwendungen/Jahr</string>
+	<string name="max_amount_usage">Max Menge pro ha:</string>
+	<string name="max_use_year_in_serie">Max Anzahl in Folge:</string>
+	 Strings in Fragment Input Purchase -->
+	<string name="input_purchase_amount">Menge in kg/lt</string>
+	<string name="input_purchase_price">Preis pro kg/lt</string>
 	<!-- Strings for TabCaption for Product List -->
 	<string name="pesticidetab">Pflanzenschutzm</string>
 	<string name="fertilizertab">Blattdünger</string>
@@ -197,6 +216,9 @@
     <string name="reentertimeUnit">h</string>
     <string name="maxamounthaUnit">kg/lt</string>
 	<string name="maxDose">max Dosis/hl:</string>
+	<string name="pestLabel">Etikette (Internet)</string>
+	<string name="etichNotFound">KEINE ETIKETTE \n - ÜBERPRÜFEN SIE DEN PRODUKTNAMEN</string>
+	<string name="pdfNotSupported">Keine App zum Lesen von pdf installiert!</string>
     <!--Strings for Archive and history -->
     <!--Strings for SearchPesticide -->
     <string name="searchLastPest">Letzte Spritzung</string>
@@ -241,5 +263,7 @@
 	<string name="estimCrop">ERTRAG</string>
 	<string name="estimCropTitleHa">Menge in t/ha</string>
 	<string name="amountCrop">Menge auf Fläche: %1$d t</string>
-
+	<!-- Strings for SpeechRecognition -->
+	<string name="speech_prompt">Bitte sprechen</string>
+	<string name="speech_not_supported">Spracheingabe nicht möglich</string>
 </resources>

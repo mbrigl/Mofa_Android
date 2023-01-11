@@ -43,7 +43,10 @@
 	<string name = "asa_fertilizer_code">codice per fertilizzatori</string>
 	<string name = "asa_fertilizer_soil_code">codice per fertilizzatori mineralici</string>
 	<string name="asa_mofa_note">evidenziare i lavori</string>
-
+	<string name="asa_new_ver">ASA Version 16</string>
+	<string name="cultivation_type">tipo produzione</string>
+	<string name="cultivation_type_desc">solo per ASAAGRAR Ver. > 16</string>
+	<string name="asa_landorder_code">Ordinare campi per codice</string>
 	<!-- Table names	-->
 	<!-- Table names	-->
 	<string name="landtable">impianti</string>
@@ -56,7 +59,8 @@
 	<string name="soilfertilizertable">fertilizzantimin</string>
 	<string name="categorytable">categorie raccolta</string>
 	<string name="extratable">extra</string>
-	
+	<string name="reasonstable">motivi di tratt.</string>
+	<string name="weathertable">parametri tempo</string>
 	<!-- Notification messages	-->
 	<string name="download_mess">MoFa - Downloading</string>
 	<string name="download_title">MoFa - Starting download</string>
@@ -151,8 +155,23 @@
 	<!-- Strings in workresources -->
 	<string name="toast_msg_start">Per favore prima scegliere l\'appezzamento</string>
 	<!--  Strings in Fragment Input Dose -->
-	<string name="input_dose_hl">dose per hl</string>
+	<string name="input_dose_hl">dose per hl(1x)</string>
 	<string name="input_amount_total">quantità totale</string>
+	<string name="reason">motivo</string>
+	<string name="status">stato:</string>
+	<string name="beeWarning">*** ATTENZIONE PERICOLO PER API ***</string>
+	<string name="beeNoWarning">*** NESSUN PERICOLO PER API ***</string>
+	<string name="warteFristen">periodo attesa:</string>
+	<string name="reason_prompt">ragione:</string>
+	<string name="min_dose">min dose:</string>
+	<string name="max_dose">max dose:</string>
+	<string name="max_use_pro_year">nummero max per anno:</string>
+	<string name="max_amount_usage">quantità max per tratt.:</string>
+	<string name="max_use_year_in_serie">nummero max in serie:</string>
+
+	<!-- Strings in Fragment Input Purchase -->
+	<string name="input_purchase_amount">quantità in kg/lt</string>
+	<string name="input_purchase_price">prezzo per kg/lt</string>
 	<!-- Strings for TabCaption for Product List -->
 	<string name="pesticidetab">antiparassitari</string>
 	<string name="fertilizertab">fertilizzatori</string>
@@ -198,6 +217,9 @@
     <string name="reentertimeUnit">h</string>
     <string name="maxamounthaUnit">kg/lt</string>
 	<string name="maxDose">max dose/hl:</string>
+	<string name="pestLabel">etichetta (Internet)</string>
+	<string name="etichNotFound">NESSUN ETICHETTA \n - RICONTROLLARE NOME DEL PRODOTTO</string>
+	<string name="pdfNotSupported">Nessuna app per file pdf installato</string>
     <!--Strings for SearchPesticide -->
     <string name="searchLastPest">Cerca ultimo trattamento</string>
     <string name="searchVQuarter">Scegliere il campo da cercare</string>
@@ -241,5 +263,7 @@
 	<string name="estimCrop">RACCOLTO</string>
 	<string name="estimCropTitleHa">raccolto in t/ha</string>
 	<string name="amountCrop">raccolot su superf.: %1$d t</string>
-
+	<!-- Strings for SpeechRecognition -->
+	<string name="speech_prompt">Inizia parlare</string>
+	<string name="speech_not_supported">Supporto voce non possibile</string>
 </resources>

@@ -5,7 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
+import androidx.core.app.NotificationCompat;
 /**
  * 
  * @author schmida
@@ -18,7 +18,7 @@ public class NotificationService {
 	private int NOTIFICATION_ID_F=2;
 	private Notification mNotification;
 	private NotificationManager mNotificationManager;
-	private PendingIntent mContentIntent;
+	private PendingIntent mContentIntent = null;
 	private CharSequence mContentTitle;
 	private Boolean mShowDetails;
 	public NotificationService(Context context, Boolean showDetails)
@@ -33,7 +33,16 @@ public class NotificationService {
 		mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 		NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
 		Intent notificationIntent = new Intent();
-		mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+			mContentIntent = PendingIntent.getActivity
+					(mContext, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
+		}
+		else
+		{
+			mContentIntent = PendingIntent.getActivity
+					(mContext, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
+		}
+		//mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
 		int icon = notIcon;
 		CharSequence tickerText = aText; //Initial text that appears in the status bar
 		long when = System.currentTimeMillis();
@@ -88,7 +97,17 @@ public class NotificationService {
 			    mNotification = new Notification(icon, tickerText, when);
 			    mContentTitle = fullText;
 			    notificationIntent = new Intent();
-			    mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
+			    mContentIntent = null;
+				if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+					mContentIntent = PendingIntent.getActivity
+							(mContext, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
+				}
+				else
+				{
+					mContentIntent = PendingIntent.getActivity
+							(mContext, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
+				}
+			    //mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
 				NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
 				mNotification = builder.setContentIntent(mContentIntent)
 						.setSmallIcon(icon).setTicker(tickerText).setWhen(when)

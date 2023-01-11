@@ -115,9 +115,7 @@
 
 -keep class android.support.v4.app.** { *; }
 -keep interface android.support.v4.app.** { *; }
--keep class com.actionbarsherlock.** { *; }
--dontwarn com.actionbarsherlock.internal.**
--keep interface com.actionbarsherlock.** { *; }
+
 -keep class it.schmid.android.mofa.db.** { *; }
 -keep class it.schmid.android.mofa.model.** { *; }
 -keep class it.schmid.android.mofa.dropbox.** { *; }
@@ -128,3 +126,4 @@
 -keep interface com.j256.**
 -keepclassmembers interface com.j256.** { *; }
 ##---------------End:   proguard configuration for ActionBarSherlock  ----------
+-keeppackagenames org.jsoup.nodes

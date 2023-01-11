@@ -2,22 +2,19 @@ package it.schmid.android.mofa;
 
 
 
+import androidx.fragment.app.FragmentManager;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.model.SoilFertilizer;
 import it.schmid.android.mofa.model.Work;
 import it.schmid.android.mofa.model.WorkFertilizer;
-import it.schmid.android.mofa.model.WorkWorker;
-import it.schmid.android.mofa.model.Worker;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import androidx.fragment.app.DialogFragment;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -74,7 +71,7 @@ public class WorkSelectSoilFertilizerActivity extends DashboardActivity implemen
 //						}
 //					};
 //					dlg.show();
-				android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+				FragmentManager fm = getSupportFragmentManager();
 				InputAmountSoilFertFragment inputAmountDialog = InputAmountSoilFertFragment.newInstance(0.00, soilFertilizer[0].getProductName(), size);
 				inputAmountDialog.setCallback(WorkSelectSoilFertilizerActivity.this);
 				inputAmountDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);

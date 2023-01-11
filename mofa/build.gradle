@@ -1,19 +1,22 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.1'
-    useLibrary 'org.apache.http.legacy'
-    lintOptions {
-        disable 'Typos'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
+    compileSdkVersion 31
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "it.schmid.android.mofa"
-        minSdkVersion 11
-        targetSdkVersion 16
+
+        multiDexEnabled true
+
+        minSdkVersion 21
+        targetSdkVersion 31
         compileOptions {
-            sourceCompatibility JavaVersion.VERSION_1_7
-            targetCompatibility JavaVersion.VERSION_1_7
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
         }
     }
 
@@ -25,23 +28,31 @@ android {
         }
     }
     packagingOptions {
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/NOTICE.txt'
+        resources {
+            excludes += ['META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt']
+        }
+    }
+    lint {
+        disable 'Typos'
+    }
+    lintOptions{
+        checkReleaseBuilds false
     }
 
 }
 
-dependencies {
-    compile project(':library')
-    compile files('libs/ormlite-core-4.42.jar')
-    compile files('libs/ormlite-android-4.42.jar')
-    compile 'com.dropbox.core:dropbox-core-sdk:2.0.6'
-    compile 'com.google.code.gson:gson:2.2.4'
-    compile 'com.android.support:support-v4:23.4.0'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
-    compile 'com.squareup.okhttp:okhttp:2.7.5'
-    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+dependencies{
+    implementation project(':library')
+    implementation files('libs/ormlite-core-4.42.jar')
+    implementation files('libs/ormlite-android-4.42.jar')
+    implementation 'com.dropbox.core:dropbox-core-sdk:5.1.1'
+    implementation 'com.google.code.gson:gson:2.2.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.squareup.okhttp:okhttp:2.7.5'
+    implementation 'com.squareup.okhttp3:okhttp:3.3.1'
+    implementation 'org.jsoup:jsoup:1.10.3'
+    implementation 'com.google.http-client:google-http-client-android:1.39.2'
+
 }

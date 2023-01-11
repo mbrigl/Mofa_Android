@@ -15,6 +15,16 @@
     <item>1</item>
     <item>2</item>
 </string-array>
+    <string-array name="listCultivationType">
+        <item>Agrios</item>
+        <item>Bio</item>
+        <item>Gesetzlich</item>
+    </string-array>
+    <string-array name="listCultivationTypeValues">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 <string-array name="sprayconcentration">
     <item>1.0</item>
     <item>1.5</item>

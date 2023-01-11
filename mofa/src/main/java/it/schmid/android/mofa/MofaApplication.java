@@ -130,6 +130,10 @@ public class MofaApplication extends Application{
     public void setBackendSoftware(String backEnd){
 
     }
+	public Boolean newAsaVersion(){
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		return preferences.getBoolean("asa_new_ver",false);
+	}
 
 	public String getLeafFertilizerCodeASA(){
 		SharedPreferences preferences;

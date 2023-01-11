@@ -4,10 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.v4.content.AsyncTaskLoader;
+import androidx.loader.content.AsyncTaskLoader;
 import android.util.Log;
-
-import com.j256.ormlite.stmt.QueryBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,8 +18,6 @@ import it.schmid.android.mofa.model.Fertilizer;
 import it.schmid.android.mofa.model.Pesticide;
 import it.schmid.android.mofa.model.SprayFertilizer;
 import it.schmid.android.mofa.model.SprayPesticide;
-import it.schmid.android.mofa.model.Spraying;
-import it.schmid.android.mofa.model.VQuarter;
 import it.schmid.android.mofa.model.Work;
 
 public class SearchHashMapLoader extends AsyncTaskLoader<HashMap<Integer,List<String>>> {

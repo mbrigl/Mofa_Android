@@ -62,20 +62,34 @@
               android:text="@string/note_label">
 	     
 	 </TextView>
-    
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
     <EditText
         android:id="@+id/noteeditText"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:ems="10"
         android:background="@color/lightgreen"
         android:inputType="textMultiLine"
         android:focusable="true" 
         android:focusableInTouchMode="true" >
-		
+
         
     </EditText>
-
+        <ImageButton
+            android:id="@+id/speechButton"
+            android:textSize="18dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:src="@android:drawable/ic_btn_speak_now"
+            >
+        </ImageButton>
+    </LinearLayout>
    <LinearLayout 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

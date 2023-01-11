@@ -44,8 +44,10 @@
     <string name="asa_fertilizer_code">Code fertilizer</string>
     <string name="asa_fertilizer_soil_code">Code soil fertilizer</string>
     <string name="asa_mofa_note">Mark entries</string>
-
-
+    <string name="asa_new_ver">ASA Version 16</string>
+    <string name="cultivation_type">Cultivation-Type</string>
+    <string name="cultivation_type_desc">only for ASAAGRAR Ver. > 16</string>
+    <string name="asa_landorder_code">Order land by code</string>
     <!-- Table names -->
     <string name="landtable">land</string>
     <string name="vquartertable">Variety Quarter</string>
@@ -57,6 +59,8 @@
     <string name="soilfertilizertable">soilfertilizer</string>
     <string name="categorytable">fruit category</string>
     <string name="extratable">extras</string>
+    <string name="reasonstable">reasons</string>
+    <string name="weathertable">weather</string>
     <!-- Notification messages -->
     <string name="download_mess">MoFa - Downloading</string>
     <string name="download_title">MoFa - Starting download</string>
@@ -148,8 +152,23 @@
     <!-- Strings in workresources -->
     <string name="toast_msg_start">Please start the input selecting a land</string>
     <!-- Strings in Fragment Input Dose -->
-    <string name="input_dose_hl">Please enter the dose per hl</string>
+    <string name="input_dose_hl">Please enter the dose per hl(1x)</string>
     <string name="input_amount_total">Please enter the total amount</string>
+    <string name="reason">Please select the reason</string>
+    <string name="status">Status:</string>
+    <string name="beeWarning">*** ATTENTION BEE DANGEROUS ***</string>
+    <string name="beeNoWarning">*** NOT BEE DANGEROUS ***</string>
+    <string name="warteFristen">Waiting time:</string>
+    <string name="reason_prompt">Reason:</string>
+    <string name="min_dose">Minimum dose:</string>
+    <string name="max_dose">Maximum dose:</string>
+    <string name="max_use_pro_year">Maximum usage pro year:</string>
+    <string name="max_amount_usage">Maximum amount pro use/ha:</string>
+    <string name="max_use_year_in_serie">Maximum use in serie:</string>
+
+    <!-- Strings in Fragment Input Purchase -->
+    <string name="input_purchase_amount">amount in kg/lt</string>
+    <string name="input_purchase_price">price for kg/lt</string>
     <!-- Strings for TabCaption for Product List -->
     <string name="pesticidetab">Pesticides</string>
     <string name="fertilizertab">Fertilizer</string>
@@ -201,7 +220,9 @@
     <string name="maxamounthaUnit">kg/lt</string>
     <string name="amountha">amount ha:</string>
     <string name="maxDose">max dose/hl:</string>
-
+    <string name="pestLabel">label(from Internet)</string>
+    <string name="etichNotFound">"NO LABEL - CHECK NAME OF PRODUCT</string>
+    <string name="pdfNotSupported">No app for pdf installed</string>
     <!-- Strings for SearchPesticide -->
     <string name="searchLastPest">Last Spraying work</string>
     <string name="searchVQuarter">Please select vquarter for search</string>
@@ -250,5 +271,8 @@
     <string name="estimCropTitleHa">amount in t/ha</string>
     <string name="amountCrop">Amount on size: %1$d t</string>
 
+    <!-- Strings for SpeechRecognition -->
+    <string name="speech_prompt">Start speaking</string>
+    <string name="speech_not_supported">Speech not supported</string>
 
 </resources>

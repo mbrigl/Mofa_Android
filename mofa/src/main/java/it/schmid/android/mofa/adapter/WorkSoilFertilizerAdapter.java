@@ -3,10 +3,9 @@ package it.schmid.android.mofa.adapter;
 
 
 
+import androidx.fragment.app.FragmentManager;
 import it.schmid.android.mofa.InputAmountSoilFertFragment;
-import it.schmid.android.mofa.PromptDialogKeyboard;
 import it.schmid.android.mofa.R;
-import it.schmid.android.mofa.WorkEditHarvestFragment;
 import it.schmid.android.mofa.WorkEditSoilFertilizerFragment;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.model.SoilFertilizer;
@@ -19,7 +18,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -85,7 +84,7 @@ public class WorkSoilFertilizerAdapter extends ArrayAdapter<WorkFertilizer> impl
 //					}
 //				};
 //				dlg.show();
-				android.support.v4.app.FragmentManager fm = ((FragmentActivity)context).getSupportFragmentManager();
+				FragmentManager fm = ((FragmentActivity)context).getSupportFragmentManager();
 				InputAmountSoilFertFragment inputAmountDialog = InputAmountSoilFertFragment.newInstance(workFertilizer.getAmount(), soilFertilizer.getProductName(), fragment.sumOfSize());
 				inputAmountDialog.setCallback(WorkSoilFertilizerAdapter.this);
 				inputAmountDialog.show(fm, "InputAmount");

@@ -30,11 +30,20 @@
         android:inputType="numberDecimal"
         android:digits="0123456789.,$"
         android:imeOptions="actionDone" />
+    <TextView
+        android:id="@+id/lbl_amount_ha" android:text="@string/amountha"
+        android:layout_width="wrap_content" android:layout_height="wrap_content" />
 
+    <EditText
+        android:id="@+id/txt_amount_ha"
+        android:layout_width="match_parent"  android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:digits="0123456789.,$"
+        android:imeOptions="actionDone" />
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-        <TableRow
+       <!-- <TableRow
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
@@ -50,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                  />
-        </TableRow>
+        </TableRow> -->
         <TableRow
             android:id="@+id/tableRow1"
             android:layout_width="wrap_content"

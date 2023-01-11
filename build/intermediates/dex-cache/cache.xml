@@ -2,166 +2,229 @@
 <items version="2" >
 
     <item
-        is-multidex="false"
-        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        is-multidex="true"
+        jar="/Users/schmida/.android/build-cache/160e627deadd2d125d32b0911ae2e37f6016c3f2/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
-        revision="23.0.1"
-        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/internal_impl-23.4.0_211cc4b509a91e576e1d087f26e672997b891005.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
-        sha1="72d2df2b60d3def4f085ccc7fcc2384e60890c36">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/instant-run-bootstrap_15d68af1e7b8c0e3085d1f8f8e84fc0dd677f3d9.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.7.4/b8f38a249116b66d804a5ca2b14a3459b7913a94/jackson-core-2.7.4.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
-        sha1="b8f38a249116b66d804a5ca2b14a3459b7913a94">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/jackson-core-2.7.4_490a3938e57f7ccf6644260280c6adc7d4e1dd46.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
-        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.4.0_6037e42c2f95f330be8fca7027954a554dd948d1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/schmida/Downloads/Android Studio.app/Contents/gradle/m2repository/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
-        sha1="a60a5e993c98c864010053cb901b7eab25306568">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/gson-2.2.4_5389c40430b123c35b89c165b9d0b6fdef18a466.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
-        sha1="bf92bcebfc6dc6c80299d4e350292adb5ee08820">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/instant-run_efe9399ed2086a50221c62cf6dacaa64d8eb2bb1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
-        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.4.0_a2998da9ec595232b1cc1c12c3d882e52bf27e18.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
-        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.4.0_d1e886242bd07eac97d504c84a4e405a90818e3d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/libs/ormlite-android-4.42.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
-        sha1="e100b4fe8706da96352504146c2877b68e0d7231">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/ormlite-android-4.42_4b965e1212cb772ed020d5ca26ee68671b3919f7.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/libs/ormlite-core-4.42.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
-        sha1="9c345683bceda8106373a485be9c6ecdfa5aa2b3">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/ormlite-core-4.42_0ceb89f1dd02f3739e628a4bab6d1c9a99253c1b.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.7.5/7a15a7db50f86c4b64aa3367424a60e3a325b8f1/okhttp-2.7.5.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
-        sha1="7a15a7db50f86c4b64aa3367424a60e3a325b8f1">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/okhttp-2.7.5_da240d27e31fbb72f695b8fc1142b366594d4f15.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
+        revision="25.0.0"
         sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.4.0_60c4e3f78c6033f453d97bd799ca5fe67ad701f3.jar" />
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/classes_1213d87ebb2c474f187846621fdd3c2a4133ec44/classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.8.0/5ea7af56cc7c567ed9856d99efb30740e9b17ff/okio-1.8.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
-        sha1="05ea7af56cc7c567ed9856d99efb30740e9b17ff">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/okio-1.8.0_f54c5b55265a2dc15e512c9a96027a1ed74d577d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.android.support/design/23.4.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.1"
-        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/com.android.support-design-23.4.0_b11cfde9364394290fec47e3fa6f3697ff46ecbc.jar" />
-    </item>
-    <item
-        is-multidex="false"
+        is-multidex="true"
         jar="/Users/schmida/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.1"
         sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/support-annotations-23.4.0_110c6e88af25ba617bc874872c9e927322f50cec.jar" />
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_110c6e88af25ba617bc874872c9e927322f50cec/classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.dropbox.core/dropbox-core-sdk/2.0.6/ce40aaa7d0cffea07fed12dcbf398fb095dca864/dropbox-core-sdk-2.0.6.jar"
+        is-multidex="true"
+        jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.7.5/7a15a7db50f86c4b64aa3367424a60e3a325b8f1/okhttp-2.7.5.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="7a15a7db50f86c4b64aa3367424a60e3a325b8f1">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-2.7.5_da240d27e31fbb72f695b8fc1142b366594d4f15/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/libs/ormlite-core-4.42.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="9c345683bceda8106373a485be9c6ecdfa5aa2b3">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/2/ormlite-core-4.42_0ceb89f1dd02f3739e628a4bab6d1c9a99253c1b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.7.4/b8f38a249116b66d804a5ca2b14a3459b7913a94/jackson-core-2.7.4.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.1"
-        sha1="ce40aaa7d0cffea07fed12dcbf398fb095dca864">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/dropbox-core-sdk-2.0.6_77f0ef58150403e586aadc80d67cf80b7e9ceeab.jar" />
+        sha1="b8f38a249116b66d804a5ca2b14a3459b7913a94">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/jackson-core-2.7.4_490a3938e57f7ccf6644260280c6adc7d4e1dd46/classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.4.0/jars/classes.jar"
+        is-multidex="true"
+        jar="/Users/schmida/.android/build-cache/a21ab40a39eb7f56eedf8f6bed33e030cdc05858/output/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.4.0_62efc106d7fd7afa3a83e6aeff830c5bac3d8757/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.3.1/19047bdb6a4fc00a44124f64ca98e88fc204e7e3/okhttp-3.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="19047bdb6a4fc00a44124f64ca98e88fc204e7e3">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.3.1_fb36f21c681802604678df6d780974dd58257887/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/libs/ormlite-android-4.42.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.1"
+        sha1="e100b4fe8706da96352504146c2877b68e0d7231">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/2/ormlite-android-4.42_4b965e1212cb772ed020d5ca26ee68671b3919f7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="102bf5435d8feab9139ddcf4ac358c38c2c759dc">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_15d68af1e7b8c0e3085d1f8f8e84fc0dd677f3d9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Applications/Android Studio.app/Contents/gradle/m2repository/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.2.4_d0ce76b63ce905fbab3c5d385c8e1b8692010f19/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.8.0/5ea7af56cc7c567ed9856d99efb30740e9b17ff/okio-1.8.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="05ea7af56cc7c567ed9856d99efb30740e9b17ff">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/okio-1.8.0_f54c5b55265a2dc15e512c9a96027a1ed74d577d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/.android/build-cache/f9552f5da6f105f5eccb539be9927047a4449571/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
         sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.4.0_fa8786e37fb3612053a1963095dbb402472c4896.jar" />
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2579dd27ac8b7a94f3d5d558ae6878bb0e50472c/classes.dex" />
     </item>
     <item
-        is-multidex="false"
+        is-multidex="true"
+        jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.dropbox.core/dropbox-core-sdk/3.0.3/ed9183bcb55af03c8cfe55e555a91eb55c9280d3/dropbox-core-sdk-3.0.3.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ed9183bcb55af03c8cfe55e555a91eb55c9280d3">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/dropbox-core-sdk-3.0.3_eeafad725f499cbed4d6bccff99061563c49ba98/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_110c6e88af25ba617bc874872c9e927322f50cec/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/.android/build-cache/203a7201722d13f3f3546462c9c7ba6ec2f1933c/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7fd07a929e732c8aba13b78122f94223f519e97a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/.android/build-cache/25e14a318b2fd07713edb32f1d9f21ec1cf2a1dc/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d2c01536be4eee484cf0eaa54c8c0a162f529869/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.7.4/b8f38a249116b66d804a5ca2b14a3459b7913a94/jackson-core-2.7.4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b8f38a249116b66d804a5ca2b14a3459b7913a94">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/jackson-core-2.7.4_490a3938e57f7ccf6644260280c6adc7d4e1dd46/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/libs/ormlite-core-4.42.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="9c345683bceda8106373a485be9c6ecdfa5aa2b3">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/2/ormlite-core-4.42_0ceb89f1dd02f3739e628a4bab6d1c9a99253c1b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.7.5/7a15a7db50f86c4b64aa3367424a60e3a325b8f1/okhttp-2.7.5.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="7a15a7db50f86c4b64aa3367424a60e3a325b8f1">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-2.7.5_da240d27e31fbb72f695b8fc1142b366594d4f15/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.8.0/5ea7af56cc7c567ed9856d99efb30740e9b17ff/okio-1.8.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="05ea7af56cc7c567ed9856d99efb30740e9b17ff">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/okio-1.8.0_f54c5b55265a2dc15e512c9a96027a1ed74d577d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/libs/ormlite-android-4.42.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e100b4fe8706da96352504146c2877b68e0d7231">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/2/ormlite-android-4.42_4b965e1212cb772ed020d5ca26ee68671b3919f7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/schmida/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.3.1/19047bdb6a4fc00a44124f64ca98e88fc204e7e3/okhttp-3.3.1.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.1"
         sha1="19047bdb6a4fc00a44124f64ca98e88fc204e7e3">
-        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/pre-dexed/debug/okhttp-3.3.1_fb36f21c681802604678df6d780974dd58257887.jar" />
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.3.1_fb36f21c681802604678df6d780974dd58257887/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/.android/build-cache/9a65a4a6bbb8e4b45cc0fb0c04c2c24283a1fc96/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9b8b890d3a3df243e2c50f03b1b801467d02c680/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/.android/build-cache/a21ab40a39eb7f56eedf8f6bed33e030cdc05858/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d71d3da377852a65e94ee718dda7cadabcb026aa/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/schmida/AndroidStudioProjects/Mofa/mofa/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_efe9399ed2086a50221c62cf6dacaa64d8eb2bb1/classes.dex" />
     </item>
 
 </items>

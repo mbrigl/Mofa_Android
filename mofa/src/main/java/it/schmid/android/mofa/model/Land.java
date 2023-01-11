@@ -32,7 +32,7 @@ public class Land extends ImportBehavior{
 	 @DatabaseField
 	private String code;
 	
-	@ForeignCollectionField
+	@ForeignCollectionField (orderColumnName = "code")
 	private ForeignCollection<VQuarter> vquarters;
 	private Boolean importError=false;
 

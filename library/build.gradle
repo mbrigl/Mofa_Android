@@ -1,12 +1,11 @@
 apply plugin: 'com.android.library'
 android {
-    compileSdkVersion 15
-    buildToolsVersion '22.0.1'
+    compileSdkVersion 30
 
     defaultConfig {
         //applicationId "com.google.android.vending.licensing"
         minSdkVersion 3
-        targetSdkVersion 15
+        targetSdkVersion 30
     }
 
     buildTypes {

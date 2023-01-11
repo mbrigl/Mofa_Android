@@ -81,12 +81,12 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	private String backEndSoftware;
     private MofaApplication app;
 	//**licensing variables
-	private Handler mHandler;
-	private LicenseChecker mChecker;
-	private LicenseCheckerCallback mLicenseCheckerCallback;
+	//private Handler mHandler;
+	//private LicenseChecker mChecker;
+	//private LicenseCheckerCallback mLicenseCheckerCallback;
 	boolean licensed;
-	boolean checkingLicense;
-	boolean didCheck;
+	//boolean checkingLicense;
+	//boolean didCheck;
 	
 	private SharedPreferences preferences;
 	//******************
@@ -230,17 +230,17 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 		       //SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
 		       //licensed = sharedPref.getBoolean("LICENSED", false);
 		       //** The following lines are to disable for productive use
-		       licensed=app.getLicense(); 
+		       //licensed=app.getLicense();
 		       licensed=true; //only for TESTING, disabling this line for productive use !!!
 		       
-		      if (licensed==false){ //not licensed or still to check
+		      /*if (licensed==false){ //not licensed or still to check
 		    	   String deviceId = Secure.getString(getContentResolver(), Secure.ANDROID_ID);
 			       Log.i("Device Id", deviceId);
 			       mHandler = new Handler();
 			       mLicenseCheckerCallback = new MyLicenseCheckerCallback();
 			       mChecker = new LicenseChecker(this, new ServerManagedPolicy(this, new   AESObfuscator(SALT, getPackageName(), deviceId)), BASE64_PUBLIC_KEY);
 			       doCheck();
-		     }
+		     }*/
 		      if (licensed==true){ //seems to be licensed, go on..
 		    	  app.setLicense(true);
 				  if (resetDropbox == true){ //resetting the link if enabled in preferences
@@ -290,7 +290,13 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
               break;
            case 6:
                //startActivity(new Intent (this, WorkerOverviewActivity.class));
-			   startActivity(new Intent (this, VegDataActivity.class));
+			   if (DatabaseManager.getInstance().checkIfEmpty()==true){
+				   Toast.makeText(this, R.string.nodata, Toast.LENGTH_LONG).show();
+			   }else{
+				   startActivity(new Intent(this, VegDataActivity.class));
+
+			   }
+
 			   break;
 	      default: 
 	    	   break;
@@ -573,7 +579,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 		final ArrayList<Integer> selElements = new ArrayList<Integer>(); //storing the elements to import/update
 		final String[] elementDesc = {getString(R.string.landtable), getString(R.string.vquartertable), getString(R.string.machinetable),
 				getString(R.string.workertable),getString(R.string.tasktable), getString(R.string.pesticidetable), getString(R.string.fertilizertable),
-				getString(R.string.soilfertilizertable), getString(R.string.categorytable), getString(R.string.extratable)};
+				getString(R.string.soilfertilizertable), getString(R.string.categorytable), getString(R.string.extratable),getString(R.string.reasonstable),getString(R.string.weathertable)};
 		StringBuilder sb = new StringBuilder();
 		boolean first = false; //only for checking if \n
 		if (format.equalsIgnoreCase("1")){ //json
@@ -618,11 +624,11 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	}
     private void doCheck() {
 
-        didCheck = false;
-        checkingLicense = true;
-        setProgressBarIndeterminateVisibility(true);
+        //didCheck = false;
+        //checkingLicense = true;
+        //setProgressBarIndeterminateVisibility(true);
 
-        mChecker.checkAccess(mLicenseCheckerCallback);
+        //mChecker.checkAccess(mLicenseCheckerCallback);
     }
  //only for testing purpose, resetting the licensing flag
     private void removeLicenseFlag(){
@@ -630,6 +636,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
     	sharedPref.edit().remove("LICENSED").commit();
     }
    //check the license
+	/*
     private class MyLicenseCheckerCallback implements LicenseCheckerCallback {
 
      //   @Override
@@ -649,8 +656,8 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
                 //SharedPreference so the app only has to check the license once.
             
             licensed = true;
-            checkingLicense = false;
-            didCheck = true;
+            //checkingLicense = false;
+            //didCheck = true;
 
         }
 
@@ -668,9 +675,9 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
                         //You can do other things here, like saving the licensed status to a
                         //SharedPreference so the app only has to check the license once.
 
-                licensed = false;
-                checkingLicense = false;
-                didCheck = true;               
+                licensed = true;
+                //checkingLicense = false;
+                //didCheck = true;
 
                 showDialog(0);
 
@@ -686,14 +693,14 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
                 return;
             }
             licensed = true;
-            checkingLicense = false;
-            didCheck = false;
+            //checkingLicense = false;
+            //didCheck = false;
 
             showDialog(0);
         }
 
 
-    }
+    }*/
 
     protected Dialog onCreateDialog(int id) {
         // We have only one dialog.

@@ -2,18 +2,16 @@ package it.schmid.android.mofa.vegdata;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.net.Uri;
-import android.provider.ContactsContract;
-import android.provider.SyncStateContract;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.text.style.TtsSpan;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,14 +24,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import it.schmid.android.mofa.ActivityConstants;
-import it.schmid.android.mofa.DashboardActivity;
 import it.schmid.android.mofa.MofaApplication;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.SendingProcess;
-import it.schmid.android.mofa.WorkOverviewActivity;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.interfaces.ClearInterface;
-import it.schmid.android.mofa.interfaces.ShowInfoInterface;
 import it.schmid.android.mofa.model.Global;
 import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.VQuarter;

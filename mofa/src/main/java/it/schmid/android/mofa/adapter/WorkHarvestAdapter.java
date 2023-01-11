@@ -1,14 +1,12 @@
 package it.schmid.android.mofa.adapter;
 
+import androidx.fragment.app.FragmentManager;
 import it.schmid.android.mofa.HarvestDialogFragment;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.HarvestDialogFragment.HarvestDialogListener;
-import it.schmid.android.mofa.WorkEditHarvestFragment;
-import it.schmid.android.mofa.adapter.WorkSelectedPesticideAdapter.PesticideHolder;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.model.FruitQuality;
 import it.schmid.android.mofa.model.Harvest;
-import it.schmid.android.mofa.model.SprayPesticide;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,8 +16,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,7 +25,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class WorkHarvestAdapter extends ArrayAdapter<Harvest>implements HarvestDialogListener{
 	private static final String TAG = "WorkHarvestAdapter";
@@ -76,7 +73,7 @@ public class WorkHarvestAdapter extends ArrayAdapter<Harvest>implements HarvestD
 			public void onClick(View v) {
 				HarvestDialogFragment harvestDialog = new HarvestDialogFragment(currHarvest);
 				harvestDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
-				android.support.v4.app.FragmentManager fm = ((FragmentActivity)context).getSupportFragmentManager();
+				FragmentManager fm = ((FragmentActivity)context).getSupportFragmentManager();
 				harvestDialog.setHarvestCallback(WorkHarvestAdapter.this);
 				setCurrHarvest(currHarvest);
 				harvestDialog.show(fm, "fragmentdialog_harvest");
