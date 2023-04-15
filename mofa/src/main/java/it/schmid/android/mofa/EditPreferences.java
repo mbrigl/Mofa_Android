@@ -67,7 +67,7 @@ public class EditPreferences extends PreferenceActivity {
 	  
 	  private void createSdFolderStruct(){
 			if (isSdPresent()){ //SD-Card mounted
-				File direct = new File(Environment.getExternalStorageDirectory() + "/MoFaBackend");
+				File direct = new File(Environment.getExternalStorageDirectory() + PathConstants.PATH);
 				   if(!direct.exists())
 				    {
 				        if(direct.mkdir()) 
@@ -75,24 +75,24 @@ public class EditPreferences extends PreferenceActivity {
 				           //directory is created;
 				          }
 				    }
-				 direct = new File(Environment.getExternalStorageDirectory() + "/MoFaBackend/import/land");
+				 direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/land");
 				 @SuppressWarnings("unused")
 				boolean successful = direct.mkdirs();
-				 direct = new File(Environment.getExternalStorageDirectory() + "/MoFaBackend/export");
+				 direct = new File(Environment.getExternalStorageDirectory() + PathConstants.EXPORT);
 				 successful = direct.mkdirs();
-				 direct = new File(Environment.getExternalStorageDirectory() + "/MoFaBackend/import/worker");
+				 direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/worker");
 				 successful = direct.mkdirs();
-				 direct = new File(Environment.getExternalStorageDirectory() + "/MoFaBackend/import/vquarter");
+				 direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/vquarter");
 				 successful = direct.mkdirs();
-				 direct = new File(Environment.getExternalStorageDirectory() + "/MoFaBackend/import/pesticide");
+				 direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/pesticide");
 				 successful = direct.mkdirs();
-				 direct = new File(Environment.getExternalStorageDirectory() + "/MoFaBackend/import/fertilizer");
+				 direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/fertilizer");
 				 successful = direct.mkdirs();
-				 direct = new File(Environment.getExternalStorageDirectory() + "/MoFaBackend/import/soilfertilizer");
+				 direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/soilfertilizer");
 				 successful = direct.mkdirs();
-				 direct = new File(Environment.getExternalStorageDirectory() + "/MoFaBackend/import/task");
+				 direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/task");
 				 successful = direct.mkdirs();
-				 direct = new File(Environment.getExternalStorageDirectory() + "/MoFaBackend/import/machine");
+				 direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/machine");
 				 successful = direct.mkdirs();
 			}
 		}

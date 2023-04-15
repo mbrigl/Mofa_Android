@@ -10,6 +10,7 @@ import com.dropbox.core.v2.files.Metadata;
 
 import java.util.ArrayList;
 
+import it.schmid.android.mofa.PathConstants;
 
 
 /**
@@ -55,25 +56,13 @@ public class CheckFileTask extends AsyncTask<String, Void, ArrayList<Integer>> {
         String fileName = params[0];
         int pos = 1;
         for (String element: elements) {
-
-
-
             try {
-                String path = "";
+                String path = PathConstants.IMPORT +element+fileName;
+                mDbxClient.files().getMetadata(path);
 
-                    path = "/MoFaBackend/import"+element+fileName;
-                    mDbxClient.files().getMetadata(path);
-
-
-                    sb.append(mElementDesc[pos-1]);
-                    sb.append("\n");
-                    selElements.add(pos);
-
-
-
-
-
-
+                sb.append(mElementDesc[pos-1]);
+                sb.append("\n");
+                selElements.add(pos);
             }catch(DbxException e){
                 Log.d("Error Dropbox",e.getLocalizedMessage());
             }

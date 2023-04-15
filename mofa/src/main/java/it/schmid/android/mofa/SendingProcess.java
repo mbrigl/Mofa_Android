@@ -327,17 +327,17 @@ public void run(){
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss") ;
 				if (fileType.equalsIgnoreCase("1")){
 					if (callingActivity==ActivityConstants.WORK_OVERVIEW){
-						file = new File(sdCard.getAbsolutePath() + "/MoFaBackend/export", "worklist" + dateFormat.format(date) + ".json");
+						file = new File(sdCard.getAbsolutePath() + PathConstants.EXPORT, "worklist" + dateFormat.format(date) + ".json");
 					}
 					if (callingActivity==ActivityConstants.PURCHASING_ACTIVITY){
-						file = new File(sdCard.getAbsolutePath() + "/MoFaBackend/export", "purchaselist" + dateFormat.format(date) + ".json");						
+						file = new File(sdCard.getAbsolutePath() + PathConstants.EXPORT, "purchaselist" + dateFormat.format(date) + ".json");						
 					}
 				}else{
 					if (callingActivity==ActivityConstants.WORK_OVERVIEW){
-						file = new File(sdCard.getAbsolutePath() + "/MoFaBackend/export", "worklist" + dateFormat.format(date) + ".xml");
+						file = new File(sdCard.getAbsolutePath() + PathConstants.EXPORT, "worklist" + dateFormat.format(date) + ".xml");
 					}
 					if (callingActivity==ActivityConstants.PURCHASING_ACTIVITY){
-						file = new File(sdCard.getAbsolutePath() + "/MoFaBackend/export", "purchaselist" + dateFormat.format(date) + ".xml");
+						file = new File(sdCard.getAbsolutePath() + PathConstants.EXPORT, "purchaselist" + dateFormat.format(date) + ".xml");
 					}
 				}
 				
@@ -1541,23 +1541,23 @@ public void run(){
 		ACCESS_TOKEN = DropboxClient.retrieveAccessToken(context);
 		if (fileType.equalsIgnoreCase("1")){
 			if (callingActivity==ActivityConstants.WORK_OVERVIEW){
-				filePath =  "/MoFaBackend/export/worklist" + dateFormat.format(date) + ".json";
+				filePath =  PathConstants.EXPORT + "/worklist" + dateFormat.format(date) + ".json";
 			}
 			if (callingActivity==ActivityConstants.PURCHASING_ACTIVITY){
-				filePath =  "/MoFaBackend/export/purchaselist" + dateFormat.format(date) + ".json";
+				filePath =  PathConstants.EXPORT + "/purchaselist" + dateFormat.format(date) + ".json";
 			}
 			if (callingActivity==ActivityConstants.VEGDATA_ACTIVITY){ // calling this asynch from vegdata
-				filePath = "/MoFaBackend/export/vegdata" + dateFormat.format(date) + ".json";
+				filePath = PathConstants.EXPORT + "/vegdata" + dateFormat.format(date) + ".json";
 			}
 		}else{
 			if (callingActivity==ActivityConstants.WORK_OVERVIEW){
-				filePath =  "/MoFaBackend/export/worklist" + dateFormat.format(date) + ".xml";
+				filePath =  PathConstants.EXPORT + "/worklist" + dateFormat.format(date) + ".xml";
 			}
 			if (callingActivity==ActivityConstants.PURCHASING_ACTIVITY){
-				filePath =  "/MoFaBackend/export/purchaselist" + dateFormat.format(date) + ".xml";
+				filePath =  PathConstants.EXPORT + "/purchaselist" + dateFormat.format(date) + ".xml";
 			}
 			if (callingActivity==ActivityConstants.VEGDATA_ACTIVITY){ // calling this asynch from vegdata
-				filePath = "/MoFaBackend/export/vegdata" + dateFormat.format(date) + ".xml";
+				filePath = PathConstants.EXPORT + "/vegdata" + dateFormat.format(date) + ".xml";
 			}
 		}
 

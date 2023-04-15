@@ -74,7 +74,6 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	 */
 	private Boolean resetDropbox;
 	private Boolean dropBox; 
-	static final String DROPBOX_IMPORT_PATH = "/MoFaBackend/import";
 	private Boolean offline;
 	private String urlPath;
 	private String format;
@@ -269,7 +268,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 			       }else{
 			    	   if (urlPath == ""){
 				    	   //Toast.makeText(getApplicationContext(), R.string.restpathemptystring, Toast.LENGTH_LONG).show();
-				    	  urlPath = DROPBOX_IMPORT_PATH;
+				    	  urlPath = PathConstants.IMPORT;
 				       }
 			    	   showImportDialog();
 			       }
@@ -509,7 +508,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 		            	if (dropBox==false){
 		            		updateData(selElements,urlPath,offline,format); //starting the import of data
 		            	}else{
-		            		updateData(selElements,DROPBOX_IMPORT_PATH,offline,format); //starting the import of dropbox data
+		            		updateData(selElements,PathConstants.IMPORT,offline,format); //starting the import of dropbox data
 		            	}
 	            		
 	            	}else{ // works table not empty first export
@@ -526,7 +525,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 //		            	if (dropBox==false){  
 //		            		updateData(selElements,urlPath,offline,format); //starting the import of data
 //		            	}else{
-//		            		updateData(selElements,DROPBOX_IMPORT_PATH,offline,format); //starting the import of dropbox data
+//		            		updateData(selElements,PathConstants.IMPORT,offline,format); //starting the import of dropbox data
 //		            	}
 	            	}
 	            	
@@ -535,7 +534,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	            	if (dropBox==false){
 	            		updateData(selElements, urlPath,offline,format);
 	            	}else{
-	            		updateData(selElements,DROPBOX_IMPORT_PATH,offline,format);
+	            		updateData(selElements,PathConstants.IMPORT,offline,format);
 	            	}
 	            	
 	            

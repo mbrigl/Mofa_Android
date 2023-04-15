@@ -9,6 +9,8 @@ import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.DbxPathV2;
 
+import it.schmid.android.mofa.PathConstants;
+
 /**
  * Created by schmida on 22.07.16.
  */
@@ -16,8 +18,6 @@ public class CreateFolderTask extends AsyncTask {
     private DbxClientV2 dbxClient;
 
     private Context context;
-    private static final String exportPath = "/MoFaBackend/export";
-    private static final String importPath = "/MoFaBackend/import";
     CreateFolderTask(DbxClientV2 dbxClient, Context context) {
         this.dbxClient = dbxClient;
 
@@ -27,18 +27,18 @@ public class CreateFolderTask extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] params) {
         try {
-            dbxClient.files().createFolder(exportPath);
-            dbxClient.files().createFolder(importPath);
-            dbxClient.files().createFolder(importPath +"/land");
-            dbxClient.files().createFolder(importPath +"/vquarter");
-            dbxClient.files().createFolder(importPath + "/worker");
-            dbxClient.files().createFolder(importPath + "/machine");
-            dbxClient.files().createFolder(importPath + "/task");
-            dbxClient.files().createFolder(importPath + "/pesticide");
-            dbxClient.files().createFolder(importPath + "/fertilizer");
-            dbxClient.files().createFolder(importPath + "/category");
-            dbxClient.files().createFolder(importPath + "/soilfertilizer");
-            dbxClient.files().createFolder(importPath + "/extra");
+            dbxClient.files().createFolder(PathConstants.EXPORT);
+            dbxClient.files().createFolder(PathConstants.IMPORT);
+            dbxClient.files().createFolder(PathConstants.IMPORT + "/land");
+            dbxClient.files().createFolder(PathConstants.IMPORT + "/vquarter");
+            dbxClient.files().createFolder(PathConstants.IMPORT + "/worker");
+            dbxClient.files().createFolder(PathConstants.IMPORT + "/machine");
+            dbxClient.files().createFolder(PathConstants.IMPORT + "/task");
+            dbxClient.files().createFolder(PathConstants.IMPORT + "/pesticide");
+            dbxClient.files().createFolder(PathConstants.IMPORT + "/fertilizer");
+            dbxClient.files().createFolder(PathConstants.IMPORT + "/category");
+            dbxClient.files().createFolder(PathConstants.IMPORT + "/soilfertilizer");
+            dbxClient.files().createFolder(PathConstants.IMPORT + "/extra");
 
             // Upload to Dropbox
 //            InputStream inputStream = new FileInputStream(file);

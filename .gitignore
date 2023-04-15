@@ -1,51 +1,9 @@
-<<<<<<< HEAD
-# Created by .ignore support plugin (hsz.mobi)
+*.iml
 .gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
+.idea
 .DS_Store
 /build
-mofa/build
-library/build
-=======
-#built application files
-*.apk
-*.ap_
-
-# files for the dex VM
-*.dex
-
-# Java class files
-*.class
-
-# generated files
-bin/
-gen/
-
-# Local configuration file (sdk path, etc)
-local.properties
-
-# Windows thumbnail db
-Thumbs.db
-
-# OSX files
-.DS_Store
-
-# Eclipse project files
-.classpath
-.project
-
-# Android Studio
-build/intermediates/model_data.bin
-.idea/workspace.xml
-.idea/
-.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
-.gradle
-build/
-mofa/mofa.iml
-/.idea/workspace.xml
-.idea/tasks.xml
-.idea/datasources.xml
-.idea/dataSources.ids
->>>>>>> history
+/library/build
+/mofa/build
+/local.properties
+.externalNativeBuild
