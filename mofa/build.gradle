@@ -7,11 +7,11 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "it.schmid.android.mofa"
+        applicationId "it.bz.tol.mofa"
         minSdk 26
         targetSdk 32
-        versionCode 26
-        versionName "6.01"
+        versionCode 27
+        versionName "6.02"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

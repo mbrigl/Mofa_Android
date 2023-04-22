@@ -13,6 +13,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.widget.TextView;
 
@@ -40,8 +41,8 @@ public class AboutDialog extends Dialog{
 		Integer versionDb = DatabaseManager.getInstance().getDbVersion();
 		
 		String aboutText = "<b>Mo</b>bile <b>Fa</b>rmer<br>"
-				+ " Version " + versionName +"<br>	Copyright 2013 - 2014<br> <b>arnold@schmid-online.it</b><br>";
-		aboutText  += "Database Version: " + versionDb;
+				+ " Version " + versionName +"<br>	Copyright 2023<br> <b>Territorium Online srl</b>";
+		aboutText += "<br><a href=\"https://www.tol.info/ueber-uns/datenschutz/#c14274\">Privacy Policy</a>";
 		
 		tv.setText(readRawTextFile(R.raw.legal));
 		tv = (TextView)findViewById(R.id.info_text);
@@ -49,6 +50,7 @@ public class AboutDialog extends Dialog{
 		//tv.setText(Html.fromHtml(readRawTextFile(R.raw.info))) ;
 		tv.setLinkTextColor(Color.rgb(0, 126, 128));
 		Linkify.addLinks(tv, Linkify.ALL);
+		tv.setMovementMethod(LinkMovementMethod.getInstance());
 		
 	}
 
