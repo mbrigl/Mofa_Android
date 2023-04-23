@@ -13,7 +13,8 @@
 		android:title="@string/updateoffline"/>
     <CheckBoxPreference
 		android:key="dropbox"
-		android:title="@string/dropbox"/>
+		android:title="@string/dropbox"
+		android:defaultValue="1"/>
     <CheckBoxPreference
 		android:key="dropboxreset"
 		android:title="@string/dropboxreset"/>
@@ -29,14 +30,13 @@
        android:entries="@array/listWebFormat"
        android:entryValues="@array/listWebFormatValues"
        />
-    <ListPreference
-       android:title="Backend Software"
-       android:summary="BackendSoftware"
-       android:key="listBackendFormat"
-       android:defaultValue="2"
-       android:entries="@array/listBackend"
-       android:entryValues="@array/listBackendValues"
-    />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/listBackend"
+            android:entryValues="@array/listBackendValues"
+            android:key="listBackendFormat"
+            android:summary="BackendSoftware"
+            android:title="Backend Software" />
     </PreferenceCategory>
 
 	

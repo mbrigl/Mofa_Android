@@ -68,13 +68,9 @@ public class EditPreferences extends PreferenceActivity {
 	  private void createSdFolderStruct(){
 			if (isSdPresent()){ //SD-Card mounted
 				File direct = new File(Environment.getExternalStorageDirectory() + PathConstants.PATH);
-				   if(!direct.exists())
-				    {
-				        if(direct.mkdir()) 
-				          {
-				           //directory is created;
-				          }
-				    }
+				if(!direct.exists())
+					direct.mkdir();
+
 				 direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/land");
 				 @SuppressWarnings("unused")
 				boolean successful = direct.mkdirs();

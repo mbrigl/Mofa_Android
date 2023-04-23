@@ -52,8 +52,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.dropbox.core.android.Auth;
-
 import com.google.android.vending.licensing.AESObfuscator;
 import com.google.android.vending.licensing.LicenseChecker;
 import com.google.android.vending.licensing.LicenseCheckerCallback;
@@ -243,20 +241,20 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 		      if (licensed==true){ //seems to be licensed, go on..
 		    	  app.setLicense(true);
 				  if (resetDropbox == true){ //resetting the link if enabled in preferences
-					  deleteAccessToken();
+					  DropboxClient.deleteAccessToken(this);
 					  Editor editor = preferences.edit(); //resetting this preference to false
 					  editor.putBoolean("dropboxreset", false);
 					  editor.commit();
 				  }
 		    	   if (dropBox == true){ //DropBox sync
-					   if (!tokenExists()) { //Dropbox API V2 - check if Token exists
+					   if (!DropboxClient.tokenExists(this)) { //Dropbox API V2 - check if Token exists
 						   //No token
 						   //Back to LoginActivity
 						   Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
 						   startActivity(intent);
 
 					   }else {
-						   ACCESS_TOKEN = retrieveAccessToken();
+						   ACCESS_TOKEN = DropboxClient.retrieveAccessToken(this);
 						   importFromDropbox();
 					   }
 
@@ -736,27 +734,4 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
                 .create();
 
     }
-
-	private boolean tokenExists() {
-		SharedPreferences prefs = getSharedPreferences("it.schmid.android.mofa", Context.MODE_PRIVATE);
-		String accessToken = prefs.getString("access-token", null);
-		return accessToken != null;
-	}
-	private String retrieveAccessToken() {
-		//check if ACCESS_TOKEN is previously stored on previous app launches
-		SharedPreferences prefs = getSharedPreferences("it.schmid.android.mofa", Context.MODE_PRIVATE);
-		String accessToken = prefs.getString("access-token", null);
-		if (accessToken == null) {
-			Log.d("AccessToken Status", "No token found");
-			return null;
-		} else {
-			//accessToken already exists
-			Log.d("AccessToken Status", "Token exists");
-			return accessToken;
-		}
-	}
-	private void deleteAccessToken(){
-		SharedPreferences prefs = getSharedPreferences("it.schmid.android.mofa", Context.MODE_PRIVATE);
-		prefs.edit().remove("access-token").commit();
-	}
 }

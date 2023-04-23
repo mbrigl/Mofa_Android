@@ -61,29 +61,25 @@ public class WorkingJournalPreferenceFragment extends PreferenceFragment impleme
 	 private void createSdFolderStruct(){
 			if (isSdPresent()){ //SD-Card mounted
 				File direct = new File(Environment.getExternalStorageDirectory() + PathConstants.PATH);
-				   if(!direct.exists())
-				    {
-				        if(direct.mkdir()) 
-				          {
-				           //directory is created;
-				          }
-				    }
-				 direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/land");
-				 boolean successful = direct.mkdirs();
-				 direct = new File(Environment.getExternalStorageDirectory() + PathConstants.EXPORT);
-				 successful = direct.mkdirs();
-				 direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/worker");
-				 successful = direct.mkdirs();
-				 direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/vquarter");
-				 successful = direct.mkdirs();
-				 direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/pesticide");
-				 successful = direct.mkdirs();
-				 direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/fertilizer");
-				 successful = direct.mkdirs();
-				 direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/task");
-				 successful = direct.mkdirs();
-				 direct = new File(Environment.getExternalStorageDirectory() +PathConstants.IMPORT + "/machine");
-				 successful = direct.mkdirs();
+				if(!direct.exists())
+					direct.mkdir();
+
+				direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/land");
+				boolean successful = direct.mkdirs();
+				direct = new File(Environment.getExternalStorageDirectory() + PathConstants.EXPORT);
+				successful = direct.mkdirs();
+				direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/worker");
+				successful = direct.mkdirs();
+				direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/vquarter");
+				successful = direct.mkdirs();
+				direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/pesticide");
+				successful = direct.mkdirs();
+				direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/fertilizer");
+				successful = direct.mkdirs();
+				direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/task");
+				successful = direct.mkdirs();
+				direct = new File(Environment.getExternalStorageDirectory() +PathConstants.IMPORT + "/machine");
+				successful = direct.mkdirs();
 			}
 		}
 		private boolean isSdPresent(){

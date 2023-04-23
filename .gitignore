@@ -7,3 +7,8 @@
 /mofa/build
 /local.properties
 .externalNativeBuild
+mapping.txt
+seeds.txt
+unused.txt
+mofa/debug/
+mofa/release/

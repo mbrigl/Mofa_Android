@@ -382,13 +382,13 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
 		}
 	private void setPredefWork(int taskId) {
 		String key = "LAST_TASK"; //creating key for last task
-		SharedPreferences prefs = getActivity().getSharedPreferences("it.schmid.android.mofa", Context.MODE_PRIVATE);
+		SharedPreferences prefs = getActivity().getSharedPreferences(PathConstants.ID, Context.MODE_PRIVATE);
 		prefs.edit().putInt(key,taskId).apply();
 		//Toast.makeText(getActivity(),DatabaseManager.getInstance().getFirstLandIdForIrrigation(workId),Toast.LENGTH_LONG).show();
 	}
 	private int getPredefWork (){
 		String key = "LAST_TASK";
-		SharedPreferences prefs = getActivity().getSharedPreferences("it.schmid.android.mofa", Context.MODE_PRIVATE);
+		SharedPreferences prefs = getActivity().getSharedPreferences(PathConstants.ID, Context.MODE_PRIVATE);
 		int taskId = (prefs.getInt(key, 0));
 		return taskId;
 

@@ -10,8 +10,8 @@ android {
         applicationId "it.bz.tol.mofa"
         minSdk 26
         targetSdk 32
-        versionCode 27
-        versionName "6.02"
+        versionCode 35
+        versionName "6.10"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -46,10 +46,10 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.google.code.gson:gson:2.2.4'
-    implementation 'com.google.http-client:google-http-client-android:1.39.2'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.google.http-client:google-http-client-android:1.43.1'
     implementation 'com.dropbox.core:dropbox-core-sdk:5.1.1'
     implementation 'com.squareup.okhttp:okhttp:2.7.5'
-    implementation 'com.squareup.okhttp3:okhttp:3.3.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'org.jsoup:jsoup:1.10.3'
 }
