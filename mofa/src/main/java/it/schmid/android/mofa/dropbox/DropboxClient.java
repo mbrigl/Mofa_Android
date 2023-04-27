@@ -20,8 +20,7 @@ public class DropboxClient {
     public static DbxClientV2 getClient(String ACCESS_TOKEN) {
         // Create Dropbox client
         DbxRequestConfig config = new DbxRequestConfig("dropbox/mofa-app", "en_US");
-        DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
-        return client;
+        return new DbxClientV2(config, ACCESS_TOKEN);
     }
 
     public static void authenticate(Context context, String secret) {
@@ -56,8 +55,7 @@ public class DropboxClient {
 
     public static boolean tokenExists(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PathConstants.ID, Context.MODE_PRIVATE);
-        String accessToken = prefs.getString("access-token", null);
-        return accessToken != null;
+        return prefs.getString("access-token", null) != null;
     }
     public static void deleteAccessToken(Context context){
         SharedPreferences prefs = context.getSharedPreferences(PathConstants.ID, Context.MODE_PRIVATE);

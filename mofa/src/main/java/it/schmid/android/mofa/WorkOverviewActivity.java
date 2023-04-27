@@ -3,6 +3,8 @@ package it.schmid.android.mofa;
 
 import it.schmid.android.mofa.adapter.WorkAdapter;
 import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.dropbox.DropboxClient;
+import it.schmid.android.mofa.dropbox.LoginActivity;
 import it.schmid.android.mofa.model.Work;
 
 import java.sql.SQLException;
@@ -240,8 +242,8 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 		     alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 		    	 public void onClick(DialogInterface dialog,int which) {
 		    		 //sendData();
-		    		 SendingProcess sending = new SendingProcess(WorkOverviewActivity.this,ActivityConstants.WORK_OVERVIEW);
-		    		 sending.sendData();
+					 SendingProcess sending = new SendingProcess(WorkOverviewActivity.this,ActivityConstants.WORK_OVERVIEW);
+					 sending.sendData();
 		    	 }
 		     });
 		  // Setting Negative "NO" Button

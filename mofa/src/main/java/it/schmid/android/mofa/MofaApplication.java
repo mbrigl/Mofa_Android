@@ -33,12 +33,8 @@ public class MofaApplication extends Application{
 	public static final Integer WORK_FERT=3;
 
 	static final String TAG ="MofaApplication";
-	//Dropbox Credentials
-	public static final String appKey = "zgo2dupm3ung3u6";
-    public static final String appSecret = "22u6lbkswjitll9";
     private static double defaultHour=8.00;
 	private HttpClient httpClient;
-	private Boolean license=false;
 	private static MofaApplication instance;
 	private ConcurrentHashMap<String, String> mGlobalVariables;
 	private Set<AppStateListener> mAppStateListeners;
@@ -144,12 +140,6 @@ public class MofaApplication extends Application{
 		SharedPreferences preferences;
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		return preferences.getString("fertilizersoilcode", "MD");
-	}
-	public Boolean getLicense() {
-		return license;
-	}
-	public void setLicense(Boolean license) {
-		this.license = license;
 	}
 	private void shutdownHttpClient() {
 		if(httpClient!=null && httpClient.getConnectionManager()!=null)	{

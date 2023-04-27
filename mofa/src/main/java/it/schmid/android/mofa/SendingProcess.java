@@ -2,6 +2,7 @@ package it.schmid.android.mofa;
 
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.dropbox.DropboxClient;
+import it.schmid.android.mofa.dropbox.LoginActivity;
 import it.schmid.android.mofa.model.Einsatzgrund;
 import it.schmid.android.mofa.model.Fertilizer;
 import it.schmid.android.mofa.model.Global;
@@ -50,6 +51,7 @@ import org.json.JSONObject;
 import org.xmlpull.v1.XmlSerializer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.os.Handler;
@@ -108,14 +110,6 @@ public void run(){
 	MofaApplication app = MofaApplication.getInstance();
 	backEndSoftware = app.getBackendSoftware();
 
-	if (format.equalsIgnoreCase("1")){ //JSON
-		try {
-			sendingData = createJSON();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}else{ //XML
 		if (Integer.parseInt(backEndSoftware)==1){ //special case ASA 
 
 			if (callingActivity==ActivityConstants.WORK_OVERVIEW){ //calling this asynch method from workoverview
@@ -149,8 +143,7 @@ public void run(){
 				sendingData = createVegDataXML();
 			}
 		}
-		
-	}
+
 	if (dropBox==true){ //DropBox case
 		writeFileToDropBox(sendingData, format);
 	}else{ //not Dropbox
@@ -187,6 +180,7 @@ public void run(){
     CharSequence tickerText = context.getString(R.string.upload_finished);  
 	if (error){
 		notifMess = context.getString(R.string.upload_finished_error);
+		handler2.sendEmptyMessage(0); // handler for updating UI task
 	}else{
 		notifMess = context.getString(R.string.upload_finished_ok);
 		handler.sendEmptyMessage(0); // handler for updating UI task
@@ -225,6 +219,15 @@ public void run(){
 
 	         }
 		};
+	/**
+	 * handler used for deleting and gui refreshing, accessing gui only through a handler
+	 */
+	private Handler handler2 = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			context.startActivity(new Intent(context, LoginActivity.class));
+		}
+	};
 		/**
 		 * helper function to handle the response of the webservice - not used for the moment
 		 * @param is-inputstream
@@ -233,85 +236,6 @@ public void run(){
 		public static String convertStreamToString(java.io.InputStream is) {
 		    java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
 		    return s.hasNext() ? s.next() : "";
-		}
-		private String createJSON() throws JSONException{
-		
-			JSONObject workData = null;
-			JSONArray mainArray = new JSONArray();
-			
-	        List<Work> workUploadList = DatabaseManager.getInstance().getAllWorks();
-			try {
-				for (Work work: workUploadList){
-					workData = new JSONObject();
-					workData.put("date", work.getDate());
-					workData.put("task", work.getTask().getId());		
-					List<WorkVQuarter> vquarters = DatabaseManager.getInstance().getVQuarterByWorkId(work.getId());
-						for (WorkVQuarter vq : vquarters){
-							JSONObject vqData = new JSONObject();
-							vqData.put("vquarter", vq.getVquarter().getId());
-							workData.accumulate("vq", vqData);
-						}
-					List<WorkWorker> workers = DatabaseManager.getInstance().getWorkWorkerByWorkId(work.getId());
-						for (WorkWorker w : workers){
-							JSONObject wData = new JSONObject();
-							wData.put("workerid", w.getWorker().getId());
-							wData.put("workerhours", w.getHours());
-							workData.accumulate("workers", wData);
-						}
-					List<WorkMachine> machines = DatabaseManager.getInstance().getWorkMachineByWorkId(work.getId());
-						for (WorkMachine m : machines){
-							JSONObject mData = new JSONObject();
-							mData.put("machineid", m.getMachine().getId());
-							mData.put("machinehours", m.getHours());
-							workData.accumulate("machines", mData);
-						}
-					List<WorkFertilizer> soilfertilizers = DatabaseManager.getInstance().getWorkFertilizerByWorkId(work.getId());
-						for (WorkFertilizer wf : soilfertilizers){
-							JSONObject mData = new JSONObject();
-							mData.put("soilfertid", wf.getSoilFertilizer().getId());
-							mData.put("machinehours", wf.getAmount());
-							workData.accumulate("soilfertilizers", mData);
-						}
-					List<Spraying> spraying = DatabaseManager.getInstance().getSprayingByWorkId(work.getId());
-						for (Spraying s : spraying){
-							JSONObject sprayData = new JSONObject();
-							sprayData.put("concentration", s.getConcentration());
-							sprayData.put("wateramount", s.getWateramount());
-							workData.accumulate("spraying", sprayData);
-							List<SprayPesticide> sprayPest = DatabaseManager.getInstance().getSprayPesticideBySprayId(s.getId());
-								for (SprayPesticide sp : sprayPest){
-									JSONObject sprayPestObject = new JSONObject();
-									sprayPestObject.put("pestid",sp.getPesticide().getId());
-									sprayPestObject.put("dose",sp.getDose());
-									sprayPestObject.put("amount",sp.getDose_amount());
-									workData.accumulate("sprayPesticide", sprayPestObject);
-								}
-							List<SprayFertilizer>sprayFert = DatabaseManager.getInstance().getSprayFertilizerBySprayId(s.getId());
-								for (SprayFertilizer sf : sprayFert){
-									JSONObject sprayFertObject = new JSONObject();
-									sprayFertObject.put("fertid", sf.getFertilizer().getId());
-									sprayFertObject.put("dose", sf.getDose());
-									sprayFertObject.put("amount", sf.getDose_amount());
-									workData.accumulate("sprayFertilizer", sprayFertObject);
-								}
-						}
-					
-					mainArray.put(workData);	
-				}
-					
-			}
-			catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		try {
-			Log.d("TAG", "[creatingJSON] - " + mainArray.toString(4)); //4 stays for intending the lines, make the return array human readable
-			
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return(mainArray.toString(4));
 		}
 		/**
 		 * 
@@ -1534,7 +1458,6 @@ public void run(){
 	 * 
 	 */
 	private void writeFileToDropBox(String data, String fileType){
-
 		Date date = new Date() ;
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss") ;
 		String filePath=null;
@@ -1573,7 +1496,7 @@ public void run(){
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			error=true;
+			error = true;
 		} catch (DbxException e){
 			error = true;
 		}

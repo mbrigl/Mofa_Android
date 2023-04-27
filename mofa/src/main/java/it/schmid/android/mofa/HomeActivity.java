@@ -77,14 +77,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 	private String format;
 	private String backEndSoftware;
     private MofaApplication app;
-	//**licensing variables
-	//private Handler mHandler;
-	//private LicenseChecker mChecker;
-	//private LicenseCheckerCallback mLicenseCheckerCallback;
-	boolean licensed;
-	//boolean checkingLicense;
-	//boolean didCheck;
-	
+
 	private SharedPreferences preferences;
 	//******************
 	// Dropbox credentials
@@ -220,26 +213,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 		       offline = preferences.getBoolean("updateOffline", false);
 		       dropBox = preferences.getBoolean("dropbox", false);
 		       format = preferences.getString("listFormat","-1");
-		       
 
-		      // Log.d(TAG, "Backendsoftware set to " + backEndSoftware);
-		       //removeLicenseFlag(); //only for testing		       //** checking if product is licensed !!!!
-		       //SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-		       //licensed = sharedPref.getBoolean("LICENSED", false);
-		       //** The following lines are to disable for productive use
-		       //licensed=app.getLicense();
-		       licensed=true; //only for TESTING, disabling this line for productive use !!!
-		       
-		      /*if (licensed==false){ //not licensed or still to check
-		    	   String deviceId = Secure.getString(getContentResolver(), Secure.ANDROID_ID);
-			       Log.i("Device Id", deviceId);
-			       mHandler = new Handler();
-			       mLicenseCheckerCallback = new MyLicenseCheckerCallback();
-			       mChecker = new LicenseChecker(this, new ServerManagedPolicy(this, new   AESObfuscator(SALT, getPackageName(), deviceId)), BASE64_PUBLIC_KEY);
-			       doCheck();
-		     }*/
-		      if (licensed==true){ //seems to be licensed, go on..
-		    	  app.setLicense(true);
 				  if (resetDropbox == true){ //resetting the link if enabled in preferences
 					  DropboxClient.deleteAccessToken(this);
 					  Editor editor = preferences.edit(); //resetting this preference to false
@@ -250,9 +224,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 					   if (!DropboxClient.tokenExists(this)) { //Dropbox API V2 - check if Token exists
 						   //No token
 						   //Back to LoginActivity
-						   Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-						   startActivity(intent);
-
+						   startActivity(new Intent(HomeActivity.this, LoginActivity.class));
 					   }else {
 						   ACCESS_TOKEN = DropboxClient.retrieveAccessToken(this);
 						   importFromDropbox();
@@ -270,15 +242,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 				       }
 			    	   showImportDialog();
 			       }
-		       }
-		       
-		       
-		       
-		       
 	           break;
-	 //     case 4 :
-	 //   	  startActivity(new Intent(this, GPSLocationActivity.class));
-	 //          break;
 	      case 4: 
 	    	  startActivity(new Intent (this, PurchaseActivity.class));
 	    	  break;
