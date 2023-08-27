@@ -3,15 +3,15 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "it.bz.tol.mofa"
         minSdk 26
-        targetSdk 32
-        versionCode 36
-        versionName "6.11"
+        targetSdk 33
+        versionCode 37
+        versionName "6.12"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
