@@ -1,9 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:orientation="vertical"
-    >
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <EditText
         android:layout_width="fill_parent"
@@ -11,14 +10,14 @@
         android:id="@+id/txt_search_pesticide"
         tools:context=".SearchAndFilterList"
         android:hint="@string/search_str_pesticide" />
-    <ListView 
+
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/list_view_pesticide"
         android:layout_below="@+id/txt_search_pesticide"
-        android:layout_above="@+id/btnclose">
-    </ListView>
-		
+        android:layout_above="@+id/btnclose"></ListView>
+
     <Button
         android:id="@+id/clear_search"
         android:layout_width="wrap_content"
@@ -27,10 +26,12 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/ic_content_remove" />
-   	<Button android:id="@+id/btnclose" 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="@string/closebutton"/>
-			
+
+    <Button
+        android:id="@+id/btnclose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/closebutton" />
+
 </RelativeLayout>

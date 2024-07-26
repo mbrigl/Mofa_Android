@@ -3,18 +3,18 @@
     <style name="AppTheme" parent="android:Theme.Light">
         <item name="colorAccent">@color/floating_action_button_color</item>
     </style>
-	
 
 
-	<style name="value">
-		<item name="android:textSize">30sp</item>
-	</style>
+    <style name="value">
+        <item name="android:textSize">30sp</item>
+    </style>
 
-	<style name="label" parent="@style/value">
-		<item name="android:textStyle">bold</item>
-		<item name="android:paddingRight">5dip</item>
-	</style>
-	<style name="HomeButton">
+    <style name="label" parent="@style/value">
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingRight">5dip</item>
+    </style>
+
+    <style name="HomeButton">
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -22,13 +22,15 @@
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textSize">@dimen/home_button_text_size</item>
         <item name="android:textStyle">normal</item>
-        
+
         <item name="android:background">@null</item>
     </style>
+
     <style name="CustomDialog" parent="@style/Theme.AppCompat.Light.Dialog">
         <item name="android:windowNoTitle">false</item>
     </style>
-    <style name="spinnerStyle"  parent="@android:style/Widget.TextView.SpinnerItem">
+
+    <style name="spinnerStyle" parent="@android:style/Widget.TextView.SpinnerItem">
         <item name="android:padding">10sp</item>
     </style>
 </resources>

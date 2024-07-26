@@ -39,6 +39,7 @@ public class DropboxClient {
             context.startActivity(intent);
         }
     }
+
     public static String retrieveAccessToken(Context context) {
         //check if ACCESS_TOKEN is previously stored on previous app launches
         SharedPreferences prefs = context.getSharedPreferences(PathConstants.ID, Context.MODE_PRIVATE);
@@ -57,7 +58,8 @@ public class DropboxClient {
         SharedPreferences prefs = context.getSharedPreferences(PathConstants.ID, Context.MODE_PRIVATE);
         return prefs.getString("access-token", null) != null;
     }
-    public static void deleteAccessToken(Context context){
+
+    public static void deleteAccessToken(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PathConstants.ID, Context.MODE_PRIVATE);
         prefs.edit().remove("access-token").commit();
     }

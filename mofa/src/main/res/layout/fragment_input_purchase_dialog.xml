@@ -1,12 +1,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content" android:layout_height="wrap_content"
-    android:layout_gravity="center" android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
     tools:context="it.schmid.android.mofa.InputPurchaseDialogFragment">
+
     <TextView
-        android:id="@+id/lbl_purchase_amount" android:text="@string/input_purchase_amount"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        />
+        android:id="@+id/lbl_purchase_amount"
+        android:text="@string/input_purchase_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <EditText
 
@@ -16,9 +20,12 @@
         android:inputType="numberDecimal"
         android:digits="0123456789.,$"
         android:imeOptions="actionDone" />
+
     <TextView
-        android:id="@+id/lbl_purchase_price" android:text="@string/input_purchase_price"
-        android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        android:id="@+id/lbl_purchase_price"
+        android:text="@string/input_purchase_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/txt_purchase_price"
@@ -28,21 +35,24 @@
         android:digits="0123456789.,$"
         android:selectAllOnFocus="true"
         android:imeOptions="actionDone" />
+
     <TableLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
+
         <TableRow
             android:id="@+id/tableRow1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
 
-        <Button
-            android:id="@+id/cancel_confirm_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cancelbutton" />
-        <Button
+            <Button
+                android:id="@+id/cancel_confirm_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancelbutton" />
+
+            <Button
                 android:id="@+id/ok_confirm_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

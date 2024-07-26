@@ -15,6 +15,7 @@
         android:layout_weight="0.04">
 
     </TextView>
+
     <TextView
         android:id="@+id/hourslabel"
         android:layout_width="wrap_content"

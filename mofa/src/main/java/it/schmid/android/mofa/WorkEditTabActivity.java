@@ -1,27 +1,26 @@
 package it.schmid.android.mofa;
 
-import it.schmid.android.mofa.db.DatabaseManager;
-import it.schmid.android.mofa.model.Work;
-
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBar.Tab;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.TextView;
 
+import java.util.ArrayList;
 
+import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.model.Work;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBar.Tab;
 /**
  * @author schmida
- *         Main Class for works
+ * Main Class for works
  */
 public class WorkEditTabActivity extends DashboardActivity implements WorkEditWorkFragment.ShowSprayTabListener, WorkEditWorkFragment.SetWorkIdListener, WorkEditWorkFragment.CompleteBehaviour,
         WorkEditWorkFragment.ShowSoilFertilizerTabListener, WorkEditWorkFragment.ShowHarvestTabListener, WorkEditWorkFragment.ShowWaterTabListener {
@@ -119,7 +118,7 @@ public class WorkEditTabActivity extends DashboardActivity implements WorkEditWo
     //callback methods from workeditworkactivity, after selecting the spraying task
     public void showSprayTabListener(int workId, Boolean status) {
 
-        if (status == true) {
+        if (status) {
             Log.d(TAG, "[callback - showSprayTabListener] - Invoking the callback method with workid: " + workId);
             showSprayTab();
         }
@@ -127,7 +126,7 @@ public class WorkEditTabActivity extends DashboardActivity implements WorkEditWo
 
     //callback method from workeditworkactivity, after selecting the fertilizing task -> task.id ==2
     public void showSoilFertilizerTab(int workId, Boolean status) {
-        if (status == true) {
+        if (status) {
             showSoilFertTab();
         }
 
@@ -136,7 +135,7 @@ public class WorkEditTabActivity extends DashboardActivity implements WorkEditWo
     //callback method from workeditworkfragment, after selecting a work contains harvest codes
     public void showHarvestTabListener(int workId, Boolean status) {
         // TODO Auto-generated method stub
-        if (status == true) {
+        if (status) {
             showHarvestTab();
         }
     }
@@ -170,8 +169,8 @@ public class WorkEditTabActivity extends DashboardActivity implements WorkEditWo
 
         //setting the validity of an entry
         Boolean valid = false;
-        Log.d(TAG, "[onPause] land is " + mofaApplication.getGlobalVariable("land").toString());
-        Log.d(TAG, "[onPause] worker is " + mofaApplication.getGlobalVariable("worker").toString());
+        Log.d(TAG, "[onPause] land is " + mofaApplication.getGlobalVariable("land"));
+        Log.d(TAG, "[onPause] worker is " + mofaApplication.getGlobalVariable("worker"));
         if (mofaApplication.getGlobalVariable("land").equalsIgnoreCase("valid") && mofaApplication.getGlobalVariable("worker").equalsIgnoreCase("valid")) {
             //	Log.d(TAG, "[onPause] land and worker are valid" );
             valid = true;

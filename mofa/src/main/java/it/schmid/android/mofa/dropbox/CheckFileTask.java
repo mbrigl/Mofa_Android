@@ -5,8 +5,6 @@ import android.util.Log;
 
 import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
-import com.dropbox.core.v2.files.ListFolderResult;
-import com.dropbox.core.v2.files.Metadata;
 
 import java.util.ArrayList;
 
@@ -17,14 +15,14 @@ import it.schmid.android.mofa.PathConstants;
  * Created by schmida on 22.07.16.
  */
 public class CheckFileTask extends AsyncTask<String, Void, ArrayList<Integer>> {
-    String[] elements = {"/land","/vquarter", "/machine","/worker", "/task","/pesticide", "/fertilizer", "/soilfertilizer", "/category", "/extra","/reason","/weather"};
+    String[] elements = {"/land", "/vquarter", "/machine", "/worker", "/task", "/pesticide", "/fertilizer", "/soilfertilizer", "/category", "/extra", "/reason", "/weather"};
 
     private final DbxClientV2 mDbxClient;
     private final Callback mCallback;
     private Exception mException;
     private final ArrayList<Integer> selElements = new ArrayList<Integer>();
-    private String[] mElementDesc ;
-    private StringBuilder sb = new StringBuilder();
+    private final String[] mElementDesc;
+    private final StringBuilder sb = new StringBuilder();
 
     public interface Callback {
         void onDataLoaded(ArrayList<Integer> result, StringBuilder sb);
@@ -55,18 +53,18 @@ public class CheckFileTask extends AsyncTask<String, Void, ArrayList<Integer>> {
     protected ArrayList<Integer> doInBackground(String... params) {
         String fileName = params[0];
         int pos = 1;
-        for (String element: elements) {
+        for (String element : elements) {
             try {
-                String path = PathConstants.IMPORT +element+fileName;
+                String path = PathConstants.IMPORT + element + fileName;
                 mDbxClient.files().getMetadata(path);
 
-                sb.append(mElementDesc[pos-1]);
+                sb.append(mElementDesc[pos - 1]);
                 sb.append("\n");
                 selElements.add(pos);
-            }catch(DbxException e){
-                Log.d("Error Dropbox",e.getLocalizedMessage());
+            } catch (DbxException e) {
+                Log.d("Error Dropbox", e.getLocalizedMessage());
             }
-            pos ++;
+            pos++;
         }
         return selElements;
     }

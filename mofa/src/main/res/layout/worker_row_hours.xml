@@ -3,31 +3,33 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:descendantFocusability="blocksDescendants" >
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-         
-        android:src="@drawable/ic_social_person" >
-    </ImageView> 
-    <TextView
-	    android:id="@+id/workerlabel"
-	    android:layout_width="wrap_content"
-	    android:layout_height="fill_parent"
-	    android:layout_toRightOf="@id/icon"
-	    android:textSize="16sp"
-	    android:focusable="false"
-		android:focusableInTouchMode="false"
-	     >
 
-    </TextView>
-</RelativeLayout>
-<LinearLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:descendantFocusability="blocksDescendants">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+
+            android:src="@drawable/ic_social_person"></ImageView>
+
+        <TextView
+            android:id="@+id/workerlabel"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_toRightOf="@id/icon"
+            android:textSize="16sp"
+            android:focusable="false"
+            android:focusableInTouchMode="false">
+
+        </TextView>
+    </RelativeLayout>
+
+    <LinearLayout
         android:id="@+id/toolbar"
 
         android:layout_width="fill_parent"
@@ -49,10 +51,7 @@
             >
 
         </TextView>
-</LinearLayout>
-
-
-
+    </LinearLayout>
 
 
 </LinearLayout>

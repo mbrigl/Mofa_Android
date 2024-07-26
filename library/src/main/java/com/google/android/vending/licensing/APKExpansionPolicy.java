@@ -68,10 +68,10 @@ public class APKExpansionPolicy implements Policy {
     private long mRetryCount;
     private long mLastResponseTime = 0;
     private int mLastResponse;
-    private PreferenceObfuscator mPreferences;
-    private Vector<String> mExpansionURLs = new Vector<String>();
-    private Vector<String> mExpansionFileNames = new Vector<String>();
-    private Vector<Long> mExpansionFileSizes = new Vector<Long>();
+    private final PreferenceObfuscator mPreferences;
+    private final Vector<String> mExpansionURLs = new Vector<String>();
+    private final Vector<String> mExpansionFileNames = new Vector<String>();
+    private final Vector<Long> mExpansionFileSizes = new Vector<Long>();
 
     /**
      * The design of the protocol supports n files. Currently the market can
@@ -240,7 +240,7 @@ public class APKExpansionPolicy implements Policy {
             // No response or not parseable, expire immediately
             Log.w(TAG, "License retry timestamp (GT) missing, grace period disabled");
             retryUntil = "0";
-            lRetryUntil = 0l;
+            lRetryUntil = 0L;
         }
 
         mRetryUntil = lRetryUntil;
@@ -266,7 +266,7 @@ public class APKExpansionPolicy implements Policy {
             // No response or not parseable, expire immediately
             Log.w(TAG, "Licence retry count (GR) missing, grace period disabled");
             maxRetries = "0";
-            lMaxRetries = 0l;
+            lMaxRetries = 0L;
         }
 
         mMaxRetries = lMaxRetries;
@@ -361,10 +361,8 @@ public class APKExpansionPolicy implements Policy {
         if (mLastResponse == Policy.LICENSED) {
             // Check if the LICENSED response occurred within the validity
             // timeout.
-            if (ts <= mValidityTimestamp) {
-                // Cached LICENSED response is still valid.
-                return true;
-            }
+            // Cached LICENSED response is still valid.
+            return ts <= mValidityTimestamp;
         } else if (mLastResponse == Policy.RETRY &&
                 ts < mLastResponseTime + MILLIS_PER_MINUTE) {
             // Only allow access if we are within the retry period or we haven't

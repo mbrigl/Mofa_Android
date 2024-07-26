@@ -1,198 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_weight="0.1"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-		<TableLayout
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content" >
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
-		    <TableRow
-		        android:id="@+id/tableRow3"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content" >
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-		        <TextView
-		            android:id="@+id/concentration"
-		            android:layout_width="0dp"
-		            android:layout_height="wrap_content"
-		            android:layout_column="0"
-		            android:layout_weight="50"
-		            android:background="@color/lightgreen"
-		            android:text="@string/concentrationcaption" />
+            <TextView
+                android:id="@+id/concentration"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_weight="50"
+                android:background="@color/lightgreen"
+                android:text="@string/concentrationcaption" />
 
-		        <TextView
-		            android:id="@+id/sumwatercaption"
-		            android:layout_width="0dp"
-		            android:layout_height="wrap_content"
-		            android:layout_column="1"
-		            android:layout_weight="50"
-		            android:background="@color/lightgreen"
-		            android:text="@string/sumwatercaption" />
-		        
-		    </TableRow>
-   
-		    <TableRow
-		        android:id="@+id/tableRow4"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content" >
+            <TextView
+                android:id="@+id/sumwatercaption"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_weight="50"
+                android:background="@color/lightgreen"
+                android:text="@string/sumwatercaption" />
 
-		        <Spinner
-		            android:id="@+id/concent_spinner"
-		            android:layout_width="0dp"
-		            android:layout_height="wrap_content"
-		            android:layout_column="0"
-		            android:layout_weight="50"
-		            android:layout_gravity="center_vertical" />
+        </TableRow>
 
-				<EditText
-				    android:id="@+id/sumwater"
-				    android:layout_width="0dp"
-				    android:layout_height="wrap_content"
-				    android:layout_column="1"
-				    android:layout_weight="50"
-				    android:inputType="numberDecimal"
-        			android:digits="0123456789."
-				    android:hint="0"
-                    tools:ignore="HardcodedText" />
-				 <ImageView
-       				android:id="@+id/refresh_sumwater_icon"
-       				android:layout_width="wrap_content"
-       				android:layout_height="fill_parent"
-        			android:layout_alignParentRight="true"
-              		android:src="@drawable/ic_action_refresh" />
-				
-		    </TableRow>
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-		    <TableRow
-		        android:id="@+id/tableRow5"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content" >
+            <Spinner
+                android:id="@+id/concent_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_weight="50"
+                android:layout_gravity="center_vertical" />
 
-				<ImageButton
-				    android:id="@+id/work_select_pest"
-				    android:layout_width="0dp"
-				    android:layout_height="wrap_content"
-				    android:layout_weight="20"
-				    android:src="@drawable/pesticide_bottle" 
-				    android:contentDescription="@string/imagepesticide"/>
+            <EditText
+                android:id="@+id/sumwater"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_weight="50"
+                android:inputType="numberDecimal"
+                android:digits="0123456789."
+                android:hint="0"
+                tools:ignore="HardcodedText" />
 
-        		<ListView
-        		    android:id="@+id/currpesticidelist"
-        		    android:layout_width="0dp"
-        		    android:layout_height="wrap_content"
-        		    android:layout_weight="80" >
+            <ImageView
+                android:id="@+id/refresh_sumwater_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_action_refresh" />
 
-    			</ListView>
-			</TableRow>	
+        </TableRow>
 
-			<TableRow
-			    android:id="@+id/tableRow7"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content" >
+        <TableRow
+            android:id="@+id/tableRow5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-				<TextView
-				    android:layout_width="0dp"
-				    android:layout_height="wrap_content"
-				    android:layout_weight="20" />
+            <ImageButton
+                android:id="@+id/work_select_pest"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:src="@drawable/pesticide_bottle"
+                android:contentDescription="@string/imagepesticide" />
 
-        		<ListView
-        		    android:id="@+id/currfertilizerlist"
-        		    android:layout_width="0dp"
-        		    android:layout_height="wrap_content"
-        		    android:layout_column="1"
-        		    android:layout_weight="80" >
+            <ListView
+                android:id="@+id/currpesticidelist"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="80">
 
-    			</ListView>
-			</TableRow>
-			<TableRow
-				android:id="@+id/tableRow8"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" >
+            </ListView>
+        </TableRow>
 
-				<TextView
-                    android:id="@+id/constraintstxtbox"
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_weight="80"
-					android:background="@color/lightgreen"
-					android:text = "Keine Warnungen"
-					android:lines="3"
-					android:maxLines="3"
-                    />
-				<ImageView
-					android:id="@+id/refresh_constraint_icon"
-					android:layout_width="wrap_content"
-					android:layout_height="fill_parent"
-					android:layout_alignParentRight="true"
-					android:src="@drawable/ic_action_refresh" />
+        <TableRow
+            android:id="@+id/tableRow7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-			</TableRow>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="20" />
+
+            <ListView
+                android:id="@+id/currfertilizerlist"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_weight="80">
+
+            </ListView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/constraintstxtbox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="80"
+                android:background="@color/lightgreen"
+                android:text="Keine Warnungen"
+                android:lines="3"
+                android:maxLines="3" />
+
+            <ImageView
+                android:id="@+id/refresh_constraint_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_action_refresh" />
+
+        </TableRow>
 
 
+        <TableRow
+            android:id="@+id/tableRow9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1">
 
-			<TableRow
-				android:id="@+id/tableRow9"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:stretchColumns="1">
-				<ImageButton
-					android:id="@+id/imageButton1"
-					android:layout_width="0dip"
-					android:layout_weight="1"
-					android:gravity="center"
-					android:src="@drawable/ic_sun" />
-				<ImageButton
-					android:id="@+id/imageButton2"
-					android:layout_width="0dip"
-					android:layout_weight="1"
-					android:gravity="center"
-					android:src="@drawable/ic_part_cloud" />
-				<ImageButton
-					android:id="@+id/imageButton3"
-					android:layout_width="0dip"
-					android:layout_weight="1"
-					android:gravity="center"
-					android:src="@drawable/ic_clouds" />
-				<ImageButton
-					android:id="@+id/imageButton4"
-					android:layout_width="0dip"
-					android:layout_weight="1"
-					android:gravity="center"
-					android:src="@drawable/ic_lightrain" />
-				<ImageButton
-					android:id="@+id/imageButton5"
-					android:layout_width="0dip"
-					android:layout_weight="1"
-					android:gravity="center"
-					android:src="@drawable/ic_rain" />
-				<ImageButton
-					android:id="@+id/imageButton6"
-					android:layout_width="0dip"
-					android:layout_weight="1"
-					android:gravity="center"
-					android:src="@drawable/ic_moon" />
-			</TableRow>
-		</TableLayout>
+            <ImageButton
+                android:id="@+id/imageButton1"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:src="@drawable/ic_sun" />
 
-	
-	<View
-    android:layout_width="fill_parent"
-    android:layout_height="1dp"
-    android:background="@android:color/darker_gray"/>
-<LinearLayout
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content" >
-		<Button
-	    android:id="@+id/spray_save_button"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@string/work_save_button" >
-</Button>
-</LinearLayout>
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:src="@drawable/ic_part_cloud" />
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:src="@drawable/ic_clouds" />
+
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:src="@drawable/ic_lightrain" />
+
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:src="@drawable/ic_rain" />
+
+            <ImageButton
+                android:id="@+id/imageButton6"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:src="@drawable/ic_moon" />
+        </TableRow>
+    </TableLayout>
+
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/spray_save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/work_save_button"></Button>
+    </LinearLayout>
 </LinearLayout>

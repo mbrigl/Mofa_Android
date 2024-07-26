@@ -3,38 +3,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:descendantFocusability="blocksDescendants" >
+    android:descendantFocusability="blocksDescendants">
+
     <ImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-         
-        android:src="@drawable/ic_social_person" >
-    </ImageView> 
+
+        android:src="@drawable/ic_social_person"></ImageView>
+
     <TextView
-	    android:id="@+id/workerlabel"
-	    android:layout_width="wrap_content"
-	    android:layout_height="fill_parent"
-	    android:layout_toRightOf="@id/icon"
-	    android:textSize="16sp"
-	    android:focusable="false"
-		android:focusableInTouchMode="false"
-	     >
+        android:id="@+id/workerlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_toRightOf="@id/icon"
+        android:textSize="16sp"
+        android:focusable="false"
+        android:focusableInTouchMode="false">
 
     </TextView>
+
     <TextView
-	    android:id="@+id/hourslabel"
-	    android:layout_width="wrap_content"
-	    android:layout_height="fill_parent"
-	    android:textSize="16sp"
-	    android:visibility="gone"
-	    android:focusable="false"
-		android:focusableInTouchMode="false"
+        android:id="@+id/hourslabel"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:layout_toRightOf="@id/workerlabel"
         android:layout_toLeftOf="@id/selected"
         android:gravity="center"
 
-	     >
+        >
 
     </TextView>
 

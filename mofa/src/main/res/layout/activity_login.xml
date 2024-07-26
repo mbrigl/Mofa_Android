@@ -8,6 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="it.schmid.android.mofa.dropbox.LoginActivity">
+
     <Button
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"

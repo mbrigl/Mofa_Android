@@ -7,7 +7,7 @@ import org.json.JSONObject;
  * Created by schmida on 02.09.14.
  */
 public final class Util {
-    public static String getJSONString(JSONObject jsonObject, String key){
+    public static String getJSONString(JSONObject jsonObject, String key) {
         String data = null;
         try {
             data = jsonObject.getString(key);
@@ -16,6 +16,7 @@ public final class Util {
         }
         return data;
     }
+
     public static int getJSONInt(JSONObject jsonObject, String key) {
         int data;
         try {
@@ -25,7 +26,8 @@ public final class Util {
         }
         return data;
     }
-    public static double getJSONDouble(JSONObject jsonObject, String key){
+
+    public static double getJSONDouble(JSONObject jsonObject, String key) {
         double data = 0;
         try {
             data = jsonObject.getDouble(key);

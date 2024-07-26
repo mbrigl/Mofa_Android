@@ -2,8 +2,6 @@ package it.schmid.android.mofa.vegdata;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,14 +28,14 @@ import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.VQuarter;
 
 
-public class BlossomStartFragment extends Fragment implements ExpandableVegDataAdapter.VegDataListener,ClearInterface {
+public class BlossomStartFragment extends Fragment implements ExpandableVegDataAdapter.VegDataListener, ClearInterface {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private String mJsonStr;
-    private HashMap<Land,List<VQuarter>> landMap;
+    private HashMap<Land, List<VQuarter>> landMap;
     private List<Land> lands;
-    private HashMap<String,String> setDateMap;
+    private HashMap<String, String> setDateMap;
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
     private OnBlossomStartInteractionListener mListener;
@@ -48,7 +49,6 @@ public class BlossomStartFragment extends Fragment implements ExpandableVegDataA
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
-     *
      * @return A new instance of fragment BlossomStartFragment.
      */
     // TODO: Rename and change types and number of parameters
@@ -74,8 +74,8 @@ public class BlossomStartFragment extends Fragment implements ExpandableVegDataA
             mJsonStr = getArguments().getString(ARG_PARAM1);
 
         }
-        lands = ((VegDataActivity)this.getActivity()).getLands();
-        landMap = ((VegDataActivity)this.getActivity()).getLandMap();
+        lands = ((VegDataActivity) this.getActivity()).getLands();
+        landMap = ((VegDataActivity) this.getActivity()).getLandMap();
         loadHashMapfromJson();
     }
 
@@ -92,21 +92,24 @@ public class BlossomStartFragment extends Fragment implements ExpandableVegDataA
         super.onViewCreated(view, savedInstanceState);
         expandableListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
         expandableListView.setGroupIndicator(null);
-        expandableListAdapter = new ExpandableVegDataAdapter(getActivity(),lands,landMap,setDateMap, ActivityConstants.BLOSSOMSTART, this);
+        expandableListAdapter = new ExpandableVegDataAdapter(getActivity(), lands, landMap, setDateMap, ActivityConstants.BLOSSOMSTART, this);
 
         expandableListView.setAdapter(expandableListAdapter);
 
 
     }
-    private void loadHashMapfromJson(){
-        Type type = new TypeToken<HashMap<String, String>>(){}.getType();
+
+    private void loadHashMapfromJson() {
+        Type type = new TypeToken<HashMap<String, String>>() {
+        }.getType();
         Gson gson = new Gson();
-        setDateMap =  gson.fromJson(mJsonStr, type);
+        setDateMap = gson.fromJson(mJsonStr, type);
         if (setDateMap == null) {
-            setDateMap = new HashMap<String,String>();
+            setDateMap = new HashMap<String, String>();
         }
     }
-    private String createJsonFromMap(){
+
+    private String createJsonFromMap() {
 
         Gson gson = new Gson();
         String json = gson.toJson(setDateMap);
@@ -115,15 +118,13 @@ public class BlossomStartFragment extends Fragment implements ExpandableVegDataA
     }
 
 
-
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnBlossomStartInteractionListener) {
             mListener = (OnBlossomStartInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
+            throw new RuntimeException(context
                     + " must implement OnFragmentInteractionListener");
         }
     }
@@ -131,7 +132,7 @@ public class BlossomStartFragment extends Fragment implements ExpandableVegDataA
     @Override
     public void onPause() {
         super.onPause();
-       // Log.d("onPause ", "current json string " + createJsonFromMap());
+        // Log.d("onPause ", "current json string " + createJsonFromMap());
     }
 
     @Override

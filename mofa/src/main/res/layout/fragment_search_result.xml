@@ -5,7 +5,6 @@
     android:weightSum="1">
 
 
-
     <ExpandableListView
         android:id="@+id/resultlistview"
         android:layout_width="wrap_content"
@@ -13,10 +12,11 @@
         android:padding="5dp"
         android:groupIndicator="@drawable/ic_anlagen"
         android:listSelector="@drawable/list_selector"
-        android:layout_weight="1">
-    </ExpandableListView>
-    <Button android:id="@+id/searchclose_btn"
+        android:layout_weight="1"></ExpandableListView>
+
+    <Button
+        android:id="@+id/searchclose_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/closebutton"/>
+        android:text="@string/closebutton" />
 </LinearLayout>

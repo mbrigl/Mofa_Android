@@ -3,11 +3,9 @@ package it.schmid.android.mofa.dropbox;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
-import com.dropbox.core.v2.DbxPathV2;
 
 import it.schmid.android.mofa.PathConstants;
 
@@ -15,9 +13,10 @@ import it.schmid.android.mofa.PathConstants;
  * Created by schmida on 22.07.16.
  */
 public class CreateFolderTask extends AsyncTask {
-    private DbxClientV2 dbxClient;
+    private final DbxClientV2 dbxClient;
 
-    private Context context;
+    private final Context context;
+
     CreateFolderTask(DbxClientV2 dbxClient, Context context) {
         this.dbxClient = dbxClient;
 

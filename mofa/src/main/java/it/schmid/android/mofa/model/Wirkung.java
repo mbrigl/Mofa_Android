@@ -113,8 +113,9 @@ public class Wirkung {
 
     @Override
     public String toString() {
-        return getGrund()+ ", "+ getKultur();
+        return getGrund() + ", " + getKultur();
     }
+
     @Override
     public boolean equals(Object w) {
 
@@ -125,7 +126,7 @@ public class Wirkung {
         Wirkung wirkung = (Wirkung) w;
         return
                 Objects.equals(grund, wirkung.grund) &&
-                Objects.equals(kultur, wirkung.kultur);
+                        Objects.equals(kultur, wirkung.kultur);
     }
 
     @Override

@@ -2,25 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal" >
-    
-    <TextView android:id="@+id/landname"
-        android:paddingLeft="50dip"
-         android:textSize="@dimen/text_size_large"
-         android:textStyle="italic"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginTop="10dip"
-         android:layout_alignParentLeft="true"
-         />
+    android:orientation="horizontal">
 
-    <CheckBox android:id="@+id/selected_land"
-    	android:focusable="false"
-            android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_alignParentRight="true"
-           
-          />     
-   
-    
+    <TextView
+        android:id="@+id/landname"
+        android:paddingLeft="50dip"
+        android:textSize="@dimen/text_size_large"
+        android:textStyle="italic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:layout_alignParentLeft="true" />
+
+    <CheckBox
+        android:id="@+id/selected_land"
+        android:focusable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+
+        />
+
+
 </RelativeLayout>

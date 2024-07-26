@@ -1,35 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    <PreferenceCategory
-    android:title="Internet - Services" >
-       
-    <EditTextPreference
-        android:key="url"
-        android:summary="Please enter REST path"
-        android:title="REST path" />
-         />
-    <CheckBoxPreference
-		android:key="updateOffline"
-		android:title="@string/updateoffline"/>
-    <CheckBoxPreference
-		android:key="dropbox"
-		android:title="@string/dropbox"
-		android:defaultValue="1"/>
-    <CheckBoxPreference
-		android:key="dropboxreset"
-		android:title="@string/dropboxreset"/>
-    <CheckBoxPreference
-        android:key="showPestInfos"
-        android:title="@string/showPestInfos"/>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Internet - Services">
 
-    <ListPreference
-       android:title="Format"
-       android:summary="File format"
-       android:key="listFormat"
-       android:defaultValue="2"
-       android:entries="@array/listWebFormat"
-       android:entryValues="@array/listWebFormatValues"
-       />
+        <EditTextPreference
+            android:key="url"
+            android:summary="Please enter REST path"
+            android:title="REST path" />
+        />
+        <CheckBoxPreference
+            android:key="updateOffline"
+            android:title="@string/updateoffline" />
+        <CheckBoxPreference
+            android:key="dropbox"
+            android:title="@string/dropbox"
+            android:defaultValue="1" />
+        <CheckBoxPreference
+            android:key="dropboxreset"
+            android:title="@string/dropboxreset" />
+        <CheckBoxPreference
+            android:key="showPestInfos"
+            android:title="@string/showPestInfos" />
+
+        <ListPreference
+            android:title="Format"
+            android:summary="File format"
+            android:key="listFormat"
+            android:defaultValue="2"
+            android:entries="@array/listWebFormat"
+            android:entryValues="@array/listWebFormatValues" />
         <ListPreference
             android:defaultValue="1"
             android:entries="@array/listBackend"
@@ -39,6 +37,5 @@
             android:title="Backend Software" />
     </PreferenceCategory>
 
-	
-	
+
 </PreferenceScreen>

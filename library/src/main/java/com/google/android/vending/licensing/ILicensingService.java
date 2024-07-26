@@ -12,7 +12,7 @@ import android.os.Parcel;
 public interface ILicensingService extends android.os.IInterface
 {
 /** Local-side IPC implementation stub class. */
-public static abstract class Stub extends android.os.Binder implements com.google.android.vending.licensing.ILicensingService
+abstract class Stub extends android.os.Binder implements com.google.android.vending.licensing.ILicensingService
 {
 private static final java.lang.String DESCRIPTOR = "com.android.vending.licensing.ILicensingService";
 /** Construct the stub at attach it to the interface. */
@@ -65,7 +65,7 @@ return super.onTransact(code, data, reply, flags);
 }
 private static class Proxy implements com.google.android.vending.licensing.ILicensingService
 {
-private android.os.IBinder mRemote;
+private final android.os.IBinder mRemote;
 Proxy(android.os.IBinder remote)
 {
 mRemote = remote;
@@ -93,7 +93,7 @@ _data.recycle();
 }
 }
 }
-static final int TRANSACTION_checkLicense = (IBinder.FIRST_CALL_TRANSACTION + 0);
+static final int TRANSACTION_checkLicense = (IBinder.FIRST_CALL_TRANSACTION);
 }
-public void checkLicense(long nonce, java.lang.String packageName, com.google.android.vending.licensing.ILicenseResultListener listener) throws android.os.RemoteException;
+void checkLicense(long nonce, java.lang.String packageName, com.google.android.vending.licensing.ILicenseResultListener listener) throws android.os.RemoteException;
 }

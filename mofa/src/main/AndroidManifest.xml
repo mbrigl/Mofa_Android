@@ -14,7 +14,10 @@
         android:icon="@drawable/ic_mofa_main"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light">
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <activity
             android:name=".HomeActivity"
             android:label="@string/app_name"

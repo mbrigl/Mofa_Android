@@ -2,8 +2,6 @@ package it.schmid.android.mofa.vegdata;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -34,7 +35,7 @@ import it.schmid.android.mofa.model.VQuarter;
  * Use the {@link BlossomEndFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BlossomEndFragment extends Fragment implements ExpandableVegDataAdapter.VegDataListener,ClearInterface {
+public class BlossomEndFragment extends Fragment implements ExpandableVegDataAdapter.VegDataListener, ClearInterface {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -42,9 +43,9 @@ public class BlossomEndFragment extends Fragment implements ExpandableVegDataAda
 
     // TODO: Rename and change types of parameters
     private String mJsonStr;
-    private HashMap<Land,List<VQuarter>> landMap;
+    private HashMap<Land, List<VQuarter>> landMap;
     private List<Land> lands;
-    private HashMap<String,String> setDateMap;
+    private HashMap<String, String> setDateMap;
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
 
@@ -59,7 +60,6 @@ public class BlossomEndFragment extends Fragment implements ExpandableVegDataAda
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
-     *
      * @return A new instance of fragment BlossomEndFragment.
      */
     // TODO: Rename and change types and number of parameters
@@ -79,8 +79,8 @@ public class BlossomEndFragment extends Fragment implements ExpandableVegDataAda
             mJsonStr = getArguments().getString(ARG_PARAM1);
 
         }
-        lands = ((VegDataActivity)this.getActivity()).getLands();
-        landMap = ((VegDataActivity)this.getActivity()).getLandMap();
+        lands = ((VegDataActivity) this.getActivity()).getLands();
+        landMap = ((VegDataActivity) this.getActivity()).getLandMap();
         loadHashMapfromJson();
     }
 
@@ -91,12 +91,13 @@ public class BlossomEndFragment extends Fragment implements ExpandableVegDataAda
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_blossom_end, container, false);
     }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         expandableListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
         expandableListView.setGroupIndicator(null);
-        expandableListAdapter = new ExpandableVegDataAdapter(getActivity(),lands,landMap,setDateMap, ActivityConstants.BLOSSOMEND,this);
+        expandableListAdapter = new ExpandableVegDataAdapter(getActivity(), lands, landMap, setDateMap, ActivityConstants.BLOSSOMEND, this);
         expandableListView.setAdapter(expandableListAdapter);
 
     }
@@ -114,29 +115,34 @@ public class BlossomEndFragment extends Fragment implements ExpandableVegDataAda
         if (context instanceof OnBlossomEndInteractionListener) {
             mListener = (OnBlossomEndInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
+            throw new RuntimeException(context
                     + " must implement OnFragmentInteractionListener");
         }
     }
-    private void loadHashMapfromJson(){
-        Type type = new TypeToken<HashMap<String, String>>(){}.getType();
+
+    private void loadHashMapfromJson() {
+        Type type = new TypeToken<HashMap<String, String>>() {
+        }.getType();
         Gson gson = new Gson();
-        setDateMap =  gson.fromJson(mJsonStr, type);
+        setDateMap = gson.fromJson(mJsonStr, type);
         if (setDateMap == null) {
-            setDateMap = new HashMap<String,String>();
+            setDateMap = new HashMap<String, String>();
         }
     }
-    private String createJsonFromMap(){
+
+    private String createJsonFromMap() {
         Gson gson = new Gson();
         String json = gson.toJson(setDateMap);
         return json;
 
     }
+
     @Override
     public void onPause() {
         super.onPause();
-       // Log.d("onPause ", "current json string " + createJsonFromMap());
+        // Log.d("onPause ", "current json string " + createJsonFromMap());
     }
+
     @Override
     public void onDetach() {
         super.onDetach();

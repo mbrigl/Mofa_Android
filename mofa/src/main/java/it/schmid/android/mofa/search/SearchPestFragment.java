@@ -3,7 +3,6 @@ package it.schmid.android.mofa.search;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-
+import androidx.fragment.app.Fragment;
 
 import java.util.List;
 
 import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.R;
-
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.interfaces.ProductInterface;
 
@@ -58,11 +56,11 @@ public class SearchPestFragment extends Fragment implements AbsListView.OnItemCl
     private ListAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
-    public static SearchPestFragment newInstance(int param1,int param2) {
+    public static SearchPestFragment newInstance(int param1, int param2) {
         SearchPestFragment fragment = new SearchPestFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, param1);
-        args.putInt(ARG_PARAM2,param2);
+        args.putInt(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -83,13 +81,13 @@ public class SearchPestFragment extends Fragment implements AbsListView.OnItemCl
             searchType = getArguments().getInt(ARG_PARAM2);
 
         }
-        if (searchType == ActivityConstants.SEARCH_FERT){
+        if (searchType == ActivityConstants.SEARCH_FERT) {
             prodList = DatabaseManager.getInstance().getUsedFertilizerList();
-        }else {
-           prodList = DatabaseManager.getInstance().getUsedPesticideList();
+        } else {
+            prodList = DatabaseManager.getInstance().getUsedPesticideList();
         }
 
-        mAdapter = new PesticideAdapter<ProductInterface>(getActivity(),R.layout.pesticide_row,prodList);
+        mAdapter = new PesticideAdapter<ProductInterface>(getActivity(), R.layout.pesticide_row, prodList);
 
     }
 
@@ -115,7 +113,7 @@ public class SearchPestFragment extends Fragment implements AbsListView.OnItemCl
         try {
             mListener = (OnFragmentPesticideListener) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
+            throw new ClassCastException(activity
                     + " must implement OnFragmentInteractionListener");
         }
     }
@@ -131,7 +129,7 @@ public class SearchPestFragment extends Fragment implements AbsListView.OnItemCl
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragPestInteraction((ProductInterface)mAdapter.getItem(position),searchType);
+            mListener.onFragPestInteraction((ProductInterface) mAdapter.getItem(position), searchType);
         }
     }
 
@@ -160,17 +158,19 @@ public class SearchPestFragment extends Fragment implements AbsListView.OnItemCl
      */
     public interface OnFragmentPesticideListener {
         // TODO: Update argument type and name
-        public void onFragPestInteraction(ProductInterface product, int searchType);
+        void onFragPestInteraction(ProductInterface product, int searchType);
     }
-    public static class PesticideAdapter<T extends ProductInterface> extends ArrayAdapter<T>{
-       List<? extends ProductInterface>data;
-       Context context;
-       int layoutResourceId;
-       public PesticideAdapter(Context context,int layoutResourceId, List<? extends ProductInterface> data){
-           super(context,layoutResourceId, (List<T>) data);
-           this.context= context;
-           this.layoutResourceId=layoutResourceId;
-           this.data = data;
+
+    public static class PesticideAdapter<T extends ProductInterface> extends ArrayAdapter<T> {
+        List<? extends ProductInterface> data;
+        Context context;
+        int layoutResourceId;
+
+        public PesticideAdapter(Context context, int layoutResourceId, List<? extends ProductInterface> data) {
+            super(context, layoutResourceId, (List<T>) data);
+            this.context = context;
+            this.layoutResourceId = layoutResourceId;
+            this.data = data;
         }
 
         @Override
@@ -178,16 +178,15 @@ public class SearchPestFragment extends Fragment implements AbsListView.OnItemCl
             View row = convertView;
             final T p = (T) data.get(position);
             PesticideHolder holder = null;
-            if(row == null)
-            {
-                LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+            if (row == null) {
+                LayoutInflater inflater = ((Activity) context).getLayoutInflater();
                 row = inflater.inflate(layoutResourceId, parent, false);
                 holder = new PesticideHolder();
                 holder.txtPesticide = (TextView) row.findViewById(R.id.txt_pesticide_item);
                 row.setTag(holder);
 
-            }else{
-                holder = (PesticideHolder)row.getTag();
+            } else {
+                holder = (PesticideHolder) row.getTag();
             }
 
 
@@ -202,10 +201,10 @@ public class SearchPestFragment extends Fragment implements AbsListView.OnItemCl
 
         @Override
         public T getItem(int position) {
-            return (T)data.get(position);
+            return (T) data.get(position);
         }
 
-        private static class PesticideHolder{
+        private static class PesticideHolder {
             TextView txtPesticide;
         }
     }

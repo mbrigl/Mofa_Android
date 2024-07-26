@@ -5,206 +5,206 @@
     <string name="settings">Impostazioni</string>
     <string name="title_activity_work">Registro lavoro</string>
     <string name="header_title">Configurazione</string>
-    <string name="header_summary">Impostazioni Updates</string>    
+    <string name="header_summary">Impostazioni Updates</string>
     <string name="text">URL:</string>
-	<string name="list">Fileformat:</string>
-	<string name="listbackend">Software:</string>
-	<string name="header_title_asa">Configurazione ASAAgrar</string>
-	<string name="header_summary_asa">Impostazioni import/export ASAAgrar</string>
-	<string name="APP_KEY">kr7pjmpdjth06g0</string>
+    <string name="list">Fileformat:</string>
+    <string name="listbackend">Software:</string>
+    <string name="header_title_asa">Configurazione ASAAgrar</string>
+    <string name="header_summary_asa">Impostazioni import/export ASAAgrar</string>
+    <string name="APP_KEY">kr7pjmpdjth06g0</string>
 
-	<!-- Names of the Dashboard items	-->
-	<string name="title_feature1">Registro lavoro</string>
+    <!-- Names of the Dashboard items	-->
+    <string name="title_feature1">Registro lavoro</string>
     <string name="title_feature2">Impostazioni</string>
     <string name="title_feature3">Update</string>
     <string name="title_feature4">Aquisti</string>
     <string name="title_feature5">Cerca</string>
     <string name="title_feature6">Fioritura</string>
-	
-	<!-- Preference setting for import data	-->
-	<string name="showPestInfos">attivare sempre finestra info parasit.</string>
-	<string name="updateoffline">Offline update</string>
-	<string name="dropbox">Utilizzare Dropbox</string>
-	<string name="dropboxmsg">Deattivare Offline Update per usare dropbox</string>
-	<string name="dropboxact">Clic su update per configurare dropbox</string>
-	<string name="dropboxreset">Rimuovere conness. Dropbox</string>
-	<string name="dropboxresetmessage">Attenzione: Con il prossimo update serve una nuova riconnissione con Dropbox</string>
-	<string name="waitingspinnertitle">Loading</string>
-	<string name="waitingspinnertext">Connessione con Dropbox...</string>
-	<!-- Preference setting 	-->
-	<string name="synchronisationsettings">import dati…</string>
-	<!-- Preferences ASA	-->
-	<string name = "asa_pref_title">configurazione ASAAgrar </string>
-	<string name = "asa_tax_setting">prezzo lordo aquisti</string>
-	<string name = "asa_harvest_codes">codice per raccolta</string>
-	<string name = "asa_spray_code">codice trattamenti antiparassitari</string>
-	<string name = "asa_herbicide_code">codice lavoro con erbicidi</string>
-	<string name = "asa_soilfertilizer_codes">codice lavoro per fertilizzazione</string>
-	<string name = "asa_fertilizer_code">codice per fertilizzatori</string>
-	<string name = "asa_fertilizer_soil_code">codice per fertilizzatori mineralici</string>
-	<string name="asa_mofa_note">evidenziare i lavori</string>
-	<string name="asa_new_ver">ASA Version 16</string>
-	<string name="cultivation_type">tipo produzione</string>
-	<string name="cultivation_type_desc">solo per ASAAGRAR Ver. > 16</string>
-	<string name="asa_landorder_code">Ordinare campi per codice</string>
-	<!-- Table names	-->
-	<!-- Table names	-->
-	<string name="landtable">impianti</string>
-	<string name="vquartertable">appezzamenti</string>
-	<string name="machinetable">macchine</string>
-	<string name="workertable">lavoratori</string>
-	<string name="tasktable">lavori</string>
-	<string name="pesticidetable">antiparassitari</string>
-	<string name="fertilizertable">fertilizzanti</string>
-	<string name="soilfertilizertable">fertilizzantimin</string>
-	<string name="categorytable">categorie raccolta</string>
-	<string name="extratable">extra</string>
-	<string name="reasonstable">motivi di tratt.</string>
-	<string name="weathertable">parametri tempo</string>
-	<!-- Notification messages	-->
-	<string name="download_mess">MoFa - Downloading</string>
-	<string name="download_title">MoFa - Starting download</string>
-	<string name="download_finished">MoFa - Download finito</string>
-	<string name="download_finished_ok">Import con successo</string>
-	<string name="download_finished_error">Errore nel Import</string>
-	<string name="upload_mess">MoFa - Uploading</string>
-	<string name="upload_title">MoFa - Starting upload</string>
-	<string name="upload_finished">MoFa - Upload finito</string>
-	<string name="upload_finished_ok">Dati spedito con successo</string>
-	<string name="upload_finished_error">Errore durante l\'update</string>
-	
-	<!-- Listview Work Strings -->
-	<string name="no_works">Nessun lavoro</string>
-	
-	<!--  WorkEditActivity -->
-	<string name="work_save_button">Salva</string>
-	<string name="hint_date">data</string>
-	<string name="note_label">annotazione</string>
-	
-	<!-- MenuEntries Work -->
-	<string name="work_menu_add">nuovo lavoro</string>
-	<string name="work_menu_upload"> upload</string>
-	<string name="menu_about"> Info</string>
-	<string name="no_connection"> No connessione - per favore controllare le impostazioni di rete</string>
-	<!-- MenuEntries Work Contextmenu Filter-->
-	<string name="work_menu_nofilter"> Tutti</string>
-	<string name="work_menu_sprayfilter"> trattamento</string>
-	<string name="work_menu_herbicidefilter"> erbicide</string>
-	<string name="work_menu_fertfilter"> fertigazione</string>
-	<string name="work_menu_otherfilter"> altri lavori</string>
-	
-	<!-- MenuEntries WorkEdit -->
-	<string name="workedit_menu_gpsauto"> GPS appezz.</string>
-	<!-- MenuEntries Purchase -->
-	<string name="purchase_menu_add"> nuovo aquisto</string>
-	<string name="purchase_menu_upload"> upload aquisti</string>
-	<!-- MenuEntries Harvest-->
-	<string name="harvest_menu_add">Nuovo documento</string>
-	<!-- MenuEntries VegData-->
-	<string name="vegdata_menu_upload">Upload veg.data</string>
-	<string name="vegdata_clear_content">Clear data</string>
-	<string name="vegdata_clear_message">Vuole cancellare tutti i dati di vegetazione?</string>
-	<!--  PromptDialog --> 
-	<string name="ok">OK</string>
-	<string name="cancel">Annulla</string>
+
+    <!-- Preference setting for import data	-->
+    <string name="showPestInfos">attivare sempre finestra info parasit.</string>
+    <string name="updateoffline">Offline update</string>
+    <string name="dropbox">Utilizzare Dropbox</string>
+    <string name="dropboxmsg">Deattivare Offline Update per usare dropbox</string>
+    <string name="dropboxact">Clic su update per configurare dropbox</string>
+    <string name="dropboxreset">Rimuovere conness. Dropbox</string>
+    <string name="dropboxresetmessage">Attenzione: Con il prossimo update serve una nuova riconnissione con Dropbox</string>
+    <string name="waitingspinnertitle">Loading</string>
+    <string name="waitingspinnertext">Connessione con Dropbox...</string>
+    <!-- Preference setting 	-->
+    <string name="synchronisationsettings">import dati…</string>
+    <!-- Preferences ASA	-->
+    <string name="asa_pref_title">configurazione ASAAgrar </string>
+    <string name="asa_tax_setting">prezzo lordo aquisti</string>
+    <string name="asa_harvest_codes">codice per raccolta</string>
+    <string name="asa_spray_code">codice trattamenti antiparassitari</string>
+    <string name="asa_herbicide_code">codice lavoro con erbicidi</string>
+    <string name="asa_soilfertilizer_codes">codice lavoro per fertilizzazione</string>
+    <string name="asa_fertilizer_code">codice per fertilizzatori</string>
+    <string name="asa_fertilizer_soil_code">codice per fertilizzatori mineralici</string>
+    <string name="asa_mofa_note">evidenziare i lavori</string>
+    <string name="asa_new_ver">ASA Version 16</string>
+    <string name="cultivation_type">tipo produzione</string>
+    <string name="cultivation_type_desc">solo per ASAAGRAR Ver. > 16</string>
+    <string name="asa_landorder_code">Ordinare campi per codice</string>
+    <!-- Table names	-->
+    <!-- Table names	-->
+    <string name="landtable">impianti</string>
+    <string name="vquartertable">appezzamenti</string>
+    <string name="machinetable">macchine</string>
+    <string name="workertable">lavoratori</string>
+    <string name="tasktable">lavori</string>
+    <string name="pesticidetable">antiparassitari</string>
+    <string name="fertilizertable">fertilizzanti</string>
+    <string name="soilfertilizertable">fertilizzantimin</string>
+    <string name="categorytable">categorie raccolta</string>
+    <string name="extratable">extra</string>
+    <string name="reasonstable">motivi di tratt.</string>
+    <string name="weathertable">parametri tempo</string>
+    <!-- Notification messages	-->
+    <string name="download_mess">MoFa - Downloading</string>
+    <string name="download_title">MoFa - Starting download</string>
+    <string name="download_finished">MoFa - Download finito</string>
+    <string name="download_finished_ok">Import con successo</string>
+    <string name="download_finished_error">Errore nel Import</string>
+    <string name="upload_mess">MoFa - Uploading</string>
+    <string name="upload_title">MoFa - Starting upload</string>
+    <string name="upload_finished">MoFa - Upload finito</string>
+    <string name="upload_finished_ok">Dati spedito con successo</string>
+    <string name="upload_finished_error">Errore durante l\'update</string>
+
+    <!-- Listview Work Strings -->
+    <string name="no_works">Nessun lavoro</string>
+
+    <!--  WorkEditActivity -->
+    <string name="work_save_button">Salva</string>
+    <string name="hint_date">data</string>
+    <string name="note_label">annotazione</string>
+
+    <!-- MenuEntries Work -->
+    <string name="work_menu_add">nuovo lavoro</string>
+    <string name="work_menu_upload"> upload</string>
+    <string name="menu_about"> Info</string>
+    <string name="no_connection"> No connessione - per favore controllare le impostazioni di rete</string>
+    <!-- MenuEntries Work Contextmenu Filter-->
+    <string name="work_menu_nofilter"> Tutti</string>
+    <string name="work_menu_sprayfilter"> trattamento</string>
+    <string name="work_menu_herbicidefilter"> erbicide</string>
+    <string name="work_menu_fertfilter"> fertigazione</string>
+    <string name="work_menu_otherfilter"> altri lavori</string>
+
+    <!-- MenuEntries WorkEdit -->
+    <string name="workedit_menu_gpsauto"> GPS appezz.</string>
+    <!-- MenuEntries Purchase -->
+    <string name="purchase_menu_add"> nuovo aquisto</string>
+    <string name="purchase_menu_upload"> upload aquisti</string>
+    <!-- MenuEntries Harvest-->
+    <string name="harvest_menu_add">Nuovo documento</string>
+    <!-- MenuEntries VegData-->
+    <string name="vegdata_menu_upload">Upload veg.data</string>
+    <string name="vegdata_clear_content">Clear data</string>
+    <string name="vegdata_clear_message">Vuole cancellare tutti i dati di vegetazione?</string>
+    <!--  PromptDialog -->
+    <string name="ok">OK</string>
+    <string name="cancel">Annulla</string>
     <string name="yesbutton">Sì</string>
     <string name="nobutton">No</string>
-	<string name="title">MoFa - Input</string>
-	<string name="enter_hours">ore di lavoro</string>
-	<string name="enter_amount">immettere quantità</string>
-	<!-- Strings for export data	-->
-	<string name="export_title">esportazione lavori</string>
-	<string name="export_message">Tutti i lavori vengono esportati. I dati locali vengono cancellati</string>
-	<string name="export_status_message">Esporto eseguito. Per favore alla fine eseguire l\'update un altra volta </string>
-	<string name="export_purchase_title">Esportazione aquisti</string>
-	<string name="export_purchase_message">Tutti gli aquisti vengono esportati. I dati locali vengono cancellati</string>
-	<string name="export_vegdata_title">Esportazione dati</string>
-	<string name="export_vegdata_message">Tutti i dati riguarda la fioritura vengono esportati. I dati locali non vengono cancellati</string>
-	<string name="vegdata_clear_message_title">Resetting vegetation data</string>
-	<!--  Strings for gps location  -->
-	<string name="gps_text">dati gps dell\' appezzamento attivo</string>
-	<string name="gps_point1">meridiano e latitudine del punto 1</string>
-	<string name="gps_point2">meridiano e latitudine del punto 1</string>
-	<string name="gps_empty">dati non essistenti</string>
-	
-	<!-- Strings for TabCaption -->
-	<string name="worktab">Lavoro</string>
-	<string name="workrestab">lav/macch</string>
-	<string name="spraytab">trattamento</string>
-	<string name="showspraytab">trattamento</string>
-	<string name="soilferttab">concimazione</string>
-	<string name="harvesttab">raccolta</string>
-	<string name="irrigationtab">irrig.</string>
-	<!-- Strings in SprayTab -->
-	<string name="sprayvqlist">appezzamenti</string>
-	<string name="sumwatercaption">hl</string>
-	<string name="concentrationcaption">con.</string>
-	<string name="openpesticidebutton">antipar.</string>
-	<string name="waterdialogmsg">aggiornare la quantità d\'acqua?</string>
-	<string name="constraintDefault">Nessun avviso</string>
-	<string name="constraintWarningAmountPerHa">quantità per ha superato:</string>
-	<string name="constraintWarningDose">quantità dosaggio superato:</string>
+    <string name="title">MoFa - Input</string>
+    <string name="enter_hours">ore di lavoro</string>
+    <string name="enter_amount">immettere quantità</string>
+    <!-- Strings for export data	-->
+    <string name="export_title">esportazione lavori</string>
+    <string name="export_message">Tutti i lavori vengono esportati. I dati locali vengono cancellati</string>
+    <string name="export_status_message">Esporto eseguito. Per favore alla fine eseguire l\'update un altra volta </string>
+    <string name="export_purchase_title">Esportazione aquisti</string>
+    <string name="export_purchase_message">Tutti gli aquisti vengono esportati. I dati locali vengono cancellati</string>
+    <string name="export_vegdata_title">Esportazione dati</string>
+    <string name="export_vegdata_message">Tutti i dati riguarda la fioritura vengono esportati. I dati locali non vengono cancellati</string>
+    <string name="vegdata_clear_message_title">Resetting vegetation data</string>
+    <!--  Strings for gps location  -->
+    <string name="gps_text">dati gps dell\' appezzamento attivo</string>
+    <string name="gps_point1">meridiano e latitudine del punto 1</string>
+    <string name="gps_point2">meridiano e latitudine del punto 1</string>
+    <string name="gps_empty">dati non essistenti</string>
 
-	<string name="constraintError">Controllo non possibile, perchè mancano dati (grandezza campo)</string>
-	<string name="sizeInfo">superficie:  %1$s m²</string>
-	<string name="amountha">quantita ettaro:</string>
-	<!-- String image description -->
-	<string name="imagepesticide">lista antipar.</string>
-	<!-- Strings in Pesticide List -->
-	<string name="search_str_pesticide">Inserire ricerca</string>
-	<!-- Strings in workresources -->
-	<string name="toast_msg_start">Per favore prima scegliere l\'appezzamento</string>
-	<!--  Strings in Fragment Input Dose -->
-	<string name="input_dose_hl">dose per hl(1x)</string>
-	<string name="input_amount_total">quantità totale</string>
-	<string name="reason">motivo</string>
-	<string name="status">stato:</string>
-	<string name="beeWarning">*** ATTENZIONE PERICOLO PER API ***</string>
-	<string name="beeNoWarning">*** NESSUN PERICOLO PER API ***</string>
-	<string name="warteFristen">periodo attesa:</string>
-	<string name="reason_prompt">ragione:</string>
-	<string name="min_dose">min dose:</string>
-	<string name="max_dose">max dose:</string>
-	<string name="max_use_pro_year">nummero max per anno:</string>
-	<string name="max_amount_usage">quantità max per tratt.:</string>
-	<string name="max_use_year_in_serie">nummero max in serie:</string>
+    <!-- Strings for TabCaption -->
+    <string name="worktab">Lavoro</string>
+    <string name="workrestab">lav/macch</string>
+    <string name="spraytab">trattamento</string>
+    <string name="showspraytab">trattamento</string>
+    <string name="soilferttab">concimazione</string>
+    <string name="harvesttab">raccolta</string>
+    <string name="irrigationtab">irrig.</string>
+    <!-- Strings in SprayTab -->
+    <string name="sprayvqlist">appezzamenti</string>
+    <string name="sumwatercaption">hl</string>
+    <string name="concentrationcaption">con.</string>
+    <string name="openpesticidebutton">antipar.</string>
+    <string name="waterdialogmsg">aggiornare la quantità d\'acqua?</string>
+    <string name="constraintDefault">Nessun avviso</string>
+    <string name="constraintWarningAmountPerHa">quantità per ha superato:</string>
+    <string name="constraintWarningDose">quantità dosaggio superato:</string>
 
-	<!-- Strings in Fragment Input Purchase -->
-	<string name="input_purchase_amount">quantità in kg/lt</string>
-	<string name="input_purchase_price">prezzo per kg/lt</string>
-	<!-- Strings for TabCaption for Product List -->
-	<string name="pesticidetab">antiparassitari</string>
-	<string name="fertilizertab">fertilizzatori</string>
-	<!-- Strings for Dialogs -->
-	<string name="okbutton">OK</string>
-	<string name="cancelbutton">Annulla</string>
-	<string name="closebutton">Chiudi</string>
-	<string name="dialogdeletetitel">Rimuovi</string>
-	<string name="dialogdeletemsg">Vuole cancellare ?</string>
-	<string name="dialogdeletemsgwithchilds">"Vuole cancellare l'aquisto e tutti i suoi elementi?"</string>
-	<string name="importTitle">Importazione preimpostazioni…</string>
-	<string name="noUpdatesInfo">riferimento</string>
-	<string name="noUpdatesText">no updates</string>
+    <string name="constraintError">Controllo non possibile, perchè mancano dati (grandezza campo)</string>
+    <string name="sizeInfo">superficie:  %1$s m²</string>
+    <string name="amountha">quantita ettaro:</string>
+    <!-- String image description -->
+    <string name="imagepesticide">lista antipar.</string>
+    <!-- Strings in Pesticide List -->
+    <string name="search_str_pesticide">Inserire ricerca</string>
+    <!-- Strings in workresources -->
+    <string name="toast_msg_start">Per favore prima scegliere l\'appezzamento</string>
+    <!--  Strings in Fragment Input Dose -->
+    <string name="input_dose_hl">dose per hl(1x)</string>
+    <string name="input_amount_total">quantità totale</string>
+    <string name="reason">motivo</string>
+    <string name="status">stato:</string>
+    <string name="beeWarning">*** ATTENZIONE PERICOLO PER API ***</string>
+    <string name="beeNoWarning">*** NESSUN PERICOLO PER API ***</string>
+    <string name="warteFristen">periodo attesa:</string>
+    <string name="reason_prompt">ragione:</string>
+    <string name="min_dose">min dose:</string>
+    <string name="max_dose">max dose:</string>
+    <string name="max_use_pro_year">nummero max per anno:</string>
+    <string name="max_amount_usage">quantità max per tratt.:</string>
+    <string name="max_use_year_in_serie">nummero max in serie:</string>
+
+    <!-- Strings in Fragment Input Purchase -->
+    <string name="input_purchase_amount">quantità in kg/lt</string>
+    <string name="input_purchase_price">prezzo per kg/lt</string>
+    <!-- Strings for TabCaption for Product List -->
+    <string name="pesticidetab">antiparassitari</string>
+    <string name="fertilizertab">fertilizzatori</string>
+    <!-- Strings for Dialogs -->
+    <string name="okbutton">OK</string>
+    <string name="cancelbutton">Annulla</string>
+    <string name="closebutton">Chiudi</string>
+    <string name="dialogdeletetitel">Rimuovi</string>
+    <string name="dialogdeletemsg">Vuole cancellare ?</string>
+    <string name="dialogdeletemsgwithchilds">"Vuole cancellare l'aquisto e tutti i suoi elementi?"</string>
+    <string name="importTitle">Importazione preimpostazioni…</string>
+    <string name="noUpdatesInfo">riferimento</string>
+    <string name="noUpdatesText">no updates</string>
     <string name="startsearchbutton">Inizia ricerca</string>
-	<!-- Strings for Harvest Fragment Dialog -->
-	<string name="har_title">bolla</string>
-	<string name="har_number">traspnr</string>
-	<string name="har_amount">quantità</string>
-	<string name="har_category">categoria</string>
-	<string name="har_boxes">casse</string>
-	<string name="har_note">annot</string>
-	<string name="har_sugar">z</string>
-	<string name="har_ph">pH</string>
-	<string name="har_phen">phe</string>
-	<string name="har_acid">a</string>
-	<string name="har_stage">passaggio</string>
-	<string name="har_warning_id">nummero bollo deve essere inserito</string>
-	<!-- Strings for Error/Warnings -->
-	<string name="restpathemptystring">Inserire percorso file sotto il punto RestPath</string>
-	<string name="xmlparseerror">Errore leggendo il file xml</string>
-	<string name="dropboxconnerror">Errore nella connessione con dropbox</string>
-	<string name="reimportmessage">ATTENZIONE - Prima i dati essistenti e gli aquisti devono essere esportati!</string>
-	<string name="nodata">Fare un update per importare i dati</string>
+    <!-- Strings for Harvest Fragment Dialog -->
+    <string name="har_title">bolla</string>
+    <string name="har_number">traspnr</string>
+    <string name="har_amount">quantità</string>
+    <string name="har_category">categoria</string>
+    <string name="har_boxes">casse</string>
+    <string name="har_note">annot</string>
+    <string name="har_sugar">z</string>
+    <string name="har_ph">pH</string>
+    <string name="har_phen">phe</string>
+    <string name="har_acid">a</string>
+    <string name="har_stage">passaggio</string>
+    <string name="har_warning_id">nummero bollo deve essere inserito</string>
+    <!-- Strings for Error/Warnings -->
+    <string name="restpathemptystring">Inserire percorso file sotto il punto RestPath</string>
+    <string name="xmlparseerror">Errore leggendo il file xml</string>
+    <string name="dropboxconnerror">Errore nella connessione con dropbox</string>
+    <string name="reimportmessage">ATTENZIONE - Prima i dati essistenti e gli aquisti devono essere esportati!</string>
+    <string name="nodata">Fare un update per importare i dati</string>
     <string name="noupdate">Nessun update a disposizione</string>
     <!--Strings for Pesticide Info Dialog -->
     <string name="beeDanger">PerApi</string>
@@ -216,15 +216,15 @@
     <string name="waitingtimeUnit">giorni</string>
     <string name="reentertimeUnit">h</string>
     <string name="maxamounthaUnit">kg/lt</string>
-	<string name="maxDose">max dose/hl:</string>
-	<string name="pestLabel">etichetta (Internet)</string>
-	<string name="etichNotFound">NESSUN ETICHETTA \n - RICONTROLLARE NOME DEL PRODOTTO</string>
-	<string name="pdfNotSupported">Nessuna app per file pdf installato</string>
+    <string name="maxDose">max dose/hl:</string>
+    <string name="pestLabel">etichetta (Internet)</string>
+    <string name="etichNotFound">NESSUN ETICHETTA \n - RICONTROLLARE NOME DEL PRODOTTO</string>
+    <string name="pdfNotSupported">Nessuna app per file pdf installato</string>
     <!--Strings for SearchPesticide -->
     <string name="searchLastPest">Cerca ultimo trattamento</string>
     <string name="searchVQuarter">Scegliere il campo da cercare</string>
     <string name="searchPest">Cerca antiparassitari</string>
-	<string name="searchFert">Cerca fertilizzante</string>
+    <string name="searchFert">Cerca fertilizzante</string>
     <string name="searchPestSel">Selezionare prodotto per la ricerca</string>
     <string name="searchInfo">L\'archivo contiene %1$d trattamenti. \n Questa ricerca include solo i trattamenti mandati da questo apparecchio. È importante che durante l\'anno non viene svuotato l\'archivio.</string>
     <string name="delete_archive">Svuotare l\'archivio</string>
@@ -238,32 +238,32 @@
     <string name="deleteallsended">Canellare tutti i lavori mandati</string>
     <string name="deleteallsendedmsg">È sicuro, che voule canellare tutti i lavori già mandati</string>
     <string name="deletetoastmsg">Dati cancellati !!</string>
-	<string name="hoursOverview">Ore di lavoro</string>
-	<!-- Strings for Weather -->
-	<string name="weathersunny">tempo: soleggiato</string>
-	<string name="weatherpartlycloudy">tempo: poco nuvoloso</string>
-	<string name="weathercloudy">tempo: nuvoloso</string>
-	<string name="weatherlightrain">tempo: pioggia debole</string>
-	<string name="weatherrain">tempo: pioggia</string>
-	<string name="weathernight">notte</string>
-	<!-- Strings for Irrigation -->
-	<string name="irrigduration">tempo in h:</string>
-	<string name="irrigamount">quantità rel/h:</string>
-	<string name="irrDry">irrigaz.</string>
-	<string name="irrFrost">irrigaz. gelo</string>
-	<string name="irrDrip">irrigaz. goccia</string>
-	<!-- Strings Login Dropbox Activity-->
-	<string name="titleDropboxLoginActivity">MoFa - Login Dropbox</string>
-	<string name="titleDropboxButton">Login</string>
-	<string name="dropboxInfo">Fare un click sul button Login per connettere MoFa con la sua Dropbox \n Serve un Dropbox account essistente. </string>
-	<!-- Strings for VegData -->
-	<string name="blossomStart">INIZIOFIORIT.</string>
-	<string name="blossomEnd">FINEFIORIT.</string>
-	<string name="harvestStart">RACCOLTA</string>
-	<string name="estimCrop">RACCOLTO</string>
-	<string name="estimCropTitleHa">raccolto in t/ha</string>
-	<string name="amountCrop">raccolot su superf.: %1$d t</string>
-	<!-- Strings for SpeechRecognition -->
-	<string name="speech_prompt">Inizia parlare</string>
-	<string name="speech_not_supported">Supporto voce non possibile</string>
+    <string name="hoursOverview">Ore di lavoro</string>
+    <!-- Strings for Weather -->
+    <string name="weathersunny">tempo: soleggiato</string>
+    <string name="weatherpartlycloudy">tempo: poco nuvoloso</string>
+    <string name="weathercloudy">tempo: nuvoloso</string>
+    <string name="weatherlightrain">tempo: pioggia debole</string>
+    <string name="weatherrain">tempo: pioggia</string>
+    <string name="weathernight">notte</string>
+    <!-- Strings for Irrigation -->
+    <string name="irrigduration">tempo in h:</string>
+    <string name="irrigamount">quantità rel/h:</string>
+    <string name="irrDry">irrigaz.</string>
+    <string name="irrFrost">irrigaz. gelo</string>
+    <string name="irrDrip">irrigaz. goccia</string>
+    <!-- Strings Login Dropbox Activity-->
+    <string name="titleDropboxLoginActivity">MoFa - Login Dropbox</string>
+    <string name="titleDropboxButton">Login</string>
+    <string name="dropboxInfo">Fare un click sul button Login per connettere MoFa con la sua Dropbox \n Serve un Dropbox account essistente. </string>
+    <!-- Strings for VegData -->
+    <string name="blossomStart">INIZIOFIORIT.</string>
+    <string name="blossomEnd">FINEFIORIT.</string>
+    <string name="harvestStart">RACCOLTA</string>
+    <string name="estimCrop">RACCOLTO</string>
+    <string name="estimCropTitleHa">raccolto in t/ha</string>
+    <string name="amountCrop">raccolot su superf.: %1$d t</string>
+    <!-- Strings for SpeechRecognition -->
+    <string name="speech_prompt">Inizia parlare</string>
+    <string name="speech_not_supported">Supporto voce non possibile</string>
 </resources>

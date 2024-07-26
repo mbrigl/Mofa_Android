@@ -1,15 +1,10 @@
 package it.schmid.android.mofa.dropbox;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import it.schmid.android.mofa.HomeActivity;
-import it.schmid.android.mofa.PathConstants;
 import it.schmid.android.mofa.R;
 
 public class LoginActivity extends Activity {
@@ -26,6 +21,7 @@ public class LoginActivity extends Activity {
             }
         });
     }
+
     @Override
     protected void onResume() {
         super.onResume();

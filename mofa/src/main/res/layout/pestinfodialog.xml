@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
 
@@ -14,11 +15,11 @@
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
+
             <TextView
                 android:id="@+id/beeDanger"
                 android:visibility="gone"
-                android:text="@string/beeDanger"/>
-
+                android:text="@string/beeDanger" />
 
 
             <ImageView
@@ -27,78 +28,80 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/imageBee"
                 android:contentDescription="image bee"
-                android:src="@drawable/ic_bee"/>
+                android:src="@drawable/ic_bee" />
         </TableRow>
 
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
-            <TextView
-                android:text="@string/waitingtime"
-                />
+
+            <TextView android:text="@string/waitingtime" />
+
             <TextView
                 android:id="@+id/waitingTime"
                 android:textStyle="bold"
                 android:textColor="@color/red"
-                android:layout_gravity="center"
-                />
+                android:layout_gravity="center" />
         </TableRow>
+
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
-            <TextView
-                android:text="@string/reentertime"
-                />
+
+            <TextView android:text="@string/reentertime" />
+
             <TextView
                 android:id="@+id/reenterTime"
                 android:textStyle="bold"
                 android:textColor="@color/red"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
         </TableRow>
+
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
-            <TextView
-                android:text="@string/maxtime"
-                />
+
+            <TextView android:text="@string/maxtime" />
+
             <TextView
                 android:id="@+id/maxTime"
                 android:textStyle="bold"
                 android:textColor="@color/red"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
         </TableRow>
+
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
-            <TextView
-                android:text="@string/maxamountha"
-                />
+
+            <TextView android:text="@string/maxamountha" />
+
             <TextView
                 android:id="@+id/maxAmount"
                 android:textStyle="bold"
                 android:textColor="@color/red"
-                android:layout_gravity="center"
-                />
+                android:layout_gravity="center" />
         </TableRow>
+
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
-            <TextView
-                android:text="@string/maxDose"
-                />
+
+            <TextView android:text="@string/maxDose" />
+
             <TextView
                 android:id="@+id/maxDose"
                 android:textStyle="bold"
                 android:textColor="@color/red"
-                android:layout_gravity="center"
-                />
+                android:layout_gravity="center" />
         </TableRow>
+
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
-            <TextView
-                android:text="@string/otherconstraints"
-                />
+
+            <TextView android:text="@string/otherconstraints" />
+
             <TextView
                 android:id="@+id/otherconstraints"
                 android:textStyle="bold"
@@ -108,24 +111,25 @@
         </TableRow>
 
     </TableLayout>
+
     <Button
         android:id="@+id/btn_etich"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/pestLabel"
-        >
+        android:text="@string/pestLabel">
 
     </Button>
+
     <Button
         android:id="@+id/btn_show_etich"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
 
     </Button>
+
     <TextView
         android:id="@+id/etich_Statustxt"
 
@@ -135,7 +139,8 @@
         android:visibility="gone"
         android:textColor="@color/red"
         android:textStyle="bold"
-        android:lines="2"/>
+        android:lines="2" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

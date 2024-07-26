@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-   <item android:id="@+id/work_gps_auto"
-          android:icon="@drawable/ic_action_ic_gps_autodetect"
-          android:title="@string/workedit_menu_gpsauto"
-          app:showAsAction="ifRoom|withText"
-        />
-    
+    <item
+        android:id="@+id/work_gps_auto"
+        android:icon="@drawable/ic_action_ic_gps_autodetect"
+        android:title="@string/workedit_menu_gpsauto"
+        app:showAsAction="ifRoom|withText" />
+
 </menu>

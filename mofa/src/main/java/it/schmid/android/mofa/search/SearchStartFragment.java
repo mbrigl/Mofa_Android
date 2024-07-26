@@ -5,9 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +14,9 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.List;
 
@@ -45,13 +43,13 @@ public class SearchStartFragment extends Fragment {
         TextView txtInfo = (TextView) v.findViewById(R.id.textView);
         long numSprayEntries = DatabaseManager.getInstance().getNumSprayingEntries();
         Resources res = getResources();
-        String infoText = String.format(res.getString(R.string.searchInfo),numSprayEntries);
+        String infoText = String.format(res.getString(R.string.searchInfo), numSprayEntries);
         txtInfo.setText(infoText);
         btnLastSprayOp.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 Log.d(TAG, "btnLastSprayOP clicked, loading new fragment");
-                Fragment landFragment = SearchLandFragment.newInstance(R.string.searchVQuarter,ActivityConstants.SEARCH_LAST_PEST);
+                Fragment landFragment = SearchLandFragment.newInstance(R.string.searchVQuarter, ActivityConstants.SEARCH_LAST_PEST);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.search_fragment_container, landFragment);
                 transaction.addToBackStack(null);
@@ -70,9 +68,9 @@ public class SearchStartFragment extends Fragment {
                 transaction.commit();
             }
         });
-        btnSearchFert.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                Fragment pestFragment = SearchPestFragment.newInstance(R.string.searchPestSel,ActivityConstants.SEARCH_FERT);
+        btnSearchFert.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Fragment pestFragment = SearchPestFragment.newInstance(R.string.searchPestSel, ActivityConstants.SEARCH_FERT);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.search_fragment_container, pestFragment);
                 transaction.addToBackStack(null);
@@ -89,9 +87,9 @@ public class SearchStartFragment extends Fragment {
 
             public void onClick(View view) {
                 String msgText;
-                if (chkDelAllSended.isChecked()){
+                if (chkDelAllSended.isChecked()) {
                     msgText = getString(R.string.deleteallsendedmsg);
-                }else{
+                } else {
                     msgText = getString(R.string.deletearchivemsg);
                 }
 
@@ -102,16 +100,16 @@ public class SearchStartFragment extends Fragment {
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setPositiveButton(R.string.yesbutton, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                if (chkDelAllSended.isChecked()){
+                                if (chkDelAllSended.isChecked()) {
                                     new Thread(new Runnable() {
                                         public void run() {
                                             final List<Work> workToDelete = DatabaseManager.getInstance().getAllSendedWorks();
-                                              DatabaseManager.getInstance().batchDeleteAllOldSprayEntries(workToDelete);
+                                            DatabaseManager.getInstance().batchDeleteAllOldSprayEntries(workToDelete);
 
                                         }
                                     }).start();
-                                    Toast.makeText(getActivity(),R.string.deletetoastmsg,Toast.LENGTH_SHORT).show();
-                                }else{
+                                    Toast.makeText(getActivity(), R.string.deletetoastmsg, Toast.LENGTH_SHORT).show();
+                                } else {
                                     new Thread(new Runnable() {
                                         public void run() {
                                             final List<Work> workToDelete = DatabaseManager.getInstance().getOldSprayingWorks();
@@ -119,14 +117,13 @@ public class SearchStartFragment extends Fragment {
 
                                         }
                                     }).start();
-                                    Toast.makeText(getActivity(),R.string.deletetoastmsg,Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), R.string.deletetoastmsg, Toast.LENGTH_SHORT).show();
                                 }
-
 
 
                             }
                         })
-                        .setNegativeButton(R.string.nobutton, null)						//Do nothing on no
+                        .setNegativeButton(R.string.nobutton, null)                        //Do nothing on no
                         .show();
             }
         });

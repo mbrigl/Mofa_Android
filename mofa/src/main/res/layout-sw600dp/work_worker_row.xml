@@ -2,18 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-      <TextView
+    android:orientation="vertical">
+
+    <TextView
         android:id="@+id/workworkerLabel"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:textSize="@dimen/text_size_large" >
-    </TextView>
-	 <ImageView
-       android:id="@+id/delete_worker_icon"
-       android:layout_width="wrap_content"
-       android:layout_height="fill_parent"
+        android:textSize="@dimen/text_size_large"></TextView>
+
+    <ImageView
+        android:id="@+id/delete_worker_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_alignParentRight="true"
-       android:layout_alignTop="@+id/workworkerLabel"
-       android:src="@drawable/ic_trash_empty" />
+        android:layout_alignTop="@+id/workworkerLabel"
+        android:src="@drawable/ic_trash_empty" />
 </RelativeLayout>

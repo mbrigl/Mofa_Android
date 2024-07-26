@@ -4,59 +4,62 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.LinearLayout.LayoutParams;
+
 //import android.widget.RelativeLayout.LayoutParams;
 public class PreviewAnimation extends Animation {
-	
-	    private View mAnimatedView;
-	    private LayoutParams mViewLayoutParams;
-	    private int mMarginStart, mMarginEnd;
-	    private boolean mIsVisibleAfter = false;
-	    private boolean mWasEndedAlready = false;
 
-	    /**
-	     * Initialize the animation
-	     * @param view The layout we want to animate
-	     * @param duration The duration of the animation, in ms
-	     */
-	    public PreviewAnimation(View view, int duration) {
+    private final View mAnimatedView;
+    private final LayoutParams mViewLayoutParams;
+    private final int mMarginStart;
+    private final int mMarginEnd;
+    private boolean mIsVisibleAfter = false;
+    private boolean mWasEndedAlready = false;
 
-	        setDuration(duration);
-	        mAnimatedView = view;
-	        mViewLayoutParams = (LayoutParams) view.getLayoutParams();
+    /**
+     * Initialize the animation
+     *
+     * @param view     The layout we want to animate
+     * @param duration The duration of the animation, in ms
+     */
+    public PreviewAnimation(View view, int duration) {
 
-	        // decide to show or hide the view
-	        mIsVisibleAfter = (view.getVisibility() == View.VISIBLE);
+        setDuration(duration);
+        mAnimatedView = view;
+        mViewLayoutParams = (LayoutParams) view.getLayoutParams();
 
-	        mMarginStart = mViewLayoutParams.bottomMargin;
-	        mMarginEnd = (mMarginStart == 0 ? (0- view.getHeight()) : 0);
+        // decide to show or hide the view
+        mIsVisibleAfter = (view.getVisibility() == View.VISIBLE);
 
-	        view.setVisibility(View.VISIBLE);
-	    }
+        mMarginStart = mViewLayoutParams.bottomMargin;
+        mMarginEnd = (mMarginStart == 0 ? (-view.getHeight()) : 0);
 
-	    @Override
-	    protected void applyTransformation(float interpolatedTime, Transformation t) {
-	        super.applyTransformation(interpolatedTime, t);
+        view.setVisibility(View.VISIBLE);
+    }
 
-	        if (interpolatedTime < 1.0f) {
+    @Override
+    protected void applyTransformation(float interpolatedTime, Transformation t) {
+        super.applyTransformation(interpolatedTime, t);
 
-	            // Calculating the new bottom margin, and setting it
-	            mViewLayoutParams.bottomMargin = mMarginStart
-	                    + (int) ((mMarginEnd - mMarginStart) * interpolatedTime);
+        if (interpolatedTime < 1.0f) {
 
-	            // Invalidating the layout, making us seeing the changes we made
-	            mAnimatedView.requestLayout();
+            // Calculating the new bottom margin, and setting it
+            mViewLayoutParams.bottomMargin = mMarginStart
+                    + (int) ((mMarginEnd - mMarginStart) * interpolatedTime);
 
-	        // Making sure we didn't run the ending before (it happens!)
-	        } else if (!mWasEndedAlready) {
-	            mViewLayoutParams.bottomMargin = mMarginEnd;
-	            mAnimatedView.requestLayout();
+            // Invalidating the layout, making us seeing the changes we made
+            mAnimatedView.requestLayout();
 
-	            if (mIsVisibleAfter) {
-	                mAnimatedView.setVisibility(View.GONE);
-	            }
-	            mWasEndedAlready = true;
-	        }
-	    }
-	
-	
+            // Making sure we didn't run the ending before (it happens!)
+        } else if (!mWasEndedAlready) {
+            mViewLayoutParams.bottomMargin = mMarginEnd;
+            mAnimatedView.requestLayout();
+
+            if (mIsVisibleAfter) {
+                mAnimatedView.setVisibility(View.GONE);
+            }
+            mWasEndedAlready = true;
+        }
+    }
+
+
 }

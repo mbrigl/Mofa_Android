@@ -3,56 +3,57 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
-<RelativeLayout 
-    android:id="@+id/parent_rel_layout"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal"
-    android:padding="10dp" >
-   <ImageView
-        android:id="@+id/icon"
-        android:layout_width="wrap_content"
+
+    <RelativeLayout
+        android:id="@+id/parent_rel_layout"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:src="@drawable/ic_ok_icon" >
-    </ImageView>
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-	<TextView
-	    android:id="@+id/dateLabel"
-	    android:layout_toRightOf="@id/icon"
-	    android:layout_width="wrap_content"
-	    android:layout_height="fill_parent"
-	    android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="5dp"	    
-	    android:textSize="14dp"
-	     >
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
 
-    </TextView>
-    <TextView
-        android:id="@+id/workLabel"
-        android:layout_toRightOf="@id/dateLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:textSize="14dp" >
-    </TextView>
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_ok_icon"></ImageView>
 
-   <ImageView
-       android:id="@+id/delete_icon"
-       android:layout_width="wrap_content"
-       android:layout_height="fill_parent"
-       android:layout_alignParentRight="true"
-       android:layout_alignTop="@+id/workLabel"
-       android:src="@drawable/ic_trash_empty" />
-   </RelativeLayout>
-   <LinearLayout
+        <TextView
+            android:id="@+id/dateLabel"
+            android:layout_toRightOf="@id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:textSize="14dp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/workLabel"
+            android:layout_toRightOf="@id/dateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="14dp"></TextView>
+
+        <ImageView
+            android:id="@+id/delete_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/workLabel"
+            android:src="@drawable/ic_trash_empty" />
+    </RelativeLayout>
+
+    <LinearLayout
         android:id="@+id/toolbar"
-        
+
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="-50dip"
@@ -66,9 +67,9 @@
             android:background="@color/lightgreen"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            
-             >
-        </TextView>
+
+            ></TextView>
+
         <TextView
             android:id="@+id/txtprevworkers"
             android:visibility="gone"
@@ -77,10 +78,10 @@
             android:background="@color/lgray"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            
-            >
-        </TextView>
-		<TextView
+
+            ></TextView>
+
+        <TextView
             android:id="@+id/txtprevspray"
             android:visibility="gone"
             android:layout_width="fill_parent"
@@ -88,21 +89,20 @@
             android:background="@color/lightred"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            
-            >
-        </TextView>
-       <TextView
-           android:id="@+id/txtprevwater"
-           android:visibility="gone"
-           android:layout_width="fill_parent"
-           android:layout_height="wrap_content"
-           android:background="@color/skyblue"
-           android:focusable="false"
-           android:focusableInTouchMode="false"
 
-           >
-       </TextView>
+            ></TextView>
+
+        <TextView
+            android:id="@+id/txtprevwater"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/skyblue"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+
+            ></TextView>
     </LinearLayout>
-   
-	
+
+
 </LinearLayout> 

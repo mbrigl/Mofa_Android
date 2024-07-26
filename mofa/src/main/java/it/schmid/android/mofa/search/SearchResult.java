@@ -4,9 +4,6 @@ package it.schmid.android.mofa.search;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +13,9 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
-
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,8 +23,6 @@ import java.util.List;
 
 import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.R;
-
-
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.db.SearchHashMapLoader;
 import it.schmid.android.mofa.model.VQuarter;
@@ -35,7 +32,7 @@ import it.schmid.android.mofa.model.VQuarter;
  * Use the {@link SearchResult#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchResult extends Fragment implements LoaderManager.LoaderCallbacks<HashMap<Integer,List<String>>> {
+public class SearchResult extends Fragment implements LoaderManager.LoaderCallbacks<HashMap<Integer, List<String>>> {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -45,7 +42,7 @@ public class SearchResult extends Fragment implements LoaderManager.LoaderCallba
     private int mParam1;
     private String mTitle;
     private int queryType;
-    private int prodId=0;
+    private int prodId = 0;
     private Integer[] vquartersId;
     // The Loader's id (this id is specific to the ListFragment's LoaderManager)
     private static final int LOADER_ID = 1;
@@ -53,16 +50,16 @@ public class SearchResult extends Fragment implements LoaderManager.LoaderCallba
     private ArrayList<Integer> vqIds = new ArrayList<Integer>();
     private ExpandableListView resultListView;
     private ExpandableSearchResultAdapter adapter;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
-
      * @return A new instance of fragment SearchResult.
      */
     // TODO: Rename and change types and number of parameters
-    public static SearchResult newInstance(int param1,int param2) {
+    public static SearchResult newInstance(int param1, int param2) {
         SearchResult fragment = new SearchResult();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, param1);
@@ -89,24 +86,24 @@ public class SearchResult extends Fragment implements LoaderManager.LoaderCallba
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        if (mListener !=null){
-            vqIds=mListener.getVQList();
-            if (queryType== ActivityConstants.SEARCH_PEST){
-                prodId=mListener.getProdId();
+        if (mListener != null) {
+            vqIds = mListener.getVQList();
+            if (queryType == ActivityConstants.SEARCH_PEST) {
+                prodId = mListener.getProdId();
             }
-            if (queryType== ActivityConstants.SEARCH_FERT){
-                prodId=mListener.getProdId();
+            if (queryType == ActivityConstants.SEARCH_FERT) {
+                prodId = mListener.getProdId();
             }
         }
-        View v = inflater.inflate(R.layout.fragment_search_result,container,false);
-        resultListView =(ExpandableListView) v.findViewById(R.id.resultlistview);
-        adapter = new ExpandableSearchResultAdapter(getActivity(),vqIds);
+        View v = inflater.inflate(R.layout.fragment_search_result, container, false);
+        resultListView = (ExpandableListView) v.findViewById(R.id.resultlistview);
+        adapter = new ExpandableSearchResultAdapter(getActivity(), vqIds);
         resultListView.setAdapter(adapter);
-        Button btnClose = (Button)v.findViewById(R.id.searchclose_btn);
+        Button btnClose = (Button) v.findViewById(R.id.searchclose_btn);
         btnClose.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                if (mListener !=null){
+                if (mListener != null) {
 
                     mListener.closeActivity();
                 }
@@ -116,16 +113,15 @@ public class SearchResult extends Fragment implements LoaderManager.LoaderCallba
         return v;
 
 
-
     }
 
 
-    public Loader<HashMap<Integer,List<String>>> onCreateLoader(int id, Bundle args) {
-       if (queryType==ActivityConstants.SEARCH_PEST || queryType==ActivityConstants.SEARCH_FERT) {
-           return new SearchHashMapLoader(getActivity(),vqIds,queryType,prodId);
-       }else{
-           return new SearchHashMapLoader(getActivity(),vqIds,queryType);
-       }
+    public Loader<HashMap<Integer, List<String>>> onCreateLoader(int id, Bundle args) {
+        if (queryType == ActivityConstants.SEARCH_PEST || queryType == ActivityConstants.SEARCH_FERT) {
+            return new SearchHashMapLoader(getActivity(), vqIds, queryType, prodId);
+        } else {
+            return new SearchHashMapLoader(getActivity(), vqIds, queryType);
+        }
     }
 
 
@@ -145,7 +141,7 @@ public class SearchResult extends Fragment implements LoaderManager.LoaderCallba
         try {
             mListener = (GetVQListener) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
+            throw new ClassCastException(activity
                     + " must implement GetVQListener");
         }
     }
@@ -155,23 +151,28 @@ public class SearchResult extends Fragment implements LoaderManager.LoaderCallba
         super.onDetach();
         mListener = null;
     }
+
     public interface GetVQListener {
         // TODO: Update argument type and name
-        public ArrayList<Integer> getVQList();
-        public int getProdId();
-        public void closeActivity();
+        ArrayList<Integer> getVQList();
+
+        int getProdId();
+
+        void closeActivity();
     }
 
     public static class ExpandableSearchResultAdapter extends BaseExpandableListAdapter {
         private static final String TAG = "ExpandableSearchResultAdapter";
         Context context;
-        private List<Integer> headerList;
-        private HashMap<Integer,List<String>> resultMap = new HashMap<Integer, List<String>>();
-        public ExpandableSearchResultAdapter(Context context, List<Integer> headerList){
+        private final List<Integer> headerList;
+        private HashMap<Integer, List<String>> resultMap = new HashMap<Integer, List<String>>();
+
+        public ExpandableSearchResultAdapter(Context context, List<Integer> headerList) {
             this.context = context;
-            this.headerList=headerList;
+            this.headerList = headerList;
         }
-        public void setData(HashMap<Integer,List<String>> data){
+
+        public void setData(HashMap<Integer, List<String>> data) {
             Log.d(TAG, "setData is called");
             if (resultMap != null) {
                 resultMap.clear();
@@ -180,7 +181,7 @@ public class SearchResult extends Fragment implements LoaderManager.LoaderCallba
             }
             if (data != null) {
                 Log.d(TAG, "setData is called - data not null");
-                resultMap=data;
+                resultMap = data;
                 notifyDataSetChanged();
             }
 
@@ -191,9 +192,9 @@ public class SearchResult extends Fragment implements LoaderManager.LoaderCallba
         }
 
 
-       public int getChildrenCount(int groupPosition) {
+        public int getChildrenCount(int groupPosition) {
             return this.resultMap.get(this.headerList.get(groupPosition)).size();
-            }
+        }
 
 
         public Object getGroup(int groupPosition) {
@@ -207,7 +208,7 @@ public class SearchResult extends Fragment implements LoaderManager.LoaderCallba
         }
 
 
-        public long getGroupId(int groupPosition){
+        public long getGroupId(int groupPosition) {
             return groupPosition;
         }
 
@@ -225,7 +226,7 @@ public class SearchResult extends Fragment implements LoaderManager.LoaderCallba
         public View getGroupView(int groupPosition, boolean isExpanded,
                                  View convertView, ViewGroup parent) {
             int varId = (Integer) getGroup(groupPosition);
-          //  int sizechild = getChildrenCount(groupPosition);
+            //  int sizechild = getChildrenCount(groupPosition);
             VQuarter vQ = DatabaseManager.getInstance().getVQuarterWithId(varId);
             String headerTitle = vQ.getLand().getName() + ", " + vQ.getVariety() + ", " + vQ.getPlantYear();
             if (convertView == null) {

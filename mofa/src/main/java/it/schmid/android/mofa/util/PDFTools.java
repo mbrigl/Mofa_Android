@@ -14,8 +14,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
-import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
+
+import androidx.appcompat.app.AlertDialog;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,14 +36,14 @@ public class PDFTools {
     private static final String HTML_MIME_TYPE = "text/html";
 
     // returns true if pdf supported
-    public static boolean showPDFUrl(final Context context, final String pdfUrl ) {
-        if ( isPDFSupported( context ) ) {
+    public static boolean showPDFUrl(final Context context, final String pdfUrl) {
+        if (isPDFSupported(context)) {
 
             downloadAndOpenPDF(context, pdfUrl);
             return true;
         } else {
             return false;
-           // Toast.makeText(context,"Bitte installieren Sie eine App zum Lesen von PDF-Dateien",Toast.LENGTH_LONG);
+            // Toast.makeText(context,"Bitte installieren Sie eine App zum Lesen von PDF-Dateien",Toast.LENGTH_LONG);
             //askToOpenPDFThroughGoogleDrive( context, pdfUrl );
         }
     }
@@ -62,55 +63,55 @@ public class PDFTools {
             e.printStackTrace();
         }
         // The place where the downloaded PDF file will be put
-        final File tempFile = new File( context.getExternalFilesDir( Environment.DIRECTORY_DOWNLOADS ), filename );
-        Log.e(TAG,"File Path:"+tempFile);
-        if ( tempFile.exists() ) {
+        final File tempFile = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), filename);
+        Log.e(TAG, "File Path:" + tempFile);
+        if (tempFile.exists()) {
             // If we have downloaded the file before, just go ahead and show it.
-            openPDF( context, Uri.fromFile( tempFile ) );
+            openPDF(context, Uri.fromFile(tempFile));
             return;
         }
 
         // Show progress dialog while downloading
-        final ProgressDialog progress = ProgressDialog.show( context,  "Download PDF" , "Etikette", true );
+        final ProgressDialog progress = ProgressDialog.show(context, "Download PDF", "Etikette", true);
 
         // Create the download request
-        DownloadManager.Request r = new DownloadManager.Request( Uri.parse( pdfUrl ) );
-        r.setDestinationInExternalFilesDir( context, Environment.DIRECTORY_DOWNLOADS, filename );
-        final DownloadManager dm = (DownloadManager) context.getSystemService( Context.DOWNLOAD_SERVICE );
+        DownloadManager.Request r = new DownloadManager.Request(Uri.parse(pdfUrl));
+        r.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, filename);
+        final DownloadManager dm = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         BroadcastReceiver onComplete = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if ( !progress.isShowing() ) {
+                if (!progress.isShowing()) {
                     return;
                 }
-                context.unregisterReceiver( this );
+                context.unregisterReceiver(this);
 
                 progress.dismiss();
-                long downloadId = intent.getLongExtra( DownloadManager.EXTRA_DOWNLOAD_ID, -1 );
-                Cursor c = dm.query( new DownloadManager.Query().setFilterById( downloadId ) );
+                long downloadId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+                Cursor c = dm.query(new DownloadManager.Query().setFilterById(downloadId));
 
-                if ( c.moveToFirst() ) {
-                    int status = c.getInt( c.getColumnIndex( DownloadManager.COLUMN_STATUS ) );
-                    if ( status == DownloadManager.STATUS_SUCCESSFUL ) {
-                        openPDF( context, Uri.fromFile( tempFile ) );
+                if (c.moveToFirst()) {
+                    int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
+                    if (status == DownloadManager.STATUS_SUCCESSFUL) {
+                        openPDF(context, Uri.fromFile(tempFile));
                     }
                 }
                 c.close();
             }
         };
-        context.registerReceiver( onComplete, new IntentFilter( DownloadManager.ACTION_DOWNLOAD_COMPLETE ) );
+        context.registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
         // Enqueue the request
-        dm.enqueue( r );
+        dm.enqueue(r);
     }
 
 
-    public static void askToOpenPDFThroughGoogleDrive( final Context context, final String pdfUrl ) {
-        new AlertDialog.Builder( context )
-                .setTitle( "Test" )
-                .setMessage( "Öffnen über Google Drive" )
-                .setNegativeButton( "JA", null )
-                .setPositiveButton( "NEIN", new DialogInterface.OnClickListener() {
+    public static void askToOpenPDFThroughGoogleDrive(final Context context, final String pdfUrl) {
+        new AlertDialog.Builder(context)
+                .setTitle("Test")
+                .setMessage("Öffnen über Google Drive")
+                .setNegativeButton("JA", null)
+                .setPositiveButton("NEIN", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         openPDFThroughGoogleDrive(context, pdfUrl);
@@ -120,29 +121,27 @@ public class PDFTools {
     }
 
     public static void openPDFThroughGoogleDrive(final Context context, final String pdfUrl) {
-        Intent i = new Intent( Intent.ACTION_VIEW );
-        i.setDataAndType(Uri.parse(GOOGLE_DRIVE_PDF_READER_PREFIX + pdfUrl ), HTML_MIME_TYPE );
-        context.startActivity( i );
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setDataAndType(Uri.parse(GOOGLE_DRIVE_PDF_READER_PREFIX + pdfUrl), HTML_MIME_TYPE);
+        context.startActivity(i);
     }
 
-    public static final void openPDF(Context context, Uri localUri ) {
-        Intent i = new Intent( Intent.ACTION_VIEW );
-        i.setDataAndType( localUri, PDF_MIME_TYPE );
-        context.startActivity( i );
+    public static final void openPDF(Context context, Uri localUri) {
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setDataAndType(localUri, PDF_MIME_TYPE);
+        context.startActivity(i);
     }
 
-    public static boolean isPDFSupported( Context context ) {
-        Intent i = new Intent( Intent.ACTION_VIEW );
-        final File tempFile = new File( context.getExternalFilesDir( Environment.DIRECTORY_DOWNLOADS ), "test.pdf" );
-        i.setDataAndType( Uri.fromFile( tempFile ), PDF_MIME_TYPE );
-        return context.getPackageManager().queryIntentActivities( i, PackageManager.MATCH_DEFAULT_ONLY ).size() > 0;
+    public static boolean isPDFSupported(Context context) {
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        final File tempFile = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "test.pdf");
+        i.setDataAndType(Uri.fromFile(tempFile), PDF_MIME_TYPE);
+        return context.getPackageManager().queryIntentActivities(i, PackageManager.MATCH_DEFAULT_ONLY).size() > 0;
     }
 
     // get File name from url
-    static class GetFileInfo extends AsyncTask<String, Integer, String>
-    {
-        protected String doInBackground(String... urls)
-        {
+    static class GetFileInfo extends AsyncTask<String, Integer, String> {
+        protected String doInBackground(String... urls) {
             URL url;
             String filename = null;
             try {
@@ -150,12 +149,12 @@ public class PDFTools {
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.connect();
                 conn.setInstanceFollowRedirects(false);
-                if(conn.getHeaderField("Content-Disposition")!=null){
+                if (conn.getHeaderField("Content-Disposition") != null) {
                     String depo = conn.getHeaderField("Content-Disposition");
 
-                    String depoSplit[] = depo.split("filename=");
+                    String[] depoSplit = depo.split("filename=");
                     filename = depoSplit[1].replace("filename=", "").replace("\"", "").trim();
-                }else{
+                } else {
                     filename = "download.pdf";
                 }
             } catch (MalformedURLException e1) {
@@ -169,6 +168,7 @@ public class PDFTools {
         protected void onPreExecute() {
             super.onPreExecute();
         }
+
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);

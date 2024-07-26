@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Copyright 2011 Wglxy.com
     Derived from Google IO Schedule App, Copyright 2010 Google, Inc.
 
@@ -17,16 +16,16 @@
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    
+
     android:layout_gravity="center"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-<LinearLayout
-    android:id="@+id/frame"
-    android:orientation="vertical"
-    
-    android:layout_width="400dip"
-    android:layout_height="600dip"
-    android:layout_gravity="center">
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/frame"
+        android:orientation="vertical"
+
+        android:layout_width="400dip"
+        android:layout_height="600dip"
+        android:layout_gravity="center"></LinearLayout>
 </LinearLayout>

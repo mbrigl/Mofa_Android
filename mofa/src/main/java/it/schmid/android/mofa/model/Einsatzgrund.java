@@ -1,7 +1,8 @@
 package it.schmid.android.mofa.model;
 
-import androidx.annotation.Nullable;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -39,7 +40,8 @@ public class Einsatzgrund extends ImportBehavior {
     String name;
 
     List<Einsatzgrund> einsatzgrundList = new ArrayList<Einsatzgrund>();
-    private Boolean importError=false;
+    private Boolean importError = false;
+
     public String getCode() {
         return code;
     }
@@ -67,30 +69,28 @@ public class Einsatzgrund extends ImportBehavior {
 
         MofaApplication app = MofaApplication.getInstance();
         backEndSoftware = app.getBackendSoftware();
-        switch (Integer.parseInt(backEndSoftware)) {
-            case 1: //ASA
-                Log.d ("TAG", "BackendSoftware: ASAAGRAR");
-                einsatzgrundList = reasonXmlParserASA(xmlString,notification);
-                break;
-            default: //default
-                Log.d ("TAG", "BackendSoftware:Default");
-                einsatzgrundList = reasonXmlParser(xmlString,notification);
-                break;
-
+        //default
+        if (Integer.parseInt(backEndSoftware) == 1) { //ASA
+            Log.d("TAG", "BackendSoftware: ASAAGRAR");
+            einsatzgrundList = reasonXmlParserASA(xmlString, notification);
+        } else {
+            Log.d("TAG", "BackendSoftware:Default");
+            einsatzgrundList = reasonXmlParser(xmlString, notification);
         }
-        if (!einsatzgrundList.isEmpty()){
+        if (!einsatzgrundList.isEmpty()) {
             List<Global> globalList = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.PESTREASONS);
             Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-            Type listOfReasons = new TypeToken<List<Einsatzgrund>>(){}.getType();
-            String json = gson.toJson(einsatzgrundList,listOfReasons);
+            Type listOfReasons = new TypeToken<List<Einsatzgrund>>() {
+            }.getType();
+            String json = gson.toJson(einsatzgrundList, listOfReasons);
 
-            if(globalList.isEmpty()){
+            if (globalList.isEmpty()) {
                 Global g = new Global();
                 g.setTypeInfo(ActivityConstants.PESTREASONS);
                 g.setData(json);
                 DatabaseManager.getInstance().addGlobal(g);
                 //new entry for global data
-            }else{
+            } else {
                 // existing entry
                 Global g = globalList.get(0);
                 g.setData(json);
@@ -105,13 +105,14 @@ public class Einsatzgrund extends ImportBehavior {
         return importError;
     }
 
-    private List<Einsatzgrund> reasonXmlParser(String inputData,NotificationService notification){
+    private List<Einsatzgrund> reasonXmlParser(String inputData, NotificationService notification) {
         return null;
     }
-    private List<Einsatzgrund> reasonXmlParserASA(String inputData,NotificationService notification){
-        List<Einsatzgrund> reasonList=null ;
 
-        String xCode="";
+    private List<Einsatzgrund> reasonXmlParserASA(String inputData, NotificationService notification) {
+        List<Einsatzgrund> reasonList = null;
+
+        String xCode = "";
         String xMachineName = "";
 
         try {
@@ -123,25 +124,25 @@ public class Einsatzgrund extends ImportBehavior {
             int eventType = xpp.getEventType();
             Einsatzgrund currentReason = null;
 
-            while (eventType != XmlPullParser.END_DOCUMENT ){
+            while (eventType != XmlPullParser.END_DOCUMENT) {
                 String name = null;
-                switch (eventType){
+                switch (eventType) {
                     case XmlPullParser.START_DOCUMENT:
                         reasonList = new ArrayList<Einsatzgrund>();
                         break;
                     case XmlPullParser.START_TAG:
                         name = xpp.getName();
-                        if (name.equalsIgnoreCase("Einsatzgrund")){
+                        if (name.equalsIgnoreCase("Einsatzgrund")) {
                             currentReason = new Einsatzgrund();
                             // currentMachine.setId(Integer.parseInt(xpp.getAttributeValue(0)));
-                        } else if (currentReason!= null){
+                        } else if (currentReason != null) {
 
                             if (name.equalsIgnoreCase("Code")) {
                                 xCode = xpp.nextText();
                                 currentReason.setCode(xCode);
                             }
 
-                            if (name.equalsIgnoreCase("Name")){
+                            if (name.equalsIgnoreCase("Name")) {
                                 xMachineName = xpp.nextText();
                                 currentReason.setName(xMachineName);
 
@@ -151,8 +152,8 @@ public class Einsatzgrund extends ImportBehavior {
                         break;
                     case XmlPullParser.END_TAG:
                         name = xpp.getName();
-                        if (name.equalsIgnoreCase("Einsatzgrund") && currentReason != null){
-                            Log.d("Reasons","[XMLParserReason] adding reason: " + currentReason.getName());
+                        if (name.equalsIgnoreCase("Einsatzgrund") && currentReason != null) {
+                            Log.d("Reasons", "[XMLParserReason] adding reason: " + currentReason.getName());
                             reasonList.add(currentReason);
 
                         }
@@ -165,7 +166,7 @@ public class Einsatzgrund extends ImportBehavior {
         } catch (XmlPullParserException e) {
             importError = true;
             CharSequence tickerText = "Machine";
-            notification.completed(android.R.drawable.stat_sys_download_done, tickerText,"Parser Error");
+            notification.completed(android.R.drawable.stat_sys_download_done, tickerText, "Parser Error");
             //  e.printStackTrace();
         } catch (IOException e) {
             importError = true;
@@ -173,19 +174,20 @@ public class Einsatzgrund extends ImportBehavior {
         }
         return (reasonList);
     }
+
     @Nullable
-    public static HashMap<String,String> getEinsatzGrundHashMap(){
+    public static HashMap<String, String> getEinsatzGrundHashMap() {
         List<Global> globalList = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.PESTREASONS);
-        if (!globalList.isEmpty()){
+        if (!globalList.isEmpty()) {
             String jsonData = globalList.get(0).getData();
             Gson gson = new Gson();
             Einsatzgrund[] arrEinsatz = gson.fromJson(jsonData, Einsatzgrund[].class);
-            HashMap<String,String> einsatzMap = new HashMap<String,String>();
-            for (Einsatzgrund e: arrEinsatz){
-                einsatzMap.put(e.getName(),e.getCode());
+            HashMap<String, String> einsatzMap = new HashMap<String, String>();
+            for (Einsatzgrund e : arrEinsatz) {
+                einsatzMap.put(e.getName(), e.getCode());
             }
             return einsatzMap;
-        }else{
+        } else {
             return null;
         }
 

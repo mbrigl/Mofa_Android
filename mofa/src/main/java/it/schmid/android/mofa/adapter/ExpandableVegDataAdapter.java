@@ -4,10 +4,6 @@ package it.schmid.android.mofa.adapter;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.fragment.app.DialogFragment;
-
-import androidx.fragment.app.FragmentActivity;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +14,11 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,15 +26,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import androidx.fragment.app.FragmentManager;
 import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.DatePickerDialogFragment;
-
 import it.schmid.android.mofa.R;
-
 import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.VQuarter;
-
 import it.schmid.android.mofa.vegdata.InputEstimCropFragment;
 
 /**
@@ -41,18 +38,20 @@ import it.schmid.android.mofa.vegdata.InputEstimCropFragment;
  */
 
 public class ExpandableVegDataAdapter extends BaseExpandableListAdapter implements InputEstimCropFragment.InputAmountDialogFragmentListener {
-    private Context context;
-    private List<Land> lands;
-    private HashMap<Land,List<VQuarter>> landMap;
-    private HashMap<String,String>dateMap;
+    private final Context context;
+    private final List<Land> lands;
+    private final HashMap<Land, List<VQuarter>> landMap;
+    private final HashMap<String, String> dateMap;
     private Integer curId;
-    private List<Integer> vqIdsFromLand= new ArrayList<Integer>();
-    private VegDataListener mListener;
-    private String source;
-    public interface VegDataListener{
+    private List<Integer> vqIdsFromLand = new ArrayList<Integer>();
+    private final VegDataListener mListener;
+    private final String source;
+
+    public interface VegDataListener {
         void refreshJson();
     }
-    public ExpandableVegDataAdapter(Context context, List<Land> lands, HashMap<Land,List<VQuarter>>landMap,HashMap<String,String>dateMap,String source,VegDataListener mListener){
+
+    public ExpandableVegDataAdapter(Context context, List<Land> lands, HashMap<Land, List<VQuarter>> landMap, HashMap<String, String> dateMap, String source, VegDataListener mListener) {
         this.context = context;
         this.lands = lands;
         this.landMap = landMap;
@@ -71,22 +70,25 @@ public class ExpandableVegDataAdapter extends BaseExpandableListAdapter implemen
         return this.landMap.get(this.lands.get(groupPosition))
                 .size();
     }
+
     private List<Integer> getVQuartersIDFromLand(int groupPosition) {
         List<Integer> vqIdList = new ArrayList<Integer>();
         List<VQuarter> vquarters = this.landMap.get(this.lands.get(groupPosition));
-        for (VQuarter vq : vquarters){
+        for (VQuarter vq : vquarters) {
             vqIdList.add(vq.getId());
         }
         return vqIdList;
     }
-    private Double sumOfSize(int groupPosition){
+
+    private Double sumOfSize(int groupPosition) {
         double sum = 0.00;
         List<VQuarter> vquarters = this.landMap.get(this.lands.get(groupPosition));
-        for (VQuarter vq : vquarters){
+        for (VQuarter vq : vquarters) {
             sum += vq.getSize();
         }
         return sum;
     }
+
     @Override
     public Object getGroup(int groupPosition) {
         return this.lands.get(groupPosition);
@@ -138,7 +140,7 @@ public class ExpandableVegDataAdapter extends BaseExpandableListAdapter implemen
                 args.putInt("month", calender.get(Calendar.MONTH));
                 args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
                 vqIdsFromLand = getVQuartersIDFromLand(groupPosition);
-                switch(source){
+                switch (source) {
                     case (ActivityConstants.BLOSSOMSTART):
                         showDatePicker(args);
                         break;
@@ -149,12 +151,10 @@ public class ExpandableVegDataAdapter extends BaseExpandableListAdapter implemen
                         showDatePicker(args);
                         break;
                     case (ActivityConstants.ESTIMCROP):
-                        showEstimDialogFromLand(sumOfSize(groupPosition),landDesc);
+                        showEstimDialogFromLand(sumOfSize(groupPosition), landDesc);
                         break;
 
                 }
-
-
 
 
             }
@@ -180,7 +180,7 @@ public class ExpandableVegDataAdapter extends BaseExpandableListAdapter implemen
             expandedListDateTextView.setVisibility(View.VISIBLE);
             expandedListDateTextView.setText(dateMap.get(vQuarter.getId().toString()));
             expandedClearContentImage.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             //no date defined for this vquarter
             expandedListDateTextView.setVisibility(View.GONE);
             expandedClearContentImage.setVisibility(View.GONE);
@@ -191,7 +191,7 @@ public class ExpandableVegDataAdapter extends BaseExpandableListAdapter implemen
                 dateMap.remove(vQuarter.getId().toString());
                 notifyDataSetChanged();
                 mListener.refreshJson();
-                Log.d("Adapter","deleting date from "+ vQuarter.getId());
+                Log.d("Adapter", "deleting date from " + vQuarter.getId());
             }
         });
         expandedListTextView.setText(vQuarterDesc);
@@ -199,7 +199,7 @@ public class ExpandableVegDataAdapter extends BaseExpandableListAdapter implemen
             @Override
             public void onClick(View v) {
                 curId = vQuarter.getId();
-                switch(source){
+                switch (source) {
                     case (ActivityConstants.BLOSSOMSTART):
                         prepDatePicker();
                         break;
@@ -230,20 +230,20 @@ public class ExpandableVegDataAdapter extends BaseExpandableListAdapter implemen
 
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-                //Log.d ("AdapterCallback", "setting date on " + curId);
+            //Log.d ("AdapterCallback", "setting date on " + curId);
             Calendar cal = Calendar.getInstance();
             cal.setTimeInMillis(0);
             cal.set(year, monthOfYear, dayOfMonth);
             Date date = cal.getTime();
             SimpleDateFormat sdf = new SimpleDateFormat("dd.MM");
 
-                    for(Integer id: vqIdsFromLand) {
-                        dateMap.put(id.toString(), sdf.format(date));
-                    }
-                vqIdsFromLand.clear();
-                //dateMap.put(curId.toString(), sdf.format(date));
-                notifyDataSetChanged();
-                mListener.refreshJson();
+            for (Integer id : vqIdsFromLand) {
+                dateMap.put(id.toString(), sdf.format(date));
+            }
+            vqIdsFromLand.clear();
+            //dateMap.put(curId.toString(), sdf.format(date));
+            notifyDataSetChanged();
+            mListener.refreshJson();
 
         }
     };
@@ -254,15 +254,15 @@ public class ExpandableVegDataAdapter extends BaseExpandableListAdapter implemen
         //Log.d("Adapter","inside convertview click"+ vQuarter.getId());
 
         vqIdsFromLand.add(curId);
-        if (dateMap.containsKey(curId.toString())){ //preselecting the day in datepicker
+        if (dateMap.containsKey(curId.toString())) { //preselecting the day in datepicker
             args.putInt("year", calender.get(Calendar.YEAR));
             String curDate = dateMap.get(curId.toString());
-            String str[] = curDate.split("\\."); //escaping the dot, otherwise error
+            String[] str = curDate.split("\\."); //escaping the dot, otherwise error
             int day = Integer.parseInt(str[0]);
-            int month = Integer.parseInt(str[1])-1;
+            int month = Integer.parseInt(str[1]) - 1;
             args.putInt("month", month);
             args.putInt("day", day);
-        }else{ // current date in datepicker
+        } else { // current date in datepicker
 
 
             args.putInt("year", calender.get(Calendar.YEAR));
@@ -271,6 +271,7 @@ public class ExpandableVegDataAdapter extends BaseExpandableListAdapter implemen
         }
         showDatePicker(args);
     }
+
     private void showDatePicker(Bundle args) {
         DatePickerDialogFragment date = new DatePickerDialogFragment();
         /**
@@ -283,34 +284,37 @@ public class ExpandableVegDataAdapter extends BaseExpandableListAdapter implemen
          * Set Call back to capture selected date
          */
         date.setCallBack(ondate);
-        date.show(((FragmentActivity)context).getSupportFragmentManager() , "Date Picker");
+        date.show(((FragmentActivity) context).getSupportFragmentManager(), "Date Picker");
     }
-    private void showEstimDialog(VQuarter vquarter){
+
+    private void showEstimDialog(VQuarter vquarter) {
         vqIdsFromLand.add(curId);
         int amount = 50; //default value is 50
         Double size = vquarter.getSize();
         String title = vquarter.getVariety() + " " + vquarter.getPlantYear();
-        if (dateMap.containsKey(curId.toString())){
-           amount = Integer.parseInt (dateMap.get(curId.toString())) ;
+        if (dateMap.containsKey(curId.toString())) {
+            amount = Integer.parseInt(dateMap.get(curId.toString()));
         }
-        FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
-        InputEstimCropFragment inputAmountDialog = InputEstimCropFragment.newInstance(amount,size,title);
+        FragmentManager fm = ((AppCompatActivity) context).getSupportFragmentManager();
+        InputEstimCropFragment inputAmountDialog = InputEstimCropFragment.newInstance(amount, size, title);
         inputAmountDialog.setCallback(this);
         inputAmountDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
         inputAmountDialog.show(fm, "InputAmount");
 
     }
-    private void showEstimDialogFromLand(Double size,String landName){
+
+    private void showEstimDialogFromLand(Double size, String landName) {
         int amount = 50; //default value is 50
-        FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
-        InputEstimCropFragment inputAmountDialog = InputEstimCropFragment.newInstance(amount,size,landName);
+        FragmentManager fm = ((AppCompatActivity) context).getSupportFragmentManager();
+        InputEstimCropFragment inputAmountDialog = InputEstimCropFragment.newInstance(amount, size, landName);
         inputAmountDialog.setCallback(this);
         inputAmountDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
         inputAmountDialog.show(fm, "InputAmount");
     }
+
     @Override
     public void onFinishEditDialog(Integer amountInput) {
-        for(Integer id: vqIdsFromLand) {
+        for (Integer id : vqIdsFromLand) {
             dateMap.put(id.toString(), amountInput.toString());
         }
         vqIdsFromLand.clear();

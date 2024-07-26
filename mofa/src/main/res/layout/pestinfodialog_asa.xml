@@ -3,21 +3,21 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1"
-    >
+    android:weightSum="1">
+
     <TextView
         android:id="@+id/statusText"
 
 
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"/>
+        android:layout_width="match_parent" />
+
     <TextView
         android:id="@+id/beeDanger"
 
         android:text="@string/beeDanger"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"/>
-
+        android:layout_width="match_parent" />
 
 
     <ImageView
@@ -27,7 +27,7 @@
         android:layout_gravity="center"
         android:id="@+id/imageBee"
         android:contentDescription="image bee"
-        android:src="@drawable/ic_bee"/>
+        android:src="@drawable/ic_bee" />
 
 
     <TextView
@@ -36,25 +36,26 @@
 
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:lines="6"/>
+        android:lines="6" />
+
     <Button
         android:id="@+id/btn_etich"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/pestLabel"
-        >
+        android:text="@string/pestLabel">
 
     </Button>
+
     <Button
         android:id="@+id/btn_show_etich"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
 
     </Button>
+
     <TextView
         android:id="@+id/etich_Statustxt"
 
@@ -64,5 +65,5 @@
         android:visibility="gone"
         android:textColor="@color/red"
         android:textStyle="bold"
-        android:lines="2"/>
+        android:lines="2" />
 </LinearLayout>

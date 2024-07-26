@@ -18,6 +18,7 @@ public class Wartefrist {
     @Expose
     private String anbauart;
     private int beeRestriction;
+
     public String getKarenzzeit() {
         return karenzzeit;
     }

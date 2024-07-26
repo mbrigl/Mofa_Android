@@ -6,15 +6,19 @@
     android:layout_gravity="center"
     android:orientation="vertical"
     tools:context="it.schmid.android.mofa.vegdata.InputEstimCropFragment">
+
     <TextView
         android:id="@+id/lbl_size"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:layout_gravity="right"
-        />
+        android:layout_gravity="right" />
+
     <TextView
-        android:id="@+id/lbl_amount_ha" android:text="@string/estimCropTitleHa"
-        android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        android:id="@+id/lbl_amount_ha"
+        android:text="@string/estimCropTitleHa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <NumberPicker
         android:layout_width="match_parent"
@@ -24,15 +28,17 @@
     <TextView
         android:id="@+id/lbl_amount"
 
-        android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <TableRow
             android:id="@+id/tableRow1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
 
             <Button
@@ -40,14 +46,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cancelbutton" />
+
             <Button
                 android:id="@+id/ok_confirm_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/okbutton" />
         </TableRow>
-
-
 
 
     </TableLayout>

@@ -3,14 +3,14 @@ package it.schmid.android.mofa;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 
 
 public class InputPurchaseDialogFragment extends DialogFragment {
@@ -26,13 +26,15 @@ public class InputPurchaseDialogFragment extends DialogFragment {
     private Button mCancelButton;
     private OnInputPurchaseDialogListener mListener;
 
-    public interface OnInputPurchaseDialogListener{
+    public interface OnInputPurchaseDialogListener {
 
         void onInputPurchaseDialogInteraction(Double amount, Double price);
     }
+
     public InputPurchaseDialogFragment() {
 
     }
+
     public static InputPurchaseDialogFragment newInstance(String prodParam, Double amountParam, Double priceParam) {
         InputPurchaseDialogFragment fragment = new InputPurchaseDialogFragment();
         Bundle args = new Bundle();
@@ -42,7 +44,8 @@ public class InputPurchaseDialogFragment extends DialogFragment {
         fragment.setArguments(args);
         return fragment;
     }
-    public void setCallback(OnInputPurchaseDialogListener mCallback){
+
+    public void setCallback(OnInputPurchaseDialogListener mCallback) {
 
         mListener = mCallback;
     }
@@ -72,7 +75,7 @@ public class InputPurchaseDialogFragment extends DialogFragment {
         mAmountText = (EditText) view.findViewById(R.id.txt_purchase_amount);
         mPriceText = (EditText) view.findViewById(R.id.txt_purchase_price);
         mOkButton = (Button) view.findViewById(R.id.ok_confirm_button);
-        mCancelButton =(Button) view.findViewById(R.id.cancel_confirm_button);
+        mCancelButton = (Button) view.findViewById(R.id.cancel_confirm_button);
         mOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +97,7 @@ public class InputPurchaseDialogFragment extends DialogFragment {
         super.onAttach(context);
 
     }
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -101,10 +105,11 @@ public class InputPurchaseDialogFragment extends DialogFragment {
 
         mListener = null;
     }
-    private void callBack(){
+
+    private void callBack() {
         amount = Double.parseDouble(mAmountText.getText().toString());
         price = Double.parseDouble(mPriceText.getText().toString());
-        mListener.onInputPurchaseDialogInteraction(amount,price);
+        mListener.onInputPurchaseDialogInteraction(amount, price);
         getDialog().dismiss();
     }
 }

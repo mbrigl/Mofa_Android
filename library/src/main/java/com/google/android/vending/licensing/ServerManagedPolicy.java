@@ -65,7 +65,7 @@ public class ServerManagedPolicy implements Policy {
     private long mRetryCount;
     private long mLastResponseTime = 0;
     private int mLastResponse;
-    private PreferenceObfuscator mPreferences;
+    private final PreferenceObfuscator mPreferences;
 
     /**
      * @param context The context for the current application
@@ -195,7 +195,7 @@ public class ServerManagedPolicy implements Policy {
             // No response or not parsable, expire immediately
             Log.w(TAG, "License retry timestamp (GT) missing, grace period disabled");
             retryUntil = "0";
-            lRetryUntil = 0l;
+            lRetryUntil = 0L;
         }
 
         mRetryUntil = lRetryUntil;
@@ -221,7 +221,7 @@ public class ServerManagedPolicy implements Policy {
             // No response or not parsable, expire immediately
             Log.w(TAG, "Licence retry count (GR) missing, grace period disabled");
             maxRetries = "0";
-            lMaxRetries = 0l;
+            lMaxRetries = 0L;
         }
 
         mMaxRetries = lMaxRetries;
@@ -246,10 +246,8 @@ public class ServerManagedPolicy implements Policy {
         long ts = System.currentTimeMillis();
         if (mLastResponse == Policy.LICENSED) {
             // Check if the LICENSED response occurred within the validity timeout.
-            if (ts <= mValidityTimestamp) {
-                // Cached LICENSED response is still valid.
-                return true;
-            }
+            // Cached LICENSED response is still valid.
+            return ts <= mValidityTimestamp;
         } else if (mLastResponse == Policy.RETRY &&
                    ts < mLastResponseTime + MILLIS_PER_MINUTE) {
             // Only allow access if we are within the retry period or we haven't used up our

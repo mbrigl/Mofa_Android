@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Copyright 2011 Wglxy.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +14,8 @@
     limitations under the License.
 -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_focused="true" android:state_pressed="true" android:drawable="@drawable/workjournal_mofa"/>
-    <item android:state_focused="false" android:state_pressed="true" android:drawable="@drawable/workjournal_mofa"/>
-    <item android:state_focused="true" android:drawable="@drawable/workjournal_mofa"/>
-    <item android:state_focused="false" android:state_pressed="false" android:drawable="@drawable/workjournal_mofa"/>
+    <item android:state_focused="true" android:state_pressed="true" android:drawable="@drawable/workjournal_mofa" />
+    <item android:state_focused="false" android:state_pressed="true" android:drawable="@drawable/workjournal_mofa" />
+    <item android:state_focused="true" android:drawable="@drawable/workjournal_mofa" />
+    <item android:state_focused="false" android:state_pressed="false" android:drawable="@drawable/workjournal_mofa" />
 </selector>

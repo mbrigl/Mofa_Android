@@ -1,11 +1,10 @@
 package it.schmid.android.mofa.search;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import android.util.Log;
 
-
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,10 +17,11 @@ import it.schmid.android.mofa.interfaces.ProductInterface;
 /**
  * Created by schmida on 08.12.14.
  */
-public class SearchActivity extends DashboardActivity implements SearchLandFragment.OnLandFragmentListener,SearchResult.GetVQListener,SearchPestFragment.OnFragmentPesticideListener {
-    private static final String TAG ="SearchActivity";
+public class SearchActivity extends DashboardActivity implements SearchLandFragment.OnLandFragmentListener, SearchResult.GetVQListener, SearchPestFragment.OnFragmentPesticideListener {
+    private static final String TAG = "SearchActivity";
     private ArrayList<Integer> selVQList;
-    private int prodId=0;
+    private int prodId = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,27 +56,27 @@ public class SearchActivity extends DashboardActivity implements SearchLandFragm
     public void onLandFragmentInteraction(HashMap<Integer, ArrayList<Integer>> selElements, int searchType) {
 
         selVQList = new ArrayList<Integer>();
-        for (HashMap.Entry<Integer, ArrayList<Integer>> e : selElements.entrySet()){
+        for (HashMap.Entry<Integer, ArrayList<Integer>> e : selElements.entrySet()) {
             ArrayList<Integer> entries = e.getValue();
             selVQList.addAll(entries);
         }
         Log.d(TAG, "Callback from fragment with following entries: " + selVQList.toString());
-        if (searchType==ActivityConstants.SEARCH_LAST_PEST){
-            Fragment searchResult = SearchResult.newInstance(R.string.searchLastPest,searchType);
+        if (searchType == ActivityConstants.SEARCH_LAST_PEST) {
+            Fragment searchResult = SearchResult.newInstance(R.string.searchLastPest, searchType);
             FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.search_fragment_container, searchResult);
             transaction.addToBackStack(null);
             transaction.commit();
         }
-        if(searchType==ActivityConstants.SEARCH_PEST){
-            Fragment searchResult = SearchResult.newInstance(R.string.searchPest,searchType);
+        if (searchType == ActivityConstants.SEARCH_PEST) {
+            Fragment searchResult = SearchResult.newInstance(R.string.searchPest, searchType);
             FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.search_fragment_container, searchResult);
             transaction.addToBackStack(null);
             transaction.commit();
         }
-        if(searchType==ActivityConstants.SEARCH_FERT){
-            Fragment searchResult = SearchResult.newInstance(R.string.searchFert,searchType);
+        if (searchType == ActivityConstants.SEARCH_FERT) {
+            Fragment searchResult = SearchResult.newInstance(R.string.searchFert, searchType);
             FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.search_fragment_container, searchResult);
             transaction.addToBackStack(null);
@@ -89,7 +89,8 @@ public class SearchActivity extends DashboardActivity implements SearchLandFragm
     public ArrayList<Integer> getVQList() {
         return selVQList;
     }
-    public int getProdId(){
+
+    public int getProdId() {
         return prodId;
     }
 

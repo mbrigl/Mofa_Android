@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Copyright 2011-2012 Wglxy.com
     Derived from Google IO Schedule App, Copyright 2010 Google, Inc.
 
@@ -22,19 +21,22 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical|center_horizontal">
 
-    <ImageButton style="@style/HomeButton"
-            android:id="@+id/home_btn_image"
-            android:layout_width="@dimen/home_button_size_x"
-            android:layout_height="@dimen/home_button_size_y"
-            android:scaleType="fitCenter"
-            android:onClick="onClickFeature"
-            android:src="@drawable/home_button1" 
-            android:layout_gravity="center_vertical|center_horizontal"/>
-        <TextView style="@style/HomeButton"
-            android:id="@+id/home_btn_label"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/title_feature1"
-           android:textSize="@dimen/text_size_large"
-        android:layout_gravity="center_vertical|center_horizontal"/>
+    <ImageButton
+        style="@style/HomeButton"
+        android:id="@+id/home_btn_image"
+        android:layout_width="@dimen/home_button_size_x"
+        android:layout_height="@dimen/home_button_size_y"
+        android:scaleType="fitCenter"
+        android:onClick="onClickFeature"
+        android:src="@drawable/home_button1"
+        android:layout_gravity="center_vertical|center_horizontal" />
+
+    <TextView
+        style="@style/HomeButton"
+        android:id="@+id/home_btn_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_feature1"
+        android:textSize="@dimen/text_size_large"
+        android:layout_gravity="center_vertical|center_horizontal" />
 </LinearLayout>

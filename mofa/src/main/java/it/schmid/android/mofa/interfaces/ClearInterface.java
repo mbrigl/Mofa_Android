@@ -5,5 +5,5 @@ package it.schmid.android.mofa.interfaces;
  */
 
 public interface ClearInterface {
-    public void clear();
+    void clear();
 }

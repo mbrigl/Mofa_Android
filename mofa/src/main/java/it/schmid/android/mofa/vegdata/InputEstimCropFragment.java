@@ -2,16 +2,16 @@ package it.schmid.android.mofa.vegdata;
 
 
 import android.content.res.Resources;
-import androidx.fragment.app.DialogFragment;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -36,14 +36,17 @@ public class InputEstimCropFragment extends DialogFragment {
     private Double mSize;
     private String mTitle;
     private InputAmountDialogFragmentListener callback;
+
     public interface InputAmountDialogFragmentListener {
         void onFinishEditDialog(Integer amountInput);
 
     }
+
     public InputEstimCropFragment() {
         // Required empty public constructor
     }
-    public static InputEstimCropFragment newInstance(Integer param1,Double param2,String param3) {
+
+    public static InputEstimCropFragment newInstance(Integer param1, Double param2, String param3) {
         InputEstimCropFragment fragment = new InputEstimCropFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM_AMOUNT, param1);
@@ -52,9 +55,11 @@ public class InputEstimCropFragment extends DialogFragment {
         fragment.setArguments(args);
         return fragment;
     }
-    public void setCallback(InputAmountDialogFragmentListener mCallback){
+
+    public void setCallback(InputAmountDialogFragmentListener mCallback) {
         callback = mCallback;
     }
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -65,6 +70,7 @@ public class InputEstimCropFragment extends DialogFragment {
         }
         // callback = (InputAmountDialogFragmentListener) getActivity();
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,12 +79,12 @@ public class InputEstimCropFragment extends DialogFragment {
         final NumberFormat nf = NumberFormat.getInstance(Locale.US);
         ((DecimalFormat) nf).applyPattern("###.###");
         View v = inflater.inflate(R.layout.fragment_input_estim_crop, container, false);
-        mSizeText = (TextView)v.findViewById(R.id.lbl_size);
+        mSizeText = (TextView) v.findViewById(R.id.lbl_size);
         Resources res = getResources();
         String sizeText = String.format(res.getString(R.string.sizeInfo), mSize.toString());
         mSizeText.setText(sizeText);
-        mAmountLabel = (TextView)v.findViewById(R.id.lbl_amount);
-        mNumberPicker = (NumberPicker)v.findViewById(R.id.numberPicker);
+        mAmountLabel = (TextView) v.findViewById(R.id.lbl_amount);
+        mNumberPicker = (NumberPicker) v.findViewById(R.id.numberPicker);
         mNumberPicker.setMinValue(0);
         mNumberPicker.setMaxValue(140);
         mNumberPicker.setValue(mAmount);
@@ -86,13 +92,13 @@ public class InputEstimCropFragment extends DialogFragment {
         //Set a value change listener for NumberPicker
         mNumberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal){
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 calcAmountForSize(newVal);
             }
         });
-        btnOk = (Button)v.findViewById(R.id.ok_confirm_button);
-        btnCancel = (Button)v.findViewById(R.id.cancel_confirm_button);
-        btnCancel.setOnClickListener(new View.OnClickListener(){
+        btnOk = (Button) v.findViewById(R.id.ok_confirm_button);
+        btnCancel = (Button) v.findViewById(R.id.cancel_confirm_button);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 getDialog().dismiss();
             }
@@ -111,9 +117,10 @@ public class InputEstimCropFragment extends DialogFragment {
         return v;
 
     }
-    private void calcAmountForSize(int curValue){
+
+    private void calcAmountForSize(int curValue) {
         Double amount = curValue * mSize / 10000;
-        String output = String.format(getResources().getString(R.string.amountCrop),amount.intValue());
+        String output = String.format(getResources().getString(R.string.amountCrop), amount.intValue());
         mAmountLabel.setText(output);
     }
 }
