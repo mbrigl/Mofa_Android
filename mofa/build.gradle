@@ -40,7 +40,6 @@ android {
 }
 
 dependencies {
-    implementation project(':library')
     implementation files('libs/ormlite-core-4.42.jar')
     implementation files('libs/ormlite-android-4.42.jar')
     implementation 'androidx.appcompat:appcompat:1.7.0'

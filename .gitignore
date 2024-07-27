@@ -1,11 +1,11 @@
 *.iml
 .gradle
+/local.properties
 .idea
 .DS_Store
 /build
 /library/build
 /mofa/build
-/local.properties
 .externalNativeBuild
 mapping.txt
 seeds.txt
