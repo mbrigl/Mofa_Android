@@ -26,18 +26,18 @@ public class CreateFolderTask extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] params) {
         try {
-            dbxClient.files().createFolder(PathConstants.EXPORT);
-            dbxClient.files().createFolder(PathConstants.IMPORT);
-            dbxClient.files().createFolder(PathConstants.IMPORT + "/land");
-            dbxClient.files().createFolder(PathConstants.IMPORT + "/vquarter");
-            dbxClient.files().createFolder(PathConstants.IMPORT + "/worker");
-            dbxClient.files().createFolder(PathConstants.IMPORT + "/machine");
-            dbxClient.files().createFolder(PathConstants.IMPORT + "/task");
-            dbxClient.files().createFolder(PathConstants.IMPORT + "/pesticide");
-            dbxClient.files().createFolder(PathConstants.IMPORT + "/fertilizer");
-            dbxClient.files().createFolder(PathConstants.IMPORT + "/category");
-            dbxClient.files().createFolder(PathConstants.IMPORT + "/soilfertilizer");
-            dbxClient.files().createFolder(PathConstants.IMPORT + "/extra");
+            dbxClient.files().createFolderV2(PathConstants.EXPORT);
+            dbxClient.files().createFolderV2(PathConstants.IMPORT);
+            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/land");
+            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/vquarter");
+            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/worker");
+            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/machine");
+            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/task");
+            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/pesticide");
+            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/fertilizer");
+            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/category");
+            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/soilfertilizer");
+            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/extra");
 
             // Upload to Dropbox
 //            InputStream inputStream = new FileInputStream(file);

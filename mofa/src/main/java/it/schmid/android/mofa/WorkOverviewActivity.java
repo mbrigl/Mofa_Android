@@ -31,6 +31,7 @@ import java.util.concurrent.Callable;
 
 import it.schmid.android.mofa.adapter.WorkAdapter;
 import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.dropbox.SendingProcess;
 import it.schmid.android.mofa.model.Work;
 
 

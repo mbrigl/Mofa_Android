@@ -26,7 +26,7 @@ import java.util.List;
 import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.MofaApplication;
 import it.schmid.android.mofa.R;
-import it.schmid.android.mofa.SendingProcess;
+import it.schmid.android.mofa.dropbox.SendingProcess;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.interfaces.ClearInterface;
 import it.schmid.android.mofa.model.Global;

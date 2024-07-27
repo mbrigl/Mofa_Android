@@ -24,6 +24,7 @@ import java.util.List;
 
 import it.schmid.android.mofa.adapter.ExpandablePurchaseAdapter;
 import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.dropbox.SendingProcess;
 import it.schmid.android.mofa.interfaces.PurchaseProductInterface;
 import it.schmid.android.mofa.model.Purchase;
 import it.schmid.android.mofa.model.PurchaseFertilizer;

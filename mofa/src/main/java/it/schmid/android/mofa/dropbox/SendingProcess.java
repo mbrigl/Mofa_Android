@@ -1,4 +1,4 @@
-package it.schmid.android.mofa;
+package it.schmid.android.mofa.dropbox;
 
 import android.content.Context;
 import android.content.Intent;
@@ -42,6 +42,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import it.schmid.android.mofa.ActivityConstants;
+import it.schmid.android.mofa.MofaApplication;
+import it.schmid.android.mofa.NotificationService;
+import it.schmid.android.mofa.PathConstants;
+import it.schmid.android.mofa.R;
+import it.schmid.android.mofa.Util;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.dropbox.DropboxClient;
 import it.schmid.android.mofa.dropbox.LoginActivity;

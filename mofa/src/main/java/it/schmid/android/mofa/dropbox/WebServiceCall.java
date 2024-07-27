@@ -1,4 +1,4 @@
-package it.schmid.android.mofa;
+package it.schmid.android.mofa.dropbox;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -29,6 +29,9 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
+import it.schmid.android.mofa.MofaApplication;
+import it.schmid.android.mofa.NotificationService;
+import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.model.Einsatzgrund;
 import it.schmid.android.mofa.model.Fertilizer;
 import it.schmid.android.mofa.model.FruitQuality;
