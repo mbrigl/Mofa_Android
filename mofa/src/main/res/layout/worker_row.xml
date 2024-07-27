@@ -9,7 +9,6 @@
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-
         android:src="@drawable/ic_social_person"></ImageView>
 
     <TextView
@@ -17,26 +16,23 @@
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_toRightOf="@id/icon"
-        android:textSize="16sp"
+        android:textSize="20dp"
         android:focusable="false"
         android:focusableInTouchMode="false">
-
     </TextView>
 
     <TextView
         android:id="@+id/hourslabel"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:textSize="16sp"
+        android:textSize="20dp"
         android:visibility="gone"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:layout_toRightOf="@id/workerlabel"
         android:layout_toLeftOf="@id/selected"
         android:gravity="center"
-
         >
-
     </TextView>
 
     <CheckBox

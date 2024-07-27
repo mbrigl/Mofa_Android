@@ -9,12 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--<ImageButton
-            android:id="@+id/work_add_harvest_doc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_menu_add" /> -->
-
         <ListView
             android:id="@+id/harvest_list_doc"
             android:layout_width="fill_parent"

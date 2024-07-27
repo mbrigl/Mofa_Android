@@ -9,26 +9,23 @@
         android:id="@+id/machinelabel"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:textSize="16dp"
+        android:textSize="20dp"
         android:drawableLeft="@drawable/ic_tractor_big"
         android:layout_weight="0.04">
-
     </TextView>
 
     <TextView
         android:id="@+id/hourslabel"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:textSize="16sp"
+        android:textSize="20dp"
         android:visibility="gone"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:layout_toRightOf="@id/machinelabel"
         android:layout_toLeftOf="@id/selected"
         android:gravity="center"
-
         >
-
     </TextView>
 
     <CheckBox

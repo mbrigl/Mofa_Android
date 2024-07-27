@@ -8,6 +8,6 @@
         android:id="@+id/workvquarterLabel"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:textSize="14sp"></TextView>
+        android:textSize="20dp"></TextView>
 
 </LinearLayout>
