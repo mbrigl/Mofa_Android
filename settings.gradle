@@ -1,8 +1,8 @@
 pluginManagement {
     repositories {
-        gradlePluginPortal()
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 dependencyResolutionManagement {
@@ -12,4 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-include ':mofa'
+
+rootProject.name = "MoFa"
+include ':app'
