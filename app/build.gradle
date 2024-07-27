@@ -3,14 +3,14 @@ plugins {
 }
 
 android {
-    namespace 'it.bz.tol.mfarmer'
+    namespace 'it.schmid.android.mofa'
     compileSdk 34
 
     defaultConfig {
-        applicationId "it.bz.tol.mfarmer"
-        minSdk 29
+        applicationId "it.bz.tol.mofa"
+        minSdk 26
         targetSdk 34
-        versionCode 1
+        versionCode 40
         versionName "7.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -32,6 +32,7 @@ android {
 }
 
 dependencies {
+
     implementation libs.appcompat
     implementation libs.material
     implementation libs.constraintlayout
@@ -42,6 +43,5 @@ dependencies {
     androidTestImplementation libs.espresso.core
 
     // https://mvnrepository.com/artifact/com.dropbox.core/dropbox-core-sdk
-    implementation 'com.dropbox.core:dropbox-core-sdk:7.0.0'
-
+    implementation 'com.dropbox.core:dropbox-core-sdk:6.0.0'
 }

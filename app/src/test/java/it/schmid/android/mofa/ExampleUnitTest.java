@@ -1,4 +1,4 @@
-package it.bz.tol.mfarmer;
+package it.schmid.android.mofa;
 
 import org.junit.Test;
 

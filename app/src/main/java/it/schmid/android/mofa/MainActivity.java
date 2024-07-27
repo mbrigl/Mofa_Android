@@ -1,4 +1,4 @@
-package it.bz.tol.mfarmer;
+package it.schmid.android.mofa;
 
 import android.os.Bundle;
 
@@ -13,7 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import it.bz.tol.mfarmer.databinding.ActivityMainBinding;
+import it.schmid.android.mofa.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;

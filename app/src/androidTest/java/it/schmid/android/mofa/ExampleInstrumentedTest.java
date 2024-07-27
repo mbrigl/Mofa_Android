@@ -1,4 +1,4 @@
-package it.bz.tol.mfarmer;
+package it.schmid.android.mofa;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("it.bz.tol.mfarmer", appContext.getPackageName());
+        assertEquals("it.schmid.android.mofa", appContext.getPackageName());
     }
 }
