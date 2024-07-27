@@ -49,8 +49,6 @@ import it.schmid.android.mofa.PathConstants;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.Util;
 import it.schmid.android.mofa.db.DatabaseManager;
-import it.schmid.android.mofa.dropbox.DropboxClient;
-import it.schmid.android.mofa.dropbox.LoginActivity;
 import it.schmid.android.mofa.model.Einsatzgrund;
 import it.schmid.android.mofa.model.Fertilizer;
 import it.schmid.android.mofa.model.Global;

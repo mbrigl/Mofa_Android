@@ -68,7 +68,5 @@ public class CheckFileTask extends AsyncTask<String, Void, ArrayList<Integer>> {
         }
         return selElements;
     }
-
-
 }
 

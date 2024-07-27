@@ -34,16 +34,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.schmid.android.mofa.dropbox.SendingProcess;
-import it.schmid.android.mofa.dropbox.SendingProcess.RemoveEntries;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.dropbox.CheckFileTask;
 import it.schmid.android.mofa.dropbox.DropboxClient;
 import it.schmid.android.mofa.dropbox.LoginActivity;
+import it.schmid.android.mofa.dropbox.SendingProcess;
+import it.schmid.android.mofa.dropbox.SendingProcess.RemoveEntries;
 import it.schmid.android.mofa.dropbox.WebServiceCall;
 import it.schmid.android.mofa.model.Work;
-import it.schmid.android.mofa.search.SearchActivity;
-import it.schmid.android.mofa.vegdata.VegDataActivity;
 
 
 public class HomeActivity extends DashboardActivity implements RemoveEntries {
@@ -216,22 +214,6 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                     }
                     showImportDialog();
                 }
-                break;
-            case 4:
-                startActivity(new Intent(this, PurchaseActivity.class));
-                break;
-            case 5:
-                startActivity(new Intent(this, SearchActivity.class));
-                break;
-            case 6:
-                //startActivity(new Intent (this, WorkerOverviewActivity.class));
-                if (DatabaseManager.getInstance().checkIfEmpty()) {
-                    Toast.makeText(this, R.string.nodata, Toast.LENGTH_LONG).show();
-                } else {
-                    startActivity(new Intent(this, VegDataActivity.class));
-
-                }
-
                 break;
             default:
                 break;

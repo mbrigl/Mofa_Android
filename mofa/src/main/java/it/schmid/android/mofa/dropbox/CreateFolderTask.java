@@ -38,12 +38,6 @@ public class CreateFolderTask extends AsyncTask {
             dbxClient.files().createFolderV2(PathConstants.IMPORT + "/category");
             dbxClient.files().createFolderV2(PathConstants.IMPORT + "/soilfertilizer");
             dbxClient.files().createFolderV2(PathConstants.IMPORT + "/extra");
-
-            // Upload to Dropbox
-//            InputStream inputStream = new FileInputStream(file);
-//            dbxClient.files().uploadBuilder("/" + file.getName()) //Path in the user's Dropbox to save the file.
-//                    .withMode(WriteMode.OVERWRITE) //always overwrite existing file
-//                    .uploadAndFinish(inputStream);
             Log.d("CreateFolderTask", "Success - Creating Folders");
         } catch (DbxException e) {
 
