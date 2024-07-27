@@ -1,278 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">My Application</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
 
-    <string name="app_name">MoFa</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="settings">Settings</string>
-    <string name="title_activity_work">Working Journal</string>
-    <string name="header_title">Configuring Settings</string>
-    <string name="header_summary">Settings for updating data from Internet</string>
-    <string name="text">URL:</string>
-    <string name="list">FileFormat:</string>
-    <string name="listbackend">Backend:</string>
-    <string name="header_title_asa">Configuring ASA Settings</string>
-    <string name="header_summary_asa">Settings for ASA Import/Export</string>
-    <string name="APP_KEY">kr7pjmpdjth06g0</string>
-
-    <!-- Names of the Dashboard items -->
-    <string name="title_feature1">WorkingJournal</string>
-    <string name="title_feature2">Settings</string>
-    <string name="title_feature3">Update</string>
-    <string name="title_feature4">Purchasing</string>
-    <string name="title_feature5">Searching</string>
-    <string name="title_feature6">Blossom</string>
-
-    <!-- Preference setting for import data -->
-    <string name="showPestInfos">Show allways Pest Infos</string>
-    <string name="updateoffline">Offline update</string>
-    <string name="dropbox">Enabling Dropbox</string>
-    <string name="dropboxmsg">Deactivating Offline Update to use dropbox</string>
-    <string name="dropboxact">Activating Dropbox through clicking on update</string>
-    <string name="dropboxreset">Resetting Dropbox binding</string>
-    <string name="dropboxresetmessage">Attention: You have to reconnect to your dropbox on the next update</string>
-    <string name="waitingspinnertitle">Loading</string>
-    <string name="waitingspinnertext">Connection to Dropbox...</string>
-    <!-- Preference setting -->
-    <string name="synchronisationsettings">Synchronization…</string>
-    <!-- Preferences ASA -->
-    <string name="asa_pref_title">ASAAgrar Settings</string>
-    <string name="asa_tax_setting">gross price for purchases</string>
-    <string name="asa_harvest_codes">Codes for harvest</string>
-    <string name="asa_spray_code">Codes for spraying</string>
-    <string name="asa_herbicide_code">Codes for herbicide</string>
-    <string name="asa_soilfertilizer_codes">Codes soil fertilizing</string>
-    <string name="asa_fertilizer_code">Code fertilizer</string>
-    <string name="asa_fertilizer_soil_code">Code soil fertilizer</string>
-    <string name="asa_mofa_note">Mark entries</string>
-    <string name="asa_new_ver">ASA Version 16</string>
-    <string name="cultivation_type">Cultivation-Type</string>
-    <string name="cultivation_type_desc">only for ASAAGRAR Ver. > 16</string>
-    <string name="asa_landorder_code">Order land by code</string>
-    <!-- Table names -->
-    <string name="landtable">land</string>
-    <string name="vquartertable">Variety Quarter</string>
-    <string name="machinetable">machine</string>
-    <string name="workertable">worker</string>
-    <string name="tasktable">task</string>
-    <string name="pesticidetable">pesticide</string>
-    <string name="fertilizertable">fertilizer</string>
-    <string name="soilfertilizertable">soilfertilizer</string>
-    <string name="categorytable">fruit category</string>
-    <string name="extratable">extras</string>
-    <string name="reasonstable">reasons</string>
-    <string name="weathertable">weather</string>
-    <!-- Notification messages -->
-    <string name="download_mess">MoFa - Downloading</string>
-    <string name="download_title">MoFa - Starting download</string>
-    <string name="download_finished">MoFa - Download finished</string>
-    <string name="download_finished_ok">Download Successfully completed</string>
-    <string name="download_finished_error">Error in downloading data:</string>
-    <string name="upload_mess">MoFa - Uploading</string>
-    <string name="upload_title">MoFa - Starting upload</string>
-    <string name="upload_finished">MoFa - Upload finished</string>
-    <string name="upload_finished_ok">Data uploaded successfully</string>
-    <string name="upload_finished_error">Error in uploading data</string>
-
-    <!-- Listview Work Strings -->
-    <string name="no_works">No Work</string>
-
-    <!-- WorkEditActivity -->
-    <string name="work_save_button">Save</string>
-    <string name="hint_date">Date</string>
-    <string name="note_label">note</string>
-    <!-- MenuEntries Work -->
-    <string name="work_menu_add"> New Work</string>
-    <string name="work_menu_upload"> Upload</string>
-    <string name="menu_about"> About</string>
-    <string name="no_connection"> No connection - Please check your connectivity</string>
-    <!-- MenuEntries Work Contextmenu Filter -->
-    <string name="work_menu_nofilter"> ALL</string>
-    <string name="work_menu_sprayfilter"> Spraying</string>
-    <string name="work_menu_herbicidefilter"> Herbicide</string>
-    <string name="work_menu_fertfilter"> Fertilizing</string>
-    <string name="work_menu_otherfilter"> Other</string>
-    <!-- MenuEntries WorkEdit -->
-    <string name="workedit_menu_gpsauto"> GPS VQuarter</string>
-    <!-- MenuEntries Purchase -->
-    <string name="purchase_menu_add"> New Purchase</string>
-    <string name="purchase_menu_upload"> Upload Purchases</string>
-    <!-- MenuEntries Harvest -->
-    <string name="harvest_menu_add">Add document</string>
-    <!-- MenuEntries VegData-->
-    <string name="vegdata_menu_upload">Upload veg.data</string>
-    <string name="vegdata_clear_content">Clear data</string>
-    <string name="vegdata_clear_message">Are you sure, that you want delete all vegetation infos</string>
-    <string name="vegdata_clear_message_title">Resetting vegetation data</string>
-    <!-- PromptDialog -->
-    <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
-    <string name="title">MoFa - Input</string>
-    <string name="enter_hours">Please enter the hours of work</string>
-    <string name="enter_amount">Please enter the amount</string>
-
-    <!-- Strings for export data -->
-    <string name="export_title">Export all works</string>
-    <string name="export_message">Are you sure, that you want export all works. The local work entries will be deleted</string>
-    <string name="export_status_message">Starting export, at the end restart the update</string>
-    <string name="export_purchase_title">Export all purchase entries</string>
-    <string name="export_purchase_message">Are you sure, that you want export all your purchases. The local entries will be deleted</string>
-    <string name="export_vegdata_title">Export data</string>
-    <string name="export_vegdata_message">Are you sure, that you want export all vegetation infos.</string>
-    <!-- Strings for gps location -->
-    <string name="gps_text">GPS location data of selected variety quarter</string>
-    <string name="gps_point1">longitude and latitude of point 1</string>
-    <string name="gps_point2">longitude and latitude of point 2</string>
-    <string name="gps_empty">no data</string>
-
-    <!-- Strings for TabCaption -->
-    <string name="worktab">Work</string>
-    <string name="workrestab">Work/Mach</string>
-    <string name="spraytab">Spraying</string>
-    <string name="showspraytab">spray tab</string>
-    <string name="soilferttab">Fertilizing</string>
-    <string name="harvesttab">Harvest</string>
-    <string name="irrigationtab">Irrig.</string>
-    <!-- String image description -->
-    <string name="imagepesticide">Pesticide</string>
-    <!-- Strings in SprayTab -->
-    <string name="sprayvqlist">Variety Quarters</string>
-    <string name="sumwatercaption">hl</string>
-    <string name="concentrationcaption">Con.</string>
-    <string name="openpesticidebutton">Pesticides</string>
-    <string name="waterdialogmsg">Refreshing water amount?</string>
-    <string name="constraintDefault">No warning</string>
-    <string name="constraintWarningDose">max dose exceeded</string>
-    <string name="constraintWarningAmountPerHa">Max Amount per ha exceeded:</string>
-    <string name="constraintError">Check not possible, because some data are missing</string>
-    <string name="sizeInfo">Size:  %1$s m²</string>
-
-
-    <!-- Strings in Pesticide List -->
-    <string name="search_str_pesticide">Enter text to search</string>
-    <!-- Strings in workresources -->
-    <string name="toast_msg_start">Please start the input selecting a land</string>
-    <!-- Strings in Fragment Input Dose -->
-    <string name="input_dose_hl">Please enter the dose per hl(1x)</string>
-    <string name="input_amount_total">Please enter the total amount</string>
-    <string name="reason">Please select the reason</string>
-    <string name="status">Status:</string>
-    <string name="beeWarning">*** ATTENTION BEE DANGEROUS ***</string>
-    <string name="beeNoWarning">*** NOT BEE DANGEROUS ***</string>
-    <string name="warteFristen">Waiting time:</string>
-    <string name="reason_prompt">Reason:</string>
-    <string name="min_dose">Minimum dose:</string>
-    <string name="max_dose">Maximum dose:</string>
-    <string name="max_use_pro_year">Maximum usage pro year:</string>
-    <string name="max_amount_usage">Maximum amount pro use/ha:</string>
-    <string name="max_use_year_in_serie">Maximum use in serie:</string>
-
-    <!-- Strings in Fragment Input Purchase -->
-    <string name="input_purchase_amount">amount in kg/lt</string>
-    <string name="input_purchase_price">price for kg/lt</string>
-    <!-- Strings for TabCaption for Product List -->
-    <string name="pesticidetab">Pesticides</string>
-    <string name="fertilizertab">Fertilizer</string>
-    <!-- Strings for DialogBoxes -->
-    <string name="okbutton">OK</string>
-    <string name="cancelbutton">Cancel</string>
-    <string name="yesbutton">YES</string>
-    <string name="nobutton">NO</string>
-    <string name="closebutton"> Close</string>
-    <string name="dialogdeletetitel">Remove</string>
-    <string name="dialogdeletemsg">You want to delete the item?</string>
-    <string name="dialogdeletemsgwithchilds">You want to delete the item and all its content</string>
-    <string name="importTitle">Import of MasterData…</string>
-    <string name="noUpdatesInfo">Information</string>
-    <string name="noUpdatesText">No Updates available</string>
-    <string name="startsearchbutton">Start Search</string>
-    <!-- Strings for Harvest Fragment Dialog -->
-    <string name="har_title">TransportDoc</string>
-    <string name="har_number">Docnr</string>
-    <string name="har_amount">Amount</string>
-    <string name="har_category">Category</string>
-    <string name="har_boxes">Boxes</string>
-    <string name="har_note">Note</string>
-    <string name="har_sugar">S</string>
-    <string name="har_ph">pH</string>
-    <string name="har_phen">Phe</string>
-    <string name="har_acid">Ac</string>
-    <string name="har_stage">Stage</string>
-    <string name="har_warning_id">Transport Id can not be null</string>
-    <!-- Strings for PurchaseActivities/Fragments -->
-
-
-    <!-- Strings for Error/Warnings -->
-    <string name="restpathemptystring">You have to enter a Path under Settings</string>
-    <string name="xmlparseerror">Please check the Syntax of your XML</string>
-    <string name="dropboxconnerror">Link to Dropbox failed or was cancelled</string>
-    <string name="reimportmessage">ATTENTION-ALL WORKING ENTRIES AND PURCHASES HAVE TO BE EXPORTED FIRST</string>
-    <string name="nodata">No Data - Please import data through update</string>
-    <string name="noupdate">No updates available</string>
-    <!-- Strings for Pesticide Info Dialog -->
-    <string name="beeDanger">BD</string>
-    <string name="waitingtime">waitingtime</string>
-    <string name="reentertime">RET</string>
-    <string name="maxamountha">max amount pro ha</string>
-    <string name="maxtime">max usage</string>
-    <string name="otherconstraints">other constraints</string>
-    <string name="waitingtimeUnit">days</string>
-    <string name="reentertimeUnit">h</string>
-    <string name="maxamounthaUnit">kg/lt</string>
-    <string name="amountha">amount ha:</string>
-    <string name="maxDose">max dose/hl:</string>
-    <string name="pestLabel">label(from Internet)</string>
-    <string name="etichNotFound">"NO LABEL - CHECK NAME OF PRODUCT</string>
-    <string name="pdfNotSupported">No app for pdf installed</string>
-    <!-- Strings for SearchPesticide -->
-    <string name="searchLastPest">Last Spraying work</string>
-    <string name="searchVQuarter">Please select vquarter for search</string>
-    <string name="searchPest">Search Pesticide</string>
-    <string name="searchFert">Search Fertilizer</string>
-    <string name="searchPestSel">Please select a product to search</string>
-    <string name="searchInfo">The archive contains %1$d entries. \n This search includes only spraying entries sended from this device. Be sure that you don\'t clear the archive during the year!</string>
-    <string name="hoursOverview">Working hours</string>
-    <string name="delete_archive">Clear archive</string>
-    <string name="delete_archive_mes">ATTENTION: ALL SPRAYING ENTRIES WERE DELETED, WHICH ARE OLDER THAN 60 DAYS\n IF YOU WANT TO DELETE ALL SENDED WORKS, CHECK THE CHECKBOX BELOW</string>
-    <string name="search_no_result">No entry found for this query</string>
-    <string name="fromDate">from Date</string>
-    <string name="toDate">to Date</string>
-    <string name="noHoursMsg">No hours in this period</string>
-    <string name="datemsgtomuch">The date can not exceed 60 days from today</string>
-    <string name="deletearchivemsg">Are your sure, that you want delete all spraying entries older than 60 days?</string>
-    <string name="deleteallsended">Deleting all sended works</string>
-    <string name="deleteallsendedmsg">Are you sure, that you want delete all sended works</string>
-    <string name="deletetoastmsg">Data deleted!!</string>
-
-    <!-- Strings for Weather -->
-    <string name="weathersunny">weather: sunny</string>
-    <string name="weatherpartlycloudy">weather: partly cloudy</string>
-    <string name="weathercloudy">weather: cloudy</string>
-    <string name="weatherlightrain">weather: light rain</string>
-    <string name="weatherrain">weather: rain</string>
-    <string name="weathernight">night</string>
-    <!-- Strings for Irrigation -->
-    <string name="irrigduration">Duration in h:</string>
-    <string name="irrigamount">Amount rel/h:</string>
-    <string name="irrDry">DryIrrig.</string>
-    <string name="irrFrost">FrostIrrig.</string>
-    <string name="irrDrip">DripIrrig.</string>
-
-    <!-- Strings Login Dropbox Activity-->
-    <string name="titleDropboxLoginActivity">MoFa - Login Dropbox</string>
-    <string name="titleDropboxButton">Login</string>
-    <string name="dropboxInfo">Click on the login Button to connect MoFa with your Dropbox. \n You must have a valid Dropbox Account.</string>
-
-
-    <!-- Strings for VegData -->
-    <string name="blossomStart">BLOSSOMSTART</string>
-    <string name="blossomEnd">BLOSSOMEND</string>
-    <string name="harvestStart">HARVEST</string>
-    <string name="estimCrop">YIELD</string>
-    <string name="estimCropTitleHa">amount in t/ha</string>
-    <string name="amountCrop">Amount on size: %1$d t</string>
-
-    <!-- Strings for SpeechRecognition -->
-    <string name="speech_prompt">Start speaking</string>
-    <string name="speech_not_supported">Speech not supported</string>
-
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
+        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
+        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
+        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
+        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
+        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
+        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
+        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
+        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
+        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
+        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
+        bibendum, vel congue leo egestas.\n\n
+        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
+        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
+        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
+        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
+        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
+        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
+        est.\n\n
+        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
+        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
+        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
+        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
+        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
+        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
+        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
+        convallis.\n\n
+        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
+        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
+        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
+        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
+        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
+        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
+        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
+    </string>
 </resources>
