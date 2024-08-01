@@ -125,13 +125,6 @@ public class InputDoseDialogFragment extends DialogFragment implements OnEditorA
                 }
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-                boolean showPestInfos = sharedPreferences.getBoolean("showPestInfos", false);
-                //Log.d("showpestInfo", "value = " + showPestInfos);
-                //TODO showing constraints on pesticide
-                if (mPesticide.showInfo() == 1 && showPestInfos) { //only for pesticides
-                    PestInfoDialog infoDialog = PestInfoDialog.newInstance(mPesticide.getId());
-                    infoDialog.show(getFragmentManager(), "DialogFragment");
-                }
 //
                 callback.onFinishEditDialog(mDose, mAmount);
 

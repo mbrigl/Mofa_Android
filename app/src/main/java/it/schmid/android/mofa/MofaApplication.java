@@ -6,21 +6,6 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
-import android.util.Log;
-
-import org.apache.http.HttpVersion;
-import org.apache.http.client.HttpClient;
-import org.apache.http.conn.ClientConnectionManager;
-import org.apache.http.conn.scheme.PlainSocketFactory;
-import org.apache.http.conn.scheme.Scheme;
-import org.apache.http.conn.scheme.SchemeRegistry;
-import org.apache.http.conn.ssl.SSLSocketFactory;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.params.HttpProtocolParams;
-import org.apache.http.protocol.HTTP;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -33,7 +18,6 @@ public class MofaApplication extends Application {
 
     static final String TAG = "MofaApplication";
     private static double defaultHour = 8.00;
-    private HttpClient httpClient;
     private static MofaApplication instance;
     private ConcurrentHashMap<String, String> mGlobalVariables;
     private Set<AppStateListener> mAppStateListeners;
@@ -48,7 +32,6 @@ public class MofaApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        httpClient = createHttpClient();
         mGlobalVariables = new ConcurrentHashMap<String, String>();
         mAppStateListeners = Collections.synchronizedSet(new HashSet<AppStateListener>());
     }
@@ -99,44 +82,11 @@ public class MofaApplication extends Application {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        shutdownHttpClient();
     }
 
     @Override
     public void onTerminate() {
         super.onTerminate();
-        shutdownHttpClient();
-    }
-
-    private HttpClient createHttpClient() {
-        Log.d(TAG, "createHttpClient()...");
-        HttpParams params = new BasicHttpParams();
-        HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
-        HttpProtocolParams.setContentCharset(params,
-                HTTP.DEFAULT_CONTENT_CHARSET);
-        HttpProtocolParams.setUseExpectContinue(params, true);
-        SchemeRegistry schReg = new SchemeRegistry();
-        schReg.register(new Scheme("http",
-                PlainSocketFactory.getSocketFactory(), 80));
-        schReg.register(new Scheme("https",
-                SSLSocketFactory.getSocketFactory(), 443));
-        ClientConnectionManager conMgr = new
-                ThreadSafeClientConnManager(params, schReg);
-        return new DefaultHttpClient(conMgr, params);
-    }
-
-    public HttpClient getHttpClient() {
-        return httpClient;
-    }
-
-    public String getBackendSoftware() {
-        SharedPreferences preferences;
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        return preferences.getString("listBackendFormat", "2");
-    }
-
-    public void setBackendSoftware(String backEnd) {
-
     }
 
     public Boolean newAsaVersion() {
@@ -154,12 +104,6 @@ public class MofaApplication extends Application {
         SharedPreferences preferences;
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         return preferences.getString("fertilizersoilcode", "MD");
-    }
-
-    private void shutdownHttpClient() {
-        if (httpClient != null && httpClient.getConnectionManager() != null) {
-            httpClient.getConnectionManager().shutdown();
-        }
     }
 
     public boolean networkStatus() {

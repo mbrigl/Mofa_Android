@@ -53,11 +53,8 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
      * // setting from preferences
      */
     private Boolean resetDropbox;
-    private Boolean dropBox;
-    private Boolean offline;
     private String urlPath;
     private String format;
-    private String backEndSoftware;
     private MofaApplication app;
 
     private SharedPreferences preferences;
@@ -147,12 +144,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
         String sBackEnd;
         super.onResume();
         //setting title with additional info
-        backEndSoftware = app.getBackendSoftware();
-        if (Integer.parseInt(backEndSoftware) == 1) {//ASA case
             sBackEnd = "ASA";
-        } else {
-            sBackEnd = "Excel";
-        }
         getSupportActionBar().setTitle("MoFa - " + sBackEnd);
 
     }
@@ -183,8 +175,6 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                 preferences = PreferenceManager.getDefaultSharedPreferences(this);
                 urlPath = preferences.getString("url", "");
                 resetDropbox = preferences.getBoolean("dropboxreset", false);
-                offline = preferences.getBoolean("updateOffline", false);
-                dropBox = preferences.getBoolean("dropbox", false);
                 format = preferences.getString("listFormat", "-1");
 
                 if (resetDropbox) { //resetting the link if enabled in preferences
@@ -193,26 +183,13 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                     editor.putBoolean("dropboxreset", false);
                     editor.commit();
                 }
-                if (dropBox) { //DropBox sync
-                    if (!DropboxClient.tokenExists(this)) { //Dropbox API V2 - check if Token exists
-                        //No token
-                        //Back to LoginActivity
-                        startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-                    } else {
-                        ACCESS_TOKEN = DropboxClient.retrieveAccessToken(this);
-                        importFromDropbox();
-                    }
-
-
-                    /**
-                     * handling cases different from Dropbox
-                     */
+                if (!DropboxClient.tokenExists(this)) { //Dropbox API V2 - check if Token exists
+                    //No token
+                    //Back to LoginActivity
+                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
                 } else {
-                    if (urlPath == "") {
-                        //Toast.makeText(getApplicationContext(), R.string.restpathemptystring, Toast.LENGTH_LONG).show();
-                        urlPath = Globals.IMPORT;
-                    }
-                    showImportDialog();
+                    ACCESS_TOKEN = DropboxClient.retrieveAccessToken(this);
+                    importFromDropbox();
                 }
                 break;
             default:
@@ -224,7 +201,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
      * @param selItems contains an ArrayList of integers to decide which tables are to update
      * @param url      is the URL of the webservice entry point
      */
-    private void updateData(ArrayList<Integer> selItems, String url, Boolean offline, String format) {
+    private void updateData(ArrayList<Integer> selItems, String url, String format) {
         @SuppressWarnings("unused")
         String extension;
 
@@ -233,10 +210,8 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
         } else {
             extension = ".xml";
         }
-        WebServiceCall importData = new WebServiceCall(this, offline, format, dropBox, backEndSoftware, DropboxClient.getClient(ACCESS_TOKEN));
+        WebServiceCall importData = new WebServiceCall(this, format, DropboxClient.getClient(ACCESS_TOKEN));
         importData.execute(selItems, url);
-
-
     }
 
 
@@ -420,12 +395,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                 if (checkBox.isChecked()) {
                     if ((DatabaseManager.getInstance().getAllNotSendedWorks().size() == 0) && (DatabaseManager.getInstance().getAllPurchases().size() == 0)) { // works table is empty
                         flushData(selElements);
-                        if (!dropBox) {
-                            updateData(selElements, urlPath, offline, format); //starting the import of data
-                        } else {
-                            updateData(selElements, Globals.IMPORT, offline, format); //starting the import of dropbox data
-                        }
-
+                        updateData(selElements, Globals.IMPORT, format); //starting the import of dropbox data
                     } else { // works table not empty first export
                         //Toast.makeText(getApplicationContext(), R.string.reimportmessage,Toast.LENGTH_LONG).show();
                         if (DatabaseManager.getInstance().getAllWorks().size() != 0) {
@@ -446,15 +416,8 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
 
                 } else {
                     // the standard case, only a update
-                    if (!dropBox) {
-                        updateData(selElements, urlPath, offline, format);
-                    } else {
-                        updateData(selElements, Globals.IMPORT, offline, format);
-                    }
-
-
+                    updateData(selElements, Globals.IMPORT, format);
                 }
-
             }
         });
 

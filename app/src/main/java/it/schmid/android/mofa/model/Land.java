@@ -106,18 +106,11 @@ public class Land extends ImportBehavior {
 
     @Override
     public Boolean importMasterData(String xmlString, NotificationService notification) {
-        String backEndSoftware;
         List<Land> importData;
         MofaApplication app = MofaApplication.getInstance();
-        backEndSoftware = app.getBackendSoftware();
         //default
-        if (Integer.parseInt(backEndSoftware) == 1) { //ASA
             Log.d("TAG", "BackendSoftware: ASAAGRAR");
             importData = landXmlParserASA(xmlString, notification);
-        } else {
-            Log.d("TAG", "BackendSoftware:Default");
-            importData = landXmlParser(xmlString, notification);
-        }
         for (Land l : importData) {
             Land land = DatabaseManager.getInstance().getLandWithId(l.getId());
             if (land != null) {

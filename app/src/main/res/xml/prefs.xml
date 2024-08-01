@@ -6,14 +6,6 @@
             android:key="url"
             android:summary="Please enter REST path"
             android:title="REST path" />
-        />
-        <CheckBoxPreference
-            android:key="updateOffline"
-            android:title="@string/updateoffline" />
-        <CheckBoxPreference
-            android:key="dropbox"
-            android:title="@string/dropbox"
-            android:defaultValue="1" />
         <CheckBoxPreference
             android:key="dropboxreset"
             android:title="@string/dropboxreset" />
@@ -28,13 +20,6 @@
             android:defaultValue="2"
             android:entries="@array/listWebFormat"
             android:entryValues="@array/listWebFormatValues" />
-        <ListPreference
-            android:defaultValue="1"
-            android:entries="@array/listBackend"
-            android:entryValues="@array/listBackendValues"
-            android:key="listBackendFormat"
-            android:summary="BackendSoftware"
-            android:title="Backend Software" />
     </PreferenceCategory>
 
 

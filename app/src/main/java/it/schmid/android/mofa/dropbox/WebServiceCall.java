@@ -3,33 +3,21 @@ package it.schmid.android.mofa.dropbox;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.util.Log;
 
 import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.FileMetadata;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-import it.schmid.android.mofa.MofaApplication;
 import it.schmid.android.mofa.NotificationService;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.model.Einsatzgrund;
@@ -56,8 +44,6 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String> {
     JSONArray jObj = null;
     private static boolean error = false;
     private final Context mContext;
-    private final Boolean mOffline;
-    private final Boolean mDropbox;
     private final String format;
     private String statusMsg = "";
     private ArrayList<Integer> selItems;
@@ -67,30 +53,14 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String> {
     //Notification variable
     private NotificationService mNotificationService;
 
-    public WebServiceCall(Context context, Boolean offline, String format, Boolean dropBox, String backEndSoftware, DbxClientV2 dbxClient) {
+    public WebServiceCall(Context context, String format, DbxClientV2 dbxClient) {
         this.mContext = context;
-        this.mOffline = offline;
-        this.mDropbox = dropBox;
         this.format = format;
         this.mDbxClient = dbxClient;
         //Get the notification manager
         mNotificationService = new NotificationService(context, true);
-        switch (Integer.parseInt(backEndSoftware)) {
-            case 1:
                 Log.d("TAG", "BackendSoftware: ASAAGRAR");
                 encoding = UTF;
-                break;
-            case 2:
-                Log.d("TAG", "BackendSoftware:Default");
-                encoding = UTF;
-                break;
-            case 3:
-                Log.d("TAG", "BackendSoftware:Default");
-                encoding = UTF;
-                break;
-
-
-        }
     }
 
     @Override
@@ -223,17 +193,8 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String> {
      */
 
     private String getData(String filePath) {
-
-        if (!mDropbox) {
-            if (mOffline) { //we make only a offline import
-                data = offlineImport(filePath);
-            } else { //import over Internet
-                data = HttpConnect(filePath);
-            }
-        } else {
-            data = getDropboxData(filePath);
-//            deleteDropboxFile(filePath);
-        }
+        data = getDropboxData(filePath);
+//        deleteDropboxFile(filePath);
         return data;
     }
 
@@ -271,66 +232,6 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String> {
 
         mNotificationService.completed(icon, tickerText, notifMess);
         dialog.dismiss();
-
-
-    }
-
-    // modified connection, using application object as singleton connection
-    private String HttpConnect(String restUrl) {
-        try {
-            MofaApplication app = MofaApplication.getInstance();
-            HttpClient client = app.getHttpClient();
-            HttpPost httpPost = new HttpPost(restUrl);
-            HttpResponse httpResponse = client.execute(httpPost);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            is = httpEntity.getContent();
-        } catch (Exception e) {
-            error = true;
-            e.printStackTrace();
-        }
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    is, StandardCharsets.ISO_8859_1), 8);
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line).append("\n");
-            }
-            is.close();
-            data = sb.toString();
-        } catch (Exception e) {
-            // Log.e("Buffer Error", "Error converting result " + e.toString());
-            error = true;
-        }
-        return data;
-    }
-
-
-    private String offlineImport(String filePath) {
-        String jString = "";
-        try {
-
-            File dir = Environment.getExternalStorageDirectory();
-            File importFile = new File(dir, filePath);
-            if (importFile.exists()) {
-                FileInputStream stream = new FileInputStream(importFile);
-
-                try {
-                    FileChannel fc = stream.getChannel();
-                    MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
-                    jString = Charset.defaultCharset().decode(bb).toString();
-                } finally {
-                    stream.close();
-                }
-            } else {
-                error = true;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //TODO
-        return jString;
     }
 
     private String getDropboxData(String filePath) {

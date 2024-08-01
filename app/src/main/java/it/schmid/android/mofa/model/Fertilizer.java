@@ -141,18 +141,10 @@ public class Fertilizer extends ImportBehavior implements ProductInterface {
     @Override
     public Boolean importMasterData(String xmlString, NotificationService notification) {
         List<Fertilizer> importData;
-        String backEndSoftware;
         app = MofaApplication.getInstance();
-        backEndSoftware = app.getBackendSoftware();
 
-        //default
-        if (Integer.parseInt(backEndSoftware) == 1) { //ASA
             Log.d("TAG", "BackendSoftware: ASAAGRAR");
             importData = fertilizerXmlParserASA(xmlString, notification);
-        } else {
-            Log.d("TAG", "BackendSoftware:Default");
-            importData = fertilizerXmlParser(xmlString, notification);
-        }
 
         for (Fertilizer f : importData) {
             Fertilizer fertilizer = DatabaseManager.getInstance().getFertilizerWithId(f.getId());

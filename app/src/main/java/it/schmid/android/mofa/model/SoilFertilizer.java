@@ -93,17 +93,9 @@ public class SoilFertilizer extends ImportBehavior {
     @Override
     public Boolean importMasterData(String xmlString, NotificationService notification) {
         List<SoilFertilizer> importData;
-        String backEndSoftware;
         app = MofaApplication.getInstance();
-        backEndSoftware = app.getBackendSoftware();
-        //default
-        if (Integer.parseInt(backEndSoftware) == 1) { //ASA
             Log.d("TAG", "BackendSoftware: ASAAGRAR");
             importData = soilFertilizerXmlParserASA(xmlString, notification);
-        } else {
-            Log.d("TAG", "BackendSoftware:Default");
-            importData = soilFertilizerXmlParser(xmlString, notification);
-        }
         for (SoilFertilizer f : importData) {
             SoilFertilizer soilFertilizer = DatabaseManager.getInstance().getSoilFertilizerWithId(f.getId());
             if (soilFertilizer != null) {

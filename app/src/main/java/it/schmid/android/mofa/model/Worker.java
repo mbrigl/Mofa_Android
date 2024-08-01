@@ -105,18 +105,11 @@ public class Worker extends ImportBehavior {
 
     @Override
     public Boolean importMasterData(String xmlString, NotificationService notification) {
-        String backEndSoftware;
         List<Worker> importData;
         MofaApplication app = MofaApplication.getInstance();
-        backEndSoftware = app.getBackendSoftware();
         //default
-        if (Integer.parseInt(backEndSoftware) == 1) { //ASA
             Log.d("TAG", "BackendSoftware: ASAAGRAR");
             importData = workerXmlParserASA(xmlString, notification);
-        } else {
-            Log.d("TAG", "BackendSoftware:Default");
-            importData = workerXmlParser(xmlString, notification);
-        }
 
         for (Worker w : importData) {
             Worker worker = DatabaseManager.getInstance().getWorkerWithId(w.getId());

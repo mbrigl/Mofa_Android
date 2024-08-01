@@ -202,21 +202,13 @@ public class Pesticide extends ImportBehavior implements ProductInterface {
     public Boolean importMasterData(String xmlString, NotificationService notification) {
 
         List<Pesticide> importData;
-        String backEndSoftware;
         MofaApplication app = MofaApplication.getInstance();
-        backEndSoftware = app.getBackendSoftware();
-        //default
-        if (Integer.parseInt(backEndSoftware) == 1) { //ASA
             Log.d("TAG", "BackendSoftware: ASAAGRAR");
             if (app.newAsaVersion()) {
                 importData = pesticideXmlParserASANewVersion(xmlString, notification);
             } else {
                 importData = pesticideXmlParserASA(xmlString, notification);
             }
-        } else {
-            Log.d("TAG", "BackendSoftware:Default");
-            importData = pesticideXmlParser(xmlString, notification);
-        }
 
         Log.d(TAG, "[importMasterData] + size of importData" + importData.size());
         for (Pesticide p : importData) {

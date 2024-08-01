@@ -142,18 +142,10 @@ public class Task extends ImportBehavior {
 
     @Override
     public Boolean importMasterData(String xmlString, NotificationService notification) {
-        String backEndSoftware;
         List<Task> importData;
         MofaApplication app = MofaApplication.getInstance();
-        backEndSoftware = app.getBackendSoftware();
-        //default
-        if (Integer.parseInt(backEndSoftware) == 1) { //ASA
-            Log.d("TAG", "BackendSoftware: ASAAGRAR");
-            importData = taskXmlParserASA(xmlString, notification);
-        } else {
-            Log.d("TAG", "BackendSoftware:Default");
-            importData = taskXmlParser(xmlString, notification);
-        }
+        Log.d("TAG", "BackendSoftware: ASAAGRAR");
+        importData = taskXmlParserASA(xmlString, notification);
 
 
         for (Task t : importData) {

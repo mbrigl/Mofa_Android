@@ -49,8 +49,6 @@ dependencies {
     androidTestImplementation libs.espresso.core
 
     implementation 'com.google.code.gson:gson:2.8.9'
-    implementation 'com.google.http-client:google-http-client-android:1.43.1'
-    implementation 'org.jsoup:jsoup:1.10.3'
 
     // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-android
     implementation 'com.j256.ormlite:ormlite-android:6.1'

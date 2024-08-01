@@ -128,9 +128,7 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
             //Filtering the works
 
             public boolean onNavigationItemSelected(int position, long itemId) {
-                String backEndSoftware;
                 MofaApplication app = MofaApplication.getInstance();
-                backEndSoftware = app.getBackendSoftware();
                 switch (position) {
                     case 0:
                         workList = DatabaseManager.getInstance().getAllNotSendedWorks();

@@ -17,13 +17,6 @@ import com.dropbox.core.v2.files.WriteMode;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlSerializer;
@@ -76,8 +69,6 @@ public class SendingProcess implements Runnable {
     private static final String ASANOTE = "(MoFa)";
     Context context;
     private NotificationService mNotificationService; // notification services
-    private Boolean dropBox;  // checking if dropbox setting is enabled
-    private Boolean offline; // checking if offline or through REST
     private Boolean grossPrice; // checking if for ASA using gross prices
     private Boolean mofaNote;
     private Boolean asa_New_Ver;
@@ -85,7 +76,6 @@ public class SendingProcess implements Runnable {
     private String sendingData; //
     private String urlPath;
     private String notifMess = "";
-    private String backEndSoftware;
     private boolean error = false; // error value for webservice connection
     private String restResponse = ""; // not used yet, but response of json-webservice
     private final int callingActivity;
@@ -112,9 +102,6 @@ public class SendingProcess implements Runnable {
     public void run() {
         Looper.prepare(); //For Preparing Message Pool for the child Thread
         MofaApplication app = MofaApplication.getInstance();
-        backEndSoftware = app.getBackendSoftware();
-
-        if (Integer.parseInt(backEndSoftware) == 1) { //special case ASA
 
             if (callingActivity == ActivityConstants.WORK_OVERVIEW) { //calling this asynch method from workoverview
                 if (asa_New_Ver) {
@@ -136,48 +123,8 @@ public class SendingProcess implements Runnable {
             if (callingActivity == ActivityConstants.VEGDATA_ACTIVITY) { // calling this asynch from vegdata
                 sendingData = createVegDataXMLASA();
             }
-        } else { //default case LibreOffice
-            if (callingActivity == ActivityConstants.WORK_OVERVIEW) { //default case
-                sendingData = createXML(); //default case
-            }
-            if (callingActivity == ActivityConstants.PURCHASING_ACTIVITY) {
-                sendingData = createPurchaseXML();
-            }
-            if (callingActivity == ActivityConstants.VEGDATA_ACTIVITY) { // calling this asynch from vegdata
-                sendingData = createVegDataXML();
-            }
-        }
 
-        if (dropBox) { //DropBox case
-            writeFileToDropBox(sendingData, format);
-        } else { //not Dropbox
-            if (offline) { //offline-export to SD-Card
-                writeFile(sendingData, format);
-            } else { //creating REST connection
-
-                HttpClient client = app.getHttpClient();
-                HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000); //Timeout Limit
-                HttpResponse response;
-                try {
-                    HttpPost post = new HttpPost(urlPath);
-                    StringEntity se = new StringEntity(sendingData);
-                    se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-                    post.setEntity(se);
-                    response = client.execute(post);
-                    //  Checking response
-                    if (response != null) {
-                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
-                        Log.d(TAG, convertStreamToString(in));
-                        restResponse = restResponse + convertStreamToString(in) + "\n";
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    error = true;
-
-
-                }
-            }
-        }
+        writeFileToDropBox(sendingData, format);
 
         int icon = android.R.drawable.stat_sys_upload_done;
         CharSequence tickerText = context.getString(R.string.upload_finished);
@@ -197,8 +144,6 @@ public class SendingProcess implements Runnable {
     //preparing to send Data
     public void sendData() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        offline = preferences.getBoolean("updateOffline", false);
-        dropBox = preferences.getBoolean("dropbox", false);
         format = preferences.getString("listFormat", "-1");
         urlPath = preferences.getString("url", "");
         grossPrice = preferences.getBoolean("grossprice", false);

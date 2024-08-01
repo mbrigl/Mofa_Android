@@ -93,18 +93,11 @@ public class Machine extends ImportBehavior {
 
     @Override
     public Boolean importMasterData(String xmlString, NotificationService notification) {
-        String backEndSoftware;
         List<Machine> importData;
         MofaApplication app = MofaApplication.getInstance();
-        backEndSoftware = app.getBackendSoftware();
         //default
-        if (Integer.parseInt(backEndSoftware) == 1) { //ASA
             Log.d("TAG", "BackendSoftware: ASAAGRAR");
             importData = machineXmlParserASA(xmlString, notification);
-        } else {
-            Log.d("TAG", "BackendSoftware:Default");
-            importData = machineXmlParser(xmlString, notification);
-        }
 
         for (Machine m : importData) {
             Machine machine = DatabaseManager.getInstance().getMachineWithId(m.getId());

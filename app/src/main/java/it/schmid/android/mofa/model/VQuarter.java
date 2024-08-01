@@ -204,19 +204,11 @@ public class VQuarter extends ImportBehavior {
 
     @Override
     public Boolean importMasterData(String xmlString, NotificationService notification) {
-        String backEndSoftware;
         VQuarter vquarter;
         List<VQuarter> importData;
         MofaApplication app = MofaApplication.getInstance();
-        backEndSoftware = app.getBackendSoftware();
-        //default
-        if (Integer.parseInt(backEndSoftware) == 1) { //ASA
             Log.d("TAG", "BackendSoftware: ASAAGRAR");
             importData = vquarterXmlParserASA(xmlString, notification);
-        } else {
-            Log.d("TAG", "BackendSoftware:Default");
-            importData = vquarterXmlParser(xmlString, notification);
-        }
 
 
         for (VQuarter vq : importData) {

@@ -98,19 +98,10 @@ public class FruitQuality extends ImportBehavior {
     @Override
     public Boolean importMasterData(String xmlString,
                                     NotificationService notification) {
-        String backEndSoftware;
         List<FruitQuality> importData;
         MofaApplication app = MofaApplication.getInstance();
-        backEndSoftware = app.getBackendSoftware();
-        //default
-        if (Integer.parseInt(backEndSoftware) == 1) { //ASA
-            Log.d("TAG", "BackendSoftware: ASAAGRAR");
-            importData = qualityXmlParserASA(xmlString, notification);
-        } else {
-            Log.d("TAG", "BackendSoftware:Default");
-            importData = qualityXmlParser(xmlString, notification);
-        }
-
+        Log.d("TAG", "BackendSoftware: ASAAGRAR");
+        importData = qualityXmlParserASA(xmlString, notification);
 
         for (FruitQuality f : importData) {
             FruitQuality quality = DatabaseManager.getInstance().getQualityWithId(f.getId());

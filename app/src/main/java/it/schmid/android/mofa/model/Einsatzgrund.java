@@ -65,18 +65,10 @@ public class Einsatzgrund extends ImportBehavior {
 
     @Override
     public Boolean importMasterData(String xmlString, NotificationService notification) {
-        String backEndSoftware;
-
         MofaApplication app = MofaApplication.getInstance();
-        backEndSoftware = app.getBackendSoftware();
         //default
-        if (Integer.parseInt(backEndSoftware) == 1) { //ASA
             Log.d("TAG", "BackendSoftware: ASAAGRAR");
             einsatzgrundList = reasonXmlParserASA(xmlString, notification);
-        } else {
-            Log.d("TAG", "BackendSoftware:Default");
-            einsatzgrundList = reasonXmlParser(xmlString, notification);
-        }
         if (!einsatzgrundList.isEmpty()) {
             List<Global> globalList = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.PESTREASONS);
             Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
