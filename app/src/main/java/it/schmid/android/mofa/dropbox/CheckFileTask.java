@@ -15,7 +15,8 @@ import it.schmid.android.mofa.Globals;
  * Created by schmida on 22.07.16.
  */
 public class CheckFileTask extends AsyncTask<String, Void, ArrayList<Integer>> {
-    String[] elements = {"/land", "/vquarter", "/machine", "/worker", "/task", "/pesticide", "/fertilizer", "/soilfertilizer", "/category", "/extra", "/reason", "/weather"};
+    String[] elements = {"/land", "/vquarter", "/machine", "/worker", "/task"};
+//    String[] elements = {"/land", "/vquarter", "/machine", "/worker", "/task", "/pesticide", "/fertilizer", "/soilfertilizer", "/category", "/extra", "/reason", "/weather"};
 
     private final DbxClientV2 mDbxClient;
     private final Callback mCallback;
@@ -34,8 +35,6 @@ public class CheckFileTask extends AsyncTask<String, Void, ArrayList<Integer>> {
         mDbxClient = dbxClient;
         mCallback = callback;
         mElementDesc = elementDesc;
-
-
     }
 
     @Override
