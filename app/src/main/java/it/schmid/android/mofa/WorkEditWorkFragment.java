@@ -54,12 +54,9 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
             Arrays.asList("Spraying", "Spritzen", "Behandlung", "Trattamento", "Spritzung", "Pflanzenschutz", "Herbizidbehandlung",
                     "Chemische Unkrautbekämpfung", "Chem. Unkrautbekämpfung")
     );
-    ShowSprayTabListener mCallback;
     SetWorkIdListener parentSetWorkId;
     CompleteBehaviour continueEnabled;
-    ShowSoilFertilizerTabListener mShowSFertilizerTab;
     ShowHarvestTabListener mShowHarvestTab;
-    ShowWaterTabListener mShowWaterTab;
     private static final int REQUEST_CODE = 0;
     private Boolean saveStateOnPause = false;
     private int mworkId = 0;
@@ -94,11 +91,6 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
 
     }
 
-    // interface to pass the workid to the spraying fragment
-    public interface ShowSprayTabListener {
-        void showSprayTabListener(int workId, Boolean status);
-    }
-
     public interface SetWorkIdListener {
         void setWorkIdListener(int workId);
     }
@@ -107,16 +99,8 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
         void setContinue(boolean complete);
     }
 
-    public interface ShowSoilFertilizerTabListener {
-        void showSoilFertilizerTab(int workId, Boolean status);
-    }
-
     public interface ShowHarvestTabListener {
         void showHarvestTabListener(int workId, Boolean status);
-    }
-
-    public interface ShowWaterTabListener {
-        void showWaterTabListener(int workId, Boolean status);
     }
 
     // registering the callback, using onAttach
@@ -124,10 +108,7 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mCallback = (ShowSprayTabListener) activity;
-            mShowSFertilizerTab = (ShowSoilFertilizerTabListener) activity;
             mShowHarvestTab = (ShowHarvestTabListener) activity;
-            mShowWaterTab = (ShowWaterTabListener) activity;
             parentSetWorkId = (SetWorkIdListener) activity;
             continueEnabled = (CompleteBehaviour) activity;
         } catch (ClassCastException e) {
@@ -270,22 +251,9 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
 
                 //Log.d(TAG, "ASA type = " + item.getType());
                 if (item.getType() != null) {
-                    if (work != null && item.getType().equalsIgnoreCase("S")) {
-                        mCallback.showSprayTabListener(mworkId, true);
-                    }
-                    if (work != null && item.getType().equalsIgnoreCase("H")) {
-                        mCallback.showSprayTabListener(mworkId, true);
-                    }
-                    if (work != null && item.getType().equalsIgnoreCase("D")) {
-                        mShowSFertilizerTab.showSoilFertilizerTab(mworkId, true);
-                    }
                     if (work != null && item.getType().equalsIgnoreCase("E")) {
                         Log.d(TAG, "New Harvest entry - Showing Tab");
                         mShowHarvestTab.showHarvestTabListener(mworkId, true);
-                    }
-                    if (work != null && item.getType().equalsIgnoreCase("B")) {
-                        Log.d(TAG, "New Irrigation entry - Showing Tab");
-                        mShowWaterTab.showWaterTabListener(mworkId, true);
                     }
                 }
 

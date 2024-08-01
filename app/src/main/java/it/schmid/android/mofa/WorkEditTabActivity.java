@@ -22,8 +22,8 @@ import it.schmid.android.mofa.model.Work;
  * @author schmida
  * Main Class for works
  */
-public class WorkEditTabActivity extends DashboardActivity implements WorkEditWorkFragment.ShowSprayTabListener, WorkEditWorkFragment.SetWorkIdListener, WorkEditWorkFragment.CompleteBehaviour,
-        WorkEditWorkFragment.ShowSoilFertilizerTabListener, WorkEditWorkFragment.ShowHarvestTabListener, WorkEditWorkFragment.ShowWaterTabListener {
+public class WorkEditTabActivity extends DashboardActivity implements WorkEditWorkFragment.SetWorkIdListener, WorkEditWorkFragment.CompleteBehaviour,
+        WorkEditWorkFragment.ShowHarvestTabListener {
     private static final String TAG = "WorkEditTabActivity";
     ViewPager mViewPager;
     TabsAdapter mTabsAdapter;
@@ -68,32 +68,6 @@ public class WorkEditTabActivity extends DashboardActivity implements WorkEditWo
 
     }
 
-    public void showSprayTab() {
-        if (mTabsAdapter.getCount() <= 2) { //only adding if there is not already done
-            ActionBar bar = getSupportActionBar();
-            Log.d(TAG, "[showSprayTab] - Size of tabs = " + mTabsAdapter.getCount());
-            mTabsAdapter.addTab(
-                    bar.newTab().setText(R.string.spraytab),
-                    WorkEditSprayFragment.class, mBundle);
-            sprayToCheck = true;
-        }
-
-
-    }
-
-    public void showSoilFertTab() {
-        if (mTabsAdapter.getCount() <= 2) { //only adding if there is not already done
-            ActionBar bar = getSupportActionBar();
-            Log.d(TAG, "[showSoilFertTab] - Size of tabs = " + mTabsAdapter.getCount());
-            mTabsAdapter.addTab(
-                    bar.newTab().setText(R.string.soilferttab),
-                    WorkEditSoilFertilizerFragment.class, mBundle);
-            fertToCheck = true;
-        }
-
-
-    }
-
     public void showHarvestTab() {
         if (mTabsAdapter.getCount() <= 2) { //only adding if there is not already done
             ActionBar bar = getSupportActionBar();
@@ -102,34 +76,6 @@ public class WorkEditTabActivity extends DashboardActivity implements WorkEditWo
                     bar.newTab().setText(R.string.harvesttab),
                     WorkEditHarvestFragment.class, mBundle);
         }
-    }
-
-    @Override
-    public void showWaterTabListener(int workId, Boolean status) {
-        if (mTabsAdapter.getCount() <= 2) { //only adding if there is not already done
-            ActionBar bar = getSupportActionBar();
-            Log.d(TAG, "[showIrrigationTab] - Size of tabs = " + mTabsAdapter.getCount());
-            mTabsAdapter.addTab(
-                    bar.newTab().setText(R.string.irrigationtab),
-                    WorkEditWaterFragment.class, mBundle);
-        }
-    }
-
-    //callback methods from workeditworkactivity, after selecting the spraying task
-    public void showSprayTabListener(int workId, Boolean status) {
-
-        if (status) {
-            Log.d(TAG, "[callback - showSprayTabListener] - Invoking the callback method with workid: " + workId);
-            showSprayTab();
-        }
-    }
-
-    //callback method from workeditworkactivity, after selecting the fertilizing task -> task.id ==2
-    public void showSoilFertilizerTab(int workId, Boolean status) {
-        if (status) {
-            showSoilFertTab();
-        }
-
     }
 
     //callback method from workeditworkfragment, after selecting a work contains harvest codes

@@ -53,12 +53,6 @@
             android:name=".WorkSelectMachineActivity"
             android:label="@string/app_name" />
         <activity
-            android:name=".WorkSelectSoilFertilizerActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".WorkProductTabActivity"
-            android:label="@string/app_name" />
-        <activity
             android:name=".search.SearchActivity"
             android:label="@string/app_name" />
         <activity
