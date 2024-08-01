@@ -2127,7 +2127,7 @@ public class DatabaseManager {
             w.eq("vquarter_id", vqs);
             QueryBuilder<Work, Integer> work = getSprayWorks();
             work.join(qbVquarter);
-            work.limit(2);
+            work.limit(2L);
             PreparedQuery<Work> prepWork = work.prepare();
             return getHelper().getWorkDao().query(prepWork);
         } catch (SQLException e) {

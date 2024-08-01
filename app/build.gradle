@@ -1,10 +1,10 @@
 plugins {
-    id 'com.android.application'
+    alias(libs.plugins.android.application)
 }
 
 android {
+    namespace 'it.schmid.android.mofa'
     compileSdk 34
-    useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "it.bz.tol.mofa"
@@ -13,42 +13,47 @@ android {
         versionCode 40
         versionName "7.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt')
-            proguardFile 'proguard-android.txt'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding true
+    }
     packagingOptions {
         resources {
             excludes += ['META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt']
         }
     }
-    lint {
-        disable 'Typos'
-        checkReleaseBuilds false
-    }
-    namespace 'it.schmid.android.mofa'
 }
 
 dependencies {
-    implementation files('libs/ormlite-core-4.42.jar')
-    implementation files('libs/ormlite-android-4.42.jar')
-    implementation 'androidx.appcompat:appcompat:1.7.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.material:material:1.12.0'
+
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.constraintlayout
+    implementation libs.navigation.fragment
+    implementation libs.navigation.ui
+
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'com.google.http-client:google-http-client-android:1.43.1'
-    implementation 'com.dropbox.core:dropbox-core-sdk:5.1.1'
-    implementation 'com.squareup.okhttp:okhttp:2.7.5'
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'org.jsoup:jsoup:1.10.3'
+
+    // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-android
+    implementation 'com.j256.ormlite:ormlite-android:6.1'
+    // https://mvnrepository.com/artifact/com.dropbox.core/dropbox-core-sdk
+    implementation 'com.dropbox.core:dropbox-core-sdk:5.1.1'
 }

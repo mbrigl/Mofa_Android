@@ -61,25 +61,25 @@ public class WorkingJournalPreferenceFragment extends PreferenceFragment impleme
 
     private void createSdFolderStruct() {
         if (isSdPresent()) { //SD-Card mounted
-            File direct = new File(Environment.getExternalStorageDirectory() + PathConstants.PATH);
+            File direct = new File(Environment.getExternalStorageDirectory() + Globals.PATH);
             if (!direct.exists())
                 direct.mkdir();
 
-            direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/land");
+            direct = new File(Environment.getExternalStorageDirectory() + Globals.IMPORT + "/land");
             boolean successful = direct.mkdirs();
-            direct = new File(Environment.getExternalStorageDirectory() + PathConstants.EXPORT);
+            direct = new File(Environment.getExternalStorageDirectory() + Globals.EXPORT);
             successful = direct.mkdirs();
-            direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/worker");
+            direct = new File(Environment.getExternalStorageDirectory() + Globals.IMPORT + "/worker");
             successful = direct.mkdirs();
-            direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/vquarter");
+            direct = new File(Environment.getExternalStorageDirectory() + Globals.IMPORT + "/vquarter");
             successful = direct.mkdirs();
-            direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/pesticide");
+            direct = new File(Environment.getExternalStorageDirectory() + Globals.IMPORT + "/pesticide");
             successful = direct.mkdirs();
-            direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/fertilizer");
+            direct = new File(Environment.getExternalStorageDirectory() + Globals.IMPORT + "/fertilizer");
             successful = direct.mkdirs();
-            direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/task");
+            direct = new File(Environment.getExternalStorageDirectory() + Globals.IMPORT + "/task");
             successful = direct.mkdirs();
-            direct = new File(Environment.getExternalStorageDirectory() + PathConstants.IMPORT + "/machine");
+            direct = new File(Environment.getExternalStorageDirectory() + Globals.IMPORT + "/machine");
             successful = direct.mkdirs();
         }
     }

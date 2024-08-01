@@ -210,7 +210,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                 } else {
                     if (urlPath == "") {
                         //Toast.makeText(getApplicationContext(), R.string.restpathemptystring, Toast.LENGTH_LONG).show();
-                        urlPath = PathConstants.IMPORT;
+                        urlPath = Globals.IMPORT;
                     }
                     showImportDialog();
                 }
@@ -423,7 +423,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                         if (!dropBox) {
                             updateData(selElements, urlPath, offline, format); //starting the import of data
                         } else {
-                            updateData(selElements, PathConstants.IMPORT, offline, format); //starting the import of dropbox data
+                            updateData(selElements, Globals.IMPORT, offline, format); //starting the import of dropbox data
                         }
 
                     } else { // works table not empty first export
@@ -440,7 +440,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
 //		            	if (dropBox==false){  
 //		            		updateData(selElements,urlPath,offline,format); //starting the import of data
 //		            	}else{
-//		            		updateData(selElements,PathConstants.IMPORT,offline,format); //starting the import of dropbox data
+//		            		updateData(selElements,Globals.IMPORT,offline,format); //starting the import of dropbox data
 //		            	}
                     }
 
@@ -449,7 +449,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                     if (!dropBox) {
                         updateData(selElements, urlPath, offline, format);
                     } else {
-                        updateData(selElements, PathConstants.IMPORT, offline, format);
+                        updateData(selElements, Globals.IMPORT, offline, format);
                     }
 
 

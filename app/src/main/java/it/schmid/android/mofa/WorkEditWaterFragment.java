@@ -207,14 +207,14 @@ public class WorkEditWaterFragment extends Fragment {
 
     private void setDefaultValue(int workId, Double value) {
         String key = "Irr" + DatabaseManager.getInstance().getFirstLandIdForIrrigation(workId); //creating key for irr
-        SharedPreferences prefs = getActivity().getSharedPreferences(PathConstants.ID, Context.MODE_PRIVATE);
+        SharedPreferences prefs = getActivity().getSharedPreferences(Globals.ID, Context.MODE_PRIVATE);
         prefs.edit().putLong(key, Double.doubleToLongBits(value)).apply();
         //Toast.makeText(getActivity(),DatabaseManager.getInstance().getFirstLandIdForIrrigation(workId),Toast.LENGTH_LONG).show();
     }
 
     private Double getDefaultValue(int workId) {
         String key = "Irr" + DatabaseManager.getInstance().getFirstLandIdForIrrigation(workId); //creating key for irr
-        SharedPreferences prefs = getActivity().getSharedPreferences(PathConstants.ID, Context.MODE_PRIVATE);
+        SharedPreferences prefs = getActivity().getSharedPreferences(Globals.ID, Context.MODE_PRIVATE);
         Double value = Double.longBitsToDouble(prefs.getLong(key, 0));
         return value;
 

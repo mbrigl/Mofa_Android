@@ -232,7 +232,7 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String> {
             }
         } else {
             data = getDropboxData(filePath);
-            deleteDropboxFile(filePath);
+//            deleteDropboxFile(filePath);
         }
         return data;
     }

@@ -428,14 +428,14 @@ public class WorkEditSprayFragment extends Fragment {
 
     private void setPredefConc(double conc) {
         String key = "LAST_CONC"; //creating key for concentration
-        SharedPreferences prefs = getActivity().getSharedPreferences(PathConstants.ID, Context.MODE_PRIVATE);
+        SharedPreferences prefs = getActivity().getSharedPreferences(Globals.ID, Context.MODE_PRIVATE);
         prefs.edit().putLong(key, Double.doubleToRawLongBits(conc)).apply();
         //Toast.makeText(getActivity(),DatabaseManager.getInstance().getFirstLandIdForIrrigation(workId),Toast.LENGTH_LONG).show();
     }
 
     private double getPredefConc() {
         String key = "LAST_CONC";
-        SharedPreferences prefs = getActivity().getSharedPreferences(PathConstants.ID, Context.MODE_PRIVATE);
+        SharedPreferences prefs = getActivity().getSharedPreferences(Globals.ID, Context.MODE_PRIVATE);
         double conc = Double.longBitsToDouble(prefs.getLong(key, Double.doubleToLongBits(1.0)));
         return conc;
 

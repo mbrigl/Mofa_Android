@@ -7,7 +7,7 @@ import android.util.Log;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
 
-import it.schmid.android.mofa.PathConstants;
+import it.schmid.android.mofa.Globals;
 
 /**
  * Created by schmida on 22.07.16.
@@ -26,18 +26,18 @@ public class CreateFolderTask extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] params) {
         try {
-            dbxClient.files().createFolderV2(PathConstants.EXPORT);
-            dbxClient.files().createFolderV2(PathConstants.IMPORT);
-            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/land");
-            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/vquarter");
-            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/worker");
-            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/machine");
-            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/task");
-            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/pesticide");
-            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/fertilizer");
-            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/category");
-            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/soilfertilizer");
-            dbxClient.files().createFolderV2(PathConstants.IMPORT + "/extra");
+            dbxClient.files().createFolderV2(Globals.EXPORT);
+            dbxClient.files().createFolderV2(Globals.IMPORT);
+            dbxClient.files().createFolderV2(Globals.IMPORT + "/land");
+            dbxClient.files().createFolderV2(Globals.IMPORT + "/vquarter");
+            dbxClient.files().createFolderV2(Globals.IMPORT + "/worker");
+            dbxClient.files().createFolderV2(Globals.IMPORT + "/machine");
+            dbxClient.files().createFolderV2(Globals.IMPORT + "/task");
+            dbxClient.files().createFolderV2(Globals.IMPORT + "/pesticide");
+            dbxClient.files().createFolderV2(Globals.IMPORT + "/fertilizer");
+            dbxClient.files().createFolderV2(Globals.IMPORT + "/category");
+            dbxClient.files().createFolderV2(Globals.IMPORT + "/soilfertilizer");
+            dbxClient.files().createFolderV2(Globals.IMPORT + "/extra");
             Log.d("CreateFolderTask", "Success - Creating Folders");
         } catch (DbxException e) {
 

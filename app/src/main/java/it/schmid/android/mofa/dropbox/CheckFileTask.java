@@ -8,7 +8,7 @@ import com.dropbox.core.v2.DbxClientV2;
 
 import java.util.ArrayList;
 
-import it.schmid.android.mofa.PathConstants;
+import it.schmid.android.mofa.Globals;
 
 
 /**
@@ -55,7 +55,7 @@ public class CheckFileTask extends AsyncTask<String, Void, ArrayList<Integer>> {
         int pos = 1;
         for (String element : elements) {
             try {
-                String path = PathConstants.IMPORT + element + fileName;
+                String path = Globals.IMPORT + element + fileName;
                 mDbxClient.files().getMetadata(path);
 
                 sb.append(mElementDesc[pos - 1]);

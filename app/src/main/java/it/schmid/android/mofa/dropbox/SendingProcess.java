@@ -43,9 +43,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import it.schmid.android.mofa.ActivityConstants;
+import it.schmid.android.mofa.Globals;
 import it.schmid.android.mofa.MofaApplication;
 import it.schmid.android.mofa.NotificationService;
-import it.schmid.android.mofa.PathConstants;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.Util;
 import it.schmid.android.mofa.db.DatabaseManager;
@@ -258,17 +258,17 @@ public class SendingProcess implements Runnable {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
             if (fileType.equalsIgnoreCase("1")) {
                 if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
-                    file = new File(sdCard.getAbsolutePath() + PathConstants.EXPORT, "worklist" + dateFormat.format(date) + ".json");
+                    file = new File(sdCard.getAbsolutePath() + Globals.EXPORT, "worklist" + dateFormat.format(date) + ".json");
                 }
                 if (callingActivity == ActivityConstants.PURCHASING_ACTIVITY) {
-                    file = new File(sdCard.getAbsolutePath() + PathConstants.EXPORT, "purchaselist" + dateFormat.format(date) + ".json");
+                    file = new File(sdCard.getAbsolutePath() + Globals.EXPORT, "purchaselist" + dateFormat.format(date) + ".json");
                 }
             } else {
                 if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
-                    file = new File(sdCard.getAbsolutePath() + PathConstants.EXPORT, "worklist" + dateFormat.format(date) + ".xml");
+                    file = new File(sdCard.getAbsolutePath() + Globals.EXPORT, "worklist" + dateFormat.format(date) + ".xml");
                 }
                 if (callingActivity == ActivityConstants.PURCHASING_ACTIVITY) {
-                    file = new File(sdCard.getAbsolutePath() + PathConstants.EXPORT, "purchaselist" + dateFormat.format(date) + ".xml");
+                    file = new File(sdCard.getAbsolutePath() + Globals.EXPORT, "purchaselist" + dateFormat.format(date) + ".xml");
                 }
             }
 
@@ -1476,23 +1476,23 @@ public class SendingProcess implements Runnable {
         ACCESS_TOKEN = DropboxClient.retrieveAccessToken(context);
         if (fileType.equalsIgnoreCase("1")) {
             if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
-                filePath = PathConstants.EXPORT + "/worklist" + dateFormat.format(date) + ".json";
+                filePath = Globals.EXPORT + "/worklist" + dateFormat.format(date) + ".json";
             }
             if (callingActivity == ActivityConstants.PURCHASING_ACTIVITY) {
-                filePath = PathConstants.EXPORT + "/purchaselist" + dateFormat.format(date) + ".json";
+                filePath = Globals.EXPORT + "/purchaselist" + dateFormat.format(date) + ".json";
             }
             if (callingActivity == ActivityConstants.VEGDATA_ACTIVITY) { // calling this asynch from vegdata
-                filePath = PathConstants.EXPORT + "/vegdata" + dateFormat.format(date) + ".json";
+                filePath = Globals.EXPORT + "/vegdata" + dateFormat.format(date) + ".json";
             }
         } else {
             if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
-                filePath = PathConstants.EXPORT + "/worklist" + dateFormat.format(date) + ".xml";
+                filePath = Globals.EXPORT + "/worklist" + dateFormat.format(date) + ".xml";
             }
             if (callingActivity == ActivityConstants.PURCHASING_ACTIVITY) {
-                filePath = PathConstants.EXPORT + "/purchaselist" + dateFormat.format(date) + ".xml";
+                filePath = Globals.EXPORT + "/purchaselist" + dateFormat.format(date) + ".xml";
             }
             if (callingActivity == ActivityConstants.VEGDATA_ACTIVITY) { // calling this asynch from vegdata
-                filePath = PathConstants.EXPORT + "/vegdata" + dateFormat.format(date) + ".xml";
+                filePath = Globals.EXPORT + "/vegdata" + dateFormat.format(date) + ".xml";
             }
         }
 

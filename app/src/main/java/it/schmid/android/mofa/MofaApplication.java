@@ -28,9 +28,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MofaApplication extends Application {
+
     public static final Integer WORK_NORMAL = 1;
-    public static final Integer WORK_SPRAY = 2;
-    public static final Integer WORK_FERT = 3;
 
     static final String TAG = "MofaApplication";
     private static double defaultHour = 8.00;
