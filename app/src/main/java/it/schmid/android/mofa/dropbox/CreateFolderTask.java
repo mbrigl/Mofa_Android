@@ -13,41 +13,29 @@ import it.schmid.android.mofa.Globals;
  * Created by schmida on 22.07.16.
  */
 public class CreateFolderTask extends AsyncTask {
-    private final DbxClientV2 dbxClient;
 
-    private final Context context;
+    private final DbxClientV2   client;
+    private final Context       context;
 
-    CreateFolderTask(DbxClientV2 dbxClient, Context context) {
-        this.dbxClient = dbxClient;
-
+    CreateFolderTask(DbxClientV2 client, Context context) {
+        this.client = client;
         this.context = context;
     }
 
     @Override
     protected Object doInBackground(Object[] params) {
         try {
-            dbxClient.files().createFolderV2(Globals.EXPORT);
-            dbxClient.files().createFolderV2(Globals.IMPORT);
-            dbxClient.files().createFolderV2(Globals.IMPORT + "/land");
-            dbxClient.files().createFolderV2(Globals.IMPORT + "/vquarter");
-            dbxClient.files().createFolderV2(Globals.IMPORT + "/worker");
-            dbxClient.files().createFolderV2(Globals.IMPORT + "/machine");
-            dbxClient.files().createFolderV2(Globals.IMPORT + "/task");
-            dbxClient.files().createFolderV2(Globals.IMPORT + "/pesticide");
-            dbxClient.files().createFolderV2(Globals.IMPORT + "/fertilizer");
-            dbxClient.files().createFolderV2(Globals.IMPORT + "/category");
-            dbxClient.files().createFolderV2(Globals.IMPORT + "/soilfertilizer");
-            dbxClient.files().createFolderV2(Globals.IMPORT + "/extra");
+            client.files().createFolderV2(Globals.EXPORT);
+            client.files().createFolderV2(Globals.IMPORT);
+            client.files().createFolderV2(Globals.IMPORT + "/land");
+            client.files().createFolderV2(Globals.IMPORT + "/vquarter");
+            client.files().createFolderV2(Globals.IMPORT + "/worker");
+            client.files().createFolderV2(Globals.IMPORT + "/machine");
+            client.files().createFolderV2(Globals.IMPORT + "/task");
             Log.d("CreateFolderTask", "Success - Creating Folders");
         } catch (DbxException e) {
-
+            Log.e("CreateFolderTask", "Failure - Creating Folders", e);
         }
         return null;
-    }
-
-    @Override
-    protected void onPostExecute(Object o) {
-        super.onPostExecute(o);
-        //Toast.makeText(context, "Folder created successfully", Toast.LENGTH_SHORT).show();
     }
 }

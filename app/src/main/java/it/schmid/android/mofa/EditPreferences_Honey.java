@@ -8,7 +8,6 @@ import java.util.List;
 
 public class EditPreferences_Honey extends PreferenceActivity {
 
-    @SuppressLint("NewApi")
     @Override
     public void onBuildHeaders(List<Header> target) {
         loadHeadersFromResource(R.xml.prference_headers, target);
@@ -21,5 +20,4 @@ public class EditPreferences_Honey extends PreferenceActivity {
                 PreferenceContentFragmentASA.class.getName().equals(fragmentName) ||
                 PreferenceFragmentASA.class.getName().equals(fragmentName);
     }
-
 }

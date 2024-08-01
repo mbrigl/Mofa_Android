@@ -163,7 +163,6 @@ public class ExpandableLandAdapter extends BaseExpandableListAdapter {
             holder = new ViewHolderParent();
             holder.txtLand = v.findViewById(R.id.landname);
             holder.selectedLand = v.findViewById(R.id.selected_land);
-            //Log.d(TAG, "[getGroupView] Selected land:" + group.getName());
 
             v.setTag(holder);
 

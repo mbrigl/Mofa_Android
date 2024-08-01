@@ -26,8 +26,8 @@ public class CheckFileTask extends AsyncTask<String, Void, ArrayList<Integer>> {
     private final StringBuilder sb = new StringBuilder();
 
     public interface Callback {
-        void onDataLoaded(ArrayList<Integer> result, StringBuilder sb);
 
+        void onDataLoaded(ArrayList<Integer> result, StringBuilder sb);
         void onError(Exception e);
     }
 

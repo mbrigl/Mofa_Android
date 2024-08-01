@@ -8,28 +8,29 @@ import java.util.Date;
 
 @DatabaseTable
 public class Work {
+
     public final static String ID_FIELD_NAME = "id";
+
     @DatabaseField(generatedId = true, columnName = ID_FIELD_NAME)
-
     private Integer id;
+
     @DatabaseField(dataType = DataType.DATE_LONG)
-
     private Date date;
+
     @DatabaseField(foreign = true, foreignAutoRefresh = true)
-
     private Task task;
+
     @DatabaseField
-
     private String note;
-    @DatabaseField(index = true, defaultValue = "0")
 
+    @DatabaseField(index = true, defaultValue = "0")
     private Boolean valid;
-    @DatabaseField(index = true, defaultValue = "0")
 
+    @DatabaseField(index = true, defaultValue = "0")
     private Boolean sended;
+
     @DatabaseField
     private String data;
-
 
     //constructor
     public Work() {

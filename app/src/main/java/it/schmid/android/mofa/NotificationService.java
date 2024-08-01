@@ -34,13 +34,8 @@ public class NotificationService {
         mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
         Intent notificationIntent = new Intent();
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
             mContentIntent = PendingIntent.getActivity
                     (mContext, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
-        } else {
-            mContentIntent = PendingIntent.getActivity
-                    (mContext, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
-        }
         //mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
         int icon = notIcon;
         CharSequence tickerText = aText; //Initial text that appears in the status bar
@@ -49,17 +44,6 @@ public class NotificationService {
                 .setSmallIcon(icon).setTicker(tickerText).setWhen(when)
                 .setAutoCancel(true).setContentTitle(fullText)
                 .setContentText(tickerText).build();
-        //create the notification
-
-        // mNotification = new Notification(icon, tickerText, when);
-        //create the content which is shown in the notification pulldown
-        //  mContentTitle = fullText; //Full title of the notification in the pull down
-        // CharSequence contentText = "0% complete"; //Text of the notification in the pull down
-
-        //add the additional content and intent to the notification
-        // mNotification.setLatestEventInfo(mContext, mContentTitle, "", mContentIntent);
-        //make this notification appear in the 'Ongoing events' section
-        //  mNotification.flags = Notification.FLAG_ONGOING_EVENT;
 
         //show the notification
         mNotificationManager.notify(NOTIFICATION_ID, mNotification);
@@ -74,13 +58,6 @@ public class NotificationService {
     @SuppressWarnings("deprecation")
     public void progressUpdate(int percentageComplete) {
 
-        //build up the new status message
-
-        //  CharSequence contentText = percentageComplete + "% complete";
-        //publish it to the status bar
-        //  mNotification.setLatestEventInfo(mContext, mContentTitle, contentText, mContentIntent);
-
-        // mNotificationManager.notify(NOTIFICATION_ID, mNotification);
     }
 
     /**
@@ -99,13 +76,8 @@ public class NotificationService {
         mContentTitle = fullText;
         notificationIntent = new Intent();
         mContentIntent = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
             mContentIntent = PendingIntent.getActivity
                     (mContext, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
-        } else {
-            mContentIntent = PendingIntent.getActivity
-                    (mContext, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
-        }
         //mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
         mNotification = builder.setContentIntent(mContentIntent)
@@ -137,8 +109,5 @@ public class NotificationService {
         // mNotification.setLatestEventInfo(mContext, mContentTitle, "", mContentIntent);
         mNotification.flags = Notification.FLAG_AUTO_CANCEL;
         mNotificationManager.notify(NOTIFICATION_ID_F, mNotification);
-
     }
-
-
 }

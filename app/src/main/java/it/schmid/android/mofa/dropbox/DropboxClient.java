@@ -16,18 +16,18 @@ import it.schmid.android.mofa.HomeActivity;
 /**
  * Created by schmida on 22.07.16.
  */
-public class DropboxClient {
-    public static DbxClientV2 getClient(String ACCESS_TOKEN) {
-        // Create Dropbox client
+public interface DropboxClient {
+
+    static DbxClientV2 getClient(String accessToken) {
         DbxRequestConfig config = new DbxRequestConfig("dropbox/mofa-app", "en_US");
-        return new DbxClientV2(config, ACCESS_TOKEN);
+        return new DbxClientV2(config, accessToken);
     }
 
-    public static void authenticate(Context context, String secret) {
+    static void authenticate(Context context, String secret) {
         Auth.startOAuth2Authentication(context, secret);
     }
 
-    public static void getAccessToken(Context context) {
+    static void getAccessToken(Context context) {
         DbxCredential credential = Auth.getDbxCredential(); //generate Access Token
         if (credential != null && credential.getAccessToken() != null) {
             //Store accessToken in SharedPreferences
@@ -41,7 +41,7 @@ public class DropboxClient {
         }
     }
 
-    public static String retrieveAccessToken(Context context) {
+    static String retrieveAccessToken(Context context) {
         //check if ACCESS_TOKEN is previously stored on previous app launches
         SharedPreferences prefs = context.getSharedPreferences(Globals.ID, Context.MODE_PRIVATE);
         String accessToken = prefs.getString("access-token", null);
@@ -55,12 +55,12 @@ public class DropboxClient {
         }
     }
 
-    public static boolean tokenExists(Context context) {
+    static boolean tokenExists(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(Globals.ID, Context.MODE_PRIVATE);
         return prefs.getString("access-token", null) != null;
     }
 
-    public static void deleteAccessToken(Context context) {
+    static void deleteAccessToken(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(Globals.ID, Context.MODE_PRIVATE);
         prefs.edit().remove("access-token").commit();
     }

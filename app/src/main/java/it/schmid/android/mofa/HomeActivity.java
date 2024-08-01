@@ -163,12 +163,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
 
                 break;
             case 2:
-                //  startActivity (new Intent(getApplicationContext(), F2Activity.class));
-                if (Build.VERSION.SDK_INT < 11) {
-                    startActivity(new Intent(this, EditPreferences.class));
-                } else {
-                    startActivity(new Intent(this, EditPreferences_Honey.class));
-                }
+                startActivity(new Intent(this, EditPreferences_Honey.class));
                 break;
             case 3:
                 preferences = PreferenceManager.getDefaultSharedPreferences(this);

@@ -151,13 +151,11 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String> {
     }
 
     private void importData(String data, ImportBehavior selectedTable) {
-        //case XML
         error = selectedTable.importMasterData(data, mNotificationService); //concatinating the error status
         if (error) {
             onPostExecute("Error in parsing file");
 
         }
-        //return data;
     }
 
     @Override
@@ -225,9 +223,6 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String> {
                 }
             }
         }
-
         return sb.toString();
-
     }
-
 }

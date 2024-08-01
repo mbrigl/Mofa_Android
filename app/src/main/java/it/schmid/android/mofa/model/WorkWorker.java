@@ -6,16 +6,17 @@ import com.j256.ormlite.field.DatabaseField;
 public class WorkWorker {
     public final static String WORK_ID_FIELD_NAME = "work_id";
     public final static String WORKER_ID_FIELD_NAME = "worker_id";
+
     @DatabaseField(generatedId = true)
     private Integer id;
+
     @DatabaseField(foreign = true, columnName = WORK_ID_FIELD_NAME)
-
     private Work work;
+
     @DatabaseField(foreign = true, columnName = WORKER_ID_FIELD_NAME)
-
     private Worker worker;
-    @DatabaseField
 
+    @DatabaseField
     private Double hours;
 
     public WorkWorker() {
@@ -57,5 +58,4 @@ public class WorkWorker {
     public void setHours(Double hours) {
         this.hours = hours;
     }
-
 }
