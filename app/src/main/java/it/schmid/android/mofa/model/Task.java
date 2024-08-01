@@ -3,7 +3,6 @@ package it.schmid.android.mofa.model;
 
 import android.util.Log;
 
-import com.google.gson.annotations.Expose;
 import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
@@ -28,7 +27,7 @@ import it.schmid.android.mofa.db.DatabaseManager;
 public class Task extends ImportBehavior {
     private static final String TAG = "TaskClass";
     @DatabaseField(id = true)
-    @Expose
+
     private Integer id;
     @DatabaseField
     private String task;
@@ -136,7 +135,7 @@ public class Task extends ImportBehavior {
     @Override
     public int hashCode() {
         int result = 0;
-        result = (int) (id / 12) + 5;
+        result = (id / 12) + 5;
         return result;
     }
 

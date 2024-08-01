@@ -13,7 +13,7 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Button SignInButton = (Button) findViewById(R.id.sign_in_button);
+        Button SignInButton = findViewById(R.id.sign_in_button);
         SignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

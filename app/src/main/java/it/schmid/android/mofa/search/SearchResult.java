@@ -96,10 +96,10 @@ public class SearchResult extends Fragment implements LoaderManager.LoaderCallba
             }
         }
         View v = inflater.inflate(R.layout.fragment_search_result, container, false);
-        resultListView = (ExpandableListView) v.findViewById(R.id.resultlistview);
+        resultListView = v.findViewById(R.id.resultlistview);
         adapter = new ExpandableSearchResultAdapter(getActivity(), vqIds);
         resultListView.setAdapter(adapter);
-        Button btnClose = (Button) v.findViewById(R.id.searchclose_btn);
+        Button btnClose = v.findViewById(R.id.searchclose_btn);
         btnClose.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
@@ -235,7 +235,7 @@ public class SearchResult extends Fragment implements LoaderManager.LoaderCallba
                 convertView = infalInflater.inflate(R.layout.search_group_row, null);
             }
 
-            TextView lblListHeader = (TextView) convertView.findViewById(R.id.grouptext);
+            TextView lblListHeader = convertView.findViewById(R.id.grouptext);
             lblListHeader.setText(headerTitle);
 
             return convertView;
@@ -252,7 +252,7 @@ public class SearchResult extends Fragment implements LoaderManager.LoaderCallba
                 convertView = infalInflater.inflate(R.layout.search_child_row, null);
             }
 
-            TextView txtListChild = (TextView) convertView.findViewById(R.id.childtext);
+            TextView txtListChild = convertView.findViewById(R.id.childtext);
             txtListChild.setText(childText);
             return convertView;
         }

@@ -36,7 +36,7 @@ public class AboutDialog extends Dialog {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        TextView tv = (TextView) findViewById(R.id.legal_text);
+        TextView tv = findViewById(R.id.legal_text);
 
         Integer versionDb = DatabaseManager.getInstance().getDbVersion();
 
@@ -45,7 +45,7 @@ public class AboutDialog extends Dialog {
         aboutText += "<br><a href=\"https://www.tol.info/ueber-uns/datenschutz/#c14274\">Privacy Policy</a>";
 
         tv.setText(readRawTextFile(R.raw.legal));
-        tv = (TextView) findViewById(R.id.info_text);
+        tv = findViewById(R.id.info_text);
         tv.setText(Html.fromHtml(aboutText));
         //tv.setText(Html.fromHtml(readRawTextFile(R.raw.info))) ;
         tv.setLinkTextColor(Color.rgb(0, 126, 128));

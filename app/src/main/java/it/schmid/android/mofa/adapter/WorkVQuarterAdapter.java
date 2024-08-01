@@ -46,7 +46,7 @@ public class WorkVQuarterAdapter extends ArrayAdapter<VQuarter> {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
             holder = new VquarterHolder();
-            holder.txtVquarter = (TextView) row.findViewById(R.id.workvquarterLabel);
+            holder.txtVquarter = row.findViewById(R.id.workvquarterLabel);
             row.setTag(holder);
 
         } else {

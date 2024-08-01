@@ -120,20 +120,20 @@ public class HarvestDialogFragment extends DialogFragment {
 
         View view = inflater.inflate(R.layout.dialog_harvest_frag, container);
         getDialog().setTitle(R.string.har_title);
-        mDateText = (EditText) view.findViewById(R.id.edtxt_date);
-        mDocNrText = (EditText) view.findViewById(R.id.edtxt_docnr);
-        mAmountText = (EditText) view.findViewById(R.id.edtxt_amount);
-        mQualitySpinner = (Spinner) view.findViewById(R.id.spinner_quality);
+        mDateText = view.findViewById(R.id.edtxt_date);
+        mDocNrText = view.findViewById(R.id.edtxt_docnr);
+        mAmountText = view.findViewById(R.id.edtxt_amount);
+        mQualitySpinner = view.findViewById(R.id.spinner_quality);
         mQualitySpinner.setAdapter(adapter);
-        mNotesText = (EditText) view.findViewById(R.id.edtxt_notes);
-        mBoxesText = (EditText) view.findViewById(R.id.edtxt_boxes);
-        mSugarText = (EditText) view.findViewById(R.id.edtxt_sugar);
-        mPhText = (EditText) view.findViewById(R.id.edtxt_pH);
-        mPhenText = (EditText) view.findViewById(R.id.edtxt_phen);
-        mAcidText = (EditText) view.findViewById(R.id.edtxt_acid);
-        mOkButton = (Button) view.findViewById(R.id.ok_confirm_button);
-        mCancelButton = (Button) view.findViewById(R.id.cancel_confirm_button);
-        mTurnRow = (TableRow) view.findViewById(R.id.tableRow10);
+        mNotesText = view.findViewById(R.id.edtxt_notes);
+        mBoxesText = view.findViewById(R.id.edtxt_boxes);
+        mSugarText = view.findViewById(R.id.edtxt_sugar);
+        mPhText = view.findViewById(R.id.edtxt_pH);
+        mPhenText = view.findViewById(R.id.edtxt_phen);
+        mAcidText = view.findViewById(R.id.edtxt_acid);
+        mOkButton = view.findViewById(R.id.ok_confirm_button);
+        mCancelButton = view.findViewById(R.id.cancel_confirm_button);
+        mTurnRow = view.findViewById(R.id.tableRow10);
         for (int i = 0; i < mTurnRow.getChildCount(); i++) {
             final TextView passText = (TextView) mTurnRow.getChildAt(i);
             passText.setTag(Integer.valueOf(i));

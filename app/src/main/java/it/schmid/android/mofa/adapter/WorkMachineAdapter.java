@@ -42,8 +42,8 @@ public class WorkMachineAdapter extends ArrayAdapter<WorkMachine> {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
             holder = new MachineHolder();
-            holder.txtMachine = (TextView) row.findViewById(R.id.workmachineLabel);
-            holder.delIcon = (ImageView) row.findViewById(R.id.delete_machine_icon);
+            holder.txtMachine = row.findViewById(R.id.workmachineLabel);
+            holder.delIcon = row.findViewById(R.id.delete_machine_icon);
             row.setTag(holder);
         } else {
             holder = (MachineHolder) row.getTag();

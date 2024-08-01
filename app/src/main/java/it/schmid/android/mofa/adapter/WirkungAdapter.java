@@ -54,8 +54,8 @@ public class WirkungAdapter extends BaseAdapter implements SpinnerAdapter {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         view = inflatr.inflate(R.layout.spinner_wirkung, null);
-        TextView wirkText = (TextView) view.findViewById(R.id.wirkungText);
-        TextView perText = (TextView) view.findViewById(R.id.periodeText);
+        TextView wirkText = view.findViewById(R.id.wirkungText);
+        TextView perText = view.findViewById(R.id.periodeText);
         wirkText.setText(wirkungsList.get(position).getKultur() + ", " + wirkungsList.get(position).getGrund());
         perText.setText(wirkungsList.get(position).getEinsatzPeriode());
         return view;

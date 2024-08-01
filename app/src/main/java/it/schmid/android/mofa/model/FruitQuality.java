@@ -2,13 +2,11 @@ package it.schmid.android.mofa.model;
 
 import android.util.Log;
 
-import com.google.gson.annotations.Expose;
 import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import org.json.JSONArray;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -27,7 +25,7 @@ public class FruitQuality extends ImportBehavior {
     private static final String TAG = "FruitQualityClass";
     private Boolean importError = false;
     @DatabaseField(id = true)
-    @Expose
+
     private Integer id;
     @DatabaseField
     private String quality;
@@ -73,12 +71,6 @@ public class FruitQuality extends ImportBehavior {
     }
 
     @Override
-    public void importMasterData(JSONArray importData) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public boolean equals(Object obj) {
         //null instanceof Object will always return false
         if (!(obj instanceof FruitQuality))
@@ -91,7 +83,7 @@ public class FruitQuality extends ImportBehavior {
     @Override
     public int hashCode() {
         int result = 0;
-        result = (int) (id / 12) + 5;
+        result = (id / 12) + 5;
         return result;
     }
 

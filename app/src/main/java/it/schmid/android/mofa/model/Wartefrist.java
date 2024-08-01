@@ -1,21 +1,15 @@
 package it.schmid.android.mofa.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by schmida on 24.04.17.
  */
 
 public class Wartefrist {
-    @SerializedName("Karenzzeit")
-    @Expose
     private String karenzzeit;
-    @SerializedName("Kultur")
-    @Expose
+
     private String kultur;
-    @SerializedName("Anbauart")
-    @Expose
+
     private String anbauart;
     private int beeRestriction;
 

@@ -25,12 +25,12 @@ public class PreferenceContentFragment extends Fragment {
                              Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.prefscontent, parent, false);
 
-        text = (TextView) result.findViewById(R.id.text);
-        list = (TextView) result.findViewById(R.id.list);
-        listbackend = (TextView) result.findViewById(R.id.listbackend);
-        checkUpdateOffline = (TextView) result.findViewById(R.id.updateofflinebox);
-        checkResetDropbox = (TextView) result.findViewById(R.id.dropboxreset);
-        checkShowPestInfos = (TextView) result.findViewById(R.id.showPestInfos);
+        text = result.findViewById(R.id.text);
+        list = result.findViewById(R.id.list);
+        listbackend = result.findViewById(R.id.listbackend);
+        checkUpdateOffline = result.findViewById(R.id.updateofflinebox);
+        checkResetDropbox = result.findViewById(R.id.dropboxreset);
+        checkShowPestInfos = result.findViewById(R.id.showPestInfos);
         return (result);
     }
 

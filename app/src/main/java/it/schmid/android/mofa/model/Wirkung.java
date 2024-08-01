@@ -1,8 +1,5 @@
 package it.schmid.android.mofa.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.util.Objects;
 
 /**
@@ -11,32 +8,22 @@ import java.util.Objects;
 
 public class Wirkung {
 
-    @SerializedName("Grund")
-    @Expose
     private String grund;
-    @SerializedName("minDose")
-    @Expose
+
     private Double minDose;
-    @SerializedName("maxDose")
-    @Expose
+
     private Double maxDose;
-    @SerializedName("maxUseProYear")
-    @Expose
+
     private Integer maxUseProYear;
-    @SerializedName("maxAmountProUse")
-    @Expose
+
     private Double maxAmountProUse;
-    @SerializedName("maxUsageInSerie")
-    @Expose
+
     private Integer maxUsageInSerie;
-    @SerializedName("Kultur")
-    @Expose
+
     private String kultur;
-    @SerializedName("einsatzperiode")
-    @Expose
+
     private String einsatzPeriode;
-    @SerializedName("einsatzperCode")
-    @Expose
+
     private String einsatzperCode;
 
     public String getGrund() {

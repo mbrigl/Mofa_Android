@@ -101,15 +101,15 @@ public class InputDoseDialogFragment extends DialogFragment implements OnEditorA
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_input_dose, container);
 
-        mSizeText = (TextView) view.findViewById(R.id.lbl_size);
+        mSizeText = view.findViewById(R.id.lbl_size);
         Resources res = getResources();
         String sizeText = String.format(res.getString(R.string.sizeInfo), mSize.toString());
         mSizeText.setText(sizeText);
-        mAmountProHa = (EditText) view.findViewById(R.id.txt_amount_ha);
-        mDoseHlText = (EditText) view.findViewById(R.id.txt_dose_hl);
-        mAmountText = (EditText) view.findViewById(R.id.txt_dose_total);
-        mOkButton = (Button) view.findViewById(R.id.ok_confirm_button);
-        mCancelButton = (Button) view.findViewById(R.id.cancel_confirm_button);
+        mAmountProHa = view.findViewById(R.id.txt_amount_ha);
+        mDoseHlText = view.findViewById(R.id.txt_dose_hl);
+        mAmountText = view.findViewById(R.id.txt_dose_total);
+        mOkButton = view.findViewById(R.id.ok_confirm_button);
+        mCancelButton = view.findViewById(R.id.cancel_confirm_button);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 getDialog().dismiss();

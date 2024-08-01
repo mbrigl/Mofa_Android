@@ -95,10 +95,10 @@ public class SearchPestFragment extends Fragment implements AbsListView.OnItemCl
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_searchpest, container, false);
-        TextView searchTitle = (TextView) view.findViewById(R.id.searchtitle);
+        TextView searchTitle = view.findViewById(R.id.searchtitle);
         searchTitle.setText(mTitle);
         // Set the adapter
-        mListView = (AbsListView) view.findViewById(android.R.id.list);
+        mListView = view.findViewById(android.R.id.list);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
@@ -182,7 +182,7 @@ public class SearchPestFragment extends Fragment implements AbsListView.OnItemCl
                 LayoutInflater inflater = ((Activity) context).getLayoutInflater();
                 row = inflater.inflate(layoutResourceId, parent, false);
                 holder = new PesticideHolder();
-                holder.txtPesticide = (TextView) row.findViewById(R.id.txt_pesticide_item);
+                holder.txtPesticide = row.findViewById(R.id.txt_pesticide_item);
                 row.setTag(holder);
 
             } else {

@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
-import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
 import android.widget.Toast;
 
@@ -27,9 +26,7 @@ public class WorkingJournalPreferenceFragment extends PreferenceFragment impleme
                                           String key) {
         //Log.d("WorkingJournalPreferenceFragment", "calling listener");
         CheckBoxPreference dropboxReset = (CheckBoxPreference) getPreferenceScreen().findPreference("dropboxreset");
-        ListPreference encodePref = (ListPreference) getPreferenceScreen().findPreference("listFormat");
         //	Log.d("WorkingJournalPreferenceFragment", "Pref ASA ");
-        encodePref.setValue("2");
         if (dropboxReset.isChecked()) {
             Toast.makeText(getActivity(), R.string.dropboxresetmessage, Toast.LENGTH_LONG).show();
         }

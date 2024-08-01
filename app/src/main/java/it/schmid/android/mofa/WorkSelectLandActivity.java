@@ -33,8 +33,8 @@ public class WorkSelectLandActivity extends DashboardActivity {
         DatabaseManager.init(this);
         setContentView(R.layout.land_list);
 
-        listView = (ExpandableListView) findViewById(R.id.landlistview);
-        closeButton = (Button) findViewById(R.id.landclose_btn);
+        listView = findViewById(R.id.landlistview);
+        closeButton = findViewById(R.id.landclose_btn);
 
         Bundle bundle = getIntent().getExtras();
         if (null != bundle && bundle.containsKey("Work_ID")) {

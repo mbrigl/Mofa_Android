@@ -37,8 +37,8 @@ public class WorkSelectWorkerActivity extends DashboardActivity {
         super.onCreate(savedInstanceState);
         DatabaseManager.init(this);
         setContentView(R.layout.worker_list);
-        ListView listView = (ListView) findViewById(R.id.workerlistview);
-        Button closeButton = (Button) findViewById(R.id.workerclose_btn);
+        ListView listView = findViewById(R.id.workerlistview);
+        Button closeButton = findViewById(R.id.workerclose_btn);
 
         Bundle bundle = getIntent().getExtras();
         if (null != bundle && bundle.containsKey("Work_ID")) {
@@ -166,10 +166,10 @@ public class WorkSelectWorkerActivity extends DashboardActivity {
                 convertView = inflater.inflate(itemLayout, parent, false);
                 //setting up viewholder
                 holderItem = new WorkerHolder();
-                holderItem.wImage = (ImageView) convertView.findViewById(R.id.icon);
-                holderItem.wName = (TextView) convertView.findViewById(R.id.workerlabel);
-                holderItem.wHours = (TextView) convertView.findViewById(R.id.hourslabel);
-                holderItem.wIsSelected = (CheckBox) convertView.findViewById(R.id.selected);
+                holderItem.wImage = convertView.findViewById(R.id.icon);
+                holderItem.wName = convertView.findViewById(R.id.workerlabel);
+                holderItem.wHours = convertView.findViewById(R.id.hourslabel);
+                holderItem.wIsSelected = convertView.findViewById(R.id.selected);
 
                 convertView.setTag(holderItem);
             } else {

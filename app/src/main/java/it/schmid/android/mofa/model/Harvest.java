@@ -1,6 +1,5 @@
 package it.schmid.android.mofa.model;
 
-import com.google.gson.annotations.Expose;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -11,39 +10,39 @@ import java.util.Date;
 public class Harvest {
     public final static String ID_FIELD_NAME = "id";
     @DatabaseField(id = true)
-    @Expose
+
     private Integer id;
     @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private Work work;
     @DatabaseField(foreign = true, foreignAutoRefresh = true)
-    @Expose
+
     private FruitQuality fruitQuality;
     @DatabaseField(dataType = DataType.DATE_LONG)
-    @Expose
+
     private Date date;
     @DatabaseField
-    @Expose
+
     private Integer amount;
     @DatabaseField
-    @Expose
+
     private Integer pass = 1;
     @DatabaseField
-    @Expose
+
     private Integer boxes;
     @DatabaseField
-    @Expose
+
     private String note;
     @DatabaseField
-    @Expose
+
     private Double sugar;
     @DatabaseField
-    @Expose
+
     private Double phValue;
     @DatabaseField
-    @Expose
+
     private Double acid;
     @DatabaseField
-    @Expose
+
     private Double phenol;
 
     public Integer getId() {

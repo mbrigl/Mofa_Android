@@ -3,12 +3,8 @@ package it.schmid.android.mofa.model;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import com.j256.ormlite.field.DatabaseField;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
@@ -32,7 +28,7 @@ public class Pesticide extends ImportBehavior implements ProductInterface {
     private static final String TAG = "PesticideClass";
     private static final int SHOWINFO = 1;
     @DatabaseField(id = true)
-    @Expose
+
     private Integer id;
     @DatabaseField(index = true)
     private Integer regNumber;
@@ -127,70 +123,6 @@ public class Pesticide extends ImportBehavior implements ProductInterface {
         this.status = status;
     }
 
-    public PestInfos getPestInfo() {
-        Gson gson = new Gson();
-        PestInfos pest = gson.fromJson(this.getData(), PestInfos.class);
-        return pest;
-    }
-
-    @Override
-    public void importMasterData(JSONArray importData) {
-        Pesticide pesticide;
-        try {
-            Log.i(TAG,
-                    "Number of entries " + importData.length());
-            for (int i = 0; i < importData.length(); i++) {
-                JSONObject jsonObject = importData.getJSONObject(i);
-                Log.i(TAG, jsonObject.getString("product") + "," + jsonObject.getInt("id"));
-                pesticide = DatabaseManager.getInstance().getPesticideWithId(jsonObject.getInt("id"));
-                if (null != pesticide) {
-                    if (!jsonObject.isNull("regnr")) {
-                        pesticide.setRegNumber(jsonObject.getInt("regnr"));
-                    }
-
-                    pesticide.setProductName(jsonObject.getString("product"));
-                    if (!(jsonObject.getString("dose").equals(""))) {
-                        double doubleDose = 0;
-                        java.text.NumberFormat nf = NumberFormat.getInstance(Locale.getDefault());
-                        try {
-                            doubleDose = nf.parse(jsonObject.getString("dose")).doubleValue();
-                            pesticide.setDefaultDose(doubleDose);
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-
-
-                    }
-
-                    DatabaseManager.getInstance().updatePesticide(pesticide);
-                } else {
-                    Pesticide p = new Pesticide();
-                    p.setId(jsonObject.getInt("id"));
-                    if (!jsonObject.isNull("regnr")) {
-                        p.setRegNumber(jsonObject.getInt("regnr"));
-                    }
-                    p.setProductName(jsonObject.getString("product"));
-                    if (!(jsonObject.getString("dose").equals(""))) {
-                        double doubleDose = 0;
-                        java.text.NumberFormat nf = NumberFormat.getInstance(Locale.getDefault());
-                        try {
-                            doubleDose = nf.parse(jsonObject.getString("dose")).doubleValue();
-                            p.setDefaultDose(doubleDose);
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-
-                    DatabaseManager.getInstance().addPesticide(p);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
     @Override
     public String toString() {
         // TODO Auto-generated method stub
@@ -203,12 +135,12 @@ public class Pesticide extends ImportBehavior implements ProductInterface {
 
         List<Pesticide> importData;
         MofaApplication app = MofaApplication.getInstance();
-            Log.d("TAG", "BackendSoftware: ASAAGRAR");
-            if (app.newAsaVersion()) {
-                importData = pesticideXmlParserASANewVersion(xmlString, notification);
-            } else {
-                importData = pesticideXmlParserASA(xmlString, notification);
-            }
+        Log.d("TAG", "BackendSoftware: ASAAGRAR");
+        if (app.newAsaVersion()) {
+            importData = pesticideXmlParserASANewVersion(xmlString, notification);
+        } else {
+            importData = pesticideXmlParserASA(xmlString, notification);
+        }
 
         Log.d(TAG, "[importMasterData] + size of importData" + importData.size());
         for (Pesticide p : importData) {
@@ -663,20 +595,7 @@ public class Pesticide extends ImportBehavior implements ProductInterface {
                         break;
                     case XmlPullParser.END_TAG:
                         name = xpp.getName();
-                        if (name.equalsIgnoreCase("Pflanzenschutzmittel") && currentPesticide != null) {
-
-
-                            pestInfos.setWartefrist(wartefristList);
-                            pestInfos.setWirkung(wirkungList);
-                            Gson gson = new Gson();
-                            String jsonString = gson.toJson(pestInfos);
-
-                            currentPesticide.setConstraints(jsonString);
-                            Log.d(TAG, "Creating JSON for pesticide " + currentPesticide.getProductName() + ": " + jsonString);
-                            mPesticideList.add(currentPesticide);
-
-
-                        } else if (name.equalsIgnoreCase("Karenzzeit")) {
+                        if (name.equalsIgnoreCase("Karenzzeit")) {
                             wartefrist.setKarenzzeit(text);
 
                         } else if (name.equalsIgnoreCase("Anbauart")) {
@@ -742,11 +661,8 @@ public class Pesticide extends ImportBehavior implements ProductInterface {
 
     private class PestInfos {
 
-        @SerializedName("Wirkung")
-        @Expose
         private List<Wirkung> wirkung = null;
-        @SerializedName("Wartefrist")
-        @Expose
+
         private List<Wartefrist> wartefrist = null;
 
         public List<Wirkung> getWirkung() {
@@ -766,6 +682,4 @@ public class Pesticide extends ImportBehavior implements ProductInterface {
         }
 
     }
-
-
 }

@@ -10,7 +10,6 @@ import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.FileMetadata;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -44,23 +43,21 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String> {
     JSONArray jObj = null;
     private static boolean error = false;
     private final Context mContext;
-    private final String format;
     private String statusMsg = "";
     private ArrayList<Integer> selItems;
-    private String encoding; //setting the encoding for xml
+    private final String encoding; //setting the encoding for xml
     //Dropbox variable
     private final DbxClientV2 mDbxClient;
     //Notification variable
     private NotificationService mNotificationService;
 
-    public WebServiceCall(Context context, String format, DbxClientV2 dbxClient) {
+    public WebServiceCall(Context context, DbxClientV2 dbxClient) {
         this.mContext = context;
-        this.format = format;
         this.mDbxClient = dbxClient;
         //Get the notification manager
         mNotificationService = new NotificationService(context, true);
-                Log.d("TAG", "BackendSoftware: ASAAGRAR");
-                encoding = UTF;
+        Log.d("TAG", "BackendSoftware: ASAAGRAR");
+        encoding = UTF;
     }
 
     @Override
@@ -95,11 +92,7 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String> {
         progress = (100 / ((selItems.size() * 2))); //progress dividing
         url = (String) params[1];
         //checking file format
-        if (format.equalsIgnoreCase("1")) { //json
-            extension = ".json";
-        } else {
-            extension = ".xml";
-        }
+        extension = ".xml";
 
         for (Integer i : selItems) {
             switch (i) {
@@ -199,17 +192,8 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String> {
     }
 
     private void importData(String data, ImportBehavior selectedTable) {
-        if (format.equalsIgnoreCase("1")) { //case JSON
-            try {
-                jObj = new JSONArray(data);
-            } catch (JSONException e) {
-                Log.e("JSON Parser", "Error parsing data " + e);
-                error = true; //concatinating the error status
-            }
-            selectedTable.importMasterData(jObj);
-        } else {  //case XML
-            error = selectedTable.importMasterData(data, mNotificationService); //concatinating the error status
-        }
+        //case XML
+        error = selectedTable.importMasterData(data, mNotificationService); //concatinating the error status
         if (error) {
             onPostExecute("Error in parsing file");
 

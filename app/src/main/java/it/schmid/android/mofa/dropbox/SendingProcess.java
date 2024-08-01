@@ -14,8 +14,6 @@ import android.util.Xml;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.WriteMode;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,12 +25,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
-import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import it.schmid.android.mofa.ActivityConstants;
@@ -40,11 +35,8 @@ import it.schmid.android.mofa.Globals;
 import it.schmid.android.mofa.MofaApplication;
 import it.schmid.android.mofa.NotificationService;
 import it.schmid.android.mofa.R;
-import it.schmid.android.mofa.Util;
 import it.schmid.android.mofa.db.DatabaseManager;
-import it.schmid.android.mofa.model.Einsatzgrund;
 import it.schmid.android.mofa.model.Fertilizer;
-import it.schmid.android.mofa.model.Global;
 import it.schmid.android.mofa.model.Harvest;
 import it.schmid.android.mofa.model.Machine;
 import it.schmid.android.mofa.model.Pesticide;
@@ -72,12 +64,11 @@ public class SendingProcess implements Runnable {
     private Boolean grossPrice; // checking if for ASA using gross prices
     private Boolean mofaNote;
     private Boolean asa_New_Ver;
-    private String format; // file format
     private String sendingData; //
     private String urlPath;
     private String notifMess = "";
     private boolean error = false; // error value for webservice connection
-    private String restResponse = ""; // not used yet, but response of json-webservice
+    private final String restResponse = ""; // not used yet, but response of json-webservice
     private final int callingActivity;
     private String asaWorkHerbicideCode;
     private String ACCESS_TOKEN; //Dropbox
@@ -103,28 +94,25 @@ public class SendingProcess implements Runnable {
         Looper.prepare(); //For Preparing Message Pool for the child Thread
         MofaApplication app = MofaApplication.getInstance();
 
-            if (callingActivity == ActivityConstants.WORK_OVERVIEW) { //calling this asynch method from workoverview
-                if (asa_New_Ver) {
-                    sendingData = createXMLASAVer16();
-                } else {
-                    sendingData = createXMLASA();
-                }
-
-            }
-            if (callingActivity == ActivityConstants.PURCHASING_ACTIVITY) { //calling this asynch method from purchasing activity
-                if (asa_New_Ver) {
-                    Log.d("Sending Data", "ASA_New_Purchasexml");
-                    sendingData = createPurchaseXMLASAVer16();
-                } else {
-                    sendingData = createPurchaseXMLASA();
-                }
-
-            }
-            if (callingActivity == ActivityConstants.VEGDATA_ACTIVITY) { // calling this asynch from vegdata
-                sendingData = createVegDataXMLASA();
+        if (callingActivity == ActivityConstants.WORK_OVERVIEW) { //calling this asynch method from workoverview
+            if (asa_New_Ver) {
+                sendingData = createXMLASAVer16();
+            } else {
+                sendingData = createXMLASA();
             }
 
-        writeFileToDropBox(sendingData, format);
+        }
+        if (callingActivity == ActivityConstants.PURCHASING_ACTIVITY) { //calling this asynch method from purchasing activity
+            if (asa_New_Ver) {
+                Log.d("Sending Data", "ASA_New_Purchasexml");
+                sendingData = createPurchaseXMLASAVer16();
+            } else {
+                sendingData = createPurchaseXMLASA();
+            }
+
+        }
+
+        writeFileToDropBox(sendingData);
 
         int icon = android.R.drawable.stat_sys_upload_done;
         CharSequence tickerText = context.getString(R.string.upload_finished);
@@ -144,7 +132,6 @@ public class SendingProcess implements Runnable {
     //preparing to send Data
     public void sendData() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        format = preferences.getString("listFormat", "-1");
         urlPath = preferences.getString("url", "");
         grossPrice = preferences.getBoolean("grossprice", false);
         mofaNote = preferences.getBoolean("asanote", false);
@@ -400,46 +387,6 @@ public class SendingProcess implements Runnable {
                     serializer.endTag("", "harvest");
 
                 }
-                List<Global> irrigation = DatabaseManager.getInstance().getGlobalbyWorkId(wk.getId());
-                for (Global irr : irrigation) {
-                    serializer.startTag("", "irrigation");
-                    try {
-                        JSONObject jsonObj = new JSONObject(irr.getData());
-                        if (jsonObj.has("irrduration")) {
-                            serializer.startTag("", "irrduration");
-                            Double irrDuration = (Util.getJSONDouble(jsonObj, "irrduration"));
-                            serializer.text(irrDuration.toString());
-                            serializer.endTag("", "irrduration");
-                        }
-                        if (jsonObj.has("irramount")) {
-                            serializer.startTag("", "irramount");
-                            Double irrAmount = Util.getJSONDouble(jsonObj, "irramount");
-                            serializer.text(irrAmount.toString());
-                            serializer.endTag("", "irramount");
-                        }
-                        if (jsonObj.has("irrtotale")) {
-                            serializer.startTag("", "irrtotale");
-                            Double irrAmountRelative = Util.getJSONDouble(jsonObj, "irrtotale");
-                            serializer.text(irrAmountRelative.toString());
-                            serializer.endTag("", "irrtotale");
-
-                        }
-
-                        if (jsonObj.has("irrtype")) {
-                            serializer.startTag("", "irrtype");
-                            Integer irrigationType = Util.getJSONInt(jsonObj, "irrtype");
-                            serializer.text(irrigationType.toString());
-                            serializer.endTag("", "irrtype");
-
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-
-                    serializer.endTag("", "irrigation");
-
-                }
                 serializer.endTag("", "work");
             }
             serializer.endTag("", "works");
@@ -684,56 +631,6 @@ public class SendingProcess implements Runnable {
                     }
                     serializer.endTag("", "Ernteeintrag");
                 }
-                List<Global> irrigation = DatabaseManager.getInstance().getGlobalbyWorkId(wk.getId());
-                for (Global irr : irrigation) {
-                    serializer.startTag("", "Bewaesserung");
-                    try {
-                        JSONObject jsonObj = new JSONObject(irr.getData());
-                        if (jsonObj.has("irrduration")) {
-                            serializer.startTag("", "Dauer");
-                            Double irrDuration = (Util.getJSONDouble(jsonObj, "irrduration"));
-                            serializer.text(irrDuration.toString());
-                            serializer.endTag("", "Dauer");
-                        }
-                        if (jsonObj.has("irramount")) {
-                            serializer.startTag("", "MengeProStunde");
-                            Double irrAmount = Util.getJSONDouble(jsonObj, "irramount");
-                            serializer.text(irrAmount.toString());
-                            serializer.endTag("", "MengeProStunde");
-                        }
-                        if (jsonObj.has("irrtotale")) {
-                            serializer.startTag("", "MengeRelativ");
-                            Double irrAmountRelative = Util.getJSONDouble(jsonObj, "irrtotale");
-                            serializer.text(irrAmountRelative.toString());
-                            serializer.endTag("", "MengeRelativ");
-
-                        }
-
-                        if (jsonObj.has("irrtype")) {
-                            serializer.startTag("", "Art");
-                            Integer irrigationType = Util.getJSONInt(jsonObj, "irrtype");
-                            serializer.text(irrigationType.toString());
-                            serializer.endTag("", "Art");
-
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    for (WorkVQuarter vq : vquarters) {
-                        serializer.startTag("", "Sortenquartier");
-                        serializer.startTag("", "Sortenquartier");
-                        serializer.startTag("", "Code");
-                        VQuarter vquarter = DatabaseManager.getInstance().getVQuarterWithId(vq.getVquarter().getId());
-                        serializer.text(vquarter.getCode());
-                        serializer.endTag("", "Code");
-                        serializer.endTag("", "Sortenquartier");
-                        serializer.endTag("", "Sortenquartier");
-                    }
-
-
-                    serializer.endTag("", "Bewaesserung");
-
-                }
                 serializer.endTag("", "Arbeitseintrag");
             }
             serializer.endTag("", "Arbeitseintraege");
@@ -747,7 +644,6 @@ public class SendingProcess implements Runnable {
     private String createXMLASAVer16() {
         //List<Work> workUploadList = DatabaseManager.getInstance().getAllWorks();
         List<Work> workUploadList = DatabaseManager.getInstance().getAllValidNotSendedWorks();
-        HashMap<String, String> reasonMap = Einsatzgrund.getEinsatzGrundHashMap();
         XmlSerializer serializer = Xml.newSerializer();
         StringWriter writer = new StringWriter();
         try {
@@ -887,38 +783,6 @@ public class SendingProcess implements Runnable {
                         serializer.endTag("", "Sortenquartier");
                         serializer.endTag("", "Sortenquartier");
                     }
-                    List<SprayPesticide> sprayPest = DatabaseManager.getInstance().getSprayPesticideBySprayId(s.getId());
-                    for (SprayPesticide sp : sprayPest) {
-                        serializer.startTag("", "Pflanzenschutzmittel");
-                        serializer.startTag("", "Artikel");
-                        serializer.startTag("", "Code");
-                        Pesticide pest = DatabaseManager.getInstance().getPesticideWithId(sp.getPesticide().getId());
-                        serializer.text(pest.getCode());
-                        serializer.endTag("", "Code");
-                        serializer.endTag("", "Artikel");
-                        serializer.startTag("", "Menge");
-                        serializer.text(sp.getDose_amount().toString());
-                        serializer.endTag("", "Menge");
-                        serializer.startTag("", "MengeProHl1Mal");
-                        serializer.text(sp.getDose().toString());
-                        serializer.endTag("", "MengeProHl1Mal");
-                        serializer.startTag("", "Einsatzperiode");
-                        serializer.startTag("", "Code");
-                        serializer.text(sp.getPeriodCode());
-                        serializer.endTag("", "Code");
-                        serializer.endTag("", "Einsatzperiode");
-                        serializer.startTag("", "EinsatzgruendeAlsString");
-                        serializer.text(getEinsatzGrundForASA(sp.getReason()));
-                        serializer.endTag("", "EinsatzgruendeAlsString");
-                        serializer.startTag("", "Einsatzgrund");
-                        serializer.startTag("", "Einsatzgrund");
-                        serializer.startTag("", "Code");
-                        serializer.text(reasonMap.get(getEinsatzGrundForASA(sp.getReason())));
-                        serializer.endTag("", "Code");
-                        serializer.endTag("", "Einsatzgrund");
-                        serializer.endTag("", "Einsatzgrund");
-                        serializer.endTag("", "Pflanzenschutzmittel");
-                    }
                     List<SprayFertilizer> sprayFert = DatabaseManager.getInstance().getSprayFertilizerBySprayId(s.getId());
                     for (SprayFertilizer sf : sprayFert) {
                         serializer.startTag("", "Blattduenger");
@@ -998,56 +862,6 @@ public class SendingProcess implements Runnable {
                         serializer.endTag("", "Sortenquartier");
                     }
                     serializer.endTag("", "Ernteeintrag");
-                }
-                List<Global> irrigation = DatabaseManager.getInstance().getGlobalbyWorkId(wk.getId());
-                for (Global irr : irrigation) {
-                    serializer.startTag("", "Bewaesserung");
-                    try {
-                        JSONObject jsonObj = new JSONObject(irr.getData());
-                        if (jsonObj.has("irrduration")) {
-                            serializer.startTag("", "Dauer");
-                            Double irrDuration = (Util.getJSONDouble(jsonObj, "irrduration"));
-                            serializer.text(irrDuration.toString());
-                            serializer.endTag("", "Dauer");
-                        }
-                        if (jsonObj.has("irramount")) {
-                            serializer.startTag("", "MengeProStunde");
-                            Double irrAmount = Util.getJSONDouble(jsonObj, "irramount");
-                            serializer.text(irrAmount.toString());
-                            serializer.endTag("", "MengeProStunde");
-                        }
-                        if (jsonObj.has("irrtotale")) {
-                            serializer.startTag("", "MengeRelativ");
-                            Double irrAmountRelative = Util.getJSONDouble(jsonObj, "irrtotale");
-                            serializer.text(irrAmountRelative.toString());
-                            serializer.endTag("", "MengeRelativ");
-
-                        }
-
-                        if (jsonObj.has("irrtype")) {
-                            serializer.startTag("", "Art");
-                            Integer irrigationType = Util.getJSONInt(jsonObj, "irrtype");
-                            serializer.text(irrigationType.toString());
-                            serializer.endTag("", "Art");
-
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    for (WorkVQuarter vq : vquarters) {
-                        serializer.startTag("", "Sortenquartier");
-                        serializer.startTag("", "Sortenquartier");
-                        serializer.startTag("", "Code");
-                        VQuarter vquarter = DatabaseManager.getInstance().getVQuarterWithId(vq.getVquarter().getId());
-                        serializer.text(vquarter.getCode());
-                        serializer.endTag("", "Code");
-                        serializer.endTag("", "Sortenquartier");
-                        serializer.endTag("", "Sortenquartier");
-                    }
-
-
-                    serializer.endTag("", "Bewaesserung");
-
                 }
                 serializer.endTag("", "Arbeitseintrag");
             }
@@ -1257,188 +1071,22 @@ public class SendingProcess implements Runnable {
         }
     }
 
-    private String createVegDataXML() {
-        HashMap<String, String> blossStart = new HashMap<String, String>();
-        HashMap<String, String> blossEnd = new HashMap<String, String>();
-        HashMap<String, String> harvStart = new HashMap<String, String>();
-        HashMap<String, String> estCrop = new HashMap<String, String>();
-        if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).isEmpty()) {
-            String json = "";
-            Global blossomStart = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).get(0);
-            json = blossomStart.getData();
-            blossStart = getMapFromJson(json);
-        }
-        if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMEND).isEmpty()) {
-            String json = "";
-            Global blossomEnd = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMEND).get(0);
-            json = blossomEnd.getData();
-            blossEnd = getMapFromJson(json);
-        }
-        if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.HARVESTSTART).isEmpty()) {
-            String json = "";
-            Global harvestStart = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.HARVESTSTART).get(0);
-            json = harvestStart.getData();
-            harvStart = getMapFromJson(json);
-        }
-        if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.ESTIMCROP).isEmpty()) {
-            String json = "";
-            Global estimCrop = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.ESTIMCROP).get(0);
-            json = estimCrop.getData();
-            estCrop = getMapFromJson(json);
-        }
-        List<VQuarter> vquarters = DatabaseManager.getInstance().getAllVQuarters();
-        XmlSerializer serializer = Xml.newSerializer();
-        StringWriter writer = new StringWriter();
-        //Calendar calender = Calendar.getInstance();
-        //int curYear = calender.get(Calendar.YEAR);
-        try {
-            serializer.setOutput(writer);
-            serializer.startDocument("UTF-8", true);
-            serializer.startTag("", "vquarters");
-            for (VQuarter vq : vquarters) {
-                String blossDateStart = blossStart.get(vq.getId().toString());
-                String blossDateEnd = blossEnd.get(vq.getId().toString());
-                String harvestDate = harvStart.get(vq.getId().toString());
-                String estimCropAmount = estCrop.get(vq.getId().toString());
-                if (blossDateStart != null || blossDateEnd != null || harvestDate != null || estimCropAmount != null) {
-                    serializer.startTag("", "vquarter");
-                    serializer.startTag("", "vqid");
-                    serializer.text(vq.getId().toString());
-                    serializer.endTag("", "vqid");
-                    if (blossDateStart != null) {
-                        serializer.startTag("", "blossomStart");
-                        serializer.text(blossDateStart);
-                        serializer.endTag("", "blossomStart");
-                    }
-                    if (blossDateEnd != null) {
-                        serializer.startTag("", "blossomEnd");
-                        serializer.text(blossDateEnd);
-                        serializer.endTag("", "blossomEnd");
-                    }
-                    if (harvestDate != null) {
-                        serializer.startTag("", "harvestStart");
-                        serializer.text(harvestDate);
-                        serializer.endTag("", "harvestStart");
-                    }
-                    if (estimCropAmount != null) {
-                        serializer.startTag("", "cropAmount");
-                        serializer.text(estimCropAmount);
-                        serializer.endTag("", "cropAmount");
-                    }
-                    serializer.endTag("", "vquarter");
-                }
-            }
-            serializer.endTag("", "vquarters");
-            serializer.endDocument();
-            return writer.toString();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    private String createVegDataXMLASA() {
-        HashMap<String, String> blossStart = new HashMap<String, String>();
-        HashMap<String, String> blossEnd = new HashMap<String, String>();
-        HashMap<String, String> harvStart = new HashMap<String, String>();
-        HashMap<String, String> estCrop = new HashMap<String, String>();
-        if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).isEmpty()) {
-            String json = "";
-            Global blossomStart = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMSTART).get(0);
-            json = blossomStart.getData();
-            blossStart = getMapFromJson(json);
-        }
-        if (!DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMEND).isEmpty()) {
-            String json = "";
-            Global blossomEnd = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.BLOSSOMEND).get(0);
-            json = blossomEnd.getData();
-            blossEnd = getMapFromJson(json);
-        }
-        List<VQuarter> vquarters = DatabaseManager.getInstance().getAllVQuarters();
-        XmlSerializer serializer = Xml.newSerializer();
-        StringWriter writer = new StringWriter();
-        Calendar calender = Calendar.getInstance();
-        int curYear = calender.get(Calendar.YEAR);
-        try {
-            serializer.setOutput(writer);
-            serializer.startDocument("UTF-8", true);
-            serializer.startTag("", "Sortenquartiere");
-            for (VQuarter vq : vquarters) {
-                String blossDateStart = blossStart.get(vq.getId().toString());
-                String blossDateEnd = blossEnd.get(vq.getId().toString());
-                String harvestDate = harvStart.get(vq.getId().toString());
-                String estimCropAmount = estCrop.get(vq.getId().toString());
-                if (blossDateStart != null || blossDateEnd != null || harvestDate != null || estimCropAmount != null) {
-                    serializer.startTag("", "Sortenquartier");
-                    serializer.startTag("", "Code");
-                    serializer.text(vq.getCode());
-                    serializer.endTag("", "Code");
-                    serializer.startTag("", "Jahresdaten");
-                    serializer.startTag("", "Erntejahr");
-                    serializer.text(Integer.toString(curYear));
-                    serializer.endTag("", "Erntejahr");
-                    if (blossDateStart != null) {
-                        serializer.startTag("", "Bluehbeginn");
-                        serializer.text(getDateStringForASA(blossDateStart, Integer.toString(curYear)));
-                        serializer.endTag("", "Bluehbeginn");
-                    }
-                    if (blossDateEnd != null) {
-                        serializer.startTag("", "Bluehende");
-                        serializer.text(getDateStringForASA(blossDateEnd, Integer.toString(curYear)));
-                        serializer.endTag("", "Bluehende");
-                    }
-                    if (harvestDate != null) {
-                        serializer.startTag("", "Erntebeginn");
-                        serializer.text(getDateStringForASA(harvestDate, Integer.toString(curYear)));
-                        serializer.endTag("", "Erntebeginn");
-                    }
-                    if (estimCropAmount != null) {
-                        serializer.startTag("", "ErnteschaetzungProHa");
-                        serializer.text(getCropAmountInKilo(estimCropAmount));
-                        serializer.endTag("", "ErnteschaetzungProHa");
-                    }
-                    serializer.endTag("", "Jahresdaten");
-                    serializer.endTag("", "Sortenquartier");
-                }
-            }
-            serializer.endTag("", "Sortenquartiere");
-            serializer.endDocument();
-            return writer.toString();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-
-    }
-
     /**
      * Dropbox sending process
      */
-    private void writeFileToDropBox(String data, String fileType) {
+    private void writeFileToDropBox(String data) {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
         String filePath = null;
         ACCESS_TOKEN = DropboxClient.retrieveAccessToken(context);
-        if (fileType.equalsIgnoreCase("1")) {
-            if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
-                filePath = Globals.EXPORT + "/worklist" + dateFormat.format(date) + ".json";
-            }
-            if (callingActivity == ActivityConstants.PURCHASING_ACTIVITY) {
-                filePath = Globals.EXPORT + "/purchaselist" + dateFormat.format(date) + ".json";
-            }
-            if (callingActivity == ActivityConstants.VEGDATA_ACTIVITY) { // calling this asynch from vegdata
-                filePath = Globals.EXPORT + "/vegdata" + dateFormat.format(date) + ".json";
-            }
-        } else {
-            if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
-                filePath = Globals.EXPORT + "/worklist" + dateFormat.format(date) + ".xml";
-            }
-            if (callingActivity == ActivityConstants.PURCHASING_ACTIVITY) {
-                filePath = Globals.EXPORT + "/purchaselist" + dateFormat.format(date) + ".xml";
-            }
-            if (callingActivity == ActivityConstants.VEGDATA_ACTIVITY) { // calling this asynch from vegdata
-                filePath = Globals.EXPORT + "/vegdata" + dateFormat.format(date) + ".xml";
-            }
+        if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
+            filePath = Globals.EXPORT + "/worklist" + dateFormat.format(date) + ".xml";
+        }
+        if (callingActivity == ActivityConstants.PURCHASING_ACTIVITY) {
+            filePath = Globals.EXPORT + "/purchaselist" + dateFormat.format(date) + ".xml";
+        }
+        if (callingActivity == ActivityConstants.VEGDATA_ACTIVITY) { // calling this asynch from vegdata
+            filePath = Globals.EXPORT + "/vegdata" + dateFormat.format(date) + ".xml";
         }
 
 
@@ -1510,32 +1158,9 @@ public class SendingProcess implements Runnable {
         }
     }
 
-    private HashMap<String, String> getMapFromJson(String json) {
-        HashMap<String, String> tmpMap;
-        Type type = new TypeToken<HashMap<String, String>>() {
-        }.getType();
-        Gson gson = new Gson();
-        tmpMap = gson.fromJson(json, type);
-        if (tmpMap == null) {
-            tmpMap = new HashMap<String, String>();
-        }
-        return tmpMap;
-    }
-
-    private String getDateStringForASA(String dateOrg, String curYear) {
-        String[] splitted = dateOrg.split("\\.");
-        return curYear + "-" + splitted[1] + "-" + splitted[0];
-    }
-
     private String getEinsatzGrundForASA(String einsatzgrund) {
         String[] splittedText = einsatzgrund.split(",");
         return splittedText[0];
-    }
-
-    private String getCropAmountInKilo(String amount) {
-        Integer amountInT = Integer.parseInt(amount);
-        Integer amountInK = amountInT * 1000;
-        return amountInK.toString();
     }
 
     private double getPriceFromJson(String json) {

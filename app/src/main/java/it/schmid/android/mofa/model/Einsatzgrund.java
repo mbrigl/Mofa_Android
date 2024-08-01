@@ -2,41 +2,25 @@ package it.schmid.android.mofa.model;
 
 import android.util.Log;
 
-import androidx.annotation.Nullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.MofaApplication;
 import it.schmid.android.mofa.NotificationService;
-import it.schmid.android.mofa.db.DatabaseManager;
 
 /**
  * Created by schmida on 24.04.17.
  */
 
 public class Einsatzgrund extends ImportBehavior {
-    @SerializedName("Code")
-    @Expose
     String code;
-    @SerializedName("Name")
-    @Expose
+
     String name;
 
     List<Einsatzgrund> einsatzgrundList = new ArrayList<Einsatzgrund>();
@@ -59,40 +43,11 @@ public class Einsatzgrund extends ImportBehavior {
     }
 
     @Override
-    public void importMasterData(JSONArray importData) {
-
-    }
-
-    @Override
     public Boolean importMasterData(String xmlString, NotificationService notification) {
         MofaApplication app = MofaApplication.getInstance();
         //default
-            Log.d("TAG", "BackendSoftware: ASAAGRAR");
-            einsatzgrundList = reasonXmlParserASA(xmlString, notification);
-        if (!einsatzgrundList.isEmpty()) {
-            List<Global> globalList = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.PESTREASONS);
-            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-            Type listOfReasons = new TypeToken<List<Einsatzgrund>>() {
-            }.getType();
-            String json = gson.toJson(einsatzgrundList, listOfReasons);
-
-            if (globalList.isEmpty()) {
-                Global g = new Global();
-                g.setTypeInfo(ActivityConstants.PESTREASONS);
-                g.setData(json);
-                DatabaseManager.getInstance().addGlobal(g);
-                //new entry for global data
-            } else {
-                // existing entry
-                Global g = globalList.get(0);
-                g.setData(json);
-                DatabaseManager.getInstance().updateGlobal(g);
-            }
-
-
-            //Log.d("ImportReason", json);
-
-        }
+        Log.d("TAG", "BackendSoftware: ASAAGRAR");
+        einsatzgrundList = reasonXmlParserASA(xmlString, notification);
 
         return importError;
     }
@@ -166,23 +121,4 @@ public class Einsatzgrund extends ImportBehavior {
         }
         return (reasonList);
     }
-
-    @Nullable
-    public static HashMap<String, String> getEinsatzGrundHashMap() {
-        List<Global> globalList = DatabaseManager.getInstance().getGlobalbyType(ActivityConstants.PESTREASONS);
-        if (!globalList.isEmpty()) {
-            String jsonData = globalList.get(0).getData();
-            Gson gson = new Gson();
-            Einsatzgrund[] arrEinsatz = gson.fromJson(jsonData, Einsatzgrund[].class);
-            HashMap<String, String> einsatzMap = new HashMap<String, String>();
-            for (Einsatzgrund e : arrEinsatz) {
-                einsatzMap.put(e.getName(), e.getCode());
-            }
-            return einsatzMap;
-        } else {
-            return null;
-        }
-
-    }
-
 }

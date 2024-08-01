@@ -1,6 +1,6 @@
 package it.schmid.android.mofa.model;
 
-import com.google.gson.annotations.Expose;
+
 import com.j256.ormlite.field.DatabaseField;
 
 public class WorkMachine {
@@ -9,13 +9,13 @@ public class WorkMachine {
     @DatabaseField(generatedId = true)
     private Integer id;
     @DatabaseField(foreign = true, columnName = WORK_ID_FIELD_NAME)
-    @Expose
+
     private Work work;
     @DatabaseField(foreign = true, columnName = MACHINE_ID_FIELD_NAME)
-    @Expose
+
     private Machine machine;
     @DatabaseField
-    @Expose
+
     private Double hours;
 
     public WorkMachine() {

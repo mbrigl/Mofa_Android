@@ -1,5 +1,6 @@
 package it.schmid.android.mofa;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,24 +47,25 @@ public class WorkEditHarvestFragment extends Fragment implements HarvestDialogLi
         mworkId = parentActivity.getWorkId();
         Log.d(TAG, "[onCreateView] CurrWorkID= " + mworkId);
         View view = inflater.inflate(R.layout.work_edit_harvest, container, false);
-        confirmButton = (Button) view.findViewById(R.id.work_save_button);
+        confirmButton = view.findViewById(R.id.work_save_button);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                getActivity().setResult(getActivity().RESULT_OK);
+                getActivity();
+                getActivity().setResult(Activity.RESULT_OK);
                 getActivity().finish();
 
             }
 
         });
         //btnAddHarvestDoc = (ImageButton) view.findViewById(R.id.work_add_harvest_doc);
-        lstHarvestDoc = (ListView) view.findViewById(R.id.harvest_list_doc);
+        lstHarvestDoc = view.findViewById(R.id.harvest_list_doc);
 //			btnAddHarvestDoc.setOnClickListener(new View.OnClickListener() { //event when user adds a new transport document
 //				public void onClick(View v) {
 //					Log.d(TAG, "Showing the input dialog of transport document");
 //					showHarvestDialog();
 //					}
 //			});
-        FloatingActionButton myFab = (FloatingActionButton) view.findViewById(R.id.fab);
+        FloatingActionButton myFab = view.findViewById(R.id.fab);
         myFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showHarvestDialog();

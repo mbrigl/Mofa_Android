@@ -34,8 +34,8 @@ public class WorkSelectMachineActivity extends DashboardActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.machine_list);
-        ListView listView = (ListView) findViewById(R.id.machinelistview);
-        Button closeButton = (Button) findViewById(R.id.machineclose_btn);
+        ListView listView = findViewById(R.id.machinelistview);
+        Button closeButton = findViewById(R.id.machineclose_btn);
 
         Bundle bundle = getIntent().getExtras();
         if (null != bundle && bundle.containsKey("Work_ID")) {
@@ -152,9 +152,9 @@ public class WorkSelectMachineActivity extends DashboardActivity {
                 convertView = inflater.inflate(itemLayout, parent, false);
                 //setting up viewholder
                 holderItem = new MachineHolder();
-                holderItem.mName = (TextView) convertView.findViewById(R.id.machinelabel);
-                holderItem.mHours = (TextView) convertView.findViewById(R.id.hourslabel);
-                holderItem.mIsSelected = (CheckBox) convertView.findViewById(R.id.selected);
+                holderItem.mName = convertView.findViewById(R.id.machinelabel);
+                holderItem.mHours = convertView.findViewById(R.id.hourslabel);
+                holderItem.mIsSelected = convertView.findViewById(R.id.selected);
 
                 convertView.setTag(holderItem);
             } else {

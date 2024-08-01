@@ -28,10 +28,6 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
-import com.google.gson.Gson;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -72,7 +68,7 @@ public class InputDoseDialogFragmentNewVer extends DialogFragment implements OnE
     private Wirkung mWirkung;
     private Boolean edit = false;
     private PestInfos pestInfos;
-    private boolean isPest = false;
+    private final boolean isPest = false;
     private List<Wirkung> wirkungList;
     WirkungAdapter wirkungAdapter;
     private String strDefCultivationTyp;
@@ -116,15 +112,6 @@ public class InputDoseDialogFragmentNewVer extends DialogFragment implements OnE
             if (!edit) {
                 callback = (InputDoseASANewFragmentListener) getTargetFragment();
             }
-            if (this.mPesticide instanceof Pesticide) {
-                Gson gson = new Gson();
-                isPest = true;
-                Pesticide pest = (Pesticide) this.mPesticide;
-                String jsonStr = pest.getConstraints();
-                pestInfos = gson.fromJson(jsonStr, PestInfos.class);
-            }
-
-
         } catch (ClassCastException e) {
             throw new ClassCastException("Calling fragment must implement DialogFragmentListener interface");
         }
@@ -135,22 +122,22 @@ public class InputDoseDialogFragmentNewVer extends DialogFragment implements OnE
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_input_dose_asa, container);
 
-        mSizeText = (TextView) view.findViewById(R.id.lbl_size);
+        mSizeText = view.findViewById(R.id.lbl_size);
         Resources res = getResources();
         String sizeText = String.format(res.getString(R.string.sizeInfo), mSize.toString());
         mSizeText.setText(sizeText);
-        mAmountProHa = (EditText) view.findViewById(R.id.txt_amount_ha_value);
-        mReasonSpinner = (Spinner) view.findViewById(R.id.spReasons);
+        mAmountProHa = view.findViewById(R.id.txt_amount_ha_value);
+        mReasonSpinner = view.findViewById(R.id.spReasons);
         if (isPest) {
             Pesticide pest = (Pesticide) this.mPesticide;
             showDetailsOfPest(pest, view);
             loadSpinner();
         }
-        mDoseHlText = (EditText) view.findViewById(R.id.txt_dose_hl);
-        mAmountText = (EditText) view.findViewById(R.id.txt_dose_total);
-        mOkButton = (Button) view.findViewById(R.id.ok_confirm_button);
+        mDoseHlText = view.findViewById(R.id.txt_dose_hl);
+        mAmountText = view.findViewById(R.id.txt_dose_total);
+        mOkButton = view.findViewById(R.id.ok_confirm_button);
 
-        mCancelButton = (Button) view.findViewById(R.id.cancel_confirm_button);
+        mCancelButton = view.findViewById(R.id.cancel_confirm_button);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 getDialog().dismiss();
@@ -281,16 +268,16 @@ public class InputDoseDialogFragmentNewVer extends DialogFragment implements OnE
     private void showDetailsOfPest(Pesticide pest, View view) {
 
         if (pest.getStatus() != null) {
-            mStatusText = (TextView) view.findViewById(R.id.lbl_status);
+            mStatusText = view.findViewById(R.id.lbl_status);
             mStatusText.setText(getResources().getString(R.string.status) + " " + pest.getStatus());
         }
         if (pestInfos != null) {
-            mWaitingTimeText = (TextView) view.findViewById(R.id.waitingTimetxt);
-            mConstraintsText = (TextView) view.findViewById(R.id.restrictionstxt);
+            mWaitingTimeText = view.findViewById(R.id.waitingTimetxt);
+            mConstraintsText = view.findViewById(R.id.restrictionstxt);
 
             SpannableStringBuilder warteFristStr = getWarteFristStr(pestInfos.getWartefrist());
             mWaitingTimeText.setText(warteFristStr);
-            mReasonSpinner = (Spinner) view.findViewById(R.id.spReasons);
+            mReasonSpinner = view.findViewById(R.id.spReasons);
 
         }
 
@@ -376,11 +363,8 @@ public class InputDoseDialogFragmentNewVer extends DialogFragment implements OnE
 
     private class PestInfos {
 
-        @SerializedName("Wirkung")
-        @Expose
         private final List<Wirkung> wirkung = null;
-        @SerializedName("Wartefrist")
-        @Expose
+
         private final List<Wartefrist> wartefrist = null;
 
         public List<Wirkung> getWirkung() {

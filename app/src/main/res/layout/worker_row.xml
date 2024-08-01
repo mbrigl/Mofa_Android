@@ -18,8 +18,7 @@
         android:layout_toRightOf="@id/icon"
         android:textSize="20dp"
         android:focusable="false"
-        android:focusableInTouchMode="false">
-    </TextView>
+        android:focusableInTouchMode="false"></TextView>
 
     <TextView
         android:id="@+id/hourslabel"
@@ -31,9 +30,7 @@
         android:focusableInTouchMode="false"
         android:layout_toRightOf="@id/workerlabel"
         android:layout_toLeftOf="@id/selected"
-        android:gravity="center"
-        >
-    </TextView>
+        android:gravity="center"></TextView>
 
     <CheckBox
         android:id="@+id/selected"

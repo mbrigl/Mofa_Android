@@ -2,11 +2,8 @@ package it.schmid.android.mofa.model;
 
 import android.util.Log;
 
-import com.google.gson.annotations.Expose;
 import com.j256.ormlite.field.DatabaseField;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -28,7 +25,7 @@ public class Fertilizer extends ImportBehavior implements ProductInterface {
     private static final String TAG = "FertilizerClass";
     private static final int SHOWINFO = 0;
     @DatabaseField(id = true)
-    @Expose
+
     private Integer id;
     @DatabaseField(index = true)
     private String productName;
@@ -83,56 +80,6 @@ public class Fertilizer extends ImportBehavior implements ProductInterface {
     }
 
     @Override
-    public void importMasterData(JSONArray importData) {
-        Fertilizer fertilizer;
-        try {
-            Log.i(TAG,
-                    "Number of entries " + importData.length());
-            for (int i = 0; i < importData.length(); i++) {
-                JSONObject jsonObject = importData.getJSONObject(i);
-                Log.i(TAG, jsonObject.getString("product") + "," + jsonObject.getInt("id"));
-                fertilizer = DatabaseManager.getInstance().getFertilizerWithId(jsonObject.getInt("id"));
-                if (null != fertilizer) {
-                    fertilizer.setProductName(jsonObject.getString("product"));
-                    if (!(jsonObject.getString("dose").equals(""))) {
-                        double doubleDose = 0;
-                        java.text.NumberFormat nf = NumberFormat.getInstance(Locale.getDefault());
-                        try {
-                            doubleDose = nf.parse(jsonObject.getString("dose")).doubleValue();
-                            fertilizer.setDefaultDose(doubleDose);
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-
-
-                    }
-
-                    DatabaseManager.getInstance().updateFertilizer(fertilizer);
-                } else {
-                    Fertilizer f = new Fertilizer();
-                    f.setId(jsonObject.getInt("id"));
-                    f.setProductName(jsonObject.getString("product"));
-                    if (!(jsonObject.getString("dose").equals(""))) {
-                        double doubleDose = 0;
-                        java.text.NumberFormat nf = NumberFormat.getInstance(Locale.getDefault());
-                        try {
-                            doubleDose = nf.parse(jsonObject.getString("dose")).doubleValue();
-                            f.setDefaultDose(doubleDose);
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-
-                    DatabaseManager.getInstance().addFertilizer(f);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    @Override
     public String toString() {
         // TODO Auto-generated method stub
         return productName;
@@ -143,8 +90,8 @@ public class Fertilizer extends ImportBehavior implements ProductInterface {
         List<Fertilizer> importData;
         app = MofaApplication.getInstance();
 
-            Log.d("TAG", "BackendSoftware: ASAAGRAR");
-            importData = fertilizerXmlParserASA(xmlString, notification);
+        Log.d("TAG", "BackendSoftware: ASAAGRAR");
+        importData = fertilizerXmlParserASA(xmlString, notification);
 
         for (Fertilizer f : importData) {
             Fertilizer fertilizer = DatabaseManager.getInstance().getFertilizerWithId(f.getId());

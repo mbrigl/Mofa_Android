@@ -82,14 +82,14 @@ public class InputAmountSoilFertFragment extends DialogFragment implements TextV
         final NumberFormat nf = NumberFormat.getInstance(Locale.US);
         ((DecimalFormat) nf).applyPattern("###.###");
         View v = inflater.inflate(R.layout.fragment_input_soilfert, container, false);
-        mSizeText = (TextView) v.findViewById(R.id.lbl_size);
+        mSizeText = v.findViewById(R.id.lbl_size);
         Resources res = getResources();
         String sizeText = String.format(res.getString(R.string.sizeInfo), mSize.toString());
         mSizeText.setText(sizeText);
-        mAmountText = (EditText) v.findViewById(R.id.txt_amount_total);
-        mAmountHaText = (EditText) v.findViewById(R.id.txt_amount_ha);
-        btnOk = (Button) v.findViewById(R.id.ok_confirm_button);
-        btnCancel = (Button) v.findViewById(R.id.cancel_confirm_button);
+        mAmountText = v.findViewById(R.id.txt_amount_total);
+        mAmountHaText = v.findViewById(R.id.txt_amount_ha);
+        btnOk = v.findViewById(R.id.ok_confirm_button);
+        btnCancel = v.findViewById(R.id.cancel_confirm_button);
         btnCancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 getDialog().dismiss();

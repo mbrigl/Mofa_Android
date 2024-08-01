@@ -64,8 +64,8 @@ public class WorkProductAdapter<T extends ProductInterface> extends ArrayAdapter
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
             holder = new PesticideHolder();
-            holder.txtPesticide = (TextView) row.findViewById(R.id.txt_pesticide_item);
-            holder.imgInfo = (ImageView) row.findViewById(R.id.pesticide_info);
+            holder.txtPesticide = row.findViewById(R.id.txt_pesticide_item);
+            holder.imgInfo = row.findViewById(R.id.pesticide_info);
             row.setTag(holder);
 
         } else {

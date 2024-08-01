@@ -2,12 +2,9 @@ package it.schmid.android.mofa.model;
 
 import android.util.Log;
 
-import com.google.gson.annotations.Expose;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -27,7 +24,7 @@ import it.schmid.android.mofa.db.DatabaseManager;
 public class VQuarter extends ImportBehavior {
     private static final String TAG = "VQuarterClass";
     @DatabaseField(id = true)
-    @Expose
+
     private Integer id;
     @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private Land land;
@@ -164,51 +161,12 @@ public class VQuarter extends ImportBehavior {
     }
 
     @Override
-    public void importMasterData(JSONArray importData) {
-        VQuarter vquarter;
-        Land land;
-        try {
-            Log.i(TAG,
-                    "Number of entries " + importData.length());
-            for (int i = 0; i < importData.length(); i++) {
-                JSONObject jsonObject = importData.getJSONObject(i);
-                Log.i(TAG, jsonObject.getString("variety") + "," + jsonObject.getInt("id") + "," + jsonObject.getInt("year") +
-                        "," + jsonObject.getString("clone") + jsonObject.getDouble("wateramount"));
-                vquarter = DatabaseManager.getInstance().getVQuarterWithId(jsonObject.getInt("id"));
-                //getting the land of the current vQuarter
-                JSONObject jLand = jsonObject.getJSONObject("land");
-                land = DatabaseManager.getInstance().getLandWithId(jLand.getInt("id"));
-                if (null != vquarter) {
-                    vquarter.setVariety(jsonObject.getString("variety"));
-                    vquarter.setClone(jsonObject.getString("clone"));
-                    vquarter.setPlantYear(jsonObject.getInt("year"));
-                    vquarter.setWateramount(jsonObject.getDouble("wateramount"));
-                    vquarter.setLand(land);
-                    DatabaseManager.getInstance().updateVQuarter(vquarter);
-                } else {
-                    VQuarter v = new VQuarter();
-                    v.setId(jsonObject.getInt("id"));
-                    v.setVariety(jsonObject.getString("variety"));
-                    v.setClone(jsonObject.getString("clone"));
-                    v.setPlantYear(jsonObject.getInt("year"));
-                    v.setWateramount(jsonObject.getDouble("wateramount"));
-                    v.setLand(land);
-                    DatabaseManager.getInstance().addVquarter(v);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    @Override
     public Boolean importMasterData(String xmlString, NotificationService notification) {
         VQuarter vquarter;
         List<VQuarter> importData;
         MofaApplication app = MofaApplication.getInstance();
-            Log.d("TAG", "BackendSoftware: ASAAGRAR");
-            importData = vquarterXmlParserASA(xmlString, notification);
+        Log.d("TAG", "BackendSoftware: ASAAGRAR");
+        importData = vquarterXmlParserASA(xmlString, notification);
 
 
         for (VQuarter vq : importData) {

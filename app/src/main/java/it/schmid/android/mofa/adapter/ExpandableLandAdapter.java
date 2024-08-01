@@ -85,10 +85,10 @@ public class ExpandableLandAdapter extends BaseExpandableListAdapter {
             v = inflater.inflate(R.layout.land_child_row, parent, false);
             holder = new ViewHolder();
 
-            holder.txtVar = (TextView) v.findViewById(R.id.variety);
-            holder.txtClone = (TextView) v.findViewById(R.id.clone);
-            holder.txtPlantYear = (TextView) v.findViewById(R.id.plantyear);
-            holder.selected = (CheckBox) v.findViewById(R.id.selected);
+            holder.txtVar = v.findViewById(R.id.variety);
+            holder.txtClone = v.findViewById(R.id.clone);
+            holder.txtPlantYear = v.findViewById(R.id.plantyear);
+            holder.selected = v.findViewById(R.id.selected);
             holder.selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -161,8 +161,8 @@ public class ExpandableLandAdapter extends BaseExpandableListAdapter {
         if (v == null) {
             v = inflater.inflate(R.layout.land_group_row, parent, false);
             holder = new ViewHolderParent();
-            holder.txtLand = (TextView) v.findViewById(R.id.landname);
-            holder.selectedLand = (CheckBox) v.findViewById(R.id.selected_land);
+            holder.txtLand = v.findViewById(R.id.landname);
+            holder.selectedLand = v.findViewById(R.id.selected_land);
             //Log.d(TAG, "[getGroupView] Selected land:" + group.getName());
 
             v.setTag(holder);

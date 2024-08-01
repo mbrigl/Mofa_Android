@@ -109,8 +109,8 @@ public class Land extends ImportBehavior {
         List<Land> importData;
         MofaApplication app = MofaApplication.getInstance();
         //default
-            Log.d("TAG", "BackendSoftware: ASAAGRAR");
-            importData = landXmlParserASA(xmlString, notification);
+        Log.d("TAG", "BackendSoftware: ASAAGRAR");
+        importData = landXmlParserASA(xmlString, notification);
         for (Land l : importData) {
             Land land = DatabaseManager.getInstance().getLandWithId(l.getId());
             if (land != null) {

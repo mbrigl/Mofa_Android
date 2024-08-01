@@ -23,7 +23,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
-import it.schmid.android.mofa.PreviewAnimation;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.model.Worker;
@@ -43,9 +42,9 @@ public class WorkerOverviewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worker_overview);
         //inflating the views
-        fromDate = (EditText) findViewById(R.id.editTextFromDate);
-        toDate = (EditText) findViewById(R.id.editTextToDate);
-        ListView workerLV = (ListView) findViewById(R.id.workerhourslist);
+        fromDate = findViewById(R.id.editTextFromDate);
+        toDate = findViewById(R.id.editTextToDate);
+        ListView workerLV = findViewById(R.id.workerhourslist);
 
         //settings the default dates
         Date dateTo = new Date();
@@ -99,12 +98,9 @@ public class WorkerOverviewActivity extends Activity {
                         hoursOutput = "TOTALE: " + sum + " h";
                     }
                     toolbar = view.findViewById(R.id.toolbar);
-                    TextView sumText = (TextView) view.findViewById(R.id.hourslabel);
+                    TextView sumText = view.findViewById(R.id.hourslabel);
 
                     sumText.setText(hoursOutput);
-                    PreviewAnimation expandAni = new PreviewAnimation(toolbar, 500);
-                    toolbar.startAnimation(expandAni);
-
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -173,7 +169,7 @@ public class WorkerOverviewActivity extends Activity {
                 LayoutInflater inflater = ((Activity) context).getLayoutInflater();
                 row = inflater.inflate(layoutResourceId, parent, false);
                 holder = new WorkerHolder();
-                holder.txtWorker = (TextView) row.findViewById(R.id.workerlabel);
+                holder.txtWorker = row.findViewById(R.id.workerlabel);
                 row.setTag(holder);
 
             } else {
@@ -192,7 +188,7 @@ public class WorkerOverviewActivity extends Activity {
 
         @Override
         public Worker getItem(int position) {
-            return (Worker) workerList.get(position);
+            return workerList.get(position);
         }
 
         private static class WorkerHolder {

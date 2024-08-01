@@ -15,20 +15,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import it.schmid.android.mofa.ActivityConstants;
-import it.schmid.android.mofa.PreviewAnimation;
 import it.schmid.android.mofa.R;
-import it.schmid.android.mofa.Util;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.model.Fertilizer;
-import it.schmid.android.mofa.model.Global;
 import it.schmid.android.mofa.model.Harvest;
 import it.schmid.android.mofa.model.Pesticide;
 import it.schmid.android.mofa.model.SoilFertilizer;
@@ -75,11 +68,11 @@ public class WorkAdapter extends ArrayAdapter<Work> {
             convertView = inflater.inflate(layoutResourceId, parent, false);
             // setViewHolder(row);
             holder = new WorkHolder();
-            holder.imgIcon = (ImageView) convertView.findViewById(R.id.icon);
-            holder.txtDate = (TextView) convertView.findViewById(R.id.dateLabel);
-            holder.txtWork = (TextView) convertView.findViewById(R.id.workLabel);
+            holder.imgIcon = convertView.findViewById(R.id.icon);
+            holder.txtDate = convertView.findViewById(R.id.dateLabel);
+            holder.txtWork = convertView.findViewById(R.id.workLabel);
 
-            holder.delIcon = (ImageView) convertView.findViewById(R.id.delete_icon);
+            holder.delIcon = convertView.findViewById(R.id.delete_icon);
             convertView.setTag(holder);
 
         } else {
@@ -105,58 +98,6 @@ public class WorkAdapter extends ArrayAdapter<Work> {
 
         holder.imgIcon.setClickable(true);
 
-        holder.imgIcon.setOnClickListener(new OnClickListener() {
-
-            public void onClick(View v) {
-                String txtVquarters = "";
-                SpannableStringBuilder txtHarvest = new SpannableStringBuilder();
-                SpannableStringBuilder txtWorkers = new SpannableStringBuilder();
-                SpannableStringBuilder txtSpray = new SpannableStringBuilder();
-                SpannableStringBuilder txtFert = new SpannableStringBuilder();
-                SpannableStringBuilder txtWater = new SpannableStringBuilder();
-                //	Work work = data.get(position);
-                View toolbar = row.findViewById(R.id.toolbar);
-                txtVquarters = getVquarters(work);
-                txtWorkers = getWorkers(work);
-                txtSpray = getSprayInfos(work);
-                txtHarvest = getHarvestEntry(work);
-                txtFert = getFertInfos(work);
-                txtWater = getWaterInfos(work);
-                if (txtVquarters != "") {
-                    TextView txt = (TextView) row.findViewById(R.id.txtprevvquarters);
-                    txt.setText(txtVquarters);
-                }
-                if (txtWorkers.length() != 0) {
-                    TextView txtworker = (TextView) row.findViewById(R.id.txtprevworkers);
-                    txtworker.setVisibility(View.VISIBLE);
-                    txtworker.setText(txtWorkers);
-                }
-                if (txtSpray.length() != 0) {
-                    TextView txtSprayPrev = (TextView) row.findViewById(R.id.txtprevspray);
-                    txtSprayPrev.setVisibility(View.VISIBLE);
-                    txtSprayPrev.setText(txtSpray);
-                }
-                if (txtHarvest.length() != 0) {
-                    TextView txtSprayPrev = (TextView) row.findViewById(R.id.txtprevspray);
-                    txtSprayPrev.setVisibility(View.VISIBLE);
-                    txtSprayPrev.setText(txtHarvest);
-                }
-                if (txtFert.length() != 0) {
-                    TextView txtSprayPrev = (TextView) row.findViewById(R.id.txtprevspray);
-                    txtSprayPrev.setVisibility(View.VISIBLE);
-                    txtSprayPrev.setText(txtFert);
-                }
-                if (txtWater.length() != 0) {
-                    TextView txtSprayPrev = (TextView) row.findViewById(R.id.txtprevwater);
-                    txtSprayPrev.setVisibility(View.VISIBLE);
-                    txtSprayPrev.setText(txtWater);
-                }
-                PreviewAnimation expandAni = new PreviewAnimation(toolbar, 500);
-                toolbar.startAnimation(expandAni);
-
-
-            }
-        });
         holder.delIcon.setImageResource(R.drawable.ic_trash_empty);
         holder.delIcon.setClickable(true);
         holder.delIcon.setOnClickListener(new OnClickListener() {
@@ -350,49 +291,5 @@ public class WorkAdapter extends ArrayAdapter<Work> {
             }
         }
         return sprayBuilder;
-    }
-
-    private SpannableStringBuilder getWaterInfos(Work work) {
-        final String GLOBALTYP = "Irrigation";
-        double irrDuration = 0.00;
-        int irrigationType;
-        String irrDesc = "";
-        SpannableStringBuilder waterBuilder = new SpannableStringBuilder();
-        if (DatabaseManager.getInstance().getGlobalbyWorkIdAndIrrigation(work.getId(), GLOBALTYP).size() != 0) {
-            Global irrData = DatabaseManager.getInstance().getGlobalbyWorkId(work.getId()).get(0);
-            if (irrData.getData() != null) {
-                try {
-                    JSONObject jsonObj = new JSONObject(irrData.getData());
-
-                    if (jsonObj.has("irrduration")) {
-                        irrDuration = Util.getJSONDouble(jsonObj, "irrduration");
-                    }
-                    if (jsonObj.has("irrtype")) {
-                        irrigationType = Util.getJSONInt(jsonObj, "irrtype");
-                        switch (irrigationType) {
-                            case ActivityConstants.DRYIRRIGATION:
-                                irrDesc = (context.getResources().getString(R.string.irrDry));
-                                break;
-                            case ActivityConstants.FROSTIRRIGATION:
-                                irrDesc = (context.getResources().getString(R.string.irrFrost));
-                                break;
-                            case ActivityConstants.DRIPIRRIGATION:
-                                irrDesc = (context.getResources().getString(R.string.irrDrip));
-                                break;
-                            default:
-                                irrDesc = "";
-                                break;
-                        }
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                waterBuilder.append(irrDesc);
-                waterBuilder.append("\n");
-                waterBuilder.append(irrDuration + "h");
-            }
-        }
-
-        return waterBuilder;
     }
 }

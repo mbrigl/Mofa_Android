@@ -72,10 +72,10 @@ public class InputPurchaseDialogFragment extends DialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mAmountText = (EditText) view.findViewById(R.id.txt_purchase_amount);
-        mPriceText = (EditText) view.findViewById(R.id.txt_purchase_price);
-        mOkButton = (Button) view.findViewById(R.id.ok_confirm_button);
-        mCancelButton = (Button) view.findViewById(R.id.cancel_confirm_button);
+        mAmountText = view.findViewById(R.id.txt_purchase_amount);
+        mPriceText = view.findViewById(R.id.txt_purchase_price);
+        mOkButton = view.findViewById(R.id.ok_confirm_button);
+        mCancelButton = view.findViewById(R.id.cancel_confirm_button);
         mOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

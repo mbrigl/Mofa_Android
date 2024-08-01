@@ -81,13 +81,13 @@ public class SearchLandFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.land_list_search, container, false);
-        landListView = (ExpandableListView) v.findViewById(R.id.landlistview);
+        landListView = v.findViewById(R.id.landlistview);
         List<Land> landList = DatabaseManager.getInstance().getAllLands();
         adapter = new ExpandableSearchLandAdapter(getActivity(), landList);
         landListView.setAdapter(adapter);
-        TextView txtTitle = (TextView) v.findViewById(R.id.searchtitle);
+        TextView txtTitle = v.findViewById(R.id.searchtitle);
         txtTitle.setText(mTitle);
-        Button btnSearch = (Button) v.findViewById(R.id.landsearch_btn);
+        Button btnSearch = v.findViewById(R.id.landsearch_btn);
         btnSearch.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
@@ -177,10 +177,10 @@ public class SearchLandFragment extends Fragment {
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 v = inflater.inflate(R.layout.land_child_row, parent, false);
                 holder = new ViewHolder();
-                holder.txtVar = (TextView) v.findViewById(R.id.variety);
-                holder.txtClone = (TextView) v.findViewById(R.id.clone);
-                holder.txtPlantYear = (TextView) v.findViewById(R.id.plantyear);
-                holder.selected = (CheckBox) v.findViewById(R.id.selected);
+                holder.txtVar = v.findViewById(R.id.variety);
+                holder.txtClone = v.findViewById(R.id.clone);
+                holder.txtPlantYear = v.findViewById(R.id.plantyear);
+                holder.selected = v.findViewById(R.id.selected);
                 v.setTag(holder);
                 holder.selected.setTag(vquarter);
             } else {
@@ -269,8 +269,8 @@ public class SearchLandFragment extends Fragment {
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.land_group_row, parent, false);
                 holder = new ViewHolderParent();
-                holder.txtLand = (TextView) convertView.findViewById(R.id.landname);
-                holder.selectedLand = (CheckBox) convertView.findViewById(R.id.selected_land);
+                holder.txtLand = convertView.findViewById(R.id.landname);
+                holder.selectedLand = convertView.findViewById(R.id.selected_land);
                 //Log.d(TAG, "[getGroupView] Selected land:" + group.getName());
 
                 convertView.setTag(holder);
@@ -294,7 +294,7 @@ public class SearchLandFragment extends Fragment {
                             hashEntries.add(vq.getId());
                         }
                         childCheckState.put(groupPosition, hashEntries);
-                        Log.d(TAG, "Adding group with all childs on position " + groupPosition + " elements: " + hashEntries.toString());
+                        Log.d(TAG, "Adding group with all childs on position " + groupPosition + " elements: " + hashEntries);
                     } else {
                         childCheckState.remove(groupPosition);
                     }

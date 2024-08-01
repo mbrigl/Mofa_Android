@@ -16,8 +16,8 @@ public class DetailsDialog extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_details);
-        TextView tv = (TextView) findViewById(R.id.txtdetails);
-        btnClose = (Button) findViewById(R.id.btn_closedialog);
+        TextView tv = findViewById(R.id.txtdetails);
+        btnClose = findViewById(R.id.btn_closedialog);
         btnClose.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {

@@ -1,6 +1,6 @@
 package it.schmid.android.mofa.model;
 
-import com.google.gson.annotations.Expose;
+
 import com.j256.ormlite.field.DatabaseField;
 
 import it.schmid.android.mofa.interfaces.PurchaseProductInterface;
@@ -11,13 +11,13 @@ public class PurchaseFertilizer implements PurchaseProductInterface {
     @DatabaseField(generatedId = true)
     private Integer id;
     @DatabaseField(foreign = true, columnName = PURCHASE_ID_FIELD_NAME)
-    @Expose
+
     private Purchase purchase;
     @DatabaseField(foreign = true, columnName = FERTILIZER_ID_FIELD_NAME)
-    @Expose
+
     private Fertilizer fertilizer;
     @DatabaseField
-    @Expose
+
     private Double amount;
     @DatabaseField
     private String data;

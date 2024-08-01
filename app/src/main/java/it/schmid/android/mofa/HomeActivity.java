@@ -54,7 +54,6 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
      */
     private Boolean resetDropbox;
     private String urlPath;
-    private String format;
     private MofaApplication app;
 
     private SharedPreferences preferences;
@@ -111,21 +110,21 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
 
             // Inflate a view for the image button. Set its image and label.
             View v = li.inflate(imageButtonLayoutId, null);
-            ImageView iv = (ImageView) v.findViewById(R.id.home_btn_image);
+            ImageView iv = v.findViewById(R.id.home_btn_image);
             // if (iv != null) iv.setImageDrawable (imageId);
             if (iv != null) {
                 iv.setImageResource(imageId);
                 // Assign a value for the tag so the onClickFeature handler can determine which button was clicked.
                 iv.setTag(Integer.valueOf(j + 1));
             }
-            TextView tv = (TextView) v.findViewById(R.id.home_btn_label);
+            TextView tv = v.findViewById(R.id.home_btn_label);
             if (tv != null) tv.setText(labelId);
 
 
             // Find the frame where the image goes.
             // Attach the inflated view to that frame.
             View buttonView = v;
-            FrameLayout frame = (FrameLayout) findViewById(frameId);
+            FrameLayout frame = findViewById(frameId);
             if (frame != null) {
                 FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams
                         (ViewGroup.LayoutParams.MATCH_PARENT,
@@ -144,7 +143,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
         String sBackEnd;
         super.onResume();
         //setting title with additional info
-            sBackEnd = "ASA";
+        sBackEnd = "ASA";
         getSupportActionBar().setTitle("MoFa - " + sBackEnd);
 
     }
@@ -175,7 +174,6 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                 preferences = PreferenceManager.getDefaultSharedPreferences(this);
                 urlPath = preferences.getString("url", "");
                 resetDropbox = preferences.getBoolean("dropboxreset", false);
-                format = preferences.getString("listFormat", "-1");
 
                 if (resetDropbox) { //resetting the link if enabled in preferences
                     DropboxClient.deleteAccessToken(this);
@@ -201,16 +199,9 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
      * @param selItems contains an ArrayList of integers to decide which tables are to update
      * @param url      is the URL of the webservice entry point
      */
-    private void updateData(ArrayList<Integer> selItems, String url, String format) {
+    private void updateData(ArrayList<Integer> selItems, String url) {
         @SuppressWarnings("unused")
-        String extension;
-
-        if (format.equalsIgnoreCase("1")) { //json
-            extension = ".json";
-        } else {
-            extension = ".xml";
-        }
-        WebServiceCall importData = new WebServiceCall(this, format, DropboxClient.getClient(ACCESS_TOKEN));
+        WebServiceCall importData = new WebServiceCall(this, DropboxClient.getClient(ACCESS_TOKEN));
         importData.execute(selItems, url);
     }
 
@@ -395,7 +386,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                 if (checkBox.isChecked()) {
                     if ((DatabaseManager.getInstance().getAllNotSendedWorks().size() == 0) && (DatabaseManager.getInstance().getAllPurchases().size() == 0)) { // works table is empty
                         flushData(selElements);
-                        updateData(selElements, Globals.IMPORT, format); //starting the import of dropbox data
+                        updateData(selElements, Globals.IMPORT); //starting the import of dropbox data
                     } else { // works table not empty first export
                         //Toast.makeText(getApplicationContext(), R.string.reimportmessage,Toast.LENGTH_LONG).show();
                         if (DatabaseManager.getInstance().getAllWorks().size() != 0) {
@@ -406,17 +397,11 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                         if (DatabaseManager.getInstance().getAllPurchases().size() != 0) {
                             Toast.makeText(getApplicationContext(), R.string.reimportmessage, Toast.LENGTH_LONG).show();
                         }
-//			    		flushData(selElements); //deleting the old data
-//		            	if (dropBox==false){  
-//		            		updateData(selElements,urlPath,offline,format); //starting the import of data
-//		            	}else{
-//		            		updateData(selElements,Globals.IMPORT,offline,format); //starting the import of dropbox data
-//		            	}
                     }
 
                 } else {
                     // the standard case, only a update
-                    updateData(selElements, Globals.IMPORT, format);
+                    updateData(selElements, Globals.IMPORT);
                 }
             }
         });
@@ -460,11 +445,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                 getString(R.string.soilfertilizertable), getString(R.string.categorytable), getString(R.string.extratable), getString(R.string.reasonstable), getString(R.string.weathertable)};
         StringBuilder sb = new StringBuilder();
         boolean first = false; //only for checking if \n
-        if (format.equalsIgnoreCase("1")) { //json
-            extension = ".json";
-        } else {
-            extension = ".xml";
-        }
+        extension = ".xml";
         filename = filename + extension;
         new CheckFileTask(DropboxClient.getClient(ACCESS_TOKEN), elementDesc, new CheckFileTask.Callback() {
 

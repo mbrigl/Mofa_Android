@@ -1,5 +1,6 @@
 package it.schmid.android.mofa;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -51,11 +52,11 @@ public class WorkEditResourcesFragment extends Fragment {
         mworkId = parentActivity.getWorkId();
         //Log.d(TAG,"[onCreateView] CurrWorkID= " + mworkId);
         View view = inflater.inflate(R.layout.work_edit_resources, container, false);
-        confirmButton = (Button) view.findViewById(R.id.work_save_button);
-        mWorker = (ImageButton) view.findViewById(R.id.work_change_worker);
-        mMachine = (ImageButton) view.findViewById(R.id.work_change_machine);
-        mWorkWorkerList = (ListView) view.findViewById(R.id.currworkerlist);
-        mWorkMachineList = (ListView) view.findViewById(R.id.currmachinelist);
+        confirmButton = view.findViewById(R.id.work_save_button);
+        mWorker = view.findViewById(R.id.work_change_worker);
+        mMachine = view.findViewById(R.id.work_change_machine);
+        mWorkWorkerList = view.findViewById(R.id.currworkerlist);
+        mWorkMachineList = view.findViewById(R.id.currmachinelist);
         populateFields(mworkId);
         setListener();
         return view;
@@ -96,7 +97,8 @@ public class WorkEditResourcesFragment extends Fragment {
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                getActivity().setResult(getActivity().RESULT_OK);
+                getActivity();
+                getActivity().setResult(Activity.RESULT_OK);
                 getActivity().finish();
 
             }

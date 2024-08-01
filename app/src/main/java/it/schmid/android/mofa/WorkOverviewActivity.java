@@ -55,9 +55,9 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         setContentView(R.layout.work_list);
         // ViewGroup contentView = (ViewGroup) getLayoutInflater().inflate(R.layout.work_list,null);
-        listViewWork = (ListView) findViewById(R.id.listViewWork);
-        delIcon = (ImageView) findViewById(R.id.delete_icon);
-        FloatingActionButton myFab = (FloatingActionButton) findViewById(R.id.fab);
+        listViewWork = findViewById(R.id.listViewWork);
+        delIcon = findViewById(R.id.delete_icon);
+        FloatingActionButton myFab = findViewById(R.id.fab);
         myFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 createWork();

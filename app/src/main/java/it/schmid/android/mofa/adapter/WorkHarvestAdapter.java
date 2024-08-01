@@ -52,13 +52,13 @@ public class WorkHarvestAdapter extends ArrayAdapter<Harvest> implements Harvest
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
             holder = new HarvestHolder();
-            holder.txtHarvestDate = (TextView) row.findViewById(R.id.txt_date);
-            holder.txtHarvestId = (TextView) row.findViewById(R.id.txt_docnr);
-            holder.txtHarvestAmount = (TextView) row.findViewById(R.id.txt_weight);
-            holder.txtHarvestCategory = (TextView) row.findViewById(R.id.txt_category);
-            holder.txtHarvestBoxes = (TextView) row.findViewById(R.id.txt_boxes);
-            holder.txtHarvestNotes = (TextView) row.findViewById(R.id.txt_notes);
-            holder.delIcon = (ImageView) row.findViewById(R.id.delete_icon);
+            holder.txtHarvestDate = row.findViewById(R.id.txt_date);
+            holder.txtHarvestId = row.findViewById(R.id.txt_docnr);
+            holder.txtHarvestAmount = row.findViewById(R.id.txt_weight);
+            holder.txtHarvestCategory = row.findViewById(R.id.txt_category);
+            holder.txtHarvestBoxes = row.findViewById(R.id.txt_boxes);
+            holder.txtHarvestNotes = row.findViewById(R.id.txt_notes);
+            holder.delIcon = row.findViewById(R.id.delete_icon);
 
             row.setTag(holder);
         } else {

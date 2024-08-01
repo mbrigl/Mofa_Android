@@ -2,7 +2,6 @@ package it.schmid.android.mofa.model;
 
 import android.util.Log;
 
-import com.google.gson.annotations.Expose;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -25,7 +24,7 @@ import it.schmid.android.mofa.db.DatabaseManager;
 public class Machine extends ImportBehavior {
     private static final String TAG = "MachineClass";
     @DatabaseField(id = true)
-    @Expose
+
     private Integer id;
     @DatabaseField
     private String name;
@@ -96,8 +95,8 @@ public class Machine extends ImportBehavior {
         List<Machine> importData;
         MofaApplication app = MofaApplication.getInstance();
         //default
-            Log.d("TAG", "BackendSoftware: ASAAGRAR");
-            importData = machineXmlParserASA(xmlString, notification);
+        Log.d("TAG", "BackendSoftware: ASAAGRAR");
+        importData = machineXmlParserASA(xmlString, notification);
 
         for (Machine m : importData) {
             Machine machine = DatabaseManager.getInstance().getMachineWithId(m.getId());

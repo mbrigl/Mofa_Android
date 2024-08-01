@@ -24,11 +24,11 @@ public class PreferenceContentFragmentASA extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent,
                              Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.prefscontentasa, parent, false);
-        asaTaxSettings = (TextView) result.findViewById(R.id.asa_tax_setting);
-        asaNoteSettings = (TextView) result.findViewById(R.id.asa_mofa_note);
-        asaNewVersion = (TextView) result.findViewById(R.id.asa_new_ver);
-        asaCultivationType = (TextView) result.findViewById(R.id.cultivationType);
-        asaLandOrder = (TextView) result.findViewById(R.id.asa_landorder_code);
+        asaTaxSettings = result.findViewById(R.id.asa_tax_setting);
+        asaNoteSettings = result.findViewById(R.id.asa_mofa_note);
+        asaNewVersion = result.findViewById(R.id.asa_new_ver);
+        asaCultivationType = result.findViewById(R.id.cultivationType);
+        asaLandOrder = result.findViewById(R.id.asa_landorder_code);
         //		 fertilizerCode=(TextView)result.findViewById(R.id.asa_fertilizer_code);
 //		 fertilizerSoilCode=(TextView)result.findViewById(R.id.asa_fertilizer_soil_code);
         return (result);

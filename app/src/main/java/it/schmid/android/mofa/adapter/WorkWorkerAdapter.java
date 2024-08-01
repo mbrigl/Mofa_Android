@@ -48,8 +48,8 @@ public class WorkWorkerAdapter extends ArrayAdapter<WorkWorker> {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
             holder = new WorkerHolder();
-            holder.txtWorker = (TextView) row.findViewById(R.id.workworkerLabel);
-            holder.delIcon = (ImageView) row.findViewById(R.id.delete_worker_icon);
+            holder.txtWorker = row.findViewById(R.id.workworkerLabel);
+            holder.delIcon = row.findViewById(R.id.delete_worker_icon);
             row.setTag(holder);
         } else {
             holder = (WorkerHolder) row.getTag();

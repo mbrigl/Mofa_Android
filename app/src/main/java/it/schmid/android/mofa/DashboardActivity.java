@@ -16,7 +16,6 @@
 
 package it.schmid.android.mofa;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -221,12 +220,12 @@ public abstract class DashboardActivity extends AppCompatActivity {
         super.setContentView(finalLayoutId);
 
         if (addFrame) {
-            LinearLayout frameView = (LinearLayout) findViewById(R.id.frame);
+            LinearLayout frameView = findViewById(R.id.frame);
             if (frameView != null) {
 
                 // If the frameView is there, inflate the layout given as an argument.
                 // Attach it as a child to the frameView.
-                LayoutInflater li = ((Activity) this).getLayoutInflater();
+                LayoutInflater li = this.getLayoutInflater();
                 View childView = li.inflate(layoutId, null);
                 if (childView != null) {
                     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams
@@ -253,7 +252,7 @@ public abstract class DashboardActivity extends AppCompatActivity {
      */
 
     public void setTitleFromActivityLabel(int textViewId) {
-        TextView tv = (TextView) findViewById(textViewId);
+        TextView tv = findViewById(textViewId);
         if (tv != null) tv.setText(getTitle());
     } // end setTitleText
 

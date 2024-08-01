@@ -124,14 +124,14 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
         mworkId = parentActivity.getWorkId();
         Log.d(TAG, "[onCreateView] CurrWorkID= " + mworkId);
         View view = inflater.inflate(R.layout.work_edit, container, false);
-        mDateText = (EditText) view.findViewById(R.id.work_edit_date);
-        mPickDate = (Button) view.findViewById(R.id.work_change_date);
-        mWork = (Spinner) view.findViewById(R.id.tasklist);
-        confirmButton = (Button) view.findViewById(R.id.work_save_button);
-        mSpeech = (ImageButton) view.findViewById(R.id.speechButton);
-        mLand = (ImageButton) view.findViewById(R.id.work_change_land);
-        mWorkVquarterList = (ListView) view.findViewById(R.id.currlandlist);
-        mNoteText = (EditText) view.findViewById(R.id.noteeditText);
+        mDateText = view.findViewById(R.id.work_edit_date);
+        mPickDate = view.findViewById(R.id.work_change_date);
+        mWork = view.findViewById(R.id.tasklist);
+        confirmButton = view.findViewById(R.id.work_save_button);
+        mSpeech = view.findViewById(R.id.speechButton);
+        mLand = view.findViewById(R.id.work_change_land);
+        mWorkVquarterList = view.findViewById(R.id.currlandlist);
+        mNoteText = view.findViewById(R.id.noteeditText);
 
 
         populateFields(mworkId);
@@ -214,7 +214,8 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 saveState();
-                getActivity().setResult(getActivity().RESULT_OK);
+                getActivity();
+                getActivity().setResult(RESULT_OK);
                 getActivity().finish();
 
             }
@@ -298,7 +299,8 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == getActivity().RESULT_OK && requestCode == REQUEST_CODE) {
+        getActivity();
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             if (data.hasExtra("Work_ID")) {
 
             }

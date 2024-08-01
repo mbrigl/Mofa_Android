@@ -3,8 +3,6 @@ package it.schmid.android.mofa.model;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import org.json.JSONArray;
-
 import it.schmid.android.mofa.NotificationService;
 
 /**
@@ -20,11 +18,6 @@ public class Global extends ImportBehavior {
     private String data;
     @DatabaseField
     private Integer workId;
-
-    @Override
-    public void importMasterData(JSONArray importData) {
-
-    }
 
     @Override
     public Boolean importMasterData(String xmlString, NotificationService notification) {

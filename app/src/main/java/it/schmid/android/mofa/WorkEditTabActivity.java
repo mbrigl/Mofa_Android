@@ -33,8 +33,8 @@ public class WorkEditTabActivity extends DashboardActivity implements WorkEditWo
     private Integer workId = 0; //current workid
     private Boolean continueEnabled = false;
     static final int DATE_DIALOG_ID = 0;
-    private Boolean sprayToCheck = false; //check variable for spraying
-    private Boolean fertToCheck = false;
+    private final Boolean sprayToCheck = false; //check variable for spraying
+    private final Boolean fertToCheck = false;
 
     MofaApplication mofaApplication = MofaApplication.getInstance();
 

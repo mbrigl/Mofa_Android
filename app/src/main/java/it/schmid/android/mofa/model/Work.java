@@ -1,6 +1,5 @@
 package it.schmid.android.mofa.model;
 
-import com.google.gson.annotations.Expose;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -11,22 +10,22 @@ import java.util.Date;
 public class Work {
     public final static String ID_FIELD_NAME = "id";
     @DatabaseField(generatedId = true, columnName = ID_FIELD_NAME)
-    @Expose
+
     private Integer id;
     @DatabaseField(dataType = DataType.DATE_LONG)
-    @Expose
+
     private Date date;
     @DatabaseField(foreign = true, foreignAutoRefresh = true)
-    @Expose
+
     private Task task;
     @DatabaseField
-    @Expose
+
     private String note;
     @DatabaseField(index = true, defaultValue = "0")
-    @Expose
+
     private Boolean valid;
     @DatabaseField(index = true, defaultValue = "0")
-    @Expose
+
     private Boolean sended;
     @DatabaseField
     private String data;

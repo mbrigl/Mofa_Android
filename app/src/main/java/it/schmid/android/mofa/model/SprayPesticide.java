@@ -1,6 +1,6 @@
 package it.schmid.android.mofa.model;
 
-import com.google.gson.annotations.Expose;
+
 import com.j256.ormlite.field.DatabaseField;
 
 public class SprayPesticide {
@@ -9,22 +9,22 @@ public class SprayPesticide {
     @DatabaseField(generatedId = true)
     private Integer id;
     @DatabaseField(foreign = true, columnName = PESTICIDE_ID_FIELD_NAME)
-    @Expose
+
     private Pesticide pesticide;
     @DatabaseField(foreign = true, columnName = SPRAY_ID_FIELD_NAME)
-    @Expose
+
     private Spraying spraying;
     @DatabaseField
-    @Expose
+
     private Double dose;
     @DatabaseField
-    @Expose
+
     private Double dose_amount;
     @DatabaseField
-    @Expose
+
     private String reason;
     @DatabaseField
-    @Expose
+
     private String periodCode;
 
     public SprayPesticide() {

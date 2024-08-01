@@ -2,11 +2,8 @@ package it.schmid.android.mofa.model;
 
 import android.util.Log;
 
-import com.google.gson.annotations.Expose;
 import com.j256.ormlite.field.DatabaseField;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -24,7 +21,7 @@ import it.schmid.android.mofa.db.DatabaseManager;
 public class SoilFertilizer extends ImportBehavior {
     private static final String TAG = "SoilFertilizerClass";
     @DatabaseField(id = true)
-    @Expose
+
     private Integer id;
     @DatabaseField(index = true)
     private String productName;
@@ -59,32 +56,6 @@ public class SoilFertilizer extends ImportBehavior {
     }
 
     @Override
-    public void importMasterData(JSONArray importData) {
-        SoilFertilizer sFertilizer;
-        try {
-            Log.i(TAG,
-                    "Number of entries " + importData.length());
-            for (int i = 0; i < importData.length(); i++) {
-                JSONObject jsonObject = importData.getJSONObject(i);
-                Log.i(TAG, jsonObject.getString("product") + "," + jsonObject.getInt("id"));
-                sFertilizer = DatabaseManager.getInstance().getSoilFertilizerWithId(jsonObject.getInt("id"));
-                if (null != sFertilizer) {
-                    sFertilizer.setProductName(jsonObject.getString("product"));
-                    DatabaseManager.getInstance().updateSoilFertilizer(sFertilizer);
-                } else {
-                    SoilFertilizer f = new SoilFertilizer();
-                    f.setId(jsonObject.getInt("id"));
-                    f.setProductName(jsonObject.getString("product"));
-                    DatabaseManager.getInstance().addSoilFertilizer(f);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    @Override
     public String toString() {
         // TODO Auto-generated method stub
         return productName;
@@ -94,8 +65,8 @@ public class SoilFertilizer extends ImportBehavior {
     public Boolean importMasterData(String xmlString, NotificationService notification) {
         List<SoilFertilizer> importData;
         app = MofaApplication.getInstance();
-            Log.d("TAG", "BackendSoftware: ASAAGRAR");
-            importData = soilFertilizerXmlParserASA(xmlString, notification);
+        Log.d("TAG", "BackendSoftware: ASAAGRAR");
+        importData = soilFertilizerXmlParserASA(xmlString, notification);
         for (SoilFertilizer f : importData) {
             SoilFertilizer soilFertilizer = DatabaseManager.getInstance().getSoilFertilizerWithId(f.getId());
             if (soilFertilizer != null) {

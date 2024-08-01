@@ -2,7 +2,6 @@ package it.schmid.android.mofa.model;
 
 import android.util.Log;
 
-import com.google.gson.annotations.Expose;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -25,7 +24,7 @@ import it.schmid.android.mofa.db.DatabaseManager;
 public class Worker extends ImportBehavior {
     private static final String TAG = "WorkerClass";
     @DatabaseField(id = true)
-    @Expose
+
     private Integer id;
     @DatabaseField
     private String lastname;
@@ -108,8 +107,8 @@ public class Worker extends ImportBehavior {
         List<Worker> importData;
         MofaApplication app = MofaApplication.getInstance();
         //default
-            Log.d("TAG", "BackendSoftware: ASAAGRAR");
-            importData = workerXmlParserASA(xmlString, notification);
+        Log.d("TAG", "BackendSoftware: ASAAGRAR");
+        importData = workerXmlParserASA(xmlString, notification);
 
         for (Worker w : importData) {
             Worker worker = DatabaseManager.getInstance().getWorkerWithId(w.getId());

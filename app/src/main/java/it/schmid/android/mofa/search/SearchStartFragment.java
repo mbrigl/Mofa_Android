@@ -34,13 +34,13 @@ public class SearchStartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.search_frag_start, container, false);
-        Button btnLastSprayOp = (Button) v.findViewById(R.id.btn_search_last_sprayop);
-        Button btnSearchPest = (Button) v.findViewById(R.id.btn_search_pest);
-        Button btnSearchFert = (Button) v.findViewById(R.id.btn_search_fert);
-        Button btnDelArchive = (Button) v.findViewById(R.id.btn_del_arch);
-        Button btnWorkHours = (Button) v.findViewById(R.id.btn_hours_overview);
-        final CheckBox chkDelAllSended = (CheckBox) v.findViewById(R.id.check_del_all_sended);
-        TextView txtInfo = (TextView) v.findViewById(R.id.textView);
+        Button btnLastSprayOp = v.findViewById(R.id.btn_search_last_sprayop);
+        Button btnSearchPest = v.findViewById(R.id.btn_search_pest);
+        Button btnSearchFert = v.findViewById(R.id.btn_search_fert);
+        Button btnDelArchive = v.findViewById(R.id.btn_del_arch);
+        Button btnWorkHours = v.findViewById(R.id.btn_hours_overview);
+        final CheckBox chkDelAllSended = v.findViewById(R.id.check_del_all_sended);
+        TextView txtInfo = v.findViewById(R.id.textView);
         long numSprayEntries = DatabaseManager.getInstance().getNumSprayingEntries();
         Resources res = getResources();
         String infoText = String.format(res.getString(R.string.searchInfo), numSprayEntries);
