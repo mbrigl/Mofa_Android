@@ -10,14 +10,5 @@
             android:name="resource"
             android:value="prefs" />
     </header>
-    <header
-        android:fragment="it.schmid.android.mofa.PreferenceFragmentASA"
-        android:summary="@string/header_summary_asa"
-        android:title="@string/header_title_asa"
-        tools:ignore="UnusedAttribute">
-        <extra
-            android:name="resource"
-            android:value="prefs_asa" />
-    </header>
 
 </preference-headers>

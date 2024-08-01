@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="Internet - Services">
-
-        <EditTextPreference
-            android:key="url"
-            android:summary="Please enter REST path"
-            android:title="REST path" />
         <CheckBoxPreference
             android:key="dropboxreset"
             android:title="@string/dropboxreset" />
-        <CheckBoxPreference
-            android:key="showPestInfos"
-            android:title="@string/showPestInfos" />
     </PreferenceCategory>
-
-
 </PreferenceScreen>

@@ -14,8 +14,8 @@ import it.schmid.android.mofa.Globals;
  */
 public class CreateFolderTask extends AsyncTask {
 
-    private final DbxClientV2   client;
-    private final Context       context;
+    private final DbxClientV2 client;
+    private final Context context;
 
     CreateFolderTask(DbxClientV2 client, Context context) {
         this.client = client;

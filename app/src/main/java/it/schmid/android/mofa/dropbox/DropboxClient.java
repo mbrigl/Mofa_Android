@@ -18,8 +18,10 @@ import it.schmid.android.mofa.HomeActivity;
  */
 public interface DropboxClient {
 
+    String IDENTIFIER = "dropbox/mofa-app";
+
     static DbxClientV2 getClient(String accessToken) {
-        DbxRequestConfig config = new DbxRequestConfig("dropbox/mofa-app", "en_US");
+        DbxRequestConfig config = DbxRequestConfig.newBuilder(IDENTIFIER).build();
         return new DbxClientV2(config, accessToken);
     }
 

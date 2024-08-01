@@ -6,76 +6,10 @@
 
         <TextView
             style="@style/label"
-            android:text="@string/text" />
-
-        <TextView
-            android:id="@+id/text"
-            style="@style/value" />
-    </TableRow>
-
-    <TableRow>
-
-        <TextView
-            style="@style/label"
-            android:text="@string/updateoffline" />
-
-        <TextView
-            android:id="@+id/updateofflinebox"
-            style="@style/value" />
-    </TableRow>
-
-    <TableRow>
-
-        <TextView
-            style="@style/label"
-            android:text="@string/dropbox" />
-
-        <TextView
-            android:id="@+id/dropbox"
-            style="@style/value" />
-    </TableRow>
-
-    <TableRow>
-
-        <TextView
-            style="@style/label"
             android:text="@string/dropboxreset" />
 
         <TextView
             android:id="@+id/dropboxreset"
-            style="@style/value" />
-    </TableRow>
-
-    <TableRow>
-
-        <TextView
-            style="@style/label"
-            android:text="@string/showPestInfos" />
-
-        <TextView
-            android:id="@+id/showPestInfos"
-            style="@style/value" />
-    </TableRow>
-
-    <TableRow>
-
-        <TextView
-            style="@style/label"
-            android:text="@string/list" />
-
-        <TextView
-            android:id="@+id/list"
-            style="@style/value" />
-    </TableRow>
-
-    <TableRow>
-
-        <TextView
-            style="@style/label"
-            android:text="@string/listbackend" />
-
-        <TextView
-            android:id="@+id/listbackend"
             style="@style/value" />
     </TableRow>
 

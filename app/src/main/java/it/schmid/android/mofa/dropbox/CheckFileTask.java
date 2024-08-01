@@ -16,7 +16,6 @@ import it.schmid.android.mofa.Globals;
  */
 public class CheckFileTask extends AsyncTask<String, Void, ArrayList<Integer>> {
     String[] elements = {"/land", "/vquarter", "/machine", "/worker", "/task"};
-//    String[] elements = {"/land", "/vquarter", "/machine", "/worker", "/task", "/pesticide", "/fertilizer", "/soilfertilizer", "/category", "/extra", "/reason", "/weather"};
 
     private final DbxClientV2 mDbxClient;
     private final Callback mCallback;
@@ -28,6 +27,7 @@ public class CheckFileTask extends AsyncTask<String, Void, ArrayList<Integer>> {
     public interface Callback {
 
         void onDataLoaded(ArrayList<Integer> result, StringBuilder sb);
+
         void onError(Exception e);
     }
 

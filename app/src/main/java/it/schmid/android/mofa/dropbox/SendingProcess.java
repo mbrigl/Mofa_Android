@@ -3,7 +3,6 @@ package it.schmid.android.mofa.dropbox;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -14,13 +13,9 @@ import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.WriteMode;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -29,7 +24,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.Globals;
 import it.schmid.android.mofa.MofaApplication;
 import it.schmid.android.mofa.NotificationService;
@@ -82,14 +76,8 @@ public class SendingProcess implements Runnable {
         Looper.prepare(); //For Preparing Message Pool for the child Thread
         MofaApplication app = MofaApplication.getInstance();
 
-        if (callingActivity == ActivityConstants.WORK_OVERVIEW) { //calling this asynch method from workoverview
-            if (asa_New_Ver) {
-                sendingData = createXMLASAVer16();
-            } else {
-                sendingData = createXMLASA();
-            }
+        sendingData = asa_New_Ver ? createXMLASAVer16() : createXMLASA();
 
-        }
         writeFileToDropBox(sendingData);
 
         int icon = android.R.drawable.stat_sys_upload_done;
@@ -143,134 +131,6 @@ public class SendingProcess implements Runnable {
             context.startActivity(new Intent(context, LoginActivity.class));
         }
     };
-
-    /**
-     * helper function to handle the response of the webservice - not used for the moment
-     *
-     * @param is-inputstream
-     * @return
-     */
-    public static String convertStreamToString(java.io.InputStream is) {
-        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
-    }
-
-    /**
-     * @param data
-     * @param fileType "1" for Json; "2" for XML
-     */
-    private void writeFile(String data, String fileType) {
-        if (isSdPresent()) {
-            FileOutputStream fos;
-            File sdCard = Environment.getExternalStorageDirectory();
-            File file = null;
-            Date date = new Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-            if (fileType.equalsIgnoreCase("1")) {
-                if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
-                    file = new File(sdCard.getAbsolutePath() + Globals.EXPORT, "worklist" + dateFormat.format(date) + ".json");
-                }
-                if (callingActivity == ActivityConstants.PURCHASING_ACTIVITY) {
-                    file = new File(sdCard.getAbsolutePath() + Globals.EXPORT, "purchaselist" + dateFormat.format(date) + ".json");
-                }
-            } else {
-                if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
-                    file = new File(sdCard.getAbsolutePath() + Globals.EXPORT, "worklist" + dateFormat.format(date) + ".xml");
-                }
-                if (callingActivity == ActivityConstants.PURCHASING_ACTIVITY) {
-                    file = new File(sdCard.getAbsolutePath() + Globals.EXPORT, "purchaselist" + dateFormat.format(date) + ".xml");
-                }
-            }
-
-            byte[] bData = data.getBytes();
-            try {
-                fos = new FileOutputStream(file);
-                fos.write(bData);
-                fos.flush();
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                error = true;
-            }
-        } else {
-            error = true;
-        }
-
-    }
-
-    private boolean isSdPresent() {
-        return android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
-    }
-
-    private String createXML() {
-        //List<Work> workUploadList = DatabaseManager.getInstance().getAllWorks();
-        List<Work> workUploadList = DatabaseManager.getInstance().getAllValidNotSendedWorksExcel();
-        XmlSerializer serializer = Xml.newSerializer();
-        StringWriter writer = new StringWriter();
-        try {
-            serializer.setOutput(writer);
-            serializer.startDocument("UTF-8", true);
-            serializer.startTag("", "works");
-            serializer.attribute("", "number", String.valueOf(workUploadList.size()));
-            for (Work wk : workUploadList) {
-                serializer.startTag("", "work");
-                serializer.startTag("", "date");
-                SimpleDateFormat sdf = new SimpleDateFormat();
-                sdf.applyPattern("yyyy-MM-dd'T'hh:mm:sss'Z'");
-                serializer.text(sdf.format(wk.getDate()));
-                serializer.endTag("", "date");
-                serializer.startTag("", "task");
-                serializer.text(wk.getTask().getId().toString());
-                serializer.endTag("", "task");
-                serializer.startTag("", "type");
-                if (wk.getTask().getType() == null) {
-                    serializer.text("O");
-                } else {
-                    serializer.text(wk.getTask().getType());
-                }
-                serializer.endTag("", "type");
-                serializer.startTag("", "note");
-                serializer.text(wk.getNote());
-                serializer.endTag("", "note");
-                List<WorkVQuarter> vquarters = DatabaseManager.getInstance().getVQuarterByWorkIdOrderedByVq(wk.getId());
-                for (WorkVQuarter vq : vquarters) {
-                    serializer.startTag("", "vquarter");
-                    serializer.startTag("", "vqid");
-                    serializer.text(vq.getVquarter().getId().toString());
-                    serializer.endTag("", "vqid");
-                    serializer.endTag("", "vquarter");
-                }
-                List<WorkWorker> workers = DatabaseManager.getInstance().getWorkWorkerByWorkId(wk.getId());
-                for (WorkWorker w : workers) {
-                    serializer.startTag("", "worker");
-                    serializer.startTag("", "workerid");
-                    serializer.text(w.getWorker().getId().toString());
-                    serializer.endTag("", "workerid");
-                    serializer.startTag("", "workerhours");
-                    serializer.text(w.getHours().toString());
-                    serializer.endTag("", "workerhours");
-                    serializer.endTag("", "worker");
-                }
-                List<WorkMachine> machines = DatabaseManager.getInstance().getWorkMachineByWorkId(wk.getId());
-                for (WorkMachine m : machines) {
-                    serializer.startTag("", "machine");
-                    serializer.startTag("", "machineid");
-                    serializer.text(m.getMachine().getId().toString());
-                    serializer.endTag("", "machineid");
-                    serializer.startTag("", "machinehours");
-                    serializer.text(m.getHours().toString());
-                    serializer.endTag("", "machinehours");
-                    serializer.endTag("", "machine");
-                }
-                serializer.endTag("", "work");
-            }
-            serializer.endTag("", "works");
-            serializer.endDocument();
-            return writer.toString();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     private String createXMLASA() {
         //List<Work> workUploadList = DatabaseManager.getInstance().getAllWorks();
@@ -455,18 +315,8 @@ public class SendingProcess implements Runnable {
     private void writeFileToDropBox(String data) {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-        String filePath = null;
         ACCESS_TOKEN = DropboxClient.retrieveAccessToken(context);
-        if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
-            filePath = Globals.EXPORT + "/worklist" + dateFormat.format(date) + ".xml";
-        }
-        if (callingActivity == ActivityConstants.PURCHASING_ACTIVITY) {
-            filePath = Globals.EXPORT + "/purchaselist" + dateFormat.format(date) + ".xml";
-        }
-        if (callingActivity == ActivityConstants.VEGDATA_ACTIVITY) { // calling this asynch from vegdata
-            filePath = Globals.EXPORT + "/vegdata" + dateFormat.format(date) + ".xml";
-        }
-
+        String filePath = Globals.EXPORT + "/worklist" + dateFormat.format(date) + ".xml";
 
         try {
             InputStream inputStream = new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
@@ -482,22 +332,6 @@ public class SendingProcess implements Runnable {
             error = true;
         } catch (DbxException e) {
             error = true;
-        }
-
-    }
-
-    private String getEinsatzGrundForASA(String einsatzgrund) {
-        String[] splittedText = einsatzgrund.split(",");
-        return splittedText[0];
-    }
-
-    private double getPriceFromJson(String json) {
-        try {
-            JSONObject object = new JSONObject(json);
-            double price = object.getDouble("price");
-            return price;
-        } catch (JSONException e) {
-            return 0.00;
         }
     }
 }

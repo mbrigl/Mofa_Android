@@ -1,6 +1,5 @@
 package it.schmid.android.mofa;
 
-import android.annotation.SuppressLint;
 import android.preference.PreferenceActivity;
 
 import java.util.List;
@@ -16,8 +15,6 @@ public class EditPreferences_Honey extends PreferenceActivity {
 
     @Override
     protected boolean isValidFragment(String fragmentName) {
-        return WorkingJournalPreferenceFragment.class.getName().equals(fragmentName) ||
-                PreferenceContentFragmentASA.class.getName().equals(fragmentName) ||
-                PreferenceFragmentASA.class.getName().equals(fragmentName);
+        return WorkingJournalPreferenceFragment.class.getName().equals(fragmentName);
     }
 }

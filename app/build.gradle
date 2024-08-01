@@ -50,6 +50,6 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-android
     implementation 'com.j256.ormlite:ormlite-android:6.1'
-    // https://mvnrepository.com/artifact/com.dropbox.core/dropbox-core-sdk
-    implementation 'com.dropbox.core:dropbox-core-sdk:5.1.1'
+    // https://mvnrepository.com/artifact/com.dropbox.core/dropbox-android-sdk
+    implementation 'com.dropbox.core:dropbox-android-sdk:7.0.0'
 }

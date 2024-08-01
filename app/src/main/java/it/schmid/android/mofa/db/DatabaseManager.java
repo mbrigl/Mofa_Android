@@ -17,8 +17,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import it.schmid.android.mofa.ActivityConstants;
-import it.schmid.android.mofa.model.Global;
 import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.Machine;
 import it.schmid.android.mofa.model.Task;
@@ -1037,36 +1035,5 @@ public class DatabaseManager {
         where.eq(WorkMachine.MACHINE_ID_FIELD_NAME, machineid);
         PreparedQuery<WorkMachine> preparedQuery = queryBuilder.prepare();
         return getHelper().getWorkMachineDao().query(preparedQuery);
-    }
-
-    public void flushVegData() {
-
-        try {
-            getHelper().getGlobalDao().callBatchTasks(new Callable<Void>() {
-
-                public Void call() throws Exception {
-                    getHelper().getGlobalDao().delete(getAllVegData());
-                    return null;
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //getHelper().getFruitQualityDao().delete(getAllQualities());
-
-    }
-
-    private List<Global> getAllVegData() {
-        List<Global> globalList = null;
-        try {
-            QueryBuilder<Global, Integer> qbGlobal = getHelper().getGlobalDao().queryBuilder();
-            qbGlobal.where().eq("typeInfo", ActivityConstants.BLOSSOMSTART).or().eq("typeInfo", ActivityConstants.BLOSSOMEND);
-            PreparedQuery<Global> preparedQuery = qbGlobal.prepare();
-            globalList = getHelper().getGlobalDao().query(preparedQuery);
-            return globalList;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 }

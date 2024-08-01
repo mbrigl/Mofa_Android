@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -176,10 +175,13 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                     editor.putBoolean("dropboxreset", false);
                     editor.commit();
                 }
+
                 if (!DropboxClient.tokenExists(this)) { //Dropbox API V2 - check if Token exists
                     //No token
                     //Back to LoginActivity
                     startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+
+//                    DropboxClient.authenticate(getApplicationContext(), getString(R.string.APP_KEY));
                 } else {
                     ACCESS_TOKEN = DropboxClient.retrieveAccessToken(this);
                     importFromDropbox();
