@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -26,7 +28,7 @@ import it.schmid.android.mofa.model.Work;
 import it.schmid.android.mofa.model.WorkWorker;
 import it.schmid.android.mofa.model.Worker;
 
-public class WorkSelectWorkerActivity extends DashboardActivity {
+public class WorkSelectWorkerActivity extends AppCompatActivity {
     private static final String TAG = "WorkSelectWorkerActivity";
     private int workId;
     SparseArray<Double> selectedWorkers = new SparseArray<Double>();

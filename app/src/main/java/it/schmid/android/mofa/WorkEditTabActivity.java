@@ -22,7 +22,7 @@ import it.schmid.android.mofa.model.Work;
  * @author schmida
  * Main Class for works
  */
-public class WorkEditTabActivity extends DashboardActivity implements WorkEditWorkFragment.SetWorkIdListener, WorkEditWorkFragment.CompleteBehaviour,
+public class WorkEditTabActivity extends AppCompatActivity implements WorkEditWorkFragment.SetWorkIdListener, WorkEditWorkFragment.CompleteBehaviour,
         WorkEditWorkFragment.ShowHarvestTabListener {
     private static final String TAG = "WorkEditTabActivity";
     ViewPager mViewPager;

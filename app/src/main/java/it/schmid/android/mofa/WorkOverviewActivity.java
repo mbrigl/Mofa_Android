@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBar.OnNavigationListener;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.j256.ormlite.misc.TransactionManager;
@@ -35,7 +36,7 @@ import it.schmid.android.mofa.dropbox.SendingProcess;
 import it.schmid.android.mofa.model.Work;
 
 
-public class WorkOverviewActivity extends DashboardActivity implements SendingProcess.RemoveEntries {
+public class WorkOverviewActivity extends AppCompatActivity implements SendingProcess.RemoveEntries {
     private static final String TAG = "WorkOverviewActivity";
     private static final int ACTIVITY_CREATE = 0;
     private static final int ACTIVITY_EDIT = 1;
@@ -243,7 +244,7 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 //sendData();
-                SendingProcess sending = new SendingProcess(WorkOverviewActivity.this, ActivityConstants.WORK_OVERVIEW);
+                SendingProcess sending = new SendingProcess(WorkOverviewActivity.this);
                 sending.sendData();
             }
         });

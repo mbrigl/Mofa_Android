@@ -51,15 +51,12 @@ public class SendingProcess implements Runnable {
     private String notifMess = "";
     private boolean error = false; // error value for webservice connection
     private final String restResponse = ""; // not used yet, but response of json-webservice
-    private final int callingActivity;
-    private String asaWorkHerbicideCode;
     private String ACCESS_TOKEN; //Dropbox
     RemoveEntries mremoveEntries;
 
     //constructor
-    public SendingProcess(Context context, Integer callingActivity) {
+    public SendingProcess(Context context) {
         this.context = context;
-        this.callingActivity = callingActivity;
         mremoveEntries = (RemoveEntries) context;
 
     }

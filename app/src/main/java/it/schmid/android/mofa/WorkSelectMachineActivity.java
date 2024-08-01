@@ -16,6 +16,8 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -24,7 +26,7 @@ import it.schmid.android.mofa.model.Machine;
 import it.schmid.android.mofa.model.Work;
 import it.schmid.android.mofa.model.WorkMachine;
 
-public class WorkSelectMachineActivity extends DashboardActivity {
+public class WorkSelectMachineActivity extends AppCompatActivity {
     private static final String TAG = "WorkSelectMachineActivity";
     private int workId;
     SparseArray<Double> selectedMachines = new SparseArray<Double>();

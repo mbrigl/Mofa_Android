@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +21,7 @@ import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.Work;
 import it.schmid.android.mofa.model.WorkVQuarter;
 
-public class WorkSelectLandActivity extends DashboardActivity {
+public class WorkSelectLandActivity extends AppCompatActivity {
     private static final String TAG = "WorkSelectLandActivity";
     private Work work = null;
     private ExpandableLandAdapter adapter;

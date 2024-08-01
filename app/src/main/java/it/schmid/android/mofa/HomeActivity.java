@@ -30,6 +30,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +45,7 @@ import it.schmid.android.mofa.dropbox.WebServiceCall;
 import it.schmid.android.mofa.model.Work;
 
 
-public class HomeActivity extends DashboardActivity implements RemoveEntries {
+public class HomeActivity extends AppCompatActivity implements RemoveEntries {
     private static final String BASE64_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxxdQkUSBx7ZmOM4AFBBvgNTSN3GWdsfM7uE0ygmvLdXC7V0/tX2byfLMvvkUtfdVD/c986SQdDrB2Un4Hr9nCcAFlWW1DFQgZrHZaWbe/gmk1rcxqbjKTON2CnWyfWU0iLu2ZCSRcYquajpKasJdVlvkTR+mlhOahSB06GmDcZDr/Uzr5psepYpex97Tqny0N+LWwnNFZ4QUPn8YJ/l/BVc3oc+UpshY1h8ieIn7BVEO0Xyk0gGs08BCyvHjNWBYTQadMQRhnXBdLraKwX7v6ojBMWk6RsSjXv94fqyrtPywNYW0IlXwthp4L3xm8EXhiMGdiZ6XbCovHGh9ud7tUQIDAQAB";
     private static final byte[] SALT = new byte[]{88, 77, 37, 44, 48, 10, 59, 27, 03, 63, 60, 02, 59, 50, 50, 53, 58, 69, 13, 95};
     private static final String TAG = "HomeActivity";
@@ -176,15 +178,12 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                     editor.commit();
                 }
 
-                if (!DropboxClient.tokenExists(this)) { //Dropbox API V2 - check if Token exists
-                    //No token
-                    //Back to LoginActivity
-                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-
-//                    DropboxClient.authenticate(getApplicationContext(), getString(R.string.APP_KEY));
-                } else {
+                if (DropboxClient.tokenExists(this)) { //Dropbox API V2 - check if Token exists
                     ACCESS_TOKEN = DropboxClient.retrieveAccessToken(this);
                     importFromDropbox();
+                } else {
+                    //No token
+                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
                 }
                 break;
             default:
@@ -374,7 +373,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                     } else { // works table not empty first export
                         //Toast.makeText(getApplicationContext(), R.string.reimportmessage,Toast.LENGTH_LONG).show();
                         if (DatabaseManager.getInstance().getAllWorks().size() != 0) {
-                            SendingProcess sending = new SendingProcess(HomeActivity.this, ActivityConstants.WORK_OVERVIEW); //first make the export
+                            SendingProcess sending = new SendingProcess(HomeActivity.this); //first make the export
                             sending.sendData();
                             Toast.makeText(getApplicationContext(), R.string.export_status_message, Toast.LENGTH_LONG).show();
                         }
