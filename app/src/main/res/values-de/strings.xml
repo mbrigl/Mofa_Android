@@ -59,8 +59,6 @@
     <string name="soilfertilizertable">Bodendünger</string>
     <string name="categorytable">Erntekategorien</string>
     <string name="extratable">Extras</string>
-    <string name="reasonstable">Einsatzgründe</string>
-    <string name="weathertable">Wetter</string>
     <!-- Notification messages	-->
     <string name="download_mess">MoFa - Downloading</string>
     <string name="download_title">MoFa - Starte download</string>
@@ -155,12 +153,10 @@
     <!--  Strings in Fragment Input Dose -->
     <string name="input_dose_hl">Dosierung pro hl(1x)</string>
     <string name="input_amount_total">Totale Mittelmenge</string>
-    <string name="reason">Einsatzgrund</string>
     <string name="status">Status:</string>
     <string name="beeWarning">*** ACHTUNG BIENENGEFÄHRLICH ***</string>
     <string name="beeNoWarning">*** NICHT BIENENGEFÄHRLICH ***</string>
     <string name="warteFristen">Karenzzeiten:</string>
-    <string name="reason_prompt">Einsatzgrund</string>
     <string name="min_dose">Minimum Dosis:</string>
     <string name="max_dose">Maximum Dosis:</string>
     <string name="max_use_pro_year">Anzahl Anwendungen/Jahr</string>
@@ -239,13 +235,6 @@
     <string name="deleteallsendedmsg">Sind Sie sicher, dass Sie alle gesendeten Einträge löschen möchten</string>
     <string name="deletetoastmsg">Daten wurden gelöscht !!</string>
     <string name="hoursOverview">Arbeitsstunden</string>
-    <!-- Strings for Weather -->
-    <string name="weathersunny">Wetter: sonnig</string>
-    <string name="weatherpartlycloudy">Wetter: teilw. bewölkt</string>
-    <string name="weathercloudy">Wetter: bewölkt</string>
-    <string name="weatherlightrain">Wetter: leichter Regen</string>
-    <string name="weatherrain">Wetter: Regen</string>
-    <string name="weathernight">Nacht</string>
     <!-- Strings for Irrigation -->
     <string name="irrigduration">Dauer in h:</string>
     <string name="irrigamount">Menge rel/h:</string>

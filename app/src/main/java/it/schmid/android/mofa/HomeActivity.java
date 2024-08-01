@@ -441,8 +441,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
         String filename = "/list"; //the filename is always list
         final ArrayList<Integer> selElements = new ArrayList<Integer>(); //storing the elements to import/update
         final String[] elementDesc = {getString(R.string.landtable), getString(R.string.vquartertable), getString(R.string.machinetable),
-                getString(R.string.workertable), getString(R.string.tasktable), getString(R.string.pesticidetable), getString(R.string.fertilizertable),
-                getString(R.string.soilfertilizertable), getString(R.string.categorytable), getString(R.string.extratable), getString(R.string.reasonstable), getString(R.string.weathertable)};
+                getString(R.string.workertable), getString(R.string.tasktable)};
         StringBuilder sb = new StringBuilder();
         boolean first = false; //only for checking if \n
         extension = ".xml";
@@ -496,71 +495,6 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
         sharedPref.edit().remove("LICENSED").commit();
     }
     //check the license
-	/*
-    private class MyLicenseCheckerCallback implements LicenseCheckerCallback {
-
-     //   @Override
-        public void allow(int reason) {
-            // TODO Auto-generated method stub
-            if (isFinishing()) {
-                // Don't update UI if Activity is finishing.
-                return;
-            }               
-            Log.i("License","Accepted!");       
-            	//SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-            	//SharedPreferences.Editor editor = sharedPref.edit();
-            	//editor.putBoolean("LICENSED", true);
-            	//editor.commit();
-            
-                //You can do other things here, like saving the licensed status to a
-                //SharedPreference so the app only has to check the license once.
-            
-            licensed = true;
-            //checkingLicense = false;
-            //didCheck = true;
-
-        }
-
-        @SuppressWarnings("deprecation")
-      //  @Override
-        public void dontAllow(int reason) {
-            // TODO Auto-generated method stub
-             if (isFinishing()) {
-                    // Don't update UI if Activity is finishing.
-                    return;
-                }
-                Log.i("License","Denied!");
-                Log.i("License","Reason for denial: "+reason);                                                                              
-
-                        //You can do other things here, like saving the licensed status to a
-                        //SharedPreference so the app only has to check the license once.
-
-                licensed = true;
-                //checkingLicense = false;
-                //didCheck = true;
-
-                showDialog(0);
-
-        }
-
-        @SuppressWarnings("deprecation")
-     //   @Override
-        public void applicationError(int reason) {
-            // TODO Auto-generated method stub
-            Log.i("License", "Error: " + reason);
-            if (isFinishing()) {
-                // Don't update UI if Activity is finishing.
-                return;
-            }
-            licensed = true;
-            //checkingLicense = false;
-            //didCheck = false;
-
-            showDialog(0);
-        }
-
-
-    }*/
 
     protected Dialog onCreateDialog(int id) {
         // We have only one dialog.

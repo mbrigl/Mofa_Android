@@ -14,8 +14,6 @@ public class Spraying {
     private Double concentration;
     @DatabaseField
     private Double wateramount;
-    @DatabaseField
-    private Integer weather = 1;
 
     public Spraying() {
     }
@@ -50,13 +48,5 @@ public class Spraying {
 
     public void setWateramount(Double wateramount) {
         this.wateramount = wateramount;
-    }
-
-    public Integer getWeather() {
-        return weather;
-    }
-
-    public void setWeather(Integer weather) {
-        this.weather = weather;
     }
 }

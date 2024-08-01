@@ -24,6 +24,5 @@ public interface ActivityConstants {
     String BLOSSOMEND = "BLOSSOMEND";
     String HARVESTSTART = "HARVESTSTART";
     String ESTIMCROP = "ESTIMCROP";
-    String PESTREASONS = "PESTREASONS";
 
 }

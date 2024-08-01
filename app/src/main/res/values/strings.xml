@@ -101,8 +101,6 @@
     <string name="soilfertilizertable">soilfertilizer</string>
     <string name="categorytable">fruit category</string>
     <string name="extratable">extras</string>
-    <string name="reasonstable">reasons</string>
-    <string name="weathertable">weather</string>
     <!-- Notification messages -->
     <string name="download_mess">MoFa - Downloading</string>
     <string name="download_title">MoFa - Starting download</string>
@@ -196,12 +194,10 @@
     <!-- Strings in Fragment Input Dose -->
     <string name="input_dose_hl">Please enter the dose per hl(1x)</string>
     <string name="input_amount_total">Please enter the total amount</string>
-    <string name="reason">Please select the reason</string>
     <string name="status">Status:</string>
     <string name="beeWarning">*** ATTENTION BEE DANGEROUS ***</string>
     <string name="beeNoWarning">*** NOT BEE DANGEROUS ***</string>
     <string name="warteFristen">Waiting time:</string>
-    <string name="reason_prompt">Reason:</string>
     <string name="min_dose">Minimum dose:</string>
     <string name="max_dose">Maximum dose:</string>
     <string name="max_use_pro_year">Maximum usage pro year:</string>
@@ -285,13 +281,6 @@
     <string name="deleteallsendedmsg">Are you sure, that you want delete all sended works</string>
     <string name="deletetoastmsg">Data deleted!!</string>
 
-    <!-- Strings for Weather -->
-    <string name="weathersunny">weather: sunny</string>
-    <string name="weatherpartlycloudy">weather: partly cloudy</string>
-    <string name="weathercloudy">weather: cloudy</string>
-    <string name="weatherlightrain">weather: light rain</string>
-    <string name="weatherrain">weather: rain</string>
-    <string name="weathernight">night</string>
     <!-- Strings for Irrigation -->
     <string name="irrigduration">Duration in h:</string>
     <string name="irrigamount">Amount rel/h:</string>

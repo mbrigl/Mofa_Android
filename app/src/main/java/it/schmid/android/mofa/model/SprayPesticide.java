@@ -22,9 +22,6 @@ public class SprayPesticide {
     private Double dose_amount;
     @DatabaseField
 
-    private String reason;
-    @DatabaseField
-
     private String periodCode;
 
     public SprayPesticide() {
@@ -73,14 +70,6 @@ public class SprayPesticide {
 
     public void setDose_amount(Double dose_amount) {
         this.dose_amount = dose_amount;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
     }
 
     public String getPeriodCode() {

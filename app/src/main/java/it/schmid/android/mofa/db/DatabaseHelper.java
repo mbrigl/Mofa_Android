@@ -322,12 +322,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private void updateFromVersion13(SQLiteDatabase db,
                                      ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            getWorkDao().executeRaw("ALTER TABLE `Spraying` ADD COLUMN weather Integer;");
-            TableUtils.createTableIfNotExists(connectionSource, Global.class);
-        } catch (java.sql.SQLException e) {
-            e.printStackTrace();
-        }
         onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
     }
 
@@ -350,8 +344,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
                         public Void call() throws Exception {
                             getWorkDao().executeRaw("ALTER TABLE spraying RENAME TO tmp;");
-                            getWorkDao().executeRaw("CREATE TABLE spraying (concentration DOUBLE PRECISION , id INTEGER PRIMARY KEY AUTOINCREMENT , wateramount DOUBLE PRECISION , weather INTEGER , work_id INTEGER );");
-                            getWorkDao().executeRaw("INSERT INTO spraying(concentration, id, wateramount, weather, work_id) SELECT concentration, id, wateramount, weather, work_id FROM tmp;");
+                            getWorkDao().executeRaw("CREATE TABLE spraying (concentration DOUBLE PRECISION , id INTEGER PRIMARY KEY AUTOINCREMENT , wateramount DOUBLE PRECISION , work_id INTEGER );");
+                            getWorkDao().executeRaw("INSERT INTO spraying(concentration, id, wateramount, work_id) SELECT concentration, id, wateramount, work_id FROM tmp;");
                             getWorkDao().executeRaw("DROP TABLE tmp;");
                             getWorkDao().executeRaw("ALTER TABLE `vquarter` ADD COLUMN data VARCHAR;");
                             getWorkDao().executeRaw("ALTER TABLE `pesticide` ADD COLUMN data VARCHAR;");
@@ -379,7 +373,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
                         public Void call() throws Exception {
 
                             getWorkDao().executeRaw("ALTER TABLE `pesticide` ADD COLUMN status VARCHAR;");
-                            getWorkDao().executeRaw("ALTER TABLE `spraypesticide` ADD COLUMN reason VARCHAR;");
                             return null;
                         }
                     });

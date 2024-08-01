@@ -304,10 +304,6 @@ public class SendingProcess implements Runnable {
                     serializer.startTag("", "wateramount");
                     serializer.text(s.getWateramount().toString());
                     serializer.endTag("", "wateramount");
-                    serializer.startTag("", "weather");
-                    String weatherStr = getWeatherString(s.getWeather());
-                    serializer.text(weatherStr);
-                    serializer.endTag("", "weather");
                     List<SprayPesticide> sprayPest = DatabaseManager.getInstance().getSprayPesticideBySprayId(s.getId());
                     for (SprayPesticide sp : sprayPest) {
                         serializer.startTag("", "Pesticide");
@@ -521,8 +517,6 @@ public class SendingProcess implements Runnable {
                     serializer.text(s.getWateramount().toString());
                     serializer.endTag("", "Wassermenge");
                     serializer.startTag("", "Notiz");
-                    String weatherStr = getWeatherString(s.getWeather());
-                    serializer.text(weatherStr);
                     serializer.endTag("", "Notiz");
                     for (WorkVQuarter vq : vquarters) {
                         serializer.startTag("", "Sortenquartier");
@@ -750,13 +744,6 @@ public class SendingProcess implements Runnable {
                 }
                 List<Spraying> spraying = DatabaseManager.getInstance().getSprayingByWorkId(wk.getId());
                 for (Spraying s : spraying) {
-                    serializer.startTag("", "Witterungsverhaeltnis");
-                    serializer.startTag("", "Code");
-                    String weatherCode = getWeatherCodeForASA(s.getWeather());
-                    serializer.text(weatherCode);
-                    serializer.endTag("", "Code");
-                    serializer.endTag("", "Witterungsverhaeltnis");
-
                     if (wk.getTask().getType().equalsIgnoreCase("H")) { //herbicide
                         serializer.startTag("", "Herbizideinsatz");
                     } else {
@@ -770,8 +757,6 @@ public class SendingProcess implements Runnable {
                     serializer.text(s.getWateramount().toString());
                     serializer.endTag("", "Wassermenge");
                     serializer.startTag("", "Notiz");
-                    String weatherStr = getWeatherString(s.getWeather());
-                    serializer.text(weatherStr);
                     serializer.endTag("", "Notiz");
                     for (WorkVQuarter vq : vquarters) {
                         serializer.startTag("", "Sortenquartier");
@@ -1106,56 +1091,6 @@ public class SendingProcess implements Runnable {
             error = true;
         }
 
-    }
-
-    private String getWeatherString(int weatherId) {
-        switch (weatherId) {
-            case ActivityConstants.SUNNY:
-                return context.getString(R.string.weathersunny);
-
-            case ActivityConstants.PARTLYCLOUDED:
-                return context.getString(R.string.weatherpartlycloudy);
-
-            case ActivityConstants.CLOUDED:
-                return context.getString(R.string.weathercloudy);
-
-            case ActivityConstants.LIGHTRAIN:
-                return context.getString(R.string.weatherlightrain);
-
-            case ActivityConstants.RAIN:
-                return context.getString(R.string.weatherrain);
-            case ActivityConstants.MOON:
-                return context.getString(R.string.weathernight);
-            default:
-                return context.getString(R.string.weathersunny);
-
-
-        }
-    }
-
-    //this for new ASA - Version, important is that the weathercodes are number 01,02..05
-    private String getWeatherCodeForASA(int weatherId) {
-        switch (weatherId) {
-            case ActivityConstants.SUNNY:
-                return "01";
-
-            case ActivityConstants.PARTLYCLOUDED:
-                return "02";
-            case ActivityConstants.CLOUDED:
-                return "03";
-
-            case ActivityConstants.LIGHTRAIN:
-                return "04";
-
-            case ActivityConstants.RAIN:
-                return "05";
-            case ActivityConstants.MOON:
-                return "01";
-            default:
-                return "01";
-
-
-        }
     }
 
     private String getEinsatzGrundForASA(String einsatzgrund) {
