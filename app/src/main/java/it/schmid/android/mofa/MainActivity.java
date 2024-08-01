@@ -1,9 +1,10 @@
 package it.schmid.android.mofa;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -14,11 +15,15 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.snackbar.Snackbar;
 
 import it.schmid.android.mofa.databinding.ActivityMainBinding;
+import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.dropbox.DropboxClient;
+import it.schmid.android.mofa.dropbox.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    private DatabaseSync sync;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +38,11 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
+        binding.fab.setOnClickListener(view -> {
+            if (DatabaseManager.getInstance().checkIfEmpty()) {
+                Toast.makeText(this, R.string.nodata, Toast.LENGTH_LONG).show();
+            } else {
+                startActivity(new Intent(this, WorkOverviewActivity.class));
             }
         });
     }
@@ -58,7 +62,28 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+
+        if (id == R.id.action_sync) {
+            if (DropboxClient.tokenExists(this)) { //Dropbox API V2 - check if Token exists
+                sync = new DatabaseSync(DropboxClient.retrieveAccessToken(this), this);
+                sync.importFromDropbox();
+            } else {
+                //No token
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            }
+            return true;
+        }
+
+        if (id == R.id.action_reset) {
+            MofaApplication app = (MofaApplication) getApplication();
+            app.resetAuthentication();
+            return true;
+        }
+
         if (id == R.id.action_settings) {
+            Snackbar.make(binding.getRoot(), "Replace with your own action", Snackbar.LENGTH_LONG)
+                    .setAnchorView(R.id.fab)
+                    .setAction("Action", null).show();
             return true;
         }
 

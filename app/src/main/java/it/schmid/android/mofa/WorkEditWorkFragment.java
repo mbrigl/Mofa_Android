@@ -80,7 +80,6 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        DatabaseManager.init(getActivity());
         setHasOptionsMenu(true);
         mofaApplication = MofaApplication.getInstance();
         mofaApplication.putGlobalVariable("land", "null"); //setting the global variable for checking validity to null

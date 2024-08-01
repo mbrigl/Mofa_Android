@@ -31,7 +31,6 @@ public class WorkMachineAdapter extends ArrayAdapter<WorkMachine> {
         this.context = context;
         this.layoutResourceId = layoutResourceId;
         this.data = data;
-        DatabaseManager.init(context);
     }
 
     @Override

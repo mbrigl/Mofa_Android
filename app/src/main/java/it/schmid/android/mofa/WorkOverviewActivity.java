@@ -50,7 +50,6 @@ public class WorkOverviewActivity extends AppCompatActivity implements SendingPr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DatabaseManager.init(this); //initialize the DatabaseManager
 
         actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);

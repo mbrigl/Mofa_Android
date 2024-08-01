@@ -39,7 +39,6 @@ public class WorkEditResourcesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DatabaseManager.init(getActivity());
         setHasOptionsMenu(true);
 
     }

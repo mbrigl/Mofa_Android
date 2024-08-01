@@ -29,7 +29,7 @@ public interface DropboxClient {
         Auth.startOAuth2Authentication(context, secret);
     }
 
-    static void getAccessToken(Context context) {
+    static void getAccessToken(Context context, Class<?> activity) {
         DbxCredential credential = Auth.getDbxCredential(); //generate Access Token
         if (credential != null && credential.getAccessToken() != null) {
             //Store accessToken in SharedPreferences
@@ -38,7 +38,7 @@ public interface DropboxClient {
             new CreateFolderTask(DropboxClient.getClient(credential.getAccessToken()), context).execute(); //creating the folder-structure for MoFa
 
             //Proceed to HomeActivityActivity
-            Intent intent = new Intent(context, HomeActivity.class);
+            Intent intent = new Intent(context, activity);
             context.startActivity(intent);
         }
     }

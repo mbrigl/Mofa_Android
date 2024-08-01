@@ -2,13 +2,19 @@ package it.schmid.android.mofa;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.dropbox.DropboxClient;
 
 public class MofaApplication extends Application {
 
@@ -19,7 +25,7 @@ public class MofaApplication extends Application {
     private ConcurrentHashMap<String, String> mGlobalVariables;
     private Set<AppStateListener> mAppStateListeners;
 
-    private static Integer workType = WORK_NORMAL;
+    private static final Integer workType = WORK_NORMAL;
 
     public interface AppStateListener {
         void onStateChanged(String key, String value);
@@ -31,6 +37,7 @@ public class MofaApplication extends Application {
         instance = this;
         mGlobalVariables = new ConcurrentHashMap<String, String>();
         mAppStateListeners = Collections.synchronizedSet(new HashSet<AppStateListener>());
+        DatabaseManager.init(this);
     }
 
     public static MofaApplication getInstance() {
@@ -62,7 +69,6 @@ public class MofaApplication extends Application {
     }
 
 
-
     public boolean networkStatus() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
@@ -77,5 +83,18 @@ public class MofaApplication extends Application {
 
     public static void setDefaultHour(double defaultHour) {
         MofaApplication.defaultHour = defaultHour;
+    }
+
+
+    public void resetAuthentication() {
+        String prefName = PreferenceManager.getDefaultSharedPreferencesName(this);
+        SharedPreferences preferences = getSharedPreferences(prefName, Context.MODE_PRIVATE);
+
+        DropboxClient.deleteAccessToken(getApplicationContext());
+        SharedPreferences.Editor editor = preferences.edit(); //resetting this preference to false
+        editor.putBoolean("dropboxreset", false);
+        editor.commit();
+
+        Toast.makeText(this, R.string.dropboxresetmessage, Toast.LENGTH_LONG).show();
     }
 }

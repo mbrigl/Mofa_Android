@@ -40,7 +40,6 @@ public class ExpandableLandAdapter extends BaseExpandableListAdapter {
         isSelected = new Boolean[lands.size()];
         this.hashSelQuarters = hashSelQuarters;
         this.inflater = LayoutInflater.from(context);
-        DatabaseManager.init(context);
         for (Land l : lands) {
             isSelected[counter] = allSubItemsSelected(l);
             counter++;

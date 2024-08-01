@@ -3,6 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="it.schmid.android.mofa.MainActivity">
     <item
+        android:id="@+id/action_sync"
+        android:orderInCategory="100"
+        android:title="Aktualisieren"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_reset"
+        android:orderInCategory="100"
+        android:title="Reset"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"

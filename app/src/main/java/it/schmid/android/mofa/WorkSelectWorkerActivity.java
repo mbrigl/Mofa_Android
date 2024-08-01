@@ -37,7 +37,6 @@ public class WorkSelectWorkerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DatabaseManager.init(this);
         setContentView(R.layout.worker_list);
         ListView listView = findViewById(R.id.workerlistview);
         Button closeButton = findViewById(R.id.workerclose_btn);

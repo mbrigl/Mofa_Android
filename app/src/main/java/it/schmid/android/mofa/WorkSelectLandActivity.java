@@ -32,7 +32,6 @@ public class WorkSelectLandActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DatabaseManager.init(this);
         setContentView(R.layout.land_list);
 
         listView = findViewById(R.id.landlistview);

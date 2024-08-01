@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import it.schmid.android.mofa.HomeActivity;
 import it.schmid.android.mofa.R;
 
 public class LoginActivity extends Activity {
@@ -25,6 +26,6 @@ public class LoginActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        DropboxClient.getAccessToken(this);
+        DropboxClient.getAccessToken(this, HomeActivity.class);
     }
 }

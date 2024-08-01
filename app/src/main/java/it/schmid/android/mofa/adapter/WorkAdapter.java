@@ -37,14 +37,6 @@ public class WorkAdapter extends ArrayAdapter<Work> {
         this.context = context;
         this.layoutResourceId = layoutResourceId;
         this.data = data;
-        DatabaseManager.init(context);
-    }
-
-    public WorkAdapter(Context context, int layoutResourceId) { //constructor for the loader
-        super(context, layoutResourceId);
-        this.context = context;
-        this.layoutResourceId = layoutResourceId;
-        DatabaseManager.init(context);
     }
 
 

@@ -37,7 +37,6 @@ public class WorkWorkerAdapter extends ArrayAdapter<WorkWorker> {
             MofaApplication mofaApplication = MofaApplication.getInstance();
             mofaApplication.putGlobalVariable("worker", "valid");
         }
-        DatabaseManager.init(context);
     }
 
     @Override
