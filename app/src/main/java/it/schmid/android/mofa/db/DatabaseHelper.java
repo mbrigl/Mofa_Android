@@ -15,22 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import it.schmid.android.mofa.model.Fertilizer;
 import it.schmid.android.mofa.model.Global;
 import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.Machine;
-import it.schmid.android.mofa.model.Pesticide;
-import it.schmid.android.mofa.model.Purchase;
-import it.schmid.android.mofa.model.PurchaseFertilizer;
-import it.schmid.android.mofa.model.PurchasePesticide;
-import it.schmid.android.mofa.model.SoilFertilizer;
-import it.schmid.android.mofa.model.SprayFertilizer;
-import it.schmid.android.mofa.model.SprayPesticide;
-import it.schmid.android.mofa.model.Spraying;
 import it.schmid.android.mofa.model.Task;
 import it.schmid.android.mofa.model.VQuarter;
 import it.schmid.android.mofa.model.Work;
-import it.schmid.android.mofa.model.WorkFertilizer;
 import it.schmid.android.mofa.model.WorkMachine;
 import it.schmid.android.mofa.model.WorkVQuarter;
 import it.schmid.android.mofa.model.WorkWorker;
@@ -46,20 +36,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Machine, Integer> machineDao = null;
     private Dao<Task, Integer> taskDao = null;
     private Dao<VQuarter, Integer> vquarterDao = null;
-    private Dao<Pesticide, Integer> pesticideDao = null;
-    private Dao<Fertilizer, Integer> fertilizerDao = null;
     private Dao<Work, Integer> workDao = null;
     private Dao<WorkVQuarter, Integer> workVquarterDao = null;
     private Dao<WorkWorker, Integer> workWorkerDao = null;
     private Dao<WorkMachine, Integer> workMachineDao = null;
-    private Dao<WorkFertilizer, Integer> workFertilizerDao = null;
-    private Dao<Spraying, Integer> sprayingDao = null;
-    private Dao<SprayPesticide, Integer> sprayPesticideDao = null;
-    private Dao<SprayFertilizer, Integer> sprayFertilizerDao = null;
-    private Dao<SoilFertilizer, Integer> soilFertilizerDao = null;
-    private Dao<Purchase, Integer> purchaseDao = null;
-    private Dao<PurchasePesticide, Integer> purchasePesticideDao = null;
-    private Dao<PurchaseFertilizer, Integer> purchaseFertilizerDao = null;
     private Dao<Global, Integer> globalDao = null;
 
     public DatabaseHelper(Context context) {
@@ -74,20 +54,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Task.class);
             TableUtils.createTable(connectionSource, Machine.class);
             TableUtils.createTable(connectionSource, VQuarter.class);
-            TableUtils.createTable(connectionSource, Pesticide.class);
-            TableUtils.createTable(connectionSource, Fertilizer.class);
-            TableUtils.createTable(connectionSource, SoilFertilizer.class);
             TableUtils.createTable(connectionSource, Work.class);
-            TableUtils.createTable(connectionSource, Spraying.class);
-            TableUtils.createTable(connectionSource, SprayPesticide.class);
-            TableUtils.createTable(connectionSource, SprayFertilizer.class);
             TableUtils.createTable(connectionSource, WorkVQuarter.class);
             TableUtils.createTable(connectionSource, WorkWorker.class);
             TableUtils.createTable(connectionSource, WorkMachine.class);
-            TableUtils.createTable(connectionSource, WorkFertilizer.class);
-            TableUtils.createTable(connectionSource, Purchase.class);
-            TableUtils.createTable(connectionSource, PurchasePesticide.class);
-            TableUtils.createTable(connectionSource, PurchaseFertilizer.class);
             TableUtils.createTable(connectionSource, Global.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
@@ -109,9 +79,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
                     break;
                 case 2:
                     updateFromVersion2(db, connectionSource, oldVersion, newVersion);
-                    break;
-                case 3:
-                    updateFromVersion3(db, connectionSource, oldVersion, newVersion);
                     break;
                 case 4:
                     updateFromVersion4(db, connectionSource, oldVersion, newVersion);
@@ -170,14 +137,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 
     private void updateFromVersion1(SQLiteDatabase db, ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            TableUtils.createTableIfNotExists(connectionSource, Fertilizer.class);
-            TableUtils.createTable(connectionSource, SprayFertilizer.class);
-
-        } catch (java.sql.SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
 
     }
@@ -188,26 +147,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     }
 
-    private void updateFromVersion3(SQLiteDatabase db,
-                                    ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            TableUtils.createTableIfNotExists(connectionSource, SoilFertilizer.class);
-        } catch (java.sql.SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
-    }
-
     private void updateFromVersion4(SQLiteDatabase db,
                                     ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            TableUtils.createTableIfNotExists(connectionSource, WorkFertilizer.class);
-            Log.d("DatabaseHelperClass", "Upgrade Vers. 4, creating WorkFertilizer Table");
-        } catch (java.sql.SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
 
     }
@@ -231,9 +172,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             getWorkerDao().executeRaw("ALTER TABLE `worker` ADD COLUMN code VARCHAR;");
             getMachineDao().executeRaw("ALTER TABLE `machine` ADD COLUMN code VARCHAR;");
             getTaskDao().executeRaw("ALTER TABLE `task` ADD COLUMN code VARCHAR;");
-            getPesticideDao().executeRaw("ALTER TABLE `pesticide` ADD COLUMN code VARCHAR;");
-            getFertilizerDao().executeRaw("ALTER TABLE `fertilizer` ADD COLUMN code VARCHAR;");
-            getSoilFertilizerDao().executeRaw("ALTER TABLE `soilfertilizer` ADD COLUMN code VARCHAR;");
         } catch (java.sql.SQLException e) {
             e.printStackTrace();
         }
@@ -242,15 +180,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private void updateFromVersion7(SQLiteDatabase db,
                                     ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            TableUtils.createTableIfNotExists(connectionSource, Purchase.class);
-            TableUtils.createTableIfNotExists(connectionSource, PurchasePesticide.class);
-            TableUtils.createTableIfNotExists(connectionSource, PurchaseFertilizer.class);
-            getPesticideDao().executeRaw("ALTER TABLE `pesticide` ADD COLUMN barCode VARCHAR;");
-            getFertilizerDao().executeRaw("ALTER TABLE `fertilizer` ADD COLUMN barCode VARCHAR;");
-        } catch (java.sql.SQLException e) {
-            e.printStackTrace();
-        }
         onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
     }
 
@@ -275,7 +204,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
                                      ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
             getWorkDao().executeRaw("ALTER TABLE `work` ADD COLUMN sended SMALLINT DEFAULT 0;");
-            getPesticideDao().executeRaw("ALTER TABLE `pesticide` ADD COLUMN constraints VARCHAR;");
         } catch (java.sql.SQLException e) {
             e.printStackTrace();
         }
@@ -430,72 +358,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return taskDao;
     }
 
-    public Dao<Pesticide, Integer> getPesticideDao() {
-        if (null == pesticideDao) {
-            try {
-                pesticideDao = getDao(Pesticide.class);
-            } catch (java.sql.SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return pesticideDao;
-    }
-
-    public Dao<Fertilizer, Integer> getFertilizerDao() {
-        if (null == fertilizerDao) {
-            try {
-                fertilizerDao = getDao(Fertilizer.class);
-            } catch (java.sql.SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return fertilizerDao;
-    }
-
-    public Dao<SoilFertilizer, Integer> getSoilFertilizerDao() {
-        if (null == soilFertilizerDao) {
-            try {
-                soilFertilizerDao = getDao(SoilFertilizer.class);
-            } catch (java.sql.SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return soilFertilizerDao;
-    }
-
-    public Dao<SprayPesticide, Integer> getSprayPesticideDao() {
-        if (null == sprayPesticideDao) {
-            try {
-                sprayPesticideDao = getDao(SprayPesticide.class);
-            } catch (java.sql.SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return sprayPesticideDao;
-    }
-
-    public Dao<SprayFertilizer, Integer> getSprayFertilizerDao() {
-        if (null == sprayFertilizerDao) {
-            try {
-                sprayFertilizerDao = getDao(SprayFertilizer.class);
-            } catch (java.sql.SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return sprayFertilizerDao;
-    }
-
-    public Dao<Spraying, Integer> getSprayingDao() {
-        if (null == sprayingDao) {
-            try {
-                sprayingDao = getDao(Spraying.class);
-            } catch (java.sql.SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return sprayingDao;
-    }
-
     public Dao<VQuarter, Integer> getVquarterDao() {
         if (null == vquarterDao) {
             try {
@@ -549,50 +411,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             }
         }
         return workMachineDao;
-    }
-
-    public Dao<WorkFertilizer, Integer> getWorkFertilizerDao() {
-        if (null == workFertilizerDao) {
-            try {
-                workFertilizerDao = getDao(WorkFertilizer.class);
-            } catch (java.sql.SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return workFertilizerDao;
-    }
-
-    public Dao<Purchase, Integer> getPurchaseDao() {
-        if (null == purchaseDao) {
-            try {
-                purchaseDao = getDao(Purchase.class);
-            } catch (java.sql.SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return purchaseDao;
-    }
-
-    public Dao<PurchasePesticide, Integer> getPurchasePesticideDao() {
-        if (null == purchasePesticideDao) {
-            try {
-                purchasePesticideDao = getDao(PurchasePesticide.class);
-            } catch (java.sql.SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return purchasePesticideDao;
-    }
-
-    public Dao<PurchaseFertilizer, Integer> getPurchaseFertilizerDao() {
-        if (null == purchaseFertilizerDao) {
-            try {
-                purchaseFertilizerDao = getDao(PurchaseFertilizer.class);
-            } catch (java.sql.SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return purchaseFertilizerDao;
     }
 
     public Dao<Global, Integer> getGlobalDao() {

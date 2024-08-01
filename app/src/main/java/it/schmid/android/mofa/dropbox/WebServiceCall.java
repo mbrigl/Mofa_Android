@@ -19,12 +19,9 @@ import java.util.ArrayList;
 
 import it.schmid.android.mofa.NotificationService;
 import it.schmid.android.mofa.R;
-import it.schmid.android.mofa.model.Fertilizer;
 import it.schmid.android.mofa.model.ImportBehavior;
 import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.Machine;
-import it.schmid.android.mofa.model.Pesticide;
-import it.schmid.android.mofa.model.SoilFertilizer;
 import it.schmid.android.mofa.model.Task;
 import it.schmid.android.mofa.model.VQuarter;
 import it.schmid.android.mofa.model.Worker;
@@ -129,28 +126,6 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String> {
                     importData(data, task);
                     statusMsg += " task - error: " + error + "\n";
                     break;
-                case 6:
-                    Pesticide pesticide = new Pesticide();
-                    data = getData(url + "/pesticide/list" + extension);
-                    publishProgress(progress);
-                    importData(data, pesticide);
-                    statusMsg += " pesticide - error: " + error + "\n";
-                    break;
-                case 7:
-                    Fertilizer fertilizer = new Fertilizer();
-                    data = getData(url + "/fertilizer/list" + extension);
-                    publishProgress(progress);
-                    importData(data, fertilizer);
-                    statusMsg += " fertilizer - error: " + error + "\n";
-                    break;
-                case 8:
-                    SoilFertilizer sFertilizer = new SoilFertilizer();
-                    data = getData(url + "/soilfertilizer/list" + extension);
-                    publishProgress(progress);
-                    importData(data, sFertilizer);
-                    statusMsg += " soilfertilizer - error: " + error + "\n";
-                    break;
-
                 default:
                     break;
             }

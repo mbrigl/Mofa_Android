@@ -107,21 +107,7 @@ public class WorkEditTabActivity extends DashboardActivity implements WorkEditWo
             //	Log.d(TAG, "[onPause] land and worker are valid" );
             valid = true;
         }
-        //second case spray work
-        if (valid && sprayToCheck) {
-            if (workId != 0) {
-                valid = !DatabaseManager.getInstance().sprayIsEmpty(workId); //returns true if no Pesticide/Fertilizer
-                //	Log.d(TAG, "[onPause] spray Part is: " + valid);
-            }
-        }
 
-
-        //third case soil fertilizing
-        if (valid && fertToCheck) { //fertilizer work
-            if (workId != 0) {
-                valid = !DatabaseManager.getInstance().soilFertIsEmpty(workId);
-            }
-        }
         //writing the validity flat into the DB
         if (workId != 0) {
             Work w = DatabaseManager.getInstance().getWorkWithId(workId);

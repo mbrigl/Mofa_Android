@@ -7,9 +7,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
-import it.schmid.android.mofa.model.SprayFertilizer;
-import it.schmid.android.mofa.model.SprayPesticide;
-import it.schmid.android.mofa.model.Spraying;
 import it.schmid.android.mofa.model.Work;
 import it.schmid.android.mofa.model.WorkVQuarter;
 import it.schmid.android.mofa.model.WorkWorker;
@@ -55,7 +52,6 @@ public class DatabaseTestDB {
                     } else {
                         task = 21;
                         w = createWork(lDate, task, "test2");
-                        createSprayEntry(w);
 
                     }
                     createWorkVQuarter(w);
@@ -110,50 +106,6 @@ public class DatabaseTestDB {
             }
         }
 
-    }
-
-    private void createSprayEntry(Work w) {
-        int[] pestIds = {289, 301, 302, 325, 345, 347, 351, 356, 1179, 895, 974, 977};
-        int[] fertIds = {106, 109, 258, 282, 380, 383, 726, 728, 730, 755, 790};
-        int pestId;
-        int fertId;
-        Spraying sp = new Spraying();
-        sp.setWork(w);
-        sp.setConcentration(1.0);
-        sp.setWateramount(10.00);
-        DatabaseManager.getInstance().addSpray(sp);
-        int elPestPos = new Random().nextInt(pestIds.length - 2);
-        Log.d(TAG, "pestpos = " + elPestPos);
-        for (int i = 1; i <= 2; i++) {
-            pestId = pestIds[elPestPos];
-            SprayPesticide sprayP = new SprayPesticide();
-            sprayP.setSpraying(sp);
-            sprayP.setPesticide(DatabaseManager.getInstance().getPesticideWithId(pestId));
-            sprayP.setDose(0.03);
-            sprayP.setDose_amount(20.00);
-            DatabaseManager.getInstance().addSprayPesticide(sprayP);
-            if (elPestPos >= pestIds.length - 1) {
-                elPestPos = 0;
-            } else {
-                elPestPos++;
-            }
-        }
-        int elFertPos = new Random().nextInt(fertIds.length - 2);
-        Log.d(TAG, "fertpos = " + elFertPos);
-        for (int i = 1; i <= 2; i++) {
-            fertId = fertIds[elFertPos];
-            SprayFertilizer sprayF = new SprayFertilizer();
-            sprayF.setSpraying(sp);
-            sprayF.setFertilizer(DatabaseManager.getInstance().getFertilizerWithId(fertId));
-            sprayF.setDose(0.03);
-            sprayF.setDose_amount(20.00);
-            DatabaseManager.getInstance().addSprayFertilizer(sprayF);
-            if (elFertPos >= fertIds.length - 1) {
-                elFertPos = 0;
-            } else {
-                elFertPos++;
-            }
-        }
     }
 
 

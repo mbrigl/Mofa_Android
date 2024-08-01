@@ -310,16 +310,6 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                 case 5:
                     DatabaseManager.getInstance().flushTask();
                     break;
-                case 6:
-                    Log.d(TAG, "Deleting existing entries");
-                    DatabaseManager.getInstance().flushPesticideNew();
-                    break;
-                case 7:
-                    DatabaseManager.getInstance().flushFertilizerNew();
-                    break;
-                case 8:
-                    DatabaseManager.getInstance().flushSoilFertilizer();
-                    break;
                 default:
                     break;
 
@@ -366,7 +356,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
         // Adding a listener for the checkbox with a
         checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if ((isChecked) && ((DatabaseManager.getInstance().getAllNotSendedWorks().size() > 0) || (DatabaseManager.getInstance().getAllPurchases().size() > 0))) {
+                if ((isChecked) && (DatabaseManager.getInstance().getAllNotSendedWorks().size() > 0)) {
                     Toast.makeText(getApplicationContext(), R.string.reimportmessage, Toast.LENGTH_LONG).show();
                 }
             }
@@ -381,7 +371,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
         alertDialog.setPositiveButton(R.string.yesbutton, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 if (checkBox.isChecked()) {
-                    if ((DatabaseManager.getInstance().getAllNotSendedWorks().size() == 0) && (DatabaseManager.getInstance().getAllPurchases().size() == 0)) { // works table is empty
+                    if (DatabaseManager.getInstance().getAllNotSendedWorks().size() == 0) { // works table is empty
                         flushData(selElements);
                         updateData(selElements, Globals.IMPORT); //starting the import of dropbox data
                     } else { // works table not empty first export
@@ -390,9 +380,6 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                             SendingProcess sending = new SendingProcess(HomeActivity.this, ActivityConstants.WORK_OVERVIEW); //first make the export
                             sending.sendData();
                             Toast.makeText(getApplicationContext(), R.string.export_status_message, Toast.LENGTH_LONG).show();
-                        }
-                        if (DatabaseManager.getInstance().getAllPurchases().size() != 0) {
-                            Toast.makeText(getApplicationContext(), R.string.reimportmessage, Toast.LENGTH_LONG).show();
                         }
                     }
 

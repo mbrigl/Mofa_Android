@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.text.SpannableStringBuilder;
 import android.text.style.BulletSpan;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,16 +20,9 @@ import java.util.List;
 
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.db.DatabaseManager;
-import it.schmid.android.mofa.model.Fertilizer;
-import it.schmid.android.mofa.model.Pesticide;
-import it.schmid.android.mofa.model.SoilFertilizer;
-import it.schmid.android.mofa.model.SprayFertilizer;
-import it.schmid.android.mofa.model.SprayPesticide;
-import it.schmid.android.mofa.model.Spraying;
 import it.schmid.android.mofa.model.Task;
 import it.schmid.android.mofa.model.VQuarter;
 import it.schmid.android.mofa.model.Work;
-import it.schmid.android.mofa.model.WorkFertilizer;
 import it.schmid.android.mofa.model.WorkWorker;
 import it.schmid.android.mofa.model.Worker;
 
@@ -187,74 +179,5 @@ public class WorkAdapter extends ArrayAdapter<Work> {
         }
 
         return workerBuilder;
-    }
-
-    private SpannableStringBuilder getFertInfos(Work work) {
-        SpannableStringBuilder fertBuilder = new SpannableStringBuilder();
-        if (DatabaseManager.getInstance().getWorkFertilizerByWorkId(work.getId()).size() != 0) {
-            boolean first = true;
-            List<WorkFertilizer> wF = DatabaseManager.getInstance().getWorkFertilizerByWorkId(work.getId());
-            for (WorkFertilizer f : wF) {
-                if (first) {
-                    first = false;
-                } else {
-                    fertBuilder.append("\n");
-                }
-                SoilFertilizer soilFertilizer = DatabaseManager.getInstance().getSoilFertilizerWithId(f.getSoilFertilizer().getId());
-                String fertStr = soilFertilizer.getProductName();
-                fertStr += " (" + f.getAmount() + " kg)";
-                fertBuilder.append(fertStr);
-                fertBuilder.setSpan(new BulletSpan(10), fertBuilder.length() - fertStr.length(), fertBuilder.length(), 17);
-
-            }
-        }
-        return fertBuilder;
-    }
-
-    private SpannableStringBuilder getSprayInfos(Work work) {
-
-        SpannableStringBuilder sprayBuilder = new SpannableStringBuilder();
-
-
-        //getting the spray pesticides, if a spray work
-        if (DatabaseManager.getInstance().getSprayingByWorkId(work.getId()).size() != 0) { //its a spraying work
-            Spraying sprayInfo = DatabaseManager.getInstance().getSprayingByWorkId(work.getId()).get(0);
-            //start formatting output using SpannableStringBuilder
-            String str1 = context.getResources().getString(R.string.concentrationcaption) + ": ";
-            sprayBuilder.append(str1);
-            String str2 = sprayInfo.getConcentration() + " x ";
-            sprayBuilder.append(str2);
-            sprayBuilder.setSpan(new StyleSpan(1), sprayBuilder.length() - str2.length(), sprayBuilder.length(), 17);
-            str1 = context.getResources().getString(R.string.sumwatercaption) + ": ";
-            sprayBuilder.append(str1);
-            str2 = sprayInfo.getWateramount().toString();
-            sprayBuilder.append(str2);
-            sprayBuilder.setSpan(new StyleSpan(1), sprayBuilder.length() - str2.length(), sprayBuilder.length(), 17);
-            int msprayId;
-
-            msprayId = DatabaseManager.getInstance().getSprayingByWorkId(work.getId()).get(0).getId();
-            List<SprayPesticide> selectedPesticides = DatabaseManager.getInstance().getSprayPesticideBySprayId(msprayId);
-            for (SprayPesticide sp : selectedPesticides) {
-                Pesticide pesticide = DatabaseManager.getInstance().getPesticideWithId(sp.getPesticide().getId());
-                String pestStr = pesticide.getProductName();
-                pestStr += "(" + sp.getDose() + " )";
-                sprayBuilder.append("\n");
-                sprayBuilder.append(pestStr);
-                sprayBuilder.setSpan(new BulletSpan(10), sprayBuilder.length() - pestStr.length(), sprayBuilder.length(), 17);
-
-
-            }
-            List<SprayFertilizer> selectedFertilizers = DatabaseManager.getInstance().getSprayFertilizerBySprayId(msprayId);
-            for (SprayFertilizer sf : selectedFertilizers) {
-                Fertilizer fertilizer = DatabaseManager.getInstance().getFertilizerWithId(sf.getFertilizer().getId());
-                String fertStr = fertilizer.getProductName();
-                fertStr += " (" + sf.getDose() + " )";
-                sprayBuilder.append("\n");
-                sprayBuilder.append(fertStr);
-                sprayBuilder.setSpan(new BulletSpan(10), sprayBuilder.length() - fertStr.length(), sprayBuilder.length(), 17);
-
-            }
-        }
-        return sprayBuilder;
     }
 }
