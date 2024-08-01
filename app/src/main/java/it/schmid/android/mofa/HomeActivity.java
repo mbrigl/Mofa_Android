@@ -46,8 +46,6 @@ import it.schmid.android.mofa.model.Work;
 
 
 public class HomeActivity extends AppCompatActivity implements RemoveEntries {
-    private static final String BASE64_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxxdQkUSBx7ZmOM4AFBBvgNTSN3GWdsfM7uE0ygmvLdXC7V0/tX2byfLMvvkUtfdVD/c986SQdDrB2Un4Hr9nCcAFlWW1DFQgZrHZaWbe/gmk1rcxqbjKTON2CnWyfWU0iLu2ZCSRcYquajpKasJdVlvkTR+mlhOahSB06GmDcZDr/Uzr5psepYpex97Tqny0N+LWwnNFZ4QUPn8YJ/l/BVc3oc+UpshY1h8ieIn7BVEO0Xyk0gGs08BCyvHjNWBYTQadMQRhnXBdLraKwX7v6ojBMWk6RsSjXv94fqyrtPywNYW0IlXwthp4L3xm8EXhiMGdiZ6XbCovHGh9ud7tUQIDAQAB";
-    private static final byte[] SALT = new byte[]{88, 77, 37, 44, 48, 10, 59, 27, 03, 63, 60, 02, 59, 50, 50, 53, 58, 69, 13, 95};
     private static final String TAG = "HomeActivity";
     public static final int NUM_HOME_BUTTONS = 3;
     /**
@@ -58,11 +56,6 @@ public class HomeActivity extends AppCompatActivity implements RemoveEntries {
     private MofaApplication app;
 
     private SharedPreferences preferences;
-    //******************
-    // Dropbox credentials
-    //private static final String appKey = "zgo2dupm3ung3u6";
-    //private static final String appSecret = "22u6lbkswjitll9";
-    private static final int REQUEST_LINK_TO_DBX = 0;
 
     //Dropbox variable
     private String ACCESS_TOKEN;
@@ -201,93 +194,8 @@ public class HomeActivity extends AppCompatActivity implements RemoveEntries {
         importData.execute(selItems, url);
     }
 
-
-    //DialogBox for Updating Data
-    private void showImportDialog() {
-
-        boolean first = false; //only for checking if \n
-        StringBuilder sb = new StringBuilder();
-        final ArrayList<Integer> selElements = new ArrayList<Integer>(); //storing the checked preferences
-
-        // Checking the preferences
-        if (preferences.getBoolean("updateLand", false)) {
-            sb.append(getString(R.string.landtable));
-            first = true;
-            selElements.add(1); // 1 means we update land,
-        }
-        if (preferences.getBoolean("updateVquarter", false)) {
-            if (first) {
-                sb.append("\n");
-            } else {
-                // Special case, its not possible to update only the variety quarters, we have a relation to the land!!!
-                // Therefore we add the land-element
-                selElements.add(1);
-            }
-            sb.append(getString(R.string.vquartertable));
-            first = true;
-            selElements.add(2); // 2 means we update the variety quarter
-        }
-        if (preferences.getBoolean("updateMachine", false)) {
-            if (first) {
-                sb.append("\n");
-            }
-            sb.append(getString(R.string.machinetable));
-            first = true;
-            selElements.add(3);
-        }
-        if (preferences.getBoolean("updateWorker", false)) {
-            if (first) {
-                sb.append("\n");
-            }
-            sb.append(getString(R.string.workertable));
-            first = true;
-            selElements.add(4);
-        }
-        if (preferences.getBoolean("updateTask", false)) {
-            if (first) {
-                sb.append("\n");
-            }
-            sb.append(getString(R.string.tasktable));
-            first = true;
-            selElements.add(5);
-        }
-        if (preferences.getBoolean("updatePesticide", false)) {
-            if (first) {
-                sb.append("\n");
-            }
-            sb.append(getString(R.string.pesticidetable));
-            first = true;
-            selElements.add(6);
-        }
-        if (preferences.getBoolean("updateFertilizer", false)) {
-            if (first) {
-                sb.append("\n");
-            }
-            sb.append(getString(R.string.fertilizertable));
-            first = true;
-            selElements.add(7);
-        }
-        if (preferences.getBoolean("updateSoilFertilizer", false)) {
-            if (first) {
-                sb.append("\n");
-            }
-            sb.append(getString(R.string.soilfertilizertable));
-            first = true;
-            selElements.add(8);
-        }
-
-        if (selElements.size() > 0) {
-            showAlertDialog(sb, selElements);
-        } else { // no updates
-            showNoUpdateDialog();
-        }
-
-
-    }
-
     //deleting the table entries
     private void flushData(ArrayList<Integer> selItems) {
-
         for (Integer i : selItems) {
             switch (i) {
                 case 1:
@@ -457,58 +365,5 @@ public class HomeActivity extends AppCompatActivity implements RemoveEntries {
         for (Work w : workList) {
             DatabaseManager.getInstance().deleteCascWork(w);
         }
-
-    }
-
-    private void doCheck() {
-
-        //didCheck = false;
-        //checkingLicense = true;
-        //setProgressBarIndeterminateVisibility(true);
-
-        //mChecker.checkAccess(mLicenseCheckerCallback);
-    }
-
-    //only for testing purpose, resetting the licensing flag
-    private void removeLicenseFlag() {
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        sharedPref.edit().remove("LICENSED").commit();
-    }
-    //check the license
-
-    protected Dialog onCreateDialog(int id) {
-        // We have only one dialog.
-        return new AlertDialog.Builder(this)
-                .setTitle("UNLICENSED APPLICATION DIALOG TITLE")
-                .setMessage("This application is not licensed, please buy it from the play store.")
-                .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(
-                                "http://market.android.com/details?id=" + getPackageName()));
-                        startActivity(marketIntent);
-                        finish();
-                    }
-                })
-                .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                })
-                .setNeutralButton("Re-Check", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        doCheck();
-                    }
-                })
-
-                .setCancelable(false)
-                .setOnKeyListener(new DialogInterface.OnKeyListener() {
-                    public boolean onKey(DialogInterface dialogInterface, int i, KeyEvent keyEvent) {
-                        Log.i("License", "Key Listener");
-                        finish();
-                        return true;
-                    }
-                })
-                .create();
-
     }
 }

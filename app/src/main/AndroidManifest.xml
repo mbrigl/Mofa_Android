@@ -29,7 +29,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.MobileFarmer" />
+            android:theme="@style/Theme.MobileFarmer">
+        </activity>
         <activity
             android:name=".EditPreferences_Honey"
             android:label="@string/app_name" />
