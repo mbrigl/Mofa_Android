@@ -21,7 +21,6 @@ import java.util.concurrent.Callable;
 
 import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.model.Fertilizer;
-import it.schmid.android.mofa.model.FruitQuality;
 import it.schmid.android.mofa.model.Global;
 import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.Machine;
@@ -1866,66 +1865,6 @@ public class DatabaseManager {
         where.eq(PurchaseFertilizer.FERTILIZER_ID_FIELD_NAME, fertid);
         PreparedQuery<PurchaseFertilizer> preparedQuery = queryBuilder.prepare();
         return getHelper().getPurchaseFertilizerDao().query(preparedQuery);
-    }
-
-    /*************************************
-     *
-     * FruitQuality - DB Operations
-     */
-    //Stored - Queries
-    public List<FruitQuality> getAllQualities() {
-        List<FruitQuality> qualityList = null;
-        try {
-            qualityList = getHelper().getFruitQualityDao().queryForAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return qualityList;
-    }
-
-    // adding,updating Worker class
-    public void addQuality(FruitQuality f) {
-        try {
-            getHelper().getFruitQualityDao().create(f);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void updateQuality(FruitQuality quality) {
-        try {
-            getHelper().getFruitQualityDao().update(quality);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // checking if the worker exists by id
-    public FruitQuality getQualityWithId(int qualityId) {
-        FruitQuality quality = null;
-        try {
-            quality = getHelper().getFruitQualityDao().queryForId(qualityId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return quality;
-    }
-
-    public void flushQuality() {
-
-        try {
-            getHelper().getFruitQualityDao().callBatchTasks(new Callable<Void>() {
-
-                public Void call() throws Exception {
-                    getHelper().getFruitQualityDao().delete(getAllQualities());
-                    return null;
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //getHelper().getFruitQualityDao().delete(getAllQualities());
-
     }
 
     public void flushVegData() {

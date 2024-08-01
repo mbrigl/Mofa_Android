@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import it.schmid.android.mofa.NotificationService;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.model.Fertilizer;
-import it.schmid.android.mofa.model.FruitQuality;
 import it.schmid.android.mofa.model.ImportBehavior;
 import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.Machine;
@@ -150,13 +149,6 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String> {
                     publishProgress(progress);
                     importData(data, sFertilizer);
                     statusMsg += " soilfertilizer - error: " + error + "\n";
-                    break;
-                case 9:
-                    FruitQuality fruitQuality = new FruitQuality();
-                    data = getData(url + "/category/list" + extension);
-                    publishProgress(progress);
-                    importData(data, fruitQuality);
-                    statusMsg += " fruitquality - error: " + error + "\n";
                     break;
 
                 default:

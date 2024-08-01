@@ -320,9 +320,6 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                 case 8:
                     DatabaseManager.getInstance().flushSoilFertilizer();
                     break;
-                case 9:
-                    DatabaseManager.getInstance().flushQuality();
-                    break;
                 default:
                     break;
 

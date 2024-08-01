@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import it.schmid.android.mofa.model.Fertilizer;
-import it.schmid.android.mofa.model.FruitQuality;
 import it.schmid.android.mofa.model.Global;
 import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.Machine;
@@ -61,7 +60,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Purchase, Integer> purchaseDao = null;
     private Dao<PurchasePesticide, Integer> purchasePesticideDao = null;
     private Dao<PurchaseFertilizer, Integer> purchaseFertilizerDao = null;
-    private Dao<FruitQuality, Integer> fruitQualityDao = null;
     private Dao<Global, Integer> globalDao = null;
 
     public DatabaseHelper(Context context) {
@@ -90,7 +88,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Purchase.class);
             TableUtils.createTable(connectionSource, PurchasePesticide.class);
             TableUtils.createTable(connectionSource, PurchaseFertilizer.class);
-            TableUtils.createTable(connectionSource, FruitQuality.class);
             TableUtils.createTable(connectionSource, Global.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
@@ -260,15 +257,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private void updateFromVersion8(SQLiteDatabase db,
                                     ConnectionSource connectionSource, int oldVersion, int newVersion) {
         final String CAT_IMPORT_PATH = "MoFaBackend/import/category"; //this is the new Dropbox Folder
-        try {
-            //we have to add a new folder for backward compatibility on upgrade
-
-            TableUtils.createTableIfNotExists(connectionSource, FruitQuality.class);
-
-        } catch (java.sql.SQLException e) {
-            e.printStackTrace();
-        }
-
         onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
     }
 
@@ -605,17 +593,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             }
         }
         return purchaseFertilizerDao;
-    }
-
-    public Dao<FruitQuality, Integer> getFruitQualityDao() {
-        if (null == fruitQualityDao) {
-            try {
-                fruitQualityDao = getDao(FruitQuality.class);
-            } catch (java.sql.SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return fruitQualityDao;
     }
 
     public Dao<Global, Integer> getGlobalDao() {

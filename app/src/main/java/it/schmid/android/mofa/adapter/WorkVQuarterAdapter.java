@@ -18,7 +18,6 @@ import it.schmid.android.mofa.model.VQuarter;
 public class WorkVQuarterAdapter extends ArrayAdapter<VQuarter> {
     private static final String TAG = "WorkVQuarterAdapter";
     Context context;
-    String strVquarter;
     int layoutResourceId;
     List<VQuarter> data = null;
 
@@ -57,6 +56,8 @@ public class WorkVQuarterAdapter extends ArrayAdapter<VQuarter> {
         if (vquarter.getPlantYear() != null) { //checking if plantYear==null
             plantYear = vquarter.getPlantYear().toString();
         }
+
+        String strVquarter;
         if (vquarter.getClone() != null) {
             strVquarter = curLand.getName() + ", " + vquarter.getVariety() + "," + plantYear + " " + vquarter.getClone();
         } else {
