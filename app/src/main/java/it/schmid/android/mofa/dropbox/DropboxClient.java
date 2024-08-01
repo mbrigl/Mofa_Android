@@ -11,7 +11,6 @@ import com.dropbox.core.oauth.DbxCredential;
 import com.dropbox.core.v2.DbxClientV2;
 
 import it.schmid.android.mofa.Globals;
-import it.schmid.android.mofa.HomeActivity;
 
 /**
  * Created by schmida on 22.07.16.

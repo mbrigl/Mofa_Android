@@ -26,17 +26,8 @@ public class DatePickerDialogFragment extends DialogFragment {
     public DatePickerDialogFragment() {
     }
 
-    public DatePickerDialogFragment(Activity acallback) {
-        mActivity = acallback;
-    }
-
     public DatePickerDialogFragment(Fragment callback) {
         mFragment = callback;
-    }
-
-    public void setCallBack(OnDateSetListener ondate) {
-        ondateSet = ondate;
-        callFromAdapter = true;
     }
 
     @SuppressLint("NewApi")
@@ -68,6 +59,5 @@ public class DatePickerDialogFragment extends DialogFragment {
         } else { //fragment
             return new DatePickerDialog(getActivity(), (OnDateSetListener) mFragment, year, month, day);
         }
-
     }
 }

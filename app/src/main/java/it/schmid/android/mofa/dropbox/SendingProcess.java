@@ -12,6 +12,7 @@ import android.util.Xml;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.WriteMode;
+import com.j256.ormlite.misc.TransactionManager;
 
 import org.xmlpull.v1.XmlSerializer;
 
@@ -20,9 +21,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import it.schmid.android.mofa.Globals;
 import it.schmid.android.mofa.MofaApplication;
@@ -39,31 +42,25 @@ import it.schmid.android.mofa.model.Worker;
 
 
 public class SendingProcess implements Runnable {
-    private static final String TAG = "SendingProcess";
-    private static final String ASANOTE = "(MoFa)";
-    Context context;
+    private Context context;
     private NotificationService mNotificationService; // notification services
-    private Boolean grossPrice; // checking if for ASA using gross prices
-    private Boolean mofaNote;
     private Boolean asa_New_Ver;
     private String sendingData; //
-    private String urlPath;
     private String notifMess = "";
     private boolean error = false; // error value for webservice connection
-    private final String restResponse = ""; // not used yet, but response of json-webservice
     private String ACCESS_TOKEN; //Dropbox
-    RemoveEntries mremoveEntries;
+    UpdateEntries updateEntries;
 
     //constructor
     public SendingProcess(Context context) {
         this.context = context;
-        mremoveEntries = (RemoveEntries) context;
+        updateEntries = (UpdateEntries) context;
 
     }
 
     // interface to delete the works from workoverview -- callback
-    public interface RemoveEntries {
-        void deleteAllEntries();
+    public interface UpdateEntries {
+        void updateData();
     }
 
     /**
@@ -83,9 +80,9 @@ public class SendingProcess implements Runnable {
             notifMess = context.getString(R.string.upload_finished_error);
             handler2.sendEmptyMessage(0); // handler for updating UI task
         } else {
+            deleteAllEntries();
             notifMess = context.getString(R.string.upload_finished_ok);
             handler.sendEmptyMessage(0); // handler for updating UI task
-
         }
 
         mNotificationService.completed(icon, tickerText, notifMess);
@@ -95,9 +92,6 @@ public class SendingProcess implements Runnable {
     //preparing to send Data
     public void sendData() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        urlPath = preferences.getString("url", "");
-        grossPrice = preferences.getBoolean("grossprice", false);
-        mofaNote = preferences.getBoolean("asanote", false);
         asa_New_Ver = preferences.getBoolean("asa_new_ver", false);
         mNotificationService = new NotificationService(context, false);
         int icon = android.R.drawable.stat_sys_upload;
@@ -115,7 +109,7 @@ public class SendingProcess implements Runnable {
     private final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            mremoveEntries.deleteAllEntries();
+            updateEntries.updateData();
 
         }
     };
@@ -153,12 +147,7 @@ public class SendingProcess implements Runnable {
                 serializer.endTag("", "Arbeit");
 
                 serializer.startTag("", "Notiz");
-                String note;
-                if (mofaNote) {
-                    note = ASANOTE + " " + wk.getNote();
-                } else {
-                    note = wk.getNote();
-                }
+                String note = wk.getNote();
                 serializer.text(note);
                 serializer.endTag("", "Notiz");
                 List<WorkWorker> workers = DatabaseManager.getInstance().getWorkWorkerByWorkId(wk.getId());
@@ -242,12 +231,7 @@ public class SendingProcess implements Runnable {
                 serializer.endTag("", "Arbeit");
 
                 serializer.startTag("", "Notiz");
-                String note;
-                if (mofaNote) {
-                    note = ASANOTE + " " + wk.getNote();
-                } else {
-                    note = wk.getNote();
-                }
+                String note = wk.getNote();
                 serializer.text(note);
                 serializer.endTag("", "Notiz");
                 List<WorkWorker> workers = DatabaseManager.getInstance().getWorkWorkerByWorkId(wk.getId());
@@ -329,6 +313,25 @@ public class SendingProcess implements Runnable {
             error = true;
         } catch (DbxException e) {
             error = true;
+        }
+    }
+
+    private void deleteAllEntries() {
+        try {
+            TransactionManager.callInTransaction(DatabaseManager.getInstance().getConnection(),
+                    new Callable<Void>() {
+                        public Void call() throws Exception {
+                            List<Work> removeWorkList = DatabaseManager.getInstance().getAllOldValidNotSprayWorks();
+                            for (Work w : removeWorkList) {
+                                DatabaseManager.getInstance().deleteCascWork(w);
+
+                            }
+                            DatabaseManager.getInstance().setWorksSendedToTrue();
+                            return null;
+                        }
+                    });
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

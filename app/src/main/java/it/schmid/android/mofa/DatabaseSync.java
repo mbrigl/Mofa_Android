@@ -27,8 +27,18 @@ public class DatabaseSync {
         this.context = context;
     }
 
-
-
+    /**
+     * DropBox Operation for import
+     */
+    public void exportToDropbox() {
+        MofaApplication app = MofaApplication.getInstance();
+        Boolean haveConnection = app.networkStatus();
+        if (haveConnection) {
+            new DatabaseSync(null, context).showUploadDialog();
+        } else {
+            Toast.makeText(context.getApplicationContext(), R.string.no_connection, Toast.LENGTH_LONG).show();
+        }
+    }
 
     /**
      * DropBox Operation for import
@@ -70,7 +80,6 @@ public class DatabaseSync {
     }
 
 
-
     @SuppressWarnings("deprecation")
     private void showAlertDialog(StringBuilder sb, final ArrayList<Integer> selElements) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
@@ -96,18 +105,14 @@ public class DatabaseSync {
         alertDialog.setPositiveButton(R.string.yesbutton, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 if (checkBox.isChecked()) {
-                    if (DatabaseManager.getInstance().getAllNotSendedWorks().size() == 0) { // works table is empty
+                    if (DatabaseManager.getInstance().getAllNotSendedWorks().isEmpty()) { // works table is empty
                         flushData(selElements);
                         updateData(selElements, Globals.IMPORT); //starting the import of dropbox data
-                    } else { // works table not empty first export
-                        //Toast.makeText(getApplicationContext(), R.string.reimportmessage,Toast.LENGTH_LONG).show();
-                        if (DatabaseManager.getInstance().getAllWorks().size() != 0) {
-                            SendingProcess sending = new SendingProcess(context); //first make the export
-                            sending.sendData();
-                            Toast.makeText(context, R.string.export_status_message, Toast.LENGTH_LONG).show();
-                        }
+                    } else if (!DatabaseManager.getInstance().getAllWorks().isEmpty()) {
+                        SendingProcess sending = new SendingProcess(context); //first make the export
+                        sending.sendData();
+                        Toast.makeText(context, R.string.export_status_message, Toast.LENGTH_LONG).show();
                     }
-
                 } else {
                     // the standard case, only a update
                     updateData(selElements, Globals.IMPORT);
@@ -174,5 +179,29 @@ public class DatabaseSync {
 
             }
         }
+    }
+
+    /**
+     * export dialog
+     */
+    private void showUploadDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        alertDialog.setTitle(context.getString(R.string.export_title));
+        StringBuilder sb = new StringBuilder();
+        sb.append(context.getString(R.string.export_message));
+        LinearLayout linearLayout = new LinearLayout(context);
+        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
+                LinearLayout.LayoutParams.FILL_PARENT));
+        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        alertDialog.setView(linearLayout);
+        alertDialog.setMessage(sb);
+        // Setting Negative "YES" Button
+        alertDialog.setPositiveButton("YES", (dialog, which) -> {
+            SendingProcess sending = new SendingProcess(context);
+            sending.sendData();
+        });
+        // Setting Negative "NO" Button
+        alertDialog.setNegativeButton("NO", (dialog, which) -> dialog.cancel());
+        alertDialog.show();
     }
 }

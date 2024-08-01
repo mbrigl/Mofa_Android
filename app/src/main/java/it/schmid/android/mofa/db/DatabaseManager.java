@@ -2,7 +2,6 @@ package it.schmid.android.mofa.db;
 
 import android.content.Context;
 
-import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -15,7 +14,6 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.Machine;
@@ -29,8 +27,6 @@ import it.schmid.android.mofa.model.Worker;
 
 public class DatabaseManager {
     private PreparedQuery<VQuarter> vqForWorkQuery = null;
-    private PreparedQuery<Worker> workerForWorkQuery = null;
-    private PreparedQuery<Machine> machineForWorkQuery = null;
     static private DatabaseManager instance;
 
     static public void init(Context ctx) {
@@ -75,22 +71,6 @@ public class DatabaseManager {
         return isEmpty;
     }
 
-    public void batchDeleteAllOldSprayEntries(final List<Work> workList) {
-        try {
-            getHelper().getWorkDao().callBatchTasks(new Callable<Void>() {
-                public Void call() throws Exception {
-                    for (Work w : workList) {
-                        deleteCascWork(w);
-                    }
-                    return null;
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
     /***************************************************{
      *
      }
@@ -102,16 +82,6 @@ public class DatabaseManager {
         List<Land> landList = null;
         try {
             landList = getHelper().getLandDao().queryForAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return landList;
-    }
-
-    public List<Land> getAllLandsOrdered() {
-        List<Land> landList = null;
-        try {
-            landList = getHelper().getLandDao().queryBuilder().orderByRaw("name").query();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -154,11 +124,6 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return land;
-    }
-
-    public List<Land> getLandWithCode(String code) throws SQLException {
-        List<Land> result = getHelper().getLandDao().queryForEq("code", code);
-        return result;
     }
 
     public void flushLand() {
@@ -386,32 +351,6 @@ public class DatabaseManager {
         }
     }
 
-    public String getWorkerHours(Date fromDate, Date toDate, int workerid) {
-        String sumHours = "0.00";
-        QueryBuilder<Work, Integer> workqb = getHelper().getWorkDao().queryBuilder();
-        try {
-            workqb.where().between("date", fromDate, toDate);
-            //  PreparedQuery<Work> prepWork = workqb.prepare();
-            //  List<Work> test = getHelper().getWorkDao().query(prepWork);
-            QueryBuilder<WorkWorker, Integer> qb = getHelper().getWorkWorkerDao().queryBuilder();
-            qb.join(workqb);
-            qb.selectRaw("SUM(hours) AS total");
-            qb.where().eq("worker_id", workerid);
-            GenericRawResults<String[]> sum = getHelper().getWorkWorkerDao().queryRaw(qb.prepareStatementString());
-            String[] x = sum.getFirstResult();
-            sumHours = x[0];
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return sumHours;
-
-//
-//
-//
-
-    }
-
     /*************************************
      *
      * Works - DB Operations
@@ -423,29 +362,6 @@ public class DatabaseManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return workList;
-    }
-
-    public List<Work> getAllValidWorks() {
-        List<Work> workList = null;
-        try {
-            workList = getHelper().getWorkDao().queryForEq("valid", true);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return workList;
-    }
-
-    public List<Work> getAllValidNotSprayWorks() {
-        List<Work> workList = null;
-
-        try {
-            workList = getWorksNotSpraying();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
         return workList;
     }
 
@@ -491,41 +407,12 @@ public class DatabaseManager {
         return workList;
     }
 
-    public List<Work> getAllSendedWorks() {
-        List<Work> workList = null;
-        try {
-            QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
-            qb.where().eq("sended", true);
-            PreparedQuery<Work> preparedQuery = qb.prepare();
-            workList = getHelper().getWorkDao().query(preparedQuery);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return workList;
-    }
-
     public List<Work> getAllValidNotSendedWorks() {
         List<Work> workList = null;
         try {
             QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
             qb.where().eq("sended", false).and().eq("valid", true);
             qb.orderBy("date", false);
-            PreparedQuery<Work> preparedQuery = qb.prepare();
-            workList = getHelper().getWorkDao().query(preparedQuery);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return workList;
-    }
-
-    public List<Work> getAllValidNotSendedWorksExcel() {
-        List<Work> workList = null;
-        try {
-            QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
-            qb.where().eq("sended", false).and().eq("valid", true);
-            qb.orderBy("date", true);
             PreparedQuery<Work> preparedQuery = qb.prepare();
             workList = getHelper().getWorkDao().query(preparedQuery);
 
@@ -543,49 +430,6 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return workList;
-    }
-
-    public List<Work> getWorksForTaskId(int id) {
-        List<Work> workList = null;
-        try {
-            workList = getHelper().getWorkDao().queryForEq("task_id", id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return workList;
-    }
-
-    public List<Work> getWorksForTaskIdOrdered(int id) throws SQLException {
-
-        QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
-
-        if (id <= 3) {
-            qb.where().eq("task_id", id);
-        } else {
-            qb.where().ge("task_id", id);
-        }
-        qb.orderBy("date", false);
-        PreparedQuery<Work> preparedQuery = qb.prepare();
-        return getHelper().getWorkDao().query(preparedQuery);
-
-
-    }
-
-    public List<Work> getWorksNotSpraying() throws SQLException { //filtering of asa codes
-        QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
-        final Where<Work, Integer> w = qb.where();
-        List<Task> asaTasks = getTaskNotSpraying();
-        int clauseC = 0;
-        for (Task t : asaTasks) { //generating a dynamic or
-            w.eq("task_id", t.getId()).and().eq("valid", true);
-            clauseC++;
-        }
-        if (clauseC > 1) {
-            w.or(clauseC);
-        }
-        qb.orderBy("date", false);
-        PreparedQuery<Work> preparedQuery = qb.prepare();
-        return getHelper().getWorkDao().query(preparedQuery);
     }
 
     //query for deleting the old works, not spraying
@@ -610,91 +454,6 @@ public class DatabaseManager {
         return getHelper().getWorkDao().query(preparedQuery);
     }
 
-    // all old spraying works that can be deleted using delete archive
-    public List<Work> getOldSprayingWorks() { //filtering of asa codes
-        Calendar c = Calendar.getInstance();
-        c.setTime(new Date()); // Now use today date.
-        c.add(Calendar.DATE, -50);
-        Date currDateMinusFifty = c.getTime();
-        QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
-        final Where<Work, Integer> w = qb.where();
-        try {
-            List<Task> asaTasks = getTaskSpraying();
-            int clauseC = 0;
-            for (Task t : asaTasks) { //generating a dynamic or
-                w.eq("task_id", t.getId()).and().eq("valid", true).and().eq("sended", true).and().le("date", currDateMinusFifty);
-                clauseC++;
-            }
-            if (clauseC > 1) {
-                w.or(clauseC);
-            }
-            qb.orderBy("date", false);
-            PreparedQuery<Work> preparedQuery = qb.prepare();
-            return getHelper().getWorkDao().query(preparedQuery);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null; //only if error
-
-    }
-
-    //query for filtering data for S,D,H Spritzung, Düngung und Herbizid
-    public List<Work> getWorksForTaskIdOrderedASA(String type) throws SQLException { //filtering of asa codes
-        QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
-        final Where<Work, Integer> w = qb.where();
-        List<Task> asaTasks = getTaskForASAFiltering(type);
-        int clauseC = 0;
-        for (Task t : asaTasks) { //generating a dynamic or
-            w.eq("task_id", t.getId()).and().eq("sended", false);
-            clauseC++;
-        }
-        if (clauseC > 1) {
-            w.or(clauseC);
-        }
-        qb.orderBy("date", false);
-        PreparedQuery<Work> preparedQuery = qb.prepare();
-        return getHelper().getWorkDao().query(preparedQuery);
-    }
-
-    // query for filtering all other works
-    public List<Work> getWorksForTaskIdOrderedASARest() throws SQLException { //all others from the code not equal
-        QueryBuilder<Work, Integer> qb = getHelper().getWorkDao().queryBuilder();
-        final Where<Work, Integer> w = qb.where();
-        List<Task> asaTasks = getTaskForASAFilteringRest();
-        int clauseC = 0;
-        for (Task t : asaTasks) { //generating a dynamic or not equal
-            w.eq("task_id", t.getId()).and().eq("sended", false);
-            clauseC++;
-        }
-        if (clauseC > 1) {
-            w.or(clauseC);
-        }
-        qb.orderBy("date", false);
-        PreparedQuery<Work> preparedQuery = qb.prepare();
-        return getHelper().getWorkDao().query(preparedQuery);
-    }
-
-    //subquery for task for Spritzung, Dpngung und Herbizid
-    public List<Task> getTaskForASAFiltering(String type) throws SQLException {
-        QueryBuilder<Task, Integer> qb = getHelper().getTaskDao().queryBuilder();
-        final Where<Task, Integer> w = qb.where();
-        w.eq("type", type);
-        PreparedQuery<Task> preparedQuery = qb.prepare();
-        return getHelper().getTaskDao().query(preparedQuery);
-    }
-
-    //subquery fo task for all other
-    public List<Task> getTaskForASAFilteringRest() throws SQLException {
-        QueryBuilder<Task, Integer> qb = getHelper().getTaskDao().queryBuilder();
-        final Where<Task, Integer> w = qb.where();
-        w.or(
-                w.isNull("type"),
-                w.eq("type", "E")
-        );
-        PreparedQuery<Task> preparedQuery = qb.prepare();
-        return getHelper().getTaskDao().query(preparedQuery);
-    }
-
     public List<Task> getTaskNotSpraying() throws SQLException {
         QueryBuilder<Task, Integer> qb = getHelper().getTaskDao().queryBuilder();
         final Where<Task, Integer> w = qb.where();
@@ -705,14 +464,6 @@ public class DatabaseManager {
                 w.eq("type", "H"),
                 w.eq("type", "O")
         );
-        PreparedQuery<Task> preparedQuery = qb.prepare();
-        return getHelper().getTaskDao().query(preparedQuery);
-    }
-
-    public List<Task> getTaskSpraying() throws SQLException {
-        QueryBuilder<Task, Integer> qb = getHelper().getTaskDao().queryBuilder();
-        final Where<Task, Integer> w = qb.where();
-        w.eq("type", "S");
         PreparedQuery<Task> preparedQuery = qb.prepare();
         return getHelper().getTaskDao().query(preparedQuery);
     }
@@ -744,14 +495,6 @@ public class DatabaseManager {
         }
     }
 
-    public void deleteWork(Work work) {
-        try {
-            getHelper().getWorkDao().delete(work);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void deleteCascWork(Work work) {
         try {
             //del Varquarters of current work
@@ -774,22 +517,6 @@ public class DatabaseManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * WorkVQuarter-Query and Operations
-     *
-     * @return gives us the VQuarters of a work
-     * @throws SQLException
-     */
-    public List<WorkVQuarter> getAllWorkVQuarter() {
-        List<WorkVQuarter> workVQuarterList = null;
-        try {
-            workVQuarterList = getHelper().getWorkVQuarterDao().queryForAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return workVQuarterList;
     }
 
     public List<VQuarter> lookupVQuarterForWork(Work work) throws SQLException {
@@ -823,19 +550,6 @@ public class DatabaseManager {
         return workvquarter;
     }
 
-    // getting the workvquarter object of a work ordered by vquarterid
-    public List<WorkVQuarter> getVQuarterByWorkIdOrderedByVq(int workId) throws SQLException {
-
-        QueryBuilder<WorkVQuarter, Integer> qb = getHelper().getWorkVQuarterDao().queryBuilder();
-
-        qb.where().eq(WorkVQuarter.WORK_ID_FIELD_NAME, workId);
-        qb.orderBy(WorkVQuarter.VQUARTER_ID_FIELD_NAME, true);
-        PreparedQuery<WorkVQuarter> preparedQuery = qb.prepare();
-        return getHelper().getWorkVQuarterDao().query(preparedQuery);
-
-
-    }
-
     public void deleteWorkVquarter(WorkVQuarter workvquarter) {
         try {
             getHelper().getWorkVQuarterDao().delete(workvquarter);
@@ -850,56 +564,6 @@ public class DatabaseManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public List<WorkVQuarter> getWorkVQuarterByWorkIdAndByVQuarterId(int workid, int vquarterid) throws SQLException {
-        QueryBuilder<WorkVQuarter, Integer> queryBuilder =
-                getHelper().getWorkVQuarterDao().queryBuilder();
-        // get the WHERE object to build our query
-        Where<WorkVQuarter, Integer> where = queryBuilder.where();
-        // the workid field must be equal to workid
-        where.eq(WorkVQuarter.WORK_ID_FIELD_NAME, workid);
-        // and
-        where.and();
-        // the vquarterid field must be equal to workerid
-        where.eq(WorkVQuarter.VQUARTER_ID_FIELD_NAME, vquarterid);
-        PreparedQuery<WorkVQuarter> preparedQuery = queryBuilder.prepare();
-        return getHelper().getWorkVQuarterDao().query(preparedQuery);
-    }
-
-    /**
-     * WorkWorker-Query and Operations
-     *
-     * @return gives us the Worker of a work
-     * @throws SQLException
-     */
-    public List<WorkWorker> getAllWorkWorker() {
-        List<WorkWorker> workWorkerList = null;
-        try {
-            workWorkerList = getHelper().getWorkWorkerDao().queryForAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return workWorkerList;
-    }
-
-    public List<Worker> lookupWorkerForWork(Work work) throws SQLException {
-        if (workerForWorkQuery == null) {
-            workerForWorkQuery = makeWorkerForWorkQuery();
-        }
-        workerForWorkQuery.setArgumentHolderValue(0, work);
-
-        return getHelper().getWorkerDao().query(workerForWorkQuery);
-    }
-
-    private PreparedQuery<Worker> makeWorkerForWorkQuery() throws SQLException {
-        QueryBuilder<WorkWorker, Integer> workWorkerQb = getHelper().getWorkWorkerDao().queryBuilder();
-        workWorkerQb.selectColumns(WorkWorker.WORKER_ID_FIELD_NAME);
-        SelectArg workSelectArg = new SelectArg();
-        workWorkerQb.where().eq(WorkWorker.WORK_ID_FIELD_NAME, workSelectArg);
-        QueryBuilder<Worker, Integer> workerQb = getHelper().getWorkerDao().queryBuilder();
-        workerQb.where().in("id", workWorkerQb);
-        return workerQb.prepare();
     }
 
     // getting the workworker object of a work
@@ -950,41 +614,6 @@ public class DatabaseManager {
         where.eq(WorkWorker.WORKER_ID_FIELD_NAME, workerid);
         PreparedQuery<WorkWorker> preparedQuery = queryBuilder.prepare();
         return getHelper().getWorkWorkerDao().query(preparedQuery);
-    }
-
-    /**
-     * WorkMachine-Query and Operations
-     *
-     * @return gives us the Machine of a work
-     * @throws SQLException
-     */
-    public List<WorkMachine> getAllWorkMachine() {
-        List<WorkMachine> workMachineList = null;
-        try {
-            workMachineList = getHelper().getWorkMachineDao().queryForAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return workMachineList;
-    }
-
-    public List<Machine> lookupMachineForWork(Work work) throws SQLException {
-        if (machineForWorkQuery == null) {
-            machineForWorkQuery = makeMachineForWorkQuery();
-        }
-        machineForWorkQuery.setArgumentHolderValue(0, work);
-
-        return getHelper().getMachineDao().query(machineForWorkQuery);
-    }
-
-    private PreparedQuery<Machine> makeMachineForWorkQuery() throws SQLException {
-        QueryBuilder<WorkMachine, Integer> workMachineQb = getHelper().getWorkMachineDao().queryBuilder();
-        workMachineQb.selectColumns(WorkMachine.MACHINE_ID_FIELD_NAME);
-        SelectArg workSelectArg = new SelectArg();
-        workMachineQb.where().eq(WorkMachine.WORK_ID_FIELD_NAME, workSelectArg);
-        QueryBuilder<Machine, Integer> machineQb = getHelper().getMachineDao().queryBuilder();
-        machineQb.where().in("id", workMachineQb);
-        return machineQb.prepare();
     }
 
     // getting the workmachine object of a work

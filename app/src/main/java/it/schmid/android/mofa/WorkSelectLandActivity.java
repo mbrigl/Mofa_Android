@@ -71,14 +71,4 @@ public class WorkSelectLandActivity extends AppCompatActivity {
         adapter = new ExpandableLandAdapter(landList, this, selHashQuarters, work);
         listView.setAdapter(adapter);
     }
-
-//	@Override
-//	public void finish() {
-    // Prepare data intent
-//	  Intent data = new Intent();
-//	  data.putExtra("Work_ID", work.getId());
-//	  // Activity finished ok, return the data
-//	  setResult(RESULT_OK, data);
-//	  super.finish();
-//	} 
 }

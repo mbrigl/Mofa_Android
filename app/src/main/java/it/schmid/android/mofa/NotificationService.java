@@ -50,17 +50,6 @@ public class NotificationService {
     }
 
     /**
-     * Receives progress updates from the background task and updates the status bar notification appropriately
-     *
-     * @param percentageComplete
-     */
-
-    @SuppressWarnings("deprecation")
-    public void progressUpdate(int percentageComplete) {
-
-    }
-
-    /**
      * called when the background task is complete, this removes the notification from the status bar.
      * We could also use this to add a new ‘task complete’ notification
      */
@@ -85,28 +74,6 @@ public class NotificationService {
                 .setAutoCancel(true).setContentTitle(fullText)
                 .setContentText(tickerText).build();
         //mNotification.setLatestEventInfo(mContext, mContentTitle, "", mContentIntent);
-        mNotification.flags = Notification.FLAG_AUTO_CANCEL;
-        mNotificationManager.notify(NOTIFICATION_ID_F, mNotification);
-
-    }
-
-    //not used for the moment
-    @SuppressWarnings("deprecation")
-    public void completedWithDetails(int notIcon, CharSequence aText, String fullText, String shortText) {
-        //remove the notification from the status bar
-        Intent notificationIntent;
-        mNotificationManager.cancel(NOTIFICATION_ID);
-        int icon = notIcon;
-        CharSequence tickerText = aText;
-        long when = System.currentTimeMillis();
-        mNotification = new Notification(icon, tickerText, when);
-        mContentTitle = shortText;
-        notificationIntent = new Intent(mContext, DetailsDialog.class);
-        notificationIntent.putExtra("DATA", fullText);
-
-
-        mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
-        // mNotification.setLatestEventInfo(mContext, mContentTitle, "", mContentIntent);
         mNotification.flags = Notification.FLAG_AUTO_CANCEL;
         mNotificationManager.notify(NOTIFICATION_ID_F, mNotification);
     }

@@ -61,11 +61,6 @@ public class WorkEditResourcesFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
     private void populateFields(int id) {
 
         if (id != 0) {
@@ -161,6 +156,4 @@ public class WorkEditResourcesFragment extends Fragment {
         }
         firstLoad = false;
     }
-
-
 }

@@ -25,8 +25,6 @@ public class MofaApplication extends Application {
     private ConcurrentHashMap<String, String> mGlobalVariables;
     private Set<AppStateListener> mAppStateListeners;
 
-    private static final Integer workType = WORK_NORMAL;
-
     public interface AppStateListener {
         void onStateChanged(String key, String value);
     }
@@ -52,11 +50,6 @@ public class MofaApplication extends Application {
         mGlobalVariables.put(key, value);
         //notifyListeners (key,value);
     }
-
-    public Integer getWorkType() {
-        return workType;
-    }
-
 
     @Override
     public void onLowMemory() {
