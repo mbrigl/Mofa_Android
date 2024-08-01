@@ -78,9 +78,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".search.WorkerOverviewActivity"
-            android:label="@string/app_name" />
-        <activity
             android:name=".dropbox.LoginActivity"
             android:label="@string/titleDropboxLoginActivity" />
     </application>
