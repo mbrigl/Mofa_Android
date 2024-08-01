@@ -23,7 +23,6 @@ import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.model.Fertilizer;
 import it.schmid.android.mofa.model.FruitQuality;
 import it.schmid.android.mofa.model.Global;
-import it.schmid.android.mofa.model.Harvest;
 import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.Machine;
 import it.schmid.android.mofa.model.Pesticide;
@@ -1033,9 +1032,6 @@ public class DatabaseManager {
             DeleteBuilder dbp = getHelper().getSprayingDao().deleteBuilder();
             dbp.where().eq("work_id", work.getId());
             getHelper().getSprayingDao().delete(dbp.prepare());
-            DeleteBuilder dbh = getHelper().getHarvestDao().deleteBuilder();
-            dbh.where().eq("work_id", work.getId());
-            getHelper().getHarvestDao().delete(dbh.prepare());
             DeleteBuilder dbi = getHelper().getGlobalDao().deleteBuilder();
             dbi.where().eq("workId", work.getId());
             getHelper().getGlobalDao().delete(dbi.prepare());
@@ -1930,75 +1926,6 @@ public class DatabaseManager {
         }
         //getHelper().getFruitQualityDao().delete(getAllQualities());
 
-    }
-
-    /*************************************
-     *
-     * Harvest - DB Operations
-     */
-
-    public List<Harvest> getAllHarvestEntries() {
-        List<Harvest> harvestList = null;
-        try {
-            harvestList = getHelper().getHarvestDao().queryForAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return harvestList;
-    }
-
-    public void addHarvest(Harvest h) {
-        try {
-            getHelper().getHarvestDao().create(h);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void updateHarvest(Harvest harvest) {
-        try {
-            getHelper().getHarvestDao().update(harvest);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // checking if the harvest exists by id
-    public Harvest getHarvestWithId(int id) {
-        Harvest harvest = null;
-        try {
-            harvest = getHelper().getHarvestDao().queryForId(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return harvest;
-    }
-
-    public void flushHarvest() {
-        try {
-            getHelper().getHarvestDao().delete(getAllHarvestEntries());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void deleteHarvest(Harvest harvest) {
-        try {
-            getHelper().getHarvestDao().delete(harvest);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // getting the list of harvest objects of a work
-    public List<Harvest> getHarvestListbyWorkId(int workId) {
-        List<Harvest> harvestList = null;
-        try {
-            harvestList = getHelper().getHarvestDao().queryForEq("work_id", workId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return harvestList;
     }
 
     public void flushVegData() {

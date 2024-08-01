@@ -31,8 +31,6 @@ public class FruitQuality extends ImportBehavior {
     private String quality;
     @DatabaseField
     private String code;
-    @ForeignCollectionField
-    private ForeignCollection<Harvest> harvests;
 
     public Integer getId() {
         return id;
@@ -56,18 +54,6 @@ public class FruitQuality extends ImportBehavior {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public List<Harvest> getHarvests() {
-        ArrayList<Harvest> harvestList = new ArrayList<Harvest>();
-        for (Harvest harvest : harvests) {
-            harvestList.add(harvest);
-        }
-        return harvestList;
-    }
-
-    public void setItem(ForeignCollection<Harvest> harvests) {
-        this.harvests = harvests;
     }
 
     @Override

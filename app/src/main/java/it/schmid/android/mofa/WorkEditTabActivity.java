@@ -68,22 +68,8 @@ public class WorkEditTabActivity extends DashboardActivity implements WorkEditWo
 
     }
 
-    public void showHarvestTab() {
-        if (mTabsAdapter.getCount() <= 2) { //only adding if there is not already done
-            ActionBar bar = getSupportActionBar();
-            Log.d(TAG, "[showHarvestTab] - Size of tabs = " + mTabsAdapter.getCount());
-            mTabsAdapter.addTab(
-                    bar.newTab().setText(R.string.harvesttab),
-                    WorkEditHarvestFragment.class, mBundle);
-        }
-    }
-
     //callback method from workeditworkfragment, after selecting a work contains harvest codes
     public void showHarvestTabListener(int workId, Boolean status) {
-        // TODO Auto-generated method stub
-        if (status) {
-            showHarvestTab();
-        }
     }
 
     public void setWorkIdListener(int workId) {

@@ -241,32 +241,6 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
             }
         });
 
-
-        mWork.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-            @SuppressLint("NewApi")
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
-                                       int pos, long id) {
-                Task item = (Task) parentView.getItemAtPosition(pos);
-
-
-                //Log.d(TAG, "ASA type = " + item.getType());
-                if (item.getType() != null) {
-                    if (work != null && item.getType().equalsIgnoreCase("E")) {
-                        Log.d(TAG, "New Harvest entry - Showing Tab");
-                        mShowHarvestTab.showHarvestTabListener(mworkId, true);
-                    }
-                }
-
-
-            }
-
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-
-            }
-
-        });
         mNoteText.setOnFocusChangeListener(new OnFocusChangeListener() {
 
             public void onFocusChange(View v, boolean hasFocus) {

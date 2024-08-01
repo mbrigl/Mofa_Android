@@ -22,7 +22,6 @@ import java.util.List;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.model.Fertilizer;
-import it.schmid.android.mofa.model.Harvest;
 import it.schmid.android.mofa.model.Pesticide;
 import it.schmid.android.mofa.model.SoilFertilizer;
 import it.schmid.android.mofa.model.SprayFertilizer;
@@ -188,40 +187,6 @@ public class WorkAdapter extends ArrayAdapter<Work> {
         }
 
         return workerBuilder;
-    }
-
-    private SpannableStringBuilder getHarvestEntry(Work work) {
-        SpannableStringBuilder harvestBuilder = new SpannableStringBuilder();
-        SpannableStringBuilder harvestBuilder1 = new SpannableStringBuilder();
-        if (DatabaseManager.getInstance().getHarvestListbyWorkId(work.getId()).size() != 0) {
-            boolean first = true;
-            List<Harvest> harvestList = DatabaseManager.getInstance().getHarvestListbyWorkId(work.getId());
-            for (Harvest h : harvestList) {
-                if (first) {
-                    first = false;
-                } else {
-                    harvestBuilder.append("\n");
-                }
-                String str1 = context.getResources().getString(R.string.har_number) + ": ";
-                harvestBuilder.append(str1);
-                String str2 = h.getId().toString() + " ";
-                harvestBuilder.append(str2);
-                harvestBuilder.setSpan(new StyleSpan(1), harvestBuilder.length() - str2.length(), harvestBuilder.length(), 17);
-                str1 = context.getResources().getString(R.string.har_amount) + ": ";
-                harvestBuilder.append(str1);
-                str2 = h.getAmount().toString() + " kg ";
-                harvestBuilder.append(str2);
-                harvestBuilder.setSpan(new StyleSpan(1), harvestBuilder.length() - str2.length(), harvestBuilder.length(), 17);
-                str1 = context.getResources().getString(R.string.har_category) + ": ";
-                harvestBuilder.append("\n");
-                harvestBuilder.append(str1);
-                str2 = h.getFruitQuality().getQuality();
-                harvestBuilder.append(str2);
-                harvestBuilder.setSpan(new StyleSpan(1), harvestBuilder.length() - str2.length(), harvestBuilder.length(), 17);
-
-            }
-        }
-        return harvestBuilder;
     }
 
     private SpannableStringBuilder getFertInfos(Work work) {

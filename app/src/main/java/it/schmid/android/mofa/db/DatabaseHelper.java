@@ -18,7 +18,6 @@ import java.util.concurrent.Callable;
 import it.schmid.android.mofa.model.Fertilizer;
 import it.schmid.android.mofa.model.FruitQuality;
 import it.schmid.android.mofa.model.Global;
-import it.schmid.android.mofa.model.Harvest;
 import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.Machine;
 import it.schmid.android.mofa.model.Pesticide;
@@ -63,7 +62,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<PurchasePesticide, Integer> purchasePesticideDao = null;
     private Dao<PurchaseFertilizer, Integer> purchaseFertilizerDao = null;
     private Dao<FruitQuality, Integer> fruitQualityDao = null;
-    private Dao<Harvest, Integer> harvestDao = null;
     private Dao<Global, Integer> globalDao = null;
 
     public DatabaseHelper(Context context) {
@@ -93,7 +91,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, PurchasePesticide.class);
             TableUtils.createTable(connectionSource, PurchaseFertilizer.class);
             TableUtils.createTable(connectionSource, FruitQuality.class);
-            TableUtils.createTable(connectionSource, Harvest.class);
             TableUtils.createTable(connectionSource, Global.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
@@ -267,7 +264,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             //we have to add a new folder for backward compatibility on upgrade
 
             TableUtils.createTableIfNotExists(connectionSource, FruitQuality.class);
-            TableUtils.createTableIfNotExists(connectionSource, Harvest.class);
 
         } catch (java.sql.SQLException e) {
             e.printStackTrace();
@@ -292,7 +288,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             getWorkDao().executeRaw("ALTER TABLE `work` ADD COLUMN sended SMALLINT DEFAULT 0;");
             getPesticideDao().executeRaw("ALTER TABLE `pesticide` ADD COLUMN constraints VARCHAR;");
-            getHarvestDao().executeRaw("ALTER TABLE `harvest` ADD COLUMN pass INTEGER;");
         } catch (java.sql.SQLException e) {
             e.printStackTrace();
         }
@@ -621,17 +616,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             }
         }
         return fruitQualityDao;
-    }
-
-    public Dao<Harvest, Integer> getHarvestDao() {
-        if (null == harvestDao) {
-            try {
-                harvestDao = getDao(Harvest.class);
-            } catch (java.sql.SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return harvestDao;
     }
 
     public Dao<Global, Integer> getGlobalDao() {

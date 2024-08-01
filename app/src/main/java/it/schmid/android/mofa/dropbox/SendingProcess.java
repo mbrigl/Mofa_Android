@@ -37,7 +37,6 @@ import it.schmid.android.mofa.NotificationService;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.model.Fertilizer;
-import it.schmid.android.mofa.model.Harvest;
 import it.schmid.android.mofa.model.Machine;
 import it.schmid.android.mofa.model.Pesticide;
 import it.schmid.android.mofa.model.Purchase;
@@ -334,55 +333,6 @@ public class SendingProcess implements Runnable {
                     }
                     serializer.endTag("", "spraying");
                 }
-                List<Harvest> harvest = DatabaseManager.getInstance().getHarvestListbyWorkId(wk.getId());
-                for (Harvest h : harvest) {
-                    serializer.startTag("", "harvest");
-                    serializer.startTag("", "Datum");
-                    serializer.text(sdf.format(h.getDate()));
-                    serializer.endTag("", "Datum");
-                    serializer.startTag("", "LieferscheinNummer");
-                    serializer.text(h.getId().toString());
-                    serializer.endTag("", "LieferscheinNummer");
-                    serializer.startTag("", "Menge");
-                    serializer.text(h.getAmount().toString());
-                    serializer.endTag("", "Menge");
-                    serializer.startTag("", "Durchgang");
-                    serializer.text(h.getPass().toString());
-                    serializer.endTag("", "Durchgang");
-                    serializer.startTag("", "Kategorie");
-                    serializer.text(h.getFruitQuality().getQuality());
-                    serializer.endTag("", "Kategorie");
-                    serializer.startTag("", "Kisten");
-                    serializer.text(h.getBoxes().toString());
-                    serializer.endTag("", "Kisten");
-                    if (h.getSugar() != null) {
-                        serializer.startTag("", "Zucker");
-                        serializer.text(h.getSugar().toString());
-                        serializer.endTag("", "Zucker");
-                    }
-                    if (h.getAcid() != null) {
-                        serializer.startTag("", "Saeure");
-                        serializer.text(h.getAcid().toString());
-                        serializer.endTag("", "Saeure");
-                    }
-                    if (h.getPhenol() != null) {
-                        serializer.startTag("", "Phenole");
-                        serializer.text(h.getPhenol().toString());
-                        serializer.endTag("", "Phenole");
-                    }
-                    if (h.getPhValue() != null) {
-                        serializer.startTag("", "PHWert");
-                        serializer.text(h.getPhValue().toString());
-                        serializer.endTag("", "PHWert");
-                    }
-                    if (h.getNote() != null) {
-                        serializer.startTag("", "Notiz");
-                        serializer.text(h.getNote());
-                        serializer.endTag("", "Notiz");
-                    }
-                    serializer.endTag("", "harvest");
-
-                }
                 serializer.endTag("", "work");
             }
             serializer.endTag("", "works");
@@ -565,66 +515,6 @@ public class SendingProcess implements Runnable {
                         serializer.endTag("", "Spritzung");
                     }
                 }
-                List<Harvest> harvest = DatabaseManager.getInstance().getHarvestListbyWorkId(wk.getId());
-                for (Harvest h : harvest) {
-                    serializer.startTag("", "Ernteeintrag");
-                    serializer.startTag("", "Datum");
-                    serializer.text(sdf.format(h.getDate()));
-                    serializer.endTag("", "Datum");
-                    serializer.startTag("", "LieferscheinNummer");
-                    serializer.text(h.getId().toString());
-                    serializer.endTag("", "LieferscheinNummer");
-                    serializer.startTag("", "Menge");
-                    serializer.text(h.getAmount().toString());
-                    serializer.endTag("", "Menge");
-                    serializer.startTag("", "Durchgang");
-                    serializer.text(h.getPass().toString());
-                    serializer.endTag("", "Durchgang");
-                    serializer.startTag("", "Kategorie");
-                    serializer.startTag("", "Code");
-                    serializer.text(h.getFruitQuality().getCode());
-                    serializer.endTag("", "Code");
-                    serializer.endTag("", "Kategorie");
-                    serializer.startTag("", "Kisten");
-                    serializer.text(h.getBoxes().toString());
-                    serializer.endTag("", "Kisten");
-                    if (h.getSugar() != null) {
-                        serializer.startTag("", "Zucker");
-                        serializer.text(h.getSugar().toString());
-                        serializer.endTag("", "Zucker");
-                    }
-                    if (h.getAcid() != null) {
-                        serializer.startTag("", "Saeure");
-                        serializer.text(h.getAcid().toString());
-                        serializer.endTag("", "Saeure");
-                    }
-                    if (h.getPhenol() != null) {
-                        serializer.startTag("", "Phenole");
-                        serializer.text(h.getPhenol().toString());
-                        serializer.endTag("", "Phenole");
-                    }
-                    if (h.getPhValue() != null) {
-                        serializer.startTag("", "PHWert");
-                        serializer.text(h.getPhValue().toString());
-                        serializer.endTag("", "PHWert");
-                    }
-                    if (h.getNote() != null) {
-                        serializer.startTag("", "Notiz");
-                        serializer.text(h.getNote());
-                        serializer.endTag("", "Notiz");
-                    }
-                    for (WorkVQuarter vq : vquarters) {
-                        serializer.startTag("", "Sortenquartier");
-                        serializer.startTag("", "Sortenquartier");
-                        serializer.startTag("", "Code");
-                        VQuarter vquarter = DatabaseManager.getInstance().getVQuarterWithId(vq.getVquarter().getId());
-                        serializer.text(vquarter.getCode());
-                        serializer.endTag("", "Code");
-                        serializer.endTag("", "Sortenquartier");
-                        serializer.endTag("", "Sortenquartier");
-                    }
-                    serializer.endTag("", "Ernteeintrag");
-                }
                 serializer.endTag("", "Arbeitseintrag");
             }
             serializer.endTag("", "Arbeitseintraege");
@@ -787,66 +677,6 @@ public class SendingProcess implements Runnable {
                     } else {
                         serializer.endTag("", "Spritzung");
                     }
-                }
-                List<Harvest> harvest = DatabaseManager.getInstance().getHarvestListbyWorkId(wk.getId());
-                for (Harvest h : harvest) {
-                    serializer.startTag("", "Ernteeintrag");
-                    serializer.startTag("", "Datum");
-                    serializer.text(sdf.format(h.getDate()));
-                    serializer.endTag("", "Datum");
-                    serializer.startTag("", "LieferscheinNummer");
-                    serializer.text(h.getId().toString());
-                    serializer.endTag("", "LieferscheinNummer");
-                    serializer.startTag("", "Menge");
-                    serializer.text(h.getAmount().toString());
-                    serializer.endTag("", "Menge");
-                    serializer.startTag("", "Durchgang");
-                    serializer.text(h.getPass().toString());
-                    serializer.endTag("", "Durchgang");
-                    serializer.startTag("", "Kategorie");
-                    serializer.startTag("", "Code");
-                    serializer.text(h.getFruitQuality().getCode());
-                    serializer.endTag("", "Code");
-                    serializer.endTag("", "Kategorie");
-                    serializer.startTag("", "Kisten");
-                    serializer.text(h.getBoxes().toString());
-                    serializer.endTag("", "Kisten");
-                    if (h.getSugar() != null) {
-                        serializer.startTag("", "Zucker");
-                        serializer.text(h.getSugar().toString());
-                        serializer.endTag("", "Zucker");
-                    }
-                    if (h.getAcid() != null) {
-                        serializer.startTag("", "Saeure");
-                        serializer.text(h.getAcid().toString());
-                        serializer.endTag("", "Saeure");
-                    }
-                    if (h.getPhenol() != null) {
-                        serializer.startTag("", "Phenole");
-                        serializer.text(h.getPhenol().toString());
-                        serializer.endTag("", "Phenole");
-                    }
-                    if (h.getPhValue() != null) {
-                        serializer.startTag("", "PHWert");
-                        serializer.text(h.getPhValue().toString());
-                        serializer.endTag("", "PHWert");
-                    }
-                    if (h.getNote() != null) {
-                        serializer.startTag("", "Notiz");
-                        serializer.text(h.getNote());
-                        serializer.endTag("", "Notiz");
-                    }
-                    for (WorkVQuarter vq : vquarters) {
-                        serializer.startTag("", "Sortenquartier");
-                        serializer.startTag("", "Sortenquartier");
-                        serializer.startTag("", "Code");
-                        VQuarter vquarter = DatabaseManager.getInstance().getVQuarterWithId(vq.getVquarter().getId());
-                        serializer.text(vquarter.getCode());
-                        serializer.endTag("", "Code");
-                        serializer.endTag("", "Sortenquartier");
-                        serializer.endTag("", "Sortenquartier");
-                    }
-                    serializer.endTag("", "Ernteeintrag");
                 }
                 serializer.endTag("", "Arbeitseintrag");
             }
