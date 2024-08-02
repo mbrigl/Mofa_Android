@@ -53,9 +53,10 @@
         <activity
             android:name="com.dropbox.core.android.AuthActivity"
             android:configChanges="orientation|keyboard"
-            android:launchMode="singleTask"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
             <intent-filter>
+
                 <!-- Insert your app key after “db-  ...” -->
                 <data android:scheme="db-kr7pjmpdjth06g0" />
 

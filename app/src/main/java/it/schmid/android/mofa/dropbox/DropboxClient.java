@@ -10,6 +10,9 @@ import com.dropbox.core.android.Auth;
 import com.dropbox.core.oauth.DbxCredential;
 import com.dropbox.core.v2.DbxClientV2;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import it.schmid.android.mofa.Globals;
 
 /**
@@ -34,7 +37,9 @@ public interface DropboxClient {
             //Store accessToken in SharedPreferences
             SharedPreferences prefs = context.getSharedPreferences(Globals.ID, Context.MODE_PRIVATE);
             prefs.edit().putString("access-token", credential.getAccessToken()).apply();
-            new CreateFolderTask(DropboxClient.getClient(credential.getAccessToken()), context).execute(); //creating the folder-structure for MoFa
+
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            executor.execute(new CreateFolderTask(DropboxClient.getClient(credential.getAccessToken()), context));
 
             //Proceed to HomeActivityActivity
             Intent intent = new Intent(context, activity);

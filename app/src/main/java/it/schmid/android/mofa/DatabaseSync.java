@@ -4,12 +4,16 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.dropbox.CheckFileTask;
@@ -48,35 +52,29 @@ public class DatabaseSync {
         waitingSpinner.setTitle(context.getString(R.string.waitingspinnertitle));
         waitingSpinner.setMessage(context.getString(R.string.waitingspinnertext));
         waitingSpinner.show();
-        String extension;
-        String filename = "/list"; //the filename is always list
+
+        String filename = "/list.xml"; //the filename is always list
         final ArrayList<Integer> selElements = new ArrayList<Integer>(); //storing the elements to import/update
-        final String[] elementDesc = {context.getString(R.string.landtable), context.getString(R.string.vquartertable), context.getString(R.string.machinetable),
-                context.getString(R.string.workertable), context.getString(R.string.tasktable)};
-        StringBuilder sb = new StringBuilder();
-        boolean first = false; //only for checking if \n
-        extension = ".xml";
-        filename += extension;
-        new CheckFileTask(DropboxClient.getClient(ACCESS_TOKEN), elementDesc, new CheckFileTask.Callback() {
+        final String[] elementDesc = {context.getString(R.string.landtable), context.getString(R.string.vquartertable),
+                context.getString(R.string.machinetable), context.getString(R.string.workertable), context.getString(R.string.tasktable)};
 
-            @Override
-            public void onDataLoaded(ArrayList<Integer> result, StringBuilder sb) {
-                if (result.size() > 0) {
-                    waitingSpinner.dismiss();
-                    showAlertDialog(sb, result);
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        Runnable runnable = new CheckFileTask(DropboxClient.getClient(ACCESS_TOKEN), elementDesc, filename, handler,
+                (result, builder, e) -> {
+                    if (e == null) {
+                        if (result.size() > 0) {
+                            waitingSpinner.dismiss();
+                            showAlertDialog(builder, result);
 
-                } else { // no updates
-                    waitingSpinner.dismiss();
-                    showNoUpdateDialog();
-                }
+                        } else { // no updates
+                            waitingSpinner.dismiss();
+                            showNoUpdateDialog();
+                        }
+                    }
+                });
 
-            }
-
-            @Override
-            public void onError(Exception e) {
-
-            }
-        }).execute(filename);
+        executor.execute(runnable);
     }
 
 

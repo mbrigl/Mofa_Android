@@ -1,11 +1,15 @@
 package it.schmid.android.mofa.dropbox;
 
-import android.os.AsyncTask;
+import android.os.Handler;
 import android.util.Log;
 
 import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.FileMetadata;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import it.schmid.android.mofa.Globals;
@@ -14,58 +18,64 @@ import it.schmid.android.mofa.Globals;
 /**
  * Created by schmida on 22.07.16.
  */
-public class CheckFileTask extends AsyncTask<String, Void, ArrayList<Integer>> {
-    String[] elements = {"/land", "/vquarter", "/machine", "/worker", "/task"};
+public class CheckFileTask implements Runnable {
 
+    private final Handler handler;
     private final DbxClientV2 mDbxClient;
     private final Callback mCallback;
-    private Exception mException;
-    private final ArrayList<Integer> selElements = new ArrayList<Integer>();
-    private final String[] mElementDesc;
+    private final String[] titles;
+    private final String filename;
     private final StringBuilder sb = new StringBuilder();
 
+    Exception mException;
+    final ArrayList<Integer> result = new ArrayList<Integer>();
+
+
+    @FunctionalInterface
     public interface Callback {
 
-        void onDataLoaded(ArrayList<Integer> result, StringBuilder sb);
-
-        void onError(Exception e);
+        void onDataLoaded(ArrayList<Integer> result, StringBuilder sb, Exception e);
     }
 
-    public CheckFileTask(DbxClientV2 dbxClient, String[] elementDesc, Callback callback) {
+    public CheckFileTask(DbxClientV2 dbxClient, String[] titles, String filename, Handler handler, Callback callback) {
         mDbxClient = dbxClient;
         mCallback = callback;
-        mElementDesc = elementDesc;
+        this.titles = titles;
+        this.filename = filename;
+        this.handler = handler;
     }
 
-    @Override
-    protected void onPostExecute(ArrayList<Integer> result) {
-        super.onPostExecute(result);
-
-        if (mException != null) {
-            mCallback.onError(mException);
-        } else {
-            mCallback.onDataLoaded(result, sb);
-        }
-    }
-
-    @Override
-    protected ArrayList<Integer> doInBackground(String... params) {
-        String fileName = params[0];
+    public void run() {
         int pos = 1;
-        for (String element : elements) {
+        for (Item i : Item.values()) {
             try {
-                String path = Globals.IMPORT + element + fileName;
-                mDbxClient.files().getMetadata(path);
+                String path = Globals.IMPORT + "/" + i.name().toLowerCase() + filename;
+                FileMetadata meta = (FileMetadata) mDbxClient.files().getMetadata(path);
+                LocalDateTime lastModified = LocalDateTime.ofInstant(meta.getServerModified().toInstant(), ZoneId.systemDefault());
 
-                sb.append(mElementDesc[pos - 1]);
+                sb.append(titles[pos - 1]);
+                sb.append(": ");
+                sb.append(lastModified.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
                 sb.append("\n");
-                selElements.add(pos);
+                result.add(pos);
             } catch (DbxException e) {
                 Log.d("Error Dropbox", e.getLocalizedMessage());
             }
             pos++;
         }
-        return selElements;
+
+        handler.post(() -> mCallback.onDataLoaded(result, sb, mException));
     }
+/*
+    ExecutorService executor = Executors.newSingleThreadExecutor();
+    Handler handler = new Handler(Looper.getMainLooper());
+
+    executor.execute(() -> {
+        //Background work here
+        handler.post(() -> {
+            //UI Thread work here
+        });
+    });
+ */
 }
 
