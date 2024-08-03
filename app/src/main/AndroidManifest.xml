@@ -28,9 +28,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".WorkOverviewActivity"
-            android:label="@string/app_name" />
-        <activity
             android:name=".WorkEditTabActivity"
             android:label="@string/app_name" />
         <activity

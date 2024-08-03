@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             if (DatabaseManager.getInstance().checkIfEmpty()) {
                 Toast.makeText(this, R.string.nodata, Toast.LENGTH_LONG).show();
             } else {
-                startActivity(new Intent(this, WorkOverviewActivity.class));
+                startActivity(new Intent(this, WorkEditTabActivity.class));
             }
         });
     }
