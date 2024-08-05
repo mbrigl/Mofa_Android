@@ -3,7 +3,7 @@ package it.schmid.android.mofa.model;
 
 import com.j256.ormlite.field.DatabaseField;
 
-public class WorkMachine {
+public class WorkMachine implements Entity {
     public final static String WORK_ID_FIELD_NAME = "work_id";
     public final static String MACHINE_ID_FIELD_NAME = "machine_id";
     @DatabaseField(generatedId = true)
@@ -58,4 +58,8 @@ public class WorkMachine {
         this.hours = hours;
     }
 
+    @Override
+    public final <R, T> R accept(Entity.Visitor<R, T> visitor, T data) {
+        return visitor.visit(this, data);
+    }
 }

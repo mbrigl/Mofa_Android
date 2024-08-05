@@ -1,175 +1,99 @@
 package it.schmid.android.mofa.adapter;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.text.SpannableStringBuilder;
-import android.text.style.BulletSpan;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.sql.SQLException;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.db.DatabaseManager;
-import it.schmid.android.mofa.model.Task;
-import it.schmid.android.mofa.model.VQuarter;
 import it.schmid.android.mofa.model.Work;
-import it.schmid.android.mofa.model.WorkWorker;
-import it.schmid.android.mofa.model.Worker;
 
-public class WorkAdapter extends ArrayAdapter<Work> {
-    private static final String TAG = "ArrayAdapter";
-    Context context;
-    int layoutResourceId;
-    List<Work> data = null;
+public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder> {
 
-    public WorkAdapter(Context context, int layoutResourceId, List<Work> data) {
-        super(context, layoutResourceId, data);
-        this.context = context;
-        this.layoutResourceId = layoutResourceId;
-        this.data = data;
+    private List<Work> data;
+    private Context context;
+    private OnClickListener onClickListener;
+
+    public class WorkViewHolder extends RecyclerView.ViewHolder {
+
+        private ImageView mIcon;
+        private TextView mDate;
+        private TextView mTitle;
+
+        public WorkViewHolder(View itemView) {
+            super(itemView);
+
+            mIcon = itemView.findViewById(R.id.icon);
+            mDate = itemView.findViewById(R.id.dateLabel);
+            mTitle = itemView.findViewById(R.id.workLabel);
+        }
     }
 
+    public WorkAdapter(List<Work> data, Context context) {
+        this.data = data;
+        this.context = context;
+    }
 
     @Override
-    public View getView(final int position, View convertView, final ViewGroup parent) {
+    public WorkViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.worklist_row, parent, false);
+        return new WorkViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(WorkViewHolder holder, int position) {
         final String DATE_FORMAT = "dd.MM.yyyy";
         final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-        final View row;
-        WorkHolder holder;
-        if (convertView == null) {
-            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-            convertView = inflater.inflate(layoutResourceId, parent, false);
-            // setViewHolder(row);
-            holder = new WorkHolder();
-            holder.imgIcon = convertView.findViewById(R.id.icon);
-            holder.txtDate = convertView.findViewById(R.id.dateLabel);
-            holder.txtWork = convertView.findViewById(R.id.workLabel);
 
-            holder.delIcon = convertView.findViewById(R.id.delete_icon);
-            convertView.setTag(holder);
+        Work work = data.get(position);
+        holder.mIcon.setImageResource(work.getValid() ? R.drawable.ic_ok_icon : R.drawable.ic_alerts_and_states_warning);
+        holder.mDate.setText(dateFormat.format(work.getDate()));
+        holder.mTitle.setText(work.getTask().getTask());
 
-        } else {
-            // row=convertView;
-            holder = (WorkHolder) convertView.getTag();
-        }
-        row = convertView;
-        final Work work = data.get(position);
-        String myDate = dateFormat.format(work.getDate());
-        //  Log.d(TAG,myDate);
-        //  Log.d(TAG,work.getDate().toString());
-        holder.txtDate.setText(myDate);
-
-        Task task = work.getTask(); // getting the task
-        if (task != null) {
-            holder.txtWork.setText(task.getTask());
-        }
-        if (work.getValid()) {
-            holder.imgIcon.setImageResource(R.drawable.ic_ok_icon);
-        } else {
-            holder.imgIcon.setImageResource(R.drawable.ic_alerts_and_states_warning);
-        }
-
-        holder.imgIcon.setClickable(true);
-
-        holder.delIcon.setImageResource(R.drawable.ic_trash_empty);
-        holder.delIcon.setClickable(true);
-        holder.delIcon.setOnClickListener(new OnClickListener() {
-
-            public void onClick(View v) {
-                showYesNoDeleteDialog(work, position);
+        holder.itemView.setOnClickListener(view -> {
+            if (onClickListener != null) {
+                onClickListener.onClick(work);
             }
         });
-        return convertView;
     }
 
-    static class WorkHolder {
-        ImageView imgIcon;
-        TextView txtDate;
-        TextView txtWork;
-        ImageView delIcon;
+    // Setter for the click listener
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 
-
-    private void showYesNoDeleteDialog(final Work work, final int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
-        builder.setTitle(R.string.dialogdeletetitel);
-        builder.setMessage(R.string.dialogdeletemsg);
-
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int which) {
-                // Deleting the entry
-                DatabaseManager.getInstance().deleteCascWork(work);
-                data.remove(data.get(position)); //removing the item form the list
-                notifyDataSetChanged();
-                dialog.dismiss();
-            }
-        });
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int which) {
-                // Do Nothing
-                dialog.dismiss();
-            }
-
-        });
-
-
-        AlertDialog alert = builder.create();
-        alert.show();
+    // Interface for the click listener
+    public interface OnClickListener {
+        void onClick(Work work);
     }
 
-    private String getVquarters(Work work) {
-        String txtVquarters = "";
-        Boolean first = true;
-        try { // get vquarters for current work
-            List<VQuarter> selectedQuarters = DatabaseManager.getInstance().lookupVQuarterForWork(work);
-            for (VQuarter vq : selectedQuarters) {
-                if (first) {
-                    txtVquarters = vq.getLand().getName() + " " + vq.getVariety();
-                    first = false;
-                } else {
-                    txtVquarters += ", " + vq.getLand().getName() + " " + vq.getVariety();
-                }
-
-            }
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-        }
-        return txtVquarters;
+    @Override
+    public int getItemCount() {
+        return data.size();
     }
 
-    private SpannableStringBuilder getWorkers(Work work) {
-        SpannableStringBuilder workerBuilder = new SpannableStringBuilder();
-        boolean first = true;
-        List<WorkWorker> selectedWorkers = DatabaseManager.getInstance().getWorkWorkerByWorkId(work.getId());
-        for (WorkWorker w : selectedWorkers) {
-            String txtWorkers;
-            if (first) {
-                first = false;
-            } else {
-                workerBuilder.append("\n");
-            }
+    public void removeItem(int position) {
+        // Deleting the entry
+        Work item = data.get(position);
+        DatabaseManager.getInstance().deleteCascWork(item);
+        data.remove(position);
+        notifyItemRemoved(position);
+    }
 
-            Worker worker = DatabaseManager.getInstance().getWorkerWithId(w.getWorker().getId());
-            txtWorkers = worker.getFirstName() + " " + worker.getLastname() + ": " + w.getHours() + " h";
-            workerBuilder.append(txtWorkers);
-            workerBuilder.setSpan(new BulletSpan(10), workerBuilder.length() - txtWorkers.length(), workerBuilder.length(), 17);
+    public void restoreItem(Work item, int position) {
+        data.add(position, item);
+        notifyItemInserted(position);
+    }
 
-
-        }
-
-        return workerBuilder;
+    public List<Work> getData() {
+        return data;
     }
 }

@@ -7,7 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import java.util.Date;
 
 @DatabaseTable
-public class Work {
+public class Work implements Entity {
 
     public final static String ID_FIELD_NAME = "id";
 
@@ -90,6 +90,11 @@ public class Work {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    @Override
+    public final <R, T> R accept(Entity.Visitor<R, T> visitor, T data) {
+        return visitor.visit(this, data);
     }
 }
 

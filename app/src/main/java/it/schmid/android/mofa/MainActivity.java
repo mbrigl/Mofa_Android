@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
-    private DatabaseSync sync;
+    private StorageSync sync;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.action_sync) {
             if (DropboxClient.tokenExists(this)) { //Dropbox API V2 - check if Token exists
-                sync = new DatabaseSync(DropboxClient.retrieveAccessToken(this), this);
+                sync = new StorageSync(this);
                 sync.importFromDropbox();
             } else {
                 //No token

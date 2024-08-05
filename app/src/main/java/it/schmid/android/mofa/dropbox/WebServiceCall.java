@@ -19,7 +19,9 @@ import java.util.ArrayList;
 
 import it.schmid.android.mofa.NotificationService;
 import it.schmid.android.mofa.R;
-import it.schmid.android.mofa.model.ImportBehavior;
+import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.model.ASAImport;
+import it.schmid.android.mofa.model.Entity;
 import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.Machine;
 import it.schmid.android.mofa.model.Task;
@@ -150,11 +152,11 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String> {
         return data;
     }
 
-    private void importData(String data, ImportBehavior selectedTable) {
-        error = selectedTable.importMasterData(data, mNotificationService); //concatinating the error status
+    private void importData(String data, Entity entity) {
+        ASAImport visitor = new ASAImport(DatabaseManager.getInstance(), mNotificationService);
+        error = entity.accept(visitor, data); //concatinating the error status
         if (error) {
             onPostExecute("Error in parsing file");
-
         }
     }
 
