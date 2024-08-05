@@ -35,7 +35,7 @@ public class NotificationService {
 		Intent notificationIntent = new Intent();
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
 			mContentIntent = PendingIntent.getActivity
-					(mContext, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
+					(mContext, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 		}
 		else
 		{
@@ -100,7 +100,7 @@ public class NotificationService {
 			    mContentIntent = null;
 				if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
 					mContentIntent = PendingIntent.getActivity
-							(mContext, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
+							(mContext, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 				}
 				else
 				{
