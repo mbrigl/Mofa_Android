@@ -13,7 +13,6 @@ import com.j256.ormlite.table.TableUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import it.schmid.android.mofa.model.Global;
 import it.schmid.android.mofa.model.Land;
@@ -26,7 +25,8 @@ import it.schmid.android.mofa.model.WorkVQuarter;
 import it.schmid.android.mofa.model.WorkWorker;
 import it.schmid.android.mofa.model.Worker;
 
-public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
+class DatabaseHelper extends OrmLiteSqliteOpenHelper {
+
     private static final String DATABASE_NAME = "MofaDB.sqlite";
     private static final int DATABASE_VERSION = 17;
 
@@ -69,60 +69,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, ConnectionSource connectionSource, int oldVersion,
-                          int newVersion) {
+    public void onUpgrade(SQLiteDatabase db, ConnectionSource source, int oldVersion, int newVersion) {
         try {
             List<String> allSql = new ArrayList<String>();
             switch (oldVersion) {
-                case 1:
-                    updateFromVersion1(db, connectionSource, oldVersion, newVersion);
-                    break;
-                case 2:
-                    updateFromVersion2(db, connectionSource, oldVersion, newVersion);
-                    break;
-                case 4:
-                    updateFromVersion4(db, connectionSource, oldVersion, newVersion);
-                    break;
-                //allSql.add("alter table AdData add column `new_col` VARCHAR");
-                //allSql.add("alter table AdData add column `new_col2` VARCHAR");
-                case 5:
-                    updateFromVersion5(db, connectionSource, oldVersion, newVersion);
-                    break;
-                case 6:
-                    updateFromVersion6(db, connectionSource, oldVersion, newVersion);
-                    break;
-                case 7:
-                    updateFromVersion7(db, connectionSource, oldVersion, newVersion);
-                    break;
-                case 8:
-                    updateFromVersion8(db, connectionSource, oldVersion, newVersion);
-                    break;
-                case 9:
-                    updateFromVersion9(db, connectionSource, oldVersion, newVersion);
-                    break;
-                case 10:
-                    updateFromVersion10(db, connectionSource, oldVersion, newVersion);
-                    break;
-                case 11:
-                    updateFromVersion11(db, connectionSource, oldVersion, newVersion);
-                    break;
-                case 12:
-                    updateFromVersion12(db, connectionSource, oldVersion, newVersion);
-                    break;
-                case 13:
-                    updateFromVersion13(db, connectionSource, oldVersion, newVersion);
-                    break;
-                case 14:
-                    updateFromVersion14(db, connectionSource, oldVersion, newVersion);
-                    break;
-                case 15:
-                    updateFromVersion15(db, connectionSource, oldVersion, newVersion);
-                    break;
-                case 16:
-                    updateFromVersion16(db, connectionSource, oldVersion, newVersion);
-                    break;
                 case 17:
-                    updateFromVersion17(db, connectionSource, oldVersion, newVersion);
+                    updateFromVersion17(db, source, oldVersion, newVersion);
                     break;
             }
             for (String sql : allSql) {
@@ -132,181 +84,15 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             Log.e(DatabaseHelper.class.getName(), "exception during onUpgrade", e);
             throw new RuntimeException(e);
         }
-
     }
 
-
-    private void updateFromVersion1(SQLiteDatabase db, ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
-
-    }
-
-    private void updateFromVersion2(SQLiteDatabase db,
-                                    ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
-
-    }
-
-    private void updateFromVersion4(SQLiteDatabase db,
-                                    ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
-
-    }
-
-    private void updateFromVersion5(SQLiteDatabase db,
-                                    ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-
-            getWorkDao().executeRaw("ALTER TABLE `work` ADD COLUMN note VARCHAR;");
-        } catch (java.sql.SQLException e) {
-            e.printStackTrace();
-        }
-        onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
-    }
-
-    private void updateFromVersion6(SQLiteDatabase db,
-                                    ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            getLandDao().executeRaw("ALTER TABLE `land` ADD COLUMN code VARCHAR;");
-            getVquarterDao().executeRaw("ALTER TABLE `vquarter` ADD COLUMN code VARCHAR;");
-            getWorkerDao().executeRaw("ALTER TABLE `worker` ADD COLUMN code VARCHAR;");
-            getMachineDao().executeRaw("ALTER TABLE `machine` ADD COLUMN code VARCHAR;");
-            getTaskDao().executeRaw("ALTER TABLE `task` ADD COLUMN code VARCHAR;");
-        } catch (java.sql.SQLException e) {
-            e.printStackTrace();
-        }
-        onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
-    }
-
-    private void updateFromVersion7(SQLiteDatabase db,
-                                    ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
-    }
-
-    private void updateFromVersion8(SQLiteDatabase db,
-                                    ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        final String CAT_IMPORT_PATH = "MoFaBackend/import/category"; //this is the new Dropbox Folder
-        onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
-    }
-
-    private void updateFromVersion9(SQLiteDatabase db,
-                                    ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            getWorkDao().executeRaw("ALTER TABLE `work` ADD COLUMN valid SMALLINT DEFAULT 0;");
-
-        } catch (java.sql.SQLException e) {
-            e.printStackTrace();
-        }
-        onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
-    }
-
-    private void updateFromVersion10(SQLiteDatabase db,
-                                     ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            getWorkDao().executeRaw("ALTER TABLE `work` ADD COLUMN sended SMALLINT DEFAULT 0;");
-        } catch (java.sql.SQLException e) {
-            e.printStackTrace();
-        }
-        onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
-    }
-
-    private void updateFromVersion11(SQLiteDatabase db,
-                                     ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            getTaskDao().executeRaw("ALTER TABLE `task` ADD COLUMN type VARCHAR(1);");
-        } catch (java.sql.SQLException e) {
-            e.printStackTrace();
-        }
-        onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
-    }
-
-    private void updateFromVersion12(SQLiteDatabase db,
-                                     ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            getVquarterDao().executeRaw("ALTER TABLE `vquarter` ADD COLUMN size REAL;");
-
-        } catch (java.sql.SQLException e) {
-            e.printStackTrace();
-        }
-        onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
-    }
-
-    private void updateFromVersion13(SQLiteDatabase db,
-                                     ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
-    }
-
-    private void updateFromVersion14(SQLiteDatabase db,
-                                     ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            getWorkDao().executeRaw("ALTER TABLE `Global` ADD COLUMN workId Integer;");
-        } catch (java.sql.SQLException e) {
-            e.printStackTrace();
-        }
-        onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
-    }
-
-    private void updateFromVersion15(SQLiteDatabase db,
-                                     ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            Log.d("Update Db", "updating to ver 15");
-            TransactionManager.callInTransaction(connectionSource,
-                    new Callable<Void>() {
-
-                        public Void call() throws Exception {
-                            getWorkDao().executeRaw("ALTER TABLE spraying RENAME TO tmp;");
-                            getWorkDao().executeRaw("CREATE TABLE spraying (concentration DOUBLE PRECISION , id INTEGER PRIMARY KEY AUTOINCREMENT , wateramount DOUBLE PRECISION , work_id INTEGER );");
-                            getWorkDao().executeRaw("INSERT INTO spraying(concentration, id, wateramount, work_id) SELECT concentration, id, wateramount, work_id FROM tmp;");
-                            getWorkDao().executeRaw("DROP TABLE tmp;");
-                            getWorkDao().executeRaw("ALTER TABLE `vquarter` ADD COLUMN data VARCHAR;");
-                            getWorkDao().executeRaw("ALTER TABLE `pesticide` ADD COLUMN data VARCHAR;");
-                            getWorkDao().executeRaw("ALTER TABLE `fertilizer` ADD COLUMN data VARCHAR;");
-                            getWorkDao().executeRaw("ALTER TABLE `task` ADD COLUMN data VARCHAR;");
-                            getWorkDao().executeRaw("ALTER TABLE `work` ADD COLUMN data VARCHAR;");
-                            getWorkDao().executeRaw("ALTER TABLE `purchasefertilizer` ADD COLUMN data VARCHAR;");
-                            getWorkDao().executeRaw("ALTER TABLE `purchasepesticide` ADD COLUMN data VARCHAR;");
-                            return null;
-                        }
-                    });
-        } catch (java.sql.SQLException e) {
-            e.printStackTrace();
-        }
-        onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
-    }
-
-    private void updateFromVersion16(SQLiteDatabase db,
-                                     ConnectionSource connectionSource, int oldVersion, int newVersion) {
+    private void updateFromVersion17(SQLiteDatabase db, ConnectionSource source, int oldVersion, int newVersion) {
         try {
             Log.d("Update Db", "updating to ver 16");
-            TransactionManager.callInTransaction(connectionSource,
-                    new Callable<Void>() {
-
-                        public Void call() throws Exception {
-
-                            getWorkDao().executeRaw("ALTER TABLE `pesticide` ADD COLUMN status VARCHAR;");
-                            return null;
-                        }
-                    });
-        } catch (java.sql.SQLException e) {
-            e.printStackTrace();
-        }
-        onUpgrade(db, connectionSource, oldVersion + 1, newVersion);
-    }
-
-    private void updateFromVersion17(SQLiteDatabase db,
-                                     ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            Log.d("Update Db", "updating to ver 16");
-            TransactionManager.callInTransaction(connectionSource,
-                    new Callable<Void>() {
-
-                        public Void call() throws Exception {
-
-
-                            getWorkDao().executeRaw("ALTER TABLE `spraypesticide` ADD COLUMN periodCode VARCHAR;");
-                            return null;
-                        }
-                    });
+            TransactionManager.callInTransaction(connectionSource, () -> {
+                getWorkDao().executeRaw("ALTER TABLE `spraypesticide` ADD COLUMN periodCode VARCHAR;");
+                return null;
+            });
         } catch (java.sql.SQLException e) {
             e.printStackTrace();
         }

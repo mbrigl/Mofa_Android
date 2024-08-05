@@ -3,13 +3,11 @@ package it.schmid.android.mofa.model;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import it.schmid.android.mofa.NotificationService;
-
 /**
  * Created by schmida on 26.01.16.
  */
 @DatabaseTable
-public class Global extends ImportBehavior {
+public class Global implements Entity {
     @DatabaseField(generatedId = true)
     private Integer id;
     @DatabaseField
@@ -18,11 +16,6 @@ public class Global extends ImportBehavior {
     private String data;
     @DatabaseField
     private Integer workId;
-
-    @Override
-    public Boolean importMasterData(String xmlString, NotificationService notification) {
-        return null;
-    }
 
     public Integer getId() {
         return id;
@@ -54,5 +47,10 @@ public class Global extends ImportBehavior {
 
     public void setWorkId(Integer workId) {
         this.workId = workId;
+    }
+
+    @Override
+    public final <R, T> R accept(Entity.Visitor<R, T> visitor, T data) {
+        return visitor.visit(this, data);
     }
 }

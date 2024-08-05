@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="it.schmid.android.mofa.FirstFragment"
+        android:name="it.schmid.android.mofa.WorkListFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_worklist">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"

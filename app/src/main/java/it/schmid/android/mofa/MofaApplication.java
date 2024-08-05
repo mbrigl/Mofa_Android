@@ -8,9 +8,6 @@ import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import it.schmid.android.mofa.db.DatabaseManager;
@@ -18,28 +15,20 @@ import it.schmid.android.mofa.dropbox.DropboxClient;
 
 public class MofaApplication extends Application {
 
-    public static final Integer WORK_NORMAL = 1;
-
+    private static MofaApplication INSTANCE;
     private static double defaultHour = 8.00;
-    private static MofaApplication instance;
-    private ConcurrentHashMap<String, String> mGlobalVariables;
-    private Set<AppStateListener> mAppStateListeners;
 
-    public interface AppStateListener {
-        void onStateChanged(String key, String value);
+    private final ConcurrentHashMap<String, String> mGlobalVariables;
+
+    public MofaApplication() {
+        INSTANCE = this;
+        mGlobalVariables = new ConcurrentHashMap<String, String>();
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        instance = this;
-        mGlobalVariables = new ConcurrentHashMap<String, String>();
-        mAppStateListeners = Collections.synchronizedSet(new HashSet<AppStateListener>());
         DatabaseManager.init(this);
-    }
-
-    public static MofaApplication getInstance() {
-        return instance;
     }
 
     public String getGlobalVariable(String key) {
@@ -89,5 +78,9 @@ public class MofaApplication extends Application {
         editor.commit();
 
         Toast.makeText(this, R.string.dropboxresetmessage, Toast.LENGTH_LONG).show();
+    }
+
+    public static MofaApplication getInstance() {
+        return INSTANCE;
     }
 }

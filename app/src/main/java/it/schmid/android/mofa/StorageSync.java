@@ -21,13 +21,11 @@ import it.schmid.android.mofa.dropbox.DropboxClient;
 import it.schmid.android.mofa.dropbox.SendingProcess;
 import it.schmid.android.mofa.dropbox.WebServiceCall;
 
-public class DatabaseSync {
+public class StorageSync {
 
-    private final String ACCESS_TOKEN;
     private final Context context;
 
-    public DatabaseSync(String token, Context context) {
-        this.ACCESS_TOKEN = token;
+    public StorageSync(Context context) {
         this.context = context;
     }
 
@@ -38,7 +36,7 @@ public class DatabaseSync {
         MofaApplication app = MofaApplication.getInstance();
         Boolean haveConnection = app.networkStatus();
         if (haveConnection) {
-            new DatabaseSync(null, context).showUploadDialog();
+            showUploadDialog();
         } else {
             Toast.makeText(context.getApplicationContext(), R.string.no_connection, Toast.LENGTH_LONG).show();
         }
@@ -60,7 +58,8 @@ public class DatabaseSync {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
-        Runnable runnable = new CheckFileTask(DropboxClient.getClient(ACCESS_TOKEN), elementDesc, filename, handler,
+        String token = DropboxClient.retrieveAccessToken(context);
+        Runnable runnable = new CheckFileTask(DropboxClient.getClient(token), elementDesc, filename, handler,
                 (result, builder, e) -> {
                     if (e == null) {
                         if (result.size() > 0) {
@@ -148,7 +147,8 @@ public class DatabaseSync {
      */
     private void updateData(ArrayList<Integer> selItems, String url) {
         @SuppressWarnings("unused")
-        WebServiceCall importData = new WebServiceCall(context, DropboxClient.getClient(ACCESS_TOKEN));
+        String token = DropboxClient.retrieveAccessToken(context);
+        WebServiceCall importData = new WebServiceCall(context, DropboxClient.getClient(token));
         importData.execute(selItems, url);
     }
 

@@ -12,6 +12,7 @@ import com.j256.ormlite.support.ConnectionSource;
 
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -26,10 +27,10 @@ import it.schmid.android.mofa.model.WorkWorker;
 import it.schmid.android.mofa.model.Worker;
 
 public class DatabaseManager {
-    private PreparedQuery<VQuarter> vqForWorkQuery = null;
-    static private DatabaseManager instance;
 
-    static public void init(Context ctx) {
+    private static DatabaseManager instance;
+
+    public static void init(Context ctx) {
         if (instance == null) {
             instance = new DatabaseManager(ctx);
         }
@@ -40,9 +41,10 @@ public class DatabaseManager {
     }
 
     private final DatabaseHelper helper;
+    private PreparedQuery<VQuarter> vqForWorkQuery = null;
 
     private DatabaseManager(Context ctx) {
-        helper = new DatabaseHelper(ctx);
+        this.helper = new DatabaseHelper(ctx);
     }
 
     private DatabaseHelper getHelper() {
@@ -79,23 +81,21 @@ public class DatabaseManager {
      */
     //Stored - Queries
     public List<Land> getAllLands() {
-        List<Land> landList = null;
         try {
-            landList = getHelper().getLandDao().queryForAll();
+            return getHelper().getLandDao().queryForAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return landList;
+        return Collections.emptyList();
     }
 
     public List<Land> getAllLandsOrderedByCode() {
-        List<Land> landList = null;
         try {
-            landList = getHelper().getLandDao().queryBuilder().orderByRaw("code").query();
+            return getHelper().getLandDao().queryBuilder().orderByRaw("code").query();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return landList;
+        return Collections.emptyList();
     }
 
     // adding,updating Land class
@@ -117,13 +117,12 @@ public class DatabaseManager {
 
     // checking if the land exists by id
     public Land getLandWithId(int landId) {
-        Land land = null;
         try {
-            land = getHelper().getLandDao().queryForId(landId);
+            return getHelper().getLandDao().queryForId(landId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return land;
+        return null;
     }
 
     public void flushLand() {
