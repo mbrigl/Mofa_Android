@@ -35,7 +35,7 @@ public class NotificationService {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
         Intent notificationIntent = new Intent();
         mContentIntent = PendingIntent.getActivity
-                (mContext, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
+                (mContext, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
         //mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
         int icon = notIcon;
         CharSequence tickerText = aText; //Initial text that appears in the status bar
@@ -66,7 +66,7 @@ public class NotificationService {
         notificationIntent = new Intent();
         mContentIntent = null;
         mContentIntent = PendingIntent.getActivity
-                (mContext, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
+                (mContext, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
         //mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
         mNotification = builder.setContentIntent(mContentIntent)
