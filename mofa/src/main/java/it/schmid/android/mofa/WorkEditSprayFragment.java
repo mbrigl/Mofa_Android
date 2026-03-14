@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Locale;
 
 import android.content.Context;
+import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -360,10 +361,10 @@ public class WorkEditSprayFragment extends Fragment {
 
 		}
         if (constraintWarning == false) {
-            constraintTextView.setBackgroundColor(getResources().getColor(R.color.lightgreen));
+            constraintTextView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lightgreen));
             constraintMsg = getResources().getString(R.string.constraintDefault);
         } else {
-            constraintTextView.setBackgroundColor(getResources().getColor(R.color.lightred));
+            constraintTextView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lightred));
 
         }
         constraintTextView.setText(constraintMsg);
@@ -409,9 +410,9 @@ public class WorkEditSprayFragment extends Fragment {
 		for (int x = 0; x < mTurnRow.getChildCount(); x++){
 			ImageButton weatherBtn = (ImageButton) mTurnRow.getChildAt(x);
 			if (iChecked==(x+1)){
-				weatherBtn.setBackgroundColor(getResources().getColor(R.color.deepskyblue));
+				weatherBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.deepskyblue));
 			}else{
-				weatherBtn.setBackgroundColor(getResources().getColor(R.color.skyblue));
+				weatherBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.skyblue));
 			}
 		}
 		weather = iChecked;

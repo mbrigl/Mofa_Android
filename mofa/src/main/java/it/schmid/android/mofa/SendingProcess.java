@@ -38,13 +38,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.protocol.HTTP;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -151,28 +149,24 @@ public void run(){
 			writeFile(sendingData, format);
 		}else{ //creating REST connection
 			
-			HttpClient client = app.getHttpClient();
-			HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000); //Timeout Limit
-	        HttpResponse response;
-	        try{
-                HttpPost post = new HttpPost(urlPath);
-                StringEntity se = new StringEntity(sendingData);  
-                se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-                post.setEntity(se);
-                response = client.execute(post);
-              //  Checking response 
-                if(response!=null){
-                    InputStream in = response.getEntity().getContent(); //Get the data in the entity
-                    Log.d (TAG, convertStreamToString(in));
-                    restResponse= restResponse + convertStreamToString(in) + "\n";
-                }
-            }
-            catch(Exception e){
-                e.printStackTrace();
-                error = true;
-            
-    	
-            }
+			OkHttpClient client = app.getHttpClient();
+			try {
+				RequestBody body = RequestBody.create(sendingData, MediaType.get("application/json; charset=utf-8"));
+				Request request = new Request.Builder()
+						.url(urlPath)
+						.post(body)
+						.build();
+				try (Response response = client.newCall(request).execute()) {
+					if (response.body() != null) {
+						String responseStr = response.body().string();
+						Log.d(TAG, responseStr);
+						restResponse = restResponse + responseStr + "\n";
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				error = true;
+			}
 		}
 	}
 	
@@ -245,7 +239,7 @@ public void run(){
 		private void writeFile(String data, String fileType){
 			if (isSdPresent()){
 				FileOutputStream fos;
-				File sdCard = Environment.getExternalStorageDirectory();
+				File sdCard = context.getExternalFilesDir(null);
 				File file=null;
 				Date date = new Date() ;
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss") ;

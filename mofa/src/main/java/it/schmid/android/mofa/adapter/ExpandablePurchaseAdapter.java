@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import android.app.Activity;
+import androidx.core.content.ContextCompat;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -74,12 +75,12 @@ public class ExpandablePurchaseAdapter extends BaseExpandableListAdapter impleme
 			PurchasePesticide prodName = (PurchasePesticide) p;
 			Pesticide pest = DatabaseManager.getInstance().getPesticideWithId(prodName.getProduct().getId());
 			childText = pest.getProductName();
-			bGround = context.getResources().getColor(R.color.lightred);
+			bGround = ContextCompat.getColor(context, R.color.lightred);
 		}else{
 			PurchaseFertilizer prodName = (PurchaseFertilizer) p;
 			Fertilizer fert = DatabaseManager.getInstance().getFertilizerWithId(prodName.getProduct().getId());
 			childText = fert.getProductName();
-			bGround = context.getResources().getColor(R.color.lightgreen);
+			bGround = ContextCompat.getColor(context, R.color.lightgreen);
 		}
 		
 		final Double childAmount = p.getAmount();

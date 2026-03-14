@@ -1,11 +1,16 @@
 apply plugin: 'com.android.library'
 android {
-    compileSdk 34
+    compileSdk 36
 
     defaultConfig {
         //applicationId "com.google.android.vending.licensing"
         minSdk 26
-        targetSdk 34
+        targetSdk 36
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     buildTypes {

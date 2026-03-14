@@ -1,6 +1,7 @@
 package it.schmid.android.mofa;
 
 import android.content.Context;
+import androidx.core.content.ContextCompat;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -241,10 +242,10 @@ public class WorkEditWaterFragment extends Fragment {
         for (int x = 0; x < mIrrTypeRow.getChildCount(); x++){
             ImageButton irrBtn = (ImageButton) mIrrTypeRow.getChildAt(x);
             if (irrNumber==(x+1)){
-                irrBtn.setBackgroundColor(getResources().getColor(R.color.deepskyblue));
+                irrBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.deepskyblue));
                 updateIrrDesc(irrNumber);
             }else{
-                irrBtn.setBackgroundColor(getResources().getColor(R.color.skyblue));
+                irrBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.skyblue));
             }
         }
         irrigationType = irrNumber;

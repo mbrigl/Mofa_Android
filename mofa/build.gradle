@@ -3,13 +3,12 @@ plugins {
 }
 
 android {
-    compileSdk 35
-    useLibrary 'org.apache.http.legacy'
+    compileSdk 36
 
     defaultConfig {
         applicationId "it.bz.tol.mofa"
         minSdk 26
-        targetSdk 35
+        targetSdk 36
         versionCode 42
         versionName "7.0"
 
@@ -24,8 +23,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     packagingOptions {
         resources {
@@ -43,13 +42,11 @@ dependencies {
     implementation project(':library')
     implementation files('libs/ormlite-core-4.42.jar')
     implementation files('libs/ormlite-android-4.42.jar')
-    implementation 'androidx.appcompat:appcompat:1.7.1'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.material:material:1.13.0'
-    implementation 'com.google.code.gson:gson:2.13.2'
-    implementation 'com.google.http-client:google-http-client-android:2.0.2'
-    implementation 'com.dropbox.core:dropbox-core-sdk:5.4.6'
-    implementation 'com.squareup.okhttp:okhttp:2.7.5'
-    implementation 'com.squareup.okhttp3:okhttp:5.3.0'
-    implementation 'org.jsoup:jsoup:1.21.2'
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.gson
+    implementation libs.google.http.client.android
+    implementation libs.dropbox.core.sdk
+    implementation libs.okhttp
+    implementation libs.jsoup
 }

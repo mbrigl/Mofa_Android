@@ -1,0 +1,22 @@
+[versions]
+agp = "8.13.1"
+appcompat = "1.7.1"
+material = "1.13.0"
+gson = "2.13.2"
+googleHttpClient = "2.1.0"
+dropbox = "5.4.6"
+okhttp = "5.3.2"
+jsoup = "1.22.1"
+
+[libraries]
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+google-http-client-android = { group = "com.google.http-client", name = "google-http-client-android", version.ref = "googleHttpClient" }
+dropbox-core-sdk = { group = "com.dropbox.core", name = "dropbox-core-sdk", version.ref = "dropbox" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+jsoup = { group = "org.jsoup", name = "jsoup", version.ref = "jsoup" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }

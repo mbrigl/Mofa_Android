@@ -24,10 +24,6 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -48,7 +44,6 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String > {
 	private static final String ISO8859 = "iso-8859-1";
 
 	ProgressDialog dialog;
-	 InputStream is = null;
 	 String data = "";
 	 JSONArray jObj = null;
 	 private static boolean error = false;
@@ -272,34 +267,23 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String > {
     }
 // modified connection, using application object as singleton connection
 private String HttpConnect(String restUrl){
+	MofaApplication app = MofaApplication.getInstance();
+	okhttp3.OkHttpClient client = app.getHttpClient();
 	try {
-		MofaApplication app = MofaApplication.getInstance();
-		HttpClient client = app.getHttpClient();
-		HttpPost httpPost = new HttpPost(restUrl);
-		HttpResponse httpResponse = client.execute(httpPost);
-        HttpEntity httpEntity = httpResponse.getEntity();
-        is = httpEntity.getContent();
+		okhttp3.Request request = new okhttp3.Request.Builder()
+				.url(restUrl)
+				.post(okhttp3.RequestBody.create("", null))
+				.build();
+		try (okhttp3.Response httpResponse = client.newCall(request).execute()) {
+			if (httpResponse.body() != null) {
+				data = httpResponse.body().string();
+			}
 		}
-		catch (Exception e)
-		{
-		error =  true;
+	} catch (Exception e) {
+		error = true;
 		e.printStackTrace();
-		}
-	try {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(
-                is, "iso-8859-1"), 8);
-        StringBuilder sb = new StringBuilder();
-        String line = null;
-        while ((line = reader.readLine()) != null) {
-            sb.append(line).append("\n");
-        }
-        is.close();
-        data = sb.toString();
-    } catch (Exception e) {
-       // Log.e("Buffer Error", "Error converting result " + e.toString());
-        error= true;
-    }
-    return data;
+	}
+	return data;
 }
 
 
@@ -307,7 +291,7 @@ private String offlineImport(String filePath){
 	 String jString = "";
 	try {
 
-        File dir = Environment.getExternalStorageDirectory();
+        File dir = mContext.getExternalFilesDir(null);
         File importFile = new File(dir, filePath);
         if (importFile.exists()){
         	FileInputStream stream = new FileInputStream(importFile);

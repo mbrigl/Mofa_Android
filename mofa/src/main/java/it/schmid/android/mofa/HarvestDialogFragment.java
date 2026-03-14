@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Locale;
 
 import android.annotation.SuppressLint;
+import androidx.core.content.ContextCompat;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import androidx.fragment.app.DialogFragment;
@@ -294,9 +295,9 @@ public class HarvestDialogFragment extends DialogFragment{
 		for (int x = 0; x < mTurnRow.getChildCount(); x++){
 			TextView passText = (TextView) mTurnRow.getChildAt(x);
 			if (iChecked==(x+1)){
-				passText.setBackgroundColor(getResources().getColor(R.color.lightgreen));
+				passText.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lightgreen));
 			}else{
-				passText.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+				passText.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.transparent));
 			}
 		}
 		mPass=iChecked;
