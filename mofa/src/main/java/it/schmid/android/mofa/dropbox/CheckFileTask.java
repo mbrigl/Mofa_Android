@@ -5,6 +5,7 @@ import android.os.Looper;
 import android.util.Log;
 
 import com.dropbox.core.DbxException;
+import com.dropbox.core.oauth.DbxCredential;
 import com.dropbox.core.v2.DbxClientV2;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import it.schmid.android.mofa.PathConstants;
  * Created by schmida on 22.07.16.
  */
 public class CheckFileTask {
-    private static final String[] ELEMENTS = {"/land", "/vquarter", "/machine", "/worker", "/task", "/pesticide", "/fertilizer", "/soilfertilizer", "/category", "/extra", "/reason", "/weather"};
+    private static final String[] ELEMENTS = {"/land", "/vquarter", "/machine", "/worker", "/task"};
 
     private final DbxClientV2 mDbxClient;
     private final Callback mCallback;
@@ -26,9 +27,9 @@ public class CheckFileTask {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
+    @FunctionalInterface
     public interface Callback {
         void onDataLoaded(ArrayList<Integer> result, StringBuilder sb);
-        void onError(Exception e);
     }
 
     public CheckFileTask(DbxClientV2 dbxClient, String[] elementDesc, Callback callback) {
@@ -59,5 +60,9 @@ public class CheckFileTask {
             final StringBuilder resultSb = sb;
             mainHandler.post(() -> mCallback.onDataLoaded(result, resultSb));
         });
+    }
+
+    public static void execute(DbxCredential credential, String[] elementDesc, String filename, Callback callback) {
+        new CheckFileTask(DropboxClient.getClient(credential), elementDesc, callback).execute(filename);
     }
 }

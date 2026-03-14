@@ -17,9 +17,6 @@
 	<string name="title_feature1">Registro lavoro</string>
     <string name="title_feature2">Impostazioni</string>
     <string name="title_feature3">Update</string>
-    <string name="title_feature4">Aquisti</string>
-    <string name="title_feature5">Cerca</string>
-    <string name="title_feature6">Fioritura</string>
 	
 	<!-- Preference setting for import data	-->
 	<string name="showPestInfos">attivare sempre finestra info parasit.</string>
@@ -95,15 +92,7 @@
 	
 	<!-- MenuEntries WorkEdit -->
 	<string name="workedit_menu_gpsauto"> GPS appezz.</string>
-	<!-- MenuEntries Purchase -->
-	<string name="purchase_menu_add"> nuovo aquisto</string>
-	<string name="purchase_menu_upload"> upload aquisti</string>
 	<!-- MenuEntries Harvest-->
-	<string name="harvest_menu_add">Nuovo documento</string>
-	<!-- MenuEntries VegData-->
-	<string name="vegdata_menu_upload">Upload veg.data</string>
-	<string name="vegdata_clear_content">Clear data</string>
-	<string name="vegdata_clear_message">Vuole cancellare tutti i dati di vegetazione?</string>
 	<!--  PromptDialog --> 
 	<string name="ok">OK</string>
 	<string name="cancel">Annulla</string>
@@ -116,11 +105,6 @@
 	<string name="export_title">esportazione lavori</string>
 	<string name="export_message">Tutti i lavori vengono esportati. I dati locali vengono cancellati</string>
 	<string name="export_status_message">Esporto eseguito. Per favore alla fine eseguire l\'update un altra volta </string>
-	<string name="export_purchase_title">Esportazione aquisti</string>
-	<string name="export_purchase_message">Tutti gli aquisti vengono esportati. I dati locali vengono cancellati</string>
-	<string name="export_vegdata_title">Esportazione dati</string>
-	<string name="export_vegdata_message">Tutti i dati riguarda la fioritura vengono esportati. I dati locali non vengono cancellati</string>
-	<string name="vegdata_clear_message_title">Resetting vegetation data</string>
 	<!--  Strings for gps location  -->
 	<string name="gps_text">dati gps dell\' appezzamento attivo</string>
 	<string name="gps_point1">meridiano e latitudine del punto 1</string>
@@ -169,9 +153,6 @@
 	<string name="max_amount_usage">quantità max per tratt.:</string>
 	<string name="max_use_year_in_serie">nummero max in serie:</string>
 
-	<!-- Strings in Fragment Input Purchase -->
-	<string name="input_purchase_amount">quantità in kg/lt</string>
-	<string name="input_purchase_price">prezzo per kg/lt</string>
 	<!-- Strings for TabCaption for Product List -->
 	<string name="pesticidetab">antiparassitari</string>
 	<string name="fertilizertab">fertilizzatori</string>
@@ -185,7 +166,6 @@
 	<string name="importTitle">Importazione preimpostazioni…</string>
 	<string name="noUpdatesInfo">riferimento</string>
 	<string name="noUpdatesText">no updates</string>
-    <string name="startsearchbutton">Inizia ricerca</string>
 	<!-- Strings for Harvest Fragment Dialog -->
 	<string name="har_title">bolla</string>
 	<string name="har_number">traspnr</string>
@@ -221,15 +201,8 @@
 	<string name="etichNotFound">NESSUN ETICHETTA \n - RICONTROLLARE NOME DEL PRODOTTO</string>
 	<string name="pdfNotSupported">Nessuna app per file pdf installato</string>
     <!--Strings for SearchPesticide -->
-    <string name="searchLastPest">Cerca ultimo trattamento</string>
-    <string name="searchVQuarter">Scegliere il campo da cercare</string>
-    <string name="searchPest">Cerca antiparassitari</string>
-	<string name="searchFert">Cerca fertilizzante</string>
-    <string name="searchPestSel">Selezionare prodotto per la ricerca</string>
-    <string name="searchInfo">L\'archivo contiene %1$d trattamenti. \n Questa ricerca include solo i trattamenti mandati da questo apparecchio. È importante che durante l\'anno non viene svuotato l\'archivio.</string>
     <string name="delete_archive">Svuotare l\'archivio</string>
     <string name="delete_archive_mes">ATTENZIONE!! TUTTI I TRATTAMENTI VECCHI (PIÙ DI 60 GIORNI) VENGONO CANCELLATI\n ATTIVANDO LA CHECKBOX TUTTI I LAVORI MANDATI VENGONO CANCELLATI</string>
-    <string name="search_no_result">Nessun risultato per questa ricerca</string>
     <string name="fromDate">von Datum</string>
     <string name="toDate">bis Datum</string>
     <string name="noHoursMsg">Nessun ora in questo periodo</string>
@@ -256,13 +229,6 @@
 	<string name="titleDropboxLoginActivity">MoFa - Login Dropbox</string>
 	<string name="titleDropboxButton">Login</string>
 	<string name="dropboxInfo">Fare un click sul button Login per connettere MoFa con la sua Dropbox \n Serve un Dropbox account essistente. </string>
-	<!-- Strings for VegData -->
-	<string name="blossomStart">INIZIOFIORIT.</string>
-	<string name="blossomEnd">FINEFIORIT.</string>
-	<string name="harvestStart">RACCOLTA</string>
-	<string name="estimCrop">RACCOLTO</string>
-	<string name="estimCropTitleHa">raccolto in t/ha</string>
-	<string name="amountCrop">raccolot su superf.: %1$d t</string>
 	<!-- Strings for SpeechRecognition -->
 	<string name="speech_prompt">Inizia parlare</string>
 	<string name="speech_not_supported">Supporto voce non possibile</string>

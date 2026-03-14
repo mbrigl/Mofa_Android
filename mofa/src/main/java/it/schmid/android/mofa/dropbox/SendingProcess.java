@@ -1,0 +1,517 @@
+package it.schmid.android.mofa.dropbox;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.preference.PreferenceManager;
+import android.util.Log;
+import android.util.Xml;
+
+import com.dropbox.core.DbxException;
+import com.dropbox.core.oauth.DbxCredential;
+import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.WriteMode;
+
+import org.xmlpull.v1.XmlSerializer;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import it.schmid.android.mofa.ActivityConstants;
+import it.schmid.android.mofa.MofaApplication;
+import it.schmid.android.mofa.NotificationService;
+import it.schmid.android.mofa.PathConstants;
+import it.schmid.android.mofa.R;
+import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.model.Machine;
+import it.schmid.android.mofa.model.VQuarter;
+import it.schmid.android.mofa.model.Work;
+import it.schmid.android.mofa.model.WorkMachine;
+import it.schmid.android.mofa.model.WorkVQuarter;
+import it.schmid.android.mofa.model.WorkWorker;
+import it.schmid.android.mofa.model.Worker;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+
+public class SendingProcess implements Runnable {
+    private static final String TAG = "SendingProcess";
+    private static final String ASANOTE = "(MoFa)";
+    Context context;
+    private NotificationService mNotificationService; // notification services
+    private Boolean dropBox;  // checking if dropbox setting is enabled
+    private Boolean offline; // checking if offline or through REST
+    private Boolean mofaNote;
+    private Boolean asa_New_Ver;
+    private String format; // file format
+    private String sendingData; //
+    private String urlPath;
+    private String notifMess = "";
+    private String backEndSoftware;
+    private boolean error = false; // error value for webservice connection
+    private String restResponse = ""; // not used yet, but response of json-webservice
+    private final int callingActivity;
+    private String asaWorkHerbicideCode;
+
+    private DbxCredential credential; //Dropbox
+    RemoveEntries mremoveEntries;
+
+    //constructor
+    public SendingProcess(Context context, Integer callingActivity) {
+        this.context = context;
+        this.callingActivity = callingActivity;
+        mremoveEntries = (RemoveEntries) context;
+
+    }
+
+    // interface to delete the works from workoverview -- callback
+    public interface RemoveEntries {
+        void deleteAllEntries();
+    }
+
+    /**
+     * background sending thread
+     */
+    public void run() {
+        Looper.prepare(); //For Preparing Message Pool for the child Thread
+        MofaApplication app = MofaApplication.getInstance();
+        backEndSoftware = app.getBackendSoftware();
+
+        if (Integer.parseInt(backEndSoftware) == 1) { //special case ASA
+
+            if (callingActivity == ActivityConstants.WORK_OVERVIEW) { //calling this asynch method from workoverview
+                if (asa_New_Ver) {
+                    sendingData = createXMLASAVer16();
+                } else {
+                    sendingData = createXMLASA();
+                }
+
+            }
+        } else { //default case LibreOffice
+            if (callingActivity == ActivityConstants.WORK_OVERVIEW) { //default case
+                sendingData = createXML(); //default case
+            }
+        }
+
+        if (dropBox == true) { //DropBox case
+            writeFileToDropBox(sendingData, format);
+        } else { //not Dropbox
+            if (offline == true) { //offline-export to SD-Card
+                writeFile(sendingData, format);
+            } else { //creating REST connection
+
+                OkHttpClient client = app.getHttpClient();
+                try {
+                    RequestBody body = RequestBody.create(sendingData, MediaType.get("application/json; charset=utf-8"));
+                    Request request = new Request.Builder()
+                            .url(urlPath)
+                            .post(body)
+                            .build();
+                    try (Response response = client.newCall(request).execute()) {
+                        if (response.body() != null) {
+                            String responseStr = response.body().string();
+                            Log.d(TAG, responseStr);
+                            restResponse = restResponse + responseStr + "\n";
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    error = true;
+                }
+            }
+        }
+
+        int icon = android.R.drawable.stat_sys_upload_done;
+        CharSequence tickerText = context.getString(R.string.upload_finished);
+        if (error) {
+            notifMess = context.getString(R.string.upload_finished_error);
+            handler2.sendEmptyMessage(0); // handler for updating UI task
+        } else {
+            notifMess = context.getString(R.string.upload_finished_ok);
+            handler.sendEmptyMessage(0); // handler for updating UI task
+
+        }
+
+        mNotificationService.completed(icon, tickerText, notifMess);
+        Looper.loop(); //Loop in the message queue
+    }
+
+    //preparing to send Data
+    public void sendData() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        offline = preferences.getBoolean("updateOffline", false);
+        dropBox = preferences.getBoolean("dropbox", false);
+        format = preferences.getString("listFormat", "-1");
+        urlPath = preferences.getString("url", "");
+        mofaNote = preferences.getBoolean("asanote", false);
+        asa_New_Ver = preferences.getBoolean("asa_new_ver", false);
+        mNotificationService = new NotificationService(context, false);
+        int icon = android.R.drawable.stat_sys_upload;
+        CharSequence tickerText = context.getString(R.string.upload_title);
+        notifMess = context.getString(R.string.upload_mess);
+        mNotificationService.createNotification(icon, tickerText, notifMess);
+
+        Thread t = new Thread(this);
+        t.start();
+    }
+
+    /**
+     * handler used for deleting and gui refreshing, accessing gui only through a handler
+     */
+    private final Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            mremoveEntries.deleteAllEntries();
+
+        }
+    };
+    /**
+     * handler used for deleting and gui refreshing, accessing gui only through a handler
+     */
+    private final Handler handler2 = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            context.startActivity(new Intent(context, LoginActivity.class));
+        }
+    };
+
+    /**
+     *
+     * @param data
+     * @param fileType "1" for Json; "2" for XML
+     */
+    private void writeFile(String data, String fileType) {
+        if (isSdPresent()) {
+            FileOutputStream fos;
+            File sdCard = context.getExternalFilesDir(null);
+            File file = null;
+            Date date = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+            if (fileType.equalsIgnoreCase("1")) {
+                if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
+                    file = new File(sdCard.getAbsolutePath() + PathConstants.EXPORT, "worklist" + dateFormat.format(date) + ".json");
+                }
+            } else {
+                if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
+                    file = new File(sdCard.getAbsolutePath() + PathConstants.EXPORT, "worklist" + dateFormat.format(date) + ".xml");
+                }
+            }
+
+            byte[] bData = data.getBytes();
+            try {
+                fos = new FileOutputStream(file);
+                fos.write(bData);
+                fos.flush();
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                error = true;
+            }
+        } else {
+            error = true;
+        }
+
+    }
+
+    private boolean isSdPresent() {
+        return android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
+    }
+
+    private String createXML() {
+        //List<Work> workUploadList = DatabaseManager.getInstance().getAllWorks();
+        List<Work> workUploadList = DatabaseManager.getInstance().getAllValidNotSendedWorksExcel();
+        XmlSerializer serializer = Xml.newSerializer();
+        StringWriter writer = new StringWriter();
+        try {
+            serializer.setOutput(writer);
+            serializer.startDocument("UTF-8", true);
+            serializer.startTag("", "works");
+            serializer.attribute("", "number", String.valueOf(workUploadList.size()));
+            for (Work wk : workUploadList) {
+                serializer.startTag("", "work");
+                serializer.startTag("", "date");
+                SimpleDateFormat sdf = new SimpleDateFormat();
+                sdf.applyPattern("yyyy-MM-dd'T'hh:mm:sss'Z'");
+                serializer.text(sdf.format(wk.getDate()));
+                serializer.endTag("", "date");
+                serializer.startTag("", "task");
+                serializer.text(wk.getTask().getId().toString());
+                serializer.endTag("", "task");
+                serializer.startTag("", "type");
+                if (wk.getTask().getType() == null) {
+                    serializer.text("O");
+                } else {
+                    serializer.text(wk.getTask().getType());
+                }
+                serializer.endTag("", "type");
+                serializer.startTag("", "note");
+                serializer.text(wk.getNote());
+                serializer.endTag("", "note");
+                List<WorkVQuarter> vquarters = DatabaseManager.getInstance().getVQuarterByWorkIdOrderedByVq(wk.getId());
+                for (WorkVQuarter vq : vquarters) {
+                    serializer.startTag("", "vquarter");
+                    serializer.startTag("", "vqid");
+                    serializer.text(vq.getVquarter().getId().toString());
+                    serializer.endTag("", "vqid");
+                    serializer.endTag("", "vquarter");
+                }
+                List<WorkWorker> workers = DatabaseManager.getInstance().getWorkWorkerByWorkId(wk.getId());
+                for (WorkWorker w : workers) {
+                    serializer.startTag("", "worker");
+                    serializer.startTag("", "workerid");
+                    serializer.text(w.getWorker().getId().toString());
+                    serializer.endTag("", "workerid");
+                    serializer.startTag("", "workerhours");
+                    serializer.text(w.getHours().toString());
+                    serializer.endTag("", "workerhours");
+                    serializer.endTag("", "worker");
+                }
+                List<WorkMachine> machines = DatabaseManager.getInstance().getWorkMachineByWorkId(wk.getId());
+                for (WorkMachine m : machines) {
+                    serializer.startTag("", "machine");
+                    serializer.startTag("", "machineid");
+                    serializer.text(m.getMachine().getId().toString());
+                    serializer.endTag("", "machineid");
+                    serializer.startTag("", "machinehours");
+                    serializer.text(m.getHours().toString());
+                    serializer.endTag("", "machinehours");
+                    serializer.endTag("", "machine");
+                }
+                serializer.endTag("", "work");
+            }
+            serializer.endTag("", "works");
+            serializer.endDocument();
+            return writer.toString();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String createXMLASA() {
+        //List<Work> workUploadList = DatabaseManager.getInstance().getAllWorks();
+        List<Work> workUploadList = DatabaseManager.getInstance().getAllValidNotSendedWorks();
+        XmlSerializer serializer = Xml.newSerializer();
+        StringWriter writer = new StringWriter();
+        try {
+            serializer.setOutput(writer);
+            serializer.startDocument("UTF-8", true);
+            serializer.startTag("", "Arbeitseintraege");
+            //serializer.attribute("", "number", String.valueOf(workUploadList.size()));
+            for (Work wk : workUploadList) {
+                serializer.startTag("", "Arbeitseintrag");
+                serializer.startTag("", "Datum");
+                SimpleDateFormat sdf = new SimpleDateFormat();
+                sdf.applyPattern("yyyy-MM-dd");
+                serializer.text(sdf.format(wk.getDate()));
+                serializer.endTag("", "Datum");
+                serializer.startTag("", "Arbeit");
+                serializer.startTag("", "Code");
+                serializer.text(wk.getTask().getCode());
+                serializer.endTag("", "Code");
+                serializer.endTag("", "Arbeit");
+
+                serializer.startTag("", "Notiz");
+                String note;
+                if (mofaNote) {
+                    note = ASANOTE + " " + wk.getNote();
+                } else {
+                    note = wk.getNote();
+                }
+                serializer.text(note);
+                serializer.endTag("", "Notiz");
+                List<WorkWorker> workers = DatabaseManager.getInstance().getWorkWorkerByWorkId(wk.getId());
+
+                for (WorkWorker w : workers) {
+                    serializer.startTag("", "Arbeitskraft");
+                    serializer.startTag("", "Arbeitskraft");
+                    serializer.startTag("", "Code");
+                    Worker worker = DatabaseManager.getInstance().getWorkerWithId(w.getWorker().getId());
+                    serializer.text(worker.getCode());
+                    serializer.endTag("", "Code");
+                    serializer.endTag("", "Arbeitskraft");
+                    serializer.startTag("", "Stunden");
+                    serializer.text(w.getHours().toString());
+                    serializer.endTag("", "Stunden");
+
+                    serializer.endTag("", "Arbeitskraft");
+                }
+
+
+                List<WorkMachine> machines = DatabaseManager.getInstance().getWorkMachineByWorkId(wk.getId());
+
+                for (WorkMachine m : machines) {
+                    serializer.startTag("", "Maschine");
+                    serializer.startTag("", "Maschine");
+                    serializer.startTag("", "Code");
+                    Machine machine = DatabaseManager.getInstance().getMachineWithId(m.getMachine().getId());
+                    serializer.text(machine.getCode());
+                    serializer.endTag("", "Code");
+                    serializer.endTag("", "Maschine");
+                    serializer.startTag("", "Stunden");
+                    serializer.text(m.getHours().toString());
+                    serializer.endTag("", "Stunden");
+                    serializer.endTag("", "Maschine");
+                }
+
+                List<WorkVQuarter> vquarters = DatabaseManager.getInstance().getVQuarterByWorkId(wk.getId());
+
+                for (WorkVQuarter vq : vquarters) {
+                    serializer.startTag("", "Sortenquartier");
+                    serializer.startTag("", "Sortenquartier");
+                    serializer.startTag("", "Code");
+                    VQuarter vquarter = DatabaseManager.getInstance().getVQuarterWithId(vq.getVquarter().getId());
+                    serializer.text(vquarter.getCode());
+                    serializer.endTag("", "Code");
+                    serializer.endTag("", "Sortenquartier");
+                    serializer.endTag("", "Sortenquartier");
+                }
+                serializer.endTag("", "Arbeitseintrag");
+            }
+            serializer.endTag("", "Arbeitseintraege");
+            serializer.endDocument();
+            return writer.toString();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String createXMLASAVer16() {
+        //List<Work> workUploadList = DatabaseManager.getInstance().getAllWorks();
+        List<Work> workUploadList = DatabaseManager.getInstance().getAllValidNotSendedWorks();
+        XmlSerializer serializer = Xml.newSerializer();
+        StringWriter writer = new StringWriter();
+        try {
+            serializer.setOutput(writer);
+            serializer.startDocument("UTF-8", true);
+            serializer.startTag("", "Arbeitseintraege");
+            //serializer.attribute("", "number", String.valueOf(workUploadList.size()));
+            for (Work wk : workUploadList) {
+                serializer.startTag("", "Arbeitseintrag");
+                serializer.startTag("", "Datum");
+                SimpleDateFormat sdf = new SimpleDateFormat();
+                sdf.applyPattern("yyyy-MM-dd");
+                serializer.text(sdf.format(wk.getDate()));
+                serializer.endTag("", "Datum");
+                serializer.startTag("", "Arbeit");
+                serializer.startTag("", "Code");
+                serializer.text(wk.getTask().getCode());
+                serializer.endTag("", "Code");
+                serializer.endTag("", "Arbeit");
+
+                serializer.startTag("", "Notiz");
+                String note;
+                if (mofaNote) {
+                    note = ASANOTE + " " + wk.getNote();
+                } else {
+                    note = wk.getNote();
+                }
+                serializer.text(note);
+                serializer.endTag("", "Notiz");
+                List<WorkWorker> workers = DatabaseManager.getInstance().getWorkWorkerByWorkId(wk.getId());
+
+                for (WorkWorker w : workers) {
+                    serializer.startTag("", "Arbeitskraft");
+                    serializer.startTag("", "Arbeitskraft");
+                    serializer.startTag("", "Code");
+                    Worker worker = DatabaseManager.getInstance().getWorkerWithId(w.getWorker().getId());
+                    serializer.text(worker.getCode());
+                    serializer.endTag("", "Code");
+                    serializer.endTag("", "Arbeitskraft");
+                    serializer.startTag("", "Stunden");
+                    serializer.text(w.getHours().toString());
+                    serializer.endTag("", "Stunden");
+
+                    serializer.endTag("", "Arbeitskraft");
+                }
+
+
+                List<WorkMachine> machines = DatabaseManager.getInstance().getWorkMachineByWorkId(wk.getId());
+
+                for (WorkMachine m : machines) {
+                    serializer.startTag("", "Maschine");
+                    serializer.startTag("", "Maschine");
+                    serializer.startTag("", "Code");
+                    Machine machine = DatabaseManager.getInstance().getMachineWithId(m.getMachine().getId());
+                    serializer.text(machine.getCode());
+                    serializer.endTag("", "Code");
+                    serializer.endTag("", "Maschine");
+                    serializer.startTag("", "Stunden");
+                    serializer.text(m.getHours().toString());
+                    serializer.endTag("", "Stunden");
+                    serializer.endTag("", "Maschine");
+                }
+
+                List<WorkVQuarter> vquarters = DatabaseManager.getInstance().getVQuarterByWorkId(wk.getId());
+
+                for (WorkVQuarter vq : vquarters) {
+                    serializer.startTag("", "Sortenquartier");
+                    serializer.startTag("", "Sortenquartier");
+                    serializer.startTag("", "Code");
+                    VQuarter vquarter = DatabaseManager.getInstance().getVQuarterWithId(vq.getVquarter().getId());
+                    serializer.text(vquarter.getCode());
+                    serializer.endTag("", "Code");
+                    serializer.endTag("", "Sortenquartier");
+                    serializer.endTag("", "Sortenquartier");
+                }
+                serializer.endTag("", "Arbeitseintrag");
+            }
+            serializer.endTag("", "Arbeitseintraege");
+            serializer.endDocument();
+            return writer.toString();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Dropbox sending process
+     *
+     */
+    private void writeFileToDropBox(String data, String fileType) {
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+        String filePath = null;
+        credential = DropboxClient.retrieveCredential(context);
+        if (fileType.equalsIgnoreCase("1")) {
+            if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
+                filePath = PathConstants.EXPORT + "/worklist" + dateFormat.format(date) + ".json";
+            }
+        } else {
+            if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
+                filePath = PathConstants.EXPORT + "/worklist" + dateFormat.format(date) + ".xml";
+            }
+        }
+
+
+        try {
+            InputStream inputStream = new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
+            if (credential != null) {
+                DbxClientV2 dbxClient = DropboxClient.getClient(credential);
+                dbxClient.files().uploadBuilder(filePath)
+                        .withMode(WriteMode.OVERWRITE)
+                        .uploadAndFinish(inputStream);
+            }
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            error = true;
+        } catch (DbxException e) {
+            error = true;
+        }
+
+    }
+}

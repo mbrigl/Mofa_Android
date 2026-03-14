@@ -18,9 +18,6 @@
     <string name="title_feature1">WorkingJournal</string>
     <string name="title_feature2">Settings</string>
     <string name="title_feature3">Update</string>
-    <string name="title_feature4">Purchasing</string>
-    <string name="title_feature5">Searching</string>
-    <string name="title_feature6">Blossom</string>
 
     <!-- Preference setting for import data -->
     <string name="showPestInfos">Show allways Pest Infos</string>
@@ -93,16 +90,6 @@
     <string name="work_menu_otherfilter"> Other</string>
     <!-- MenuEntries WorkEdit -->
     <string name="workedit_menu_gpsauto"> GPS VQuarter</string>
-    <!-- MenuEntries Purchase -->
-    <string name="purchase_menu_add"> New Purchase</string>
-    <string name="purchase_menu_upload"> Upload Purchases</string>
-    <!-- MenuEntries Harvest -->
-    <string name="harvest_menu_add">Add document</string>
-    <!-- MenuEntries VegData-->
-    <string name="vegdata_menu_upload">Upload veg.data</string>
-    <string name="vegdata_clear_content">Clear data</string>
-    <string name="vegdata_clear_message">Are you sure, that you want delete all vegetation infos</string>
-    <string name="vegdata_clear_message_title">Resetting vegetation data</string>
     <!-- PromptDialog -->
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -114,10 +101,6 @@
     <string name="export_title">Export all works</string>
     <string name="export_message">Are you sure, that you want export all works. The local work entries will be deleted</string>
     <string name="export_status_message">Starting export, at the end restart the update</string>
-    <string name="export_purchase_title">Export all purchase entries</string>
-    <string name="export_purchase_message">Are you sure, that you want export all your purchases. The local entries will be deleted</string>
-    <string name="export_vegdata_title">Export data</string>
-    <string name="export_vegdata_message">Are you sure, that you want export all vegetation infos.</string>
     <!-- Strings for gps location -->
     <string name="gps_text">GPS location data of selected variety quarter</string>
     <string name="gps_point1">longitude and latitude of point 1</string>
@@ -166,9 +149,6 @@
     <string name="max_amount_usage">Maximum amount pro use/ha:</string>
     <string name="max_use_year_in_serie">Maximum use in serie:</string>
 
-    <!-- Strings in Fragment Input Purchase -->
-    <string name="input_purchase_amount">amount in kg/lt</string>
-    <string name="input_purchase_price">price for kg/lt</string>
     <!-- Strings for TabCaption for Product List -->
     <string name="pesticidetab">Pesticides</string>
     <string name="fertilizertab">Fertilizer</string>
@@ -184,7 +164,6 @@
     <string name="importTitle">Import of MasterData…</string>
     <string name="noUpdatesInfo">Information</string>
     <string name="noUpdatesText">No Updates available</string>
-    <string name="startsearchbutton">Start Search</string>
     <!-- Strings for Harvest Fragment Dialog -->
     <string name="har_title">TransportDoc</string>
     <string name="har_number">Docnr</string>
@@ -198,14 +177,13 @@
     <string name="har_acid">Ac</string>
     <string name="har_stage">Stage</string>
     <string name="har_warning_id">Transport Id can not be null</string>
-    <!-- Strings for PurchaseActivities/Fragments -->
 
 
     <!-- Strings for Error/Warnings -->
     <string name="restpathemptystring">You have to enter a Path under Settings</string>
     <string name="xmlparseerror">Please check the Syntax of your XML</string>
     <string name="dropboxconnerror">Link to Dropbox failed or was cancelled</string>
-    <string name="reimportmessage">ATTENTION-ALL WORKING ENTRIES AND PURCHASES HAVE TO BE EXPORTED FIRST</string>
+    <string name="reimportmessage">ATTENTION-ALL WORKING ENTRIES HAVE TO BE EXPORTED FIRST</string>
     <string name="nodata">No Data - Please import data through update</string>
     <string name="noupdate">No updates available</string>
     <!-- Strings for Pesticide Info Dialog -->
@@ -223,17 +201,9 @@
     <string name="pestLabel">label(from Internet)</string>
     <string name="etichNotFound">"NO LABEL - CHECK NAME OF PRODUCT</string>
     <string name="pdfNotSupported">No app for pdf installed</string>
-    <!-- Strings for SearchPesticide -->
-    <string name="searchLastPest">Last Spraying work</string>
-    <string name="searchVQuarter">Please select vquarter for search</string>
-    <string name="searchPest">Search Pesticide</string>
-    <string name="searchFert">Search Fertilizer</string>
-    <string name="searchPestSel">Please select a product to search</string>
-    <string name="searchInfo">The archive contains %1$d entries. \n This search includes only spraying entries sended from this device. Be sure that you don\'t clear the archive during the year!</string>
     <string name="hoursOverview">Working hours</string>
     <string name="delete_archive">Clear archive</string>
     <string name="delete_archive_mes">ATTENTION: ALL SPRAYING ENTRIES WERE DELETED, WHICH ARE OLDER THAN 60 DAYS\n IF YOU WANT TO DELETE ALL SENDED WORKS, CHECK THE CHECKBOX BELOW</string>
-    <string name="search_no_result">No entry found for this query</string>
     <string name="fromDate">from Date</string>
     <string name="toDate">to Date</string>
     <string name="noHoursMsg">No hours in this period</string>
@@ -263,13 +233,6 @@
     <string name="dropboxInfo">Click on the login Button to connect MoFa with your Dropbox. \n You must have a valid Dropbox Account.</string>
 
 
-    <!-- Strings for VegData -->
-    <string name="blossomStart">BLOSSOMSTART</string>
-    <string name="blossomEnd">BLOSSOMEND</string>
-    <string name="harvestStart">HARVEST</string>
-    <string name="estimCrop">YIELD</string>
-    <string name="estimCropTitleHa">amount in t/ha</string>
-    <string name="amountCrop">Amount on size: %1$d t</string>
 
     <!-- Strings for SpeechRecognition -->
     <string name="speech_prompt">Start speaking</string>

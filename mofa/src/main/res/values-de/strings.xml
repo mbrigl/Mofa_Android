@@ -18,9 +18,6 @@
 	<string name="title_feature1">Arbeitsjournal</string>
     <string name="title_feature2">Einstellungen</string>
     <string name="title_feature3">Update</string>
-    <string name="title_feature4">Einkauf</string>
-    <string name="title_feature5">Suche</string>
-    <string name="title_feature6">Blüte</string>
 	
 	<!-- Preference setting for import data	-->
 	<string name="showPestInfos">PSM Infos immer anzeigen</string>
@@ -94,16 +91,7 @@
 	<string name="work_menu_otherfilter"> Son. Arbeiten</string>
 	<!-- MenuEntries WorkEdit -->
 	<string name="workedit_menu_gpsauto"> GPS Sortenq.</string>
-	<!-- MenuEntries Purchase -->
-	<string name="purchase_menu_add"> Neuer Einkauf</string>
-	<string name="purchase_menu_upload"> Upload Einkäufe</string>
 	<!-- MenuEntries Harvest-->
-	<string name="harvest_menu_add">Neuer Liefersch.</string>
-	<!-- MenuEntries VegData-->
-	<string name="vegdata_menu_upload">Upload veg.data</string>
-	<string name="vegdata_clear_content">Daten löschen</string>
-	<string name="vegdata_clear_message">Sind Sie sicher,dass Sie alle Vegedationsdaten löschen möchten?</string>
-	<string name="vegdata_clear_message_title">Vegetationsdaten zurücksetzen</string>
 	<!--  PromptDialog --> 
 	<string name="ok">OK</string>
 	<string name="cancel">Abbrechen</string>
@@ -114,10 +102,6 @@
 	<string name="export_title">Export aller Arbeiten</string>
 	<string name="export_message">Alle Arbeiten werden exportiert. Die lokalen Daten werden gelöscht</string>
 	<string name="export_status_message">Export gestartet. Bitte führen Sie am Ende das Update nochmals aus</string>
-	<string name="export_purchase_title">Export aller Einkäufe</string>
-	<string name="export_purchase_message">Sind Sie sicher, dass Sie alle Einkäufe exportieren möchten. Die lokalen Einträge werden gelöscht</string>
-	<string name="export_vegdata_title">Export Daten</string>
-	<string name="export_vegdata_message">Sind Sie sicher, dass Sie die Vegetationsdaten exportieren möchten. Die Daten bleiben lokal gespeichert</string>
 	<!--  Strings for gps location  -->
 	<string name="gps_text">GPS Daten des gewählten Sortenquartiers</string>
 	<string name="gps_point1">Längen und Breitengrade von Punkt 1</string>
@@ -167,8 +151,6 @@
 	<string name="max_amount_usage">Max Menge pro ha:</string>
 	<string name="max_use_year_in_serie">Max Anzahl in Folge:</string>
 	 Strings in Fragment Input Purchase -->
-	<string name="input_purchase_amount">Menge in kg/lt</string>
-	<string name="input_purchase_price">Preis pro kg/lt</string>
 	<!-- Strings for TabCaption for Product List -->
 	<string name="pesticidetab">Pflanzenschutzm</string>
 	<string name="fertilizertab">Blattdünger</string>
@@ -184,7 +166,6 @@
 	<string name="importTitle">Importieren Stammdaten…</string>
 	<string name="noUpdatesInfo">Hinweis</string>
 	<string name="noUpdatesText">Keine Updates vorhanden</string>
-    <string name="startsearchbutton">Suche starten</string>
 	<!-- Strings for Harvest Fragment Dialog -->
 	<string name="har_title">Lieferschein</string>
 	<string name="har_number">Liefernr</string>
@@ -221,13 +202,6 @@
 	<string name="pdfNotSupported">Keine App zum Lesen von pdf installiert!</string>
     <!--Strings for Archive and history -->
     <!--Strings for SearchPesticide -->
-    <string name="searchLastPest">Letzte Spritzung</string>
-    <string name="searchVQuarter">Bitte Sortenquartier zur Suche auswählen</string>
-    <string name="searchPest">Suche Pflanzenschutzmittel</string>
-	<string name="searchFert">Suche Blattdünger</string>
-    <string name="searchPestSel">Bitte Produkt für die Suche auswählen</string>
-    <string name="searchInfo">Das Archiv beinhaltet %1$d Einträge. \n Diese Suche beinhaltet nur Spritzungen, welche von diesem Gerät gesendet wurden. Bitte achten Sie darauf, dass Sie das Spritzarchiv nicht während des Jahres leeren.</string>
-    <string name="search_no_result">Kein Eintrag für diese Suche</string>
     <string name="delete_archive">Archiv leeren</string>
     <string name="delete_archive_mes">ACHTUNG!! ALLE SPRITZEINTRÄGE DIE ÄLTER ALS 60 TAGE SIND WERDEN GELÖSCHT!\n DURCH DAS AKTIVIEREN DES KONTROLLKÄSTCHENS WERDEN ALLE GESENDETEN ARBEITEN GELÖSCHT</string>
     <string name="fromDate">von Datum</string>
@@ -256,13 +230,6 @@
 	<string name="titleDropboxLoginActivity">MoFa - Anmelden Dropbox</string>
 	<string name="titleDropboxButton">Anmelden</string>
 	<string name="dropboxInfo">Klicken Sie auf den Anmelden Button um MoFa mit Ihrer Dropbox zu verknüpfen \n Sie benötigen dazu ein gültiges Dropbox Konto</string>
-	<!-- Strings for VegData -->
-	<string name="blossomStart">BLÜHBEGINN</string>
-	<string name="blossomEnd">BLÜHENDE</string>
-	<string name="harvestStart">ERNTE</string>
-	<string name="estimCrop">ERTRAG</string>
-	<string name="estimCropTitleHa">Menge in t/ha</string>
-	<string name="amountCrop">Menge auf Fläche: %1$d t</string>
 	<!-- Strings for SpeechRecognition -->
 	<string name="speech_prompt">Bitte sprechen</string>
 	<string name="speech_not_supported">Spracheingabe nicht möglich</string>

@@ -34,11 +34,6 @@ public class CreateFolderTask {
                 dbxClient.files().createFolderV2(PathConstants.IMPORT + "/worker");
                 dbxClient.files().createFolderV2(PathConstants.IMPORT + "/machine");
                 dbxClient.files().createFolderV2(PathConstants.IMPORT + "/task");
-                dbxClient.files().createFolderV2(PathConstants.IMPORT + "/pesticide");
-                dbxClient.files().createFolderV2(PathConstants.IMPORT + "/fertilizer");
-                dbxClient.files().createFolderV2(PathConstants.IMPORT + "/category");
-                dbxClient.files().createFolderV2(PathConstants.IMPORT + "/soilfertilizer");
-                dbxClient.files().createFolderV2(PathConstants.IMPORT + "/extra");
                 Log.d("CreateFolderTask", "Success - Creating Folders");
             } catch (DbxException e) {
                 Log.e("CreateFolderTask", "Error creating folders", e);

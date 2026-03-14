@@ -1,30 +1,28 @@
 package it.schmid.android.mofa;
 
-import it.schmid.android.mofa.db.DatabaseManager;
-import it.schmid.android.mofa.model.Work;
-
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBar.Tab;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.TextView;
 
+import java.util.ArrayList;
 
+import it.schmid.android.mofa.db.DatabaseManager;
+import it.schmid.android.mofa.model.Work;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBar.Tab;
 /**
  * @author schmida
- *         Main Class for works
+ * Main Class for works
  */
-public class WorkEditTabActivity extends DashboardActivity implements WorkEditWorkFragment.ShowSprayTabListener, WorkEditWorkFragment.SetWorkIdListener, WorkEditWorkFragment.CompleteBehaviour,
-        WorkEditWorkFragment.ShowSoilFertilizerTabListener, WorkEditWorkFragment.ShowHarvestTabListener, WorkEditWorkFragment.ShowWaterTabListener {
+public class WorkEditTabActivity extends DashboardActivity implements WorkEditWorkFragment.SetWorkIdListener, WorkEditWorkFragment.CompleteBehaviour {
     private static final String TAG = "WorkEditTabActivity";
     ViewPager mViewPager;
     TabsAdapter mTabsAdapter;
@@ -33,9 +31,6 @@ public class WorkEditTabActivity extends DashboardActivity implements WorkEditWo
     private Bundle mBundle; //bundle for workid
     private Integer workId = 0; //current workid
     private Boolean continueEnabled = false;
-    static final int DATE_DIALOG_ID = 0;
-    private Boolean sprayToCheck = false; //check variable for spraying
-    private Boolean fertToCheck = false;
 
     MofaApplication mofaApplication = MofaApplication.getInstance();
 
@@ -69,78 +64,6 @@ public class WorkEditTabActivity extends DashboardActivity implements WorkEditWo
 
     }
 
-    public void showSprayTab() {
-        if (mTabsAdapter.getCount() <= 2) { //only adding if there is not already done
-            ActionBar bar = getSupportActionBar();
-            Log.d(TAG, "[showSprayTab] - Size of tabs = " + mTabsAdapter.getCount());
-            mTabsAdapter.addTab(
-                    bar.newTab().setText(R.string.spraytab),
-                    WorkEditSprayFragment.class, mBundle);
-            sprayToCheck = true;
-        }
-
-
-    }
-
-    public void showSoilFertTab() {
-        if (mTabsAdapter.getCount() <= 2) { //only adding if there is not already done
-            ActionBar bar = getSupportActionBar();
-            Log.d(TAG, "[showSoilFertTab] - Size of tabs = " + mTabsAdapter.getCount());
-            mTabsAdapter.addTab(
-                    bar.newTab().setText(R.string.soilferttab),
-                    WorkEditSoilFertilizerFragment.class, mBundle);
-            fertToCheck = true;
-        }
-
-
-    }
-
-    public void showHarvestTab() {
-        if (mTabsAdapter.getCount() <= 2) { //only adding if there is not already done
-            ActionBar bar = getSupportActionBar();
-            Log.d(TAG, "[showHarvestTab] - Size of tabs = " + mTabsAdapter.getCount());
-            mTabsAdapter.addTab(
-                    bar.newTab().setText(R.string.harvesttab),
-                    WorkEditHarvestFragment.class, mBundle);
-        }
-    }
-
-    @Override
-    public void showWaterTabListener(int workId, Boolean status) {
-        if (mTabsAdapter.getCount() <= 2) { //only adding if there is not already done
-            ActionBar bar = getSupportActionBar();
-            Log.d(TAG, "[showIrrigationTab] - Size of tabs = " + mTabsAdapter.getCount());
-            mTabsAdapter.addTab(
-                    bar.newTab().setText(R.string.irrigationtab),
-                    WorkEditWaterFragment.class, mBundle);
-        }
-    }
-
-    //callback methods from workeditworkactivity, after selecting the spraying task
-    public void showSprayTabListener(int workId, Boolean status) {
-
-        if (status == true) {
-            Log.d(TAG, "[callback - showSprayTabListener] - Invoking the callback method with workid: " + workId);
-            showSprayTab();
-        }
-    }
-
-    //callback method from workeditworkactivity, after selecting the fertilizing task -> task.id ==2
-    public void showSoilFertilizerTab(int workId, Boolean status) {
-        if (status == true) {
-            showSoilFertTab();
-        }
-
-    }
-
-    //callback method from workeditworkfragment, after selecting a work contains harvest codes
-    public void showHarvestTabListener(int workId, Boolean status) {
-        // TODO Auto-generated method stub
-        if (status == true) {
-            showHarvestTab();
-        }
-    }
-
     public void setWorkIdListener(int workId) {
         //Log.d (TAG, "[callback - setWorkIdListener] - Invoking the callback method with workid: " + workId);
         this.workId = workId;
@@ -170,26 +93,11 @@ public class WorkEditTabActivity extends DashboardActivity implements WorkEditWo
 
         //setting the validity of an entry
         Boolean valid = false;
-        Log.d(TAG, "[onPause] land is " + mofaApplication.getGlobalVariable("land").toString());
-        Log.d(TAG, "[onPause] worker is " + mofaApplication.getGlobalVariable("worker").toString());
+        Log.d(TAG, "[onPause] land is " + mofaApplication.getGlobalVariable("land"));
+        Log.d(TAG, "[onPause] worker is " + mofaApplication.getGlobalVariable("worker"));
         if (mofaApplication.getGlobalVariable("land").equalsIgnoreCase("valid") && mofaApplication.getGlobalVariable("worker").equalsIgnoreCase("valid")) {
             //	Log.d(TAG, "[onPause] land and worker are valid" );
             valid = true;
-        }
-        //second case spray work
-        if (valid && sprayToCheck) {
-            if (workId != 0) {
-                valid = !DatabaseManager.getInstance().sprayIsEmpty(workId); //returns true if no Pesticide/Fertilizer
-                //	Log.d(TAG, "[onPause] spray Part is: " + valid);
-            }
-        }
-
-
-        //third case soil fertilizing
-        if (valid && fertToCheck) { //fertilizer work
-            if (workId != 0) {
-                valid = !DatabaseManager.getInstance().soilFertIsEmpty(workId);
-            }
         }
         //writing the validity flat into the DB
         if (workId != 0) {
@@ -300,6 +208,4 @@ public class WorkEditTabActivity extends DashboardActivity implements WorkEditWo
         public void onTabReselected(Tab tab, FragmentTransaction ft) {
         }
     }
-
-
 }

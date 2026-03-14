@@ -14,10 +14,9 @@ import com.dropbox.core.v2.DbxClientV2;
 
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.OkHttpClient;
-
 import it.schmid.android.mofa.HomeActivity;
 import it.schmid.android.mofa.PathConstants;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by schmida on 22.07.16.
