@@ -61,8 +61,9 @@ import android.util.Log;
 import android.util.Xml;
 
 import com.dropbox.core.DbxException;
-import com.dropbox.core.DbxWebAuth;
+
 import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.oauth.DbxCredential;
 import com.dropbox.core.v2.files.WriteMode;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -87,7 +88,8 @@ public class SendingProcess implements Runnable{
 	private String restResponse=""; // not used yet, but response of json-webservice
 	private int callingActivity;
 	private String asaWorkHerbicideCode;
-	private String ACCESS_TOKEN; //Dropbox
+
+	private DbxCredential credential; //Dropbox
 	RemoveEntries mremoveEntries;
 	//constructor
 	public SendingProcess (Context context, Integer callingActivity){
@@ -1455,7 +1457,7 @@ public void run(){
 		Date date = new Date() ;
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss") ;
 		String filePath=null;
-		ACCESS_TOKEN = DropboxClient.retrieveAccessToken(context);
+		credential = DropboxClient.retrieveCredential(context);
 		if (fileType.equalsIgnoreCase("1")){
 			if (callingActivity==ActivityConstants.WORK_OVERVIEW){
 				filePath =  PathConstants.EXPORT + "/worklist" + dateFormat.format(date) + ".json";
@@ -1481,8 +1483,8 @@ public void run(){
 
 	    try {
 			InputStream inputStream = new ByteArrayInputStream(data.getBytes(Charset.forName("UTF-8")));
-			if (ACCESS_TOKEN != null) {
-				DbxClientV2 dbxClient = DropboxClient.getClient(ACCESS_TOKEN);
+			if (credential != null) {
+				DbxClientV2 dbxClient = DropboxClient.getClient(credential);
 				dbxClient.files().uploadBuilder(filePath)
 						.withMode(WriteMode.OVERWRITE)
 						.uploadAndFinish(inputStream);

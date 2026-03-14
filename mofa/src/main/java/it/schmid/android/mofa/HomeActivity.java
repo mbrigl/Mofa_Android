@@ -15,6 +15,8 @@ import it.schmid.android.mofa.search.SearchActivity;
 import it.schmid.android.mofa.search.WorkerOverviewActivity;
 import it.schmid.android.mofa.vegdata.VegDataActivity;
 
+import com.dropbox.core.oauth.DbxCredential;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +88,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
     private static final int REQUEST_LINK_TO_DBX = 0;
     
     //Dropbox variable
-	private String ACCESS_TOKEN;
+	private DbxCredential credential;
 
 	
 	// Image resources for the buttons
@@ -226,7 +228,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 						   //Back to LoginActivity
 						   startActivity(new Intent(HomeActivity.this, LoginActivity.class));
 					   }else {
-						   ACCESS_TOKEN = DropboxClient.retrieveAccessToken(this);
+						   credential = DropboxClient.retrieveCredential(this);
 						   importFromDropbox();
 					   }
 
@@ -278,7 +280,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 		}else{
 			extension =".xml";
 		}
-		WebServiceCall importData = new WebServiceCall(this, offline, format, dropBox, backEndSoftware,DropboxClient.getClient(ACCESS_TOKEN));
+		WebServiceCall importData = new WebServiceCall(this, offline, format, dropBox, backEndSoftware,DropboxClient.getClient(credential));
 		importData.execute(selItems, url);
 		
 
@@ -549,7 +551,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries{
 			extension =".xml";
 		}
 		filename = filename + extension;
-		new CheckFileTask(DropboxClient.getClient(ACCESS_TOKEN),elementDesc, new CheckFileTask.Callback(){
+		new CheckFileTask(DropboxClient.getClient(credential),elementDesc, new CheckFileTask.Callback(){
 
 			@Override
 			public void onDataLoaded(ArrayList<Integer> result, StringBuilder sb) {

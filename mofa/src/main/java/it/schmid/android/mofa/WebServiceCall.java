@@ -23,14 +23,16 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.AsyncTask;
-import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import com.dropbox.core.DbxException;
@@ -38,7 +40,7 @@ import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.FileMetadata;
 
 
-public class WebServiceCall extends AsyncTask<Object, Integer, String > {
+public class WebServiceCall {
 	private static final String TAG = "WebServiceCall";
 	private static final String UTF = "UTF-8";
 	private static final String ISO8859 = "iso-8859-1";
@@ -53,18 +55,18 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String > {
 	 private String format;
 	 private String statusMsg="";
 	 private ArrayList<Integer> selItems;
-	 private String encoding; //setting the encoding for xml
-	//Dropbox variable
+	 private String encoding;
 	private final DbxClientV2 mDbxClient;
-	 //Notification variable
 	 private NotificationService mNotificationService;
-	public WebServiceCall(Context context,Boolean offline,String format,Boolean dropBox, String backEndSoftware,DbxClientV2 dbxClient){
+	private final ExecutorService executor = Executors.newSingleThreadExecutor();
+	private final Handler mainHandler = new Handler(Looper.getMainLooper());
+
+	public WebServiceCall(Context context, Boolean offline, String format, Boolean dropBox, String backEndSoftware, DbxClientV2 dbxClient){
 		this.mContext = context;
 		this.mOffline=offline;
 		this.mDropbox=dropBox;
 		this.format = format;
 		this.mDbxClient = dbxClient;
-		//Get the notification manager
 		 mNotificationService= new NotificationService(context,true);
 		 switch (Integer.parseInt(backEndSoftware)) {
          case 1:
@@ -79,146 +81,145 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String > {
         	 Log.d ("TAG", "BackendSoftware:Default");
         	 encoding = UTF;
              break;
-         
-
      }
 	}
-	
-	@Override
-	protected void onPreExecute() {
-		//Get the notification manager
+
+	public void execute(ArrayList<Integer> items, String url) {
+		onPreExecute();
+		executor.execute(() -> {
+			String result = doInBackground(items, url);
+			mainHandler.post(() -> onPostExecute(result));
+		});
+	}
+
+	private void publishProgress(int progress) {
+		mainHandler.post(() -> onProgressUpdate(progress));
+	}
+
+	private void onPreExecute() {
 		mNotificationService= new NotificationService(mContext,true);
 		int icon = android.R.drawable.stat_sys_download;
-	    CharSequence tickerText = mContext.getString(R.string.download_title);  
+	    CharSequence tickerText = mContext.getString(R.string.download_title);
 		String notifMess = mContext.getString(R.string.download_mess);
 	    mNotificationService.createNotification(icon, tickerText,notifMess);
-	 // Setup Progress Dialog
 	    dialog = new ProgressDialog(mContext);
 	    dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 	    dialog.setTitle("Import");
 	    dialog.setMax(100);
 	    dialog.show();
-	    }
-	@Override
-	protected void onProgressUpdate(Integer... values) {
-	  // Increment Progress Dialog with the Update 
-	  // from the doInBackgroundMethod
-	  dialog.incrementProgressBy(values[0]);
-	 }
-	 @Override
-	protected String doInBackground(Object... params) {
-	String extension;
-	String url;
-	Integer progress;
-	selItems = (ArrayList<Integer>) params[0];
-	progress = (100/((selItems.size()*2))); //progress dividing
-	url = (String) params[1];
-    	//checking file format
-		 if (format.equalsIgnoreCase("1")){ //json
-				extension =".json";
-			}else{
-				extension =".xml";
-			}	 
-   
-		 for(Integer i:selItems){
-			switch(i)
-				{
+    }
+
+	private void onProgressUpdate(int value) {
+	  dialog.incrementProgressBy(value);
+	}
+
+	private String doInBackground(ArrayList<Integer> items, String url) {
+		String extension;
+		int progress = (100 / (items.size() * 2));
+		if (format.equalsIgnoreCase("1")) {
+			extension = ".json";
+		} else {
+			extension = ".xml";
+		}
+
+		for (Integer i : items) {
+			switch (i) {
 				case 1:
 					Land land = new Land();
-					data = getData(url +"/land/list" + extension);
+					data = getData(url + "/land/list" + extension);
 					publishProgress(progress);
-					importData (data,land);
+					importData(data, land);
 					statusMsg += " land - error: " + error + "\n";
 					break;
 				case 2:
 					VQuarter vquarter = new VQuarter();
-					data = getData(url +"/vquarter/list" + extension);
+					data = getData(url + "/vquarter/list" + extension);
 					publishProgress(progress);
-					importData (data, vquarter);
+					importData(data, vquarter);
 					statusMsg += " vquarter - error: " + error + "\n";
 					break;
 				case 3:
 					Machine machine = new Machine();
-					data = getData(url +"/machine/list" + extension);
+					data = getData(url + "/machine/list" + extension);
 					publishProgress(progress);
-					importData (data,machine);
+					importData(data, machine);
 					statusMsg += " machine - error: " + error + "\n";
 					break;
 				case 4:
 					Worker worker = new Worker();
-					data = getData(url +"/worker/list" + extension);
+					data = getData(url + "/worker/list" + extension);
 					publishProgress(progress);
-					importData (data,worker);
+					importData(data, worker);
 					statusMsg += " worker - error: " + error + "\n";
 					break;
 				case 5:
 					Task task = new Task();
-					data = getData(url +"/task/list" + extension);
+					data = getData(url + "/task/list" + extension);
 					publishProgress(progress);
-					importData (data, task);
+					importData(data, task);
 					statusMsg += " task - error: " + error + "\n";
 					break;
 				case 6:
 					Pesticide pesticide = new Pesticide();
-					data = getData(url +"/pesticide/list" + extension);
+					data = getData(url + "/pesticide/list" + extension);
 					publishProgress(progress);
-					importData (data, pesticide);
+					importData(data, pesticide);
 					statusMsg += " pesticide - error: " + error + "\n";
 					break;
 				case 7:
 					Fertilizer fertilizer = new Fertilizer();
-					data = getData(url +"/fertilizer/list" + extension);
+					data = getData(url + "/fertilizer/list" + extension);
 					publishProgress(progress);
-					importData (data, fertilizer);
+					importData(data, fertilizer);
 					statusMsg += " fertilizer - error: " + error + "\n";
 					break;
 				case 8:
 					SoilFertilizer sFertilizer = new SoilFertilizer();
-					data = getData(url +"/soilfertilizer/list" + extension);
+					data = getData(url + "/soilfertilizer/list" + extension);
 					publishProgress(progress);
-					importData (data, sFertilizer);
+					importData(data, sFertilizer);
 					statusMsg += " soilfertilizer - error: " + error + "\n";
-					break;	
-				case 9: 
+					break;
+				case 9:
 					FruitQuality fruitQuality = new FruitQuality();
-					data = getData(url +"/category/list" + extension);
+					data = getData(url + "/category/list" + extension);
 					publishProgress(progress);
-					importData (data, fruitQuality);
+					importData(data, fruitQuality);
 					statusMsg += " fruitquality - error: " + error + "\n";
 					break;
                 case 11:
                         Einsatzgrund einsatzgrund = new Einsatzgrund();
-                        data = getData(url +"/reason/list" + extension);
+                        data = getData(url + "/reason/list" + extension);
                         publishProgress(progress);
                         importData(data, einsatzgrund);
                         statusMsg += " reason - error: " + error + "\n";
                         break;
-
 				default:
 					break;
-				}
-			/** Invokes the callback method onProgressUpdate */
-            publishProgress(progress);
-		 }
-
-	
-      // Log.d(TAG, "Content of request: " + data);
+			}
+			publishProgress(progress);
+		}
         return data;
 	}
-	 
-	 
-	/**
-	 * 
-	 * @param filePath = Path to the file
-	 * @return data = the content of the xml or json file
-	 */
-	 
-	 private String getData(String filePath){
-		 
+
+	private void onPostExecute(String result) {
+		String notifMess = "";
+        int icon = android.R.drawable.stat_sys_download_done;
+        CharSequence tickerText = mContext.getString(R.string.download_finished);
+		if (error){
+			notifMess = mContext.getString(R.string.download_finished_error);
+		}else{
+			notifMess = mContext.getString(R.string.download_finished_ok);
+		}
+		mNotificationService.completed(icon, tickerText,notifMess);
+		dialog.dismiss();
+    }
+
+	private String getData(String filePath){
 		if (mDropbox==false){
-			if (mOffline==true){ //we make only a offline import
+			if (mOffline==true){
 				data=offlineImport(filePath);
-			}else{ //import over Internet
+			}else{
 				data=HttpConnect(filePath);
 			}
 		}else{
@@ -227,128 +228,94 @@ public class WebServiceCall extends AsyncTask<Object, Integer, String > {
 		}
 		return data;
 	}
-	private void importData (String data, ImportBehavior selectedTable){
-		if (format.equalsIgnoreCase("1")){ //case JSON
+
+	private void importData(String data, ImportBehavior selectedTable){
+		if (format.equalsIgnoreCase("1")){
 			try {
 	            jObj = new JSONArray(data);
 	        } catch (JSONException e) {
 	            Log.e("JSON Parser", "Error parsing data " + e.toString());
-	            error =  true; //concatinating the error status
+	            error = true;
 	        }
 	        selectedTable.importMasterData(jObj);
-		}else{  //case XML
-			error =  selectedTable.importMasterData(data, mNotificationService); //concatinating the error status
+		}else{
+			error = selectedTable.importMasterData(data, mNotificationService);
 		}
 		if (error){
 			onPostExecute("Error in parsing file");
-			
 		}
-		//return data;
 	}
-	@Override
-	protected void onPostExecute(String result) {
-		String notifMess = "";
 
-        int icon = android.R.drawable.stat_sys_download_done;
-        CharSequence tickerText = mContext.getString(R.string.download_finished);  
-		if (error){
-			notifMess = mContext.getString(R.string.download_finished_error);
-		}else{
-			notifMess = mContext.getString(R.string.download_finished_ok) ;
-		}
-		
-		
-		
-		mNotificationService.completed(icon, tickerText,notifMess);
-		dialog.dismiss();
-       
-
- 
-    }
-// modified connection, using application object as singleton connection
-private String HttpConnect(String restUrl){
-	MofaApplication app = MofaApplication.getInstance();
-	okhttp3.OkHttpClient client = app.getHttpClient();
-	try {
-		okhttp3.Request request = new okhttp3.Request.Builder()
-				.url(restUrl)
-				.post(okhttp3.RequestBody.create("", null))
-				.build();
-		try (okhttp3.Response httpResponse = client.newCall(request).execute()) {
-			if (httpResponse.body() != null) {
-				data = httpResponse.body().string();
+	private String HttpConnect(String restUrl){
+		MofaApplication app = MofaApplication.getInstance();
+		okhttp3.OkHttpClient client = app.getHttpClient();
+		try {
+			okhttp3.Request request = new okhttp3.Request.Builder()
+					.url(restUrl)
+					.post(okhttp3.RequestBody.create("", null))
+					.build();
+			try (okhttp3.Response httpResponse = client.newCall(request).execute()) {
+				if (httpResponse.body() != null) {
+					data = httpResponse.body().string();
+				}
 			}
+		} catch (Exception e) {
+			error = true;
+			e.printStackTrace();
 		}
-	} catch (Exception e) {
-		error = true;
-		e.printStackTrace();
-	}
-	return data;
-}
-
-
-private String offlineImport(String filePath){
-	 String jString = "";
-	try {
-
-        File dir = mContext.getExternalFilesDir(null);
-        File importFile = new File(dir, filePath);
-        if (importFile.exists()){
-        	FileInputStream stream = new FileInputStream(importFile);
-            
-            try {
-                FileChannel fc = stream.getChannel();
-                MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
-                jString = Charset.defaultCharset().decode(bb).toString();
-              }
-              finally {
-                stream.close();
-              }
-        }else{
-        	error=true;
-        }
-        
-    } catch (Exception e) {e.printStackTrace();}
-	//TODO
-	return jString;
-}
-
-private String getDropboxData(String filePath){
-	try {
-		FileMetadata mData = (FileMetadata)mDbxClient.files().getMetadata(filePath);
-		InputStream in  = mDbxClient.files().download(mData.getPathLower()).getInputStream();
-		String data = getStringFromInputStream(in);
-
 		return data;
-
-	} catch ( DbxException e ) {
-		error = true;
 	}
 
+	private String offlineImport(String filePath){
+		String jString = "";
+		try {
+	        File dir = mContext.getExternalFilesDir(null);
+	        File importFile = new File(dir, filePath);
+	        if (importFile.exists()){
+	        	FileInputStream stream = new FileInputStream(importFile);
+	            try {
+	                FileChannel fc = stream.getChannel();
+	                MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
+	                jString = Charset.defaultCharset().decode(bb).toString();
+	              }
+	              finally {
+	                stream.close();
+	              }
+	        }else{
+	        	error=true;
+	        }
+	    } catch (Exception e) {e.printStackTrace();}
+		return jString;
+	}
 
+	private String getDropboxData(String filePath){
+		try {
+			FileMetadata mData = (FileMetadata)mDbxClient.files().getMetadata(filePath);
+			InputStream in = mDbxClient.files().download(mData.getPathLower()).getInputStream();
+			return getStringFromInputStream(in);
+		} catch (DbxException e) {
+			error = true;
+		}
+		return null;
+	}
 
-	return null;
-}
 	private void deleteDropboxFile(String filePath){
 		try{
-			mDbxClient.files().delete(filePath);
+			mDbxClient.files().deleteV2(filePath);
 		}catch (DbxException e) {
 			error = true;
 		}
 	}
-	private static String getStringFromInputStream(InputStream is) {
 
+	private static String getStringFromInputStream(InputStream is) {
 		BufferedReader br = null;
 		StringBuilder sb = new StringBuilder();
-
 		String line;
 		try {
-
 			br = new BufferedReader(new InputStreamReader(is));
 			while ((line = br.readLine()) != null) {
 				sb.append(line);
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -360,9 +327,6 @@ private String getDropboxData(String filePath){
 				}
 			}
 		}
-
 		return sb.toString();
-
 	}
-
 }

@@ -18,7 +18,7 @@ android {
     buildTypes {
         release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
             proguardFile 'proguard-android.txt'
         }
     }
@@ -40,13 +40,13 @@ android {
 
 dependencies {
     implementation project(':library')
-    implementation files('libs/ormlite-core-4.42.jar')
-    implementation files('libs/ormlite-android-4.42.jar')
+    implementation libs.ormlite.android
     implementation libs.androidx.appcompat
     implementation libs.material
     implementation libs.gson
     implementation libs.google.http.client.android
     implementation libs.dropbox.core.sdk
+    implementation libs.dropbox.android.sdk
     implementation libs.okhttp
     implementation libs.jsoup
 }
