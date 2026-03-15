@@ -22,7 +22,7 @@ import it.schmid.android.mofa.NotificationService;
 import it.schmid.android.mofa.db.DatabaseManager;
 
 @DatabaseTable
-public class Worker extends ImportBehavior {
+public class Worker implements ImportBehavior {
     private static final String TAG = "WorkerClass";
     @DatabaseField(id = true)
     @Expose
@@ -104,7 +104,7 @@ public class Worker extends ImportBehavior {
     }
 
     @Override
-    public Boolean importMasterData(String xmlString, NotificationService notification) {
+    public boolean importMasterData(String xmlString, NotificationService notification) {
         String backEndSoftware;
         List<Worker> importData;
         MofaApplication app = MofaApplication.getInstance();

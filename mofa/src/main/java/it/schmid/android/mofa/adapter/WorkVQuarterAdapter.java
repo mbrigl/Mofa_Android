@@ -16,7 +16,6 @@ import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.VQuarter;
 
 public class WorkVQuarterAdapter extends ArrayAdapter<VQuarter> {
-    private static final String TAG = "WorkVQuarterAdapter";
     Context context;
     String strVquarter;
     int layoutResourceId;

@@ -4,8 +4,8 @@ import org.json.JSONArray;
 
 import it.schmid.android.mofa.NotificationService;
 
-public abstract class ImportBehavior {
-    public abstract void importMasterData(JSONArray importData);
+public interface ImportBehavior {
+    void importMasterData(JSONArray importData);
 
-    public abstract Boolean importMasterData(String xmlString, NotificationService notification);
+    boolean importMasterData(String xmlString, NotificationService notification);
 }

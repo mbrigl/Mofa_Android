@@ -88,11 +88,7 @@ public class WorkSelectWorkerActivity extends DashboardActivity {
 
             }
         });
-        closeButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        closeButton.setOnClickListener(v -> finish());
     }
 
     private void saveState(int workid, int workerid, Double hours) throws SQLException {

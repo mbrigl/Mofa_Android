@@ -15,7 +15,7 @@ import com.dropbox.core.v2.DbxClientV2;
 import java.util.concurrent.TimeUnit;
 
 import it.schmid.android.mofa.HomeActivity;
-import it.schmid.android.mofa.PathConstants;
+import it.schmid.android.mofa.MofaConstants;
 import okhttp3.OkHttpClient;
 
 /**
@@ -58,7 +58,7 @@ public class DropboxClient {
     public static void getAccessToken(Context context) {
         DbxCredential credential = Auth.getDbxCredential();
         if (credential != null) {
-            SharedPreferences prefs = context.getSharedPreferences(PathConstants.ID, Context.MODE_PRIVATE);
+            SharedPreferences prefs = context.getSharedPreferences(MofaConstants.ID, Context.MODE_PRIVATE);
             prefs.edit().putString(PREF_CREDENTIAL, DbxCredential.Writer.writeToString(credential)).apply();
             new CreateFolderTask(DropboxClient.getClient(credential), context).execute();
             Intent intent = new Intent(context, HomeActivity.class);
@@ -67,7 +67,7 @@ public class DropboxClient {
     }
 
     public static DbxCredential retrieveCredential(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(PathConstants.ID, Context.MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(MofaConstants.ID, Context.MODE_PRIVATE);
         String credentialStr = prefs.getString(PREF_CREDENTIAL, null);
         if (credentialStr == null) {
             Log.d("DropboxClient", "No credential found");
@@ -82,12 +82,12 @@ public class DropboxClient {
     }
 
     public static boolean tokenExists(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(PathConstants.ID, Context.MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(MofaConstants.ID, Context.MODE_PRIVATE);
         return prefs.getString(PREF_CREDENTIAL, null) != null;
     }
 
     public static void deleteAccessToken(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(PathConstants.ID, Context.MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(MofaConstants.ID, Context.MODE_PRIVATE);
         prefs.edit().remove(PREF_CREDENTIAL).remove("access-token").apply();
     }
 }

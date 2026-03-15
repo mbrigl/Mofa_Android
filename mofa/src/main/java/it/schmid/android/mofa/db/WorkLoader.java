@@ -20,14 +20,12 @@ public class WorkLoader extends AsyncTaskLoader<List<Work>> {
 
     public WorkLoader(Context context) {
         super(context);
-
     }
 
     @Override
     public List<Work> loadInBackground() {
         Log.d(TAG, "Loading Data in a Background Process");
         return DatabaseManager.getInstance().getAllWorksOrderByDate();
-
     }
 
     @Override

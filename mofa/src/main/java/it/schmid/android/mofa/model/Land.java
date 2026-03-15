@@ -24,7 +24,7 @@ import it.schmid.android.mofa.NotificationService;
 import it.schmid.android.mofa.db.DatabaseManager;
 
 @DatabaseTable
-public class Land extends ImportBehavior {
+public class Land implements ImportBehavior {
     private static final String TAG = "LandClass";
     @DatabaseField(id = true)
     private Integer id;
@@ -105,7 +105,7 @@ public class Land extends ImportBehavior {
     }
 
     @Override
-    public Boolean importMasterData(String xmlString, NotificationService notification) {
+    public boolean importMasterData(String xmlString, NotificationService notification) {
         String backEndSoftware;
         List<Land> importData;
         MofaApplication app = MofaApplication.getInstance();

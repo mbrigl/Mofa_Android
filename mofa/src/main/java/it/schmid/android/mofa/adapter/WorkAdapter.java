@@ -3,10 +3,8 @@ package it.schmid.android.mofa.adapter;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.text.SpannableStringBuilder;
 import android.text.style.BulletSpan;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,7 +27,6 @@ import it.schmid.android.mofa.model.WorkWorker;
 import it.schmid.android.mofa.model.Worker;
 
 public class WorkAdapter extends ArrayAdapter<Work> {
-    private static final String TAG = "ArrayAdapter";
     Context context;
     int layoutResourceId;
     List<Work> data = null;
@@ -91,29 +88,24 @@ public class WorkAdapter extends ArrayAdapter<Work> {
 
         holder.imgIcon.setClickable(true);
 
-        holder.imgIcon.setOnClickListener(new OnClickListener() {
-
-            public void onClick(View v) {
-                String txtVquarters = "";
-                SpannableStringBuilder txtWorkers = new SpannableStringBuilder();
-                //	Work work = data.get(position);
-                View toolbar = row.findViewById(R.id.toolbar);
-                txtVquarters = getVquarters(work);
-                txtWorkers = getWorkers(work);
-                if (txtVquarters != "") {
-                    TextView txt = row.findViewById(R.id.txtprevvquarters);
-                    txt.setText(txtVquarters);
-                }
-                if (txtWorkers.length() != 0) {
-                    TextView txtworker = row.findViewById(R.id.txtprevworkers);
-                    txtworker.setVisibility(View.VISIBLE);
-                    txtworker.setText(txtWorkers);
-                }
-                PreviewAnimation expandAni = new PreviewAnimation(toolbar, 500);
-                toolbar.startAnimation(expandAni);
-
-
+        holder.imgIcon.setOnClickListener(v -> {
+            String txtVquarters = "";
+            SpannableStringBuilder txtWorkers = new SpannableStringBuilder();
+            //	Work work = data.get(position);
+            View toolbar = row.findViewById(R.id.toolbar);
+            txtVquarters = getVquarters(work);
+            txtWorkers = getWorkers(work);
+            if (txtVquarters != "") {
+                TextView txt = row.findViewById(R.id.txtprevvquarters);
+                txt.setText(txtVquarters);
             }
+            if (txtWorkers.length() != 0) {
+                TextView txtworker = row.findViewById(R.id.txtprevworkers);
+                txtworker.setVisibility(View.VISIBLE);
+                txtworker.setText(txtWorkers);
+            }
+            PreviewAnimation expandAni = new PreviewAnimation(toolbar, 500);
+            toolbar.startAnimation(expandAni);
         });
         holder.delIcon.setImageResource(R.drawable.ic_trash_empty);
         holder.delIcon.setClickable(true);
@@ -139,23 +131,16 @@ public class WorkAdapter extends ArrayAdapter<Work> {
         builder.setTitle(R.string.dialogdeletetitel);
         builder.setMessage(R.string.dialogdeletemsg);
 
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int which) {
-                // Deleting the entry
-                DatabaseManager.getInstance().deleteCascWork(work);
-                data.remove(data.get(position)); //removing the item form the list
-                notifyDataSetChanged();
-                dialog.dismiss();
-            }
+        builder.setPositiveButton("YES", (dialog, which) -> {
+            // Deleting the entry
+            DatabaseManager.getInstance().deleteCascWork(work);
+            data.remove(data.get(position)); //removing the item form the list
+            notifyDataSetChanged();
+            dialog.dismiss();
         });
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int which) {
-                // Do Nothing
-                dialog.dismiss();
-            }
-
+        builder.setNegativeButton("NO", (dialog, which) -> {
+            // Do Nothing
+            dialog.dismiss();
         });
 
 
@@ -200,10 +185,7 @@ public class WorkAdapter extends ArrayAdapter<Work> {
             txtWorkers = worker.getFirstName() + " " + worker.getLastname() + ": " + w.getHours() + " h";
             workerBuilder.append(txtWorkers);
             workerBuilder.setSpan(new BulletSpan(10), workerBuilder.length() - txtWorkers.length(), workerBuilder.length(), 17);
-
-
         }
-
         return workerBuilder;
     }
 }

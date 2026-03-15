@@ -12,15 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBar.OnNavigationListener;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.j256.ormlite.misc.TransactionManager;
@@ -54,15 +51,10 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
         actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         setContentView(R.layout.work_list);
-        // ViewGroup contentView = (ViewGroup) getLayoutInflater().inflate(R.layout.work_list,null);
         listViewWork = findViewById(R.id.listViewWork);
         delIcon = findViewById(R.id.delete_icon);
         FloatingActionButton myFab = findViewById(R.id.fab);
-        myFab.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                createWork();
-            }
-        });
+        myFab.setOnClickListener(v -> createWork());
         // setContentView(contentView);
 
     }
@@ -79,8 +71,6 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
      * @param lv is a reference to the listview
      */
     private void fillData(ListView lv) {
-
-        //workList = DatabaseManager.getInstance().getAllWorksOrderByDate();
         workList = DatabaseManager.getInstance().getAllNotSendedWorks();
         Log.d(TAG, "Number of total works:" + DatabaseManager.getInstance().getAllWorks().size());
         adapter = new WorkAdapter(this, R.layout.work_row, workList);
@@ -114,86 +104,7 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) { //inflating the menu
-
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.work_menu, menu);
-
-
-        SpinnerAdapter mSpinnerAdapter;
-
-        mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.nav_list, android.R.layout.simple_spinner_dropdown_item);
-
-        OnNavigationListener mOnNavigationListener = new OnNavigationListener() {
-
-            //Filtering the works
-
-            public boolean onNavigationItemSelected(int position, long itemId) {
-                String backEndSoftware;
-                MofaApplication app = MofaApplication.getInstance();
-                backEndSoftware = app.getBackendSoftware();
-                switch (position) {
-                    case 0:
-                        workList = DatabaseManager.getInstance().getAllNotSendedWorks();
-                        adapter = new WorkAdapter(WorkOverviewActivity.this, R.layout.work_row, workList);
-                        listViewWork.setAdapter(adapter);
-
-                        break;
-                    case 1:
-                        try {
-
-                            workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASA("S");
-
-
-                        } catch (SQLException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-                        adapter = new WorkAdapter(WorkOverviewActivity.this, R.layout.work_row, workList);
-                        listViewWork.setAdapter(adapter);
-                        break;
-                    case 2:
-                        try {
-
-                            workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASA("H");
-
-                        } catch (SQLException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-                        adapter = new WorkAdapter(WorkOverviewActivity.this, R.layout.work_row, workList);
-                        listViewWork.setAdapter(adapter);
-                        break;
-                    case 3:
-                        try {
-
-                            workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASA("D");
-
-                        } catch (SQLException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-                        adapter = new WorkAdapter(WorkOverviewActivity.this, R.layout.work_row, workList);
-                        listViewWork.setAdapter(adapter);
-                        break;
-                    default:
-                        try {
-
-                            workList = DatabaseManager.getInstance().getWorksForTaskIdOrderedASARest();
-
-                        } catch (SQLException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-                        adapter = new WorkAdapter(WorkOverviewActivity.this, R.layout.work_row, workList);
-                        listViewWork.setAdapter(adapter);
-                        break;
-                }
-
-                return true;
-            }
-        };
-
-        actionBar.setListNavigationCallbacks(mSpinnerAdapter, mOnNavigationListener);
 
         return true;
     }
@@ -205,8 +116,7 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
             case R.id.work_menu_upload:
                 Log.d(TAG, "Upload the work entries");
                 MofaApplication app = MofaApplication.getInstance();
-                Boolean haveConnection = app.networkStatus();
-                if (haveConnection) {
+                if (app.networkStatus()) {
                     showUploadDialog();
                 } else {
                     Toast.makeText(getApplicationContext(), R.string.no_connection, Toast.LENGTH_LONG).show();
@@ -241,7 +151,7 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
         alertDialog.setMessage(sb);
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                var sending = new SendingProcess(WorkOverviewActivity.this, ActivityConstants.WORK_OVERVIEW);
+                var sending = new SendingProcess(WorkOverviewActivity.this, MofaConstants.WORK_OVERVIEW);
                 sending.sendData();
             }
         });
@@ -253,20 +163,6 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
             }
         });
         alertDialog.show();
-    }
-
-    /**
-     * function for uploading the data
-     */
-
-
-    public void deleteAllEntriesOrg() {
-        List<Work> removeWorkList = DatabaseManager.getInstance().getAllValidWorks();
-        for (Work w : removeWorkList) {
-            DatabaseManager.getInstance().deleteCascWork(w);
-        }
-        //adapter.notifyDataSetChanged();
-        fillData(listViewWork);
     }
 
     public void deleteAllEntries() {
@@ -292,6 +188,4 @@ public class WorkOverviewActivity extends DashboardActivity implements SendingPr
         //adapter.notifyDataSetChanged();
         fillData(listViewWork);
     }
-
-
 }

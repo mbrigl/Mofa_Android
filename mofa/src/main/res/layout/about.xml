@@ -15,26 +15,26 @@ android:layout_gravity="left|center"/>
 android:id="@+id/info_text"
 android:gravity="center"
 android:layout_gravity="center"
-android:layout_width="fill_parent"
-android:layout_height="fill_parent" />
+android:layout_width="match_parent"
+android:layout_height="match_parent" />
 </TableRow>
 <TextView
 android:id="@+id/versiondb_text"
 android:layout_width="wrap_content"
-android:layout_height="fill_parent"
+android:layout_height="match_parent"
 android:gravity="right" />
 
 
 <TableRow>
 <TextView
 android:id="@+id/legal_text"
-android:layout_width="fill_parent"
+android:layout_width="match_parent"
 android:layout_height="wrap_content"
 
-android:textSize="10dip"
+android:textSize="10dp"
 android:textStyle="italic"
 android:layout_span="2"
-android:layout_margin="8dip"
+android:layout_margin="8dp"
 android:textColor="@color/lgray" />
 </TableRow>
 </TableLayout>

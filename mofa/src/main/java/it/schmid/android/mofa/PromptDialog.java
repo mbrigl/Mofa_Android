@@ -14,7 +14,6 @@ import android.widget.TextView;
 public abstract class PromptDialog extends AlertDialog.Builder implements OnClickListener {
     private final TextView input;
     private final SeekBar seek;
-    private Double defaultValue;
     private final int currPos;
 
     /**
@@ -45,7 +44,6 @@ public abstract class PromptDialog extends AlertDialog.Builder implements OnClic
 
         setView(linear);
         seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 Double value = ((double) progress / 4);
                 input.setText(value.toString());
@@ -59,16 +57,12 @@ public abstract class PromptDialog extends AlertDialog.Builder implements OnClic
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-        //input.setSelectAllOnFocus(true);
-        // input.requestFocus();
-        // input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         if (proposedValue != 0.00) {
             input.setText(proposedValue.toString());
         }
         proposedValue *= 4;
         currPos = proposedValue.intValue();
         seek.setProgress(currPos);
-        //setView(input);
         setPositiveButton(R.string.ok, this);
         setNegativeButton(R.string.cancel, this);
     }

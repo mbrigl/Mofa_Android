@@ -9,9 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -30,17 +28,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.preference.PreferenceManager;
+
 import com.dropbox.core.oauth.DbxCredential;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import it.schmid.android.mofa.dropbox.SendingProcess;
-import it.schmid.android.mofa.dropbox.SendingProcess.RemoveEntries;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.dropbox.CheckFileTask;
 import it.schmid.android.mofa.dropbox.DropboxClient;
 import it.schmid.android.mofa.dropbox.LoginActivity;
+import it.schmid.android.mofa.dropbox.SendingProcess;
+import it.schmid.android.mofa.dropbox.SendingProcess.RemoveEntries;
 import it.schmid.android.mofa.dropbox.WebServiceCall;
 import it.schmid.android.mofa.model.Work;
 
@@ -58,11 +58,6 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
     private MofaApplication app;
 
     private SharedPreferences preferences;
-    //******************
-    // Dropbox credentials
-    //private static final String appKey = "zgo2dupm3ung3u6";
-    //private static final String appSecret = "22u6lbkswjitll9";
-    private static final int REQUEST_LINK_TO_DBX = 0;
 
     //Dropbox variable
     private DbxCredential credential;
@@ -90,7 +85,6 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
     };
 
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         DatabaseManager.init(this);
         setContentView(R.layout.activity_home);
@@ -169,12 +163,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
 
                 break;
             case 2:
-                //  startActivity (new Intent(getApplicationContext(), F2Activity.class));
-                if (Build.VERSION.SDK_INT < 11) {
-                    startActivity(new Intent(this, EditPreferences.class));
-                } else {
-                    startActivity(new Intent(this, EditPreferences_Honey.class));
-                }
+                startActivity(new Intent(this, EditPreferences.class));
                 break;
             case 3:
                 preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -207,7 +196,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                 } else {
                     if (urlPath == "") {
                         //Toast.makeText(getApplicationContext(), R.string.restpathemptystring, Toast.LENGTH_LONG).show();
-                        urlPath = PathConstants.IMPORT;
+                        urlPath = MofaConstants.IMPORT;
                     }
                     showImportDialog();
                 }
@@ -396,8 +385,8 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
             }
         });
         LinearLayout linearLayout = new LinearLayout(this);
-        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
-                LinearLayout.LayoutParams.FILL_PARENT));
+        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT));
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
         linearLayout.addView(checkBox);
         alertDialog.setView(linearLayout);
@@ -410,13 +399,13 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                         if (dropBox == false) {
                             updateData(selElements, urlPath, offline, format); //starting the import of data
                         } else {
-                            updateData(selElements, PathConstants.IMPORT, offline, format); //starting the import of dropbox data
+                            updateData(selElements, MofaConstants.IMPORT, offline, format); //starting the import of dropbox data
                         }
 
                     } else { // works table not empty first export
                         //Toast.makeText(getApplicationContext(), R.string.reimportmessage,Toast.LENGTH_LONG).show();
                         if (DatabaseManager.getInstance().getAllWorks().size() != 0) {
-                            SendingProcess sending = new SendingProcess(HomeActivity.this, ActivityConstants.WORK_OVERVIEW); //first make the export
+                            SendingProcess sending = new SendingProcess(HomeActivity.this, MofaConstants.WORK_OVERVIEW); //first make the export
                             sending.sendData();
                             Toast.makeText(getApplicationContext(), R.string.export_status_message, Toast.LENGTH_LONG).show();
                         }
@@ -424,7 +413,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
 //		            	if (dropBox==false){  
 //		            		updateData(selElements,urlPath,offline,format); //starting the import of data
 //		            	}else{
-//		            		updateData(selElements,PathConstants.IMPORT,offline,format); //starting the import of dropbox data
+//		            		updateData(selElements,MofaConstants.IMPORT,offline,format); //starting the import of dropbox data
 //		            	}
                     }
 
@@ -433,7 +422,7 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                     if (dropBox == false) {
                         updateData(selElements, urlPath, offline, format);
                     } else {
-                        updateData(selElements, PathConstants.IMPORT, offline, format);
+                        updateData(selElements, MofaConstants.IMPORT, offline, format);
                     }
 
 
@@ -488,14 +477,14 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
         }
         filename = filename + extension;
         CheckFileTask.execute(credential, elementDesc, filename, (result, builder) -> {
-                if (!result.isEmpty()) {
-                    waitingSpinner.dismiss();
-                    showAlertDialog(builder, result);
+            if (!result.isEmpty()) {
+                waitingSpinner.dismiss();
+                showAlertDialog(builder, result);
 
-                } else { // no updates
-                    waitingSpinner.dismiss();
-                    showNoUpdateDialog();
-                }
+            } else { // no updates
+                waitingSpinner.dismiss();
+                showNoUpdateDialog();
+            }
         });
     }
 
@@ -545,6 +534,5 @@ public class HomeActivity extends DashboardActivity implements RemoveEntries {
                     }
                 })
                 .create();
-
     }
 }

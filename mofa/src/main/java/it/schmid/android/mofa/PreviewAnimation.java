@@ -41,7 +41,6 @@ public class PreviewAnimation extends Animation {
         super.applyTransformation(interpolatedTime, t);
 
         if (interpolatedTime < 1.0f) {
-
             // Calculating the new bottom margin, and setting it
             mViewLayoutParams.bottomMargin = mMarginStart
                     + (int) ((mMarginEnd - mMarginStart) * interpolatedTime);
@@ -60,6 +59,4 @@ public class PreviewAnimation extends Animation {
             mWasEndedAlready = true;
         }
     }
-
-
 }

@@ -25,7 +25,6 @@ public class AboutDialog extends Dialog {
         mContext = context;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         String versionName = "";
@@ -51,7 +50,6 @@ public class AboutDialog extends Dialog {
         tv.setLinkTextColor(Color.rgb(0, 126, 128));
         Linkify.addLinks(tv, Linkify.ALL);
         tv.setMovementMethod(LinkMovementMethod.getInstance());
-
     }
 
     public static String readRawTextFile(int id) {

@@ -24,7 +24,6 @@ import it.schmid.android.mofa.model.WorkWorker;
 
 
 public class WorkEditResourcesFragment extends Fragment {
-    private static final String TAG = "WorkEditResourcesFragment";
     private int mworkId = 0;
     private Work work = null;
     private Button confirmButton;

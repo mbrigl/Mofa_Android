@@ -21,11 +21,6 @@ public class WorkMachine {
     public WorkMachine() {
     }
 
-    public WorkMachine(Work work, Machine machine) {
-        this.work = work;
-        this.machine = machine;
-    }
-
     public Integer getId() {
         return id;
     }

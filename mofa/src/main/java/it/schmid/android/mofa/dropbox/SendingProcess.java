@@ -6,9 +6,10 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.Xml;
+
+import androidx.preference.PreferenceManager;
 
 import com.dropbox.core.DbxException;
 import com.dropbox.core.oauth.DbxCredential;
@@ -28,10 +29,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import it.schmid.android.mofa.ActivityConstants;
 import it.schmid.android.mofa.MofaApplication;
+import it.schmid.android.mofa.MofaConstants;
 import it.schmid.android.mofa.NotificationService;
-import it.schmid.android.mofa.PathConstants;
 import it.schmid.android.mofa.R;
 import it.schmid.android.mofa.db.DatabaseManager;
 import it.schmid.android.mofa.model.Machine;
@@ -65,7 +65,6 @@ public class SendingProcess implements Runnable {
     private boolean error = false; // error value for webservice connection
     private String restResponse = ""; // not used yet, but response of json-webservice
     private final int callingActivity;
-    private String asaWorkHerbicideCode;
 
     private DbxCredential credential; //Dropbox
     RemoveEntries mremoveEntries;
@@ -93,7 +92,7 @@ public class SendingProcess implements Runnable {
 
         if (Integer.parseInt(backEndSoftware) == 1) { //special case ASA
 
-            if (callingActivity == ActivityConstants.WORK_OVERVIEW) { //calling this asynch method from workoverview
+            if (callingActivity == MofaConstants.WORK_OVERVIEW) { //calling this asynch method from workoverview
                 if (asa_New_Ver) {
                     sendingData = createXMLASAVer16();
                 } else {
@@ -102,7 +101,7 @@ public class SendingProcess implements Runnable {
 
             }
         } else { //default case LibreOffice
-            if (callingActivity == ActivityConstants.WORK_OVERVIEW) { //default case
+            if (callingActivity == MofaConstants.WORK_OVERVIEW) { //default case
                 sendingData = createXML(); //default case
             }
         }
@@ -172,17 +171,16 @@ public class SendingProcess implements Runnable {
     /**
      * handler used for deleting and gui refreshing, accessing gui only through a handler
      */
-    private final Handler handler = new Handler() {
+    private final Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             mremoveEntries.deleteAllEntries();
-
         }
     };
     /**
      * handler used for deleting and gui refreshing, accessing gui only through a handler
      */
-    private final Handler handler2 = new Handler() {
+    private final Handler handler2 = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             context.startActivity(new Intent(context, LoginActivity.class));
@@ -202,12 +200,12 @@ public class SendingProcess implements Runnable {
             Date date = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
             if (fileType.equalsIgnoreCase("1")) {
-                if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
-                    file = new File(sdCard.getAbsolutePath() + PathConstants.EXPORT, "worklist" + dateFormat.format(date) + ".json");
+                if (callingActivity == MofaConstants.WORK_OVERVIEW) {
+                    file = new File(sdCard.getAbsolutePath() + MofaConstants.EXPORT, "worklist" + dateFormat.format(date) + ".json");
                 }
             } else {
-                if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
-                    file = new File(sdCard.getAbsolutePath() + PathConstants.EXPORT, "worklist" + dateFormat.format(date) + ".xml");
+                if (callingActivity == MofaConstants.WORK_OVERVIEW) {
+                    file = new File(sdCard.getAbsolutePath() + MofaConstants.EXPORT, "worklist" + dateFormat.format(date) + ".xml");
                 }
             }
 
@@ -487,12 +485,12 @@ public class SendingProcess implements Runnable {
         String filePath = null;
         credential = DropboxClient.retrieveCredential(context);
         if (fileType.equalsIgnoreCase("1")) {
-            if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
-                filePath = PathConstants.EXPORT + "/worklist" + dateFormat.format(date) + ".json";
+            if (callingActivity == MofaConstants.WORK_OVERVIEW) {
+                filePath = MofaConstants.EXPORT + "/worklist" + dateFormat.format(date) + ".json";
             }
         } else {
-            if (callingActivity == ActivityConstants.WORK_OVERVIEW) {
-                filePath = PathConstants.EXPORT + "/worklist" + dateFormat.format(date) + ".xml";
+            if (callingActivity == MofaConstants.WORK_OVERVIEW) {
+                filePath = MofaConstants.EXPORT + "/worklist" + dateFormat.format(date) + ".xml";
             }
         }
 
@@ -512,6 +510,5 @@ public class SendingProcess implements Runnable {
         } catch (DbxException e) {
             error = true;
         }
-
     }
 }

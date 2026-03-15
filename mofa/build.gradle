@@ -9,10 +9,10 @@ android {
         applicationId "it.bz.tol.mofa"
         minSdk 26
         targetSdk 36
-        versionCode 42
-        versionName "7.0"
+        versionCode 43
+        versionName "7.1"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -44,9 +44,8 @@ dependencies {
     implementation libs.androidx.appcompat
     implementation libs.material
     implementation libs.gson
-    implementation libs.google.http.client.android
-    implementation libs.dropbox.core.sdk
     implementation libs.dropbox.android.sdk
+    implementation libs.androidx.preference
     implementation libs.okhttp
     implementation libs.jsoup
 }

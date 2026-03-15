@@ -29,7 +29,6 @@ import it.schmid.android.mofa.model.Worker;
 
 public class DatabaseManager {
     private PreparedQuery<VQuarter> vqForWorkQuery = null;
-    private final PreparedQuery<Worker> workerForWorkQuery = null;
     private PreparedQuery<Machine> machineForWorkQuery = null;
     static private DatabaseManager instance;
 
@@ -91,12 +90,6 @@ public class DatabaseManager {
 
     }
 
-    /***************************************************{
-     *
-     }
-     *
-     * LAND - DB Operations
-     */
     //Stored - Queries
     public List<Land> getAllLands() {
         List<Land> landList = null;

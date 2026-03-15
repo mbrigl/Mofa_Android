@@ -25,7 +25,7 @@ import it.schmid.android.mofa.NotificationService;
 import it.schmid.android.mofa.db.DatabaseManager;
 
 @DatabaseTable
-public class Task extends ImportBehavior {
+public class Task implements ImportBehavior {
     private static final String TAG = "TaskClass";
     @DatabaseField(id = true)
     @Expose
@@ -111,18 +111,6 @@ public class Task extends ImportBehavior {
         }
     }
 
-    public void setItems(ForeignCollection<Work> works) {
-        this.works = works;
-    }
-
-    public List<Work> getWorks() {
-        ArrayList<Work> workList = new ArrayList<Work>();
-        for (Work work : works) {
-            workList.add(work);
-        }
-        return workList;
-    }
-
     @Override
     public boolean equals(Object obj) {
         //null instanceof Object will always return false
@@ -141,7 +129,7 @@ public class Task extends ImportBehavior {
     }
 
     @Override
-    public Boolean importMasterData(String xmlString, NotificationService notification) {
+    public boolean importMasterData(String xmlString, NotificationService notification) {
         String backEndSoftware;
         List<Task> importData;
         MofaApplication app = MofaApplication.getInstance();

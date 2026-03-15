@@ -9,10 +9,11 @@ import com.dropbox.core.oauth.DbxCredential;
 import com.dropbox.core.v2.DbxClientV2;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import it.schmid.android.mofa.PathConstants;
+import it.schmid.android.mofa.MofaConstants;
 
 
 /**
@@ -46,13 +47,13 @@ public class CheckFileTask {
             int pos = 1;
             for (String element : ELEMENTS) {
                 try {
-                    String path = PathConstants.IMPORT + element + fileName;
+                    String path = MofaConstants.IMPORT + element + fileName;
                     mDbxClient.files().getMetadata(path);
                     sb.append(mElementDesc[pos - 1]);
                     sb.append("\n");
                     selElements.add(pos);
                 } catch (DbxException e) {
-                    Log.d("CheckFileTask", e.getLocalizedMessage());
+                    Log.d("CheckFileTask", Objects.requireNonNull(e.getLocalizedMessage()));
                 }
                 pos++;
             }

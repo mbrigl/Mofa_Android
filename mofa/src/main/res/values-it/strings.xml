@@ -83,12 +83,6 @@
 	<string name="work_menu_upload"> upload</string>
 	<string name="menu_about"> Info</string>
 	<string name="no_connection"> No connessione - per favore controllare le impostazioni di rete</string>
-	<!-- MenuEntries Work Contextmenu Filter-->
-	<string name="work_menu_nofilter"> Tutti</string>
-	<string name="work_menu_sprayfilter"> trattamento</string>
-	<string name="work_menu_herbicidefilter"> erbicide</string>
-	<string name="work_menu_fertfilter"> fertigazione</string>
-	<string name="work_menu_otherfilter"> altri lavori</string>
 	
 	<!-- MenuEntries WorkEdit -->
 	<string name="workedit_menu_gpsauto"> GPS appezz.</string>

@@ -3,7 +3,6 @@ package it.schmid.android.mofa;
 import static android.app.Activity.RESULT_OK;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -33,7 +32,6 @@ import androidx.fragment.app.Fragment;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -94,13 +92,13 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
 
     // registering the callback, using onAttach
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
         try {
-            parentSetWorkId = (SetWorkIdListener) activity;
-            continueEnabled = (CompleteBehaviour) activity;
+            parentSetWorkId = (SetWorkIdListener) context;
+            continueEnabled = (CompleteBehaviour) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity
+            throw new ClassCastException(context
                     + " must implement ShowSprayTabListener,SetWorkIdListener,continueEnabled");
         }
     }
@@ -257,8 +255,10 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
 
     public void onDateSet(DatePicker view, int year, int monthOfYear,
                           int dayOfMonth) {
-        @SuppressWarnings("deprecation")
-        Date newDate = new Date(year - 1900, monthOfYear, dayOfMonth);
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, monthOfYear, dayOfMonth, 0, 0, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        Date newDate = cal.getTime();
         //	Log.d(TAG, "onDataSet - DataPicker :" + year +"," + monthOfYear + "," +dayOfMonth);
 
         mDateText.setText(setCalendarDate(newDate));
@@ -310,7 +310,10 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
 
     private void saveState() {
         Task t = (Task) mWork.getSelectedItem();
-        Date newDate = new Date(mYear - 1900, mMonth, mDay);
+        Calendar cal = Calendar.getInstance();
+        cal.set(mYear, mMonth, mDay, 0, 0, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        Date newDate = cal.getTime();
         if (null != work) {
             updateWork(t, newDate);
         } else {
@@ -339,14 +342,14 @@ public class WorkEditWorkFragment extends Fragment implements OnDateSetListener 
 
     private void setPredefWork(int taskId) {
         String key = "LAST_TASK"; //creating key for last task
-        SharedPreferences prefs = getActivity().getSharedPreferences(PathConstants.ID, Context.MODE_PRIVATE);
+        SharedPreferences prefs = getActivity().getSharedPreferences(MofaConstants.ID, Context.MODE_PRIVATE);
         prefs.edit().putInt(key, taskId).apply();
         //Toast.makeText(getActivity(),DatabaseManager.getInstance().getFirstLandIdForIrrigation(workId),Toast.LENGTH_LONG).show();
     }
 
     private int getPredefWork() {
         String key = "LAST_TASK";
-        SharedPreferences prefs = getActivity().getSharedPreferences(PathConstants.ID, Context.MODE_PRIVATE);
+        SharedPreferences prefs = getActivity().getSharedPreferences(MofaConstants.ID, Context.MODE_PRIVATE);
         int taskId = (prefs.getInt(key, 0));
         return taskId;
 

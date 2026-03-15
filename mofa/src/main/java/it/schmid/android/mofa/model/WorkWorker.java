@@ -21,11 +21,6 @@ public class WorkWorker {
     public WorkWorker() {
     }
 
-    public WorkWorker(Work work, Worker worker) {
-        this.work = work;
-        this.worker = worker;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -57,5 +52,4 @@ public class WorkWorker {
     public void setHours(Double hours) {
         this.hours = hours;
     }
-
 }

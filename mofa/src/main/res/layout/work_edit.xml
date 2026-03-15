@@ -2,8 +2,8 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
      android:id="@+id/fragment_work" >
 
@@ -64,12 +64,12 @@
 	 </TextView>
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
     <EditText
         android:id="@+id/noteeditText"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
@@ -96,7 +96,7 @@
     
     </LinearLayout>
     <View
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="1dp"
     android:background="@android:color/darker_gray"/>
     <LinearLayout 

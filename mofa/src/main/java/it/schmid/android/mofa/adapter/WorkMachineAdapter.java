@@ -3,10 +3,8 @@ package it.schmid.android.mofa.adapter;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -21,7 +19,6 @@ import it.schmid.android.mofa.model.Machine;
 import it.schmid.android.mofa.model.WorkMachine;
 
 public class WorkMachineAdapter extends ArrayAdapter<WorkMachine> {
-    private static final String TAG = "WorkMachineAdapter";
     Context context;
     int layoutResourceId;
     List<WorkMachine> data = null;
@@ -55,37 +52,26 @@ public class WorkMachineAdapter extends ArrayAdapter<WorkMachine> {
         holder.delIcon.setImageResource(R.drawable.ic_trash_empty);
         holder.delIcon.setClickable(true);
         holder.txtMachine.setClickable(true);
-        holder.txtMachine.setOnClickListener(new OnClickListener() { //handling the change of hours by clicking on the list
+        holder.txtMachine.setOnClickListener(v -> {
 
-            public void onClick(View v) {
+            PromptDialog dlg = new PromptDialog(context, R.string.title,
+                    R.string.enter_hours, workMachine.getHours()) {
+                @Override
+                public boolean onOkClicked(Double input) {
+                    // do something
 
-                PromptDialog dlg = new PromptDialog(context, R.string.title,
-                        R.string.enter_hours, workMachine.getHours()) {
-                    @Override
-                    public boolean onOkClicked(Double input) {
-                        // do something
-
-                        workMachine.setHours(input);
-                        DatabaseManager.getInstance().updateWorkMachine(workMachine);
-                        notifyDataSetChanged();
+                    workMachine.setHours(input);
+                    DatabaseManager.getInstance().updateWorkMachine(workMachine);
+                    notifyDataSetChanged();
 
 
-                        return true; // true = close dialog
+                    return true; // true = close dialog
 
-                    }
-                };
-                dlg.show();
-
-
-            }
+                }
+            };
+            dlg.show();
         });
-        holder.delIcon.setOnClickListener(new OnClickListener() {
-
-            public void onClick(View v) {
-                showYesNoDeleteDialog(workMachine, position);
-
-            }
-        });
+        holder.delIcon.setOnClickListener(v -> showYesNoDeleteDialog(workMachine, position));
         return row;
     }
 
@@ -94,25 +80,14 @@ public class WorkMachineAdapter extends ArrayAdapter<WorkMachine> {
         builder.setTitle(R.string.dialogdeletetitel);
         builder.setMessage(R.string.dialogdeletemsg);
 
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int which) {
-                // Deleting the entry
-                DatabaseManager.getInstance().deleteWorkMachine(workMachine);
-                data.remove(data.get(position)); //removing the item form the list
-                notifyDataSetChanged();
-                dialog.dismiss();
-            }
+        builder.setPositiveButton("YES", (dialog, which) -> {
+            // Deleting the entry
+            DatabaseManager.getInstance().deleteWorkMachine(workMachine);
+            data.remove(data.get(position)); //removing the item form the list
+            notifyDataSetChanged();
+            dialog.dismiss();
         });
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int which) {
-                // Do Nothing
-                dialog.dismiss();
-            }
-
-        });
-
+        builder.setNegativeButton("NO", (dialog, which) -> dialog.dismiss());
 
         AlertDialog alert = builder.create();
         alert.show();

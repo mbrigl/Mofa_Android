@@ -83,12 +83,6 @@
 	<string name="work_menu_upload"> Upload</string>
 	<string name="menu_about"> Info</string>
 	<string name="no_connection"> Keine Datenverbindung - Bitte überprüfen Sie Ihre Netzwerkeinstellungen</string>
-	<!-- MenuEntries Work Contextmenu Filter-->
-	<string name="work_menu_nofilter"> ALLE</string>
-	<string name="work_menu_sprayfilter"> Spritzungen</string>
-	<string name="work_menu_herbicidefilter"> Herbizid</string>
-	<string name="work_menu_fertfilter"> Düngung</string>
-	<string name="work_menu_otherfilter"> Son. Arbeiten</string>
 	<!-- MenuEntries WorkEdit -->
 	<string name="workedit_menu_gpsauto"> GPS Sortenq.</string>
 	<!-- MenuEntries Harvest-->

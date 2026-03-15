@@ -24,7 +24,7 @@ import it.schmid.android.mofa.NotificationService;
 import it.schmid.android.mofa.db.DatabaseManager;
 
 @DatabaseTable
-public class VQuarter extends ImportBehavior {
+public class VQuarter implements ImportBehavior {
     private static final String TAG = "VQuarterClass";
     @DatabaseField(id = true)
     @Expose
@@ -45,14 +45,6 @@ public class VQuarter extends ImportBehavior {
     private String code;
     @DatabaseField
     private String data;
-    @DatabaseField
-    private Double gps_x1;
-    @DatabaseField
-    private Double gps_x2;
-    @DatabaseField
-    private Double gps_y1;
-    @DatabaseField
-    private Double gps_y2;
     private Boolean importError = false;
 
     public VQuarter() {
@@ -115,38 +107,6 @@ public class VQuarter extends ImportBehavior {
         this.size = size;
     }
 
-    public Double getGps_x1() {
-        return gps_x1;
-    }
-
-    public void setGps_x1(Double gps_x1) {
-        this.gps_x1 = gps_x1;
-    }
-
-    public Double getGps_x2() {
-        return gps_x2;
-    }
-
-    public void setGps_x2(Double gps_x2) {
-        this.gps_x2 = gps_x2;
-    }
-
-    public Double getGps_y1() {
-        return gps_y1;
-    }
-
-    public void setGps_y1(Double gps_y1) {
-        this.gps_y1 = gps_y1;
-    }
-
-    public Double getGps_y2() {
-        return gps_y2;
-    }
-
-    public void setGps_y2(Double gps_y2) {
-        this.gps_y2 = gps_y2;
-    }
-
     public String getCode() {
         return code;
     }
@@ -203,7 +163,7 @@ public class VQuarter extends ImportBehavior {
     }
 
     @Override
-    public Boolean importMasterData(String xmlString, NotificationService notification) {
+    public boolean importMasterData(String xmlString, NotificationService notification) {
         String backEndSoftware;
         VQuarter vquarter;
         List<VQuarter> importData;
@@ -474,10 +434,8 @@ public class VQuarter extends ImportBehavior {
     private List<VQuarter> vquarterXmlParserASA(String inputData, NotificationService notification) {
         List<VQuarter> mVquarterList = null;
         Integer xId = 1;
-        String xLandCode = "";
         Integer xLandId = null;
         String xVariety = null;
-        String xClone = null;
         Integer xYear = null;
         Double xSize = null;
         Double xWater = null;

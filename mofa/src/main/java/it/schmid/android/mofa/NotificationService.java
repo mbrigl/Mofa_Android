@@ -12,7 +12,6 @@ import androidx.core.app.NotificationCompat;
  *
  * @author schmida
  * Class for creating notification for the download of data
- * TODO: Improvements for later versions
  */
 public class NotificationService {
     private final Context mContext;
@@ -21,96 +20,69 @@ public class NotificationService {
     private Notification mNotification;
     private NotificationManager mNotificationManager;
     private PendingIntent mContentIntent = null;
-    private CharSequence mContentTitle;
     private final Boolean mShowDetails;
 
     public NotificationService(Context context, Boolean showDetails) {
         mContext = context;
-        mShowDetails = showDetails; //variable to check if we launch activity to show details
+        mShowDetails = showDetails;
     }
 
-    @SuppressWarnings("deprecation")
     public void createNotification(int notIcon, CharSequence aText, String fullText) {
-        //get the notification manager
         mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
         Intent notificationIntent = new Intent();
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-            mContentIntent = PendingIntent.getActivity
-                    (mContext, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
+            mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
         } else {
-            mContentIntent = PendingIntent.getActivity
-                    (mContext, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
+            mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
         }
-        //mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
-        int icon = notIcon;
-        CharSequence tickerText = aText; //Initial text that appears in the status bar
-        long when = System.currentTimeMillis();
-        mNotification = builder.setContentIntent(mContentIntent)
-                .setSmallIcon(icon).setTicker(tickerText).setWhen(when)
-                .setAutoCancel(true).setContentTitle(fullText)
-                .setContentText(tickerText).build();
-
-        //show the notification
+        mNotification = new NotificationCompat.Builder(mContext, MofaApplication.NOTIFICATION_CHANNEL_ID)
+                .setContentIntent(mContentIntent)
+                .setSmallIcon(notIcon)
+                .setTicker(aText)
+                .setWhen(System.currentTimeMillis())
+                .setAutoCancel(true)
+                .setContentTitle(fullText)
+                .setContentText(aText)
+                .build();
         mNotificationManager.notify(NOTIFICATION_ID, mNotification);
     }
 
-    /**
-     * called when the background task is complete, this removes the notification from the status bar.
-     * We could also use this to add a new ‘task complete’ notification
-     */
-    @SuppressWarnings("deprecation")
     public void completed(int notIcon, CharSequence aText, String fullText) {
-        //remove the notification from the status bar
-        Intent notificationIntent;
         mNotificationManager.cancel(NOTIFICATION_ID);
-        int icon = notIcon;
-        CharSequence tickerText = aText;
-        long when = System.currentTimeMillis();
-        mNotification = new Notification(icon, tickerText, when);
-        mContentTitle = fullText;
-        notificationIntent = new Intent();
-        mContentIntent = null;
+        Intent notificationIntent = new Intent();
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-            mContentIntent = PendingIntent.getActivity
-                    (mContext, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
+            mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
         } else {
-            mContentIntent = PendingIntent.getActivity
-                    (mContext, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
+            mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
         }
-        //mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
-        mNotification = builder.setContentIntent(mContentIntent)
-                .setSmallIcon(icon).setTicker(tickerText).setWhen(when)
-                .setAutoCancel(true).setContentTitle(fullText)
-                .setContentText(tickerText).build();
-        //mNotification.setLatestEventInfo(mContext, mContentTitle, "", mContentIntent);
-        mNotification.flags = Notification.FLAG_AUTO_CANCEL;
+        mNotification = new NotificationCompat.Builder(mContext, MofaApplication.NOTIFICATION_CHANNEL_ID)
+                .setContentIntent(mContentIntent)
+                .setSmallIcon(notIcon)
+                .setTicker(aText)
+                .setWhen(System.currentTimeMillis())
+                .setAutoCancel(true)
+                .setContentTitle(fullText)
+                .setContentText(aText)
+                .build();
         mNotificationManager.notify(NOTIFICATION_ID_F, mNotification);
-
     }
 
-    //not used for the moment
-    @SuppressWarnings("deprecation")
     public void completedWithDetails(int notIcon, CharSequence aText, String fullText, String shortText) {
-        //remove the notification from the status bar
-        Intent notificationIntent;
         mNotificationManager.cancel(NOTIFICATION_ID);
-        int icon = notIcon;
-        CharSequence tickerText = aText;
-        long when = System.currentTimeMillis();
-        mNotification = new Notification(icon, tickerText, when);
-        mContentTitle = shortText;
-        notificationIntent = new Intent(mContext, DetailsDialog.class);
+        Intent notificationIntent = new Intent(mContext, DetailsDialog.class);
         notificationIntent.putExtra("DATA", fullText);
-
-
-        mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
-        // mNotification.setLatestEventInfo(mContext, mContentTitle, "", mContentIntent);
-        mNotification.flags = Notification.FLAG_AUTO_CANCEL;
+        mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent,
+                android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S
+                        ? PendingIntent.FLAG_IMMUTABLE : PendingIntent.FLAG_ONE_SHOT);
+        mNotification = new NotificationCompat.Builder(mContext, MofaApplication.NOTIFICATION_CHANNEL_ID)
+                .setContentIntent(mContentIntent)
+                .setSmallIcon(notIcon)
+                .setTicker(aText)
+                .setWhen(System.currentTimeMillis())
+                .setAutoCancel(true)
+                .setContentTitle(shortText)
+                .setContentText(aText)
+                .build();
         mNotificationManager.notify(NOTIFICATION_ID_F, mNotification);
-
     }
-
-
 }

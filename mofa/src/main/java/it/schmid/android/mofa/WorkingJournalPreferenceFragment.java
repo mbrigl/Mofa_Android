@@ -1,85 +1,59 @@
 package it.schmid.android.mofa;
 
-import android.annotation.TargetApi;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
-import android.preference.ListPreference;
-import android.preference.PreferenceFragment;
 import android.widget.Toast;
+
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import java.io.File;
 
-@TargetApi(11)
-public class WorkingJournalPreferenceFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
+public class WorkingJournalPreferenceFragment extends PreferenceFragmentCompat implements OnSharedPreferenceChangeListener {
 
-    @SuppressWarnings("deprecation")
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        int res = getActivity().getResources().getIdentifier(getArguments().getString("resource"),
-                "xml",
-                getActivity().getPackageName());
-        addPreferencesFromResource(res);
-
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.prefs, rootKey);
     }
 
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-                                          String key) {
-        //Log.d("WorkingJournalPreferenceFragment", "calling listener");
-        CheckBoxPreference offlineUpdate = (CheckBoxPreference) getPreferenceScreen().findPreference("updateOffline");
-        CheckBoxPreference dropbox = (CheckBoxPreference) getPreferenceScreen().findPreference("dropbox");
-        CheckBoxPreference dropboxReset = (CheckBoxPreference) getPreferenceScreen().findPreference("dropboxreset");
-        ListPreference backendSoftware = (ListPreference) getPreferenceScreen().findPreference("listBackendFormat");
-        ListPreference encodePref = (ListPreference) getPreferenceScreen().findPreference("listFormat");
-        if (offlineUpdate.isChecked()) {
-            //	Log.d("WorkingJournalPreferenceFragment", "offlineupdate = true");
-            if (isSdPresent()) {
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        CheckBoxPreference offlineUpdate = findPreference("updateOffline");
+        CheckBoxPreference dropbox = findPreference("dropbox");
+        CheckBoxPreference dropboxReset = findPreference("dropboxreset");
+        ListPreference backendSoftware = findPreference("listBackendFormat");
+        ListPreference encodePref = findPreference("listFormat");
 
+        if (offlineUpdate != null && offlineUpdate.isChecked()) {
+            if (isSdPresent()) {
                 createSdFolderStruct();
             } else {
-                Toast.makeText(getActivity(), "SD-Card not present or ready", Toast.LENGTH_LONG).show();
+                Toast.makeText(requireActivity(), "SD-Card not present or ready", Toast.LENGTH_LONG).show();
             }
         }
-        if (dropbox.isChecked()) {
-            //Toast.makeText(getActivity(), R.string.dropboxmsg, Toast.LENGTH_LONG).show();
-            offlineUpdate.setChecked(false);
+        if (dropbox != null && dropbox.isChecked()) {
+            if (offlineUpdate != null) offlineUpdate.setChecked(false);
         }
-        if (backendSoftware.getValue().equals("1")) { //ASA settings - we set preferences for ASA on Android 4.x
-            //	Log.d("WorkingJournalPreferenceFragment", "Pref ASA ");
-            dropbox.setChecked(true);
-            encodePref.setValue("2");
+        if (backendSoftware != null && "1".equals(backendSoftware.getValue())) {
+            if (dropbox != null) dropbox.setChecked(true);
+            if (encodePref != null) encodePref.setValue("2");
         }
-        if (dropboxReset.isChecked()) {
-            Toast.makeText(getActivity(), R.string.dropboxresetmessage, Toast.LENGTH_LONG).show();
+        if (dropboxReset != null && dropboxReset.isChecked()) {
+            Toast.makeText(requireActivity(), R.string.dropboxresetmessage, Toast.LENGTH_LONG).show();
         }
-
-
     }
 
     private void createSdFolderStruct() {
-        if (isSdPresent()) { //SD-Card mounted
-            File direct = new File(getActivity().getExternalFilesDir(null) + PathConstants.PATH);
-            if (!direct.exists())
-                direct.mkdir();
-
-            direct = new File(getActivity().getExternalFilesDir(null) + PathConstants.IMPORT + "/land");
-            boolean successful = direct.mkdirs();
-            direct = new File(getActivity().getExternalFilesDir(null) + PathConstants.EXPORT);
-            successful = direct.mkdirs();
-            direct = new File(getActivity().getExternalFilesDir(null) + PathConstants.IMPORT + "/worker");
-            successful = direct.mkdirs();
-            direct = new File(getActivity().getExternalFilesDir(null) + PathConstants.IMPORT + "/vquarter");
-            successful = direct.mkdirs();
-            direct = new File(getActivity().getExternalFilesDir(null) + PathConstants.IMPORT + "/pesticide");
-            successful = direct.mkdirs();
-            direct = new File(getActivity().getExternalFilesDir(null) + PathConstants.IMPORT + "/fertilizer");
-            successful = direct.mkdirs();
-            direct = new File(getActivity().getExternalFilesDir(null) + PathConstants.IMPORT + "/task");
-            successful = direct.mkdirs();
-            direct = new File(getActivity().getExternalFilesDir(null) + PathConstants.IMPORT + "/machine");
-            successful = direct.mkdirs();
+        if (isSdPresent()) {
+            File direct = new File(requireActivity().getExternalFilesDir(null) + MofaConstants.PATH);
+            if (!direct.exists()) direct.mkdir();
+            new File(requireActivity().getExternalFilesDir(null) + MofaConstants.IMPORT + "/land").mkdirs();
+            new File(requireActivity().getExternalFilesDir(null) + MofaConstants.EXPORT).mkdirs();
+            new File(requireActivity().getExternalFilesDir(null) + MofaConstants.IMPORT + "/worker").mkdirs();
+            new File(requireActivity().getExternalFilesDir(null) + MofaConstants.IMPORT + "/vquarter").mkdirs();
+            new File(requireActivity().getExternalFilesDir(null) + MofaConstants.IMPORT + "/task").mkdirs();
+            new File(requireActivity().getExternalFilesDir(null) + MofaConstants.IMPORT + "/machine").mkdirs();
         }
     }
 
@@ -91,7 +65,6 @@ public class WorkingJournalPreferenceFragment extends PreferenceFragment impleme
     public void onResume() {
         super.onResume();
         getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
-
     }
 
     @Override

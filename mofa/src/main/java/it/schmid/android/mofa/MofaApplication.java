@@ -1,32 +1,26 @@
 package it.schmid.android.mofa;
 
 import android.app.Application;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.preference.PreferenceManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import androidx.preference.PreferenceManager;
+
 import java.util.concurrent.ConcurrentHashMap;
 
 import okhttp3.OkHttpClient;
 
 public class MofaApplication extends Application {
-    public static final Integer WORK_NORMAL = 1;
+    public static final String NOTIFICATION_CHANNEL_ID = "mofa_sync";
     private static double defaultHour = 8.00;
     private OkHttpClient httpClient;
     private static MofaApplication instance;
     private ConcurrentHashMap<String, String> mGlobalVariables;
-    private Set<AppStateListener> mAppStateListeners;
-
-    private static Integer workType = WORK_NORMAL;
-
-    public interface AppStateListener {
-        void onStateChanged(String key, String value);
-    }
 
     @Override
     public void onCreate() {
@@ -34,7 +28,19 @@ public class MofaApplication extends Application {
         instance = this;
         httpClient = new OkHttpClient();
         mGlobalVariables = new ConcurrentHashMap<String, String>();
-        mAppStateListeners = Collections.synchronizedSet(new HashSet<AppStateListener>());
+        createNotificationChannel();
+    }
+
+    private void createNotificationChannel() {
+        NotificationChannel channel = new NotificationChannel(
+                NOTIFICATION_CHANNEL_ID,
+                "MoFa Sync",
+                NotificationManager.IMPORTANCE_DEFAULT);
+        channel.setDescription("MoFa data synchronization notifications");
+        NotificationManager manager = getSystemService(NotificationManager.class);
+        if (manager != null) {
+            manager.createNotificationChannel(channel);
+        }
     }
 
     public static MofaApplication getInstance() {
@@ -47,7 +53,6 @@ public class MofaApplication extends Application {
 
     public void putGlobalVariable(String key, String value) {
         mGlobalVariables.put(key, value);
-        //notifyListeners (key,value);
     }
 
     @Override
@@ -67,8 +72,7 @@ public class MofaApplication extends Application {
     }
 
     public String getBackendSoftware() {
-        SharedPreferences preferences;
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         return preferences.getString("listBackendFormat", "2");
     }
 
@@ -78,10 +82,13 @@ public class MofaApplication extends Application {
 
     public boolean networkStatus() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-        // if no network is available networkInfo will be null
-        // otherwise check if we are connected
-        return networkInfo != null && networkInfo.isConnected();
+        if (cm == null) return false;
+        Network network = cm.getActiveNetwork();
+        if (network == null) return false;
+        NetworkCapabilities caps = cm.getNetworkCapabilities(network);
+        return caps != null
+                && caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                && caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
     }
 
     public static double getDefaultHour() {

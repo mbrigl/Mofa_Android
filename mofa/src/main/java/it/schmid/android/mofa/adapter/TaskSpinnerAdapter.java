@@ -17,15 +17,12 @@ public class TaskSpinnerAdapter extends BaseAdapter implements SpinnerAdapter {
     private final Context context;
 
     public TaskSpinnerAdapter(List<Task> tasks, Context context) {
-        super();
         this.context = context;
         this.tasks = tasks;
-
     }
 
     public int getCount() {
         return tasks.size();
-
     }
 
     public Object getItem(int position) {
@@ -38,11 +35,7 @@ public class TaskSpinnerAdapter extends BaseAdapter implements SpinnerAdapter {
     }
 
     public int getPosition(Task task) { // used, getPosition, overriden equals in Task.java
-        int i;
-        i = tasks.indexOf(task);
-
-        return i;
-
+        return tasks.indexOf(task);
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -57,5 +50,4 @@ public class TaskSpinnerAdapter extends BaseAdapter implements SpinnerAdapter {
         textView.setText(tasks.get(position).getTask());
         return textView;
     }
-
 }

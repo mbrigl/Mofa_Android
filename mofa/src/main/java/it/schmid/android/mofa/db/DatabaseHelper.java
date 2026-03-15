@@ -12,8 +12,6 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
 
 import it.schmid.android.mofa.model.Land;
 import it.schmid.android.mofa.model.Machine;

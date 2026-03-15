@@ -48,8 +48,6 @@ public class WebServiceCall {
     private final Boolean mOffline;
     private final Boolean mDropbox;
     private final String format;
-    private String statusMsg = "";
-    private String encoding;
     private final DbxClientV2 mDbxClient;
     private NotificationService mNotificationService;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -65,15 +63,12 @@ public class WebServiceCall {
         switch (Integer.parseInt(backEndSoftware)) {
             case 1:
                 Log.d("TAG", "BackendSoftware: ASAAGRAR");
-                encoding = UTF;
                 break;
             case 2:
                 Log.d("TAG", "BackendSoftware:Default");
-                encoding = UTF;
                 break;
             case 3:
                 Log.d("TAG", "BackendSoftware:Default");
-                encoding = UTF;
                 break;
         }
     }
@@ -123,35 +118,30 @@ public class WebServiceCall {
                     data = getData(url + "/land/list" + extension);
                     publishProgress(progress);
                     importData(data, land);
-                    statusMsg += " land - error: " + error + "\n";
                     break;
                 case 2:
                     VQuarter vquarter = new VQuarter();
                     data = getData(url + "/vquarter/list" + extension);
                     publishProgress(progress);
                     importData(data, vquarter);
-                    statusMsg += " vquarter - error: " + error + "\n";
                     break;
                 case 3:
                     Machine machine = new Machine();
                     data = getData(url + "/machine/list" + extension);
                     publishProgress(progress);
                     importData(data, machine);
-                    statusMsg += " machine - error: " + error + "\n";
                     break;
                 case 4:
                     Worker worker = new Worker();
                     data = getData(url + "/worker/list" + extension);
                     publishProgress(progress);
                     importData(data, worker);
-                    statusMsg += " worker - error: " + error + "\n";
                     break;
                 case 5:
                     Task task = new Task();
                     data = getData(url + "/task/list" + extension);
                     publishProgress(progress);
                     importData(data, task);
-                    statusMsg += " task - error: " + error + "\n";
                     break;
                 default:
                     break;

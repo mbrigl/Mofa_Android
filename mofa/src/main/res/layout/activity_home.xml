@@ -13,7 +13,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="2"
-    android:padding="6dip"
+    android:padding="6dp"
     tools:ignore="UselessParent">
 
     <LinearLayout

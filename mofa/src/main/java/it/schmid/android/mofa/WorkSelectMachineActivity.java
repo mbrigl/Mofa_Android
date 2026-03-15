@@ -25,7 +25,6 @@ import it.schmid.android.mofa.model.Work;
 import it.schmid.android.mofa.model.WorkMachine;
 
 public class WorkSelectMachineActivity extends DashboardActivity {
-    private static final String TAG = "WorkSelectMachineActivity";
     private int workId;
     SparseArray<Double> selectedMachines = new SparseArray<Double>();
     private Double proposedHour = 8.00;

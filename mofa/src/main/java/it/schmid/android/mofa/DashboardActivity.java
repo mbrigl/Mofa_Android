@@ -16,17 +16,12 @@
 
 package it.schmid.android.mofa;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -144,23 +139,6 @@ public abstract class DashboardActivity extends AppCompatActivity {
         super.onStop();
     }
 
-/**
- */
-// More Methods
-
-    /**
-     * Go back to the home activity.
-     *
-     * @param context Context
-     * @return void
-     */
-
-    public void goHome(Context context) {
-        final Intent intent = new Intent(context, HomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        context.startActivity(intent);
-    }
-
     /**
      * Set the content view for the activity.
      * <p>
@@ -212,16 +190,4 @@ public abstract class DashboardActivity extends AppCompatActivity {
             }
         }
     } // end setContentView
-
-    /**
-     * Show a string on the screen via Toast.
-     *
-     * @param msg String
-     * @return void
-     */
-
-    public void toast(String msg) {
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-    } // end toast
-
 } // end class

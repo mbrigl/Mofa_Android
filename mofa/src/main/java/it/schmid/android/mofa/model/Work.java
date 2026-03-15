@@ -76,14 +76,6 @@ public class Work {
         this.note = note;
     }
 
-    public Boolean getSended() {
-        return sended;
-    }
-
-    public void setSended(Boolean sended) {
-        this.sended = sended;
-    }
-
     public String getData() {
         return data;
     }

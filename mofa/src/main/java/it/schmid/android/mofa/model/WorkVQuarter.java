@@ -20,11 +20,6 @@ public class WorkVQuarter {
     public WorkVQuarter() {
     }
 
-    public WorkVQuarter(Work work, VQuarter vquarter) {
-        this.work = work;
-        this.vquarter = vquarter;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -47,14 +42,6 @@ public class WorkVQuarter {
 
     public void setVquarter(VQuarter vquarter) {
         this.vquarter = vquarter;
-    }
-
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
     }
 
     @Override
